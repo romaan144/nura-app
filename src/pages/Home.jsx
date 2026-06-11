@@ -1,16 +1,16 @@
 import { useState, useRef, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
-import { Mic, MicOff, ArrowRight, MapPin } from 'lucide-react'
+import { Mic, MicOff, ArrowRight, MapPin, Sparkles } from 'lucide-react'
 import { analyzeNeed, matchHelpers } from '../utils/matching'
 import styles from './Home.module.css'
 
 const SUGGESTIONS = [
-  "Necesito un logopeda para mi hijo de 7 años",
+  "Logopeda paciente para mi hijo de 7 años",
   "La caldera no calienta, es urgente",
-  "Busco a alguien que cuide mi perro este fin de semana",
+  "Cuidadora para mi padre mayor unas horas al día",
   "Clases de matemáticas para mi hijo de 12 años",
-  "Quiero una persona de limpieza una vez por semana",
-  "Alguien que acompañe a mi padre mayor",
+  "Persona de limpieza una vez por semana",
+  "Alguien que cuide mi perro este fin de semana",
 ]
 
 export default function Home({ setSearchState }) {
@@ -24,7 +24,7 @@ export default function Home({ setSearchState }) {
   useEffect(() => {
     if (textareaRef.current) {
       textareaRef.current.style.height = 'auto'
-      textareaRef.current.style.height = textareaRef.current.scrollHeight + 'px'
+      textareaRef.current.style.height = Math.min(textareaRef.current.scrollHeight, 180) + 'px'
     }
   }, [text])
 
@@ -45,10 +45,7 @@ export default function Home({ setSearchState }) {
   }
 
   function handleKey(e) {
-    if (e.key === 'Enter' && !e.shiftKey) {
-      e.preventDefault()
-      handleSearch()
-    }
+    if (e.key === 'Enter' && !e.shiftKey) { e.preventDefault(); handleSearch() }
   }
 
   function toggleMic() {
@@ -59,10 +56,7 @@ export default function Home({ setSearchState }) {
     const SR = window.SpeechRecognition || window.webkitSpeechRecognition
     const rec = new SR()
     rec.lang = 'es-ES'
-    rec.onresult = e => {
-      setText(e.results[0][0].transcript)
-      setListening(false)
-    }
+    rec.onresult = e => { setText(e.results[0][0].transcript); setListening(false) }
     rec.onerror = () => setListening(false)
     rec.onend = () => setListening(false)
     rec.start()
@@ -71,43 +65,33 @@ export default function Home({ setSearchState }) {
 
   return (
     <div className={styles.page}>
-      {/* Header */}
       <header className={styles.header}>
         <div className={styles.logo}>
-          <div className={styles.logoIcon}>
-            <svg viewBox="0 0 60 60" fill="none" xmlns="http://www.w3.org/2000/svg" width="36" height="36">
-              <circle cx="30" cy="16" r="13" fill="url(#g1)" opacity="0.9"/>
-              <circle cx="18" cy="40" r="13" fill="url(#g2)" opacity="0.9"/>
-              <circle cx="42" cy="40" r="13" fill="url(#g3)" opacity="0.9"/>
-              <defs>
-                <radialGradient id="g1" cx="50%" cy="30%"><stop stopColor="#FF4B4B"/><stop offset="1" stopColor="#FF1493"/></radialGradient>
-                <radialGradient id="g2" cx="30%" cy="40%"><stop stopColor="#00E5D1"/><stop offset="1" stopColor="#0891B2"/></radialGradient>
-                <radialGradient id="g3" cx="70%" cy="40%"><stop stopColor="#9B5DE5"/><stop offset="1" stopColor="#6A0DAD"/></radialGradient>
-              </defs>
-            </svg>
-          </div>
-          <span className={styles.logoText}>Nüra</span>
+          <img src="/logo.png" alt="Nüra" className={styles.logoImg} />
         </div>
         <div className={styles.location}>
-          <MapPin size={13} />
-          <span>Barcelona</span>
+          <MapPin size={12} />
+          Barcelona
         </div>
       </header>
 
-      {/* Hero */}
       <main className={styles.main}>
         <div className={styles.hero}>
+          <div className={styles.eyebrow}>
+            <Sparkles size={11} />
+            La IA que conecta personas
+          </div>
           <h1 className={styles.title}>
             ¿Qué necesitas?
           </h1>
           <p className={styles.subtitle}>
-            Descríbelo con tus palabras. Nüra encuentra a la persona adecuada.
+            Descríbelo con tus palabras. Nüra entiende el contexto
+            y encuentra a la persona adecuada.
           </p>
         </div>
 
-        {/* Search box */}
         <div className={styles.searchBox}>
-          <div className={styles.inputWrap}>
+          <div className={styles.inputCard}>
             <textarea
               ref={textareaRef}
               className={styles.textarea}
@@ -118,45 +102,41 @@ export default function Home({ setSearchState }) {
               rows={1}
               disabled={loading}
             />
-            <div className={styles.actions}>
-              <button
-                className={`${styles.micBtn} ${listening ? styles.micActive : ''}`}
-                onClick={toggleMic}
-                title="Hablar"
-              >
-                {listening ? <MicOff size={18} /> : <Mic size={18} />}
-              </button>
-              <button
-                className={styles.sendBtn}
-                onClick={handleSearch}
-                disabled={!text.trim() || loading}
-              >
-                {loading
-                  ? <div className={styles.spinner} />
-                  : <ArrowRight size={20} />
-                }
-              </button>
+            <div className={styles.inputFooter}>
+              <span className={styles.inputHint}>
+                {text.length > 0 ? `${text.length} caracteres` : 'Intro para buscar'}
+              </span>
+              <div className={styles.inputActions}>
+                <button
+                  className={`${styles.micBtn} ${listening ? styles.micActive : ''}`}
+                  onClick={toggleMic}
+                  title={listening ? 'Parar' : 'Hablar'}
+                >
+                  {listening ? <MicOff size={16} /> : <Mic size={16} />}
+                </button>
+                <button
+                  className={styles.sendBtn}
+                  onClick={handleSearch}
+                  disabled={!text.trim() || loading}
+                >
+                  {loading
+                    ? <><div className={styles.spinner} /> Buscando...</>
+                    : <><ArrowRight size={16} /> Buscar</>
+                  }
+                </button>
+              </div>
             </div>
           </div>
           {error && <p className={styles.error}>{error}</p>}
-          {loading && (
-            <p className={styles.loadingText}>
-              Nüra está analizando tu necesidad...
-            </p>
-          )}
+          {loading && <p className={styles.loadingText}>Nüra está analizando tu necesidad...</p>}
         </div>
 
-        {/* Suggestions */}
         {!loading && (
           <div className={styles.suggestions}>
-            <p className={styles.suggestLabel}>Ejemplos frecuentes</p>
+            <p className={styles.suggestLabel}>Búsquedas frecuentes</p>
             <div className={styles.chips}>
               {SUGGESTIONS.map((s, i) => (
-                <button
-                  key={i}
-                  className={styles.chip}
-                  onClick={() => setText(s)}
-                >
+                <button key={i} className={styles.chip} onClick={() => setText(s)}>
                   {s}
                 </button>
               ))}
@@ -165,9 +145,8 @@ export default function Home({ setSearchState }) {
         )}
       </main>
 
-      {/* Footer tagline */}
       <footer className={styles.footer}>
-        <p>La IA que conecta personas · Barcelona · nura.app</p>
+        <p>Nüra · La IA que conecta personas · Barcelona · nura.app</p>
       </footer>
     </div>
   )
