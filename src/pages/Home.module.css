@@ -1,0 +1,249 @@
+.page {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  background: var(--white);
+}
+
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 18px 24px;
+  border-bottom: 1px solid var(--rule);
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.logoIcon {
+  display: flex;
+  align-items: center;
+}
+
+.logoText {
+  font-size: 22px;
+  font-weight: 700;
+  letter-spacing: -0.5px;
+  color: var(--ink);
+}
+
+.location {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 12px;
+  color: var(--soft);
+  background: var(--paper);
+  padding: 5px 10px;
+  border-radius: 20px;
+  border: 1px solid var(--rule);
+}
+
+.main {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 48px 24px 32px;
+  max-width: 680px;
+  margin: 0 auto;
+  width: 100%;
+}
+
+.hero {
+  text-align: center;
+  margin-bottom: 36px;
+}
+
+.title {
+  font-size: clamp(36px, 6vw, 56px);
+  font-weight: 700;
+  color: var(--ink);
+  letter-spacing: -1.5px;
+  line-height: 1.1;
+  margin-bottom: 14px;
+}
+
+.subtitle {
+  font-size: 17px;
+  color: var(--mid);
+  line-height: 1.5;
+  max-width: 420px;
+  margin: 0 auto;
+}
+
+.searchBox {
+  width: 100%;
+  margin-bottom: 32px;
+}
+
+.inputWrap {
+  display: flex;
+  align-items: flex-end;
+  gap: 8px;
+  background: var(--white);
+  border: 2px solid var(--rule);
+  border-radius: 16px;
+  padding: 12px 12px 12px 18px;
+  transition: border-color 0.2s;
+  box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+}
+
+.inputWrap:focus-within {
+  border-color: var(--blue);
+  box-shadow: 0 0 0 4px rgba(26,86,219,0.08);
+}
+
+.textarea {
+  flex: 1;
+  border: none;
+  outline: none;
+  resize: none;
+  font-size: 16px;
+  line-height: 1.5;
+  color: var(--ink);
+  background: transparent;
+  min-height: 24px;
+  max-height: 200px;
+  overflow-y: auto;
+}
+
+.textarea::placeholder {
+  color: var(--soft);
+}
+
+.actions {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  flex-shrink: 0;
+}
+
+.micBtn {
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  border: 1px solid var(--rule);
+  background: var(--paper);
+  color: var(--soft);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s;
+}
+
+.micBtn:hover { background: var(--paper2); color: var(--blue); }
+
+.micActive {
+  background: #FEF2F2;
+  border-color: var(--red);
+  color: var(--red);
+  animation: pulse 1s infinite;
+}
+
+@keyframes pulse {
+  0%,100% { transform: scale(1); }
+  50% { transform: scale(1.06); }
+}
+
+.sendBtn {
+  width: 42px;
+  height: 42px;
+  border-radius: 12px;
+  border: none;
+  background: var(--blue);
+  color: var(--white);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s;
+  flex-shrink: 0;
+}
+
+.sendBtn:hover:not(:disabled) { background: var(--blue2); transform: scale(1.04); }
+.sendBtn:disabled { background: var(--rule); cursor: not-allowed; }
+
+.spinner {
+  width: 18px;
+  height: 18px;
+  border: 2px solid rgba(255,255,255,0.3);
+  border-top-color: white;
+  border-radius: 50%;
+  animation: spin 0.7s linear infinite;
+}
+
+@keyframes spin { to { transform: rotate(360deg); } }
+
+.error {
+  margin-top: 8px;
+  font-size: 13px;
+  color: var(--red);
+  padding: 0 4px;
+}
+
+.loadingText {
+  margin-top: 10px;
+  font-size: 13px;
+  color: var(--blue);
+  text-align: center;
+  animation: fadePulse 1.4s ease-in-out infinite;
+}
+
+@keyframes fadePulse {
+  0%,100% { opacity: 0.5; }
+  50% { opacity: 1; }
+}
+
+.suggestions {
+  width: 100%;
+}
+
+.suggestLabel {
+  font-size: 11px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.8px;
+  color: var(--soft);
+  margin-bottom: 12px;
+  text-align: center;
+}
+
+.chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  justify-content: center;
+}
+
+.chip {
+  font-size: 13px;
+  color: var(--mid);
+  background: var(--paper);
+  border: 1px solid var(--rule);
+  border-radius: 20px;
+  padding: 7px 14px;
+  transition: all 0.15s;
+  text-align: left;
+}
+
+.chip:hover {
+  background: var(--paper2);
+  border-color: var(--blue);
+  color: var(--blue);
+}
+
+.footer {
+  padding: 16px 24px;
+  text-align: center;
+  border-top: 1px solid var(--rule);
+}
+
+.footer p {
+  font-size: 11px;
+  color: var(--soft);
+}
