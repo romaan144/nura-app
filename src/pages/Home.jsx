@@ -1,6 +1,6 @@
 import { useState, useRef, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
-import { Mic, MicOff, ArrowRight, MapPin, Sparkles } from 'lucide-react'
+import { Mic, MicOff, ArrowRight, MapPin } from 'lucide-react'
 import { analyzeNeed, matchHelpers } from '../utils/matching'
 import styles from './Home.module.css'
 
@@ -65,37 +65,44 @@ export default function Home({ setSearchState }) {
 
   return (
     <div className={styles.page}>
+
+      {/* ── HEADER: solo wordmark ── */}
       <header className={styles.header}>
-        <div className={styles.logo}>
-          <img src="/logo.png" alt="Nüra" className={styles.logoImg} />
-        </div>
+        <img src="/logo-text.png" alt="Nüra" className={styles.logoText} />
         <div className={styles.location}>
           <MapPin size={12} />
           Barcelona
         </div>
       </header>
 
+      {/* ── MAIN ── */}
       <main className={styles.main}>
+
+        {/* Isotipo animado centrado */}
+        <div className={styles.isotipoWrap}>
+          <div className={styles.isotipoGlow} />
+          <img
+            src="/logo-iso.png"
+            alt=""
+            className={`${styles.isotipo} ${loading ? styles.isotipoLoading : ''}`}
+          />
+        </div>
+
+        {/* Título */}
         <div className={styles.hero}>
-          <div className={styles.eyebrow}>
-            <Sparkles size={11} />
-            La IA que conecta personas
-          </div>
-          <h1 className={styles.title}>
-            ¿Qué necesitas?
-          </h1>
+          <h1 className={styles.title}>¿Qué necesitas?</h1>
           <p className={styles.subtitle}>
-            Descríbelo con tus palabras. Nüra entiende el contexto
-            y encuentra a la persona adecuada.
+            Descríbelo con tus palabras. Nüra encuentra a la persona adecuada.
           </p>
         </div>
 
+        {/* Search box */}
         <div className={styles.searchBox}>
           <div className={styles.inputCard}>
             <textarea
               ref={textareaRef}
               className={styles.textarea}
-              placeholder="Necesito un logopeda paciente para mi hijo de 7 años en Barcelona..."
+              placeholder="Necesito un logopeda paciente para mi hijo de 7 años..."
               value={text}
               onChange={e => setText(e.target.value)}
               onKeyDown={handleKey}
@@ -131,14 +138,13 @@ export default function Home({ setSearchState }) {
           {loading && <p className={styles.loadingText}>Nüra está analizando tu necesidad...</p>}
         </div>
 
+        {/* Suggestions */}
         {!loading && (
           <div className={styles.suggestions}>
             <p className={styles.suggestLabel}>Búsquedas frecuentes</p>
             <div className={styles.chips}>
               {SUGGESTIONS.map((s, i) => (
-                <button key={i} className={styles.chip} onClick={() => setText(s)}>
-                  {s}
-                </button>
+                <button key={i} className={styles.chip} onClick={() => setText(s)}>{s}</button>
               ))}
             </div>
           </div>
@@ -146,7 +152,7 @@ export default function Home({ setSearchState }) {
       </main>
 
       <footer className={styles.footer}>
-        <p>Nüra · La IA que conecta personas · Barcelona · nura.app</p>
+        <p>La IA que conecta personas · Barcelona · nura.app</p>
       </footer>
     </div>
   )
