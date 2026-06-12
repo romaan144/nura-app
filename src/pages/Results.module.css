@@ -146,3 +146,81 @@
   box-shadow: var(--shadow-sm);
 }
 .newSearch:hover { background: var(--blue-soft); color: var(--blue); border-color: var(--blue); }
+
+/* ── REFINEMENTS APPLIED ── */
+.refinementsApplied {
+  display: flex; flex-wrap: wrap; gap: 6px; align-items: center;
+  margin-bottom: 14px;
+}
+.refinementsLabel { font-size: 11px; font-weight: 600; color: var(--soft); text-transform: uppercase; letter-spacing: 0.5px; }
+.refinementTag {
+  display: inline-flex; align-items: center; gap: 5px;
+  font-size: 12px; color: var(--blue);
+  background: var(--blue-soft); border: 1px solid var(--blue);
+  border-radius: 20px; padding: 4px 10px;
+}
+.refinementTag button {
+  display: flex; align-items: center;
+  color: var(--blue); opacity: 0.6; transition: opacity 0.15s;
+}
+.refinementTag button:hover { opacity: 1; }
+
+.founderBadge {
+  display: inline-flex; align-items: center; gap: 3px;
+  font-size: 10px; font-weight: 600; color: #92400E;
+  background: #FEF3C7; border-radius: 8px; padding: 2px 7px;
+}
+
+/* ── REFINE BOX ── */
+.refineBox {
+  background: var(--white);
+  border: 1.5px solid var(--blue);
+  border-radius: 18px;
+  padding: 18px;
+  margin-bottom: 12px;
+  box-shadow: 0 0 0 4px rgba(26,86,219,0.05);
+}
+
+.refineTitle {
+  display: flex; align-items: center; gap: 6px;
+  font-size: 13px; font-weight: 700; color: var(--blue);
+  margin-bottom: 6px;
+}
+
+.refineHint {
+  font-size: 12px; color: var(--soft); line-height: 1.5;
+  margin-bottom: 12px;
+}
+
+.refineInputWrap {
+  display: flex; gap: 8px; align-items: center;
+}
+
+.refineInput {
+  flex: 1;
+  padding: 10px 14px;
+  border: 1.5px solid var(--rule);
+  border-radius: 12px;
+  font-size: 14px; outline: none;
+  background: var(--paper); color: var(--ink);
+  transition: border-color 0.2s;
+}
+.refineInput:focus { border-color: var(--blue); background: var(--white); }
+
+.refineBtn {
+  width: 42px; height: 42px; border-radius: 12px;
+  background: var(--blue); color: white;
+  border: none;
+  display: flex; align-items: center; justify-content: center;
+  flex-shrink: 0; transition: all 0.15s;
+}
+.refineBtn:hover:not(:disabled) { background: var(--blue2); }
+.refineBtn:disabled { background: var(--rule); }
+
+.spinner {
+  width: 16px; height: 16px;
+  border: 2px solid rgba(255,255,255,0.3);
+  border-top-color: white; border-radius: 50%;
+  animation: spin 0.65s linear infinite;
+}
+@keyframes spin { to { transform: rotate(360deg); } }
