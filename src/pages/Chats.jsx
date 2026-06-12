@@ -1,74 +1,138 @@
+import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
-import { ArrowLeft, MessageCircle, Search } from 'lucide-react'
+import { ArrowLeft, Search } from 'lucide-react'
 import { useUser } from '../context/UserContext'
 import { HELPERS } from '../data/helpers'
 import styles from './Chats.module.css'
+
+// Mock chat history para demo
+const MOCK_CHATS = [
+  {
+    helperId: 1,
+    helperName: "Carlos Martínez",
+    helperColor: "#1A56DB",
+    helperAvatar: "CM",
+    lastMsg: "Perfecto, quedamos el lunes a las 10h. Le espero en consulta 😊",
+    lastTime: new Date(Date.now() - 1000 * 60 * 8).toISOString(),
+    unread: 1,
+  },
+  {
+    helperId: 5,
+    helperName: "Elena Fernández",
+    helperColor: "#059669",
+    helperAvatar: "EF",
+    lastMsg: "Sí, puedo empezar esta semana. ¿El miércoles por la mañana le viene bien?",
+    lastTime: new Date(Date.now() - 1000 * 60 * 45).toISOString(),
+    unread: 0,
+  },
+  {
+    helperId: 3,
+    helperName: "Roberto Sánchez",
+    helperColor: "#1E40AF",
+    helperAvatar: "RS",
+    lastMsg: "Ya he revisado la caldera. Era el termostato. Todo solucionado 👍",
+    lastTime: new Date(Date.now() - 1000 * 60 * 60 * 3).toISOString(),
+    unread: 0,
+  },
+  {
+    helperId: 7,
+    helperName: "Lucía Vidal",
+    helperColor: "#DB2777",
+    helperAvatar: "LV",
+    lastMsg: "Claro, puedo dar clases online también. ¿Qué días le vienen mejor a tu hijo?",
+    lastTime: new Date(Date.now() - 1000 * 60 * 60 * 24).toISOString(),
+    unread: 0,
+  },
+  {
+    helperId: 4,
+    helperName: "María López",
+    helperColor: "#7C3AED",
+    helperAvatar: "ML",
+    lastMsg: "Hasta el jueves que viene entonces. Que tenga buena semana 🌸",
+    lastTime: new Date(Date.now() - 1000 * 60 * 60 * 24 * 2).toISOString(),
+    unread: 0,
+  },
+]
 
 export default function Chats() {
   const navigate = useNavigate()
   const { chats, markRead } = useUser()
   const [search, setSearch] = useState('')
 
-  const filtered = chats.filter(c => c.helperName.toLowerCase().includes(search.toLowerCase()) || c.lastMsg.toLowerCase().includes(search.toLowerCase()))
+  // Merge real chats with mock, real ones take priority
+  const allChats = [...MOCK_CHATS.filter(m => !chats.find(c => c.helperId === m.helperId)), ...chats]
+  const filtered = allChats.filter(c =>
+    c.helperName.toLowerCase().includes(search.toLowerCase()) ||
+    c.lastMsg.toLowerCase().includes(search.toLowerCase())
+  )
 
   function formatTime(iso) {
     if (!iso) return ''
     const d = new Date(iso)
     const now = new Date()
-    if (d.toDateString() === now.toDateString()) {
-      return `${d.getHours()}:${String(d.getMinutes()).padStart(2,'0')}`
-    }
+    const diff = now - d
+    if (diff < 1000 * 60) return 'Ahora'
+    if (diff < 1000 * 60 * 60) return `${Math.floor(diff / 60000)}m`
+    if (d.toDateString() === now.toDateString()) return `${d.getHours()}:${String(d.getMinutes()).padStart(2,'0')}`
+    if (diff < 1000 * 60 * 60 * 48) return 'Ayer'
     return d.toLocaleDateString('es-ES', { day: 'numeric', month: 'short' })
   }
 
   return (
     <div className={styles.page}>
       <header className={styles.header}>
-        <button className={styles.back} onClick={() => navigate(-1)}><ArrowLeft size={18} /></button>
         <span className={styles.title}>Conversaciones</span>
-        <div style={{width:36}} />
+        <span className={styles.count}>{allChats.length}</span>
       </header>
 
-      {chats.length > 0 && (
-        <div style={{padding:'10px 16px 0', background:'var(--white)', borderBottom:'1px solid var(--rule)'}}>
-          <div style={{display:'flex',alignItems:'center',gap:'8px',background:'var(--paper)',border:'1.5px solid var(--rule)',borderRadius:'12px',padding:'8px 12px'}}>
-            <Search size={14} color="var(--soft)" />
-            <input style={{border:'none',outline:'none',background:'transparent',fontSize:'14px',color:'var(--ink)',flex:1}}
-              placeholder="Buscar conversaciones..." value={search} onChange={e => setSearch(e.target.value)} />
+      {/* Search */}
+      <div className={styles.searchWrap}>
+        <div className={styles.searchBox}>
+          <Search size={14} color="var(--soft)" />
+          <input
+            className={styles.searchInput}
+            placeholder="Buscar conversaciones..."
+            value={search}
+            onChange={e => setSearch(e.target.value)}
+          />
+        </div>
+      </div>
+
+      <div className={styles.list}>
+        {filtered.length === 0 ? (
+          <div className={styles.empty}>
+            <p>Sin resultados para "{search}"</p>
           </div>
-        </div>
-      )}
-      {chats.length === 0 ? (
-        <div className={styles.empty}>
-          <MessageCircle size={48} color="var(--rule)" />
-          <h3>Sin conversaciones todavía</h3>
-          <p>Cuando contactes con un helper, la conversación aparecerá aquí.</p>
-          <button className={styles.searchBtn} onClick={() => navigate('/')}>Buscar ayuda</button>
-        </div>
-      ) : (
-        <div className={styles.list}>
-          {[...filtered].reverse().map((chat, i) => {
+        ) : (
+          filtered.map((chat, i) => {
             const helper = HELPERS.find(h => h.id === chat.helperId)
             return (
-              <button key={i} className={styles.chatRow}
-                onClick={() => { markRead(chat.helperId); navigate(`/chat/${chat.helperId}`) }}>
-                <div className={styles.chatAvatar} style={{background: chat.helperColor}}>
-                  {chat.helperAvatar}
+              <button key={i} className={`${styles.chatRow} ${chat.unread > 0 ? styles.chatUnread : ''}`}
+                onClick={() => { markRead?.(chat.helperId); navigate(`/chat/${chat.helperId}`) }}>
+
+                <div className={styles.avatarWrap}>
+                  {helper?.avatarUrl
+                    ? <img src={helper.avatarUrl} alt={chat.helperName} className={styles.avatarImg} />
+                    : <div className={styles.avatar} style={{background: chat.helperColor}}>{chat.helperAvatar}</div>
+                  }
                   <span className={styles.onlineDot} />
                 </div>
+
                 <div className={styles.chatInfo}>
-                  <div className={styles.chatName}>{chat.helperName}</div>
-                  <div className={styles.chatLastMsg}>{chat.lastMsg}</div>
-                </div>
-                <div className={styles.chatMeta}>
-                  <span className={styles.chatTime}>{formatTime(chat.lastTime)}</span>
-                  {chat.unread > 0 && <span className={styles.unreadBadge}>{chat.unread}</span>}
+                  <div className={styles.chatTop}>
+                    <span className={styles.chatName}>{chat.helperName}</span>
+                    <span className={styles.chatTime}>{formatTime(chat.lastTime)}</span>
+                  </div>
+                  <div className={styles.chatBottom}>
+                    <span className={styles.chatLastMsg}>{chat.lastMsg}</span>
+                    {chat.unread > 0 && <span className={styles.unreadBadge}>{chat.unread}</span>}
+                  </div>
                 </div>
               </button>
             )
-          })}
-        </div>
-      )}
+          })
+        )}
+      </div>
     </div>
   )
 }

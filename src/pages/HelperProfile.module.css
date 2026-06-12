@@ -16,7 +16,7 @@
 .back:hover { border-color: var(--purple); color: var(--purple); }
 .logoText { height: 26px; width: auto; }
 
-.content { max-width: 600px; margin: 0 auto; padding: 20px 16px 160px; width: 100%; }
+.content { max-width: 600px; margin: 0 auto; padding: 20px 16px 148px; width: 100%; }
 
 /* Hero card */
 .heroCard {
@@ -142,7 +142,7 @@
 
 /* CTA */
 .cta {
-  position: fixed; bottom: 64px; left: 0; right: 0;
+  position: fixed; bottom: 52px; left: 0; right: 0;
   padding: 10px 16px;
   background: rgba(255,255,255,0.97); backdrop-filter: blur(16px);
   border-top: 1px solid var(--rule);
