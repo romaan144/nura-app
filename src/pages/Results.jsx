@@ -38,17 +38,19 @@ function HelperCard({ helper }) {
           </div>
         </div>
         <div className={styles.cardRight}>
-          <div className={styles.price}>{helper.price}</div>
           <ChevronRight size={16} color="var(--soft)" />
         </div>
       </div>
       <div className={styles.cardActions}>
-        <button className={styles.btnPrimary} onClick={e => { e.stopPropagation(); navigate(`/chat/${helper.id}`) }}>
-          <MessageCircle size={13} /> Contactar
-        </button>
-        <button className={styles.btnSecondary} onClick={e => { e.stopPropagation(); navigate(`/helper/${helper.id}`) }}>
-          Ver perfil
-        </button>
+        <div className={styles.actionsLeft}>
+          <button className={styles.btnPrimary} onClick={e => { e.stopPropagation(); navigate(`/chat/${helper.id}`) }}>
+            <MessageCircle size={13} /> Contactar
+          </button>
+          <button className={styles.btnSecondary} onClick={e => { e.stopPropagation(); navigate(`/helper/${helper.id}`) }}>
+            Ver perfil
+          </button>
+        </div>
+        <div className={styles.price}>{helper.price}</div>
       </div>
     </div>
   )
