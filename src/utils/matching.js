@@ -2,14 +2,26 @@ import { HELPERS as LOCAL_HELPERS } from '../data/helpers'
 import { searchHelpers } from './supabase'
 
 const CATEGORY_KEYWORDS = {
-  logopedia: ['logopeda','logopedia','habla','lenguaje','pronunciación','fonema','tartamudez','voz','dislalia','disfagia'],
-  tecnico: ['caldera','fontanero','fontanería','electricista','técnico','reparar','avería','instalación','grifo','tubería','luz','calefacción','aire acondicionado','pintor','cerrajero','electrodoméstico'],
-  limpieza: ['limpiar','limpieza','fregar','barrer','hogar','casa','ordenar','cristales','planchar'],
-  cuidado: ['cuidar','cuidadora','mayor','anciano','abuelo','acompañar','acompañamiento','geriatría','dependencia','niños','bebé','niñera','enfermera'],
-  mascotas: ['perro','gato','mascota','animal','pasear','cuidar perro','veterinario','adiestramiento'],
-  matematicas: ['matemáticas','mates','clases','profesor','refuerzo','estudiar','deberes','física','química','inglés','idioma','piano','música','programación','yoga','nutricion','psicolog','fisio','chef'],
-  entrenador: ['entrenador','gym','gimnasio','deporte','ejercicio','fitness','correr','adelgazar','musculación','yoga','pilates','running'],
-  otro: ['psicólogo','psicóloga','fisioterapeuta','nutricionista','chef','tatuaje','niñera','terapéutico'],
+  logopedia: ['logopeda','logopedia','habla','lenguaje','pronunciación','fonema','tartamudez','voz','dislalia','disfagia','hablar','comunicación'],
+  tecnico: ['caldera','fontanero','fontanería','electricista','técnico','reparar','avería','instalación','grifo','tubería','luz','calefacción',
+    'aire acondicionado','pintor','cerrajero','electrodoméstico','lavadora','nevera','frigorífico','horno','microondas','persiana',
+    'puerta','cerradura','ventana','gotera','humedad','desatascar','wc','inodoro','ducha','bañera','radiador','termo',
+    'mecánico','coche','carro','automóvil','vehículo','motor','frenos','rueda','neumático','batería','aceite','taller',
+    'albañil','yesero','escayola','azulejo','parquet','suelo','techo','pared'],
+  limpieza: ['limpiar','limpieza','fregar','barrer','hogar','casa','ordenar','cristales','planchar','sucio','polvo','mancha'],
+  cuidado: ['cuidar','cuidadora','mayor','anciano','abuelo','acompañar','acompañamiento','geriatría','dependencia',
+    'niños','bebé','niñera','enfermera','auxiliar','residencia','alzheimer','parkinson','discapacidad',
+    'terapéutico','salud mental','psiquiatría'],
+  mascotas: ['perro','gato','mascota','animal','pasear','cuidar perro','veterinario','adiestramiento','cachorro','felino','canino','pájaro','conejo'],
+  matematicas: ['matemáticas','mates','clases','profesor','refuerzo','estudiar','deberes','física','química','inglés','idioma',
+    'piano','música','programación','francés','alemán','italiano','clase particular','academia','tutorías',
+    'selectividad','bachillerato','ESO','primaria','universidad','oposiciones'],
+  entrenador: ['entrenador','gym','gimnasio','deporte','ejercicio','fitness','correr','adelgazar','musculación','yoga','pilates','running',
+    'crossfit','natación','ciclismo','spinning','zumba','baile','aeróbic','pesas','cardio'],
+  otro: ['psicólogo','psicóloga','psicología','fisioterapeuta','fisioterapia','nutricionista','nutrición','dietista',
+    'chef','cocina','cocinar','tatuaje','tatuador','maquilladora','fotógrafo','fotografía','diseñador',
+    'abogado','gestor','asesor','traductor','intérprete','mudanza','transporte','jardinero','jardín','plantas',
+    'masaje','quiropráctico','acupuntura','reiki','terapeuta','podólogo','óptico'],
 }
 
 const URGENCY_KEYWORDS = ['urgente','urgencia','hoy','ahora','inmediatamente','rápido','no funciona','roto','avería','24h']
