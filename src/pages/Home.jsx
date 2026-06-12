@@ -36,7 +36,7 @@ export default function Home({ setSearchState }) {
     setLoading(true); setError('')
     try {
       const analysis = await analyzeNeed(text)
-      const matches = matchHelpers(analysis)
+      const matches = await matchHelpers(analysis)
       addSearch(text)
       setSearchState({ query: text, analysis, matches })
       navigate('/results')

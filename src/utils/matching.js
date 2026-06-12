@@ -1,165 +1,133 @@
-import { HELPERS } from '../data/helpers';
+import { HELPERS as LOCAL_HELPERS } from '../data/helpers'
+import { searchHelpers } from './supabase'
 
 const CATEGORY_KEYWORDS = {
-  logopedia: ['logopeda','logopedia','habla','lenguaje','pronunciación','fonema','tartamudez','voz'],
-  tecnico: ['caldera','fontanero','fontanería','electricista','técnico','reparar','avería','instalación','grifo','tubería','luz','calefacción','aire acondicionado'],
-  limpieza: ['limpiar','limpieza','fregar','barrer','hogar','casa','ordenar','cristales'],
-  cuidado: ['cuidar','cuidadora','mayor','anciano','abuelo','acompañar','acompañamiento','geriatría','dependencia'],
-  mascotas: ['perro','gato','mascota','animal','pasear','cuidar perro','veterinario'],
-  matematicas: ['matemáticas','mates','clases','profesor','refuerzo','estudiar','deberes','física','química','inglés','idioma'],
-  entrenador: ['entrenador','gym','gimnasio','deporte','ejercicio','fitness','correr','adelgazar','musculación'],
-};
+  logopedia: ['logopeda','logopedia','habla','lenguaje','pronunciación','fonema','tartamudez','voz','dislalia','disfagia'],
+  tecnico: ['caldera','fontanero','fontanería','electricista','técnico','reparar','avería','instalación','grifo','tubería','luz','calefacción','aire acondicionado','pintor','cerrajero','electrodoméstico'],
+  limpieza: ['limpiar','limpieza','fregar','barrer','hogar','casa','ordenar','cristales','planchar'],
+  cuidado: ['cuidar','cuidadora','mayor','anciano','abuelo','acompañar','acompañamiento','geriatría','dependencia','niños','bebé','niñera','enfermera'],
+  mascotas: ['perro','gato','mascota','animal','pasear','cuidar perro','veterinario','adiestramiento'],
+  matematicas: ['matemáticas','mates','clases','profesor','refuerzo','estudiar','deberes','física','química','inglés','idioma','piano','música','programación','yoga','nutricion','psicolog','fisio','chef'],
+  entrenador: ['entrenador','gym','gimnasio','deporte','ejercicio','fitness','correr','adelgazar','musculación','yoga','pilates','running'],
+  otro: ['psicólogo','psicóloga','fisioterapeuta','nutricionista','chef','tatuaje','niñera','terapéutico'],
+}
 
-const URGENCY_KEYWORDS = ['urgente','urgencia','hoy','ahora','inmediatamente','rápido','no funciona','roto','avería'];
-const PRESENTIAL_KEYWORDS = ['casa','domicilio','presencial','venir','viene','zona','cerca','barrio'];
-const ONLINE_KEYWORDS = ['online','videoconferencia','remoto','internet','videollamada'];
+const URGENCY_KEYWORDS = ['urgente','urgencia','hoy','ahora','inmediatamente','rápido','no funciona','roto','avería','24h']
+const PRESENTIAL_KEYWORDS = ['casa','domicilio','presencial','venir','viene','zona','cerca','barrio']
+const ONLINE_KEYWORDS = ['online','videoconferencia','remoto','internet','videollamada']
 const QUALIFICATION_MAP = {
   logopedia: 'professional', tecnico: 'professional', cuidado: 'experienced',
-  mascotas: 'experienced', limpieza: 'experienced', matematicas: 'student', entrenador: 'professional',
-};
+  mascotas: 'experienced', limpieza: 'experienced', matematicas: 'student',
+  entrenador: 'professional', otro: 'professional',
+}
 
-// Filtros de refinamiento
 function applyRefinement(helpers, refinementText) {
-  const text = refinementText.toLowerCase();
-  let filtered = [...helpers];
-
-  // Género
-  if (text.includes('hombre') || text.includes('chico') || text.includes('varón')) {
-    filtered = filtered.filter(h => {
-      const femaleNames = ['sara','maría','elena','marta','lucía','carmen','ana','laura','nuria','patricia'];
-      const first = h.name.split(' ')[0].toLowerCase();
-      return !femaleNames.includes(first);
-    });
-  }
-  if (text.includes('mujer') || text.includes('chica') || text.includes('femenina')) {
-    filtered = filtered.filter(h => {
-      const femaleNames = ['sara','maría','elena','marta','lucía','carmen','ana','laura','nuria','patricia'];
-      const first = h.name.split(' ')[0].toLowerCase();
-      return femaleNames.includes(first);
-    });
-  }
-
-  // Edad aproximada
-  if (text.includes('joven') || text.includes('menor de 30') || text.includes('menos de 30')) {
-    filtered = filtered.filter(h => h.qualificationLevel === 'student' ||
-      (h.education && h.education[0]?.year?.includes('2020') || h.education?.[0]?.year?.includes('2021')));
-  }
-
-  // Online
-  if (text.includes('online') || text.includes('videoconferencia') || text.includes('remoto')) {
-    filtered = filtered.filter(h => h.online);
-  }
-
-  // A domicilio
-  if (text.includes('domicilio') || text.includes('casa') || text.includes('venga')) {
-    filtered = filtered.filter(h => h.presential);
-  }
-
-  // Urgente / disponible hoy
+  const text = refinementText.toLowerCase()
+  let filtered = [...helpers]
+  if (text.includes('online') || text.includes('videoconferencia')) filtered = filtered.filter(h => h.online)
+  if (text.includes('domicilio') || text.includes('casa') || text.includes('venga')) filtered = filtered.filter(h => h.presential)
   if (text.includes('hoy') || text.includes('urgente') || text.includes('ahora')) {
-    filtered = filtered.filter(h => h.urgent || h.available);
-    filtered.sort((a, b) => (b.urgent ? 1 : 0) - (a.urgent ? 1 : 0));
+    filtered = filtered.filter(h => h.urgent || h.available)
+    filtered.sort((a, b) => (b.urgent ? 1 : 0) - (a.urgent ? 1 : 0))
   }
-
-  // Distancia máxima
-  const distMatch = text.match(/menos de (\d+)\s*km/);
-  if (distMatch) {
-    const maxDist = parseInt(distMatch[1]);
-    filtered = filtered.filter(h => h.distance <= maxDist);
-  }
-
-  // Precio máximo
-  const priceMatch = text.match(/menos de (\d+)€|máximo (\d+)€|hasta (\d+)€/);
+  const distMatch = text.match(/menos de (\d+)\s*km/)
+  if (distMatch) filtered = filtered.filter(h => h.distance <= parseInt(distMatch[1]))
+  const priceMatch = text.match(/menos de (\d+)€|máximo (\d+)€|hasta (\d+)€/)
   if (priceMatch) {
-    const maxPrice = parseInt(priceMatch[1] || priceMatch[2] || priceMatch[3]);
-    filtered = filtered.filter(h => {
-      const p = parseInt(h.price.replace(/[^0-9]/g, ''));
-      return p <= maxPrice;
-    });
+    const maxP = parseInt(priceMatch[1] || priceMatch[2] || priceMatch[3])
+    filtered = filtered.filter(h => parseInt((h.price || '').replace(/[^0-9]/g,'')) <= maxP)
   }
-
-  // Rating mínimo
-  if (text.includes('mejor valorado') || text.includes('más valorado')) {
-    filtered.sort((a, b) => b.rating - a.rating);
-  }
-
-  // Más cercano
-  if (text.includes('más cercano') || text.includes('cerca')) {
-    filtered.sort((a, b) => a.distance - b.distance);
-  }
-
-  // Founder
-  if (text.includes('fundador') || text.includes('original')) {
-    filtered = filtered.filter(h => h.founder);
-  }
-
-  return filtered.length > 0 ? filtered : helpers;
+  if (text.includes('mejor valorado') || text.includes('más valorado')) filtered.sort((a, b) => b.rating - a.rating)
+  if (text.includes('más cercano') || text.includes('cerca')) filtered.sort((a, b) => a.distance - b.distance)
+  return filtered.length > 0 ? filtered : helpers
 }
 
 export function analyzeNeed(userText) {
-  const text = userText.toLowerCase();
-
-  let categoria = 'otro';
-  let maxMatches = 0;
+  const text = userText.toLowerCase()
+  let categoria = 'otro'
+  let maxMatches = 0
   for (const [cat, keywords] of Object.entries(CATEGORY_KEYWORDS)) {
-    const matches = keywords.filter(k => text.includes(k)).length;
-    if (matches > maxMatches) { maxMatches = matches; categoria = cat; }
+    const matches = keywords.filter(k => text.includes(k)).length
+    if (matches > maxMatches) { maxMatches = matches; categoria = cat }
   }
-
-  const urgente = URGENCY_KEYWORDS.some(k => text.includes(k));
-  const hasOnline = ONLINE_KEYWORDS.some(k => text.includes(k));
-  const hasPresential = PRESENTIAL_KEYWORDS.some(k => text.includes(k));
-  const presencial = hasPresential || (!hasOnline && ['tecnico','cuidado','limpieza','mascotas'].includes(categoria));
-  const nivelRequerido = QUALIFICATION_MAP[categoria] || 'experienced';
-  const palabrasClave = CATEGORY_KEYWORDS[categoria]?.filter(k => text.includes(k)) || [];
-
+  const urgente = URGENCY_KEYWORDS.some(k => text.includes(k))
+  const hasOnline = ONLINE_KEYWORDS.some(k => text.includes(k))
+  const hasPresential = PRESENTIAL_KEYWORDS.some(k => text.includes(k))
+  const presencial = hasPresential || (!hasOnline && ['tecnico','cuidado','limpieza','mascotas'].includes(categoria))
+  const nivelRequerido = QUALIFICATION_MAP[categoria] || 'experienced'
+  const palabrasClave = CATEGORY_KEYWORDS[categoria]?.filter(k => text.includes(k)) || []
   const resumenMap = {
     logopedia: 'Busca un logopeda', tecnico: 'Necesita un técnico',
-    limpieza: 'Busca servicio de limpieza', cuidado: 'Busca cuidado para persona mayor',
-    mascotas: 'Necesita cuidado de mascota', matematicas: 'Busca clases particulares',
-    entrenador: 'Busca entrenador personal', otro: 'Busca ayuda',
-  };
-
+    limpieza: 'Busca servicio de limpieza', cuidado: 'Busca cuidado de personas',
+    mascotas: 'Necesita cuidado de mascota', matematicas: 'Busca clases o formación',
+    entrenador: 'Busca entrenador personal', otro: 'Busca un profesional',
+  }
   return Promise.resolve({
     categoria, presencial, urgente, nivelRequerido,
-    resumen: resumenMap[categoria],
-    razon: 'Análisis basado en las palabras clave de tu búsqueda',
+    resumen: resumenMap[categoria] || 'Busca ayuda',
     palabrasClave,
-  });
+  })
 }
 
-export function matchHelpers(analysis, limit = 5, refinement = null, previousResults = null) {
-  const levelOrder = { student: 0, experienced: 1, professional: 2 };
-  const required = levelOrder[analysis.nivelRequerido] ?? 1;
-
-  // Si hay refinamiento, aplicarlo sobre los resultados previos
-  if (refinement && previousResults && previousResults.length > 0) {
-    const refined = applyRefinement(previousResults, refinement);
-    return refined.slice(0, limit);
+export async function matchHelpers(analysis, limit = 5, refinement = null, previousResults = null) {
+  if (refinement && previousResults?.length > 0) {
+    return applyRefinement(previousResults, refinement).slice(0, limit)
   }
 
-  const scored = HELPERS.map(h => {
-    let score = 0;
-    if (h.category === analysis.categoria) score += 40;
-    const keywords = analysis.palabrasClave || [];
+  const levelOrder = { student: 0, experienced: 1, professional: 2 }
+  const required = levelOrder[analysis.nivelRequerido] ?? 1
+
+  let pool = []
+
+  // Try Supabase first
+  try {
+    const remote = await searchHelpers(analysis.categoria, analysis.palabrasClave)
+    if (remote && remote.length > 0) {
+      // Normalize Supabase fields to match local format
+      pool = remote.map(h => ({
+        ...h,
+        avatarColor: h.avatar_color || '#1A56DB',
+        avatarUrl: `https://api.dicebear.com/9.x/personas/svg?seed=${encodeURIComponent(h.name.split(' ')[0])}`,
+        avatar: h.name.split(' ').map(n => n[0]).join('').slice(0,2).toUpperCase(),
+        responseTime: h.response_time,
+        completionRate: h.completion_rate,
+        qualificationLevel: h.qualification_level,
+        dniVerified: h.dni_verified,
+        specialty: h.specialty,
+      }))
+    }
+  } catch (e) {
+    console.warn('Supabase unavailable, using local data', e)
+  }
+
+  // Fallback to local if Supabase empty
+  if (pool.length === 0) pool = LOCAL_HELPERS
+
+  // Score and sort
+  const scored = pool.map(h => {
+    let score = 0
+    if (h.category === analysis.categoria) score += 40
+    const keywords = analysis.palabrasClave || []
     keywords.forEach(kw => {
-      const kl = kw.toLowerCase();
-      if (h.tags.some(t => t.toLowerCase().includes(kl))) score += 10;
-      if (h.bio.toLowerCase().includes(kl)) score += 5;
-    });
-    if (analysis.presencial && h.presential) score += 15;
-    const hLevel = levelOrder[h.qualificationLevel] ?? 1;
-    if (hLevel >= required) score += 10;
-    if (hLevel === required) score += 5;
-    if (analysis.urgente && h.urgent) score += 20;
-    score += h.rating * 2;
-    score -= h.distance * 3;
-    return { ...h, score };
-  });
+      const kl = kw.toLowerCase()
+      if ((h.tags || []).some(t => t.toLowerCase().includes(kl))) score += 10
+      if ((h.bio || '').toLowerCase().includes(kl)) score += 5
+      if ((h.specialty || '').toLowerCase().includes(kl)) score += 8
+    })
+    if (analysis.presencial && h.presential) score += 15
+    const hLevel = levelOrder[h.qualificationLevel] ?? 1
+    if (hLevel >= required) score += 10
+    if (hLevel === required) score += 5
+    if (analysis.urgente && h.urgent) score += 20
+    score += (h.rating || 4.5) * 2
+    score -= (h.distance || 1) * 3
+    return { ...h, score }
+  })
 
-  const filtered = scored.filter(h => h.score > 20);
-  if (filtered.length === 0) {
-    return scored.sort((a, b) => b.rating - a.rating).slice(0, limit);
-  }
-  return filtered.sort((a, b) => b.score - a.score).slice(0, limit);
+  const filtered = scored.filter(h => h.score > 20)
+  const results = (filtered.length > 0 ? filtered : scored)
+    .sort((a, b) => b.score - a.score)
+    .slice(0, limit)
+
+  return results
 }

@@ -64,22 +64,25 @@ export default function Results({ searchState }) {
   const [currentMatches, setCurrentMatches] = useState(matches)
   const [refining, setRefining] = useState(false)
 
-  function handleRefine() {
+  async function handleRefine() {
     if (!refineText.trim()) return
     setRefining(true)
-    setTimeout(() => {
-      const refined = matchHelpers(analysis, 5, refineText, currentMatches)
+    try {
+      const refined = await matchHelpers(analysis, 5, refineText, currentMatches)
       setCurrentMatches(refined)
       setRefinements(prev => [...prev, refineText])
       setRefineText('')
+    } finally {
       setRefining(false)
-    }, 400)
+    }
   }
 
-  function removeRefinement(idx) {
+  async function removeRefinement(idx) {
     const newR = refinements.filter((_, i) => i !== idx)
     let result = matches
-    newR.forEach(r => { result = matchHelpers(analysis, 5, r, result) })
+    for (const r of newR) {
+      result = await matchHelpers(analysis, 5, r, result)
+    }
     setCurrentMatches(result)
     setRefinements(newR)
   }
