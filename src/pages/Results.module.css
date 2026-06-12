@@ -95,3 +95,11 @@
 }
 
 .avatarImg { width: 46px; height: 46px; border-radius: 50%; object-fit: cover; flex-shrink: 0; box-shadow: 0 3px 12px rgba(0,0,0,0.12); }
+
+.cardSpecialty {
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--purple);
+  margin-bottom: 5px;
+  text-transform: capitalize;
+}
