@@ -158,3 +158,11 @@
 
 .notFound { display: flex; flex-direction: column; align-items: center; justify-content: center; min-height: 100vh; gap: 16px; color: var(--mid); }
 .notFound button { padding: 10px 20px; background: var(--grad-main); color: white; border: none; border-radius: 10px; font-size: 14px; font-weight: 600; }
+
+.rateHeaderBtn {
+  display: flex; align-items: center; gap: 5px;
+  font-size: 12px; font-weight: 600; color: var(--amber);
+  background: rgba(251,191,36,0.1); border: 1.5px solid rgba(251,191,36,0.4);
+  border-radius: 10px; padding: 6px 12px; transition: all 0.18s;
+}
+.rateHeaderBtn:hover { background: rgba(251,191,36,0.18); }

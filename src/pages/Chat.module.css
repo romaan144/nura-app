@@ -78,3 +78,12 @@
 .dateLabel::before, .dateLabel::after {
   content: ''; flex: 1; height: 1px; background: var(--rule);
 }
+
+.headerActions { display: flex; align-items: center; gap: 6px; }
+.rateBtn {
+  display: flex; align-items: center; gap: 4px;
+  font-size: 11px; font-weight: 600; color: var(--amber);
+  background: rgba(251,191,36,0.1); border: 1.5px solid rgba(251,191,36,0.4);
+  border-radius: 8px; padding: 5px 10px; transition: all 0.18s;
+}
+.rateBtn:hover { background: rgba(251,191,36,0.18); }

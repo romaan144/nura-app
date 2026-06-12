@@ -24,7 +24,10 @@ function HelperCard({ helper }) {
             <span>{helper.distance}km</span>
             {helper.urgent && <><span className={styles.dot} /><Zap size={10} color="var(--red)" /><span style={{color:'var(--red)',fontWeight:600}}>Hoy</span></>}
           </div>
-          <div className={styles.cardTags}>
+          <div className={styles.matchReason}>
+        💡 {helper.distance < 1 ? 'Muy cerca de ti' : `A ${helper.distance}km`} · {helper.responseTime} de respuesta · {helper.completionRate}% completados
+      </div>
+      <div className={styles.cardTags}>
             {helper.tags.slice(0,2).map((t,i) => <span key={i} className={styles.tag}>{t}</span>)}
           </div>
         </div>

@@ -2,6 +2,7 @@ import { useState, useRef, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { Mic, MicOff, ArrowRight, MapPin } from 'lucide-react'
 import { analyzeNeed, matchHelpers } from '../utils/matching'
+import { useUser } from '../context/UserContext'
 import styles from './Home.module.css'
 import Onboarding from '../components/Onboarding'
 
@@ -21,6 +22,7 @@ export default function Home({ setSearchState }) {
   const [listening, setListening] = useState(false)
   const textareaRef = useRef(null)
   const navigate = useNavigate()
+  const { user, searchHistory, addSearch } = useUser()
 
   useEffect(() => {
     if (textareaRef.current) {
@@ -35,6 +37,7 @@ export default function Home({ setSearchState }) {
     try {
       const analysis = await analyzeNeed(text)
       const matches = matchHelpers(analysis)
+      addSearch(text)
       setSearchState({ query: text, analysis, matches })
       navigate('/results')
     } catch { setError('No se pudo conectar. Comprueba tu conexión.') }
@@ -114,6 +117,18 @@ export default function Home({ setSearchState }) {
         )}
       </main>
 
+      {searchHistory.length > 0 && !loading && text.length === 0 && (
+        <div className={styles.recentWrap}>
+          <p className={styles.suggestLabel}>Búsquedas recientes</p>
+          <div className={styles.recentList}>
+            {searchHistory.slice(0,3).map((s, i) => (
+              <button key={i} className={styles.recentItem} onClick={() => setText(s.query)}>
+                🕐 {s.query}
+              </button>
+            ))}
+          </div>
+        </div>
+      )}
       <Onboarding />
       <footer className={styles.footer}>
         <p>La IA que conecta personas · Barcelona · nura.app</p>
