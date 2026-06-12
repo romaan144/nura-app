@@ -47,3 +47,34 @@
 .sendBtn:disabled { background: var(--rule); box-shadow: none; }
 
 .notFound { display: flex; align-items: center; justify-content: center; height: 100vh; color: var(--mid); }
+
+/* Typing indicator */
+.typingStatus { color: var(--purple); font-style: italic; }
+
+.typingBubble {
+  display: flex; align-items: center; gap: 4px;
+  background: var(--white); border: 1.5px solid var(--rule);
+  border-radius: 18px; border-bottom-left-radius: 5px;
+  padding: 12px 16px; box-shadow: var(--shadow-sm);
+}
+.typingDot {
+  width: 7px; height: 7px; border-radius: 50%;
+  background: var(--soft);
+  animation: typingBounce 1.2s ease-in-out infinite;
+}
+.typingDot:nth-child(2) { animation-delay: 0.2s; }
+.typingDot:nth-child(3) { animation-delay: 0.4s; }
+@keyframes typingBounce {
+  0%,60%,100% { transform: translateY(0); opacity: 0.4; }
+  30% { transform: translateY(-6px); opacity: 1; }
+}
+
+/* Date label */
+.dateLabel {
+  text-align: center; font-size: 11px; font-weight: 600;
+  color: var(--soft); margin: 8px 0;
+  display: flex; align-items: center; gap: 8px;
+}
+.dateLabel::before, .dateLabel::after {
+  content: ''; flex: 1; height: 1px; background: var(--rule);
+}

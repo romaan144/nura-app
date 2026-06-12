@@ -3,14 +3,15 @@ import { useNavigate } from 'react-router-dom'
 import { Mic, MicOff, ArrowRight, MapPin } from 'lucide-react'
 import { analyzeNeed, matchHelpers } from '../utils/matching'
 import styles from './Home.module.css'
+import Onboarding from '../components/Onboarding'
 
 const SUGGESTIONS = [
-  "Logopeda paciente para mi hijo de 7 años",
-  "La caldera no calienta, es urgente",
-  "Cuidadora para mi padre mayor unas horas al día",
-  "Clases de matemáticas para mi hijo de 12 años",
-  "Persona de limpieza una vez por semana",
-  "Alguien que cuide mi perro este fin de semana",
+  { icon: '🔧', text: 'La caldera no calienta, es urgente' },
+  { icon: '🗣️', text: 'Logopeda para mi hijo de 7 años' },
+  { icon: '👴', text: 'Cuidadora para mi padre mayor' },
+  { icon: '📐', text: 'Clases de matemáticas, 12 años' },
+  { icon: '🧹', text: 'Limpieza del hogar una vez por semana' },
+  { icon: '🐕', text: 'Cuidar mi perro este fin de semana' },
 ]
 
 export default function Home({ setSearchState }) {
@@ -24,7 +25,7 @@ export default function Home({ setSearchState }) {
   useEffect(() => {
     if (textareaRef.current) {
       textareaRef.current.style.height = 'auto'
-      textareaRef.current.style.height = Math.min(textareaRef.current.scrollHeight, 180) + 'px'
+      textareaRef.current.style.height = Math.min(textareaRef.current.scrollHeight, 160) + 'px'
     }
   }, [text])
 
@@ -36,9 +37,8 @@ export default function Home({ setSearchState }) {
       const matches = matchHelpers(analysis)
       setSearchState({ query: text, analysis, matches })
       navigate('/results')
-    } catch {
-      setError('No se pudo conectar. Comprueba tu conexión.')
-    } finally { setLoading(false) }
+    } catch { setError('No se pudo conectar. Comprueba tu conexión.') }
+    finally { setLoading(false) }
   }
 
   function handleKey(e) {
@@ -62,54 +62,35 @@ export default function Home({ setSearchState }) {
     <div className={styles.page}>
       <header className={styles.header}>
         <img src="/logo-text.png" alt="Nüra" className={styles.logoText} />
-        <div className={styles.location}>
-          <MapPin size={12} /> Barcelona
-        </div>
+        <div className={styles.location}><MapPin size={12} /> Barcelona</div>
       </header>
 
       <main className={styles.main}>
-        {/* Isotipo animado */}
         <div className={styles.isotipoWrap}>
           <div className={styles.isotipoGlow} />
           <img src="/logo-iso.png" alt=""
             className={`${styles.isotipo} ${loading ? styles.isotipoLoading : ''}`} />
         </div>
 
-        {/* Hero */}
         <div className={styles.hero}>
-          <h1 className={styles.title}>
-            ¿Qué{' '}
-            <span className={styles.titleAccent}>necesitas?</span>
-          </h1>
-          <p className={styles.subtitle}>
-            Descríbelo con tus palabras. Nüra entiende el contexto
-            y encuentra a la persona adecuada.
-          </p>
+          <h1 className={styles.title}>¿Qué <span className={styles.titleAccent}>necesitas?</span></h1>
+          <p className={styles.subtitle}>Descríbelo con tus palabras. Nüra encuentra a la persona adecuada.</p>
         </div>
 
-        {/* Search */}
         <div className={styles.searchBox}>
           <div className={styles.inputCard}>
-            <textarea
-              ref={textareaRef}
-              className={styles.textarea}
+            <textarea ref={textareaRef} className={styles.textarea}
               placeholder="Necesito un logopeda paciente para mi hijo de 7 años..."
-              value={text}
-              onChange={e => setText(e.target.value)}
-              onKeyDown={handleKey}
-              rows={1}
-              disabled={loading}
-            />
+              value={text} onChange={e => setText(e.target.value)}
+              onKeyDown={handleKey} rows={1} disabled={loading} />
             <div className={styles.inputFooter}>
-              <span className={styles.inputHint}>
-                {text.length > 0 ? `${text.length} caracteres` : 'Intro para buscar'}
-              </span>
+              <span className={styles.inputHint}>{text.length > 0 ? `${text.length} caracteres` : 'Intro para buscar'}</span>
               <div className={styles.inputActions}>
                 <button className={`${styles.micBtn} ${listening ? styles.micActive : ''}`} onClick={toggleMic}>
-                  {listening ? <MicOff size={16} /> : <Mic size={16} />}
+                  {listening ? <MicOff size={15} /> : <Mic size={15} />}
                 </button>
                 <button className={styles.sendBtn} onClick={handleSearch} disabled={!text.trim() || loading}>
-                  {loading ? <><div className={styles.spinner} /> Buscando...</> : <><ArrowRight size={16} /> Buscar</>}
+                  {loading ? <><div className={styles.spinner} /> Buscando...</> : <><ArrowRight size={15} /> Buscar</>}
                 </button>
               </div>
             </div>
@@ -118,19 +99,22 @@ export default function Home({ setSearchState }) {
           {loading && <p className={styles.loadingText}>Nüra está analizando tu necesidad...</p>}
         </div>
 
-        {/* Suggestions */}
         {!loading && (
           <div className={styles.suggestions}>
             <p className={styles.suggestLabel}>Búsquedas frecuentes</p>
             <div className={styles.chips}>
               {SUGGESTIONS.map((s, i) => (
-                <button key={i} className={styles.chip} onClick={() => setText(s)}>{s}</button>
+                <button key={i} className={styles.chip} onClick={() => setText(s.text)}>
+                  <span className={styles.chipIcon}>{s.icon}</span>
+                  {s.text}
+                </button>
               ))}
             </div>
           </div>
         )}
       </main>
 
+      <Onboarding />
       <footer className={styles.footer}>
         <p>La IA que conecta personas · Barcelona · nura.app</p>
       </footer>

@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
-import { ArrowLeft, MapPin, Star, Shield, Zap, MessageCircle, Search, X } from 'lucide-react'
+import { ArrowLeft, MapPin, Star, Shield, Zap, MessageCircle, Search, X, ChevronRight } from 'lucide-react'
 import { matchHelpers } from '../utils/matching'
 import styles from './Results.module.css'
 
@@ -8,40 +8,44 @@ function HelperCard({ helper }) {
   const navigate = useNavigate()
   return (
     <div className={styles.card} onClick={() => navigate(`/helper/${helper.id}`)}>
-      <div className={styles.cardTop}>
+      <div className={styles.cardMain}>
         <div className={styles.avatar} style={{ background: helper.avatarColor }}>{helper.avatar}</div>
         <div className={styles.cardInfo}>
           <div className={styles.cardName}>
-            {helper.name}
-            {helper.verified && <span className={styles.verifiedBadge}><Shield size={10} /> Verificado</span>}
-            {helper.founder && <span className={styles.founderBadge}>⭐ Fundador</span>}
+            {helper.name.split(' ')[0]} {helper.name.split(' ')[1]}
+            {helper.verified && <span className={styles.verifiedDot}><Shield size={9} /></span>}
+            {helper.founder && <span className={styles.founderDot}>⭐</span>}
           </div>
           <div className={styles.cardMeta}>
-            <span className={styles.rating}><Star size={12} fill="#F59E0B" color="#F59E0B" />{helper.rating} ({helper.reviews})</span>
+            <Star size={11} fill="#F59E0B" color="#F59E0B" />
+            <span className={styles.ratingVal}>{helper.rating}</span>
             <span className={styles.dot} />
-            <span className={styles.distance}><MapPin size={11} />{helper.distance} km · {helper.zone}</span>
-            {helper.urgent && <><span className={styles.dot} /><span className={styles.urgentBadge}><Zap size={11} />Urgencias</span></>}
+            <MapPin size={10} />
+            <span>{helper.distance}km</span>
+            {helper.urgent && <><span className={styles.dot} /><Zap size={10} color="var(--red)" /><span style={{color:'var(--red)',fontWeight:600}}>Hoy</span></>}
+          </div>
+          <div className={styles.cardTags}>
+            {helper.tags.slice(0,2).map((t,i) => <span key={i} className={styles.tag}>{t}</span>)}
           </div>
         </div>
-        <div className={styles.price}>{helper.price}</div>
-      </div>
-      <p className={styles.bio}>{helper.bio}</p>
-      <div className={styles.tags}>
-        {helper.tags.slice(0,3).map((t,i) => <span key={i} className={styles.tag}>{t}</span>)}
+        <div className={styles.cardRight}>
+          <div className={styles.price}>{helper.price}</div>
+          <ChevronRight size={16} color="var(--soft)" />
+        </div>
       </div>
       <div className={styles.cardActions}>
         <button className={styles.btnPrimary} onClick={e => { e.stopPropagation(); navigate(`/chat/${helper.id}`) }}>
-          <MessageCircle size={14} /> Contactar
+          <MessageCircle size={13} /> Contactar
         </button>
         <button className={styles.btnSecondary} onClick={e => { e.stopPropagation(); navigate(`/helper/${helper.id}`) }}>
-          Ver perfil completo
+          Ver perfil
         </button>
       </div>
     </div>
   )
 }
 
-export default function Results({ searchState, setSearchState }) {
+export default function Results({ searchState }) {
   const navigate = useNavigate()
   const { query, analysis, matches } = searchState
   const [refineText, setRefineText] = useState('')
@@ -62,19 +66,14 @@ export default function Results({ searchState, setSearchState }) {
   }
 
   function removeRefinement(idx) {
-    const newRefinements = refinements.filter((_, i) => i !== idx)
-    // Reapply remaining refinements from scratch
+    const newR = refinements.filter((_, i) => i !== idx)
     let result = matches
-    newRefinements.forEach(r => {
-      result = matchHelpers(analysis, 5, r, result)
-    })
+    newR.forEach(r => { result = matchHelpers(analysis, 5, r, result) })
     setCurrentMatches(result)
-    setRefinements(newRefinements)
+    setRefinements(newR)
   }
 
-  function handleKey(e) {
-    if (e.key === 'Enter') handleRefine()
-  }
+  function handleKey(e) { if (e.key === 'Enter') handleRefine() }
 
   return (
     <div className={styles.page}>
@@ -84,69 +83,44 @@ export default function Results({ searchState, setSearchState }) {
       </header>
 
       <div className={styles.content}>
-        {/* Query original */}
         <div className={styles.queryBox}>
           <div className={styles.queryLabel}>Tu búsqueda</div>
           <p className={styles.queryText}>"{query}"</p>
         </div>
 
-        {/* Pills de análisis */}
         <div className={styles.analysisPill}>
-          <span className={styles.pill + ' ' + styles.pillNormal}>
-            {analysis.presencial ? '📍 Presencial' : '💻 Online o presencial'}
-          </span>
+          <span className={styles.pill + ' ' + styles.pillNormal}>{analysis.presencial ? '📍 Presencial' : '💻 Online'}</span>
           {analysis.urgente && <span className={styles.pill + ' ' + styles.pillUrgent}>⚡ Urgente</span>}
           <span className={styles.pill + ' ' + styles.pillNormal}>
-            {{ student:'👤 Sin titulación requerida', experienced:'⭐ Con experiencia', professional:'🎓 Profesional titulado' }[analysis.nivelRequerido]}
+            {{ student:'👤 Sin titulación', experienced:'⭐ Con experiencia', professional:'🎓 Profesional' }[analysis.nivelRequerido]}
           </span>
         </div>
 
-        {/* Filtros aplicados */}
-        {refinements.length > 0 && (
-          <div className={styles.refinementsApplied}>
-            <span className={styles.refinementsLabel}>Filtros aplicados:</span>
-            {refinements.map((r, i) => (
-              <span key={i} className={styles.refinementTag}>
-                {r}
-                <button onClick={() => removeRefinement(i)}><X size={10} /></button>
-              </span>
-            ))}
-          </div>
-        )}
-
-        {/* ── REFINAMIENTO ── */}
+        {/* Refine */}
         <div className={styles.refineBox}>
-          <div className={styles.refineTitle}>
-            <Search size={13} />
-            Refina tu búsqueda
-          </div>
-          <p className={styles.refineHint}>
-            Puedes seguir filtrando: "disponible hoy", "menor de 30 años", "online", "menos de 1 km", "hasta 20€"...
-          </p>
+          <div className={styles.refineTitle}><Search size={13} /> Refina tu búsqueda</div>
           <div className={styles.refineInputWrap}>
-            <input
-              className={styles.refineInput}
-              placeholder='Ej: "disponible hoy y a menos de 1 km"'
-              value={refineText}
-              onChange={e => setRefineText(e.target.value)}
-              onKeyDown={handleKey}
-              disabled={refining}
-            />
-            <button
-              className={styles.refineBtn}
-              onClick={handleRefine}
-              disabled={!refineText.trim() || refining}
-            >
-              {refining ? <div className={styles.spinner} /> : <Search size={15} />}
+            <input className={styles.refineInput}
+              placeholder='Ej: "disponible hoy y menos de 1 km"'
+              value={refineText} onChange={e => setRefineText(e.target.value)}
+              onKeyDown={handleKey} disabled={refining} />
+            <button className={styles.refineBtn} onClick={handleRefine} disabled={!refineText.trim() || refining}>
+              {refining ? <div className={styles.spinner} /> : <Search size={14} />}
             </button>
           </div>
+          {refinements.length > 0 && (
+            <div className={styles.refinementsApplied}>
+              {refinements.map((r, i) => (
+                <span key={i} className={styles.refinementTag}>
+                  {r} <button onClick={() => removeRefinement(i)}><X size={9} /></button>
+                </span>
+              ))}
+            </div>
+          )}
         </div>
 
-        {/* Resultados */}
         <div className={styles.resultsHeader}>
-          <h2 className={styles.resultsTitle}>
-            {currentMatches.length > 0 ? `${currentMatches.length} personas encontradas` : 'Sin resultados'}
-          </h2>
+          <h2 className={styles.resultsTitle}>{currentMatches.length} personas encontradas</h2>
           <p className={styles.resultsSubtitle}>{analysis.resumen}</p>
         </div>
 
@@ -156,16 +130,12 @@ export default function Results({ searchState, setSearchState }) {
           </div>
         ) : (
           <div className={styles.empty}>
-            <p>No hay coincidencias con estos filtros.</p>
-            <button className={styles.retryBtn} onClick={() => { setCurrentMatches(matches); setRefinements([]) }}>
-              Quitar filtros
-            </button>
+            <p>Sin coincidencias con estos filtros.</p>
+            <button className={styles.retryBtn} onClick={() => { setCurrentMatches(matches); setRefinements([]) }}>Quitar filtros</button>
           </div>
         )}
 
-        <button className={styles.newSearch} onClick={() => navigate('/')}>
-          Nueva búsqueda desde cero
-        </button>
+        <button className={styles.newSearch} onClick={() => navigate('/')}>Nueva búsqueda</button>
       </div>
     </div>
   )
