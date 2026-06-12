@@ -118,18 +118,6 @@ export default function Home({ setSearchState }) {
         )}
       </main>
 
-      {searchHistory.length > 0 && !loading && text.length === 0 && (
-        <div className={styles.recentWrap}>
-          <p className={styles.suggestLabel}>Búsquedas recientes</p>
-          <div className={styles.recentList}>
-            {searchHistory.slice(0,3).map((s, i) => (
-              <button key={i} className={styles.recentItem} onClick={() => setText(s.query)}>
-                🕐 {s.query}
-              </button>
-            ))}
-          </div>
-        </div>
-      )}
       <Onboarding />
       <footer className={styles.footer}>
         <p>La IA que conecta personas · Barcelona · nura.app</p>
