@@ -2,6 +2,7 @@ export const HELPERS = [
   {
     id: 1,
     name: "Carlos Martínez Vidal",
+    avatarUrl: "https://api.dicebear.com/9.x/personas/svg?seed=carlos",
     avatar: "CM",
     avatarColor: "#1A56DB",
     category: "logopedia",
@@ -84,6 +85,7 @@ export const HELPERS = [
   {
     id: 2,
     name: "Sara Gómez Puig",
+    avatarUrl: "https://api.dicebear.com/9.x/personas/svg?seed=sara",
     avatar: "SG",
     avatarColor: "#0891B2",
     category: "logopedia",
@@ -142,6 +144,7 @@ export const HELPERS = [
   {
     id: 3,
     name: "Roberto Sánchez Ferrer",
+    avatarUrl: "https://api.dicebear.com/9.x/personas/svg?seed=roberto",
     avatar: "RS",
     avatarColor: "#1E40AF",
     category: "tecnico",
@@ -217,6 +220,7 @@ export const HELPERS = [
   {
     id: 4,
     name: "María López Castillo",
+    avatarUrl: "https://api.dicebear.com/9.x/personas/svg?seed=maria",
     avatar: "ML",
     avatarColor: "#7C3AED",
     category: "limpieza",
@@ -283,6 +287,7 @@ export const HELPERS = [
   {
     id: 5,
     name: "Elena Fernández Ros",
+    avatarUrl: "https://api.dicebear.com/9.x/personas/svg?seed=elena",
     avatar: "EF",
     avatarColor: "#059669",
     category: "cuidado",
@@ -357,6 +362,7 @@ export const HELPERS = [
   {
     id: 6,
     name: "Marta Puig Sala",
+    avatarUrl: "https://api.dicebear.com/9.x/personas/svg?seed=marta",
     avatar: "MP",
     avatarColor: "#D97706",
     category: "mascotas",
@@ -417,6 +423,7 @@ export const HELPERS = [
   {
     id: 7,
     name: "Lucía Vidal Torres",
+    avatarUrl: "https://api.dicebear.com/9.x/personas/svg?seed=lucia",
     avatar: "LV",
     avatarColor: "#DB2777",
     category: "matematicas",
@@ -483,6 +490,7 @@ export const HELPERS = [
   {
     id: 8,
     name: "David Moreno Llopis",
+    avatarUrl: "https://api.dicebear.com/9.x/personas/svg?seed=david",
     avatar: "DM",
     avatarColor: "#EA580C",
     category: "entrenador",

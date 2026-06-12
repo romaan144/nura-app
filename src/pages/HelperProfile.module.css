@@ -166,3 +166,13 @@
   border-radius: 10px; padding: 6px 12px; transition: all 0.18s;
 }
 .rateHeaderBtn:hover { background: rgba(251,191,36,0.18); }
+
+.shareBtn {
+  display: flex; align-items: center; gap: 5px;
+  font-size: 12px; font-weight: 600; color: var(--soft);
+  background: var(--rule2); border: 1.5px solid var(--rule);
+  border-radius: 10px; padding: 6px 12px; transition: all 0.18s;
+}
+.shareBtn:hover { color: var(--purple); border-color: var(--purple); background: rgba(123,47,255,0.06); }
+
+.avatarImg { width: 88px; height: 88px; border-radius: 50%; object-fit: cover; margin: 0 auto 14px; display: block; box-shadow: 0 6px 24px rgba(0,0,0,0.18); }

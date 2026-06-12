@@ -1,5 +1,5 @@
 import { useNavigate } from 'react-router-dom'
-import { ArrowLeft, MessageCircle } from 'lucide-react'
+import { ArrowLeft, MessageCircle, Search } from 'lucide-react'
 import { useUser } from '../context/UserContext'
 import { HELPERS } from '../data/helpers'
 import styles from './Chats.module.css'
@@ -7,6 +7,9 @@ import styles from './Chats.module.css'
 export default function Chats() {
   const navigate = useNavigate()
   const { chats, markRead } = useUser()
+  const [search, setSearch] = useState('')
+
+  const filtered = chats.filter(c => c.helperName.toLowerCase().includes(search.toLowerCase()) || c.lastMsg.toLowerCase().includes(search.toLowerCase()))
 
   function formatTime(iso) {
     if (!iso) return ''
@@ -26,6 +29,15 @@ export default function Chats() {
         <div style={{width:36}} />
       </header>
 
+      {chats.length > 0 && (
+        <div style={{padding:'10px 16px 0', background:'var(--white)', borderBottom:'1px solid var(--rule)'}}>
+          <div style={{display:'flex',alignItems:'center',gap:'8px',background:'var(--paper)',border:'1.5px solid var(--rule)',borderRadius:'12px',padding:'8px 12px'}}>
+            <Search size={14} color="var(--soft)" />
+            <input style={{border:'none',outline:'none',background:'transparent',fontSize:'14px',color:'var(--ink)',flex:1}}
+              placeholder="Buscar conversaciones..." value={search} onChange={e => setSearch(e.target.value)} />
+          </div>
+        </div>
+      )}
       {chats.length === 0 ? (
         <div className={styles.empty}>
           <MessageCircle size={48} color="var(--rule)" />
@@ -35,7 +47,7 @@ export default function Chats() {
         </div>
       ) : (
         <div className={styles.list}>
-          {[...chats].reverse().map((chat, i) => {
+          {[...filtered].reverse().map((chat, i) => {
             const helper = HELPERS.find(h => h.id === chat.helperId)
             return (
               <button key={i} className={styles.chatRow}

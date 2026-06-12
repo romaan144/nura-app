@@ -87,3 +87,11 @@
   padding: 4px 8px; margin-bottom: 6px;
   display: inline-block;
 }
+
+.contactedDot {
+  font-size: 10px; font-weight: 600;
+  color: var(--green); background: rgba(0,196,140,0.1);
+  border-radius: 8px; padding: 2px 7px;
+}
+
+.avatarImg { width: 46px; height: 46px; border-radius: 50%; object-fit: cover; flex-shrink: 0; box-shadow: 0 3px 12px rgba(0,0,0,0.12); }

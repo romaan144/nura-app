@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import { useParams, useNavigate } from 'react-router-dom'
-import { ArrowLeft, Star, Shield, MapPin, MessageCircle, Zap, TrendingUp, Clock, CheckCircle, Award, Brain, Globe, Building2, BookOpen } from 'lucide-react'
+import { ArrowLeft, Star, Shield, MapPin, MessageCircle, Zap, TrendingUp, Clock, CheckCircle, Award, Brain, Globe, Building2, BookOpen, Share2 } from 'lucide-react'
 import { HELPERS } from '../data/helpers'
 import { useUser } from '../context/UserContext'
 import RatingModal from '../components/RatingModal'
@@ -36,6 +36,7 @@ export default function HelperProfile() {
   const navigate = useNavigate()
   const { hasRated } = useUser()
   const [showRating, setShowRating] = useState(false)
+  const [shared, setShared] = useState(false)
   const h = HELPERS.find(x => x.id === parseInt(id))
 
   if (!h) return (
@@ -52,6 +53,17 @@ export default function HelperProfile() {
       <header className={styles.header}>
         <button className={styles.back} onClick={() => navigate(-1)}><ArrowLeft size={18} /></button>
         <img src="/logo-text.png" alt="Nüra" className={styles.logoText} />
+        <button className={styles.shareBtn} onClick={() => {
+          if (navigator.share) {
+            navigator.share({ title: h.name, text: h.bio, url: window.location.href })
+          } else {
+            navigator.clipboard?.writeText(window.location.href)
+            setShared(true)
+            setTimeout(() => setShared(false), 2000)
+          }
+        }}>
+          {shared ? '✓ Copiado' : <Share2 size={14} />}
+        </button>
         {!hasRated(h.id) && (
           <button className={styles.rateHeaderBtn} onClick={() => setShowRating(true)}>
             <Star size={13} /> Valorar
@@ -63,7 +75,10 @@ export default function HelperProfile() {
 
         {/* Hero */}
         <div className={styles.heroCard}>
-          <div className={styles.avatar} style={{ background: h.avatarColor }}>{h.avatar}</div>
+          {h.avatarUrl
+            ? <img src={h.avatarUrl} alt={h.name} className={styles.avatarImg} />
+            : <div className={styles.avatar} style={{ background: h.avatarColor }}>{h.avatar}</div>
+          }
           <h1 className={styles.name}>{h.name}</h1>
           <div className={styles.metaRow}>
             <span className={styles.ratingBig}><Star size={14} fill="#F59E0B" color="#F59E0B" /> {h.rating}</span>

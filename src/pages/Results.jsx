@@ -2,18 +2,25 @@ import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { ArrowLeft, MapPin, Star, Shield, Zap, MessageCircle, Search, X, ChevronRight } from 'lucide-react'
 import { matchHelpers } from '../utils/matching'
+import { useUser } from '../context/UserContext'
 import styles from './Results.module.css'
 
 function HelperCard({ helper }) {
   const navigate = useNavigate()
+  const { contactedHelpers } = useUser()
+  const alreadyContacted = contactedHelpers?.includes(helper.id)
   return (
     <div className={styles.card} onClick={() => navigate(`/helper/${helper.id}`)}>
       <div className={styles.cardMain}>
-        <div className={styles.avatar} style={{ background: helper.avatarColor }}>{helper.avatar}</div>
+        {helper.avatarUrl
+        ? <img src={helper.avatarUrl} alt={helper.name} className={styles.avatarImg} />
+        : <div className={styles.avatar} style={{ background: helper.avatarColor }}>{helper.avatar}</div>
+      }
         <div className={styles.cardInfo}>
           <div className={styles.cardName}>
             {helper.name.split(' ')[0]} {helper.name.split(' ')[1]}
             {helper.verified && <span className={styles.verifiedDot}><Shield size={9} /></span>}
+            {alreadyContacted && <span className={styles.contactedDot}>✓ Contactado</span>}
             {helper.founder && <span className={styles.founderDot}>⭐</span>}
           </div>
           <div className={styles.cardMeta}>

@@ -7,6 +7,7 @@ export function UserProvider({ children }) {
   const [chats, setChats] = useState([])
   const [ratings, setRatings] = useState([])
   const [searchHistory, setSearchHistory] = useState([])
+  const [contactedHelpers, setContactedHelpers] = useState([])
 
   useEffect(() => {
     const saved = localStorage.getItem('nura_user')
@@ -17,6 +18,8 @@ export function UserProvider({ children }) {
     if (savedRatings) setRatings(JSON.parse(savedRatings))
     const savedHistory = localStorage.getItem('nura_history')
     if (savedHistory) setSearchHistory(JSON.parse(savedHistory))
+    const savedContacted = localStorage.getItem('nura_contacted')
+    if (savedContacted) setContactedHelpers(JSON.parse(savedContacted))
   }, [])
 
   function login(userData) {
@@ -44,12 +47,22 @@ export function UserProvider({ children }) {
     }
     setChats(updated)
     localStorage.setItem('nura_chats', JSON.stringify(updated))
+    if (!contactedHelpers.includes(helperId)) {
+      const c = [...contactedHelpers, helperId]
+      setContactedHelpers(c)
+      localStorage.setItem('nura_contacted', JSON.stringify(c))
+    }
   }
 
   function markRead(helperId) {
     const updated = chats.map(c => c.helperId === helperId ? { ...c, unread: 0 } : c)
     setChats(updated)
     localStorage.setItem('nura_chats', JSON.stringify(updated))
+    if (!contactedHelpers.includes(helperId)) {
+      const c = [...contactedHelpers, helperId]
+      setContactedHelpers(c)
+      localStorage.setItem('nura_contacted', JSON.stringify(c))
+    }
   }
 
   function addSearch(query) {
@@ -69,7 +82,7 @@ export function UserProvider({ children }) {
   }
 
   return (
-    <UserContext.Provider value={{ user, login, logout, chats, addChat, markRead, ratings, addRating, hasRated, searchHistory, addSearch }}>
+    <UserContext.Provider value={{ user, login, logout, chats, addChat, markRead, ratings, addRating, hasRated, searchHistory, addSearch, contactedHelpers }}>
       {children}
     </UserContext.Provider>
   )

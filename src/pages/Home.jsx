@@ -84,15 +84,16 @@ export default function Home({ setSearchState }) {
           <div className={styles.inputCard}>
             <textarea ref={textareaRef} className={styles.textarea}
               placeholder="Necesito un logopeda paciente para mi hijo de 7 años..."
+              aria-label="Describe lo que necesitas"
               value={text} onChange={e => setText(e.target.value)}
               onKeyDown={handleKey} rows={1} disabled={loading} />
             <div className={styles.inputFooter}>
               <span className={styles.inputHint}>{text.length > 0 ? `${text.length} caracteres` : 'Intro para buscar'}</span>
               <div className={styles.inputActions}>
-                <button className={`${styles.micBtn} ${listening ? styles.micActive : ''}`} onClick={toggleMic}>
+                <button className={`${styles.micBtn} ${listening ? styles.micActive : ""}`} onClick={toggleMic} aria-label={listening ? "Parar grabación" : "Buscar por voz"}>
                   {listening ? <MicOff size={15} /> : <Mic size={15} />}
                 </button>
-                <button className={styles.sendBtn} onClick={handleSearch} disabled={!text.trim() || loading}>
+<button className={styles.sendBtn} onClick={handleSearch} disabled={!text.trim() || loading} aria-label="Buscar">
                   {loading ? <><div className={styles.spinner} /> Buscando...</> : <><ArrowRight size={15} /> Buscar</>}
                 </button>
               </div>
