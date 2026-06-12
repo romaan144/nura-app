@@ -21,7 +21,7 @@ function HelperCard({ helper }) {
             {helper.name.split(' ')[0]} {helper.name.split(' ')[1]}
             {helper.verified && <span className={styles.verifiedDot}><Shield size={9} /></span>}
           </div>
-          <div className={styles.cardSpecialty}>{helper.tags[0]}</div>
+          <div className={styles.cardSpecialty}>{helper.specialty || helper.tags[0]}</div>
           <div className={styles.cardMeta}>
             <Star size={11} fill="#F59E0B" color="#F59E0B" />
             <span className={styles.ratingVal}>{helper.rating}</span>

@@ -2,6 +2,7 @@ export const HELPERS = [
   {
     id: 1,
     name: "Carlos Martínez Vidal",
+    specialty: "Logopeda infantil",
     avatarUrl: "https://api.dicebear.com/9.x/personas/svg?seed=carlos",
     avatar: "CM",
     avatarColor: "#1A56DB",
@@ -85,6 +86,7 @@ export const HELPERS = [
   {
     id: 2,
     name: "Sara Gómez Puig",
+    specialty: "Logopeda",
     avatarUrl: "https://api.dicebear.com/9.x/personas/svg?seed=sara",
     avatar: "SG",
     avatarColor: "#0891B2",
@@ -144,6 +146,7 @@ export const HELPERS = [
   {
     id: 3,
     name: "Roberto Sánchez Ferrer",
+    specialty: "Técnico de calderas y calefacción",
     avatarUrl: "https://api.dicebear.com/9.x/personas/svg?seed=roberto",
     avatar: "RS",
     avatarColor: "#1E40AF",
@@ -220,6 +223,7 @@ export const HELPERS = [
   {
     id: 4,
     name: "María López Castillo",
+    specialty: "Limpiadora de hogar",
     avatarUrl: "https://api.dicebear.com/9.x/personas/svg?seed=maria",
     avatar: "ML",
     avatarColor: "#7C3AED",
@@ -287,6 +291,7 @@ export const HELPERS = [
   {
     id: 5,
     name: "Elena Fernández Ros",
+    specialty: "Auxiliar de geriatría",
     avatarUrl: "https://api.dicebear.com/9.x/personas/svg?seed=elena",
     avatar: "EF",
     avatarColor: "#059669",
@@ -362,6 +367,7 @@ export const HELPERS = [
   {
     id: 6,
     name: "Marta Puig Sala",
+    specialty: "Cuidadora de animales",
     avatarUrl: "https://api.dicebear.com/9.x/personas/svg?seed=marta",
     avatar: "MP",
     avatarColor: "#D97706",
@@ -423,6 +429,7 @@ export const HELPERS = [
   {
     id: 7,
     name: "Lucía Vidal Torres",
+    specialty: "Profesora particular",
     avatarUrl: "https://api.dicebear.com/9.x/personas/svg?seed=lucia",
     avatar: "LV",
     avatarColor: "#DB2777",
@@ -490,6 +497,7 @@ export const HELPERS = [
   {
     id: 8,
     name: "David Moreno Llopis",
+    specialty: "Entrenador personal",
     avatarUrl: "https://api.dicebear.com/9.x/personas/svg?seed=david",
     avatar: "DM",
     avatarColor: "#EA580C",
