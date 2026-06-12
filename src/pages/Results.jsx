@@ -53,7 +53,7 @@ export default function Results({ searchState }) {
     <div className={styles.page}>
       <header className={styles.header}>
         <button className={styles.back} onClick={() => navigate('/')}><ArrowLeft size={18} /></button>
-        <img src="/logo.png" alt="Nüra" className={styles.logoImg} />
+        <img src="/logo-text.png" alt="Nüra" className={styles.logoImg} />
       </header>
 
       <div className={styles.content}>

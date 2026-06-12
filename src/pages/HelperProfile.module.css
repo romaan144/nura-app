@@ -14,7 +14,7 @@
   transition: all 0.15s;
 }
 .back:hover { background: var(--blue-soft); color: var(--blue); }
-.headerTitle { font-size: 14px; font-weight: 600; color: var(--ink); }
+.logoText { height: 26px; width: auto; display: block; }
 
 .content { max-width: 600px; margin: 0 auto; padding: 20px 16px 110px; width: 100%; }
 

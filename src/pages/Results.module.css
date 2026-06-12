@@ -19,7 +19,7 @@
 }
 .back:hover { background: var(--blue-soft); color: var(--blue); border-color: var(--blue); }
 
-.logoImg { height: 30px; width: auto; }
+.logoImg { height: 26px; width: auto; }
 
 .content { max-width: 680px; margin: 0 auto; padding: 24px 18px 56px; }
 
