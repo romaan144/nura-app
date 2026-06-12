@@ -1,39 +1,53 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,300;0,14..32,400;0,14..32,500;0,14..32,600;0,14..32,700;1,14..32,400&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Syne:wght@600;700;800&display=swap');
 
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
 :root {
-  --blue:    #1A56DB;
-  --blue2:   #1E40AF;
-  --blue-soft: rgba(26,86,219,0.08);
-  --ink:     #0D1B2A;
-  --mid:     #4A5568;
-  --soft:    #94A3B8;
-  --rule:    #E2E8F0;
-  --rule2:   #F1F5F9;
-  --paper:   #F8FAFF;
-  --white:   #FFFFFF;
-  --red:     #EF4444;
-  --green:   #10B981;
-  --amber:   #F59E0B;
-  --shadow-sm: 0 1px 3px rgba(0,0,0,0.06), 0 1px 2px rgba(0,0,0,0.04);
-  --shadow-md: 0 4px 16px rgba(0,0,0,0.08), 0 2px 6px rgba(0,0,0,0.04);
-  --shadow-lg: 0 12px 40px rgba(0,0,0,0.1), 0 4px 12px rgba(0,0,0,0.06);
-  --radius-sm: 8px;
-  --radius-md: 14px;
-  --radius-lg: 20px;
-  --radius-xl: 28px;
+  /* Nüra palette — from the logo */
+  --red:      #FF3B3B;
+  --red2:     #E8002D;
+  --cyan:     #00D4C8;
+  --cyan2:    #00B4AA;
+  --purple:   #7B2FFF;
+  --purple2:  #5A1FCC;
+
+  /* Neutrals */
+  --ink:      #0D0D1A;
+  --mid:      #3D3D5C;
+  --soft:     #8888AA;
+  --rule:     #E4E4F0;
+  --rule2:    #F0F0FA;
+  --paper:    #FAFAFF;
+  --white:    #FFFFFF;
+  --green:    #00C48C;
+  --amber:    #FFB800;
+
+  /* Gradients */
+  --grad-main: linear-gradient(135deg, #FF3B3B 0%, #A020F0 50%, #00D4C8 100%);
+  --grad-soft: linear-gradient(135deg, rgba(255,59,59,0.08) 0%, rgba(160,32,240,0.06) 50%, rgba(0,212,200,0.08) 100%);
+  --grad-card: linear-gradient(145deg, #ffffff 0%, #F8F6FF 100%);
+
+  /* Shadows */
+  --shadow-sm: 0 1px 4px rgba(13,13,26,0.06);
+  --shadow-md: 0 4px 20px rgba(13,13,26,0.08);
+  --shadow-lg: 0 12px 48px rgba(13,13,26,0.12);
+  --shadow-color: 0 8px 32px rgba(123,47,255,0.18);
+
+  --radius-sm: 10px;
+  --radius-md: 16px;
+  --radius-lg: 22px;
+  --radius-xl: 30px;
 }
 
 body {
-  font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
-  background: var(--white);
+  font-family: 'Inter', -apple-system, sans-serif;
+  background: var(--paper);
   color: var(--ink);
   min-height: 100vh;
   -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
 }
 
+h1, h2, h3 { font-family: 'Syne', sans-serif; }
 button { cursor: pointer; font-family: inherit; border: none; background: none; }
 input, textarea { font-family: inherit; }
 a { text-decoration: none; color: inherit; }
@@ -41,7 +55,3 @@ a { text-decoration: none; color: inherit; }
 ::-webkit-scrollbar { width: 5px; }
 ::-webkit-scrollbar-track { background: transparent; }
 ::-webkit-scrollbar-thumb { background: var(--rule); border-radius: 3px; }
-
-@media (prefers-reduced-motion: reduce) {
-  *, *::before, *::after { animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; }
-}

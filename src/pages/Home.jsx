@@ -30,18 +30,15 @@ export default function Home({ setSearchState }) {
 
   async function handleSearch() {
     if (!text.trim()) return
-    setLoading(true)
-    setError('')
+    setLoading(true); setError('')
     try {
       const analysis = await analyzeNeed(text)
       const matches = matchHelpers(analysis)
       setSearchState({ query: text, analysis, matches })
       navigate('/results')
-    } catch (e) {
+    } catch {
       setError('No se pudo conectar. Comprueba tu conexión.')
-    } finally {
-      setLoading(false)
-    }
+    } finally { setLoading(false) }
   }
 
   function handleKey(e) {
@@ -50,8 +47,7 @@ export default function Home({ setSearchState }) {
 
   function toggleMic() {
     if (!('webkitSpeechRecognition' in window) && !('SpeechRecognition' in window)) {
-      setError('Tu navegador no soporta voz. Escribe tu consulta.')
-      return
+      setError('Tu navegador no soporta voz.'); return
     }
     const SR = window.SpeechRecognition || window.webkitSpeechRecognition
     const rec = new SR()
@@ -59,44 +55,39 @@ export default function Home({ setSearchState }) {
     rec.onresult = e => { setText(e.results[0][0].transcript); setListening(false) }
     rec.onerror = () => setListening(false)
     rec.onend = () => setListening(false)
-    rec.start()
-    setListening(true)
+    rec.start(); setListening(true)
   }
 
   return (
     <div className={styles.page}>
-
-      {/* ── HEADER: solo wordmark ── */}
       <header className={styles.header}>
         <img src="/logo-text.png" alt="Nüra" className={styles.logoText} />
         <div className={styles.location}>
-          <MapPin size={12} />
-          Barcelona
+          <MapPin size={12} /> Barcelona
         </div>
       </header>
 
-      {/* ── MAIN ── */}
       <main className={styles.main}>
-
-        {/* Isotipo animado centrado */}
+        {/* Isotipo animado */}
         <div className={styles.isotipoWrap}>
           <div className={styles.isotipoGlow} />
-          <img
-            src="/logo-iso.png"
-            alt=""
-            className={`${styles.isotipo} ${loading ? styles.isotipoLoading : ''}`}
-          />
+          <img src="/logo-iso.png" alt=""
+            className={`${styles.isotipo} ${loading ? styles.isotipoLoading : ''}`} />
         </div>
 
-        {/* Título */}
+        {/* Hero */}
         <div className={styles.hero}>
-          <h1 className={styles.title}>¿Qué necesitas?</h1>
+          <h1 className={styles.title}>
+            ¿Qué{' '}
+            <span className={styles.titleAccent}>necesitas?</span>
+          </h1>
           <p className={styles.subtitle}>
-            Descríbelo con tus palabras. Nüra encuentra a la persona adecuada.
+            Descríbelo con tus palabras. Nüra entiende el contexto
+            y encuentra a la persona adecuada.
           </p>
         </div>
 
-        {/* Search box */}
+        {/* Search */}
         <div className={styles.searchBox}>
           <div className={styles.inputCard}>
             <textarea
@@ -114,22 +105,11 @@ export default function Home({ setSearchState }) {
                 {text.length > 0 ? `${text.length} caracteres` : 'Intro para buscar'}
               </span>
               <div className={styles.inputActions}>
-                <button
-                  className={`${styles.micBtn} ${listening ? styles.micActive : ''}`}
-                  onClick={toggleMic}
-                  title={listening ? 'Parar' : 'Hablar'}
-                >
+                <button className={`${styles.micBtn} ${listening ? styles.micActive : ''}`} onClick={toggleMic}>
                   {listening ? <MicOff size={16} /> : <Mic size={16} />}
                 </button>
-                <button
-                  className={styles.sendBtn}
-                  onClick={handleSearch}
-                  disabled={!text.trim() || loading}
-                >
-                  {loading
-                    ? <><div className={styles.spinner} /> Buscando...</>
-                    : <><ArrowRight size={16} /> Buscar</>
-                  }
+                <button className={styles.sendBtn} onClick={handleSearch} disabled={!text.trim() || loading}>
+                  {loading ? <><div className={styles.spinner} /> Buscando...</> : <><ArrowRight size={16} /> Buscar</>}
                 </button>
               </div>
             </div>
