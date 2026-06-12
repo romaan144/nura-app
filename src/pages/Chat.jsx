@@ -45,8 +45,8 @@ function formatDateLabel(date) {
 export default function Chat() {
   const { id } = useParams()
   const navigate = useNavigate()
-  const helper = HELPERS.find(h => h.id === parseInt(id))
-  const { addChat, markRead, hasRated } = useUser()
+  const helper = helpersCache?.[parseInt(id)] || helpersCache?.[id] || HELPERS.find(h => h.id === parseInt(id))
+  const { addChat, markRead, hasRated, helpersCache } = useUser()
 
   const [messages, setMessages] = useState([])
   const [input, setInput] = useState('')

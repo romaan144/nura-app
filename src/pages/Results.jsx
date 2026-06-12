@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom'
 import { ArrowLeft, MapPin, Star, Shield, Zap, MessageCircle, Search, X, ChevronRight } from 'lucide-react'
 import { matchHelpers } from '../utils/matching'
 import { useUser } from '../context/UserContext'
+import { useEffect } from 'react'
 import styles from './Results.module.css'
 
 function HelperCard({ helper }) {
@@ -59,6 +60,10 @@ function HelperCard({ helper }) {
 export default function Results({ searchState }) {
   const navigate = useNavigate()
   const { query, analysis, matches } = searchState
+
+  useEffect(() => {
+    if (matches?.length > 0) cacheHelpers(matches)
+  }, [matches])
   const [refineText, setRefineText] = useState('')
   const [refinements, setRefinements] = useState([])
   const [currentMatches, setCurrentMatches] = useState(matches)

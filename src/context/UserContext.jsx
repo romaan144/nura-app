@@ -8,6 +8,7 @@ export function UserProvider({ children }) {
   const [ratings, setRatings] = useState([])
   const [searchHistory, setSearchHistory] = useState([])
   const [contactedHelpers, setContactedHelpers] = useState([])
+  const [helpersCache, setHelpersCache] = useState({})
 
   useEffect(() => {
     const saved = localStorage.getItem('nura_user')
@@ -81,8 +82,14 @@ export function UserProvider({ children }) {
     return ratings.some(r => r.helperId === helperId)
   }
 
+  function cacheHelpers(helpers) {
+    const map = {}
+    helpers.forEach(h => { map[h.id] = h })
+    setHelpersCache(prev => ({ ...prev, ...map }))
+  }
+
   return (
-    <UserContext.Provider value={{ user, login, logout, chats, addChat, markRead, ratings, addRating, hasRated, searchHistory, addSearch, contactedHelpers }}>
+    <UserContext.Provider value={{ user, login, logout, chats, addChat, markRead, ratings, addRating, hasRated, searchHistory, addSearch, contactedHelpers, helpersCache, cacheHelpers }}>
       {children}
     </UserContext.Provider>
   )

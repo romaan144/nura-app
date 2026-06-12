@@ -34,10 +34,11 @@ function EvoDot({ point }) {
 export default function HelperProfile() {
   const { id } = useParams()
   const navigate = useNavigate()
-  const { hasRated } = useUser()
+  const { hasRated, helpersCache } = useUser()
   const [showRating, setShowRating] = useState(false)
   const [shared, setShared] = useState(false)
-  const h = HELPERS.find(x => x.id === parseInt(id))
+  // Look in cache first (remote helpers), then local data
+  const h = helpersCache?.[parseInt(id)] || helpersCache?.[id] || HELPERS.find(x => x.id === parseInt(id))
 
   if (!h) return (
     <div className={styles.notFound}>
