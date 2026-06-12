@@ -81,7 +81,7 @@
 
 /* Results header */
 .resultsHeader { margin-bottom: 16px; }
-.resultsTitle { font-size: 20px; font-weight: 800; color: var(--ink); letter-spacing: -0.5px; margin-bottom: 3px; font-family: 'Syne', sans-serif; }
+.resultsTitle { font-size: 20px; font-weight: 800; color: var(--ink); letter-spacing: -0.3px; margin-bottom: 3px; }
 .resultsSubtitle { font-size: 13px; color: var(--mid); }
 
 /* Cards */

@@ -66,15 +66,7 @@
 }
 
 .isotipoGlow {
-  position: absolute;
-  width: 130px; height: 130px; border-radius: 50%;
-  background: radial-gradient(circle,
-    rgba(255,59,59,0.12) 0%,
-    rgba(123,47,255,0.08) 40%,
-    rgba(0,212,200,0.10) 70%,
-    transparent 100%);
-  animation: glowPulse 2.6s ease-in-out infinite;
-  pointer-events: none;
+  display: none;
 }
 
 @keyframes glowPulse {
@@ -107,7 +99,7 @@
   font-size: clamp(40px, 8vw, 62px);
   font-weight: 800;
   color: var(--ink);
-  letter-spacing: -2.5px;
+  letter-spacing: -1px;
   line-height: 1.0;
   margin-bottom: 14px;
 }
