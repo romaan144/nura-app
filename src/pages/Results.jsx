@@ -121,12 +121,12 @@ export default function Results({ searchState, setSearchState }) {
             Refina tu búsqueda
           </div>
           <p className={styles.refineHint}>
-            Puedes seguir filtrando: "que sea mujer", "menor de 30 años", "online", "menos de 1 km", "disponible hoy"...
+            Puedes seguir filtrando: "disponible hoy", "menor de 30 años", "online", "menos de 1 km", "hasta 20€"...
           </p>
           <div className={styles.refineInputWrap}>
             <input
               className={styles.refineInput}
-              placeholder='Ej: "que sea mujer y pueda venir hoy"'
+              placeholder='Ej: "disponible hoy y a menos de 1 km"'
               value={refineText}
               onChange={e => setRefineText(e.target.value)}
               onKeyDown={handleKey}
