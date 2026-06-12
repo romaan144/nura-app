@@ -114,27 +114,6 @@ export default function Results({ searchState, setSearchState }) {
           </div>
         )}
 
-        {/* Resultados */}
-        <div className={styles.resultsHeader}>
-          <h2 className={styles.resultsTitle}>
-            {currentMatches.length > 0 ? `${currentMatches.length} personas encontradas` : 'Sin resultados'}
-          </h2>
-          <p className={styles.resultsSubtitle}>{analysis.resumen}</p>
-        </div>
-
-        {currentMatches.length > 0 ? (
-          <div className={styles.cards}>
-            {currentMatches.map(h => <HelperCard key={h.id} helper={h} />)}
-          </div>
-        ) : (
-          <div className={styles.empty}>
-            <p>No hay coincidencias con estos filtros.</p>
-            <button className={styles.retryBtn} onClick={() => { setCurrentMatches(matches); setRefinements([]) }}>
-              Quitar filtros
-            </button>
-          </div>
-        )}
-
         {/* ── REFINAMIENTO ── */}
         <div className={styles.refineBox}>
           <div className={styles.refineTitle}>
@@ -162,6 +141,27 @@ export default function Results({ searchState, setSearchState }) {
             </button>
           </div>
         </div>
+
+        {/* Resultados */}
+        <div className={styles.resultsHeader}>
+          <h2 className={styles.resultsTitle}>
+            {currentMatches.length > 0 ? `${currentMatches.length} personas encontradas` : 'Sin resultados'}
+          </h2>
+          <p className={styles.resultsSubtitle}>{analysis.resumen}</p>
+        </div>
+
+        {currentMatches.length > 0 ? (
+          <div className={styles.cards}>
+            {currentMatches.map(h => <HelperCard key={h.id} helper={h} />)}
+          </div>
+        ) : (
+          <div className={styles.empty}>
+            <p>No hay coincidencias con estos filtros.</p>
+            <button className={styles.retryBtn} onClick={() => { setCurrentMatches(matches); setRefinements([]) }}>
+              Quitar filtros
+            </button>
+          </div>
+        )}
 
         <button className={styles.newSearch} onClick={() => navigate('/')}>
           Nueva búsqueda desde cero
