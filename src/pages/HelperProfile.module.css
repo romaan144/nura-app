@@ -206,7 +206,7 @@
 .commentText { font-size: 13px; color: var(--mid); }
 
 /* ── REPUTATION ── */
-.scoreCard { display: flex; gap: 16px; align-items: center; background: var(--white); border: 1.5px solid var(--rule); border-radius: 18px; padding: 20px; margin-top: 4px; margin-bottom: 14px; box-shadow: var(--shadow-sm); }
+.scoreCard { display: flex; gap: 16px; align-items: center; background: var(--white); border: 1.5px solid var(--rule); border-radius: 18px; padding: 20px; margin-top: 22px; margin-bottom: 14px; box-shadow: var(--shadow-sm); }
 .scoreLeft { display: flex; align-items: baseline; gap: 2px; flex-shrink: 0; }
 .scoreNum { font-size: 56px; font-weight: 800; letter-spacing: -3px; }
 .scoreMax { font-size: 20px; color: var(--soft); font-weight: 400; }
