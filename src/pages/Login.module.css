@@ -54,14 +54,14 @@
 
 .btn {
   width: 100%; padding: 14px;
-  background: var(--grad-main); color: white;
-  border: none; border-radius: 14px;
+  background: linear-gradient(135deg, #1a1a2e 0%, #2d1b4e 100%); color: white;
+  border: none; border-radius: 28px;
   font-size: 15px; font-weight: 700;
   display: flex; align-items: center; justify-content: center; gap: 8px;
   transition: all 0.2s; box-shadow: 0 6px 20px rgba(123,47,255,0.32);
   margin-bottom: 12px;
 }
-.btn:hover:not(:disabled) { transform: translateY(-1px); box-shadow: 0 8px 26px rgba(123,47,255,0.42); }
+.btn:hover:not(:disabled) { transform: translateY(-1px); box-shadow: 0 8px 26px rgba(13,13,26,0.35); }
 .btn:disabled { background: var(--rule); color: var(--soft); box-shadow: none; }
 
 .spinner { width: 18px; height: 18px; border: 2px solid rgba(255,255,255,0.3); border-top-color: white; border-radius: 50%; animation: spin 0.65s linear infinite; }

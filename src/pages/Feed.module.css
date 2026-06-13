@@ -62,7 +62,7 @@
 .verifiedDot { font-size: 12px; color: #1A56DB; }
 .authorSub { font-size: 11px; color: var(--soft); margin-top: 1px; }
 
-.followBtn { display: flex; align-items: center; gap: 4px; font-size: 12px; font-weight: 700; color: var(--purple); background: rgba(123,47,255,0.08); border: 1.5px solid rgba(123,47,255,0.25); border-radius: 20px; padding: 6px 12px; white-space: nowrap; transition: all 0.15s; flex-shrink: 0; }
+.followBtn { display: flex; align-items: center; gap: 4px; font-size: 12px; font-weight: 700; color: white; background: linear-gradient(135deg, #1a1a2e 0%, #2d1b4e 100%); border: none; border-radius: 20px; padding: 7px 14px; white-space: nowrap; transition: all 0.2s; flex-shrink: 0; box-shadow: 0 3px 10px rgba(13,13,26,0.2), inset 0 1px 0 rgba(255,255,255,0.12); }
 .followBtn:hover { background: rgba(123,47,255,0.14); }
 .followingBtn { display: flex; align-items: center; gap: 4px; font-size: 12px; font-weight: 600; color: var(--soft); background: var(--paper); border: 1.5px solid var(--rule); border-radius: 20px; padding: 6px 12px; white-space: nowrap; flex-shrink: 0; }
 
@@ -107,4 +107,4 @@
 .emptyIcon { font-size: 56px; }
 .emptyFeed h3 { font-size: 18px; font-weight: 800; color: var(--ink); letter-spacing: -0.3px; }
 .emptyFeed p { font-size: 14px; color: var(--soft); line-height: 1.6; max-width: 260px; }
-.exploreBtn { padding: 12px 28px; background: var(--grad-main); color: white; border: none; border-radius: 14px; font-size: 14px; font-weight: 700; margin-top: 8px; box-shadow: 0 6px 20px rgba(123,47,255,0.3); }
+.exploreBtn { padding: 12px 28px; background: linear-gradient(135deg, #1a1a2e 0%, #2d1b4e 100%); color: white; border: none; border-radius: 28px; font-size: 14px; font-weight: 700; margin-top: 8px; box-shadow: 0 6px 20px rgba(13,13,26,0.3), inset 0 1px 0 rgba(255,255,255,0.12); }

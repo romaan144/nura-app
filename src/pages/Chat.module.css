@@ -52,7 +52,7 @@
 .msgAvatarImg { width: 26px; height: 26px; border-radius: 50%; object-fit: cover; flex-shrink: 0; }
 
 .msgBubble { max-width: 74%; padding: 10px 14px; border-radius: 18px; }
-.msgUser .msgBubble { background: var(--grad-main); color: white; border-bottom-right-radius: 5px; box-shadow: 0 4px 14px rgba(123,47,255,0.28); }
+.msgUser .msgBubble { background: linear-gradient(135deg, #1a1a2e 0%, #2d1b4e 100%); color: white; border-bottom-right-radius: 5px; box-shadow: 0 4px 14px rgba(13,13,26,0.25), inset 0 1px 0 rgba(255,255,255,0.1); }
 .msgHelper .msgBubble { background: var(--white); color: var(--ink); border: 1.5px solid var(--rule); border-bottom-left-radius: 5px; box-shadow: var(--shadow-sm); }
 .msgBubble p { font-size: 14px; line-height: 1.5; }
 .msgTime { font-size: 10px; opacity: 0.55; margin-top: 4px; display: block; text-align: right; }
@@ -74,7 +74,7 @@
 .inputBar { display: flex; align-items: center; gap: 8px; padding: 10px 12px 12px; background: rgba(255,255,255,0.82); backdrop-filter: blur(24px) saturate(160%); -webkit-backdrop-filter: blur(24px) saturate(160%); border-top: 1px solid rgba(255,255,255,0.5); box-shadow: 0 -4px 16px rgba(13,13,26,0.05); flex-shrink: 0; }
 .input { flex: 1; padding: 10px 16px; border: 1.5px solid var(--rule); border-radius: 24px; font-size: 14px; outline: none; background: var(--paper); color: var(--ink); transition: border-color 0.2s; }
 .input:focus { border-color: var(--purple); background: var(--white); }
-.sendBtn { width: 42px; height: 42px; border-radius: 50%; background: var(--grad-main); color: white; border: none; display: flex; align-items: center; justify-content: center; flex-shrink: 0; transition: all 0.18s; box-shadow: 0 4px 12px rgba(123,47,255,0.3); }
+.sendBtn { width: 42px; height: 42px; border-radius: 50%; background: linear-gradient(135deg, #1a1a2e 0%, #2d1b4e 100%); color: white; border: none; display: flex; align-items: center; justify-content: center; flex-shrink: 0; transition: all 0.2s; box-shadow: 0 4px 14px rgba(13,13,26,0.3), inset 0 1px 0 rgba(255,255,255,0.15); }
 .sendBtn:hover:not(:disabled) { transform: scale(1.07); }
 .sendBtn:disabled { background: var(--rule); box-shadow: none; }
 

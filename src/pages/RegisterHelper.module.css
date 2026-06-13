@@ -91,7 +91,7 @@
 .input:disabled { opacity: 0.5; }
 .sendBtn {
   width: 44px; height: 44px; border-radius: 50%;
-  background: var(--grad-main); color: white; border: none;
+  background: linear-gradient(135deg, #1a1a2e 0%, #2d1b4e 100%); color: white; border: none;
   display: flex; align-items: center; justify-content: center;
   flex-shrink: 0; transition: all 0.18s;
   box-shadow: 0 4px 14px rgba(123,47,255,0.3);
@@ -106,8 +106,8 @@
 }
 .doneBtn {
   width: 100%; padding: 15px;
-  background: var(--grad-main); color: white;
-  border: none; border-radius: 16px;
+  background: linear-gradient(135deg, #1a1a2e 0%, #2d1b4e 100%); color: white;
+  border: none; border-radius: 28px;
   font-size: 15px; font-weight: 700;
   box-shadow: 0 6px 20px rgba(123,47,255,0.35);
   transition: all 0.2s;
