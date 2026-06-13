@@ -125,7 +125,7 @@ export default function Home({ setSearchState }) {
                   disabled={!text.trim() || loading} aria-label="Buscar">
                   {loading
                     ? <><div className={styles.spinner} /> Buscando...</>
-                    : <><ArrowRight size={15} /> Buscar</>}
+                    : <><Search size={15} /> Buscar</>}
                 </button>
               </div>
             </div>
