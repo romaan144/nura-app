@@ -251,7 +251,7 @@ export default function HelperProfile() {
               {h.online && <span className={styles.heroMode}>💻 Online</span>}
             </div>
 
-            {/* Trust badges — only most important */}
+            {/* Trust badges */}
             <div className={styles.heroBadges}>
               {h.dniVerified && (
                 <span className={styles.badgePrimary}><Shield size={10} /> DNI Verificado</span>
@@ -266,6 +266,11 @@ export default function HelperProfile() {
                 <span className={styles.badgeUrgent}><Zap size={10} /> Urgencias</span>
               )}
             </div>
+
+            {/* CTA — inside hero */}
+            <button className={styles.heroCtaBtn} onClick={() => navigate(`/chat/${h.id}`)}>
+              <MessageCircle size={16} /> Contactar a {h.name.split(' ')[0]}
+            </button>
           </div>
         </div>
 
@@ -555,12 +560,7 @@ export default function HelperProfile() {
 
       </div>
 
-      {/* ── CTA FIXED ── */}
-      <div className={styles.ctaBar}>
-        <button className={styles.ctaBtn} onClick={() => navigate(`/chat/${h.id}`)}>
-          <MessageCircle size={16} /> Contactar a {h.name.split(' ')[0]}
-        </button>
-      </div>
+
 
       {showRating && <RatingModal helper={h} onClose={() => setShowRating(false)} />}
     </div>
