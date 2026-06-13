@@ -51,3 +51,37 @@
 .noUser h2 { font-size: 22px; font-weight: 800; color: var(--ink); }
 .noUser p { font-size: 14px; color: var(--mid); }
 .loginBtn { padding: 14px 32px; background: var(--grad-main); color: white; border: none; border-radius: 14px; font-size: 15px; font-weight: 700; box-shadow: 0 6px 20px rgba(123,47,255,0.3); }
+
+.memberSince { font-size: 11px; color: var(--soft); margin-top: 4px; }
+
+.helperDashboard { display: flex; flex-direction: column; gap: 12px; }
+.dashRow { display: grid; grid-template-columns: repeat(3,1fr); gap: 8px; }
+.dashItem { background: var(--paper); border-radius: 10px; padding: 12px 8px; text-align: center; }
+.dashVal { display: block; font-size: 18px; font-weight: 800; color: var(--ink); margin-bottom: 2px; }
+.dashLbl { font-size: 10px; color: var(--soft); }
+.helperInfo { display: flex; flex-direction: column; gap: 6px; }
+.liveProfileNote {
+  display: flex; align-items: center; gap: 6px;
+  font-size: 11px; color: var(--purple);
+  background: rgba(123,47,255,0.06); border-radius: 10px;
+  padding: 8px 12px;
+}
+
+.actionBadge {
+  min-width: 18px; height: 18px; border-radius: 9px;
+  background: var(--red); color: white;
+  font-size: 10px; font-weight: 700;
+  display: flex; align-items: center; justify-content: center;
+  padding: 0 5px; margin-left: auto; margin-right: 4px;
+}
+
+.noUserLogo { width: 64px; height: 64px; object-fit: contain; }
+.noUserIso { margin-bottom: 8px; }
+.helperBtn {
+  padding: 12px 28px;
+  background: var(--white); color: var(--purple);
+  border: 1.5px solid var(--purple);
+  border-radius: 14px; font-size: 14px; font-weight: 600;
+  transition: all 0.18s;
+}
+.helperBtn:hover { background: rgba(123,47,255,0.06); }

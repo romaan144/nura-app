@@ -177,3 +177,112 @@
 .shareBtn:hover { color: var(--purple); border-color: var(--purple); background: rgba(123,47,255,0.06); }
 
 .avatarImg { width: 88px; height: 88px; border-radius: 50%; object-fit: cover; margin: 0 auto 14px; display: block; box-shadow: 0 6px 24px rgba(0,0,0,0.18); }
+
+/* ── FASE 3 ADDITIONS ── */
+
+.specialty {
+  font-size: 15px; font-weight: 600;
+  background: var(--grad-main);
+  -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+  background-clip: text;
+  margin-bottom: 8px;
+}
+
+/* Tabs */
+.tabs {
+  display: flex; gap: 6px;
+  margin-bottom: 14px;
+  overflow-x: auto; padding-bottom: 2px;
+}
+.tabs::-webkit-scrollbar { display: none; }
+.tab {
+  display: flex; align-items: center; gap: 5px;
+  padding: 8px 14px;
+  border: 1.5px solid var(--rule);
+  border-radius: 20px;
+  font-size: 12px; font-weight: 500; color: var(--soft);
+  background: var(--white); white-space: nowrap;
+  transition: all 0.15s;
+}
+.tab:hover { color: var(--purple); border-color: var(--purple); }
+.tabActive {
+  background: var(--grad-main); color: white;
+  border-color: transparent;
+  box-shadow: 0 4px 14px rgba(123,47,255,0.25);
+}
+
+/* Reputation score */
+.reputationCard {
+  display: flex; align-items: center; gap: 16px;
+  background: var(--paper); border-radius: 14px; padding: 16px;
+}
+.reputationLeft { display: flex; align-items: baseline; gap: 4px; flex-shrink: 0; }
+.reputationScore { font-size: 48px; font-weight: 800; letter-spacing: -2px; }
+.reputationMax { font-size: 18px; color: var(--soft); font-weight: 500; }
+.reputationRight { flex: 1; }
+.reputationLevel {
+  display: inline-flex; align-items: center; gap: 4px;
+  font-size: 11px; font-weight: 700;
+  border-radius: 10px; padding: 3px 10px;
+  margin-bottom: 6px;
+}
+.reputationDesc { font-size: 12px; color: var(--soft); line-height: 1.5; }
+
+/* Timeline */
+.timeline { display: flex; flex-direction: column; gap: 0; padding: 4px 0; }
+.timelineItem { display: flex; gap: 12px; position: relative; padding-bottom: 16px; }
+.timelineItem:last-child { padding-bottom: 0; }
+.timelineDot {
+  width: 10px; height: 10px; border-radius: 50%;
+  background: var(--grad-main); flex-shrink: 0; margin-top: 4px;
+  box-shadow: 0 0 0 3px rgba(123,47,255,0.15);
+}
+.timelineLine {
+  position: absolute; left: 4px; top: 14px; bottom: 0;
+  width: 2px; background: var(--rule2);
+}
+.timelineContent { flex: 1; }
+.timelinePeriod { font-size: 13px; font-weight: 700; color: var(--ink); display: block; margin-bottom: 4px; }
+.timelineStats { display: flex; gap: 12px; }
+.timelineRating { font-size: 12px; color: #F59E0B; font-weight: 600; }
+.timelineServices { font-size: 12px; color: var(--soft); }
+
+/* Company verification */
+.proofGrid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+.proofItem { background: var(--paper); border-radius: 12px; padding: 12px; }
+.proofVal { display: block; font-size: 20px; font-weight: 800; color: var(--purple); margin-bottom: 4px; }
+.proofLbl { font-size: 11px; color: var(--soft); line-height: 1.4; }
+
+.companyVerifyBox {
+  display: flex; align-items: flex-start; gap: 12px;
+  background: var(--paper); border: 1.5px dashed var(--rule);
+  border-radius: 14px; padding: 16px; margin-top: 8px;
+}
+.companyVerifyTitle { font-size: 13px; font-weight: 700; color: var(--mid); margin-bottom: 4px; }
+.companyVerifyDesc { font-size: 12px; color: var(--soft); line-height: 1.5; }
+
+/* Compare rows */
+.compareRow {
+  display: flex; align-items: flex-start; gap: 10px;
+  padding: 10px 12px; border-radius: 10px; margin-bottom: 6px;
+  background: var(--paper);
+}
+.compareNura {
+  background: rgba(123,47,255,0.07);
+  border: 1.5px solid rgba(123,47,255,0.2);
+}
+.compareSource { font-size: 12px; font-weight: 700; color: var(--ink); width: 90px; flex-shrink: 0; }
+.compareDesc { font-size: 12px; color: var(--mid); line-height: 1.4; }
+.compareNura .compareSource { color: var(--purple); }
+.compareNura .compareDesc { color: var(--purple); font-weight: 500; }
+
+/* Not found */
+.notFound {
+  min-height: 100vh; display: flex; flex-direction: column;
+  align-items: center; justify-content: center; gap: 16px;
+  color: var(--mid); text-align: center; padding: 32px;
+}
+.notFound button {
+  padding: 12px 24px; background: var(--grad-main); color: white;
+  border: none; border-radius: 12px; font-size: 14px; font-weight: 600;
+}

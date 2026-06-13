@@ -164,3 +164,25 @@
   transition: all 0.15s;
 }
 .recentItem:hover { border-color: var(--purple); color: var(--purple); background: rgba(123,47,255,0.04); }
+
+/* ── STATS STRIP ── */
+.statsStrip {
+  display: flex; gap: 0;
+  background: var(--white);
+  border: 1.5px solid var(--rule);
+  border-radius: 16px;
+  overflow: hidden;
+  margin-bottom: 22px;
+  box-shadow: var(--shadow-sm);
+  width: 100%;
+}
+.statItem {
+  flex: 1; display: flex; flex-direction: column;
+  align-items: center; padding: 12px 8px; gap: 3px;
+  border-right: 1px solid var(--rule);
+  text-align: center;
+}
+.statItem:last-child { border-right: none; }
+.statIcon { color: var(--purple); }
+.statVal { font-size: 14px; font-weight: 800; color: var(--ink); }
+.statLabel { font-size: 10px; color: var(--soft); }
