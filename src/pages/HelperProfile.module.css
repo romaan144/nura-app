@@ -124,8 +124,8 @@
 .reviewText { font-size: 13px; color: var(--mid); line-height: 1.55; }
 
 /* ── EXPERIENCE — LinkedIn style timeline ── */
-.expTimeline { display: flex; flex-direction: column; gap: 0; }
-.expCardFull { display: flex; gap: 14px; position: relative; margin-bottom: 0; }
+.expTimeline { display: flex; flex-direction: column; gap: 0; padding-top: 4px; }
+.expCardFull { display: flex; gap: 14px; position: relative; margin-bottom: 0; background: transparent; }
 .expCardFull:not(:last-child) .expTimelineLeft::after {
   content: ''; position: absolute; left: 19px; top: 46px; bottom: 0;
   width: 2px; background: linear-gradient(180deg, rgba(123,47,255,0.3) 0%, transparent 100%);
@@ -138,8 +138,8 @@
   font-size: 20px; flex-shrink: 0;
   box-shadow: 0 2px 8px rgba(0,0,0,0.06);
 }
-.expBody { flex: 1; padding-bottom: 24px; }
-.expTop { display: flex; align-items: flex-start; justify-content: space-between; gap: 8px; margin-bottom: 8px; }
+.expBody { flex: 1; padding-bottom: 24px; background: transparent; }
+.expTop { display: flex; align-items: flex-start; justify-content: space-between; gap: 8px; margin-bottom: 8px; padding-top: 2px; }
 .expInfo { flex: 1; }
 .expRole { font-size: 14px; font-weight: 700; color: var(--ink); margin-bottom: 2px; }
 .expCompanyName { font-size: 12px; font-weight: 600; color: var(--purple); margin-bottom: 2px; }
@@ -332,3 +332,5 @@
 .evoPeriod { display: none; }
 .evoRating { display: none; }
 .evoServices { display: none; }
+
+.expCard { background: var(--white); border: 1.5px solid var(--rule); border-radius: 16px; padding: 16px; box-shadow: var(--shadow-sm); }

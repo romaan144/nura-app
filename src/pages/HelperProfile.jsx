@@ -105,7 +105,7 @@ function PostCard({ post, helper }) {
 
 function ExperienceCard({ exp }) {
   return (
-    <div>
+    <div className={styles.expCard}>
       <div className={styles.expTop}>
         <div className={styles.expInfo}>
           <div className={styles.expRole}>{exp.role}</div>
