@@ -2,9 +2,9 @@ import { useState, useRef, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { Mic, MicOff, ArrowRight, MapPin } from 'lucide-react'
 import { analyzeNeed, matchHelpers } from '../utils/matching'
-import { useUser } from '../context/UserContext'
 import styles from './Home.module.css'
 import Onboarding from '../components/Onboarding'
+import { useUser } from '../context/UserContext'
 
 const SUGGESTIONS = [
   { icon: '🔧', text: 'La caldera no calienta, es urgente' },
@@ -22,7 +22,7 @@ export default function Home({ setSearchState }) {
   const [listening, setListening] = useState(false)
   const textareaRef = useRef(null)
   const navigate = useNavigate()
-  const { user, searchHistory, addSearch } = useUser()
+  const { addSearch } = useUser()
 
   useEffect(() => {
     if (textareaRef.current) {
@@ -33,15 +33,25 @@ export default function Home({ setSearchState }) {
 
   async function handleSearch() {
     if (!text.trim()) return
-    setLoading(true); setError('')
+    setLoading(true)
+    setError('')
     try {
       const analysis = await analyzeNeed(text)
       const matches = await matchHelpers(analysis)
+      if (!matches || matches.length === 0) {
+        setError('No hemos encontrado resultados. Intenta con otra búsqueda.')
+        setLoading(false)
+        return
+      }
       addSearch(text)
       setSearchState({ query: text, analysis, matches })
       navigate('/results')
-    } catch { setError('No se pudo conectar. Comprueba tu conexión.') }
-    finally { setLoading(false) }
+    } catch(e) {
+      console.error('Search error:', e)
+      setError('Error al buscar. Inténtalo de nuevo.')
+    } finally {
+      setLoading(false)
+    }
   }
 
   function handleKey(e) {
@@ -84,23 +94,22 @@ export default function Home({ setSearchState }) {
           <div className={styles.inputCard}>
             <textarea ref={textareaRef} className={styles.textarea}
               placeholder="Necesito un logopeda paciente para mi hijo de 7 años..."
-              aria-label="Describe lo que necesitas"
               value={text} onChange={e => setText(e.target.value)}
               onKeyDown={handleKey} rows={1} disabled={loading} />
             <div className={styles.inputFooter}>
               <span className={styles.inputHint}>{text.length > 0 ? `${text.length} caracteres` : 'Intro para buscar'}</span>
               <div className={styles.inputActions}>
-                <button className={`${styles.micBtn} ${listening ? styles.micActive : ""}`} onClick={toggleMic} aria-label={listening ? "Parar grabación" : "Buscar por voz"}>
+                <button className={`${styles.micBtn} ${listening ? styles.micActive : ''}`} onClick={toggleMic}>
                   {listening ? <MicOff size={15} /> : <Mic size={15} />}
                 </button>
-<button className={styles.sendBtn} onClick={handleSearch} disabled={!text.trim() || loading} aria-label="Buscar">
+                <button className={styles.sendBtn} onClick={handleSearch} disabled={!text.trim() || loading}>
                   {loading ? <><div className={styles.spinner} /> Buscando...</> : <><ArrowRight size={15} /> Buscar</>}
                 </button>
               </div>
             </div>
           </div>
           {error && <p className={styles.error}>{error}</p>}
-          {loading && <p className={styles.loadingText}>Nüra está analizando tu necesidad...</p>}
+          {loading && <p className={styles.loadingText}>Nüra está buscando...</p>}
         </div>
 
         {!loading && (
@@ -119,6 +128,7 @@ export default function Home({ setSearchState }) {
       </main>
 
       <Onboarding />
+
       <footer className={styles.footer}>
         <p>La IA que conecta personas · Barcelona · nura.app</p>
       </footer>

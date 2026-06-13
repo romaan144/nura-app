@@ -66,7 +66,7 @@ export default function Results({ searchState }) {
   }, [matches])
   const [refineText, setRefineText] = useState('')
   const [refinements, setRefinements] = useState([])
-  const [currentMatches, setCurrentMatches] = useState(matches)
+  const [currentMatches, setCurrentMatches] = useState(matches || [])
   const [refining, setRefining] = useState(false)
 
   async function handleRefine() {
