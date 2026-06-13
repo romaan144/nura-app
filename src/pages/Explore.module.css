@@ -62,9 +62,9 @@
 .categories::-webkit-scrollbar { display: none; }
 .catChip {
   display: flex; align-items: center; gap: 5px;
-  padding: 8px 14px; border: 1.5px solid var(--rule);
+  padding: 8px 14px; border: 1px solid var(--rule);
   border-radius: 20px; font-size: 12px; font-weight: 500;
-  color: var(--mid); background: var(--white); white-space: nowrap;
+  color: var(--soft); background: var(--white); white-space: nowrap;
   transition: all 0.15s;
 }
 .catChip:hover { border-color: var(--purple); color: var(--purple); }

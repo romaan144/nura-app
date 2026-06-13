@@ -508,11 +508,11 @@ export default function HelperProfile() {
                 <p className={styles.sectionNote}>Derivado del comportamiento en {h.services} servicios — no de un test de personalidad</p>
                 <div className={styles.personalityGrid}>
                   {[
-                    ['Paciencia', h.personality.patience, '#FF3B3B'],
-                    ['Empatía', h.personality.empathy, '#7B2FFF'],
-                    ['Comunicación', h.personality.communication, '#00D4C8'],
-                    ['Puntualidad', h.personality.punctuality, '#F59E0B'],
-                    ['Autonomía', h.personality.autonomy, '#059669'],
+                    ['Paciencia', h.personality.patience, 'var(--ink)'],
+                    ['Empatía', h.personality.empathy, 'var(--mid)'],
+                    ['Comunicación', h.personality.communication, 'var(--ink)'],
+                    ['Puntualidad', h.personality.punctuality, 'var(--mid)'],
+                    ['Autonomía', h.personality.autonomy, 'var(--ink)'],
                   ].map(([l, v, c]) => <PersonalityCircle key={l} label={l} value={v} color={c} />)}
                 </div>
               </section>

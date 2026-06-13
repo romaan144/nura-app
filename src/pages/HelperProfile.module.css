@@ -75,7 +75,7 @@
 
 /* ── SKILLS ── */
 .section { background: var(--white); border: 1.5px solid var(--rule); border-radius: 16px; padding: 18px; margin-bottom: 16px; box-shadow: var(--shadow-sm); }
-.sectionTitle { display: flex; align-items: center; gap: 7px; font-size: 11px; font-weight: 700; color: var(--soft); text-transform: uppercase; letter-spacing: 0.8px; margin-bottom: 12px; }
+.sectionTitle { display: flex; align-items: center; gap: 7px; font-size: 11px; font-weight: 600; color: var(--soft); text-transform: uppercase; letter-spacing: 0.8px; margin-bottom: 12px; }
 .sectionNote { font-size: 11px; color: var(--soft); margin-bottom: 14px; line-height: 1.5; padding: 8px 12px; background: var(--paper); border-radius: 8px; border-left: 3px solid var(--rule); }
 .skillsGrid { display: flex; flex-wrap: wrap; gap: 7px; }
 .skill { font-size: 12px; font-weight: 500; color: var(--ink); background: var(--paper); border: 1.5px solid var(--rule); border-radius: 8px; padding: 6px 12px; }
@@ -297,8 +297,8 @@
   border-radius: 8px; padding: 3px 9px;
 }
 .evoTrend {
-  font-size: 11px; font-weight: 700; color: #059669;
-  background: #ECFDF5; border-radius: 8px; padding: 3px 9px;
+  font-size: 11px; font-weight: 600; color: var(--mid);
+  background: var(--paper); border: 1px solid var(--rule); border-radius: 8px; padding: 3px 9px;
 }
 .evoStable {
   font-size: 11px; color: var(--soft);
@@ -337,13 +337,13 @@
 .heroCtaBtn {
   margin-top: 20px;
   padding: 13px 32px;
-  background: linear-gradient(135deg, #1a1a2e 0%, #2d1b4e 100%);
+  background: var(--grad-main);
   color: white; border: none;
   border-radius: 28px;
   font-size: 14px; font-weight: 700;
   display: flex; align-items: center; gap: 8px;
   transition: all 0.25s cubic-bezier(0.34,1.56,0.64,1);
-  box-shadow: 0 6px 24px rgba(13,13,26,0.3), inset 0 1px 0 rgba(255,255,255,0.15);
+  box-shadow: 0 6px 24px rgba(123,47,255,0.3), inset 0 1px 0 rgba(255,255,255,0.15);
 }
-.heroCtaBtn:hover { transform: translateY(-2px) scale(1.02); box-shadow: 0 10px 32px rgba(13,13,26,0.4); }
+.heroCtaBtn:hover { transform: translateY(-2px) scale(1.02); box-shadow: 0 10px 32px rgba(123,47,255,0.4); }
 .heroCtaBtn:active { transform: scale(0.97); }
