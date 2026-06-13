@@ -1,28 +1,27 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { ArrowLeft, MapPin, Star, Shield, Zap, MessageCircle, Search, X, ChevronRight } from 'lucide-react'
 import { matchHelpers } from '../utils/matching'
 import { useUser } from '../context/UserContext'
-import { useEffect } from 'react'
 import styles from './Results.module.css'
 
 function HelperCard({ helper }) {
   const navigate = useNavigate()
-  const { contactedHelpers } = useUser()
-  const alreadyContacted = contactedHelpers?.includes(helper.id)
+  if (!helper) return null
+
   return (
     <div className={styles.card} onClick={() => navigate(`/helper/${helper.id}`)}>
       <div className={styles.cardMain}>
         {helper.avatarUrl
-        ? <img src={helper.avatarUrl} alt={helper.name} className={styles.avatarImg} />
-        : <div className={styles.avatar} style={{ background: helper.avatarColor }}>{helper.avatar}</div>
-      }
+          ? <img src={helper.avatarUrl} alt={helper.name} className={styles.avatarImg} />
+          : <div className={styles.avatar} style={{ background: helper.avatarColor || '#1A56DB' }}>{helper.avatar || '?'}</div>
+        }
         <div className={styles.cardInfo}>
           <div className={styles.cardName}>
-            {helper.name.split(' ')[0]} {helper.name.split(' ')[1]}
+            {helper.name}
             {helper.verified && <span className={styles.verifiedDot}><Shield size={9} /></span>}
           </div>
-          <div className={styles.cardSpecialty}>{helper.specialty || helper.tags[0]}</div>
+          <div className={styles.cardSpecialty}>{helper.specialty || (helper.tags && helper.tags[0]) || ''}</div>
           <div className={styles.cardMeta}>
             <Star size={11} fill="#F59E0B" color="#F59E0B" />
             <span className={styles.ratingVal}>{helper.rating}</span>
@@ -32,10 +31,7 @@ function HelperCard({ helper }) {
             {helper.urgent && <><span className={styles.dot} /><Zap size={10} color="var(--red)" /><span style={{color:'var(--red)',fontWeight:600}}>Hoy</span></>}
           </div>
           <div className={styles.matchReason}>
-        💡 {helper.distance < 1 ? 'Muy cerca de ti' : `A ${helper.distance}km`} · {helper.responseTime} de respuesta · {helper.completionRate}% completados
-      </div>
-      <div className={styles.cardTags}>
-            {helper.tags.slice(0,2).map((t,i) => <span key={i} className={styles.tag}>{t}</span>)}
+            💡 {helper.zone} · {helper.responseTime} respuesta · {helper.completionRate}% completados
           </div>
         </div>
         <div className={styles.cardRight}>
@@ -59,22 +55,35 @@ function HelperCard({ helper }) {
 
 export default function Results({ searchState }) {
   const navigate = useNavigate()
-  const { query, analysis, matches } = searchState
+  const { cacheHelpers } = useUser()
 
-  useEffect(() => {
-    if (matches?.length > 0) cacheHelpers(matches)
-  }, [matches])
+  // Safety check — if no searchState, go home
+  if (!searchState) {
+    navigate('/')
+    return null
+  }
+
+  const { query, analysis, matches } = searchState
+  const safeMatches = Array.isArray(matches) ? matches : []
+
   const [refineText, setRefineText] = useState('')
   const [refinements, setRefinements] = useState([])
-  const [currentMatches, setCurrentMatches] = useState(matches || [])
+  const [currentMatches, setCurrentMatches] = useState(safeMatches)
   const [refining, setRefining] = useState(false)
+
+  useEffect(() => {
+    if (safeMatches.length > 0) {
+      cacheHelpers?.(safeMatches)
+      setCurrentMatches(safeMatches)
+    }
+  }, [])
 
   async function handleRefine() {
     if (!refineText.trim()) return
     setRefining(true)
     try {
       const refined = await matchHelpers(analysis, 5, refineText, currentMatches)
-      setCurrentMatches(refined)
+      setCurrentMatches(Array.isArray(refined) ? refined : currentMatches)
       setRefinements(prev => [...prev, refineText])
       setRefineText('')
     } finally {
@@ -82,13 +91,9 @@ export default function Results({ searchState }) {
     }
   }
 
-  async function removeRefinement(idx) {
+  function removeRefinement(idx) {
     const newR = refinements.filter((_, i) => i !== idx)
-    let result = matches
-    for (const r of newR) {
-      result = await matchHelpers(analysis, 5, r, result)
-    }
-    setCurrentMatches(result)
+    setCurrentMatches(safeMatches)
     setRefinements(newR)
   }
 
@@ -102,18 +107,24 @@ export default function Results({ searchState }) {
       </header>
 
       <div className={styles.content}>
+        {/* Query */}
         <div className={styles.queryBox}>
           <div className={styles.queryLabel}>Tu búsqueda</div>
           <p className={styles.queryText}>"{query}"</p>
         </div>
 
-        <div className={styles.analysisPill}>
-          <span className={styles.pill + ' ' + styles.pillNormal}>{analysis.presencial ? '📍 Presencial' : '💻 Online'}</span>
-          {analysis.urgente && <span className={styles.pill + ' ' + styles.pillUrgent}>⚡ Urgente</span>}
-          <span className={styles.pill + ' ' + styles.pillNormal}>
-            {{ student:'👤 Sin titulación', experienced:'⭐ Con experiencia', professional:'🎓 Profesional' }[analysis.nivelRequerido]}
-          </span>
-        </div>
+        {/* Analysis pills */}
+        {analysis && (
+          <div className={styles.analysisPill}>
+            <span className={styles.pill + ' ' + styles.pillNormal}>
+              {analysis.presencial ? '📍 Presencial' : '💻 Online'}
+            </span>
+            {analysis.urgente && <span className={styles.pill + ' ' + styles.pillUrgent}>⚡ Urgente</span>}
+            <span className={styles.pill + ' ' + styles.pillNormal}>
+              {{ student:'👤 Sin titulación', experienced:'⭐ Con experiencia', professional:'🎓 Profesional' }[analysis.nivelRequerido] || '⭐ Con experiencia'}
+            </span>
+          </div>
+        )}
 
         {/* Refine */}
         <div className={styles.refineBox}>
@@ -138,19 +149,20 @@ export default function Results({ searchState }) {
           )}
         </div>
 
+        {/* Results */}
         <div className={styles.resultsHeader}>
           <h2 className={styles.resultsTitle}>{currentMatches.length} personas encontradas</h2>
-          <p className={styles.resultsSubtitle}>{analysis.resumen}</p>
+          {analysis && <p className={styles.resultsSubtitle}>{analysis.resumen}</p>}
         </div>
 
         {currentMatches.length > 0 ? (
           <div className={styles.cards}>
-            {currentMatches.map(h => <HelperCard key={h.id} helper={h} />)}
+            {currentMatches.map((h, i) => h && <HelperCard key={h.id || i} helper={h} />)}
           </div>
         ) : (
           <div className={styles.empty}>
-            <p>Sin coincidencias con estos filtros.</p>
-            <button className={styles.retryBtn} onClick={() => { setCurrentMatches(matches); setRefinements([]) }}>Quitar filtros</button>
+            <p>No encontramos resultados para esta búsqueda.</p>
+            <button className={styles.retryBtn} onClick={() => navigate('/')}>Intentar de nuevo</button>
           </div>
         )}
 
