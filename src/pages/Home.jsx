@@ -99,10 +99,7 @@ export default function Home({ setSearchState }) {
         {/* Hero */}
         <div className={styles.hero}>
           <h1 className={styles.title}>¿Qué <span className={styles.titleAccent}>necesitas?</span></h1>
-          <p className={styles.subtitle}>
-            Descríbelo con tus palabras. Nüra entiende el contexto,
-            la urgencia y la cualificación que necesitas.
-          </p>
+          <p className={styles.subtitle}>Descríbelo con tus palabras, Nüra entiende el contexto.</p>
         </div>
 
         {/* Search */}

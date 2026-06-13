@@ -187,3 +187,14 @@
 .statIcon { color: var(--purple); }
 .statVal { font-size: 14px; font-weight: 800; color: var(--ink); }
 .statLabel { font-size: 10px; color: var(--soft); }
+
+.inputTopRow {
+  display: flex; align-items: center; gap: 7px;
+  margin-bottom: 10px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid var(--rule);
+}
+.inputTopLabel {
+  font-size: 12px; font-weight: 700; color: var(--soft);
+  text-transform: uppercase; letter-spacing: 0.6px;
+}
