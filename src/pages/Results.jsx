@@ -47,7 +47,8 @@ function HelperCard({ helper }) {
             Ver perfil
           </button>
         </div>
-        <div className={styles.price}>{helper.price}</div>
+        {helper.price && helper.price !== 'Consultar' && <div className={styles.price}>{helper.price}</div>}
+        {helper.price === 'Consultar' && <div className={styles.priceConsult}>Precio a consultar</div>}
       </div>
     </div>
   )

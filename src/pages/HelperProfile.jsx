@@ -235,13 +235,10 @@ export default function HelperProfile() {
               </div>
             </div>
 
-            {/* Price — prominent */}
-            <div className={styles.heroPrice}>
-              <span className={styles.heroPriceVal}>{h.price}</span>
-              <div className={styles.heroPriceModes}>
-                {h.presential && <span>📍 Presencial</span>}
-                {h.online && <span>💻 Online</span>}
-              </div>
+            {/* Modality */}
+            <div className={styles.heroModes}>
+              {h.presential && <span className={styles.heroMode}>📍 Presencial</span>}
+              {h.online && <span className={styles.heroMode}>💻 Online</span>}
             </div>
 
             {/* Trust badges — only most important */}
