@@ -388,20 +388,7 @@ export default function HelperProfile() {
               </div>
             </section>
 
-            <section className={styles.section}>
-              <h3 className={styles.sectionTitle}><Sparkles size={13} /> Por qué esto vale más que un CV</h3>
-              {[
-                ['LinkedIn', 'Lo escribe el propio profesional. Nadie lo verifica.'],
-                ['CV tradicional', 'Una hoja de papel que cualquiera puede redactar.'],
-                ['Entrevista', 'Una hora de conversación bajo presión. No refleja el trabajo real.'],
-                ['Perfil Nüra', 'Lo construyen las personas que han trabajado con él. Imposible de falsificar.'],
-              ].map(([source, desc], i) => (
-                <div key={i} className={`${styles.compareRow} ${source === 'Perfil Nüra' ? styles.compareNura : ''}`}>
-                  <span className={styles.compareSource}>{source}</span>
-                  <span className={styles.compareDesc}>{desc}</span>
-                </div>
-              ))}
-            </section>
+
           </>
         )}
 
