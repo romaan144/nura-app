@@ -59,7 +59,7 @@
 .content { flex: 1; max-width: 620px; margin: 0 auto; width: 100%; padding: 22px 14px 130px; }
 
 /* ── BIO ── */
-.bioCard { background: var(--white); border-radius: 16px; padding: 20px; margin-bottom: 16px; box-shadow: var(--shadow-sm); border: 1.5px solid var(--rule); }
+.bioCard { background: var(--white); border-radius: 16px; padding: 20px; margin-top: 20px; margin-bottom: 16px; box-shadow: var(--shadow-sm); border: 1.5px solid var(--rule); }
 .bioText { font-size: 14px; color: var(--mid); line-height: 1.75; }
 
 /* ── NÜRA DETECTED ── */
@@ -121,7 +121,7 @@
 .reviewText { font-size: 13px; color: var(--mid); line-height: 1.55; }
 
 /* ── EXPERIENCE — LinkedIn style timeline ── */
-.expTimeline { display: flex; flex-direction: column; gap: 0; padding-top: 8px; }
+.expTimeline { display: flex; flex-direction: column; gap: 0; padding-top: 20px; }
 .expCardFull { display: flex; gap: 14px; position: relative; margin-bottom: 0; background: transparent; }
 .expCardFull:not(:last-child) .expTimelineLeft::after {
   content: ''; position: absolute; left: 19px; top: 46px; bottom: 0;
@@ -232,7 +232,7 @@
 .nuraSeal { display: flex; align-items: center; gap: 8px; font-size: 11px; color: var(--soft); background: var(--white); border: 1.5px solid var(--rule); border-radius: 12px; padding: 11px 14px; }
 
 /* ── EMPTY STATES ── */
-.emptyTab { display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 48px 20px; gap: 12px; color: var(--soft); text-align: center; background: var(--white); border: 1.5px solid var(--rule); border-radius: 16px; }
+.emptyTab { display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 48px 20px; gap: 12px; color: var(--soft); text-align: center; background: var(--white); border: 1.5px solid var(--rule); border-radius: 16px; margin-top: 20px; }
 .emptyTab p { font-size: 14px; }
 
 /* ── CTA ── */

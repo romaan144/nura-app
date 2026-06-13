@@ -28,7 +28,7 @@
 .searchInput { border: none; outline: none; background: transparent; font-size: 13px; color: var(--ink); flex: 1; }
 .searchInput::placeholder { color: var(--soft); }
 
-.content { max-width: 680px; margin: 0 auto; padding: 22px 14px 24px; }
+.content { max-width: 680px; margin: 0 auto; padding: 24px 14px 28px; }
 
 .section { margin-bottom: 24px; }
 .sectionTitle {
