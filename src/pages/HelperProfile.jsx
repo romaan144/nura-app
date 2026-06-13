@@ -13,14 +13,24 @@ import styles from './HelperProfile.module.css'
 
 /* ── SUB-COMPONENTS ───────────────────────────────────── */
 
-function PersonalityBar({ label, value }) {
+function PersonalityCircle({ label, value, color }) {
+  const pct = (value / 10) * 100
+  const r = 22
+  const circ = 2 * Math.PI * r
+  const offset = circ - (pct / 100) * circ
   return (
-    <div className={styles.pBar}>
-      <span className={styles.pBarLabel}>{label}</span>
-      <div className={styles.pBarTrack}>
-        <div className={styles.pBarFill} style={{ width: `${value * 10}%` }} />
-      </div>
-      <span className={styles.pBarVal}>{value.toFixed(1)}</span>
+    <div className={styles.pCircle}>
+      <svg width="58" height="58" viewBox="0 0 58 58">
+        <circle cx="29" cy="29" r={r} fill="none" stroke="var(--rule2)" strokeWidth="4" />
+        <circle cx="29" cy="29" r={r} fill="none" stroke={color}
+          strokeWidth="4" strokeLinecap="round"
+          strokeDasharray={circ} strokeDashoffset={offset}
+          transform="rotate(-90 29 29)" />
+        <text x="29" y="34" textAnchor="middle"
+          fontSize="11" fontWeight="800" fill="var(--ink)"
+          fontFamily="Inter, sans-serif">{value.toFixed(1)}</text>
+      </svg>
+      <span className={styles.pCircleLabel}>{label}</span>
     </div>
   )
 }
@@ -234,8 +244,9 @@ export default function HelperProfile() {
               </div>
             </div>
 
-            {/* Modality */}
+            {/* Availability + Modality */}
             <div className={styles.heroModes}>
+              <span className={styles.heroAvailable}><span className={styles.availableDot} /> Disponible ahora</span>
               {h.presential && <span className={styles.heroMode}>📍 Presencial</span>}
               {h.online && <span className={styles.heroMode}>💻 Online</span>}
             </div>
@@ -490,14 +501,14 @@ export default function HelperProfile() {
               <section className={styles.section}>
                 <h3 className={styles.sectionTitle}><Brain size={13} /> Análisis de personalidad</h3>
                 <p className={styles.sectionNote}>Derivado del comportamiento en {h.services} servicios — no de un test de personalidad</p>
-                <div className={styles.personality}>
+                <div className={styles.personalityGrid}>
                   {[
-                    ['Paciencia', h.personality.patience],
-                    ['Empatía', h.personality.empathy],
-                    ['Comunicación', h.personality.communication],
-                    ['Puntualidad', h.personality.punctuality],
-                    ['Autonomía', h.personality.autonomy],
-                  ].map(([l, v]) => <PersonalityBar key={l} label={l} value={v} />)}
+                    ['Paciencia', h.personality.patience, '#FF3B3B'],
+                    ['Empatía', h.personality.empathy, '#7B2FFF'],
+                    ['Comunicación', h.personality.communication, '#00D4C8'],
+                    ['Puntualidad', h.personality.punctuality, '#F59E0B'],
+                    ['Autonomía', h.personality.autonomy, '#059669'],
+                  ].map(([l, v, c]) => <PersonalityCircle key={l} label={l} value={v} color={c} />)}
                 </div>
               </section>
             )}
@@ -505,20 +516,31 @@ export default function HelperProfile() {
             {/* Evolution — redesigned as a clean line */}
             {h.evolution?.length > 0 && (
               <section className={styles.section}>
-                <h3 className={styles.sectionTitle}><TrendingUp size={13} /> Evolución del perfil</h3>
-                <p className={styles.sectionNote}>La consistencia importa más que los picos aislados</p>
-                <div className={styles.evoList}>
-                  {h.evolution.map((pt, i) => (
-                    <div key={i} className={styles.evoRow}>
-                      <span className={styles.evoPeriod}>{pt.period}</span>
-                      <div className={styles.evoBar}>
-                        <div className={styles.evoFill}
-                          style={{ width: `${((pt.rating - 4.0) / 1.0) * 100}%` }} />
+                <h3 className={styles.sectionTitle}><TrendingUp size={13} /> Trayectoria en Nüra</h3>
+                <div className={styles.evoTimeline}>
+                  {h.evolution.map((pt, i) => {
+                    const isLast = i === h.evolution.length - 1
+                    const prev = h.evolution[i - 1]
+                    const improved = prev && pt.rating > prev.rating
+                    const stable = prev && pt.rating === prev.rating
+                    return (
+                      <div key={i} className={`${styles.evoPoint} ${isLast ? styles.evoPointCurrent : ''}`}>
+                        <div className={styles.evoPointLeft}>
+                          <div className={`${styles.evoDot} ${isLast ? styles.evoDotCurrent : ''}`} />
+                          {!isLast && <div className={styles.evoConnector} />}
+                        </div>
+                        <div className={styles.evoContent}>
+                          <div className={styles.evoYear}>{pt.period}{isLast ? ' · Hoy' : ''}</div>
+                          <div className={styles.evoStats}>
+                            <span className={styles.evoRatingPill}>★ {pt.rating}</span>
+                            <span className={styles.evoServicesPill}>{pt.services} servicios</span>
+                            {improved && <span className={styles.evoTrend}>↑ Mejora</span>}
+                            {stable && i > 0 && <span className={styles.evoStable}>— Estable</span>}
+                          </div>
+                        </div>
                       </div>
-                      <span className={styles.evoRating}>★ {pt.rating}</span>
-                      <span className={styles.evoServices}>{pt.services} serv.</span>
-                    </div>
-                  ))}
+                    )
+                  })}
                 </div>
               </section>
             )}

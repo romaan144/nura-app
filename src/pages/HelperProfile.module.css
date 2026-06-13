@@ -245,3 +245,90 @@
 /* ── NOT FOUND ── */
 .notFound { min-height: 100vh; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 16px; color: var(--mid); text-align: center; padding: 32px; }
 .notFound button { padding: 12px 24px; background: var(--grad-main); color: white; border: none; border-radius: 12px; font-size: 14px; font-weight: 600; }
+
+/* ── PERSONALITY CIRCLES ── */
+.personalityGrid {
+  display: grid; grid-template-columns: repeat(5, 1fr);
+  gap: 8px; padding: 4px 0;
+}
+.pCircle {
+  display: flex; flex-direction: column; align-items: center; gap: 7px;
+}
+.pCircleLabel {
+  font-size: 10px; font-weight: 600; color: var(--mid);
+  text-align: center; line-height: 1.3;
+}
+
+/* ── EVOLUTION TIMELINE ── */
+.evoTimeline { display: flex; flex-direction: column; gap: 0; padding: 4px 0; }
+.evoPoint { display: flex; gap: 14px; }
+.evoPointLeft {
+  display: flex; flex-direction: column; align-items: center;
+  flex-shrink: 0; width: 16px;
+}
+.evoDot {
+  width: 14px; height: 14px; border-radius: 50%;
+  background: var(--rule2); border: 2px solid var(--rule);
+  flex-shrink: 0; position: relative; z-index: 1;
+  transition: all 0.2s;
+}
+.evoDotCurrent {
+  background: var(--grad-main);
+  border-color: transparent;
+  box-shadow: 0 0 0 4px rgba(123,47,255,0.15);
+  width: 16px; height: 16px;
+}
+.evoConnector {
+  width: 2px; flex: 1; min-height: 16px;
+  background: linear-gradient(180deg, var(--rule) 0%, var(--rule2) 100%);
+  margin: 3px 0;
+}
+.evoContent { flex: 1; padding-bottom: 20px; }
+.evoYear {
+  font-size: 13px; font-weight: 700; color: var(--ink);
+  margin-bottom: 6px; letter-spacing: -0.2px;
+}
+.evoStats { display: flex; align-items: center; gap: 6px; flex-wrap: wrap; }
+.evoRatingPill {
+  font-size: 12px; font-weight: 700; color: var(--ink);
+  background: #FEF3C7; border-radius: 8px; padding: 3px 9px;
+}
+.evoServicesPill {
+  font-size: 11px; color: var(--soft);
+  background: var(--paper); border: 1px solid var(--rule);
+  border-radius: 8px; padding: 3px 9px;
+}
+.evoTrend {
+  font-size: 11px; font-weight: 700; color: #059669;
+  background: #ECFDF5; border-radius: 8px; padding: 3px 9px;
+}
+.evoStable {
+  font-size: 11px; color: var(--soft);
+  background: var(--paper); border-radius: 8px; padding: 3px 9px;
+}
+
+/* ── AVAILABILITY ── */
+.heroAvailable {
+  display: flex; align-items: center; gap: 5px;
+  font-size: 11px; font-weight: 600; color: #059669;
+  background: #ECFDF5; border-radius: 20px; padding: 4px 11px;
+}
+.availableDot {
+  width: 7px; height: 7px; border-radius: 50%; background: #059669;
+  animation: availPulse 2s ease-in-out infinite; flex-shrink: 0;
+}
+@keyframes availPulse { 0%,100%{opacity:1;transform:scale(1)} 50%{opacity:0.5;transform:scale(0.8)} }
+
+/* ── Remove old bar styles (kept for safety but unused) ── */
+.pBar { display: none; }
+.pBarLabel { display: none; }
+.pBarTrack { display: none; }
+.pBarFill { display: none; }
+.pBarVal { display: none; }
+.evoList { display: none; }
+.evoRow { display: none; }
+.evoBar { display: none; }
+.evoFill { display: none; }
+.evoPeriod { display: none; }
+.evoRating { display: none; }
+.evoServices { display: none; }
