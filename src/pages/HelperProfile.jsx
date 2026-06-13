@@ -277,17 +277,17 @@ export default function HelperProfile() {
         {/* ── QUICK STATS ── */}
         <div className={styles.statsRow}>
           <div className={styles.statBox}>
-            <span className={styles.statNum} style={{color:'#059669'}}>{h.services}</span>
+            <span className={styles.statNum}>{h.services}</span>
             <span className={styles.statLbl}>Servicios</span>
           </div>
           <div className={styles.statDivider} />
           <div className={styles.statBox}>
-            <span className={styles.statNum} style={{color:'var(--purple)'}}>{h.completionRate}%</span>
+            <span className={styles.statNum}>{h.completionRate}%</span>
             <span className={styles.statLbl}>Completados</span>
           </div>
           <div className={styles.statDivider} />
           <div className={styles.statBox}>
-            <span className={styles.statNum} style={{color:'#D97706'}}>{h.reviews}</span>
+            <span className={styles.statNum}>{h.reviews}</span>
             <span className={styles.statLbl}>Valoraciones</span>
           </div>
         </div>
