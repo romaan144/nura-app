@@ -1,18 +1,118 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { useParams, useNavigate } from 'react-router-dom'
 import {
   ArrowLeft, Star, Shield, MapPin, MessageCircle, Zap,
   TrendingUp, Clock, CheckCircle, Award, Brain, Globe,
   Building2, BookOpen, Share2, Lock, Heart, Sparkles,
-  ThumbsUp, MessageSquare, AlertCircle, BarChart2, ChevronRight
+  ThumbsUp, MessageSquare, AlertCircle, BarChart2, RefreshCw,
+  Activity, Cpu, Eye, Layers
 } from 'lucide-react'
 import { HELPERS } from '../data/helpers'
 import { useUser } from '../context/UserContext'
 import RatingModal from '../components/RatingModal'
 import styles from './HelperProfile.module.css'
 
-/* ── SUB-COMPONENTS ───────────────────────────────────── */
+/* ── LIVE PROFILE PULSE ───────────────────────────────────────────────────
+   This is the core of Nüra's concept: the profile is alive, updating now.
+   ──────────────────────────────────────────────────────────────────────── */
 
+function LivePulse({ helper }) {
+  const [updates, setUpdates] = useState([
+    { id: 1, text: `Nüra analizó las últimas ${helper.reviews} valoraciones y actualizó el perfil de personalidad`, time: 'Hace 2 horas', icon: <Brain size={11} /> },
+    { id: 2, text: `Nueva habilidad detectada en conversación: "${helper.hiddenSkills?.[0] || 'resolución de conflictos'}"`, time: 'Hace 1 día', icon: <Cpu size={11} /> },
+    { id: 3, text: `Nüra preguntó: "¿Has completado alguna formación nueva este mes?" — perfil actualizado`, time: 'Hace 3 días', icon: <MessageSquare size={11} /> },
+    { id: 4, text: `Puntuación de reputación subió +2 puntos tras 3 servicios completados esta semana`, time: 'Hace 5 días', icon: <TrendingUp size={11} /> },
+    { id: 5, text: `Comportamiento en chat analizado: alta empatía y tiempo de respuesta excelente`, time: 'Hace 1 semana', icon: <Activity size={11} /> },
+  ])
+  const [pulse, setPulse] = useState(false)
+
+  useEffect(() => {
+    const t = setInterval(() => setPulse(p => !p), 3000)
+    return () => clearInterval(t)
+  }, [])
+
+  return (
+    <div className={styles.liveCard}>
+      <div className={styles.liveHeader}>
+        <div className={styles.liveIndicator}>
+          <span className={`${styles.liveDot} ${pulse ? styles.liveDotPulse : ''}`} />
+          <span className={styles.liveLabel}>Perfil vivo · actualizándose ahora</span>
+        </div>
+        <RefreshCw size={12} color="var(--purple)" className={pulse ? styles.spinning : ''} />
+      </div>
+      <div className={styles.liveUpdates}>
+        {updates.map(u => (
+          <div key={u.id} className={styles.liveUpdate}>
+            <span className={styles.liveUpdateIcon}>{u.icon}</span>
+            <div className={styles.liveUpdateContent}>
+              <p className={styles.liveUpdateText}>{u.text}</p>
+              <span className={styles.liveUpdateTime}>{u.time}</span>
+            </div>
+          </div>
+        ))}
+      </div>
+      <div className={styles.liveFooter}>
+        <Eye size={11} />
+        <span>Nüra actualiza este perfil automáticamente con cada servicio, valoración y conversación</span>
+      </div>
+    </div>
+  )
+}
+
+/* ── NÜRA AI PROACTIVE QUESTION ────────────────────────────────────────── */
+function NuraQuestion({ helperName }) {
+  const [answered, setAnswered] = useState(false)
+  const [answer, setAnswer] = useState('')
+  const [sent, setSent] = useState(false)
+
+  if (sent) return (
+    <div className={styles.nuraQuestionSent}>
+      <Sparkles size={14} color="var(--purple)" />
+      <span>Respuesta enviada. Nüra actualizará el perfil de {helperName.split(' ')[0]} en breve.</span>
+    </div>
+  )
+
+  return (
+    <div className={styles.nuraQuestion}>
+      <div className={styles.nuraQuestionHeader}>
+        <img src="/logo-iso.png" alt="Nüra" className={styles.nuraIso} />
+        <div>
+          <span className={styles.nuraQuestionFrom}>Nüra IA · Pregunta proactiva</span>
+          <p className={styles.nuraQuestionText}>
+            {helperName.split(' ')[0]}, ¿has completado alguna formación nueva o trabajado en un contexto diferente en los últimos 3 meses? Tu perfil se actualiza con lo que aprendes.
+          </p>
+        </div>
+      </div>
+      {!answered ? (
+        <div className={styles.nuraQuestionActions}>
+          <button className={styles.nuraQuestionBtn} onClick={() => setAnswered(true)}>
+            Sí, cuéntaselo a Nüra
+          </button>
+          <button className={styles.nuraQuestionSkip} onClick={() => setSent(true)}>
+            No por ahora
+          </button>
+        </div>
+      ) : (
+        <div className={styles.nuraQuestionInput}>
+          <input
+            placeholder="Cuéntale a Nüra qué has aprendido..."
+            value={answer}
+            onChange={e => setAnswer(e.target.value)}
+            className={styles.nuraInput}
+            autoFocus
+          />
+          <button
+            className={styles.nuraInputSend}
+            disabled={!answer.trim()}
+            onClick={() => setSent(true)}
+          >→</button>
+        </div>
+      )}
+    </div>
+  )
+}
+
+/* ── PERSONALITY CIRCLES ──────────────────────────────────────────────── */
 function PersonalityCircle({ label, value, color }) {
   const pct = (value / 10) * 100
   const r = 22
@@ -35,74 +135,7 @@ function PersonalityCircle({ label, value, color }) {
   )
 }
 
-function PostCard({ post, helper }) {
-  const [liked, setLiked] = useState(false)
-  const [likes, setLikes] = useState(post.likes)
-  const [showComment, setShowComment] = useState(false)
-  const [comment, setComment] = useState('')
-  const [comments, setComments] = useState([])
-
-  return (
-    <div className={styles.postCard}>
-      <div className={styles.postHeader}>
-        {helper.avatarUrl
-          ? <img src={helper.avatarUrl} alt="" className={styles.postAvatarImg} />
-          : <div className={styles.postAvatar} style={{ background: helper.avatarColor }}>{helper.avatar}</div>
-        }
-        <div className={styles.postMeta}>
-          <span className={styles.postName}>{helper.name}</span>
-          <span className={styles.postDate}>{post.date}</span>
-        </div>
-        {post.verifiedWork && (
-          <span className={styles.verifiedWorkBadge}><Shield size={9} /> Verificado</span>
-        )}
-      </div>
-
-      <p className={styles.postText}>{post.text}</p>
-
-      {post.badge && <div className={styles.postBadge}>{post.badge}</div>}
-
-      <div className={styles.postActions}>
-        <button
-          className={`${styles.postAction} ${liked ? styles.postActionActive : ''}`}
-          onClick={() => { setLiked(l => !l); setLikes(n => liked ? n - 1 : n + 1) }}>
-          <ThumbsUp size={14} /> {likes}
-        </button>
-        <button className={styles.postAction} onClick={() => setShowComment(s => !s)}>
-          <MessageSquare size={14} /> {post.comments + comments.length}
-        </button>
-      </div>
-
-      {showComment && (
-        <div className={styles.commentInputRow}>
-          <input className={styles.commentField} placeholder="Escribe un comentario..."
-            value={comment} onChange={e => setComment(e.target.value)} autoFocus
-            onKeyDown={e => e.key === 'Enter' && comment.trim() && (
-              setComments(c => [...c, { text: comment, user: 'Tú' }]),
-              setComment(''), setShowComment(false)
-            )} />
-          <button className={styles.commentSubmit}
-            disabled={!comment.trim()}
-            onClick={() => {
-              setComments(c => [...c, { text: comment, user: 'Tú' }])
-              setComment(''); setShowComment(false)
-            }}>→</button>
-        </div>
-      )}
-
-      {comments.map((c, i) => (
-        <div key={i} className={styles.userComment}>
-          <div className={styles.commentDot}>T</div>
-          <div className={styles.commentBubble}>
-            <span className={styles.commentUser}>{c.user}</span>
-            <p className={styles.commentText}>{c.text}</p>
-          </div>
-        </div>
-      ))}
-    </div>
-  )
-}
-
+/* ── EXPERIENCE CARD ──────────────────────────────────────────────────── */
 function ExperienceCard({ exp }) {
   return (
     <div className={styles.expCard}>
@@ -159,8 +192,66 @@ function ExperienceCard({ exp }) {
   )
 }
 
-/* ── MAIN COMPONENT ───────────────────────────────────── */
+/* ── POST CARD ────────────────────────────────────────────────────────── */
+function PostCard({ post, helper }) {
+  const [liked, setLiked] = useState(false)
+  const [likes, setLikes] = useState(post.likes)
+  const [showComment, setShowComment] = useState(false)
+  const [comment, setComment] = useState('')
+  const [comments, setComments] = useState([])
 
+  return (
+    <div className={styles.postCard}>
+      <div className={styles.postHeader}>
+        {helper.avatarUrl
+          ? <img src={helper.avatarUrl} alt="" className={styles.postAvatarImg} />
+          : <div className={styles.postAvatar} style={{ background: helper.avatarColor }}>{helper.avatar}</div>
+        }
+        <div className={styles.postMeta}>
+          <span className={styles.postName}>{helper.name}</span>
+          <span className={styles.postDate}>{post.date}</span>
+        </div>
+        {post.verifiedWork && (
+          <span className={styles.verifiedWorkBadge}><Shield size={9} /> Verificado</span>
+        )}
+      </div>
+      <p className={styles.postText}>{post.text}</p>
+      {post.badge && <div className={styles.postBadge}>{post.badge}</div>}
+      <div className={styles.postActions}>
+        <button className={`${styles.postAction} ${liked ? styles.postActionActive : ''}`}
+          onClick={() => { setLiked(l => !l); setLikes(n => liked ? n - 1 : n + 1) }}>
+          <ThumbsUp size={14} /> {likes}
+        </button>
+        <button className={styles.postAction} onClick={() => setShowComment(s => !s)}>
+          <MessageSquare size={14} /> {post.comments + comments.length}
+        </button>
+      </div>
+      {showComment && (
+        <div className={styles.commentInputRow}>
+          <input className={styles.commentField} placeholder="Escribe un comentario..."
+            value={comment} onChange={e => setComment(e.target.value)} autoFocus
+            onKeyDown={e => e.key === 'Enter' && comment.trim() && (
+              setComments(c => [...c, { text: comment }]),
+              setComment(''), setShowComment(false)
+            )} />
+          <button className={styles.commentSubmit} disabled={!comment.trim()}
+            onClick={() => { setComments(c => [...c, { text: comment }]); setComment(''); setShowComment(false) }}>→</button>
+        </div>
+      )}
+      {comments.map((c, i) => (
+        <div key={i} className={styles.userComment}>
+          <div className={styles.commentDot}>T</div>
+          <div className={styles.commentBubble}>
+            <span className={styles.commentUser}>Tú</span>
+            <p className={styles.commentText}>{c.text}</p>
+          </div>
+        </div>
+      ))}
+    </div>
+  )
+}
+
+/* ── MAIN ─────────────────────────────────────────────────────────────── */
 export default function HelperProfile() {
   const { id } = useParams()
   const navigate = useNavigate()
@@ -185,21 +276,30 @@ export default function HelperProfile() {
   }
 
   const tabs = [
-    { id: 'perfil', label: 'Perfil', icon: <Brain size={12} /> },
+    { id: 'perfil', label: 'Perfil vivo', icon: <Activity size={12} /> },
     { id: 'empresas', label: 'Laboral', icon: <Building2 size={12} /> },
     { id: 'feed', label: 'Publicaciones', icon: <MessageSquare size={12} /> },
     { id: 'reputacion', label: 'Reputación', icon: <BarChart2 size={12} /> },
   ]
 
+  const score = Math.round(
+    (h.rating / 5) * 40 +
+    (Math.min(h.services, 100) / 100) * 30 +
+    (h.completionRate / 100) * 20 +
+    (h.dniVerified ? 10 : 0)
+  )
+  const level = score >= 90 ? { label: 'Experto verificado', color: '#059669', bg: '#ECFDF5' }
+    : score >= 75 ? { label: 'Referente de confianza', color: '#1A56DB', bg: '#EFF6FF' }
+    : { label: 'Con historial', color: '#D97706', bg: '#FFFBEB' }
+
   return (
     <div className={styles.page}>
-
-      {/* ── HEADER ── */}
+      {/* Header */}
       <header className={styles.header}>
         <button className={styles.back} onClick={() => navigate(-1)}><ArrowLeft size={18} /></button>
         <div className={styles.headerActions}>
           <button className={styles.shareBtn} onClick={handleShare}>
-            {shared ? <span className={styles.copiedLabel}>✓ Copiado</span> : <Share2 size={15} />}
+            {shared ? <span className={styles.copiedLabel}>✓</span> : <Share2 size={15} />}
           </button>
           {!hasRated(h.id) && (
             <button className={styles.rateBtn} onClick={() => setShowRating(true)}>
@@ -210,71 +310,52 @@ export default function HelperProfile() {
       </header>
 
       <div className={styles.content}>
-
-        {/* ── HERO ── */}
+        {/* Hero */}
         <div className={styles.hero}>
-          {/* Gradient background from logo colors */}
-          <div className={styles.heroBg} />
+          {h.avatarUrl
+            ? <img src={h.avatarUrl} alt={h.name} className={styles.heroAvatar} />
+            : <div className={styles.heroAvatarFallback} style={{ background: h.avatarColor }}>{h.avatar}</div>
+          }
+          <h1 className={styles.heroName}>{h.name}</h1>
+          <p className={styles.heroSpecialty}>{h.specialty || h.tags?.[0]}</p>
 
-          <div className={styles.heroInner}>
-            {h.avatarUrl
-              ? <img src={h.avatarUrl} alt={h.name} className={styles.heroAvatar} />
-              : <div className={styles.heroAvatarFallback} style={{ background: h.avatarColor }}>{h.avatar}</div>
-            }
-
-            <h1 className={styles.heroName}>{h.name}</h1>
-            <p className={styles.heroSpecialty}>{h.specialty || h.tags?.[0]}</p>
-
-            {/* Key info row */}
-            <div className={styles.heroMeta}>
-              <div className={styles.heroMetaItem}>
-                <Star size={13} fill="#F59E0B" color="#F59E0B" />
-                <strong>{h.rating}</strong>
-                <span>({h.reviews} val.)</span>
-              </div>
-              <div className={styles.heroMetaSep} />
-              <div className={styles.heroMetaItem}>
-                <MapPin size={12} />
-                <span>{h.zone} · {h.distance}km</span>
-              </div>
-              <div className={styles.heroMetaSep} />
-              <div className={styles.heroMetaItem}>
-                <Clock size={12} />
-                <span>{h.responseTime}</span>
-              </div>
+          <div className={styles.heroMeta}>
+            <div className={styles.heroMetaItem}>
+              <Star size={13} fill="#F59E0B" color="#F59E0B" />
+              <strong>{h.rating}</strong>
+              <span>({h.reviews})</span>
             </div>
-
-            {/* Availability + Modality */}
-            <div className={styles.heroModes}>
-              <span className={styles.heroAvailable}><span className={styles.availableDot} /> Disponible ahora</span>
-              {h.presential && <span className={styles.heroMode}>📍 Presencial</span>}
-              {h.online && <span className={styles.heroMode}>💻 Online</span>}
+            <div className={styles.heroMetaSep} />
+            <div className={styles.heroMetaItem}>
+              <MapPin size={12} />
+              <span>{h.zone} · {h.distance}km</span>
             </div>
-
-            {/* Trust badges */}
-            <div className={styles.heroBadges}>
-              {h.dniVerified && (
-                <span className={styles.badgePrimary}><Shield size={10} /> DNI Verificado</span>
-              )}
-              {h.criminalRecordClear && (
-                <span className={styles.badgeSecondary}><CheckCircle size={10} /> Sin antecedentes</span>
-              )}
-              {h.founder && (
-                <span className={styles.badgeFounder}><Award size={10} /> Fundador</span>
-              )}
-              {h.urgent && (
-                <span className={styles.badgeUrgent}><Zap size={10} /> Urgencias</span>
-              )}
+            <div className={styles.heroMetaSep} />
+            <div className={styles.heroMetaItem}>
+              <Clock size={12} />
+              <span>{h.responseTime}</span>
             </div>
-
-            {/* CTA — inside hero */}
-            <button className={styles.heroCtaBtn} onClick={() => navigate(`/chat/${h.id}`)}>
-              <MessageCircle size={16} /> Contactar a {h.name.split(' ')[0]}
-            </button>
           </div>
+
+          <div className={styles.heroModes}>
+            <span className={styles.heroAvailable}><span className={styles.availableDot} /> Disponible ahora</span>
+            {h.presential && <span className={styles.heroMode}>📍 Presencial</span>}
+            {h.online && <span className={styles.heroMode}>💻 Online</span>}
+          </div>
+
+          <div className={styles.heroBadges}>
+            {h.dniVerified && <span className={styles.badgePrimary}><Shield size={10} /> DNI Verificado</span>}
+            {h.criminalRecordClear && <span className={styles.badgeSecondary}><CheckCircle size={10} /> Sin antecedentes</span>}
+            {h.founder && <span className={styles.badgeFounder}><Award size={10} /> Fundador</span>}
+            {h.urgent && <span className={styles.badgeUrgent}><Zap size={10} /> Urgencias</span>}
+          </div>
+
+          <button className={styles.heroCtaBtn} onClick={() => navigate(`/chat/${h.id}`)}>
+            <MessageCircle size={16} /> Contactar a {h.name.split(' ')[0]}
+          </button>
         </div>
 
-        {/* ── QUICK STATS ── */}
+        {/* Stats */}
         <div className={styles.statsRow}>
           <div className={styles.statBox}>
             <span className={styles.statNum}>{h.services}</span>
@@ -292,39 +373,41 @@ export default function HelperProfile() {
           </div>
         </div>
 
-        {/* ── TABS ── */}
+        {/* Tabs */}
         <div className={styles.tabsWrap}>
           <div className={styles.tabs}>
             {tabs.map(tab => (
               <button key={tab.id}
                 className={`${styles.tab} ${activeTab === tab.id ? styles.tabActive : ''}`}
                 onClick={() => setActiveTab(tab.id)}>
-                {tab.icon}
-                <span>{tab.label}</span>
+                {tab.icon} <span>{tab.label}</span>
               </button>
             ))}
           </div>
         </div>
 
-        {/* ══════════════════════════════════════════════ */}
-        {/* TAB: PERFIL VIVO                              */}
-        {/* ══════════════════════════════════════════════ */}
+        {/* ── TAB: PERFIL VIVO ── */}
         {activeTab === 'perfil' && (
           <>
-            {/* Bio — first, prominent */}
+            {/* THE KEY DIFFERENTIATOR: Live pulse */}
+            <div style={{paddingTop:'20px'}}>
+              <LivePulse helper={h} />
+            </div>
+
+            {/* Bio */}
             <div className={styles.bioCard}>
               <p className={styles.bioText}>{h.bio}</p>
             </div>
 
-            {/* Nüra-detected skills — the key differentiator, shown prominently */}
+            {/* Nüra-detected skills — THE differentiator */}
             {h.hiddenSkills?.length > 0 && (
               <div className={styles.nuraDetectedCard}>
                 <div className={styles.nuraDetectedHeader}>
-                  <Sparkles size={14} color="var(--purple)" />
-                  <span>Detectado por Nüra</span>
+                  <Cpu size={14} color="var(--purple)" />
+                  <span>Detectado por Nüra · no declarado por {h.name.split(' ')[0]}</span>
                 </div>
                 <p className={styles.nuraDetectedDesc}>
-                  Habilidades que Nüra ha identificado a partir del comportamiento y valoraciones reales — no declaradas por el helper.
+                  Nüra identificó estas capacidades analizando conversaciones, comportamiento y valoraciones reales. {h.name.split(' ')[0]} nunca las declaró explícitamente.
                 </p>
                 <div className={styles.nuraDetectedSkills}>
                   {h.hiddenSkills.map((s, i) => (
@@ -334,21 +417,27 @@ export default function HelperProfile() {
               </div>
             )}
 
+            {/* Nüra proactive question (visible to helper) */}
+            <NuraQuestion helperName={h.name} />
+
             {/* Declared skills */}
             {h.skills?.length > 0 && (
               <section className={styles.section}>
-                <h3 className={styles.sectionTitle}><CheckCircle size={13} /> Especialidades</h3>
+                <h3 className={styles.sectionTitle}><CheckCircle size={13} /> Especialidades declaradas</h3>
                 <div className={styles.skillsGrid}>
                   {h.skills.map((s, i) => <span key={i} className={styles.skill}>{s}</span>)}
                 </div>
               </section>
             )}
 
-            {/* Education — timeline */}
+            {/* Education */}
             {h.education?.length > 0 && (
               <section className={styles.section}>
-                <h3 className={styles.sectionTitle}><BookOpen size={13} /> Formación académica verificada</h3>
-                <div className={styles.sectionNote}>Plan de estudios verificado por Nüra en las webs oficiales de cada institución</div>
+                <h3 className={styles.sectionTitle}><BookOpen size={13} /> Formación académica</h3>
+                <div className={styles.nuraVerifyNote}>
+                  <Cpu size={11} />
+                  <span>Nüra buscó el plan de estudios en internet — asignatura por asignatura, universidad por universidad</span>
+                </div>
                 <div className={styles.eduTimeline}>
                   {h.education.map((ed, i) => (
                     <div key={i} className={styles.eduItem}>
@@ -380,13 +469,14 @@ export default function HelperProfile() {
               </section>
             )}
 
-            {/* Reviews */}
+            {/* Reviews — semantic analysis */}
             {h.qualitativeComments?.length > 0 && (
               <section className={styles.section}>
                 <h3 className={styles.sectionTitle}><Heart size={13} /> Valoraciones reales</h3>
-                <p className={styles.sectionNote}>
-                  Nüra analiza el texto semánticamente — los adjetivos construyen el perfil de personalidad
-                </p>
+                <div className={styles.nuraVerifyNote}>
+                  <Cpu size={11} />
+                  <span>Nüra analiza el texto semánticamente — los adjetivos se convierten en atributos verificados del perfil</span>
+                </div>
                 <div className={styles.reviewsList}>
                   {h.qualitativeComments.map((c, i) => (
                     <div key={i} className={styles.reviewItem}>
@@ -409,48 +499,51 @@ export default function HelperProfile() {
           </>
         )}
 
-        {/* ══════════════════════════════════════════════ */}
-        {/* TAB: HISTORIAL LABORAL                        */}
-        {/* ══════════════════════════════════════════════ */}
+        {/* ── TAB: LABORAL ── */}
         {activeTab === 'empresas' && (
-          <>
-            {h.experience?.length > 0
-              ? (
-                <div className={styles.expTimeline}>
-                  {h.experience.map((ex, i) => (
-                    <div key={i} className={styles.expCardFull}>
-                      <div className={styles.expTimelineLeft}>
-                        <div className={styles.expLogo}>{ex.companyLogo}</div>
-                      </div>
-                      <div className={styles.expBody}>
-                        <ExperienceCard exp={ex} />
-                      </div>
-                    </div>
-                  ))}
-                </div>
-              )
-              : (
-                <div className={styles.emptyTab}>
-                  <Building2 size={32} color="var(--rule)" />
-                  <p>Sin historial laboral todavía.</p>
-                </div>
-              )
-            }
+          <div style={{paddingTop:'20px'}}>
+            <div className={styles.empresasIntroCard}>
+              <Shield size={16} color="var(--purple)" />
+              <div>
+                <p className={styles.empresasIntroTitle}>Historial verificado por terceros</p>
+                <p className={styles.empresasIntroDesc}>
+                  Lo que ves aquí no lo ha escrito {h.name.split(' ')[0]}. Lo han escrito las empresas y personas que han trabajado con él. Imposible de falsificar.
+                </p>
+              </div>
+            </div>
 
-            {/* Company CTA */}
+            {h.experience?.length > 0 ? (
+              <div className={styles.expTimeline}>
+                {h.experience.map((ex, i) => (
+                  <div key={i} className={styles.expTimelineItem}>
+                    <div className={styles.expTimelineLeft}>
+                      <div className={styles.expLogo}>{ex.companyLogo}</div>
+                      {i < h.experience.length - 1 && <div className={styles.expConnector} />}
+                    </div>
+                    <div className={styles.expTimelineBody}>
+                      <ExperienceCard exp={ex} />
+                    </div>
+                  </div>
+                ))}
+              </div>
+            ) : (
+              <div className={styles.emptyTab}>
+                <Building2 size={32} color="var(--rule)" />
+                <p>Sin historial laboral todavía.</p>
+              </div>
+            )}
+
             <div className={styles.companyCta}>
               <Lock size={16} color="var(--soft)" />
               <div>
                 <p className={styles.companyCtaTitle}>¿Has trabajado con {h.name.split(' ')[0]}?</p>
-                <p className={styles.companyCtaDesc}>Las empresas pueden añadir experiencias verificadas al perfil. Disponible en Fase 3.</p>
+                <p className={styles.companyCtaDesc}>Las empresas pueden añadir verificaciones al perfil. Disponible en Fase 3.</p>
               </div>
             </div>
-          </>
+          </div>
         )}
 
-        {/* ══════════════════════════════════════════════ */}
-        {/* TAB: PUBLICACIONES                            */}
-        {/* ══════════════════════════════════════════════ */}
+        {/* ── TAB: PUBLICACIONES ── */}
         {activeTab === 'feed' && (
           <div style={{paddingTop:'20px'}}>
             {h.posts?.length > 0
@@ -465,47 +558,39 @@ export default function HelperProfile() {
           </div>
         )}
 
-        {/* ══════════════════════════════════════════════ */}
-        {/* TAB: REPUTACIÓN                               */}
-        {/* ══════════════════════════════════════════════ */}
+        {/* ── TAB: REPUTACIÓN ── */}
         {activeTab === 'reputacion' && (
-          <>
-            {/* Score card */}
-            {(() => {
-              const score = Math.round(
-                (h.rating / 5) * 40 +
-                (Math.min(h.services, 100) / 100) * 30 +
-                (h.completionRate / 100) * 20 +
-                (h.dniVerified ? 10 : 0)
-              )
-              const level = score >= 90
-                ? { label: 'Experto verificado', color: '#059669', bg: '#ECFDF5' }
-                : score >= 75
-                ? { label: 'Referente de confianza', color: '#1A56DB', bg: '#EFF6FF' }
-                : { label: 'Con historial', color: '#D97706', bg: '#FFFBEB' }
-              return (
-                <div className={styles.scoreCard}>
-                  <div className={styles.scoreLeft}>
-                    <div className={styles.scoreNum} style={{ color: level.color }}>{score}</div>
-                    <div className={styles.scoreMax}>/100</div>
-                  </div>
-                  <div className={styles.scoreRight}>
-                    <span className={styles.scoreBadge} style={{ color: level.color, background: level.bg }}>
-                      <Sparkles size={11} /> {level.label}
-                    </span>
-                    <p className={styles.scoreDesc}>
-                      Construida con {h.services} servicios reales, {h.reviews} valoraciones y comportamiento en plataforma.
-                    </p>
-                  </div>
+          <div style={{paddingTop:'20px'}}>
+            {/* Score */}
+            <div className={styles.scoreCard}>
+              <div className={styles.scoreLeft}>
+                <div className={styles.scoreNum} style={{ color: level.color }}>{score}</div>
+                <div className={styles.scoreMax}>/100</div>
+              </div>
+              <div className={styles.scoreRight}>
+                <span className={styles.scoreBadge} style={{ color: level.color, background: level.bg }}>
+                  <Sparkles size={11} /> {level.label}
+                </span>
+                <p className={styles.scoreDesc}>
+                  Construida con {h.services} servicios reales y {h.reviews} valoraciones. Se actualiza automáticamente.
+                </p>
+                <div className={styles.scoreComponents}>
+                  <div className={styles.scoreComp}><span>Valoración</span><span>{Math.round((h.rating/5)*40)}/40</span></div>
+                  <div className={styles.scoreComp}><span>Servicios</span><span>{Math.round((Math.min(h.services,100)/100)*30)}/30</span></div>
+                  <div className={styles.scoreComp}><span>Completados</span><span>{Math.round((h.completionRate/100)*20)}/20</span></div>
+                  <div className={styles.scoreComp}><span>Verificación</span><span>{h.dniVerified ? 10 : 0}/10</span></div>
                 </div>
-              )
-            })()}
+              </div>
+            </div>
 
             {/* Personality */}
             {h.personality && (
               <section className={styles.section}>
                 <h3 className={styles.sectionTitle}><Brain size={13} /> Análisis de personalidad</h3>
-                <p className={styles.sectionNote}>Derivado del comportamiento en {h.services} servicios — no de un test de personalidad</p>
+                <div className={styles.nuraVerifyNote}>
+                  <Cpu size={11} />
+                  <span>Derivado del comportamiento en {h.services} servicios reales — no de un test de personalidad</span>
+                </div>
                 <div className={styles.personalityGrid}>
                   {[
                     ['Paciencia', h.personality.patience, 'var(--ink)'],
@@ -518,7 +603,7 @@ export default function HelperProfile() {
               </section>
             )}
 
-            {/* Evolution — redesigned as a clean line */}
+            {/* Evolution */}
             {h.evolution?.length > 0 && (
               <section className={styles.section}>
                 <h3 className={styles.sectionTitle}><TrendingUp size={13} /> Trayectoria en Nüra</h3>
@@ -527,20 +612,18 @@ export default function HelperProfile() {
                     const isLast = i === h.evolution.length - 1
                     const prev = h.evolution[i - 1]
                     const improved = prev && pt.rating > prev.rating
-                    const stable = prev && pt.rating === prev.rating
                     return (
-                      <div key={i} className={`${styles.evoPoint} ${isLast ? styles.evoPointCurrent : ''}`}>
+                      <div key={i} className={styles.evoPoint}>
                         <div className={styles.evoPointLeft}>
                           <div className={`${styles.evoDot} ${isLast ? styles.evoDotCurrent : ''}`} />
                           {!isLast && <div className={styles.evoConnector} />}
                         </div>
                         <div className={styles.evoContent}>
-                          <div className={styles.evoYear}>{pt.period}{isLast ? ' · Hoy' : ''}</div>
+                          <div className={styles.evoYear}>{pt.period}{isLast ? ' · Ahora' : ''}</div>
                           <div className={styles.evoStats}>
                             <span className={styles.evoRatingPill}>★ {pt.rating}</span>
                             <span className={styles.evoServicesPill}>{pt.services} servicios</span>
                             {improved && <span className={styles.evoTrend}>↑ Mejora</span>}
-                            {stable && i > 0 && <span className={styles.evoStable}>— Estable</span>}
                           </div>
                         </div>
                       </div>
@@ -550,17 +633,13 @@ export default function HelperProfile() {
               </section>
             )}
 
-            {/* Nüra seal */}
             <div className={styles.nuraSeal}>
-              <Shield size={13} color="var(--purple)" />
-              <span>Perfil verificado por Nüra · DNI confirmado · {h.services} servicios reales · Se actualiza automáticamente</span>
+              <Layers size={13} color="var(--purple)" />
+              <span>Perfil construido por Nüra · No por {h.name.split(' ')[0]} · {h.services} servicios reales · Se actualiza solo</span>
             </div>
-          </>
+          </div>
         )}
-
       </div>
-
-
 
       {showRating && <RatingModal helper={h} onClose={() => setShowRating(false)} />}
     </div>

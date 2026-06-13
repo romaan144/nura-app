@@ -347,3 +347,116 @@
 }
 .heroCtaBtn:hover { transform: translateY(-2px) scale(1.02); box-shadow: 0 10px 32px rgba(123,47,255,0.4); }
 .heroCtaBtn:active { transform: scale(0.97); }
+
+/* ── LIVE PULSE CARD ── */
+.liveCard {
+  background: var(--white);
+  border: 1.5px solid rgba(123,47,255,0.2);
+  border-radius: 18px;
+  overflow: hidden;
+  margin-bottom: 14px;
+  box-shadow: 0 2px 16px rgba(123,47,255,0.07);
+}
+.liveHeader {
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 12px 16px 10px;
+  background: linear-gradient(135deg, rgba(123,47,255,0.06) 0%, rgba(0,212,200,0.04) 100%);
+  border-bottom: 1px solid rgba(123,47,255,0.1);
+}
+.liveIndicator { display: flex; align-items: center; gap: 7px; }
+.liveDot {
+  width: 8px; height: 8px; border-radius: 50%;
+  background: var(--purple); flex-shrink: 0;
+  box-shadow: 0 0 0 0 rgba(123,47,255,0.4);
+  transition: box-shadow 0.3s;
+}
+.liveDotPulse { box-shadow: 0 0 0 6px rgba(123,47,255,0.1); }
+.liveLabel { font-size: 11px; font-weight: 700; color: var(--purple); }
+.spinning { animation: spin 2s linear infinite; }
+@keyframes spin { from{transform:rotate(0deg)} to{transform:rotate(360deg)} }
+
+.liveUpdates { display: flex; flex-direction: column; }
+.liveUpdate {
+  display: flex; align-items: flex-start; gap: 10px;
+  padding: 10px 16px;
+  border-bottom: 1px solid var(--rule2);
+  transition: background 0.15s;
+}
+.liveUpdate:last-child { border-bottom: none; }
+.liveUpdate:hover { background: var(--paper); }
+.liveUpdateIcon {
+  width: 24px; height: 24px; border-radius: 8px;
+  background: rgba(123,47,255,0.08);
+  color: var(--purple);
+  display: flex; align-items: center; justify-content: center;
+  flex-shrink: 0; margin-top: 1px;
+}
+.liveUpdateContent { flex: 1; }
+.liveUpdateText { font-size: 12px; color: var(--ink); line-height: 1.5; margin-bottom: 2px; }
+.liveUpdateTime { font-size: 10px; color: var(--soft); }
+.liveFooter {
+  display: flex; align-items: center; gap: 6px;
+  padding: 10px 16px;
+  font-size: 10px; color: var(--soft);
+  background: var(--paper);
+  border-top: 1px solid var(--rule);
+}
+
+/* ── NÜRA PROACTIVE QUESTION ── */
+.nuraQuestion {
+  background: var(--white);
+  border: 1.5px solid rgba(123,47,255,0.2);
+  border-radius: 16px;
+  padding: 16px;
+  margin-bottom: 14px;
+  box-shadow: 0 2px 12px rgba(123,47,255,0.06);
+}
+.nuraQuestionHeader { display: flex; align-items: flex-start; gap: 10px; margin-bottom: 12px; }
+.nuraIso { width: 28px; height: 28px; object-fit: contain; flex-shrink: 0; margin-top: 2px; }
+.nuraQuestionFrom { font-size: 10px; font-weight: 700; color: var(--purple); text-transform: uppercase; letter-spacing: 0.5px; display: block; margin-bottom: 4px; }
+.nuraQuestionText { font-size: 13px; color: var(--ink); line-height: 1.55; }
+.nuraQuestionActions { display: flex; gap: 8px; }
+.nuraQuestionBtn { padding: 8px 16px; background: var(--grad-main); color: white; border: none; border-radius: 20px; font-size: 12px; font-weight: 600; transition: all 0.15s; }
+.nuraQuestionSkip { padding: 8px 14px; background: var(--paper); color: var(--soft); border: 1.5px solid var(--rule); border-radius: 20px; font-size: 12px; }
+.nuraQuestionInput { display: flex; gap: 8px; }
+.nuraInput { flex: 1; padding: 9px 14px; border: 1.5px solid var(--purple); border-radius: 20px; font-size: 13px; outline: none; background: var(--white); color: var(--ink); font-family: 'Inter',sans-serif; }
+.nuraInputSend { width: 36px; height: 36px; border-radius: 50%; background: var(--grad-main); color: white; border: none; font-size: 16px; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+.nuraInputSend:disabled { background: var(--rule); }
+.nuraQuestionSent { display: flex; align-items: center; gap: 8px; background: rgba(123,47,255,0.06); border: 1.5px solid rgba(123,47,255,0.15); border-radius: 14px; padding: 12px 16px; font-size: 12px; color: var(--purple); font-weight: 500; margin-bottom: 14px; }
+
+/* ── NÜRA VERIFY NOTE ── */
+.nuraVerifyNote {
+  display: flex; align-items: center; gap: 6px;
+  font-size: 11px; color: var(--purple);
+  background: rgba(123,47,255,0.05);
+  border-radius: 8px; padding: 7px 10px;
+  margin-bottom: 12px;
+}
+
+/* ── SCORE COMPONENTS ── */
+.scoreComponents { display: flex; gap: 6px; flex-wrap: wrap; margin-top: 10px; }
+.scoreComp {
+  display: flex; flex-direction: column; align-items: center;
+  background: var(--paper); border-radius: 8px; padding: 5px 8px;
+  flex: 1; min-width: 55px;
+}
+.scoreComp span:first-child { font-size: 9px; color: var(--soft); margin-bottom: 2px; text-align: center; }
+.scoreComp span:last-child { font-size: 12px; font-weight: 700; color: var(--ink); }
+
+/* ── EMPRESAS INTRO CARD ── */
+.empresasIntroCard {
+  display: flex; align-items: flex-start; gap: 12px;
+  background: rgba(123,47,255,0.04);
+  border: 1.5px solid rgba(123,47,255,0.15);
+  border-radius: 14px; padding: 14px;
+  margin-bottom: 16px;
+}
+.empresasIntroTitle { font-size: 13px; font-weight: 700; color: var(--ink); margin-bottom: 4px; }
+.empresasIntroDesc { font-size: 12px; color: var(--mid); line-height: 1.5; }
+
+/* ── EXPERIENCE TIMELINE (new structure) ── */
+.expTimeline { display: flex; flex-direction: column; gap: 0; }
+.expTimelineItem { display: flex; gap: 12px; }
+.expTimelineLeft { display: flex; flex-direction: column; align-items: center; flex-shrink: 0; width: 46px; }
+.expConnector { width: 2px; flex: 1; min-height: 16px; background: var(--rule); margin: 4px 0; }
+.expTimelineBody { flex: 1; padding-bottom: 16px; }
