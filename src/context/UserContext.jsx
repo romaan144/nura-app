@@ -9,6 +9,8 @@ export function UserProvider({ children }) {
   const [searchHistory, setSearchHistory] = useState([])
   const [contactedHelpers, setContactedHelpers] = useState([])
   const [helpersCache, setHelpersCache] = useState({})
+  const [following, setFollowing] = useState([]) // ids of followed profiles
+  const [notifications, setNotifications] = useState([])
 
   useEffect(() => {
     const saved = localStorage.getItem('nura_user')
@@ -21,6 +23,10 @@ export function UserProvider({ children }) {
     if (savedHistory) setSearchHistory(JSON.parse(savedHistory))
     const savedContacted = localStorage.getItem('nura_contacted')
     if (savedContacted) setContactedHelpers(JSON.parse(savedContacted))
+    const savedFollowing = localStorage.getItem('nura_following')
+    if (savedFollowing) setFollowing(JSON.parse(savedFollowing))
+    const savedNotifs = localStorage.getItem('nura_notifications')
+    if (savedNotifs) setNotifications(JSON.parse(savedNotifs))
   }, [])
 
   function login(userData) {
@@ -30,7 +36,11 @@ export function UserProvider({ children }) {
 
   function logout() {
     setUser(null)
+    setChats([]); setRatings([]); setSearchHistory([])
+    setContactedHelpers([]); setFollowing([]); setNotifications([])
     localStorage.removeItem('nura_user')
+    localStorage.removeItem('nura_chats')
+    localStorage.removeItem('nura_following')
   }
 
   function addChat(helperId, helperName, helperColor, helperAvatar, lastMsg) {
@@ -41,10 +51,7 @@ export function UserProvider({ children }) {
         ? { ...c, lastMsg, lastTime: new Date().toISOString(), unread: (c.unread || 0) + 1 }
         : c)
     } else {
-      updated = [...chats, {
-        helperId, helperName, helperColor, helperAvatar,
-        lastMsg, lastTime: new Date().toISOString(), unread: 0,
-      }]
+      updated = [...chats, { helperId, helperName, helperColor, helperAvatar, lastMsg, lastTime: new Date().toISOString(), unread: 0 }]
     }
     setChats(updated)
     localStorage.setItem('nura_chats', JSON.stringify(updated))
@@ -59,17 +66,6 @@ export function UserProvider({ children }) {
     const updated = chats.map(c => c.helperId === helperId ? { ...c, unread: 0 } : c)
     setChats(updated)
     localStorage.setItem('nura_chats', JSON.stringify(updated))
-    if (!contactedHelpers.includes(helperId)) {
-      const c = [...contactedHelpers, helperId]
-      setContactedHelpers(c)
-      localStorage.setItem('nura_contacted', JSON.stringify(c))
-    }
-  }
-
-  function addSearch(query) {
-    const updated = [{ query, date: new Date().toISOString() }, ...searchHistory].slice(0, 10)
-    setSearchHistory(updated)
-    localStorage.setItem('nura_history', JSON.stringify(updated))
   }
 
   function addRating(helperId, rating, comment) {
@@ -82,19 +78,63 @@ export function UserProvider({ children }) {
     return ratings.some(r => r.helperId === helperId)
   }
 
+  function addSearch(query) {
+    const updated = [{ query, date: new Date().toISOString() }, ...searchHistory].slice(0, 10)
+    setSearchHistory(updated)
+    localStorage.setItem('nura_history', JSON.stringify(updated))
+  }
+
   function cacheHelpers(helpers) {
     const map = {}
     helpers.forEach(h => { map[h.id] = h })
     setHelpersCache(prev => ({ ...prev, ...map }))
   }
 
+  function follow(id) {
+    if (following.includes(id)) return
+    const updated = [...following, id]
+    setFollowing(updated)
+    localStorage.setItem('nura_following', JSON.stringify(updated))
+    // Add notification
+    const notif = { id: Date.now(), type: 'followed', profileId: id, date: new Date().toISOString(), read: false }
+    const updatedNotifs = [notif, ...notifications].slice(0, 50)
+    setNotifications(updatedNotifs)
+    localStorage.setItem('nura_notifications', JSON.stringify(updatedNotifs))
+  }
+
+  function unfollow(id) {
+    const updated = following.filter(f => f !== id)
+    setFollowing(updated)
+    localStorage.setItem('nura_following', JSON.stringify(updated))
+  }
+
+  function isFollowing(id) {
+    return following.includes(id)
+  }
+
+  function markNotifsRead() {
+    const updated = notifications.map(n => ({ ...n, read: true }))
+    setNotifications(updated)
+    localStorage.setItem('nura_notifications', JSON.stringify(updated))
+  }
+
+  const unreadNotifs = notifications.filter(n => !n.read).length
+  const totalUnreadChats = chats.reduce((s, c) => s + (c.unread || 0), 0)
+
   return (
-    <UserContext.Provider value={{ user, login, logout, chats, addChat, markRead, ratings, addRating, hasRated, searchHistory, addSearch, contactedHelpers, helpersCache, cacheHelpers }}>
+    <UserContext.Provider value={{
+      user, login, logout,
+      chats, addChat, markRead, totalUnreadChats,
+      ratings, addRating, hasRated,
+      searchHistory, addSearch,
+      contactedHelpers,
+      helpersCache, cacheHelpers,
+      following, follow, unfollow, isFollowing,
+      notifications, markNotifsRead, unreadNotifs,
+    }}>
       {children}
     </UserContext.Provider>
   )
 }
 
-export function useUser() {
-  return useContext(UserContext)
-}
+export function useUser() { return useContext(UserContext) }

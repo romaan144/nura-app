@@ -13,6 +13,7 @@ import Chats from './pages/Chats'
 import RegisterHelper from './pages/RegisterHelper'
 import HowItWorks from './pages/HowItWorks'
 import Explore from './pages/Explore'
+import Feed from './pages/Feed'
 import NotFound from './pages/NotFound'
 import NavBar from './components/NavBar'
 import Toast from './components/Toast'
@@ -45,6 +46,7 @@ function AppRoutes({ showSplash }) {
           <Route path="/register-helper" element={<RegisterHelper />} />
           <Route path="/how-it-works" element={<HowItWorks />} />
         <Route path="/explore" element={<Explore />} />
+        <Route path="/feed" element={<Feed />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
       </PageTransition>
