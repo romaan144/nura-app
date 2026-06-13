@@ -1,6 +1,6 @@
 import { useState, useRef, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
-import { Mic, MicOff, ArrowRight, MapPin, Sparkles, TrendingUp, Users, Shield } from 'lucide-react'
+import { Mic, MicOff, ArrowRight, MapPin, Sparkles, TrendingUp, Users, Shield, Search } from 'lucide-react'
 import { analyzeNeed, matchHelpers } from '../utils/matching'
 import styles from './Home.module.css'
 import Onboarding from '../components/Onboarding'
