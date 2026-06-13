@@ -11,6 +11,8 @@ import { useUser } from '../context/UserContext'
 import RatingModal from '../components/RatingModal'
 import styles from './HelperProfile.module.css'
 
+/* ── SUB-COMPONENTS ───────────────────────────────────── */
+
 function PersonalityBar({ label, value }) {
   return (
     <div className={styles.pBar}>
@@ -23,78 +25,37 @@ function PersonalityBar({ label, value }) {
   )
 }
 
-function ReputationScore({ helper }) {
-  const score = Math.round(
-    (helper.rating / 5) * 40 +
-    (Math.min(helper.services, 100) / 100) * 30 +
-    (helper.completionRate / 100) * 20 +
-    (helper.dniVerified ? 10 : 0)
-  )
-  const level = score >= 90 ? { label: 'Experto verificado', color: '#059669', bg: '#ECFDF5' }
-    : score >= 75 ? { label: 'Referente', color: '#1A56DB', bg: '#EFF6FF' }
-    : score >= 60 ? { label: 'Con historial', color: '#D97706', bg: '#FFFBEB' }
-    : { label: 'Nuevo', color: '#6B7280', bg: '#F9FAFB' }
-  return (
-    <div className={styles.reputationCard}>
-      <div className={styles.reputationLeft}>
-        <div className={styles.reputationScore} style={{ color: level.color }}>{score}</div>
-        <div className={styles.reputationMax}>/100</div>
-      </div>
-      <div className={styles.reputationRight}>
-        <span className={styles.reputationLevel} style={{ color: level.color, background: level.bg }}>
-          <Sparkles size={11} /> {level.label}
-        </span>
-        <p className={styles.reputationDesc}>
-          Puntuación construida automáticamente con {helper.services} servicios reales, valoraciones verificadas y comportamiento en la plataforma.
-        </p>
-      </div>
-    </div>
-  )
-}
-
-function PostCard({ post, helperName, helperAvatar, helperColor }) {
+function PostCard({ post, helper }) {
   const [liked, setLiked] = useState(false)
   const [likes, setLikes] = useState(post.likes)
   const [showComment, setShowComment] = useState(false)
   const [comment, setComment] = useState('')
   const [comments, setComments] = useState([])
 
-  function handleLike() {
-    setLiked(l => !l)
-    setLikes(n => liked ? n - 1 : n + 1)
-  }
-
-  function submitComment() {
-    if (!comment.trim()) return
-    setComments(c => [...c, { text: comment, user: 'Tú', date: 'Ahora' }])
-    setComment('')
-    setShowComment(false)
-  }
-
   return (
     <div className={styles.postCard}>
-      {/* Post header */}
       <div className={styles.postHeader}>
-        <div className={styles.postAvatar} style={{ background: helperColor }}>{helperAvatar}</div>
+        {helper.avatarUrl
+          ? <img src={helper.avatarUrl} alt="" className={styles.postAvatarImg} />
+          : <div className={styles.postAvatar} style={{ background: helper.avatarColor }}>{helper.avatar}</div>
+        }
         <div className={styles.postMeta}>
-          <span className={styles.postName}>{helperName}</span>
+          <span className={styles.postName}>{helper.name}</span>
           <span className={styles.postDate}>{post.date}</span>
         </div>
         {post.verifiedWork && (
-          <span className={styles.verifiedWorkBadge}><Shield size={10} /> Trabajo verificado</span>
+          <span className={styles.verifiedWorkBadge}><Shield size={9} /> Verificado</span>
         )}
       </div>
 
-      {/* Post content */}
       <p className={styles.postText}>{post.text}</p>
 
-      {post.badge && (
-        <div className={styles.postBadge}>{post.badge}</div>
-      )}
+      {post.badge && <div className={styles.postBadge}>{post.badge}</div>}
 
-      {/* Actions */}
       <div className={styles.postActions}>
-        <button className={`${styles.postAction} ${liked ? styles.postActionActive : ''}`} onClick={handleLike}>
+        <button
+          className={`${styles.postAction} ${liked ? styles.postActionActive : ''}`}
+          onClick={() => { setLiked(l => !l); setLikes(n => liked ? n - 1 : n + 1) }}>
           <ThumbsUp size={14} /> {likes}
         </button>
         <button className={styles.postAction} onClick={() => setShowComment(s => !s)}>
@@ -102,27 +63,26 @@ function PostCard({ post, helperName, helperAvatar, helperColor }) {
         </button>
       </div>
 
-      {/* Comment input */}
       {showComment && (
-        <div className={styles.commentInput}>
-          <input
-            placeholder="Escribe un comentario..."
-            value={comment}
-            onChange={e => setComment(e.target.value)}
-            onKeyDown={e => e.key === 'Enter' && submitComment()}
-            className={styles.commentField}
-            autoFocus
-          />
-          <button className={styles.commentSubmit} onClick={submitComment} disabled={!comment.trim()}>
-            Publicar
-          </button>
+        <div className={styles.commentInputRow}>
+          <input className={styles.commentField} placeholder="Escribe un comentario..."
+            value={comment} onChange={e => setComment(e.target.value)} autoFocus
+            onKeyDown={e => e.key === 'Enter' && comment.trim() && (
+              setComments(c => [...c, { text: comment, user: 'Tú' }]),
+              setComment(''), setShowComment(false)
+            )} />
+          <button className={styles.commentSubmit}
+            disabled={!comment.trim()}
+            onClick={() => {
+              setComments(c => [...c, { text: comment, user: 'Tú' }])
+              setComment(''); setShowComment(false)
+            }}>→</button>
         </div>
       )}
 
-      {/* User comments */}
       {comments.map((c, i) => (
         <div key={i} className={styles.userComment}>
-          <div className={styles.commentAvatar}>T</div>
+          <div className={styles.commentDot}>T</div>
           <div className={styles.commentBubble}>
             <span className={styles.commentUser}>{c.user}</span>
             <p className={styles.commentText}>{c.text}</p>
@@ -133,11 +93,10 @@ function PostCard({ post, helperName, helperAvatar, helperColor }) {
   )
 }
 
-function ExperienceCard({ exp, helperName }) {
+function ExperienceCard({ exp }) {
   return (
     <div className={styles.expCardFull}>
-      {/* Company header */}
-      <div className={styles.expCompanyHeader}>
+      <div className={styles.expTop}>
         <div className={styles.expLogo}>{exp.companyLogo}</div>
         <div className={styles.expInfo}>
           <div className={styles.expRole}>{exp.role}</div>
@@ -145,45 +104,43 @@ function ExperienceCard({ exp, helperName }) {
           <div className={styles.expPeriodLoc}>{exp.period} · {exp.location}</div>
         </div>
         {exp.verifiedByCompany && (
-          <span className={styles.verifiedTag} style={{background:'#EFF6FF',color:'#1E40AF'}}>
-            <Building2 size={9} /> Verificado
-          </span>
+          <span className={styles.expVerifiedTag}><Building2 size={9} /> Verificado</span>
         )}
       </div>
 
-      {/* Competencies */}
-      <div className={styles.competencies}>
-        {exp.competencies?.map((c, i) => <span key={i} className={styles.competency}>{c}</span>)}
-      </div>
-
-      {/* Manager opinion */}
-      {exp.managerOpinion && (
-        <div className={styles.managerOpinion}>
-          <div className={styles.opinionHeader}>
-            <div className={styles.opinionAvatar}>{exp.managerOpinion.avatar}</div>
-            <div>
-              <div className={styles.opinionName}>{exp.managerOpinion.name}</div>
-              <div className={styles.opinionRole}>{exp.managerOpinion.role} · {exp.company}</div>
-            </div>
-            <div className={styles.opinionStars}>
-              {[1,2,3,4,5].map(n => <Star key={n} size={10} fill="#F59E0B" color="#F59E0B" />)}
-            </div>
-          </div>
-          <p className={styles.opinionText}>"{exp.managerOpinion.text}"</p>
-          <div className={styles.opinionBadge}><Shield size={10} /> Opinión verificada — añadida por la empresa en Nüra</div>
+      {exp.competencies?.length > 0 && (
+        <div className={styles.competencies}>
+          {exp.competencies.map((c, i) => <span key={i} className={styles.competency}>{c}</span>)}
         </div>
       )}
 
-      {/* Colleague opinions */}
+      {exp.managerOpinion && (
+        <div className={styles.managerBlock}>
+          <div className={styles.managerHeader}>
+            <div className={styles.managerAvatar}>{exp.managerOpinion.avatar}</div>
+            <div className={styles.managerInfo}>
+              <span className={styles.managerName}>{exp.managerOpinion.name}</span>
+              <span className={styles.managerRole}>{exp.managerOpinion.role}</span>
+            </div>
+            <div className={styles.managerStars}>
+              {[1,2,3,4,5].map(n => <Star key={n} size={10} fill="#F59E0B" color="#F59E0B" />)}
+            </div>
+          </div>
+          <p className={styles.managerQuote}>"{exp.managerOpinion.text}"</p>
+          <span className={styles.managerVerified}><Shield size={9} /> Opinión verificada por Nüra</span>
+        </div>
+      )}
+
       {exp.colleagueOpinions?.length > 0 && (
-        <div className={styles.colleagueOpinions}>
-          <div className={styles.colleagueTitle}>Compañeros de trabajo</div>
+        <div className={styles.colleaguesBlock}>
+          <p className={styles.colleaguesTitle}>Compañeros de trabajo</p>
           {exp.colleagueOpinions.map((c, i) => (
-            <div key={i} className={styles.colleagueCard}>
+            <div key={i} className={styles.colleagueRow}>
               <div className={styles.colleagueAvatar}>{c.avatar}</div>
               <div>
-                <div className={styles.colleagueName}>{c.name} · <span className={styles.colleagueRole}>{c.role}</span></div>
-                <p className={styles.colleagueText}>"{c.text}"</p>
+                <span className={styles.colleagueName}>{c.name}</span>
+                <span className={styles.colleagueRole}> · {c.role}</span>
+                <p className={styles.colleagueQuote}>"{c.text}"</p>
               </div>
             </div>
           ))}
@@ -192,6 +149,8 @@ function ExperienceCard({ exp, helperName }) {
     </div>
   )
 }
+
+/* ── MAIN COMPONENT ───────────────────────────────────── */
 
 export default function HelperProfile() {
   const { id } = useParams()
@@ -205,126 +164,199 @@ export default function HelperProfile() {
 
   if (!h) return (
     <div className={styles.notFound}>
-      <AlertCircle size={48} color="var(--rule)" />
+      <AlertCircle size={40} color="var(--rule)" />
       <p>Perfil no encontrado.</p>
       <button onClick={() => navigate(-1)}>Volver</button>
     </div>
   )
 
-  const levelLabel = { student: 'Estudiante', experienced: 'Con experiencia', professional: 'Profesional titulado' }[h.qualificationLevel] || 'Con experiencia'
-
   function handleShare() {
-    if (navigator.share) navigator.share({ title: h.name, text: `${h.specialty} verificado en Nüra`, url: window.location.href })
+    if (navigator.share) navigator.share({ title: h.name, text: `${h.specialty} en Nüra`, url: window.location.href })
     else { navigator.clipboard?.writeText(window.location.href); setShared(true); setTimeout(() => setShared(false), 2000) }
   }
 
+  const tabs = [
+    { id: 'perfil', label: 'Perfil', icon: <Brain size={12} /> },
+    { id: 'empresas', label: 'Laboral', icon: <Building2 size={12} /> },
+    { id: 'feed', label: 'Publicaciones', icon: <MessageSquare size={12} /> },
+    { id: 'reputacion', label: 'Reputación', icon: <BarChart2 size={12} /> },
+  ]
+
   return (
     <div className={styles.page}>
+
+      {/* ── HEADER ── */}
       <header className={styles.header}>
         <button className={styles.back} onClick={() => navigate(-1)}><ArrowLeft size={18} /></button>
-        <img src="/logo-text.png" alt="Nüra" className={styles.logoText} />
         <div className={styles.headerActions}>
-          <button className={styles.shareBtn} onClick={handleShare}>{shared ? '✓' : <Share2 size={15} />}</button>
-          {!hasRated(h.id) && <button className={styles.rateHeaderBtn} onClick={() => setShowRating(true)}><Star size={12} /> Valorar</button>}
+          <button className={styles.shareBtn} onClick={handleShare}>
+            {shared ? <span className={styles.copiedLabel}>✓ Copiado</span> : <Share2 size={15} />}
+          </button>
+          {!hasRated(h.id) && (
+            <button className={styles.rateBtn} onClick={() => setShowRating(true)}>
+              <Star size={13} /> Valorar
+            </button>
+          )}
         </div>
       </header>
 
       <div className={styles.content}>
-        {/* Hero */}
-        <div className={styles.heroCard}>
-          {h.avatarUrl
-            ? <img src={h.avatarUrl} alt={h.name} className={styles.avatarImg} />
-            : <div className={styles.avatar} style={{ background: h.avatarColor }}>{h.avatar}</div>
-          }
-          <h1 className={styles.name}>{h.name}</h1>
-          <p className={styles.specialty}>{h.specialty || h.tags?.[0]}</p>
-          <div className={styles.metaRow}>
-            <span className={styles.ratingBig}><Star size={14} fill="#F59E0B" color="#F59E0B" /> {h.rating}</span>
-            <span className={styles.metaDot} />
-            <span className={styles.metaItem}><MapPin size={12} /> {h.zone}</span>
-            <span className={styles.metaDot} />
-            <span className={styles.metaItem}>{h.distance} km</span>
-          </div>
-          <div className={styles.badges}>
-            {h.dniVerified && <span className={styles.badge} style={{color:'#059669',background:'#ECFDF5'}}><Shield size={10} /> DNI Verificado</span>}
-            {h.criminalRecordClear && <span className={styles.badge} style={{color:'#1E40AF',background:'#EFF6FF'}}><CheckCircle size={10} /> Sin antecedentes</span>}
-            {h.founder && <span className={styles.badge} style={{color:'#92400E',background:'#FEF3C7'}}><Award size={10} /> Fundador</span>}
-            {h.urgent && <span className={styles.badge} style={{color:'#DC2626',background:'#FEF2F2'}}><Zap size={10} /> Urgencias</span>}
-            <span className={styles.badge} style={{color:'var(--purple)',background:'rgba(123,47,255,0.08)'}}>{levelLabel}</span>
-          </div>
-        </div>
 
-        {/* Stats */}
-        <div className={styles.stats}>
-          {[
-            { icon: <Star size={13} />, val: h.rating, lbl: 'Valoración', color: '#F59E0B' },
-            { icon: <CheckCircle size={13} />, val: h.services, lbl: 'Servicios', color: '#059669' },
-            { icon: <Clock size={13} />, val: h.responseTime, lbl: 'Respuesta', color: 'var(--purple)' },
-            { icon: <TrendingUp size={13} />, val: `${h.completionRate}%`, lbl: 'Completados', color: 'var(--cyan2)' },
-          ].map((s, i) => (
-            <div key={i} className={styles.stat}>
-              <span className={styles.statIcon} style={{color:s.color}}>{s.icon}</span>
-              <span className={styles.statVal}>{s.val}</span>
-              <span className={styles.statLbl}>{s.lbl}</span>
+        {/* ── HERO ── */}
+        <div className={styles.hero}>
+          {/* Gradient background from logo colors */}
+          <div className={styles.heroBg} />
+
+          <div className={styles.heroInner}>
+            {h.avatarUrl
+              ? <img src={h.avatarUrl} alt={h.name} className={styles.heroAvatar} />
+              : <div className={styles.heroAvatarFallback} style={{ background: h.avatarColor }}>{h.avatar}</div>
+            }
+
+            <h1 className={styles.heroName}>{h.name}</h1>
+            <p className={styles.heroSpecialty}>{h.specialty || h.tags?.[0]}</p>
+
+            {/* Key info row */}
+            <div className={styles.heroMeta}>
+              <div className={styles.heroMetaItem}>
+                <Star size={13} fill="#F59E0B" color="#F59E0B" />
+                <strong>{h.rating}</strong>
+                <span>({h.reviews} val.)</span>
+              </div>
+              <div className={styles.heroMetaSep} />
+              <div className={styles.heroMetaItem}>
+                <MapPin size={12} />
+                <span>{h.zone} · {h.distance}km</span>
+              </div>
+              <div className={styles.heroMetaSep} />
+              <div className={styles.heroMetaItem}>
+                <Clock size={12} />
+                <span>{h.responseTime}</span>
+              </div>
             </div>
-          ))}
-        </div>
 
-        {/* Price */}
-        <div className={styles.priceRow}>
-          <div className={styles.priceBox}>
-            <span className={styles.priceVal}>{h.price}</span>
-            <span className={styles.priceLbl}>Precio</span>
+            {/* Price — prominent */}
+            <div className={styles.heroPrice}>
+              <span className={styles.heroPriceVal}>{h.price}</span>
+              <div className={styles.heroPriceModes}>
+                {h.presential && <span>📍 Presencial</span>}
+                {h.online && <span>💻 Online</span>}
+              </div>
+            </div>
+
+            {/* Trust badges — only most important */}
+            <div className={styles.heroBadges}>
+              {h.dniVerified && (
+                <span className={styles.badgePrimary}><Shield size={10} /> DNI Verificado</span>
+              )}
+              {h.criminalRecordClear && (
+                <span className={styles.badgeSecondary}><CheckCircle size={10} /> Sin antecedentes</span>
+              )}
+              {h.founder && (
+                <span className={styles.badgeFounder}><Award size={10} /> Fundador</span>
+              )}
+              {h.urgent && (
+                <span className={styles.badgeUrgent}><Zap size={10} /> Urgencias</span>
+              )}
+            </div>
           </div>
-          <div className={styles.modalBox}>
-            {h.presential && <span className={styles.modal}>📍 Presencial</span>}
-            {h.online && <span className={styles.modal}>💻 Online</span>}
+        </div>
+
+        {/* ── QUICK STATS ── */}
+        <div className={styles.statsRow}>
+          <div className={styles.statBox}>
+            <span className={styles.statNum} style={{color:'#059669'}}>{h.services}</span>
+            <span className={styles.statLbl}>Servicios</span>
+          </div>
+          <div className={styles.statDivider} />
+          <div className={styles.statBox}>
+            <span className={styles.statNum} style={{color:'var(--purple)'}}>{h.completionRate}%</span>
+            <span className={styles.statLbl}>Completados</span>
+          </div>
+          <div className={styles.statDivider} />
+          <div className={styles.statBox}>
+            <span className={styles.statNum} style={{color:'#D97706'}}>{h.reviews}</span>
+            <span className={styles.statLbl}>Valoraciones</span>
           </div>
         </div>
 
-        {/* Tabs */}
-        <div className={styles.tabs}>
-          {[
-            { id: 'perfil', label: 'Perfil vivo', icon: <Brain size={12} /> },
-            { id: 'empresas', label: 'Historial laboral', icon: <Building2 size={12} /> },
-            { id: 'feed', label: 'Publicaciones', icon: <MessageSquare size={12} /> },
-            { id: 'reputacion', label: 'Reputación', icon: <BarChart2 size={12} /> },
-          ].map(tab => (
-            <button key={tab.id}
-              className={`${styles.tab} ${activeTab === tab.id ? styles.tabActive : ''}`}
-              onClick={() => setActiveTab(tab.id)}>
-              {tab.icon} {tab.label}
-            </button>
-          ))}
+        {/* ── TABS ── */}
+        <div className={styles.tabsWrap}>
+          <div className={styles.tabs}>
+            {tabs.map(tab => (
+              <button key={tab.id}
+                className={`${styles.tab} ${activeTab === tab.id ? styles.tabActive : ''}`}
+                onClick={() => setActiveTab(tab.id)}>
+                {tab.icon}
+                <span>{tab.label}</span>
+              </button>
+            ))}
+          </div>
         </div>
 
-        {/* ── PERFIL VIVO ── */}
+        {/* ══════════════════════════════════════════════ */}
+        {/* TAB: PERFIL VIVO                              */}
+        {/* ══════════════════════════════════════════════ */}
         {activeTab === 'perfil' && (
           <>
-            <section className={styles.section}>
-              <h3 className={styles.sectionTitle}><Brain size={13} /> Sobre {h.name.split(' ')[0]}</h3>
-              <p className={styles.bio}>{h.bio}</p>
-            </section>
+            {/* Bio — first, prominent */}
+            <div className={styles.bioCard}>
+              <p className={styles.bioText}>{h.bio}</p>
+            </div>
 
+            {/* Nüra-detected skills — the key differentiator, shown prominently */}
+            {h.hiddenSkills?.length > 0 && (
+              <div className={styles.nuraDetectedCard}>
+                <div className={styles.nuraDetectedHeader}>
+                  <Sparkles size={14} color="var(--purple)" />
+                  <span>Detectado por Nüra</span>
+                </div>
+                <p className={styles.nuraDetectedDesc}>
+                  Habilidades que Nüra ha identificado a partir del comportamiento y valoraciones reales — no declaradas por el helper.
+                </p>
+                <div className={styles.nuraDetectedSkills}>
+                  {h.hiddenSkills.map((s, i) => (
+                    <span key={i} className={styles.nuraSkill}>{s}</span>
+                  ))}
+                </div>
+              </div>
+            )}
+
+            {/* Declared skills */}
+            {h.skills?.length > 0 && (
+              <section className={styles.section}>
+                <h3 className={styles.sectionTitle}><CheckCircle size={13} /> Especialidades</h3>
+                <div className={styles.skillsGrid}>
+                  {h.skills.map((s, i) => <span key={i} className={styles.skill}>{s}</span>)}
+                </div>
+              </section>
+            )}
+
+            {/* Education */}
             {h.education?.length > 0 && (
               <section className={styles.section}>
-                <h3 className={styles.sectionTitle}><BookOpen size={13} /> Formación académica verificada</h3>
-                <p className={styles.sectionNote}>Plan de estudios buscado en internet por Nüra — asignatura por asignatura</p>
+                <h3 className={styles.sectionTitle}><BookOpen size={13} /> Formación verificada</h3>
+                <p className={styles.sectionNote}>Plan de estudios verificado por Nüra en las webs de cada universidad</p>
                 {h.education.map((ed, i) => (
                   <div key={i} className={styles.eduCard}>
-                    <div className={styles.eduHeader}>
-                      <div>
+                    <div className={styles.eduRow}>
+                      <div className={styles.eduIcon}>🎓</div>
+                      <div className={styles.eduBody}>
                         <div className={styles.eduTitle}>{ed.title}</div>
-                        <div className={styles.eduInstitution}>{ed.institution} · {ed.year}</div>
+                        <div className={styles.eduInstitution}>{ed.institution}</div>
+                        <div className={styles.eduYear}>{ed.year}</div>
+                        <p className={styles.eduDetails}>{ed.details}</p>
                       </div>
-                      {ed.verified && <span className={styles.verifiedTag}><Shield size={9} /> Verificado</span>}
+                      {ed.verified && (
+                        <span className={styles.eduVerified}><Shield size={9} /></span>
+                      )}
                     </div>
-                    <p className={styles.eduDetails}>{ed.details}</p>
                   </div>
                 ))}
               </section>
             )}
 
+            {/* Languages */}
             {h.languages?.length > 0 && (
               <section className={styles.section}>
                 <h3 className={styles.sectionTitle}><Globe size={13} /> Idiomas</h3>
@@ -334,161 +366,166 @@ export default function HelperProfile() {
               </section>
             )}
 
-            {(h.skills?.length > 0 || h.hiddenSkills?.length > 0) && (
-              <section className={styles.section}>
-                <h3 className={styles.sectionTitle}><CheckCircle size={13} /> Habilidades</h3>
-                <div className={styles.skillsGrid}>
-                  {(h.skills || []).map((s, i) => <span key={i} className={styles.skill}>{s}</span>)}
-                </div>
-                {h.hiddenSkills?.length > 0 && (
-                  <div className={styles.hiddenSkills}>
-                    <span className={styles.hiddenLabel}><Brain size={10} /> Detectadas por Nüra — no declaradas por el helper</span>
-                    {h.hiddenSkills.map((s, i) => <span key={i} className={styles.hiddenSkill}>{s}</span>)}
-                  </div>
-                )}
-              </section>
-            )}
-
+            {/* Reviews */}
             {h.qualitativeComments?.length > 0 && (
               <section className={styles.section}>
-                <h3 className={styles.sectionTitle}><Heart size={13} /> Lo que dicen de {h.name.split(' ')[0]}</h3>
-                <p className={styles.sectionNote}>Analizadas semánticamente — los adjetivos se convierten en atributos verificados del perfil</p>
-                {h.qualitativeComments.map((c, i) => (
-                  <div key={i} className={styles.comment}>
-                    <div className={styles.commentAvatarSmall}>{c.avatar || c.user?.[0]}</div>
-                    <div>
-                      <p className={styles.commentText}>"{c.text}"</p>
-                      <span className={styles.commentMeta}>{c.user} · {c.date} · <Star size={9} fill="#F59E0B" color="#F59E0B" /> 5</span>
+                <h3 className={styles.sectionTitle}><Heart size={13} /> Valoraciones reales</h3>
+                <p className={styles.sectionNote}>
+                  Nüra analiza el texto semánticamente — los adjetivos construyen el perfil de personalidad
+                </p>
+                <div className={styles.reviewsList}>
+                  {h.qualitativeComments.map((c, i) => (
+                    <div key={i} className={styles.reviewItem}>
+                      <div className={styles.reviewAvatar}>{c.avatar?.[0] || c.user?.[0]}</div>
+                      <div className={styles.reviewBody}>
+                        <div className={styles.reviewTop}>
+                          <span className={styles.reviewUser}>{c.user}</span>
+                          <div className={styles.reviewStars}>
+                            {[1,2,3,4,5].map(n => <Star key={n} size={9} fill="#F59E0B" color="#F59E0B" />)}
+                          </div>
+                          <span className={styles.reviewDate}>{c.date}</span>
+                        </div>
+                        <p className={styles.reviewText}>"{c.text}"</p>
+                      </div>
                     </div>
-                  </div>
-                ))}
+                  ))}
+                </div>
               </section>
             )}
           </>
         )}
 
-        {/* ── HISTORIAL LABORAL (Para empresas) ── */}
+        {/* ══════════════════════════════════════════════ */}
+        {/* TAB: HISTORIAL LABORAL                        */}
+        {/* ══════════════════════════════════════════════ */}
         {activeTab === 'empresas' && (
           <>
-            <div className={styles.empresasIntro}>
-              <Shield size={16} color="var(--purple)" />
-              <p>El historial laboral de {h.name.split(' ')[0]} está verificado por las empresas que lo han contratado. No lo escribe él — lo escriben ellas.</p>
-            </div>
-
-            {h.experience?.length > 0 && h.experience.map((ex, i) => (
-              <ExperienceCard key={i} exp={ex} helperName={h.name} />
-            ))}
-
-            {/* Company verification CTA */}
-            <div className={styles.section}>
-              <h3 className={styles.sectionTitle}><Building2 size={13} /> ¿Has trabajado con {h.name.split(' ')[0]}?</h3>
-              <p className={styles.sectionNote}>Las empresas pueden añadir verificaciones al perfil — tiempo trabajado, proyectos completados, competencias demostradas.</p>
-              <div className={styles.companyVerifyBox}>
-                <Lock size={18} color="var(--soft)" />
-                <div>
-                  <div className={styles.companyVerifyTitle}>Verificación empresarial disponible en Fase 3</div>
-                  <div className={styles.companyVerifyDesc}>Contacta con nosotros en nura.app/empresas</div>
+            {h.experience?.length > 0
+              ? h.experience.map((ex, i) => <ExperienceCard key={i} exp={ex} />)
+              : (
+                <div className={styles.emptyTab}>
+                  <Building2 size={32} color="var(--rule)" />
+                  <p>Sin historial laboral todavía.</p>
                 </div>
+              )
+            }
+
+            {/* Company CTA */}
+            <div className={styles.companyCta}>
+              <Lock size={16} color="var(--soft)" />
+              <div>
+                <p className={styles.companyCtaTitle}>¿Has trabajado con {h.name.split(' ')[0]}?</p>
+                <p className={styles.companyCtaDesc}>Las empresas pueden añadir experiencias verificadas al perfil. Disponible en Fase 3.</p>
               </div>
             </div>
-
-            {/* Evidence summary */}
-            <section className={styles.section}>
-              <h3 className={styles.sectionTitle}><CheckCircle size={13} /> Evidencia objetiva</h3>
-              <div className={styles.proofGrid}>
-                <div className={styles.proofItem}>
-                  <span className={styles.proofVal}>{h.rating}/5</span>
-                  <span className={styles.proofLbl}>Valoración media de {h.reviews} personas reales</span>
-                </div>
-                <div className={styles.proofItem}>
-                  <span className={styles.proofVal}>{h.completionRate}%</span>
-                  <span className={styles.proofLbl}>Servicios sin incidencias</span>
-                </div>
-                <div className={styles.proofItem}>
-                  <span className={styles.proofVal}>{h.services}</span>
-                  <span className={styles.proofLbl}>Servicios completados en Nüra</span>
-                </div>
-                <div className={styles.proofItem}>
-                  <span className={styles.proofVal}>{h.responseTime}</span>
-                  <span className={styles.proofLbl}>Tiempo de respuesta</span>
-                </div>
-              </div>
-            </section>
           </>
         )}
 
-        {/* ── FEED PUBLICACIONES ── */}
+        {/* ══════════════════════════════════════════════ */}
+        {/* TAB: PUBLICACIONES                            */}
+        {/* ══════════════════════════════════════════════ */}
         {activeTab === 'feed' && (
           <>
-            <div className={styles.feedIntro}>
-              <Sparkles size={14} color="var(--purple)" />
-              <p>Solo los trabajos verificados tienen el badge de Nüra. El resto son publicaciones propias del helper.</p>
-            </div>
-            {h.posts?.length > 0 ? (
-              h.posts.map(post => (
-                <PostCard key={post.id} post={post}
-                  helperName={h.name} helperAvatar={h.avatar} helperColor={h.avatarColor} />
-              ))
-            ) : (
-              <div className={styles.emptyFeed}>
-                <MessageSquare size={32} color="var(--rule)" />
-                <p>{h.name.split(' ')[0]} aún no ha publicado nada.</p>
-              </div>
-            )}
+            {h.posts?.length > 0
+              ? h.posts.map(post => <PostCard key={post.id} post={post} helper={h} />)
+              : (
+                <div className={styles.emptyTab}>
+                  <MessageSquare size={32} color="var(--rule)" />
+                  <p>{h.name.split(' ')[0]} aún no ha publicado nada.</p>
+                </div>
+              )
+            }
           </>
         )}
 
-        {/* ── REPUTACIÓN ── */}
+        {/* ══════════════════════════════════════════════ */}
+        {/* TAB: REPUTACIÓN                               */}
+        {/* ══════════════════════════════════════════════ */}
         {activeTab === 'reputacion' && (
           <>
-            <section className={styles.section}>
-              <h3 className={styles.sectionTitle}><Sparkles size={13} /> Puntuación de reputación Nüra</h3>
-              <p className={styles.sectionNote}>Se construye sola. No la escribe el helper — la construyen sus acciones reales.</p>
-              <ReputationScore helper={h} />
-            </section>
+            {/* Score card */}
+            {(() => {
+              const score = Math.round(
+                (h.rating / 5) * 40 +
+                (Math.min(h.services, 100) / 100) * 30 +
+                (h.completionRate / 100) * 20 +
+                (h.dniVerified ? 10 : 0)
+              )
+              const level = score >= 90
+                ? { label: 'Experto verificado', color: '#059669', bg: '#ECFDF5' }
+                : score >= 75
+                ? { label: 'Referente de confianza', color: '#1A56DB', bg: '#EFF6FF' }
+                : { label: 'Con historial', color: '#D97706', bg: '#FFFBEB' }
+              return (
+                <div className={styles.scoreCard}>
+                  <div className={styles.scoreLeft}>
+                    <div className={styles.scoreNum} style={{ color: level.color }}>{score}</div>
+                    <div className={styles.scoreMax}>/100</div>
+                  </div>
+                  <div className={styles.scoreRight}>
+                    <span className={styles.scoreBadge} style={{ color: level.color, background: level.bg }}>
+                      <Sparkles size={11} /> {level.label}
+                    </span>
+                    <p className={styles.scoreDesc}>
+                      Construida con {h.services} servicios reales, {h.reviews} valoraciones y comportamiento en plataforma.
+                    </p>
+                  </div>
+                </div>
+              )
+            })()}
 
+            {/* Personality */}
             {h.personality && (
               <section className={styles.section}>
                 <h3 className={styles.sectionTitle}><Brain size={13} /> Análisis de personalidad</h3>
-                <p className={styles.sectionNote}>Derivado del comportamiento en {h.services} servicios — no de un test</p>
+                <p className={styles.sectionNote}>Derivado del comportamiento en {h.services} servicios — no de un test de personalidad</p>
                 <div className={styles.personality}>
-                  {[['Paciencia', h.personality.patience],['Empatía', h.personality.empathy],['Comunicación', h.personality.communication],['Puntualidad', h.personality.punctuality],['Autonomía', h.personality.autonomy]].map(([l, v]) => (
-                    <PersonalityBar key={l} label={l} value={v} />
-                  ))}
+                  {[
+                    ['Paciencia', h.personality.patience],
+                    ['Empatía', h.personality.empathy],
+                    ['Comunicación', h.personality.communication],
+                    ['Puntualidad', h.personality.punctuality],
+                    ['Autonomía', h.personality.autonomy],
+                  ].map(([l, v]) => <PersonalityBar key={l} label={l} value={v} />)}
                 </div>
               </section>
             )}
 
+            {/* Evolution — redesigned as a clean line */}
             {h.evolution?.length > 0 && (
               <section className={styles.section}>
                 <h3 className={styles.sectionTitle}><TrendingUp size={13} /> Evolución del perfil</h3>
-                <p className={styles.sectionNote}>La consistencia en el tiempo vale más que los picos aislados</p>
-                <div className={styles.evoChart}>
+                <p className={styles.sectionNote}>La consistencia importa más que los picos aislados</p>
+                <div className={styles.evoList}>
                   {h.evolution.map((pt, i) => (
-                    <div key={i} className={styles.evoItem}>
-                      <div className={styles.evoBarWrap}>
-                        <div className={styles.evoBar} style={{ height: `${Math.max((pt.rating - 4.0) * 100, 8)}%` }} />
-                      </div>
+                    <div key={i} className={styles.evoRow}>
                       <span className={styles.evoPeriod}>{pt.period}</span>
-                      <span className={styles.evoRating}>{pt.rating}</span>
+                      <div className={styles.evoBar}>
+                        <div className={styles.evoFill}
+                          style={{ width: `${((pt.rating - 4.0) / 1.0) * 100}%` }} />
+                      </div>
+                      <span className={styles.evoRating}>★ {pt.rating}</span>
+                      <span className={styles.evoServices}>{pt.services} serv.</span>
                     </div>
                   ))}
                 </div>
               </section>
             )}
 
-            <div className={styles.nuraNote}>
-              <Shield size={12} />
-              <span>Perfil verificado · DNI confirmado · {h.services} servicios reales · Se actualiza automáticamente</span>
+            {/* Nüra seal */}
+            <div className={styles.nuraSeal}>
+              <Shield size={13} color="var(--purple)" />
+              <span>Perfil verificado por Nüra · DNI confirmado · {h.services} servicios reales · Se actualiza automáticamente</span>
             </div>
           </>
         )}
+
       </div>
 
-      {/* CTA */}
-      <div className={styles.cta}>
+      {/* ── CTA FIXED ── */}
+      <div className={styles.ctaBar}>
         <button className={styles.ctaBtn} onClick={() => navigate(`/chat/${h.id}`)}>
-          <MessageCircle size={17} /> Contactar a {h.name.split(' ')[0]}
+          <MessageCircle size={16} /> Contactar a {h.name.split(' ')[0]}
         </button>
       </div>
 
