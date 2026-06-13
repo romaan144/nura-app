@@ -95,9 +95,8 @@ function PostCard({ post, helper }) {
 
 function ExperienceCard({ exp }) {
   return (
-    <div className={styles.expCardFull}>
+    <div>
       <div className={styles.expTop}>
-        <div className={styles.expLogo}>{exp.companyLogo}</div>
         <div className={styles.expInfo}>
           <div className={styles.expRole}>{exp.role}</div>
           <div className={styles.expCompanyName}>{exp.company}</div>
@@ -329,27 +328,29 @@ export default function HelperProfile() {
               </section>
             )}
 
-            {/* Education */}
+            {/* Education — timeline */}
             {h.education?.length > 0 && (
               <section className={styles.section}>
-                <h3 className={styles.sectionTitle}><BookOpen size={13} /> Formación verificada</h3>
-                <p className={styles.sectionNote}>Plan de estudios verificado por Nüra en las webs de cada universidad</p>
-                {h.education.map((ed, i) => (
-                  <div key={i} className={styles.eduCard}>
-                    <div className={styles.eduRow}>
-                      <div className={styles.eduIcon}>🎓</div>
+                <h3 className={styles.sectionTitle}><BookOpen size={13} /> Formación académica verificada</h3>
+                <div className={styles.sectionNote}>Plan de estudios verificado por Nüra en las webs oficiales de cada institución</div>
+                <div className={styles.eduTimeline}>
+                  {h.education.map((ed, i) => (
+                    <div key={i} className={styles.eduItem}>
+                      <div className={styles.eduTimelineLeft}>
+                        <div className={styles.eduIcon}>🎓</div>
+                      </div>
                       <div className={styles.eduBody}>
                         <div className={styles.eduTitle}>{ed.title}</div>
                         <div className={styles.eduInstitution}>{ed.institution}</div>
                         <div className={styles.eduYear}>{ed.year}</div>
                         <p className={styles.eduDetails}>{ed.details}</p>
+                        {ed.verified && (
+                          <span className={styles.eduVerifiedBadge}><Shield size={9} /> Verificado por Nüra</span>
+                        )}
                       </div>
-                      {ed.verified && (
-                        <span className={styles.eduVerified}><Shield size={9} /></span>
-                      )}
                     </div>
-                  </div>
-                ))}
+                  ))}
+                </div>
               </section>
             )}
 
@@ -398,7 +399,20 @@ export default function HelperProfile() {
         {activeTab === 'empresas' && (
           <>
             {h.experience?.length > 0
-              ? h.experience.map((ex, i) => <ExperienceCard key={i} exp={ex} />)
+              ? (
+                <div className={styles.expTimeline}>
+                  {h.experience.map((ex, i) => (
+                    <div key={i} className={styles.expCardFull}>
+                      <div className={styles.expTimelineLeft}>
+                        <div className={styles.expLogo}>{ex.companyLogo}</div>
+                      </div>
+                      <div className={styles.expBody}>
+                        <ExperienceCard exp={ex} />
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              )
               : (
                 <div className={styles.emptyTab}>
                   <Building2 size={32} color="var(--rule)" />
