@@ -9,7 +9,7 @@
   position: sticky; top: 0; z-index: 20;
   display: flex; align-items: center; justify-content: space-between;
   padding: 12px 16px;
-  background: rgba(255,255,255,0.95); backdrop-filter: blur(20px);
+  background: rgba(255,255,255,0.82); backdrop-filter: blur(24px) saturate(160%); -webkit-backdrop-filter: blur(24px) saturate(160%); box-shadow: 0 1px 0 rgba(0,0,0,0.04);
   border-bottom: 1px solid var(--rule);
 }
 .back { width: 36px; height: 36px; border-radius: 50%; border: 1.5px solid var(--rule); background: var(--white); color: var(--mid); display: flex; align-items: center; justify-content: center; transition: all 0.15s; }
@@ -48,7 +48,7 @@
 .statDivider { width: 1px; background: var(--rule); flex-shrink: 0; margin: 10px 0; }
 
 /* ── TABS ── */
-.tabsWrap { background: var(--white); border-bottom: 2px solid var(--rule); position: sticky; top: 57px; z-index: 15; }
+.tabsWrap { background: rgba(255,255,255,0.82); backdrop-filter: blur(24px) saturate(160%); -webkit-backdrop-filter: blur(24px) saturate(160%); border-bottom: 1px solid rgba(255,255,255,0.5); box-shadow: 0 1px 0 rgba(0,0,0,0.04); position: sticky; top: 57px; z-index: 15; }
 .tabs { display: flex; overflow-x: auto; }
 .tabs::-webkit-scrollbar { display: none; }
 .tab { display: flex; align-items: center; gap: 5px; padding: 13px 16px; font-size: 12px; font-weight: 500; color: var(--soft); white-space: nowrap; border-bottom: 2px solid transparent; transition: all 0.15s; flex-shrink: 0; margin-bottom: -2px; }
@@ -236,7 +236,7 @@
 .emptyTab p { font-size: 14px; }
 
 /* ── CTA ── */
-.ctaBar { position: fixed; bottom: 52px; left: 0; right: 0; padding: 10px 16px; background: rgba(255,255,255,0.97); backdrop-filter: blur(16px); border-top: 1px solid var(--rule); z-index: 25; }
+.ctaBar { position: fixed; bottom: 52px; left: 0; right: 0; padding: 10px 16px; background: rgba(255,255,255,0.82); backdrop-filter: blur(28px) saturate(180%); -webkit-backdrop-filter: blur(28px) saturate(180%); border-top: 1px solid rgba(255,255,255,0.6); box-shadow: 0 -4px 20px rgba(13,13,26,0.06); border-top: 1px solid var(--rule); z-index: 25; }
 .ctaBtn { width: 100%; max-width: 620px; margin: 0 auto; display: flex; align-items: center; justify-content: center; gap: 8px; padding: 15px; background: var(--grad-main); color: white; border: none; border-radius: 16px; font-size: 15px; font-weight: 700; transition: all 0.2s; box-shadow: 0 6px 20px rgba(123,47,255,0.35); }
 .ctaBtn:hover { transform: translateY(-2px); }
 

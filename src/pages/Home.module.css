@@ -30,9 +30,11 @@
 .header {
   display: flex; align-items: center; justify-content: space-between;
   padding: 14px 20px;
-  background: rgba(255,255,255,0.88);
-  backdrop-filter: blur(16px);
-  border-bottom: 1px solid var(--rule);
+  background: rgba(255,255,255,0.82);
+  backdrop-filter: blur(24px) saturate(160%);
+  -webkit-backdrop-filter: blur(24px) saturate(160%);
+  border-bottom: 1px solid rgba(255,255,255,0.5);
+  box-shadow: 0 1px 0 rgba(0,0,0,0.04), 0 4px 16px rgba(13,13,26,0.04);
   position: sticky; top: 0; z-index: 20;
 }
 .logoText { height: 26px; width: auto; display: block; }
