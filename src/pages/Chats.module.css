@@ -13,7 +13,7 @@
   background: rgba(123,47,255,0.1); border-radius: 12px; padding: 3px 10px;
 }
 
-.searchWrap { padding: 10px 16px 6px; background: var(--white); }
+.searchWrap { padding: 12px 16px 10px; background: var(--white); }
 .searchBox {
   display: flex; align-items: center; gap: 8px;
   background: var(--paper); border: 1.5px solid var(--rule);

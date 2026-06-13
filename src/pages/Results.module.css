@@ -23,7 +23,7 @@
 .pillUrgent { color: #92400E; background: #FEF3C7; border: 1.5px solid #FCD34D; }
 
 /* Refine */
-.refineBox { background: var(--white); border: 1.5px solid var(--purple); border-radius: 16px; padding: 14px 16px; margin-bottom: 14px; box-shadow: 0 0 0 3px rgba(123,47,255,0.05); }
+.refineBox { background: var(--white); border: 1.5px solid var(--purple); border-radius: 16px; padding: 14px 16px; margin-top: 4px; margin-bottom: 16px; box-shadow: 0 0 0 3px rgba(123,47,255,0.05); }
 .refineTitle { display: flex; align-items: center; gap: 6px; font-size: 12px; font-weight: 700; color: var(--purple); margin-bottom: 10px; }
 .refineInputWrap { display: flex; gap: 8px; align-items: center; }
 .refineInput { flex: 1; padding: 9px 13px; border: 1.5px solid var(--rule); border-radius: 10px; font-size: 13px; outline: none; background: var(--paper); color: var(--ink); transition: border-color 0.2s; }
@@ -40,7 +40,7 @@
 .resultsTitle { font-size: 18px; font-weight: 800; color: var(--ink); letter-spacing: -0.3px; margin-bottom: 2px; }
 .resultsSubtitle { font-size: 12px; color: var(--mid); }
 
-.cards { display: flex; flex-direction: column; gap: 10px; margin-bottom: 16px; }
+.cards { display: flex; flex-direction: column; gap: 12px; margin-bottom: 20px; }
 
 /* Compact card */
 .card {

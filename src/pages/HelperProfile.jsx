@@ -447,7 +447,7 @@ export default function HelperProfile() {
         {/* TAB: PUBLICACIONES                            */}
         {/* ══════════════════════════════════════════════ */}
         {activeTab === 'feed' && (
-          <>
+          <div style={{paddingTop:'8px'}}>
             {h.posts?.length > 0
               ? h.posts.map(post => <PostCard key={post.id} post={post} helper={h} />)
               : (
@@ -457,7 +457,7 @@ export default function HelperProfile() {
                 </div>
               )
             }
-          </>
+          </div>
         )}
 
         {/* ══════════════════════════════════════════════ */}

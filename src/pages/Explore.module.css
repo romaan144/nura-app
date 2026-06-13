@@ -28,7 +28,7 @@
 .searchInput { border: none; outline: none; background: transparent; font-size: 13px; color: var(--ink); flex: 1; }
 .searchInput::placeholder { color: var(--soft); }
 
-.content { max-width: 680px; margin: 0 auto; padding: 18px 14px; }
+.content { max-width: 680px; margin: 0 auto; padding: 22px 14px 24px; }
 
 .section { margin-bottom: 24px; }
 .sectionTitle {
@@ -89,7 +89,7 @@
 .featuredRating { display: flex; align-items: center; gap: 3px; font-size: 12px; font-weight: 600; color: var(--mid); }
 
 /* Grid */
-.grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+.grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
 
 .card {
   background: var(--white); border: 1.5px solid var(--rule);
