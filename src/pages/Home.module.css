@@ -17,16 +17,24 @@
   position: relative;
 }
 .headerLogo {
-  height: 22px; width: auto;
+  height: 20px; width: auto;
   position: absolute; left: 50%; transform: translateX(-50%);
+  background: white;
+  padding: 6px 14px;
+  border-radius: 20px;
+  box-shadow: 0 1px 4px rgba(0,0,0,0.08), 0 2px 12px rgba(0,0,0,0.04);
+  object-fit: contain;
+  height: auto;
 }
 .profileBtn {
   width: 36px; height: 36px; border-radius: 50%;
-  background: transparent; border: none;
+  background: white;
+  border: none;
   display: flex; align-items: center; justify-content: center;
-  transition: background 0.15s; cursor: pointer;
+  transition: all 0.15s; cursor: pointer;
+  box-shadow: 0 1px 4px rgba(0,0,0,0.08), 0 2px 12px rgba(0,0,0,0.04);
 }
-.profileBtn:hover { background: rgba(0,0,0,0.06); }
+.profileBtn:hover { box-shadow: 0 2px 8px rgba(0,0,0,0.12); }
 .profileAvatar {
   width: 28px; height: 28px; border-radius: 50%;
   background: var(--grad-main); color: white;
@@ -130,7 +138,7 @@
 
 /* ── SUGGESTIONS ── */
 .suggestions {
-  padding: 8px 16px 6px;
+  padding: 4px 12px 4px;
   display: flex; flex-direction: column; gap: 6px;
   flex-shrink: 0;
 }
@@ -154,20 +162,20 @@
 
 /* ── INPUT — Claude style ── */
 .inputWrap {
-  padding: 8px 12px max(16px, env(safe-area-inset-bottom));
-  background: #F8F8FA;
+  padding: 8px 12px max(20px, env(safe-area-inset-bottom));
+  background: transparent;
   flex-shrink: 0;
 }
 .inputBar {
   display: flex; align-items: flex-end; gap: 6px;
   background: white;
-  border-radius: 24px;
-  padding: 8px 8px 8px 14px;
-  box-shadow: 0 1px 4px rgba(0,0,0,0.08), 0 4px 16px rgba(0,0,0,0.04);
+  border-radius: 26px;
+  padding: 8px 8px 8px 16px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.08), 0 8px 32px rgba(0,0,0,0.06);
   transition: box-shadow 0.2s;
 }
 .inputBar:focus-within {
-  box-shadow: 0 1px 4px rgba(0,0,0,0.1), 0 6px 24px rgba(0,0,0,0.07);
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1), 0 12px 40px rgba(0,0,0,0.08);
 }
 .input {
   flex: 1; border: none; outline: none;
