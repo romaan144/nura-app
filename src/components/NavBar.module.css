@@ -44,12 +44,12 @@
 }
 .drawerLogo { height: 24px; width: auto; }
 .drawerClose {
-  width: 32px; height: 32px; border-radius: 8px;
-  background: var(--paper); border: 1.5px solid var(--rule);
+  width: 36px; height: 36px; border-radius: 50%;
+  background: transparent; border: none;
   color: var(--mid); display: flex; align-items: center; justify-content: center;
   transition: all 0.15s;
 }
-.drawerClose:hover { color: var(--ink); }
+.drawerClose:hover { background: var(--paper); color: var(--ink); }
 
 /* User */
 .drawerUser {
