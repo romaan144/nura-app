@@ -286,6 +286,7 @@ export default function HelperProfile() {
       {/* Header */}
       <header className={styles.header}>
         <button className={styles.back} onClick={() => navigate(-1)}><ArrowLeft size={18} /></button>
+        <img src="/logo-text.png" alt="Nüra" className={styles.headerLogo} />
         <div className={styles.headerActions}>
           <button className={styles.shareBtn} onClick={handleShare}>
             {shared ? <span className={styles.copiedLabel}>✓</span> : <Share2 size={15} />}
