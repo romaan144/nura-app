@@ -17,43 +17,32 @@ import styles from './HelperProfile.module.css'
    ──────────────────────────────────────────────────────────────────────── */
 
 function LivePulse({ helper }) {
-  const [updates, setUpdates] = useState([
-    { id: 1, text: `Nüra analizó las últimas ${helper.reviews} valoraciones y actualizó el perfil de personalidad`, time: 'Hace 2 horas', icon: <Brain size={11} /> },
-    { id: 2, text: `Nueva habilidad detectada en conversación: "${helper.hiddenSkills?.[0] || 'resolución de conflictos'}"`, time: 'Hace 1 día', icon: <Cpu size={11} /> },
-    { id: 3, text: `Nüra preguntó: "¿Has completado alguna formación nueva este mes?" — perfil actualizado`, time: 'Hace 3 días', icon: <MessageSquare size={11} /> },
-    { id: 4, text: `Puntuación de reputación subió +2 puntos tras 3 servicios completados esta semana`, time: 'Hace 5 días', icon: <TrendingUp size={11} /> },
-    { id: 5, text: `Comportamiento en chat analizado: alta empatía y tiempo de respuesta excelente`, time: 'Hace 1 semana', icon: <Activity size={11} /> },
-  ])
   const [pulse, setPulse] = useState(false)
-
   useEffect(() => {
-    const t = setInterval(() => setPulse(p => !p), 3000)
+    const t = setInterval(() => setPulse(p => !p), 2500)
     return () => clearInterval(t)
   }, [])
+
+  const facts = [
+    { icon: <Brain size={12} />, text: `Personalidad analizada en ${helper.services} servicios reales` },
+    { icon: <Cpu size={12} />, text: `${helper.hiddenSkills?.length || 2} habilidades detectadas sin que ${helper.name.split(' ')[0]} las declarara` },
+    { icon: <Activity size={12} />, text: `Reputación actualizada automáticamente tras cada valoración` },
+    { icon: <MessageSquare size={12} />, text: `Comportamiento en chats analizado para construir el perfil` },
+  ]
 
   return (
     <div className={styles.liveCard}>
       <div className={styles.liveHeader}>
-        <div className={styles.liveIndicator}>
-          <span className={`${styles.liveDot} ${pulse ? styles.liveDotPulse : ''}`} />
-          <span className={styles.liveLabel}>Perfil vivo · actualizándose ahora</span>
-        </div>
-        <RefreshCw size={12} color="var(--purple)" className={pulse ? styles.spinning : ''} />
+        <span className={`${styles.liveDot} ${pulse ? styles.liveDotPulse : ''}`} />
+        <span className={styles.liveLabel}>Perfil vivo — Nüra lo construye y actualiza sola</span>
       </div>
-      <div className={styles.liveUpdates}>
-        {updates.map(u => (
-          <div key={u.id} className={styles.liveUpdate}>
-            <span className={styles.liveUpdateIcon}>{u.icon}</span>
-            <div className={styles.liveUpdateContent}>
-              <p className={styles.liveUpdateText}>{u.text}</p>
-              <span className={styles.liveUpdateTime}>{u.time}</span>
-            </div>
+      <div className={styles.liveFacts}>
+        {facts.map((f, i) => (
+          <div key={i} className={styles.liveFact}>
+            <span className={styles.liveFactIcon}>{f.icon}</span>
+            <span className={styles.liveFactText}>{f.text}</span>
           </div>
         ))}
-      </div>
-      <div className={styles.liveFooter}>
-        <Eye size={11} />
-        <span>Nüra actualiza este perfil automáticamente con cada servicio, valoración y conversación</span>
       </div>
     </div>
   )
@@ -312,6 +301,7 @@ export default function HelperProfile() {
       <div className={styles.content}>
         {/* Hero */}
         <div className={styles.hero}>
+          <div className={styles.heroInner}>
           {h.avatarUrl
             ? <img src={h.avatarUrl} alt={h.name} className={styles.heroAvatar} />
             : <div className={styles.heroAvatarFallback} style={{ background: h.avatarColor }}>{h.avatar}</div>
@@ -353,6 +343,7 @@ export default function HelperProfile() {
           <button className={styles.heroCtaBtn} onClick={() => navigate(`/chat/${h.id}`)}>
             <MessageCircle size={16} /> Contactar a {h.name.split(' ')[0]}
           </button>
+          </div>
         </div>
 
         {/* Stats */}
