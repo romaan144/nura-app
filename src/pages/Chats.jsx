@@ -81,6 +81,7 @@ export default function Chats() {
   return (
     <div className={styles.page}>
       <header className={styles.header}>
+        <MenuButton />
         <span className={styles.title}>Conversaciones</span>
         <span className={styles.count}>{allChats.length}</span>
       </header>
