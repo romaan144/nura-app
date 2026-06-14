@@ -49,6 +49,7 @@ body {
   color: var(--ink);
   min-height: 100vh;
   -webkit-font-smoothing: antialiased;
+  background: #F5F4EF !important;
 }
 
 h1, h2, h3 { font-family: 'Plus Jakarta Sans', 'Inter', sans-serif; }
