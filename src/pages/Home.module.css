@@ -7,7 +7,7 @@
 /* Header */
 .header {
   display: flex; align-items: center; justify-content: space-between;
-  padding: 12px 18px 12px 62px;
+  padding: 10px 16px;
   background: rgba(255,255,255,0.82);
   backdrop-filter: blur(24px) saturate(160%);
   -webkit-backdrop-filter: blur(24px) saturate(160%);
@@ -16,7 +16,6 @@
   flex-shrink: 0;
 }
 .logoText { height: 26px; width: auto; }
-.headerRight { display: flex; align-items: center; gap: 10px; }
 .location { font-size: 12px; color: var(--soft); }
 
 /* Messages */

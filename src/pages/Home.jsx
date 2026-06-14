@@ -2,6 +2,7 @@ import { useState, useEffect, useRef } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { Send, Mic, MicOff, ArrowRight } from 'lucide-react'
 import { analyzeNeed, matchHelpers } from '../utils/matching'
+import { MenuButton } from '../components/NavBar'
 import { useUser } from '../context/UserContext'
 import styles from './Home.module.css'
 import Onboarding from '../components/Onboarding'
@@ -188,10 +189,9 @@ export default function Home({ setSearchState }) {
     <div className={styles.page}>
       {/* Header */}
       <header className={styles.header}>
+        <MenuButton />
         <img src="/logo-text.png" alt="Nüra" className={styles.logoText} />
-        <div className={styles.headerRight}>
-          <span className={styles.location}>📍 Barcelona</span>
-        </div>
+        <span className={styles.location}>📍 Barcelona</span>
       </header>
 
       {/* Messages */}

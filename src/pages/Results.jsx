@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
+import { MenuButton } from '../components/NavBar'
 import { ArrowLeft, MapPin, Star, Shield, Zap, MessageCircle, Search, X, ChevronRight } from 'lucide-react'
 import { matchHelpers } from '../utils/matching'
 import { useUser } from '../context/UserContext'

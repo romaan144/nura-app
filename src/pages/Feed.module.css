@@ -3,7 +3,7 @@
 /* Header */
 .header {
   display: flex; align-items: center; justify-content: space-between;
-  padding: 14px 18px 14px 62px;
+  padding: 12px 16px;
   background: rgba(255,255,255,0.82);
   backdrop-filter: blur(24px) saturate(160%);
   -webkit-backdrop-filter: blur(24px) saturate(160%);

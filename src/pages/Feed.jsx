@@ -177,6 +177,7 @@ export default function Feed() {
     <div className={styles.page}>
       {/* Header */}
       <header className={styles.header}>
+        <MenuButton />
         <img src="/logo-text.png" alt="Nüra" className={styles.logoText} />
         <button className={styles.notifBtn} onClick={markNotifsRead}>
           <Bell size={20} />

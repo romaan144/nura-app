@@ -2,6 +2,7 @@ import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { Star, MapPin, Shield, Zap, TrendingUp, Search, Filter } from 'lucide-react'
 import { HELPERS } from '../data/helpers'
+import { MenuButton } from '../components/NavBar'
 import styles from './Explore.module.css'
 
 const CATEGORIES = [
@@ -82,6 +83,7 @@ export default function Explore() {
     <div className={styles.page}>
       <header className={styles.header}>
         <div className={styles.headerTop}>
+          <MenuButton />
           <div>
             <h1 className={styles.title}>Explorar</h1>
             <p className={styles.subtitle}>Barcelona · {HELPERS.length} helpers activos</p>
