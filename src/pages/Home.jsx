@@ -1,175 +1,262 @@
-import { useState, useRef, useEffect } from 'react'
+import { useState, useEffect, useRef } from 'react'
 import { useNavigate } from 'react-router-dom'
-import { Mic, MicOff, ArrowRight, MapPin, Sparkles, TrendingUp, Users, Shield, Search } from 'lucide-react'
+import { Send, Mic, MicOff, ArrowRight } from 'lucide-react'
 import { analyzeNeed, matchHelpers } from '../utils/matching'
+import { useUser } from '../context/UserContext'
 import styles from './Home.module.css'
 import Onboarding from '../components/Onboarding'
-import { useUser } from '../context/UserContext'
 
-const SUGGESTIONS = [
-  { icon: '🔧', text: 'La caldera no calienta, es urgente', cat: 'técnico' },
-  { icon: '🗣️', text: 'Logopeda para mi hijo de 7 años', cat: 'logopedia' },
-  { icon: '👴', text: 'Cuidadora para mi padre mayor con Alzheimer', cat: 'cuidado' },
-  { icon: '📐', text: 'Clases de matemáticas para mi hijo de 12 años', cat: 'clases' },
-  { icon: '🧹', text: 'Limpieza del hogar una vez por semana', cat: 'limpieza' },
-  { icon: '🐕', text: 'Cuidar mi perro este fin de semana', cat: 'mascotas' },
-  { icon: '💪', text: 'Entrenador personal a domicilio', cat: 'deporte' },
-  { icon: '🏠', text: 'Fontanero urgente, hay una fuga', cat: 'técnico' },
-]
+// Nüra's opening message adapts to who you are
+function getWelcome(user) {
+  if (!user) return [
+    `Hola, soy **Nüra**.`,
+    `Cuéntame qué necesitas o en qué puedes ayudar. Puedo encontrarte a alguien, actualizar tu perfil o conectarte con una empresa. Habla con naturalidad.`,
+  ]
+  if (user.isHelper) return [
+    `Hola ${user.name?.split(' ')[0] || ''} 👋`,
+    `¿Qué quieres hacer hoy? Puedo ayudarte a encontrar nuevos clientes, actualizar tu perfil con algo nuevo que hayas aprendido, o responder cualquier duda sobre tus servicios.`,
+  ]
+  return [
+    `Hola ${user.name?.split(' ')[0] || ''} 👋`,
+    `¿En qué puedo ayudarte hoy? Cuéntamelo con tus palabras.`,
+  ]
+}
 
-const STATS = [
-  { icon: <Users size={16} />, val: '1.200+', label: 'Helpers verificados' },
-  { icon: <Shield size={16} />, val: '100%', label: 'Identidades verificadas' },
-  { icon: <Sparkles size={16} />, val: '4.8★', label: 'Valoración media' },
-]
+// Detect intent from message
+function detectIntent(text, user) {
+  const t = text.toLowerCase()
+  const isHelper = user?.isHelper
+
+  if (isHelper && (t.includes('aprendido') || t.includes('certificado') || t.includes('curso') || t.includes('formación') || t.includes('estudié') || t.includes('trabajé')))
+    return 'update_profile'
+  if (t.includes('empresa') || t.includes('contratar') || t.includes('b2b') || t.includes('empleado') || t.includes('trabajó'))
+    return 'b2b'
+  if (isHelper && (t.includes('cliente') || t.includes('ayudar') || t.includes('ofrecer') || t.includes('disponible')))
+    return 'helper_visibility'
+  return 'search'
+}
+
+const SUGGESTIONS = {
+  default: ['Necesito un logopeda para mi hijo', 'Busco cuidadora para mi padre', 'Quiero un técnico de calderas urgente', 'Clases de matemáticas en casa'],
+  helper: ['Acabo de obtener una certificación nueva', 'He trabajado en un sitio nuevo este mes', 'Quiero aparecer en más búsquedas', 'Tengo disponibilidad esta semana'],
+}
 
 export default function Home({ setSearchState }) {
-  const [text, setText] = useState('')
-  const [loading, setLoading] = useState(false)
-  const [error, setError] = useState('')
-  const [listening, setListening] = useState(false)
-  const textareaRef = useRef(null)
   const navigate = useNavigate()
-  const { addSearch } = useUser()
+  const { user, addSearch } = useUser()
+  const [messages, setMessages] = useState([])
+  const [input, setInput] = useState('')
+  const [loading, setLoading] = useState(false)
+  const [listening, setListening] = useState(false)
+  const [showSuggestions, setShowSuggestions] = useState(true)
+  const bottomRef = useRef(null)
+  const inputRef = useRef(null)
+
+  // Init with Nüra's welcome
+  useEffect(() => {
+    const lines = getWelcome(user)
+    setTimeout(() => {
+      setMessages([{ id: 1, from: 'nura', lines }])
+    }, 300)
+  }, [user?.id])
 
   useEffect(() => {
-    if (textareaRef.current) {
-      textareaRef.current.style.height = 'auto'
-      textareaRef.current.style.height = Math.min(textareaRef.current.scrollHeight, 160) + 'px'
-    }
-  }, [text])
+    bottomRef.current?.scrollIntoView({ behavior: 'smooth' })
+  }, [messages])
 
-  async function handleSearch() {
-    if (!text.trim()) return
+  async function handleSend(text) {
+    const msg = text || input
+    if (!msg.trim() || loading) return
+
+    setInput('')
+    setShowSuggestions(false)
+    const userMsg = { id: Date.now(), from: 'user', text: msg }
+    setMessages(prev => [...prev, userMsg])
     setLoading(true)
-    setError('')
+
+    const intent = detectIntent(msg, user)
+
+    // Nüra responds differently based on intent
+    if (intent === 'update_profile') {
+      setTimeout(() => {
+        setMessages(prev => [...prev, {
+          id: Date.now(), from: 'nura',
+          lines: [
+            `Perfecto. He actualizado tu perfil con esta información.`,
+            `Nüra analizará el contexto y añadirá las habilidades y experiencia relevantes automáticamente. Tu perfil ya refleja esto.`,
+          ]
+        }])
+        setLoading(false)
+      }, 1200)
+      return
+    }
+
+    if (intent === 'b2b') {
+      setTimeout(() => {
+        setMessages(prev => [...prev, {
+          id: Date.now(), from: 'nura',
+          lines: [
+            `Entendido. El acceso empresarial a perfiles verificados está disponible en Fase 3 de Nüra.`,
+            `Si quieres añadir una verificación al perfil de alguien que ha trabajado contigo, escríbeme el nombre y qué quieres que conste.`,
+          ]
+        }])
+        setLoading(false)
+      }, 1000)
+      return
+    }
+
+    if (intent === 'helper_visibility') {
+      setTimeout(() => {
+        setMessages(prev => [...prev, {
+          id: Date.now(), from: 'nura',
+          lines: [
+            `Tu perfil está activo y apareces en las búsquedas de tu zona.`,
+            `¿Quieres actualizar tu disponibilidad, tu zona de trabajo o añadir algo nuevo a tu perfil?`,
+          ]
+        }])
+        setLoading(false)
+      }, 1000)
+      return
+    }
+
+    // Search intent — the main flow
     try {
-      const analysis = await analyzeNeed(text)
+      // Nüra confirms she understood
+      setMessages(prev => [...prev, {
+        id: Date.now() + 0.5, from: 'nura',
+        lines: [`Entendido. Buscando en la red de helpers de Barcelona...`],
+        loading: true
+      }])
+
+      const analysis = await analyzeNeed(msg)
       const matches = await matchHelpers(analysis)
+
+      setMessages(prev => prev.filter(m => !m.loading))
+
       if (!matches || matches.length === 0) {
-        setError('No encontramos resultados. Prueba con otra búsqueda.')
+        setMessages(prev => [...prev, {
+          id: Date.now(), from: 'nura',
+          lines: [`No encontré a nadie disponible para esto ahora mismo. Prueba a describírmelo de otra forma o amplía la zona.`]
+        }])
         setLoading(false)
         return
       }
-      addSearch?.(text)
-      setSearchState({ query: text, analysis, matches })
-      navigate('/results')
+
+      addSearch?.(msg)
+      setSearchState({ query: msg, analysis, matches })
+
+      setMessages(prev => [...prev, {
+        id: Date.now(), from: 'nura',
+        lines: [`He encontrado **${matches.length} personas** que pueden ayudarte. Aquí están los perfiles más compatibles.`],
+        action: { label: 'Ver resultados', onClick: () => navigate('/results') }
+      }])
     } catch(e) {
-      console.error(e)
-      setError('Error al buscar. Inténtalo de nuevo.')
-    } finally {
-      setLoading(false)
+      setMessages(prev => prev.filter(m => !m.loading))
+      setMessages(prev => [...prev, {
+        id: Date.now(), from: 'nura',
+        lines: [`Algo fue mal. Inténtalo de nuevo.`]
+      }])
     }
+    setLoading(false)
   }
 
   function handleKey(e) {
-    if (e.key === 'Enter' && !e.shiftKey) { e.preventDefault(); handleSearch() }
+    if (e.key === 'Enter' && !e.shiftKey) { e.preventDefault(); handleSend() }
   }
 
   function toggleMic() {
-    if (!('webkitSpeechRecognition' in window) && !('SpeechRecognition' in window)) {
-      setError('Tu navegador no soporta voz.')
-      return
-    }
+    if (!('webkitSpeechRecognition' in window) && !('SpeechRecognition' in window)) return
     const SR = window.SpeechRecognition || window.webkitSpeechRecognition
     const rec = new SR()
     rec.lang = 'es-ES'
-    rec.onresult = e => { setText(e.results[0][0].transcript); setListening(false) }
+    rec.onresult = e => { handleSend(e.results[0][0].transcript); setListening(false) }
     rec.onerror = () => setListening(false)
     rec.onend = () => setListening(false)
     rec.start()
     setListening(true)
   }
 
+  const suggestions = user?.isHelper ? SUGGESTIONS.helper : SUGGESTIONS.default
+
+  function formatLine(line) {
+    // Bold **text**
+    const parts = line.split(/\*\*(.*?)\*\*/g)
+    return parts.map((part, i) => i % 2 === 1 ? <strong key={i}>{part}</strong> : part)
+  }
+
   return (
     <div className={styles.page}>
+      {/* Header */}
       <header className={styles.header}>
         <img src="/logo-text.png" alt="Nüra" className={styles.logoText} />
-        <div className={styles.location}><MapPin size={12} /> Barcelona</div>
+        <div className={styles.headerRight}>
+          <span className={styles.location}>📍 Barcelona</span>
+        </div>
       </header>
 
-      <main className={styles.main}>
-        {/* Isotipo */}
-        <div className={styles.isotipoWrap}>
-          <div className={styles.isotipoGlow} />
-          <img src="/logo-iso.png" alt=""
-            className={`${styles.isotipo} ${loading ? styles.isotipoLoading : ''}`} />
-        </div>
-
-        {/* Hero */}
-        <div className={styles.hero}>
-          <h1 className={styles.title}>¿Qué <span className={styles.titleAccent}>necesitas?</span></h1>
-          <p className={styles.subtitle}>Descríbelo con tus palabras, Nüra entiende el contexto.</p>
-        </div>
-
-        {/* Search */}
-        <div className={styles.searchBox}>
-          <div className={styles.inputCard}>
-            <textarea ref={textareaRef} className={styles.textarea}
-              placeholder="Ej: Necesito un logopeda paciente para mi hijo de 7 años en Barcelona..."
-              value={text} onChange={e => setText(e.target.value)}
-              onKeyDown={handleKey} rows={1} disabled={loading}
-              aria-label="Describe lo que necesitas" />
-            <div className={styles.inputFooter}>
-              <span className={styles.inputHint}>
-                {text.length > 0 ? `${text.length} caracteres · Intro para buscar` : 'Cuéntanos qué necesitas'}
-              </span>
-              <div className={styles.inputActions}>
-                <button
-                  className={`${styles.micBtn} ${listening ? styles.micActive : ''}`}
-                  onClick={toggleMic}
-                  aria-label={listening ? 'Parar grabación' : 'Buscar por voz'}>
-                  {listening ? <MicOff size={15} /> : <Mic size={15} />}
-                </button>
-                <button className={styles.sendBtn} onClick={handleSearch}
-                  disabled={!text.trim() || loading} aria-label="Buscar">
-                  {loading
-                    ? <><div className={styles.spinner} /> Buscando...</>
-                    : <><Search size={15} /> Buscar</>}
-                </button>
+      {/* Messages */}
+      <div className={styles.messages}>
+        {messages.map(msg => (
+          <div key={msg.id} className={`${styles.msgRow} ${msg.from === 'user' ? styles.msgRowUser : ''}`}>
+            {msg.from === 'nura' && (
+              <div className={styles.nuraAvatar}>
+                <img src="/logo-iso.png" alt="Nüra" className={styles.nuraAvatarImg} />
               </div>
-            </div>
-          </div>
-          {error && <p className={styles.error}>{error}</p>}
-          {loading && <p className={styles.loadingText}>Nüra está analizando tu necesidad...</p>}
-        </div>
-
-        {/* Stats strip */}
-        {!loading && (
-          <div className={styles.statsStrip}>
-            {STATS.map((s, i) => (
-              <div key={i} className={styles.statItem}>
-                <span className={styles.statIcon}>{s.icon}</span>
-                <span className={styles.statVal}>{s.val}</span>
-                <span className={styles.statLabel}>{s.label}</span>
-              </div>
-            ))}
-          </div>
-        )}
-
-        {/* Suggestions */}
-        {!loading && (
-          <div className={styles.suggestions}>
-            <p className={styles.suggestLabel}>
-              <TrendingUp size={11} /> Búsquedas frecuentes
-            </p>
-            <div className={styles.chips}>
-              {SUGGESTIONS.map((s, i) => (
-                <button key={i} className={styles.chip} onClick={() => setText(s.text)}>
-                  <span className={styles.chipIcon}>{s.icon}</span>
-                  {s.text}
-                </button>
+            )}
+            <div className={`${styles.bubble} ${msg.from === 'user' ? styles.bubbleUser : styles.bubbleNura}`}>
+              {msg.text && <p>{msg.text}</p>}
+              {msg.lines?.map((line, i) => (
+                <p key={i} className={i === 0 && msg.lines.length > 1 ? styles.bubbleFirst : ''}>
+                  {formatLine(line)}
+                </p>
               ))}
+              {msg.loading && (
+                <div className={styles.typingDots}>
+                  <span /><span /><span />
+                </div>
+              )}
+              {msg.action && (
+                <button className={styles.bubbleAction} onClick={msg.action.onClick}>
+                  {msg.action.label} <ArrowRight size={13} />
+                </button>
+              )}
             </div>
           </div>
-        )}
-      </main>
+        ))}
+        <div ref={bottomRef} />
+      </div>
+
+      {/* Suggestions */}
+      {showSuggestions && (
+        <div className={styles.suggestions}>
+          {suggestions.map((s, i) => (
+            <button key={i} className={styles.suggestion} onClick={() => handleSend(s)}>
+              {s}
+            </button>
+          ))}
+        </div>
+      )}
+
+      {/* Input */}
+      <div className={styles.inputBar}>
+        <input
+          ref={inputRef}
+          className={styles.input}
+          placeholder="Escribe a Nüra..."
+          value={input}
+          onChange={e => setInput(e.target.value)}
+          onKeyDown={handleKey}
+          disabled={loading}
+        />
+        <button className={`${styles.micBtn} ${listening ? styles.micActive : ''}`} onClick={toggleMic}>
+          {listening ? <MicOff size={16} /> : <Mic size={16} />}
+        </button>
+        <button className={styles.sendBtn} onClick={() => handleSend()} disabled={!input.trim() || loading}>
+          <Send size={16} />
+        </button>
+      </div>
 
       <Onboarding />
-
-      <footer className={styles.footer}>
-        <p>La IA que conecta personas · Barcelona · nura.app</p>
-      </footer>
     </div>
   )
 }

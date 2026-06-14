@@ -380,10 +380,7 @@ export default function HelperProfile() {
         {/* ── TAB: PERFIL VIVO ── */}
         {activeTab === 'perfil' && (
           <>
-            {/* THE KEY DIFFERENTIATOR: Live pulse */}
-            <div style={{paddingTop:'20px'}}>
-              <LivePulse helper={h} />
-            </div>
+            <div style={{paddingTop:'20px'}} />
 
             {/* Bio */}
             <div className={styles.bioCard}>
@@ -408,8 +405,7 @@ export default function HelperProfile() {
               </div>
             )}
 
-            {/* Nüra proactive question (visible to helper) */}
-            <NuraQuestion helperName={h.name} />
+
 
             {/* Declared skills */}
             {h.skills?.length > 0 && (
