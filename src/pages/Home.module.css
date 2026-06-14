@@ -20,11 +20,10 @@
   height: 20px; width: auto;
   position: absolute; left: 50%; transform: translateX(-50%);
   background: white;
-  padding: 6px 14px;
+  padding: 7px 16px;
   border-radius: 20px;
   box-shadow: 0 1px 4px rgba(0,0,0,0.08), 0 2px 12px rgba(0,0,0,0.04);
-  object-fit: contain;
-  height: auto;
+  display: block;
 }
 .profileBtn {
   width: 36px; height: 36px; border-radius: 50%;
