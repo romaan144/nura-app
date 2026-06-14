@@ -1,162 +1,177 @@
 .page {
   height: 100dvh;
   display: flex; flex-direction: column;
-  background: var(--paper);
+  background: var(--white);
 }
 
-/* Header */
+/* ── HEADER — ChatGPT style ── */
 .header {
   display: flex; align-items: center; justify-content: space-between;
-  padding: 10px 16px;
-  background: rgba(255,255,255,0.82);
-  backdrop-filter: blur(24px) saturate(160%);
-  -webkit-backdrop-filter: blur(24px) saturate(160%);
-  border-bottom: 1px solid rgba(255,255,255,0.5);
-  box-shadow: 0 1px 0 rgba(0,0,0,0.04);
+  padding: 12px 14px;
+  background: var(--white);
+  border-bottom: 1px solid var(--rule);
   flex-shrink: 0;
 }
-.logoText { height: 26px; width: auto; }
-.location { font-size: 12px; color: var(--soft); }
+.headerCenter {
+  display: flex; align-items: center; gap: 8px;
+  position: absolute; left: 50%; transform: translateX(-50%);
+}
+.headerIso {
+  width: 26px; height: 26px; object-fit: contain;
+  animation: nuraPulse 3s ease-in-out infinite;
+}
+@keyframes nuraPulse {
+  0%,100% { transform: scale(1); opacity: 1; }
+  50% { transform: scale(1.1); opacity: 0.8; }
+}
+.headerLogo { height: 22px; width: auto; }
 
-/* Messages */
+.profileBtn {
+  width: 36px; height: 36px; border-radius: 50%;
+  background: var(--paper); border: 1.5px solid var(--rule);
+  display: flex; align-items: center; justify-content: center;
+  transition: all 0.15s;
+}
+.profileBtn:hover { border-color: var(--purple); }
+.profileAvatar {
+  width: 28px; height: 28px; border-radius: 50%;
+  background: var(--grad-main); color: white;
+  font-size: 13px; font-weight: 700;
+  display: flex; align-items: center; justify-content: center;
+}
+
+/* ── MESSAGES ── */
 .messages {
-  flex: 1;
-  overflow-y: auto;
-  padding: 20px 16px 10px;
-  display: flex; flex-direction: column; gap: 14px;
+  flex: 1; overflow-y: auto;
+  padding: 24px 16px 12px;
+  display: flex; flex-direction: column; gap: 16px;
   min-height: 0;
 }
 
-.msgRow { display: flex; align-items: flex-end; gap: 8px; max-width: 100%; }
+.msgRow { display: flex; align-items: flex-end; gap: 8px; }
 .msgRowUser { flex-direction: row-reverse; }
 
 .nuraAvatar {
-  width: 32px; height: 32px; border-radius: 50%;
+  width: 30px; height: 30px; border-radius: 50%;
   background: var(--white); border: 1.5px solid var(--rule);
   display: flex; align-items: center; justify-content: center;
-  flex-shrink: 0; box-shadow: var(--shadow-sm);
+  flex-shrink: 0; box-shadow: 0 1px 4px rgba(0,0,0,0.06);
+  animation: nuraGlow 3s ease-in-out infinite;
 }
-.nuraAvatarImg { width: 20px; height: 20px; object-fit: contain; }
+@keyframes nuraGlow {
+  0%,100% { box-shadow: 0 0 0 0 rgba(123,47,255,0); }
+  50% { box-shadow: 0 0 0 4px rgba(123,47,255,0.1); }
+}
+.nuraAvatarImg { width: 18px; height: 18px; object-fit: contain; }
 
 .bubble {
-  max-width: 78%;
-  padding: 12px 15px;
-  border-radius: 20px;
-  display: flex; flex-direction: column; gap: 6px;
+  max-width: 80%; padding: 11px 14px;
+  display: flex; flex-direction: column; gap: 5px;
 }
 .bubble p { font-size: 14px; line-height: 1.6; margin: 0; }
 .bubble p:empty { display: none; }
-.bubbleFirst { font-weight: 600; }
 
 .bubbleNura {
-  background: var(--white);
-  border: 1.5px solid var(--rule);
-  border-bottom-left-radius: 6px;
+  background: var(--paper);
+  border-radius: 18px 18px 18px 4px;
   color: var(--ink);
-  box-shadow: var(--shadow-sm);
 }
 .bubbleUser {
   background: linear-gradient(135deg, #1a1a2e 0%, #2d1b4e 100%);
   color: white;
-  border-bottom-right-radius: 6px;
-  box-shadow: 0 4px 14px rgba(13,13,26,0.25);
+  border-radius: 18px 18px 4px 18px;
+  box-shadow: 0 2px 12px rgba(13,13,26,0.2);
 }
 
-/* Typing dots */
-.typingDots {
-  display: flex; gap: 4px; align-items: center; padding: 4px 0;
-}
+.typingDots { display: flex; gap: 4px; align-items: center; padding: 2px 0; }
 .typingDots span {
-  width: 7px; height: 7px; border-radius: 50%; background: var(--soft);
+  width: 6px; height: 6px; border-radius: 50%; background: var(--soft);
   animation: tdot 1.2s ease-in-out infinite;
 }
 .typingDots span:nth-child(2) { animation-delay: 0.2s; }
 .typingDots span:nth-child(3) { animation-delay: 0.4s; }
-@keyframes tdot { 0%,60%,100%{transform:translateY(0);opacity:0.4} 30%{transform:translateY(-5px);opacity:1} }
+@keyframes tdot { 0%,60%,100%{transform:translateY(0);opacity:0.4} 30%{transform:translateY(-4px);opacity:1} }
 
-/* Action button inside bubble */
 .bubbleAction {
-  display: inline-flex; align-items: center; gap: 6px;
-  margin-top: 4px;
-  padding: 8px 16px;
-  background: var(--grad-main);
-  color: white; border: none; border-radius: 20px;
+  display: inline-flex; align-items: center; gap: 5px;
+  margin-top: 6px; padding: 7px 14px;
+  background: var(--grad-main); color: white;
+  border: none; border-radius: 20px;
   font-size: 13px; font-weight: 600;
-  align-self: flex-start;
-  transition: all 0.2s;
-  box-shadow: 0 4px 12px rgba(123,47,255,0.3);
+  align-self: flex-start; transition: all 0.15s;
+  box-shadow: 0 3px 10px rgba(123,47,255,0.3);
 }
 .bubbleAction:hover { transform: translateY(-1px); }
 
-/* Suggestions */
+/* ── SUGGESTIONS ── */
 .suggestions {
   padding: 0 16px 10px;
-  display: flex; flex-direction: column; gap: 6px;
+  display: flex; flex-direction: column; gap: 8px;
   flex-shrink: 0;
 }
 .suggestion {
-  text-align: left;
-  padding: 10px 14px;
-  background: var(--white);
+  display: flex; align-items: center; gap: 12px;
+  padding: 12px 16px;
+  background: var(--paper);
   border: 1.5px solid var(--rule);
-  border-radius: 12px;
-  font-size: 13px; color: var(--mid);
-  transition: all 0.15s;
+  border-radius: 14px;
+  text-align: left; transition: all 0.15s;
 }
-.suggestion:hover { border-color: var(--purple); color: var(--purple); background: rgba(123,47,255,0.03); }
+.suggestion:hover { border-color: rgba(123,47,255,0.3); background: rgba(123,47,255,0.03); }
+.suggestionIcon { font-size: 18px; flex-shrink: 0; }
+.suggestionText { font-size: 13px; color: var(--mid); }
 
-/* Input bar */
-.inputBar {
-  display: flex; align-items: center; gap: 8px;
-  padding: 10px 14px 14px;
-  background: rgba(255,255,255,0.82);
-  backdrop-filter: blur(24px) saturate(160%);
-  -webkit-backdrop-filter: blur(24px) saturate(160%);
-  border-top: 1px solid rgba(255,255,255,0.5);
-  box-shadow: 0 -4px 16px rgba(13,13,26,0.05);
+/* ── INPUT — ChatGPT style ── */
+.inputWrap {
+  padding: 10px 14px max(16px, env(safe-area-inset-bottom));
+  background: var(--white);
   flex-shrink: 0;
 }
+.inputBar {
+  display: flex; align-items: center; gap: 8px;
+  background: var(--paper);
+  border: 1.5px solid var(--rule);
+  border-radius: 26px;
+  padding: 6px 6px 6px 12px;
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+.inputBar:focus-within {
+  border-color: rgba(123,47,255,0.3);
+  box-shadow: 0 0 0 3px rgba(123,47,255,0.06);
+  background: var(--white);
+}
+.plusBtn {
+  width: 32px; height: 32px; border-radius: 50%;
+  background: var(--white); border: 1.5px solid var(--rule);
+  color: var(--mid); display: flex; align-items: center; justify-content: center;
+  flex-shrink: 0; transition: all 0.15s;
+}
+.plusBtn:hover { color: var(--purple); border-color: rgba(123,47,255,0.3); }
 .input {
-  flex: 1; padding: 11px 16px;
-  border: 1.5px solid var(--rule); border-radius: 24px;
-  font-size: 14px; outline: none;
-  background: var(--paper); color: var(--ink);
-  font-family: 'Inter', sans-serif;
-  transition: border-color 0.2s;
+  flex: 1; border: none; outline: none;
+  background: transparent; font-size: 14px;
+  color: var(--ink); font-family: 'Inter', sans-serif;
+  padding: 6px 0;
 }
-.input:focus { border-color: rgba(123,47,255,0.4); background: var(--white); }
 .input::placeholder { color: var(--soft); }
-.micBtn {
-  width: 40px; height: 40px; border-radius: 50%;
-  background: var(--paper); border: 1.5px solid var(--rule);
-  color: var(--soft); display: flex; align-items: center; justify-content: center;
-  transition: all 0.18s; flex-shrink: 0;
-}
-.micActive { background: rgba(255,59,59,0.08); border-color: var(--red); color: var(--red); }
 .sendBtn {
-  width: 42px; height: 42px; border-radius: 50%;
+  width: 36px; height: 36px; border-radius: 50%;
   background: linear-gradient(135deg, #1a1a2e 0%, #2d1b4e 100%);
   color: white; border: none;
   display: flex; align-items: center; justify-content: center;
   flex-shrink: 0; transition: all 0.2s;
-  box-shadow: 0 4px 14px rgba(13,13,26,0.25), inset 0 1px 0 rgba(255,255,255,0.15);
+  box-shadow: 0 3px 10px rgba(13,13,26,0.2);
 }
-.sendBtn:hover:not(:disabled) { transform: scale(1.07); }
-.sendBtn:disabled { background: var(--rule); box-shadow: none; }
-
-/* ── NÜRA AVATAR PULSE ── */
-.nuraAvatarImg {
-  width: 20px; height: 20px; object-fit: contain;
-  animation: nuraPulse 3s ease-in-out infinite;
+.sendBtn:hover { transform: scale(1.07); }
+.micBtn {
+  background: var(--paper) !important;
+  color: var(--soft) !important;
+  box-shadow: none !important;
+  border: 1.5px solid var(--rule) !important;
 }
-@keyframes nuraPulse {
-  0%, 100% { transform: scale(1); opacity: 1; }
-  50% { transform: scale(1.12); opacity: 0.85; }
-}
-.nuraAvatar {
-  animation: nuraGlow 3s ease-in-out infinite;
-}
-@keyframes nuraGlow {
-  0%, 100% { box-shadow: 0 0 0 0 rgba(123,47,255,0); }
-  50% { box-shadow: 0 0 0 4px rgba(123,47,255,0.12); }
+.micActive {
+  background: rgba(255,59,59,0.1) !important;
+  color: var(--red) !important;
+  box-shadow: none !important;
+  border: 1.5px solid var(--red) !important;
 }

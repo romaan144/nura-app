@@ -1,45 +1,49 @@
 import { useState, useEffect, useRef } from 'react'
 import { useNavigate } from 'react-router-dom'
-import { Send, Mic, MicOff, ArrowRight } from 'lucide-react'
+import { Send, Mic, MicOff, ArrowRight, Plus } from 'lucide-react'
 import { analyzeNeed, matchHelpers } from '../utils/matching'
-import { MenuButton } from '../components/NavBar'
 import { useUser } from '../context/UserContext'
+import { MenuButton } from '../components/NavBar'
 import styles from './Home.module.css'
 import Onboarding from '../components/Onboarding'
 
-// Nüra's opening message adapts to who you are
 function getWelcome(user) {
   if (!user) return [
     `Hola, soy **Nüra**.`,
-    `Cuéntame qué necesitas o en qué puedes ayudar. Puedo encontrarte a alguien, actualizar tu perfil o conectarte con una empresa. Habla con naturalidad.`,
+    `Cuéntame qué necesitas o en qué puedes ayudar.`,
   ]
   if (user.isHelper) return [
-    `Hola ${user.name?.split(' ')[0] || ''} 👋`,
-    `¿Qué quieres hacer hoy? Puedo ayudarte a encontrar nuevos clientes, actualizar tu perfil con algo nuevo que hayas aprendido, o responder cualquier duda sobre tus servicios.`,
+    `Hola ${user.name?.split(' ')[0]} 👋`,
+    `¿Qué quieres hacer hoy? Puedo buscarte clientes, actualizar tu perfil o lo que necesites.`,
   ]
   return [
-    `Hola ${user.name?.split(' ')[0] || ''} 👋`,
-    `¿En qué puedo ayudarte hoy? Cuéntamelo con tus palabras.`,
+    `Hola ${user.name?.split(' ')[0]} 👋`,
+    `¿En qué puedo ayudarte hoy?`,
   ]
 }
 
-// Detect intent from message
 function detectIntent(text, user) {
   const t = text.toLowerCase()
-  const isHelper = user?.isHelper
-
-  if (isHelper && (t.includes('aprendido') || t.includes('certificado') || t.includes('curso') || t.includes('formación') || t.includes('estudié') || t.includes('trabajé')))
+  if (user?.isHelper && (t.includes('aprendido') || t.includes('certificado') || t.includes('curso') || t.includes('estudié') || t.includes('trabajé')))
     return 'update_profile'
-  if (t.includes('empresa') || t.includes('contratar') || t.includes('b2b') || t.includes('empleado') || t.includes('trabajó'))
+  if (t.includes('empresa') || t.includes('contratar') || t.includes('empleado') || t.includes('trabajó'))
     return 'b2b'
-  if (isHelper && (t.includes('cliente') || t.includes('ayudar') || t.includes('ofrecer') || t.includes('disponible')))
+  if (user?.isHelper && (t.includes('cliente') || t.includes('ofrecer') || t.includes('disponible')))
     return 'helper_visibility'
   return 'search'
 }
 
 const SUGGESTIONS = {
-  default: ['Necesito un logopeda para mi hijo', 'Busco cuidadora para mi padre', 'Quiero un técnico de calderas urgente', 'Clases de matemáticas en casa'],
-  helper: ['Acabo de obtener una certificación nueva', 'He trabajado en un sitio nuevo este mes', 'Quiero aparecer en más búsquedas', 'Tengo disponibilidad esta semana'],
+  default: [
+    { icon: '🗣️', text: 'Necesito un logopeda para mi hijo' },
+    { icon: '✍️', text: 'Busco cuidadora para mi padre mayor' },
+    { icon: '🔧', text: 'Técnico de calderas urgente' },
+  ],
+  helper: [
+    { icon: '✍️', text: 'Acabo de obtener una certificación nueva' },
+    { icon: '🌐', text: 'He trabajado en un nuevo sitio este mes' },
+    { icon: '🖼️', text: 'Quiero actualizar mi disponibilidad' },
+  ],
 }
 
 export default function Home({ setSearchState }) {
@@ -53,7 +57,6 @@ export default function Home({ setSearchState }) {
   const bottomRef = useRef(null)
   const inputRef = useRef(null)
 
-  // Init with Nüra's welcome
   useEffect(() => {
     const lines = getWelcome(user)
     setTimeout(() => {
@@ -65,98 +68,64 @@ export default function Home({ setSearchState }) {
     bottomRef.current?.scrollIntoView({ behavior: 'smooth' })
   }, [messages])
 
+  function formatLine(line) {
+    const parts = line.split(/\*\*(.*?)\*\*/g)
+    return parts.map((part, i) => i % 2 === 1 ? <strong key={i}>{part}</strong> : part)
+  }
+
   async function handleSend(text) {
     const msg = text || input
     if (!msg.trim() || loading) return
 
     setInput('')
     setShowSuggestions(false)
-    const userMsg = { id: Date.now(), from: 'user', text: msg }
-    setMessages(prev => [...prev, userMsg])
+    setMessages(prev => [...prev, { id: Date.now(), from: 'user', text: msg }])
     setLoading(true)
 
     const intent = detectIntent(msg, user)
 
-    // Nüra responds differently based on intent
     if (intent === 'update_profile') {
       setTimeout(() => {
-        setMessages(prev => [...prev, {
-          id: Date.now(), from: 'nura',
-          lines: [
-            `Perfecto. He actualizado tu perfil con esta información.`,
-            `Nüra analizará el contexto y añadirá las habilidades y experiencia relevantes automáticamente. Tu perfil ya refleja esto.`,
-          ]
-        }])
+        setMessages(prev => [...prev, { id: Date.now(), from: 'nura', lines: ['He actualizado tu perfil con esta información. Nüra lo analizará y añadirá las habilidades relevantes automáticamente.'] }])
         setLoading(false)
       }, 1200)
       return
     }
-
     if (intent === 'b2b') {
       setTimeout(() => {
-        setMessages(prev => [...prev, {
-          id: Date.now(), from: 'nura',
-          lines: [
-            `Entendido. El acceso empresarial a perfiles verificados está disponible en Fase 3 de Nüra.`,
-            `Si quieres añadir una verificación al perfil de alguien que ha trabajado contigo, escríbeme el nombre y qué quieres que conste.`,
-          ]
-        }])
+        setMessages(prev => [...prev, { id: Date.now(), from: 'nura', lines: ['El acceso empresarial está disponible en Fase 3 de Nüra. Si quieres verificar que alguien ha trabajado contigo, cuéntame su nombre y qué quieres que conste.'] }])
         setLoading(false)
       }, 1000)
       return
     }
-
     if (intent === 'helper_visibility') {
       setTimeout(() => {
-        setMessages(prev => [...prev, {
-          id: Date.now(), from: 'nura',
-          lines: [
-            `Tu perfil está activo y apareces en las búsquedas de tu zona.`,
-            `¿Quieres actualizar tu disponibilidad, tu zona de trabajo o añadir algo nuevo a tu perfil?`,
-          ]
-        }])
+        setMessages(prev => [...prev, { id: Date.now(), from: 'nura', lines: ['Tu perfil está activo. ¿Quieres actualizar tu disponibilidad, zona o añadir algo nuevo?'] }])
         setLoading(false)
       }, 1000)
       return
     }
 
-    // Search intent — the main flow
     try {
-      // Nüra confirms she understood
-      setMessages(prev => [...prev, {
-        id: Date.now() + 0.5, from: 'nura',
-        lines: [`Entendido. Buscando en la red de helpers de Barcelona...`],
-        loading: true
-      }])
-
+      setMessages(prev => [...prev, { id: Date.now() + 0.5, from: 'nura', lines: ['Buscando en la red de helpers...'], loading: true }])
       const analysis = await analyzeNeed(msg)
       const matches = await matchHelpers(analysis)
-
       setMessages(prev => prev.filter(m => !m.loading))
-
-      if (!matches || matches.length === 0) {
-        setMessages(prev => [...prev, {
-          id: Date.now(), from: 'nura',
-          lines: [`No encontré a nadie disponible para esto ahora mismo. Prueba a describírmelo de otra forma o amplía la zona.`]
-        }])
+      if (!matches?.length) {
+        setMessages(prev => [...prev, { id: Date.now(), from: 'nura', lines: ['No encontré a nadie disponible ahora mismo. Prueba a describirlo de otra forma.'] }])
         setLoading(false)
         return
       }
-
       addSearch?.(msg)
       setSearchState({ query: msg, analysis, matches })
-
       setMessages(prev => [...prev, {
         id: Date.now(), from: 'nura',
-        lines: [`He encontrado **${matches.length} personas** que pueden ayudarte. Aquí están los perfiles más compatibles.`],
+        lines: [`He encontrado **${matches.length} personas** que pueden ayudarte.`],
         action: { label: 'Ver resultados', onClick: () => navigate('/results') }
       }])
-    } catch(e) {
+    } catch {
       setMessages(prev => prev.filter(m => !m.loading))
-      setMessages(prev => [...prev, {
-        id: Date.now(), from: 'nura',
-        lines: [`Algo fue mal. Inténtalo de nuevo.`]
-      }])
+      setMessages(prev => [...prev, { id: Date.now(), from: 'nura', lines: ['Algo fue mal. Inténtalo de nuevo.'] }])
     }
     setLoading(false)
   }
@@ -179,19 +148,22 @@ export default function Home({ setSearchState }) {
 
   const suggestions = user?.isHelper ? SUGGESTIONS.helper : SUGGESTIONS.default
 
-  function formatLine(line) {
-    // Bold **text**
-    const parts = line.split(/\*\*(.*?)\*\*/g)
-    return parts.map((part, i) => i % 2 === 1 ? <strong key={i}>{part}</strong> : part)
-  }
-
   return (
     <div className={styles.page}>
-      {/* Header */}
+
+      {/* Header — ChatGPT style */}
       <header className={styles.header}>
         <MenuButton />
-        <img src="/logo-text.png" alt="Nüra" className={styles.logoText} />
-        <span className={styles.location}>📍 Barcelona</span>
+        <div className={styles.headerCenter}>
+          <img src="/logo-iso.png" alt="" className={styles.headerIso} />
+          <img src="/logo-text.png" alt="Nüra" className={styles.headerLogo} />
+        </div>
+        <button className={styles.profileBtn} onClick={() => navigate('/profile')}>
+          {user?.name
+            ? <div className={styles.profileAvatar}>{user.name[0].toUpperCase()}</div>
+            : <div className={styles.profileAvatar}>?</div>
+          }
+        </button>
       </header>
 
       {/* Messages */}
@@ -206,9 +178,7 @@ export default function Home({ setSearchState }) {
             <div className={`${styles.bubble} ${msg.from === 'user' ? styles.bubbleUser : styles.bubbleNura}`}>
               {msg.text && <p>{msg.text}</p>}
               {msg.lines?.map((line, i) => (
-                <p key={i} className={i === 0 && msg.lines.length > 1 ? styles.bubbleFirst : ''}>
-                  {formatLine(line)}
-                </p>
+                <p key={i}>{formatLine(line)}</p>
               ))}
               {msg.loading && (
                 <div className={styles.typingDots}>
@@ -226,34 +196,40 @@ export default function Home({ setSearchState }) {
         <div ref={bottomRef} />
       </div>
 
-      {/* Suggestions */}
+      {/* Suggestions — ChatGPT style with icon + text */}
       {showSuggestions && (
         <div className={styles.suggestions}>
           {suggestions.map((s, i) => (
-            <button key={i} className={styles.suggestion} onClick={() => handleSend(s)}>
-              {s}
+            <button key={i} className={styles.suggestion} onClick={() => handleSend(s.text)}>
+              <span className={styles.suggestionIcon}>{s.icon}</span>
+              <span className={styles.suggestionText}>{s.text}</span>
             </button>
           ))}
         </div>
       )}
 
-      {/* Input */}
-      <div className={styles.inputBar}>
-        <input
-          ref={inputRef}
-          className={styles.input}
-          placeholder="Escribe a Nüra..."
-          value={input}
-          onChange={e => setInput(e.target.value)}
-          onKeyDown={handleKey}
-          disabled={loading}
-        />
-        <button className={`${styles.micBtn} ${listening ? styles.micActive : ''}`} onClick={toggleMic}>
-          {listening ? <MicOff size={16} /> : <Mic size={16} />}
-        </button>
-        <button className={styles.sendBtn} onClick={() => handleSend()} disabled={!input.trim() || loading}>
-          <Send size={16} />
-        </button>
+      {/* Input bar — ChatGPT style */}
+      <div className={styles.inputWrap}>
+        <div className={styles.inputBar}>
+          <button className={styles.plusBtn}><Plus size={18} /></button>
+          <input
+            ref={inputRef}
+            className={styles.input}
+            placeholder="Escribe a Nüra..."
+            value={input}
+            onChange={e => setInput(e.target.value)}
+            onKeyDown={handleKey}
+            disabled={loading}
+          />
+          {input.trim()
+            ? <button className={styles.sendBtn} onClick={() => handleSend()}>
+                <Send size={16} />
+              </button>
+            : <button className={`${styles.sendBtn} ${listening ? styles.micActive : styles.micBtn}`} onClick={toggleMic}>
+                {listening ? <MicOff size={16} /> : <Mic size={16} />}
+              </button>
+          }
+        </div>
       </div>
 
       <Onboarding />
