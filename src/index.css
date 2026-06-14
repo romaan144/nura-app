@@ -43,14 +43,7 @@
   --radius-xl: 30px;
 }
 
-body {
-  font-family: 'Inter', -apple-system, sans-serif;
-  background: var(--paper);
-  color: var(--ink);
-  min-height: 100vh;
-  -webkit-font-smoothing: antialiased;
-  background: #F5F4EF !important;
-}
+
 
 h1, h2, h3 { font-family: 'Plus Jakarta Sans', 'Inter', sans-serif; }
 button { cursor: pointer; font-family: inherit; border: none; background: none; }
@@ -69,3 +62,5 @@ a { text-decoration: none; color: inherit; }
   -webkit-backdrop-filter: blur(24px) saturate(160%);
   border: 1px solid rgba(255,255,255,0.5);
 }
+
+body { background: #F8F8FA; }

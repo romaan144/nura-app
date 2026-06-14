@@ -1,4 +1,4 @@
-.page { min-height: 100vh; background: #F5F4EF; padding-bottom: 24px; }
+.page { min-height: 100vh; background: #F8F8FA; padding-bottom: 24px; }
 
 .header { display: flex; align-items: center; justify-content: space-between; padding: 16px 20px; background: rgba(255,255,255,0.82); backdrop-filter: blur(24px) saturate(160%); -webkit-backdrop-filter: blur(24px) saturate(160%); border-bottom: 1px solid rgba(255,255,255,0.5); box-shadow: 0 1px 0 rgba(0,0,0,0.04); position: sticky; top: 0; z-index: 10; }
 .headerTitle { font-size: 17px; font-weight: 800; color: var(--ink); letter-spacing: -0.3px; }
@@ -25,7 +25,7 @@
 .sectionTitle { font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.7px; color: var(--soft); margin-bottom: 14px; }
 
 .helperCard { display: flex; flex-direction: column; gap: 8px; }
-.helperRow { display: flex; align-items: center; justify-content: space-between; padding: 8px 12px; background: #F5F4EF; border-radius: 10px; }
+.helperRow { display: flex; align-items: center; justify-content: space-between; padding: 8px 12px; background: #F8F8FA; border-radius: 10px; }
 .helperKey { font-size: 12px; color: var(--soft); }
 .helperVal { font-size: 13px; font-weight: 600; color: var(--ink); }
 
@@ -36,7 +36,7 @@
 .ratingStars { display: flex; gap: 2px; margin-bottom: 4px; }
 .ratingComment { font-size: 12px; color: var(--mid); font-style: italic; line-height: 1.4; }
 
-.actionRow { width: 100%; display: flex; align-items: center; gap: 12px; padding: 13px 12px; background: #F5F4EF; border-radius: 12px; margin-bottom: 6px; transition: all 0.18s; }
+.actionRow { width: 100%; display: flex; align-items: center; gap: 12px; padding: 13px 12px; background: #F8F8FA; border-radius: 12px; margin-bottom: 6px; transition: all 0.18s; }
 .actionRow:hover { background: var(--rule2); }
 .actionHighlight { background: rgba(123,47,255,0.07); }
 .actionHighlight:hover { background: rgba(123,47,255,0.12); }
@@ -56,7 +56,7 @@
 
 .helperDashboard { display: flex; flex-direction: column; gap: 12px; }
 .dashRow { display: grid; grid-template-columns: repeat(3,1fr); gap: 8px; }
-.dashItem { background: #F5F4EF; border-radius: 10px; padding: 12px 8px; text-align: center; }
+.dashItem { background: #F8F8FA; border-radius: 10px; padding: 12px 8px; text-align: center; }
 .dashVal { display: block; font-size: 18px; font-weight: 800; color: var(--ink); margin-bottom: 2px; }
 .dashLbl { font-size: 10px; color: var(--soft); }
 .helperInfo { display: flex; flex-direction: column; gap: 6px; }

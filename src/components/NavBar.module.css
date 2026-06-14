@@ -31,7 +31,7 @@
   position: fixed;
   top: 0; left: 0; bottom: 0;
   width: 270px;
-  background: var(--white);
+  background: #F8F8FA;
   z-index: 500;
   display: flex; flex-direction: column;
   transform: translateX(-100%);
@@ -45,6 +45,7 @@
   display: flex; align-items: center; justify-content: space-between;
   padding: 52px 16px 16px;
   border-bottom: 1px solid var(--rule);
+  background: #F8F8FA;
 }
 .drawerLogo { height: 24px; width: auto; }
 .drawerClose {
@@ -60,7 +61,7 @@
   display: flex; align-items: center; gap: 12px;
   padding: 14px 16px;
   border-bottom: 1px solid var(--rule);
-  background: var(--paper);
+  background: #F0F0F2;
 }
 .drawerAvatar {
   width: 38px; height: 38px; border-radius: 50%;
@@ -89,7 +90,7 @@
 }
 .drawerItem:hover { background: var(--paper); color: var(--ink); }
 .drawerItemActive {
-  background: rgba(123,47,255,0.07);
+  background: rgba(123,47,255,0.09);
   color: var(--purple); font-weight: 700;
 }
 .drawerIcon { flex-shrink: 0; color: inherit; }

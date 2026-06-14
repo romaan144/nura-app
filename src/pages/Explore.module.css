@@ -1,7 +1,7 @@
-.page { min-height: 100vh; background: #F5F4EF; padding-bottom: 24px; }
+.page { min-height: 100vh; background: #F8F8FA; padding-bottom: 24px; }
 
 .header {
-  background: rgba(245,244,239,0.92); backdrop-filter: blur(24px) saturate(160%); -webkit-backdrop-filter: blur(24px) saturate(160%);
+  background: rgba(248,248,250,0.92); backdrop-filter: blur(24px) saturate(160%); -webkit-backdrop-filter: blur(24px) saturate(160%);
   border-bottom: 1px solid rgba(255,255,255,0.5); box-shadow: 0 1px 0 rgba(0,0,0,0.04);
   padding: 14px 16px; position: sticky; top: 0; z-index: 10;
 }
@@ -93,9 +93,10 @@
 .grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
 
 .card {
-  background: var(--white); border: 1.5px solid var(--rule);
+  background: #FFFFFF; border: none;
   border-radius: 16px; overflow: hidden;
-  cursor: pointer; transition: all 0.2s; box-shadow: var(--shadow-sm);
+  cursor: pointer; transition: all 0.2s;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.06), 0 4px 16px rgba(0,0,0,0.04);
 }
 .card:hover { transform: translateY(-2px); box-shadow: var(--shadow-color); border-color: transparent; }
 .cardTop {
