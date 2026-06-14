@@ -8,31 +8,30 @@
 .header {
   display: flex; align-items: center; justify-content: space-between;
   padding: 12px 14px;
-  background: var(--white);
-  border-bottom: 1px solid var(--rule);
+  background: rgba(255,255,255,0.75);
+  backdrop-filter: blur(28px) saturate(180%);
+  -webkit-backdrop-filter: blur(28px) saturate(180%);
+  border-bottom: 1px solid rgba(255,255,255,0.6);
+  box-shadow: 0 1px 0 rgba(0,0,0,0.04), 0 4px 20px rgba(13,13,26,0.03);
   flex-shrink: 0;
 }
-.headerCenter {
-  display: flex; align-items: center; gap: 8px;
+.headerLogo {
+  height: 24px; width: auto;
   position: absolute; left: 50%; transform: translateX(-50%);
 }
-.headerIso {
-  width: 26px; height: 26px; object-fit: contain;
-  animation: nuraPulse 3s ease-in-out infinite;
-}
-@keyframes nuraPulse {
-  0%,100% { transform: scale(1); opacity: 1; }
-  50% { transform: scale(1.1); opacity: 0.8; }
-}
-.headerLogo { height: 22px; width: auto; }
+
 
 .profileBtn {
   width: 36px; height: 36px; border-radius: 50%;
-  background: var(--paper); border: 1.5px solid var(--rule);
+  background: rgba(255,255,255,0.7);
+  backdrop-filter: blur(20px) saturate(180%);
+  -webkit-backdrop-filter: blur(20px) saturate(180%);
+  border: 1.5px solid rgba(255,255,255,0.8);
+  box-shadow: 0 2px 12px rgba(13,13,26,0.08), inset 0 1px 0 rgba(255,255,255,0.9);
   display: flex; align-items: center; justify-content: center;
-  transition: all 0.15s;
+  transition: all 0.2s;
 }
-.profileBtn:hover { border-color: var(--purple); }
+.profileBtn:hover { box-shadow: 0 4px 16px rgba(123,47,255,0.15); }
 .profileAvatar {
   width: 28px; height: 28px; border-radius: 50%;
   background: var(--grad-main); color: white;
@@ -112,41 +111,48 @@
 .suggestion {
   display: flex; align-items: center; gap: 12px;
   padding: 12px 16px;
-  background: var(--paper);
-  border: 1.5px solid var(--rule);
-  border-radius: 14px;
-  text-align: left; transition: all 0.15s;
+  background: rgba(255,255,255,0.75);
+  backdrop-filter: blur(16px) saturate(160%);
+  -webkit-backdrop-filter: blur(16px) saturate(160%);
+  border: 1.5px solid rgba(255,255,255,0.8);
+  box-shadow: 0 2px 12px rgba(13,13,26,0.06), inset 0 1px 0 rgba(255,255,255,0.9);
+  border-radius: 16px;
+  text-align: left; transition: all 0.2s;
 }
-.suggestion:hover { border-color: rgba(123,47,255,0.3); background: rgba(123,47,255,0.03); }
+.suggestion:hover { box-shadow: 0 4px 20px rgba(13,13,26,0.1), inset 0 1px 0 rgba(255,255,255,1); transform: translateY(-1px); }
 .suggestionIcon { font-size: 18px; flex-shrink: 0; }
 .suggestionText { font-size: 13px; color: var(--mid); }
 
 /* ── INPUT — ChatGPT style ── */
 .inputWrap {
   padding: 10px 14px max(16px, env(safe-area-inset-bottom));
-  background: var(--white);
+  background: rgba(255,255,255,0.7);
+  backdrop-filter: blur(28px) saturate(180%);
+  -webkit-backdrop-filter: blur(28px) saturate(180%);
   flex-shrink: 0;
 }
 .inputBar {
   display: flex; align-items: center; gap: 8px;
-  background: var(--paper);
-  border: 1.5px solid var(--rule);
+  background: rgba(255,255,255,0.85);
+  border: 1.5px solid rgba(255,255,255,0.9);
   border-radius: 26px;
-  padding: 6px 6px 6px 12px;
-  transition: border-color 0.2s, box-shadow 0.2s;
+  padding: 6px 6px 6px 14px;
+  box-shadow: 0 4px 24px rgba(13,13,26,0.08), 0 1px 4px rgba(13,13,26,0.04), inset 0 1px 0 rgba(255,255,255,1);
+  transition: all 0.2s;
 }
 .inputBar:focus-within {
-  border-color: rgba(123,47,255,0.3);
-  box-shadow: 0 0 0 3px rgba(123,47,255,0.06);
+  border-color: rgba(255,255,255,1);
+  box-shadow: 0 4px 28px rgba(13,13,26,0.1), 0 0 0 3px rgba(123,47,255,0.08), inset 0 1px 0 rgba(255,255,255,1);
   background: var(--white);
 }
 .plusBtn {
   width: 32px; height: 32px; border-radius: 50%;
-  background: var(--white); border: 1.5px solid var(--rule);
+  background: rgba(255,255,255,0.6);
+  border: 1.5px solid rgba(0,0,0,0.08);
   color: var(--mid); display: flex; align-items: center; justify-content: center;
-  flex-shrink: 0; transition: all 0.15s;
+  flex-shrink: 0; transition: all 0.2s;
 }
-.plusBtn:hover { color: var(--purple); border-color: rgba(123,47,255,0.3); }
+.plusBtn:hover { color: var(--purple); background: rgba(255,255,255,0.9); }
 .input {
   flex: 1; border: none; outline: none;
   background: transparent; font-size: 14px;

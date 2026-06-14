@@ -154,10 +154,7 @@ export default function Home({ setSearchState }) {
       {/* Header — ChatGPT style */}
       <header className={styles.header}>
         <MenuButton />
-        <div className={styles.headerCenter}>
-          <img src="/logo-iso.png" alt="" className={styles.headerIso} />
-          <img src="/logo-text.png" alt="Nüra" className={styles.headerLogo} />
-        </div>
+        <img src="/logo-text.png" alt="Nüra" className={styles.headerLogo} />
         <button className={styles.profileBtn} onClick={() => navigate('/profile')}>
           {user?.name
             ? <div className={styles.profileAvatar}>{user.name[0].toUpperCase()}</div>
