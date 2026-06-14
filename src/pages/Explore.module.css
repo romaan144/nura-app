@@ -1,9 +1,9 @@
-.page { min-height: 100vh; background: var(--paper); padding-bottom: 80px; }
+.page { min-height: 100vh; background: var(--paper); padding-bottom: 24px; }
 
 .header {
   background: rgba(255,255,255,0.82); backdrop-filter: blur(24px) saturate(160%); -webkit-backdrop-filter: blur(24px) saturate(160%);
   border-bottom: 1px solid rgba(255,255,255,0.5); box-shadow: 0 1px 0 rgba(0,0,0,0.04);
-  padding: 18px 18px 14px; position: sticky; top: 0; z-index: 10;
+  padding: 18px 18px 14px 62px; position: sticky; top: 0; z-index: 10;
 }
 .headerTop { display: flex; align-items: flex-start; justify-content: space-between; margin-bottom: 14px; }
 .title { font-size: 24px; font-weight: 800; color: var(--ink); letter-spacing: -0.5px; }
@@ -29,7 +29,7 @@
 .searchInput { border: none; outline: none; background: transparent; font-size: 13px; color: var(--ink); flex: 1; }
 .searchInput::placeholder { color: var(--soft); }
 
-.content { max-width: 680px; margin: 0 auto; padding: 24px 14px 88px; }
+.content { max-width: 680px; margin: 0 auto; padding: 24px 14px 32px; }
 
 .section { margin-bottom: 24px; }
 .sectionTitle {
