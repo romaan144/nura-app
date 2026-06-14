@@ -1,6 +1,7 @@
 import { useState, useEffect, useRef } from 'react'
 import { useParams, useNavigate } from 'react-router-dom'
 import { ArrowLeft, Send, Shield, Star, User, MapPin } from 'lucide-react'
+import { MenuButton } from '../components/NavBar'
 import { HELPERS } from '../data/helpers'
 import { useUser } from '../context/UserContext'
 import RatingModal from '../components/RatingModal'

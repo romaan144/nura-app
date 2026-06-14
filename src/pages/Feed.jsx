@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom'
 import { Heart, MessageCircle, Share2, Bookmark, Bell, UserPlus, Check, Sparkles } from 'lucide-react'
 import { HELPERS } from '../data/helpers'
 import { COMPANIES } from '../data/companies'
+import { MenuButton } from '../components/NavBar'
 import { useUser } from '../context/UserContext'
 import styles from './Feed.module.css'
 
