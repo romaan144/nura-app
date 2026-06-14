@@ -9,16 +9,16 @@ import Onboarding from '../components/Onboarding'
 
 function getWelcome(user) {
   if (!user) return [
-    `Hola, soy **Nüra**.`,
-    `Cuéntame qué necesitas o en qué puedes ayudar.`,
+    `Hola, soy **Nüra** ✨`,
+    `¿Qué **grad:necesitas** hoy? Cuéntamelo con tus palabras.`,
   ]
   if (user.isHelper) return [
-    `Hola ${user.name?.split(' ')[0]} 👋`,
-    `¿Qué quieres hacer hoy? Puedo buscarte clientes, actualizar tu perfil o lo que necesites.`,
+    `Hola **${user.name?.split(' ')[0]}** 👋`,
+    `¿Qué quieres **grad:hacer** hoy? Puedo buscarte clientes, actualizar tu perfil o lo que necesites.`,
   ]
   return [
-    `Hola ${user.name?.split(' ')[0]} 👋`,
-    `¿En qué puedo ayudarte hoy?`,
+    `Hola **${user.name?.split(' ')[0]}** 👋`,
+    `¿En qué puedo **grad:ayudarte** hoy?`,
   ]
 }
 
@@ -70,7 +70,15 @@ export default function Home({ setSearchState }) {
 
   function formatLine(line) {
     const parts = line.split(/\*\*(.*?)\*\*/g)
-    return parts.map((part, i) => i % 2 === 1 ? <strong key={i}>{part}</strong> : part)
+    return parts.map((part, i) => {
+      if (i % 2 === 1) {
+        if (part.startsWith('grad:')) {
+          return <span key={i} className={styles.gradText}>{part.slice(5)}</span>
+        }
+        return <strong key={i}>{part}</strong>
+      }
+      return part
+    })
   }
 
   async function handleSend(text) {

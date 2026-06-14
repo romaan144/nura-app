@@ -50,19 +50,21 @@
 
 /* Nüra avatar */
 .nuraAvatar {
-  width: 28px; height: 28px; border-radius: 50%;
+  width: 36px; height: 36px; border-radius: 50%;
   background: white;
   display: flex; align-items: center; justify-content: center;
   flex-shrink: 0;
   box-shadow: 0 1px 3px rgba(0,0,0,0.1);
   animation: nuraGlow 3s ease-in-out infinite;
+  align-self: flex-start;
+  margin-top: 2px;
 }
 @keyframes nuraGlow {
   0%,100% { box-shadow: 0 1px 3px rgba(0,0,0,0.08); }
   50% { box-shadow: 0 1px 3px rgba(0,0,0,0.08), 0 0 0 3px rgba(123,47,255,0.08); }
 }
 .nuraAvatarImg {
-  width: 17px; height: 17px; object-fit: contain;
+  width: 22px; height: 22px; object-fit: contain;
   animation: nuraPulse 3s ease-in-out infinite;
 }
 @keyframes nuraPulse {
@@ -206,4 +208,13 @@
 .micActive {
   background: rgba(255,59,59,0.08) !important;
   color: #FF3B3B !important;
+}
+
+/* ── GRADIENT TEXT IN NÜRA BUBBLES ── */
+.gradText {
+  background: linear-gradient(90deg, #FF3B3B, #7B2FFF, #00D4C8);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  font-weight: 700;
 }
