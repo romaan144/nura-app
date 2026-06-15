@@ -3,174 +3,80 @@ import { useNavigate } from 'react-router-dom'
 import { Heart, MessageCircle, Share2, Bookmark, Bell, UserPlus, Check, Sparkles, Award, Shield } from 'lucide-react'
 import { HELPERS } from '../data/helpers'
 import { COMPANIES } from '../data/companies'
-import PageHeader from '../components/PageHeader'
 import { useUser } from '../context/UserContext'
+import PageHeader from '../components/PageHeader'
 import styles from './Feed.module.css'
 
-// Build a unified feed from helpers + companies
 function buildFeed(following, helpers, companies) {
   const allPosts = []
-
-  // Posts from followed profiles
   const followedHelpers = helpers.filter(h => following.includes(h.id) || following.includes(String(h.id)))
   const followedCompanies = companies.filter(c => following.includes(c.id))
-
-  followedHelpers.forEach(h => {
-    h.posts?.forEach(p => allPosts.push({ ...p, author: h, authorType: 'helper' }))
-  })
-  followedCompanies.forEach(c => {
-    c.posts?.forEach(p => allPosts.push({ ...p, author: c, authorType: 'company' }))
-  })
-
-  // If not following anyone yet, show recommended content
+  followedHelpers.forEach(h => { h.posts?.forEach(p => allPosts.push({ ...p, author: h, authorType: 'helper' })) })
+  followedCompanies.forEach(c => { c.posts?.forEach(p => allPosts.push({ ...p, author: c, authorType: 'company' })) })
   if (allPosts.length === 0) {
-    helpers.slice(0, 4).forEach(h => {
-      h.posts?.slice(0, 1).forEach(p => allPosts.push({ ...p, author: h, authorType: 'helper', recommended: true }))
-    })
-    companies.slice(0, 2).forEach(c => {
-      c.posts?.slice(0, 1).forEach(p => allPosts.push({ ...p, author: c, authorType: 'company', recommended: true }))
-    })
+    helpers.slice(0, 4).forEach(h => { h.posts?.slice(0, 1).forEach(p => allPosts.push({ ...p, author: h, authorType: 'helper', recommended: true })) })
+    companies.slice(0, 2).forEach(c => { c.posts?.slice(0, 1).forEach(p => allPosts.push({ ...p, author: c, authorType: 'company', recommended: true })) })
   }
-
   return allPosts.sort(() => Math.random() - 0.3)
 }
 
-function PostTypeTag({ type }) {
-  const map = {
-    work: { label: 'Trabajo verificado', color: '#059669', bg: '#ECFDF5', icon: '✅' },
-    cert: { label: 'Certificación', color: '#92400E', bg: '#FEF3C7', icon: '🏆' },
-    news: { label: 'Novedad', color: '#1E40AF', bg: '#EFF6FF', icon: '📢' },
-    hiring: { label: 'Oferta de trabajo', color: '#7C3AED', bg: 'rgba(123,47,255,0.1)', icon: '💼' },
-    milestone: { label: 'Hito', color: '#DB2777', bg: '#FDF2F8', icon: '🎉' },
-    research: { label: 'Investigación', color: '#0891B2', bg: '#ECFEFF', icon: '🔬' },
-    event: { label: 'Evento', color: '#D97706', bg: '#FFFBEB', icon: '📅' },
-    training: { label: 'Formación', color: '#059669', bg: '#ECFDF5', icon: '📚' },
-  }
-  const t = map[type] || map.news
-  return (
-    <span className={styles.postTypeTag} style={{ color: t.color, background: t.bg }}>
-      {t.icon} {t.label}
-    </span>
-  )
-}
-
-function PostCard({ post }) {
+function PostCard({ post, follow, unfollow, isFollowing }) {
   const navigate = useNavigate()
-  const { follow, unfollow, isFollowing } = useUser()
   const [liked, setLiked] = useState(false)
   const [likes, setLikes] = useState(post.likes)
   const [saved, setSaved] = useState(false)
   const author = post.author
   const followed = isFollowing(author.id)
 
-  function handleAuthorClick() {
-    if (post.authorType === 'helper') navigate(`/helper/${author.id}`)
-    else navigate(`/company/${author.id}`)
-  }
-
   return (
     <div className={styles.postCard}>
       {post.recommended && (
-        <div className={styles.recommendedBadge}>
-          <Sparkles size={11} /> Recomendado para ti
-        </div>
+        <div className={styles.recommendedBadge}><Sparkles size={11} /> Recomendado para ti</div>
       )}
-
-      {/* Author header */}
       <div className={styles.postHeader}>
-        <div className={styles.authorInfo} onClick={handleAuthorClick}>
+        <div className={styles.authorInfo} onClick={() => post.authorType === 'helper' ? navigate(`/helper/${author.id}`) : null}>
           <div className={styles.authorAvatar} style={{ background: author.avatarColor }}>
             {author.avatarUrl
               ? <img src={author.avatarUrl} alt="" className={styles.authorAvatarImg} />
-              : <span>{typeof author.avatar === 'string' && author.avatar.length <= 2 ? author.avatar : author.name?.[0]}</span>
+              : <span>{author.avatar || author.name?.[0]}</span>
             }
           </div>
           <div className={styles.authorMeta}>
             <div className={styles.authorName}>
               {author.name}
-{author.founder && <Award size={12} color='#92400E' style={{marginLeft:'3px',verticalAlign:'middle'}} />}
+              {author.founder && <Award size={12} color='#92400E' style={{marginLeft:'4px',verticalAlign:'middle'}} />}
+              {author.verified && !author.founder && <Shield size={11} color='#059669' style={{marginLeft:'4px',verticalAlign:'middle'}} />}
             </div>
-            <div className={styles.authorSub}>
-              {post.authorType === 'company' ? author.handle : author.specialty}
-              {' · '}{post.date}
-            </div>
+            <div className={styles.authorSub}>{post.authorType === 'company' ? author.handle : author.specialty} · {post.date}</div>
           </div>
         </div>
-
-        {!followed ? (
-          <button className={styles.followBtn} onClick={() => follow(author.id)}>
-            <UserPlus size={13} /> Seguir
-          </button>
-        ) : (
-          <button className={styles.followingBtn} onClick={() => unfollow(author.id)}>
-            <Check size={13} /> Siguiendo
-          </button>
-        )}
+        {!followed
+          ? <button className={styles.followBtn} onClick={() => follow(author.id)}><UserPlus size={13} /> Seguir</button>
+          : <button className={styles.followingBtn} onClick={() => unfollow(author.id)}><Check size={13} /> Siguiendo</button>
+        }
       </div>
-
-      {/* Post type tag */}
-      <PostTypeTag type={post.type} />
-
-      {/* Content */}
       <p className={styles.postText}>{post.text}</p>
-
-      {/* Actions */}
+      {post.badge && <div className={styles.postBadge}>{post.badge}</div>}
       <div className={styles.postActions}>
-        <button
-          className={`${styles.action} ${liked ? styles.actionLiked : ''}`}
+        <button className={`${styles.action} ${liked ? styles.actionLiked : ''}`}
           onClick={() => { setLiked(l => !l); setLikes(n => liked ? n - 1 : n + 1) }}>
           <Heart size={18} fill={liked ? 'var(--red)' : 'none'} color={liked ? 'var(--red)' : 'var(--soft)'} />
           <span>{likes}</span>
         </button>
         <button className={styles.action}>
-          <MessageCircle size={18} color="var(--soft)" />
-          <span>{post.comments}</span>
+          <MessageCircle size={18} color="var(--soft)" /><span>{post.comments}</span>
         </button>
-        <button className={styles.action}>
-          <Share2 size={18} color="var(--soft)" />
-        </button>
-        <button
-          className={`${styles.action} ${styles.actionRight} ${saved ? styles.actionSaved : ''}`}
-          onClick={() => setSaved(s => !s)}>
+        <button className={styles.action}><Share2 size={18} color="var(--soft)" /></button>
+        <button className={`${styles.action} ${styles.actionRight} ${saved ? styles.actionSaved : ''}`} onClick={() => setSaved(s => !s)}>
           <Bookmark size={18} fill={saved ? 'var(--purple)' : 'none'} color={saved ? 'var(--purple)' : 'var(--soft)'} />
         </button>
       </div>
-      {/* Notification panel */}
-      {showNotifs && (
-        <div className={styles.notifOverlay} onClick={() => setShowNotifs(false)}>
-          <div className={styles.notifPanel} onClick={e => e.stopPropagation()}>
-            <div className={styles.notifPanelHeader}>
-              <span className={styles.notifPanelTitle}>Notificaciones</span>
-              <button className={styles.notifClose} onClick={() => setShowNotifs(false)}>✕</button>
-            </div>
-            {notifications.length === 0 ? (
-              <div className={styles.notifEmpty}>
-                <Bell size={28} color="var(--rule)" />
-                <p>Sin notificaciones</p>
-              </div>
-            ) : (
-              <div className={styles.notifList}>
-                {notifications.slice(0,10).map((n, i) => (
-                  <div key={i} className={styles.notifItem}>
-                    <div className={styles.notifDot} />
-                    <div className={styles.notifText}>
-                      {n.type === 'followed' ? 'Empezaste a seguir a alguien' : 'Nueva actividad'}
-                    </div>
-                    <span className={styles.notifTime}>Hoy</span>
-                  </div>
-                ))}
-              </div>
-            )}
-          </div>
-        </div>
-      )}
     </div>
   )
 }
 
 function SuggestedProfile({ profile, type, onFollow, onUnfollow, isFollowed }) {
   const navigate = useNavigate()
-
   return (
     <div className={styles.suggestedCard} onClick={() => type === 'helper' ? navigate(`/helper/${profile.id}`) : null}>
       <div className={styles.suggestedAvatar} style={{ background: profile.avatarColor }}>
@@ -188,35 +94,6 @@ function SuggestedProfile({ profile, type, onFollow, onUnfollow, isFollowed }) {
         onClick={(e) => { e.stopPropagation(); isFollowed ? onUnfollow(profile.id) : onFollow(profile.id) }}>
         {isFollowed ? '✓' : '+ Seguir'}
       </button>
-      {/* Notification panel */}
-      {showNotifs && (
-        <div className={styles.notifOverlay} onClick={() => setShowNotifs(false)}>
-          <div className={styles.notifPanel} onClick={e => e.stopPropagation()}>
-            <div className={styles.notifPanelHeader}>
-              <span className={styles.notifPanelTitle}>Notificaciones</span>
-              <button className={styles.notifClose} onClick={() => setShowNotifs(false)}>✕</button>
-            </div>
-            {notifications.length === 0 ? (
-              <div className={styles.notifEmpty}>
-                <Bell size={28} color="var(--rule)" />
-                <p>Sin notificaciones</p>
-              </div>
-            ) : (
-              <div className={styles.notifList}>
-                {notifications.slice(0,10).map((n, i) => (
-                  <div key={i} className={styles.notifItem}>
-                    <div className={styles.notifDot} />
-                    <div className={styles.notifText}>
-                      {n.type === 'followed' ? 'Empezaste a seguir a alguien' : 'Nueva actividad'}
-                    </div>
-                    <span className={styles.notifTime}>Hoy</span>
-                  </div>
-                ))}
-              </div>
-            )}
-          </div>
-        </div>
-      )}
     </div>
   )
 }
@@ -225,52 +102,34 @@ export default function Feed() {
   const { following, follow, unfollow, isFollowing, unreadNotifs, markNotifsRead, notifications } = useUser()
   const [activeSection, setActiveSection] = useState('para-ti')
   const [showNotifs, setShowNotifs] = useState(false)
-  const [hidden, setHidden] = useState(false)
-  const lastScrollY = useRef(0)
-
-  useEffect(() => {
-    const el = document.querySelector('#feedScroll')
-    if (!el) return
-    const onScroll = () => {
-      const curr = el.scrollTop
-      setHidden(curr > lastScrollY.current && curr > 60)
-      lastScrollY.current = curr
-    }
-    el.addEventListener('scroll', onScroll, { passive: true })
-    return () => el.removeEventListener('scroll', onScroll)
-  }, []) // para-ti | siguiendo
 
   const feed = buildFeed(following, HELPERS, COMPANIES)
   const followingFeed = buildFeed(following, HELPERS, COMPANIES).filter(p => !p.recommended)
   const displayFeed = activeSection === 'siguiendo' ? followingFeed : feed
-
   const suggestedHelpers = HELPERS.filter(h => !following.includes(h.id) && !following.includes(String(h.id))).slice(0, 4)
   const suggestedCompanies = COMPANIES.filter(c => !following.includes(c.id)).slice(0, 3)
 
   return (
     <div className={styles.page}>
-      {/* Header */}
-      <PageHeader rightEl={<button className={styles.notifBtn} onClick={() => { setShowNotifs(s => !s); markNotifsRead() }}><Bell size={18} />{unreadNotifs > 0 && <span className={styles.notifBadge}>{unreadNotifs}</span>}</button>} />
+      <PageHeader rightEl={
+        <button className={styles.notifBtn} onClick={() => { setShowNotifs(s => !s); markNotifsRead() }}>
+          <Bell size={20} />
+          {unreadNotifs > 0 && <span className={styles.notifBadge}>{unreadNotifs}</span>}
+        </button>
+      } />
 
-      {/* Section tabs */}
-      <div className={`${styles.sectionTabs} ${hidden ? styles.sectionTabsHidden : ''}`}>
+      <div className={styles.sectionTabs}>
         <div className={styles.sectionTabsInner}>
-          <button
-            className={`${styles.sectionTab} ${activeSection === 'para-ti' ? styles.sectionTabActive : ''}`}
-            onClick={() => setActiveSection('para-ti')}>
-            Para ti
-          </button>
-          <button
-            className={`${styles.sectionTab} ${activeSection === 'siguiendo' ? styles.sectionTabActive : ''}`}
+          <button className={`${styles.sectionTab} ${activeSection === 'para-ti' ? styles.sectionTabActive : ''}`}
+            onClick={() => setActiveSection('para-ti')}>Para ti</button>
+          <button className={`${styles.sectionTab} ${activeSection === 'siguiendo' ? styles.sectionTabActive : ''}`}
             onClick={() => setActiveSection('siguiendo')}>
             Siguiendo {following.length > 0 && <span className={styles.followingCount}>{following.length}</span>}
           </button>
         </div>
       </div>
 
-      <div className={styles.content} id='feedScroll'>
-
-        {/* Suggested to follow */}
+      <div className={styles.content}>
         {activeSection === 'para-ti' && (suggestedHelpers.length > 0 || suggestedCompanies.length > 0) && (
           <div className={styles.suggestedSection}>
             <h3 className={styles.suggestedTitle}>Sugerencias para ti</h3>
@@ -287,47 +146,43 @@ export default function Feed() {
           </div>
         )}
 
-        {/* Feed */}
-        {displayFeed.length > 0 ? (
-          displayFeed.map((post, i) => <PostCard key={`${post.id}-${i}`} post={post} />)
-        ) : (
-          <div className={styles.emptyFeed}>
-            <div className={styles.emptyIcon}>👥</div>
-            <h3>Sigue a alguien para ver su actividad</h3>
-            <p>Cuando sigas a helpers o empresas, sus publicaciones aparecerán aquí.</p>
-            <button className={styles.exploreBtn} onClick={() => setActiveSection('para-ti')}>
-              Ver sugerencias
-            </button>
-          </div>
-        )}
+        {displayFeed.length > 0
+          ? displayFeed.map((post, i) => (
+              <PostCard key={`${post.id}-${i}`} post={post}
+                follow={follow} unfollow={unfollow} isFollowing={isFollowing} />
+            ))
+          : (
+            <div className={styles.emptyFeed}>
+              <div className={styles.emptyIcon}>👥</div>
+              <h3>Sigue a alguien para ver su actividad</h3>
+              <p>Cuando sigas a helpers o empresas, sus publicaciones aparecerán aquí.</p>
+              <button className={styles.exploreBtn} onClick={() => setActiveSection('para-ti')}>Ver sugerencias</button>
+            </div>
+          )
+        }
 
-        {/* Company profiles section */}
         {activeSection === 'para-ti' && (
           <div className={styles.companiesSection}>
             <h3 className={styles.suggestedTitle}>Empresas en Nüra</h3>
             {COMPANIES.map(c => (
               <div key={c.id} className={styles.companyRow}>
-                <div className={styles.companyAvatarWrap}>
-                  <div className={styles.companyAvatar} style={{ background: c.avatarColor }}>
-                    {c.avatar}
-                  </div>
-                </div>
+                <div className={styles.companyAvatar} style={{ background: c.avatarColor }}>{c.avatar}</div>
                 <div className={styles.companyInfo}>
                   <div className={styles.companyName}>{c.name} {c.verified && <Shield size={11} color='#059669' style={{marginLeft:'3px',verticalAlign:'middle'}} />}</div>
                   <div className={styles.companySpec}>{c.specialty}</div>
-                  <div className={styles.companyFollowers}>{c.followers.toLocaleString()} seguidores</div>
+                  <div className={styles.companyFollowers}>{c.followers?.toLocaleString()} seguidores</div>
                 </div>
                 <button
                   className={isFollowing(c.id) ? styles.followingBtnSmall : styles.followBtnSmall}
                   onClick={() => isFollowing(c.id) ? unfollow(c.id) : follow(c.id)}>
-                  {following.includes(c.id) ? '✓' : '+ Seguir'}
+                  {isFollowing(c.id) ? '✓' : '+ Seguir'}
                 </button>
               </div>
             ))}
           </div>
         )}
       </div>
-      {/* Notification panel */}
+
       {showNotifs && (
         <div className={styles.notifOverlay} onClick={() => setShowNotifs(false)}>
           <div className={styles.notifPanel} onClick={e => e.stopPropagation()}>
@@ -335,7 +190,7 @@ export default function Feed() {
               <span className={styles.notifPanelTitle}>Notificaciones</span>
               <button className={styles.notifClose} onClick={() => setShowNotifs(false)}>✕</button>
             </div>
-            {notifications.length === 0 ? (
+            {!notifications?.length ? (
               <div className={styles.notifEmpty}>
                 <Bell size={28} color="var(--rule)" />
                 <p>Sin notificaciones</p>
@@ -345,9 +200,7 @@ export default function Feed() {
                 {notifications.slice(0,10).map((n, i) => (
                   <div key={i} className={styles.notifItem}>
                     <div className={styles.notifDot} />
-                    <div className={styles.notifText}>
-                      {n.type === 'followed' ? 'Empezaste a seguir a alguien' : 'Nueva actividad'}
-                    </div>
+                    <div className={styles.notifText}>{n.type === 'followed' ? 'Empezaste a seguir a alguien' : 'Nueva actividad'}</div>
                     <span className={styles.notifTime}>Hoy</span>
                   </div>
                 ))}
