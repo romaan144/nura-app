@@ -439,7 +439,7 @@ export default function HelperProfile() {
                 )}
               </div>
             </section>
-            {/* Nüra-detected skills — THE differentiator */
+            {/* Nüra-detected skills — THE differentiator */}
             {h.hiddenSkills?.length > 0 && (
               <div className={styles.nuraDetectedCard}>
                 <div className={styles.nuraDetectedHeader}>
