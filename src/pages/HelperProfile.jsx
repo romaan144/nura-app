@@ -285,7 +285,7 @@ export default function HelperProfile() {
   return (
     <div className={styles.page}>
       {/* Header */}
-      <PageHeader showBack rightEl={<div className={styles.headerActions}><button className={styles.shareBtn} onClick={handleShare}>{shared ? <span>✓</span> : <Share2 size={15} />}</button>{!hasRated(h.id) && <button className={styles.rateBtn} onClick={() => setShowRating(true)}><Star size={13} /> Valorar</button>}</div>} />
+      <PageHeader showBack rightEl={<div className={styles.headerActions}><button className={styles.shareBtn} onClick={handleShare}>{shared ? <span>✓</span> : <Share2 size={15} />}</button></div>} />
 
       <div className={styles.content}>
         {/* Hero */}
