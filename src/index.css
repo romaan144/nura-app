@@ -56,7 +56,7 @@
   --card-shadow:  0 2px 8px rgba(0,0,0,0.08), 0 1px 3px rgba(0,0,0,0.05);
 
   /* Page horizontal margin */
-  --page-x: 14px;
+  --page-x: clamp(12px, 4vw, 20px);
 }
 
 
@@ -82,7 +82,7 @@ a { text-decoration: none; color: inherit; }
 body {
   background: #F8F8FA;
   font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-  font-size: 15px;
+  font-size: clamp(13px, 3.8vw, 16px);
   color: var(--ink);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;

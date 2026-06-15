@@ -294,12 +294,6 @@ export default function Home({ setSearchState }) {
           <img src="/logo-text.png" alt="Nüra" className={styles.headerLogo} />
         </div>
         <div className={styles.headerRight}>
-          {messages.length > 1 && (
-            <button className={styles.newChatBtn}
-              onClick={() => { setNuraChatMessages([]); setNuraLastMatches(null); }}>
-              + Nuevo chat
-            </button>
-          )}
           <button className={styles.profileBtn} onClick={() => navigate('/profile')} style={{flexShrink:0,width:'38px',height:'38px',minWidth:'38px'}}>
             {user?.name
               ? <img src={`https://api.dicebear.com/9.x/personas/svg?seed=${encodeURIComponent(user.name)}`} alt="" style={{width:'100%',height:'100%',borderRadius:'50%',objectFit:'cover'}} />
@@ -358,6 +352,15 @@ export default function Home({ setSearchState }) {
               <span className={styles.recentText}>{s.query}</span>
             </button>
           ))}
+        </div>
+      )}
+
+      {messages.length > 2 && (
+        <div className={styles.newChatRow}>
+          <button className={styles.newChatBtn}
+            onClick={() => { setNuraChatMessages([]); setNuraLastMatches(null); }}>
+            + Nuevo chat
+          </button>
         </div>
       )}
 
