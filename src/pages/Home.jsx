@@ -70,17 +70,23 @@ function ResultCard({ helper, onNavigate, onFav, isFav }) {
           </div>
           <div className={styles.resultSpec}>{helper.specialty}</div>
           <div className={styles.resultMeta}>
-            <span className={styles.resultRating}><Star size={11} fill="#F59E0B" color="#F59E0B" /> {helper.rating} <span style={{color:'#aaa'}}>({helper.reviews})</span></span>
-            <span className={styles.resultDot} />
-            <span className={styles.resultDist}>{helper.distance} km de ti</span>
+            <Star size={11} fill="#F59E0B" color="#F59E0B" />
+            <span className={styles.resultRating}>{helper.rating}</span>
+            <span className={styles.resultMetaDot}>·</span>
+            <MapPin size={10} color="#aaa" />
+            <span>{helper.distance} km</span>
+            <span className={styles.resultMetaDot}>·</span>
+            <span>{helper.reviews} reseñas</span>
           </div>
         </div>
       </div>
       <div className={styles.resultBottom}>
         <div className={styles.resultTags}>
           {helper.urgent && <span className={styles.resultUrgent}>⚡ Urgencias</span>}
-          {helper.presential && <span className={styles.resultTag}>📍 Presencial</span>}
-          {helper.online && <span className={styles.resultTag}>💻 Online</span>}
+          {helper.presential && helper.online
+            ? <span className={styles.resultTag}>Presencial · Online</span>
+            : helper.presential ? <span className={styles.resultTag}>📍 Presencial</span>
+            : helper.online ? <span className={styles.resultTag}>💻 Online</span> : null}
           <span className={styles.resultTag}>⏱ {helper.responseTime}</span>
         </div>
         <div style={{display:'flex',gap:'8px',alignItems:'center'}}>

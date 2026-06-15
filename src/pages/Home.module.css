@@ -55,9 +55,9 @@
 
 /* Bubbles */
 .bubble {
-  max-width: 82%;
-  padding: 10px 14px;
-  display: flex; flex-direction: column; gap: 4px;
+  max-width: 80%;
+  padding: 11px 14px;
+  display: flex; flex-direction: column; gap: 6px;
   border-radius: 18px;
 }
 .bubble p {
@@ -76,6 +76,7 @@
   background: #1C1C1E;
   color: white;
   border-radius: 18px 18px 4px 18px;
+  padding: 11px 14px;
 }
 
 /* Typing dots */
@@ -363,3 +364,5 @@
   transition: all 0.15s;
 }
 .newChatBtn:hover { color: var(--ink); border-color: rgba(0,0,0,0.15); }
+
+.resultMetaDot { color: var(--rule); margin: 0 1px; }

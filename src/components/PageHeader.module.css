@@ -1,9 +1,10 @@
 .header {
   display: flex; align-items: center; justify-content: space-between;
-  padding: 12px 14px;
+  padding: 12px var(--page-x);
   background: transparent;
   position: sticky; top: 0; z-index: 20;
   pointer-events: none;
+  min-height: 60px;
 }
 .left, .right {
   pointer-events: all;

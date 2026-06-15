@@ -304,55 +304,36 @@ export default function HelperProfile() {
             ? <img src={h.avatarUrl} alt={h.name} className={styles.heroAvatar} />
             : <div className={styles.heroAvatarFallback} style={{ background: h.avatarColor }}>{h.avatar}</div>
           }
-          <h1 className={styles.heroName}>{h.name}{h.founder && <Award size={13} color='#92400E' style={{marginLeft:'5px',verticalAlign:'middle'}} />}</h1>
+          {/* Name */}
+          <h1 className={styles.heroName}>
+            {h.name}
+            {h.founder && <Award size={13} color='#92400E' style={{marginLeft:'5px',verticalAlign:'middle'}} />}
+          </h1>
           <p className={styles.heroSpecialty}>{h.specialty || h.tags?.[0]}</p>
 
+          {/* One line: rating · distance · response time */}
           <div className={styles.heroMeta}>
-            <div className={styles.heroMetaItem}>
-              <Star size={13} fill="#F59E0B" color="#F59E0B" />
-              <strong>{h.rating}</strong>
-              <span>({h.reviews})</span>
-            </div>
-            <div className={styles.heroMetaSep} />
-            <div className={styles.heroMetaItem}>
-              <MapPin size={12} />
-              <span>{h.zone} · {h.distance}km</span>
-            </div>
-            <div className={styles.heroMetaSep} />
-            <div className={styles.heroMetaItem}>
-              <Clock size={12} />
-              <span>{h.responseTime}</span>
-            </div>
+            <Star size={12} fill="#F59E0B" color="#F59E0B" />
+            <strong>{h.rating}</strong>
+            <span className={styles.heroMetaDot}>·</span>
+            <MapPin size={12} color="var(--soft)" />
+            <span>{h.distance} km</span>
+            <span className={styles.heroMetaDot}>·</span>
+            <Clock size={12} color="var(--soft)" />
+            <span>{h.responseTime}</span>
           </div>
 
-          {/* Availability */}
-          <div className={styles.availabilityRow}>
-            <div className={`${styles.availChip} ${h.available ? styles.availChipGreen : styles.availChipGray}`}>
-              <span className={styles.availDot} />
-              {h.available ? 'Disponible ahora' : 'No disponible hoy'}
-            </div>
-            {h.responseTime && (
-              <div className={styles.availChip}>⏱ Responde en {h.responseTime}</div>
-            )}
-          </div>
-          <div className={styles.heroModes}>
-
-            {h.presential && <span className={styles.heroMode}>📍 Presencial</span>}
-            {h.online && <span className={styles.heroMode}>💻 Online</span>}
-          </div>
-
-          {/* Coverage and mode */}
-          <div className={styles.heroCoverage}>
-            <span className={styles.coverageChip}>📍 {h.zone}</span>
-            {h.presential && <span className={styles.coverageChip}>Presencial</span>}
-            {h.online && <span className={styles.coverageChip}>💻 Online</span>}
-            {h.languages?.slice(0,2).map(l => <span key={l} className={styles.coverageChip}>🌐 {l}</span>)}
-          </div>
-          <div className={styles.heroBadges}>
-            {h.dniVerified && <span className={styles.badgePrimary}><Shield size={10} /> DNI Verificado</span>}
-            {h.criminalRecordClear && <span className={styles.badgeSecondary}><CheckCircle size={10} /> Sin antecedentes</span>}
-
-            {h.urgent && <span className={styles.badgeUrgent}><Zap size={10} /> Urgencias</span>}
+          {/* Status + key badges — only non-obvious info */}
+          <div className={styles.heroTags}>
+            <span className={h.available ? styles.tagGreen : styles.tagGray}>
+              <span className={styles.dot} />{h.available ? 'Disponible' : 'No disponible'}
+            </span>
+            {h.presential && h.online
+              ? <span className={styles.tag}>Presencial · Online</span>
+              : h.presential ? <span className={styles.tag}>Solo presencial</span>
+              : <span className={styles.tag}>Solo online</span>}
+            {h.urgent && <span className={styles.tagRed}><Zap size={10} /> Urgencias</span>}
+            {h.dniVerified && <span className={styles.tagBlue}><Shield size={10} /> Verificado</span>}
           </div>
 
           <div className={styles.heroActions}>

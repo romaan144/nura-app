@@ -51,7 +51,7 @@
 .cardMain { display: flex; align-items: center; gap: 12px; margin-bottom: 12px; }
 .avatar { width: 46px; height: 46px; border-radius: 50%; display: flex; align-items: center; justify-content: center; color: white; font-weight: 700; font-size: 15px; flex-shrink: 0; box-shadow: 0 3px 12px rgba(0,0,0,0.15); }
 .cardInfo { flex: 1; min-width: 0; }
-.cardName { font-size: 16px; font-weight: 800; color: var(--ink); display: flex; align-items: center; gap: 5px; margin-bottom: 4px; letter-spacing: -0.2px; }
+.cardName { font-size: 15px; font-weight: 800; color: var(--ink); display: flex; align-items: center; gap: 5px; letter-spacing: -0.2px; }
 .verifiedDot { color: var(--green); display: flex; }
 .founderDot { font-size: 11px; }
 .cardMeta { display: flex; align-items: center; gap: 4px; font-size: 12px; color: var(--soft); margin-bottom: 6px; }
