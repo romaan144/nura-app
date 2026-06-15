@@ -268,7 +268,7 @@ export default function HelperProfile() {
   const tabs = [
     { id: 'perfil', label: 'Perfil vivo', icon: <Activity size={12} /> },
     { id: 'empresas', label: 'Laboral', icon: <Building2 size={12} /> },
-    { id: 'feed', label: 'Publicaciones', icon: <MessageSquare size={12} /> },
+    { id: 'feed', label: 'Posts', icon: <MessageSquare size={12} /> },
     { id: 'reputacion', label: 'Reputación', icon: <BarChart2 size={12} /> },
   ]
 
