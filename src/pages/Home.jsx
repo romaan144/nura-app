@@ -291,7 +291,7 @@ export default function Home({ setSearchState }) {
           {messages.length > 1 && (
             <button
               onClick={() => { setNuraChatMessages([]); setNuraLastMatches(null); }}
-              style={{padding:'7px 13px',borderRadius:'20px',background:'white',border:'1.5px solid rgba(0,0,0,0.08)',color:'var(--mid)',fontSize:'12px',fontWeight:600,boxShadow:'0 1px 4px rgba(0,0,0,0.08)',whiteSpace:'nowrap',display:'flex',alignItems:'center',gap:'5px'}}>
+              style={{padding:'5px 10px',borderRadius:'16px',background:'white',border:'1.5px solid rgba(0,0,0,0.08)',color:'var(--soft)',fontSize:'11px',fontWeight:600,boxShadow:'0 1px 3px rgba(0,0,0,0.06)',whiteSpace:'nowrap',display:'flex',alignItems:'center',gap:'4px',flexShrink:0}}>
               + Nuevo chat
             </button>
           )}
