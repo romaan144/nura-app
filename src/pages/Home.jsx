@@ -49,6 +49,7 @@ const SUGGESTIONS = {
 
 
 function ResultCard({ helper, onNavigate }) {
+  console.log('HELPER PRICE:', helper.name, helper.price)
   return (
     <div className={styles.resultCard} onClick={() => onNavigate(`/helper/${helper.id}`)}>
       <div className={styles.resultTop}>
