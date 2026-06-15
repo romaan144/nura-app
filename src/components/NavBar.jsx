@@ -9,10 +9,23 @@ import pageStyles from './PageHeader.module.css'
 export function MenuButton() {
   return (
     <button
-      className={pageStyles.circleBtn}
       onClick={() => window.__openDrawer?.()}
-      aria-label="Menú">
-      <Menu size={20} />
+      aria-label="Menú"
+      style={{
+        width: '40px',
+        height: '40px',
+        borderRadius: '50%',
+        background: 'white',
+        border: '1.5px solid rgba(0,0,0,0.08)',
+        boxShadow: '0 2px 8px rgba(0,0,0,0.1), 0 1px 3px rgba(0,0,0,0.06)',
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center',
+        color: '#333',
+        cursor: 'pointer',
+        flexShrink: 0,
+      }}>
+      <Menu size={18} />
     </button>
   )
 }
