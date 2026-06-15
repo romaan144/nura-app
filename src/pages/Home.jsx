@@ -1,9 +1,10 @@
 import { useState, useEffect, useRef } from 'react'
+import PageHeader from '../components/PageHeader'
 import { useNavigate } from 'react-router-dom'
 import { Send, Mic, MicOff, ArrowRight, Plus } from 'lucide-react'
 import { analyzeNeed, matchHelpers } from '../utils/matching'
 import { useUser } from '../context/UserContext'
-import PageHeader from '../components/PageHeader'
+
 import styles from './Home.module.css'
 import Onboarding from '../components/Onboarding'
 
@@ -159,17 +160,11 @@ export default function Home({ setSearchState }) {
   return (
     <div className={styles.page}>
 
-      {/* Header — ChatGPT style */}
-      <header className={styles.header}>
-        <MenuButton />
-        <img src="/logo-text.png" alt="Nüra" className={styles.headerLogo} />
-        <button className={styles.profileBtn} onClick={() => navigate('/profile')}>
-          {user?.name
-            ? <div className={styles.profileAvatar}>{user.name[0].toUpperCase()}</div>
-            : <div className={styles.profileAvatar}>?</div>
-          }
-        </button>
-      </header>
+      <PageHeader rightEl={
+          <button className={styles.profileBtn} onClick={() => navigate('/profile')}>
+            <div className={styles.profileAvatar}>{user?.name?.[0]?.toUpperCase() || '?'}</div>
+          </button>
+        } />
 
       {/* Messages */}
       <div className={styles.messages}>
