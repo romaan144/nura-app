@@ -6,7 +6,7 @@ import { HELPERS } from '../data/helpers'
 import styles from './Profile.module.css'
 
 export default function Profile() {
-  const { user, logout, chats, ratings } = useUser()
+  const { user, logout, chats, ratings, searchHistory, totalUnreadChats: totalUnread } = useUser()
   const navigate = useNavigate()
 
   if (!user) {
