@@ -76,9 +76,15 @@ function AppRoutes({ showSplash }) {
 }
 
 export default function App() {
-  const [showSplash, setShowSplash] = useState(true)
+  const [showSplash, setShowSplash] = useState(() => {
+    // Only show splash once per session
+    if (sessionStorage.getItem('nura_splashed')) return false
+    sessionStorage.setItem('nura_splashed', '1')
+    return true
+  })
   useEffect(() => {
-    const t = setTimeout(() => setShowSplash(false), 2400)
+    if (!showSplash) return
+    const t = setTimeout(() => setShowSplash(false), 2600)
     return () => clearTimeout(t)
   }, [])
 
