@@ -43,3 +43,8 @@
 }
 .circleBtn:hover { box-shadow: 0 4px 14px rgba(0,0,0,0.14); transform: scale(1.04); }
 .placeholder { width: 38px; }
+
+@media (min-width: 768px) {
+  .left { visibility: hidden; } /* Keep space but hide button */
+  .header { padding: 14px 24px; }
+}

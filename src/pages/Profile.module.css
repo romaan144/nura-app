@@ -102,3 +102,9 @@
 .historyItem:last-child { border-bottom: none; }
 .historyQuery { font-size: 13px; color: var(--ink); font-weight: 500; }
 .historyDate { font-size: 11px; color: var(--soft); }
+
+@media (min-width: 768px) {
+  .page { max-width: 640px; margin: 0 auto; }
+  .content { padding: 0 24px 40px; }
+  .avatarSection { padding: 32px 24px 24px; }
+}

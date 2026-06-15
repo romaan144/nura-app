@@ -312,3 +312,14 @@
 .recentItem:hover { box-shadow: 0 2px 8px rgba(0,0,0,0.08); }
 .recentIcon { font-size: 14px; flex-shrink: 0; }
 .recentText { font-size: 13px; color: var(--mid); }
+
+/* ── DESKTOP ── */
+@media (min-width: 768px) {
+  .page { max-width: 700px; margin: 0 auto; width: 100%; }
+  .messages { padding: 32px 24px 16px; }
+  .inputWrap { padding: 10px 24px 20px; }
+  .suggestions { padding: 4px 24px 8px; }
+  .resultCard { padding: 18px 20px; }
+  .headerLogoPill { display: none; } /* Logo is in sidebar */
+  .header { justify-content: flex-end; padding: 14px 24px; }
+}

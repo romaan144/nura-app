@@ -105,3 +105,9 @@
 /* ── CONTRATAR BUTTON IN HEADER ── */
 .contractBtn { display: flex; align-items: center; gap: 5px; padding: 7px 13px; background: var(--grad-main); color: white; border: none; border-radius: 18px; font-size: 12px; font-weight: 700; box-shadow: 0 2px 8px rgba(123,47,255,0.3); transition: all 0.15s; flex-shrink: 0; }
 .contractBtn:hover { transform: scale(1.03); }
+
+@media (min-width: 768px) {
+  .page { max-width: 700px; margin: 0 auto; }
+  .messages { padding: 24px 24px 12px; }
+  .inputBar { padding: 10px 24px 20px; }
+}

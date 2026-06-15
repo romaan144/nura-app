@@ -113,3 +113,10 @@
 .sortRow::-webkit-scrollbar { display: none; }
 .sortBtn { padding: 6px 13px; background: white; border: none; border-radius: 16px; font-size: 12px; font-weight: 500; color: var(--mid); white-space: nowrap; flex-shrink: 0; box-shadow: 0 1px 3px rgba(0,0,0,0.06); transition: all 0.15s; }
 .sortBtnActive { background: #1C1C1E; color: white; box-shadow: 0 2px 8px rgba(0,0,0,0.15); }
+
+@media (min-width: 768px) {
+  .page { max-width: 800px; margin: 0 auto; }
+  .content { padding: 0 24px 40px; }
+  .cards { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+  .sortRow { padding: 0 24px 14px; }
+}

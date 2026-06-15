@@ -16,6 +16,7 @@ import Explore from './pages/Explore'
 import Feed from './pages/Feed'
 import NotFound from './pages/NotFound'
 import NavBar from './components/NavBar'
+import DesktopSidebar from './components/DesktopSidebar'
 import ScrollToTop from './components/ScrollToTop'
 import OnboardingPage from './pages/Onboarding'
 import MyServices from './pages/MyServices'
@@ -34,6 +35,7 @@ function AppRoutes({ showSplash }) {
   return (
     <>
       {showSplash && <Splash />}
+      <div className="desktopMain">
       <PageTransition>
         <Routes location={location} key={location.pathname}>
           <Route path="/" element={<Home setSearchState={setSearchState} />} />
@@ -55,6 +57,7 @@ function AppRoutes({ showSplash }) {
           <Route path="*" element={<NotFound />} />
         </Routes>
       </PageTransition>
+      </div>
       {!hideNav && <NavBar />}
       <Toast />
     </>

@@ -48,3 +48,11 @@
 .price { font-size: 12px; font-weight: 700; color: var(--purple); }
 .cardBadges { display: flex; gap: 3px; }
 .badge { font-size: 12px; }
+
+@media (min-width: 768px) {
+  .page { max-width: 900px; margin: 0 auto; }
+  .content { padding: 0 24px 40px; }
+  .grid { grid-template-columns: 1fr 1fr 1fr; gap: 14px; }
+  .searchWrap { padding: 0 24px 12px; }
+  .categories { padding: 0 24px 14px; }
+}
