@@ -156,16 +156,18 @@ export default function Results({ searchState }) {
         </div>
 
         {currentMatches.length > 0 ? (
-          <div className={styles.sortRow}>
-        {['relevance','rating','distance','price'].map(s => (
-          <button key={s} className={`${styles.sortBtn} ${sortBy===s?styles.sortBtnActive:''}`} onClick={() => setSortBy(s)}>
-            {{relevance:'Relevancia',rating:'Valoración',distance:'Distancia',price:'Precio'}[s]}
-          </button>
-        ))}
-      </div>
-      <div className={styles.cards}>
-            {currentMatches.map((h, i) => h && <HelperCard key={h.id || i} helper={h} />)}
-          </div>
+          <>
+            <div className={styles.sortRow}>
+              {['relevance','rating','distance','price'].map(s => (
+                <button key={s} className={`${styles.sortBtn} ${sortBy===s?styles.sortBtnActive:''}`} onClick={() => setSortBy(s)}>
+                  {{'relevance':'Relevancia','rating':'Valoración','distance':'Distancia','price':'Precio'}[s]}
+                </button>
+              ))}
+            </div>
+            <div className={styles.cards}>
+              {currentMatches.map((h, i) => h && <HelperCard key={h.id || i} helper={h} />)}
+            </div>
+          </>
         ) : (
           <div className={styles.empty}>
             <p>No encontramos resultados para esta búsqueda.</p>
