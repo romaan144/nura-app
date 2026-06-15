@@ -297,7 +297,16 @@ export default function Home({ setSearchState }) {
     <div className={styles.page}>
       {/* Floating top — three independent bubbles */}
       <div className={styles.floatTop}>
-        <MenuButton className={styles.menuBubble} />
+        <button
+          className={styles.logoBubble}
+          style={{position:'static',transform:'none',padding:'0',width:'42px',height:'42px',borderRadius:'50%',display:'flex',alignItems:'center',justifyContent:'center',pointerEvents:'all'}}
+          onClick={() => window.__openDrawer?.()}>
+          <svg width="18" height="12" viewBox="0 0 18 12" fill="none">
+            <rect width="18" height="2" rx="1" fill="rgba(0,0,0,0.65)"/>
+            <rect y="5" width="14" height="2" rx="1" fill="rgba(0,0,0,0.65)"/>
+            <rect y="10" width="18" height="2" rx="1" fill="rgba(0,0,0,0.65)"/>
+          </svg>
+        </button>
         <div className={styles.logoBubble}>
           <img src="/logo-text.png" alt="Nüra" className={styles.headerLogo} />
         </div>
