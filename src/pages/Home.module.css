@@ -6,7 +6,10 @@
 .page {
   position: fixed;
   inset: 0;
-  background: #F8F8FA;
+  background:
+    radial-gradient(ellipse 120% 60% at 50% -10%, rgba(123,47,255,0.045) 0%, transparent 65%),
+    radial-gradient(ellipse 80% 40% at 90% 100%, rgba(0,212,200,0.03) 0%, transparent 60%),
+    #F7F7F9;
   overflow: hidden;
 }
 
@@ -60,16 +63,16 @@
   backdrop-filter: blur(24px) saturate(180%);
   -webkit-backdrop-filter: blur(24px) saturate(180%);
   border: 1px solid rgba(255,255,255,0.35);
-  box-shadow: 0 4px 24px rgba(0,0,0,0.06);
+  box-shadow: 0 2px 16px rgba(0,0,0,0.05), 0 0 0 0.5px rgba(0,0,0,0.06);
   display: flex;
   align-items: center;
   justify-content: center;
   cursor: pointer;
-  color: rgba(0,0,0,0.75);
-  transition: transform 0.2s, opacity 0.2s;
+  color: rgba(0,0,0,0.65);
+  transition: opacity 0.2s;
   flex-shrink: 0;
 }
-.menuBubble:active { opacity: 0.7; transform: scale(0.94); }
+.menuBubble:active { opacity: 0.6; }
 
 /* ── LOGO PILL — floating center ────────────────────── */
 .logoBubble {
@@ -102,16 +105,16 @@
   backdrop-filter: blur(24px) saturate(180%);
   -webkit-backdrop-filter: blur(24px) saturate(180%);
   border: 1px solid rgba(255,255,255,0.35);
-  box-shadow: 0 4px 24px rgba(0,0,0,0.06);
+  box-shadow: 0 2px 16px rgba(0,0,0,0.05), 0 0 0 0.5px rgba(0,0,0,0.06);
   display: flex;
   align-items: center;
   justify-content: center;
   overflow: hidden;
   cursor: pointer;
-  transition: transform 0.2s, opacity 0.2s;
+  transition: opacity 0.2s;
   flex-shrink: 0;
 }
-.profileBubble:active { opacity: 0.7; transform: scale(0.94); }
+.profileBubble:active { opacity: 0.6; }
 
 /* ── SUGGESTIONS — floating pills ──────────────────── */
 .suggestions {
@@ -210,12 +213,15 @@
 .msgRowUser { flex-direction: row-reverse; }
 
 .nuraAvatar {
-  width: 36px; height: 36px;
+  width: 34px; height: 34px;
   border-radius: 50%;
-  background: white;
+  background: rgba(255,255,255,0.72);
+  backdrop-filter: blur(16px) saturate(160%);
+  -webkit-backdrop-filter: blur(16px) saturate(160%);
+  border: 1px solid rgba(255,255,255,0.35);
   display: flex; align-items: center; justify-content: center;
   flex-shrink: 0;
-  box-shadow: 0 1px 4px rgba(0,0,0,0.1);
+  box-shadow: 0 1px 8px rgba(0,0,0,0.04);
   align-self: flex-start;
   margin-top: 2px;
 }
@@ -239,10 +245,13 @@
 .bubble p { margin: 0; line-height: 1.55; letter-spacing: -0.1px; }
 .bubble p:empty { display: none; }
 .bubbleNura {
-  background: white;
-  color: #1a1a1a;
+  background: rgba(255,255,255,0.78);
+  backdrop-filter: blur(20px) saturate(160%);
+  -webkit-backdrop-filter: blur(20px) saturate(160%);
+  border: 1px solid rgba(255,255,255,0.4);
+  color: rgba(0,0,0,0.85);
   border-radius: 4px 18px 18px 18px;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.08), 0 1px 3px rgba(0,0,0,0.05);
+  box-shadow: 0 1px 12px rgba(0,0,0,0.04);
 }
 .bubbleUser {
   background: #1C1C1E;
