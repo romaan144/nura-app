@@ -13,6 +13,7 @@ import { useUser } from '../context/UserContext'
 import RatingModal from '../components/RatingModal'
 import styles from './HelperProfile.module.css'
 import { showToast } from '../components/Toast'
+import { getHelperById } from '../utils/supabase'
 
 /* ── LIVE PROFILE PULSE ───────────────────────────────────────────────────
    This is the core of Nüra's concept: the profile is alive, updating now.
@@ -259,7 +260,17 @@ export default function HelperProfile() {
   // useEffect(() => { if(h) setFaved(isFavorite(h.id)) }, [h?.id])
   const [activeTab, setActiveTab] = useState('perfil')
 
-  const h = helpersCache?.[parseInt(id)] || helpersCache?.[id] || HELPERS.find(x => x.id === parseInt(id))
+  const [h, setH] = useState(
+    helpersCache?.[parseInt(id)] || helpersCache?.[id] || HELPERS.find(x => x.id === parseInt(id))
+  )
+
+  useEffect(() => {
+    if (!h) {
+      getHelperById(id).then(remote => {
+        if (remote) setH(remote)
+      })
+    }
+  }, [id])
 
   if (!h) return (
     <div className={styles.notFound}>
