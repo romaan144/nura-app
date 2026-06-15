@@ -247,6 +247,10 @@ export default function HelperProfile() {
   const navigate = useNavigate()
   const { hasRated, helpersCache } = useUser()
   const [showRating, setShowRating] = useState(false)
+
+  useEffect(() => {
+    window.scrollTo(0, 0)
+  }, [])
   const [shared, setShared] = useState(false)
   const [activeTab, setActiveTab] = useState('perfil')
 
