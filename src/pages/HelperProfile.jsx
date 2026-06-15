@@ -260,17 +260,39 @@ export default function HelperProfile() {
   // useEffect(() => { if(h) setFaved(isFavorite(h.id)) }, [h?.id])
   const [activeTab, setActiveTab] = useState('perfil')
 
-  const [h, setH] = useState(
-    helpersCache?.[parseInt(id)] || helpersCache?.[id] || HELPERS.find(x => x.id === parseInt(id))
-  )
+  const [h, setH] = useState(null)
+  const [loading, setLoading] = useState(true)
 
   useEffect(() => {
-    if (!h) {
-      getHelperById(id).then(remote => {
-        if (remote) setH(remote)
-      })
+    // Try local sources first
+    const local =
+      helpersCache?.[parseInt(id)] ||
+      helpersCache?.[id] ||
+      helpersCache?.[String(id)] ||
+      HELPERS.find(x => x.id === parseInt(id) || String(x.id) === String(id))
+
+    if (local) {
+      setH(local)
+      setLoading(false)
+      return
     }
+
+    // Fetch from Supabase
+    setLoading(true)
+    getHelperById(id).then(remote => {
+      if (remote) setH(remote)
+      setLoading(false)
+    }).catch(() => setLoading(false))
   }, [id])
+
+  if (loading) return (
+    <div style={{display:'flex',alignItems:'center',justifyContent:'center',height:'100dvh',background:'#F8F8FA'}}>
+      <div style={{textAlign:'center',display:'flex',flexDirection:'column',alignItems:'center',gap:'16px'}}>
+        <img src="/logo-iso.png" alt="Nüra" style={{width:'48px',height:'48px',animation:'pulse 1.5s ease-in-out infinite'}} />
+        <p style={{fontSize:'13px',color:'var(--soft)'}}>Cargando perfil...</p>
+      </div>
+    </div>
+  )
 
   if (!h) return (
     <div className={styles.notFound}>

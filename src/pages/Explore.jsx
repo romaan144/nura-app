@@ -22,10 +22,14 @@ export default function Explore() {
   const navigate = useNavigate()
   const [searchText, setSearchText] = useState('')
   const [HELPERS, setHELPERS] = useState(LOCAL_HELPERS)
+  const { cacheHelpers } = useUser()
 
   useEffect(() => {
     getAllHelpers().then(remote => {
-      if (remote?.length > 0) setHELPERS(remote)
+      if (remote?.length > 0) {
+        setHELPERS(remote)
+        cacheHelpers(remote)
+      }
     })
   }, [])
   const [activeCategory, setActiveCategory] = useState('all')
