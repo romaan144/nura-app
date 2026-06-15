@@ -149,6 +149,24 @@ export default function Profile() {
               </div>
             </div>
           )}
+        {/* App settings */}
+        <div className={styles.section}>
+          <h3 className={styles.sectionTitle}>⚙️ Preferencias</h3>
+          <div className={styles.settingRow}>
+            <span className={styles.settingLabel}>Notificaciones</span>
+            <label className={styles.toggle}>
+              <input type="checkbox" defaultChecked style={{display:'none'}} />
+              <span className={styles.toggleSlider} />
+            </label>
+          </div>
+          <div className={styles.settingRow}>
+            <span className={styles.settingLabel}>Mostrar distancia en km</span>
+            <label className={styles.toggle}>
+              <input type="checkbox" defaultChecked style={{display:'none'}} />
+              <span className={styles.toggleSlider} />
+            </label>
+          </div>
+        </div>
         {/* Actions */}
         <div className={styles.section}>
           <h3 className={styles.sectionTitle}>Acciones</h3>

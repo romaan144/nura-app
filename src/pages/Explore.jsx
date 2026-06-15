@@ -9,13 +9,20 @@ import styles from './Explore.module.css'
 
 const CATEGORIES = [
   { id: 'all', label: 'Todos', icon: '✦' },
-  { id: 'logopeda', label: 'Logopedia', icon: '🗣️' },
-  { id: 'tecnico', label: 'Técnicos', icon: '🔧' },
-  { id: 'limpieza', label: 'Limpieza', icon: '🧹' },
   { id: 'cuidado', label: 'Cuidados', icon: '❤️' },
+  { id: 'logopeda', label: 'Logopedia', icon: '🗣️' },
+  { id: 'limpieza', label: 'Limpieza', icon: '🧹' },
+  { id: 'tecnico', label: 'Técnicos', icon: '🔧' },
   { id: 'mascotas', label: 'Mascotas', icon: '🐾' },
   { id: 'clases', label: 'Clases', icon: '📚' },
   { id: 'entrenador', label: 'Fitness', icon: '💪' },
+  { id: 'psicologia', label: 'Psicología', icon: '🧠' },
+  { id: 'nutricion', label: 'Nutrición', icon: '🥗' },
+  { id: 'fisioterapia', label: 'Fisio', icon: '🦴' },
+  { id: 'idiomas', label: 'Idiomas', icon: '🌍' },
+  { id: 'informatica', label: 'Informática', icon: '💻' },
+  { id: 'musica', label: 'Música', icon: '🎵' },
+  { id: 'acompañamiento', label: 'Acompañamiento', icon: '🤝' },
 ]
 
 export default function Explore() {

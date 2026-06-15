@@ -29,6 +29,14 @@ function AppRoutes({ showSplash }) {
   const [searchState, setSearchState] = useState(null)
   const location = useLocation()
   const { user } = useUser()
+  const [showOnboarding, setShowOnboarding] = useState(() => {
+    return !user && !localStorage.getItem('nura_onboarded')
+  })
+
+  const handleOnboardingComplete = () => {
+    localStorage.setItem('nura_onboarded', '1')
+    setShowOnboarding(false)
+  }
 
   const hideNav = ['/login', '/register-helper', '/splash', '/onboarding']
     .some(p => location.pathname.startsWith(p))

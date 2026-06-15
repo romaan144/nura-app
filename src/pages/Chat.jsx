@@ -221,6 +221,17 @@ export default function Chat() {
         }}>
           <Calendar size={13} /> Contratar
         </button>
+        <button onClick={() => setShowConfirm(true)}
+          style={{padding:'7px 14px',borderRadius:'100px',
+            background:'rgba(255,255,255,0.72)',
+            backdropFilter:'blur(24px) saturate(180%)',
+            WebkitBackdropFilter:'blur(24px) saturate(180%)',
+            border:'1px solid rgba(255,255,255,0.35)',
+            boxShadow:'0 2px 16px rgba(0,0,0,0.05)',
+            fontSize:'12px',fontWeight:700,color:'var(--purple)',
+            display:'flex',alignItems:'center',gap:'5px',flexShrink:0}}>
+          <Calendar size={13} /> Contratar
+        </button>
       </header>
 
       {/* Helper info strip */}

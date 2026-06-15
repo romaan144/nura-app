@@ -39,14 +39,18 @@ function detectIntent(text, user) {
 
 const SUGGESTIONS = {
   default: [
-    { icon: '🗣️', text: 'Necesito un logopeda para mi hijo' },
-    { icon: '❤️', text: 'Busco cuidadora para mi padre mayor' },
-    { icon: '🔧', text: 'Técnico de calderas urgente' },
+    { icon: '❤️', text: 'Cuidadora para mi madre con Alzheimer' },
+    { icon: '🗣️', text: 'Logopeda infantil para mi hijo de 5 años' },
+    { icon: '🔧', text: 'Técnico de calderas con urgencia' },
+    { icon: '🧹', text: 'Limpieza profunda del hogar' },
+    { icon: '🐾', text: 'Cuidador de perros mientras viajo' },
+    { icon: '📚', text: 'Clases de refuerzo de matemáticas' },
   ],
   helper: [
     { icon: '✨', text: 'Acabo de obtener una certificación' },
     { icon: '🏢', text: 'He trabajado en un nuevo sitio' },
     { icon: '📅', text: 'Quiero actualizar mi disponibilidad' },
+    { icon: '💬', text: '¿Cómo puedo mejorar mi perfil?' },
   ],
 }
 
@@ -306,7 +310,8 @@ export default function Home({ setSearchState }) {
     setListening(true)
   }
 
-  const suggestions = user?.isHelper ? SUGGESTIONS.helper : SUGGESTIONS.default
+  const allSuggestions = user?.isHelper ? SUGGESTIONS.helper : SUGGESTIONS.default
+  const suggestions = allSuggestions.slice(0, 3)
 
   return (
     <div className={styles.page}>

@@ -420,6 +420,30 @@ function HelperProfileInner() {
         </div>
 
         {/* ── TAB: PERFIL VIVO ── */}
+        {/* Availability quick view */}
+        {activeTab === 'perfil' && (
+          <section className={styles.section} style={{marginBottom:'10px'}}>
+            <h3 className={styles.sectionTitle}>📅 Disponibilidad esta semana</h3>
+            <div style={{display:'flex',gap:'6px',overflowX:'auto',paddingBottom:'4px'}}>
+              {['Lun','Mar','Mié','Jue','Vie','Sáb','Dom'].map((day,i) => {
+                const available = h.available && i < 5
+                return (
+                  <div key={day} style={{
+                    display:'flex',flexDirection:'column',alignItems:'center',gap:'4px',
+                    padding:'8px 10px',borderRadius:'14px',minWidth:'44px',
+                    background: available ? 'rgba(5,150,105,0.08)' : 'var(--paper)',
+                    border: available ? '1px solid rgba(5,150,105,0.2)' : '1px solid var(--rule)',
+                    flexShrink:0
+                  }}>
+                    <span style={{fontSize:'10px',color:'var(--soft)',fontWeight:600}}>{day}</span>
+                    <span style={{fontSize:'14px'}}>{available ? '✓' : '–'}</span>
+                    {available && <span style={{fontSize:'9px',color:'#059669',fontWeight:600}}>Libre</span>}
+                  </div>
+                )
+              })}
+            </div>
+          </section>
+        )}
         {activeTab === 'perfil' && (
           <>
             
