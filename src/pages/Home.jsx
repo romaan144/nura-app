@@ -290,10 +290,9 @@ export default function Home({ setSearchState }) {
         <div style={{display:'flex',gap:'6px',alignItems:'center'}}>
           {messages.length > 1 && (
             <button
-              onClick={() => { setMessages([]); setLastMatches(null); setTimeout(() => setMessages([{ id: 1, from: 'nura', lines: getWelcome(user) }]), 100) }}
-              style={{width:'34px',height:'34px',borderRadius:'50%',background:'transparent',border:'none',color:'var(--soft)',display:'flex',alignItems:'center',justifyContent:'center',fontSize:'18px'}}
-              title="Nueva conversación">
-              ✏️
+              onClick={() => { setNuraChatMessages([]); setNuraLastMatches(null); }}
+              style={{padding:'7px 13px',borderRadius:'20px',background:'white',border:'1.5px solid rgba(0,0,0,0.08)',color:'var(--mid)',fontSize:'12px',fontWeight:600,boxShadow:'0 1px 4px rgba(0,0,0,0.08)',whiteSpace:'nowrap',display:'flex',alignItems:'center',gap:'5px'}}>
+              + Nuevo chat
             </button>
           )}
           <button className={styles.profileBtn} onClick={() => navigate('/profile')} style={{flexShrink:0,width:'38px',height:'38px',minWidth:'38px'}}>
