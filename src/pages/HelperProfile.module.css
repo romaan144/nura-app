@@ -16,10 +16,26 @@
 .back { width: 36px; height: 36px; border-radius: 50%; border: 1.5px solid var(--rule); background: var(--white); color: var(--mid); display: flex; align-items: center; justify-content: center; transition: all 0.15s; }
 .back:hover { border-color: var(--purple); color: var(--purple); }
 .headerActions { display: flex; align-items: center; gap: 8px; }
-.shareBtn { display: flex; align-items: center; gap: 5px; font-size: 12px; font-weight: 500; color: var(--soft); background: var(--paper); border: 1.5px solid var(--rule); border-radius: 20px; padding: 7px 13px; transition: all 0.15s; }
-.shareBtn:hover { color: var(--purple); border-color: var(--purple); }
+.shareBtn {
+  width: 40px; height: 40px; border-radius: 50%;
+  background: white; border: 1.5px solid rgba(0,0,0,0.07);
+  color: var(--mid);
+  display: flex; align-items: center; justify-content: center;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1), 0 1px 3px rgba(0,0,0,0.06);
+  transition: all 0.15s;
+}
+.shareBtn:hover { box-shadow: 0 4px 14px rgba(0,0,0,0.14); color: var(--ink); }
+.copiedLabel { font-size: 13px; font-weight: 600; color: #059669; }
 .copiedLabel { color: #059669; font-weight: 600; }
-.rateBtn { display: flex; align-items: center; gap: 5px; font-size: 12px; font-weight: 600; color: #92400E; background: #FEF3C7; border: 1.5px solid #FCD34D; border-radius: 20px; padding: 7px 13px; }
+.rateBtn {
+  width: 40px; height: 40px; border-radius: 50%;
+  background: white; border: 1.5px solid rgba(0,0,0,0.07);
+  color: var(--mid);
+  display: flex; align-items: center; justify-content: center;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1), 0 1px 3px rgba(0,0,0,0.06);
+  transition: all 0.15s;
+}
+.rateBtn:hover { box-shadow: 0 4px 14px rgba(0,0,0,0.14); color: #F59E0B; }
 
 /* ── HERO ── */
 .hero {
