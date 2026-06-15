@@ -4,6 +4,7 @@ import { ArrowLeft, Send, Shield, Star, MapPin, Award, Calendar, Info } from 'lu
 import { HELPERS } from '../data/helpers'
 import { useUser } from '../context/UserContext'
 import { getHelperById } from '../utils/supabase'
+import { notifyServiceConfirmed } from '../utils/notifications'
 import RatingModal from '../components/RatingModal'
 import styles from './Chat.module.css'
 
@@ -121,7 +122,7 @@ function ConfirmModal({ helper, onClose }) {
         </div>
         <div style={{display:'flex',gap:'10px'}}>
           <button onClick={onClose} style={{flex:1,padding:'14px',background:'rgba(0,0,0,0.05)',color:'rgba(0,0,0,0.55)',border:'none',borderRadius:'100px',fontSize:'14px',fontWeight:600,cursor:'pointer'}}>Cancelar</button>
-          <button onClick={()=>setDone(true)} disabled={!date}
+          <button onClick={()=>{ setDone(true); notifyServiceConfirmed(helper.name?.split(' ')?.[0] || helper.name) }} disabled={!date}
             style={{flex:2,padding:'14px',background:date?'#1C1C1E':'rgba(0,0,0,0.1)',color:date?'white':'rgba(0,0,0,0.3)',border:'none',borderRadius:'100px',fontSize:'14px',fontWeight:700,cursor:date?'pointer':'default',transition:'all 0.2s'}}>
             Enviar solicitud
           </button>

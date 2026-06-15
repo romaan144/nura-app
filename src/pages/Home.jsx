@@ -6,6 +6,7 @@ import { useUser } from '../context/UserContext'
 import { MenuButton } from '../components/NavBar'
 import { showToast } from '../components/Toast'
 import { haptic } from '../utils/haptic'
+import { scheduleLocalNotification } from '../utils/notifications'
 import styles from './Home.module.css'
 
 function getWelcome(user) {
@@ -266,6 +267,12 @@ export default function Home({ setSearchState }) {
       addSearch?.(msg)
       setSearchState({ query: msg, analysis, matches })
       setLastMatches(matches)
+      // Schedule reminder if user doesn't contact
+      scheduleLocalNotification(
+        '¿Te convencieron los resultados?',
+        `Tienes ${matches.length} profesionales esperando tu mensaje en Nüra.`,
+        2 * 60 * 60 * 1000
+      )
       // Cache helpers for instant profile loading
       if (matches?.length) {
         const cacheMap = {}

@@ -134,7 +134,7 @@ function normalize(h) {
     price: h.price || null,
     zone: h.zone || h.city || 'Barcelona',
     city: h.city || 'Barcelona',
-    distance: parseFloat(h.distance) || parseFloat((Math.random()*4+0.3).toFixed(1)),
+    distance: parseFloat(h.distance) || 1.5, // Default 1.5km — honest fallback
     rating: parseFloat(h.rating) || 4.5,
     reviews: parseInt(h.reviews) || 0,
     services: parseInt(h.services) || 0,

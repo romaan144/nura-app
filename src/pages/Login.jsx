@@ -2,6 +2,7 @@ import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { ArrowRight } from 'lucide-react'
 import { useUser } from '../context/UserContext'
+import { requestNotificationPermission, scheduleRetentionNotifications } from '../utils/notifications'
 import styles from './Login.module.css'
 
 export default function Login() {
@@ -21,11 +22,26 @@ export default function Login() {
   function handleCode() {
     if (code.length < 4) return
     setLoading(true)
-    setTimeout(() => { setLoading(false); setStep('name') }, 700)
+    setTimeout(() => {
+      setLoading(false)
+      // Check if we have a name from onboarding
+      const savedUser = JSON.parse(localStorage.getItem('nura_user') || 'null')
+      if (savedUser?.name && savedUser.name !== 'Usuario') {
+        login({ ...savedUser, phone, verified: true })
+        requestNotificationPermission().then(g => { if(g) scheduleRetentionNotifications(savedUser.name) })
+        navigate('/')
+      } else {
+        setStep('name')
+      }
+    }, 700)
   }
   function handleName() {
     if (!name.trim()) return
     login({ name: name.trim(), phone, joined: new Date().toISOString() })
+    // Ask for notification permission after login
+    requestNotificationPermission().then(granted => {
+      if (granted) scheduleRetentionNotifications(name.trim())
+    })
     navigate('/')
   }
 
@@ -71,7 +87,7 @@ export default function Login() {
         {step === 'code' && (
           <div className={styles.step}>
             <h2 className={styles.stepTitle}>Código de verificación</h2>
-            <p className={styles.stepDesc}>Enviado al +34 {phone} · <span className={styles.hint}>Demo: cualquier 4 dígitos</span></p>
+            <p className={styles.stepDesc}>Enviado al +34 {phone}. Puede tardar hasta 30 segundos.</p>
             <div className={styles.codeWrap}>
               {[0,1,2,3].map(i => (
                 <div key={i} className={`${styles.codeBox} ${code.length > i ? styles.codeBoxFilled : ''}`}>
