@@ -1,4 +1,4 @@
-.page { min-height: 100vh; background: var(--white); padding-bottom: 24px; }
+.page { min-height: 100vh; background: #FFFFFF; padding-bottom: 24px; }
 
 .header {
   display: flex; align-items: center; justify-content: space-between;
@@ -13,10 +13,10 @@
   background: rgba(123,47,255,0.1); border-radius: 12px; padding: 3px 10px;
 }
 
-.searchWrap { padding: 12px 16px 10px; background: var(--white); }
+.searchWrap { padding: 12px 16px 10px; background: #FFFFFF; }
 .searchBox {
   display: flex; align-items: center; gap: 8px;
-  background: var(--paper); border: 1.5px solid var(--rule);
+  background: #F8F8FA; border: none;
   border-radius: 12px; padding: 9px 13px;
   transition: border-color 0.2s;
 }
@@ -29,11 +29,11 @@
 .chatRow {
   width: 100%; display: flex; align-items: center; gap: 13px;
   padding: 13px 18px;
-  background: var(--white);
+  background: #FFFFFF;
   border-bottom: 1px solid var(--rule);
   transition: background 0.15s; text-align: left;
 }
-.chatRow:hover { background: var(--paper); }
+.chatRow:hover { background: #F8F8FA; }
 .chatUnread { background: rgba(123,47,255,0.03); }
 .chatUnread:hover { background: rgba(123,47,255,0.06); }
 

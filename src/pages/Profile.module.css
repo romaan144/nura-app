@@ -2,11 +2,11 @@
 
 
 
-.settingsBtn { width: 36px; height: 36px; border-radius: 50%; border: 1.5px solid var(--rule); background: var(--white); color: var(--mid); display: flex; align-items: center; justify-content: center; }
+.settingsBtn { width: 36px; height: 36px; border-radius: 50%; border: none; background: #FFFFFF; color: var(--mid); display: flex; align-items: center; justify-content: center; }
 
 .content { max-width: 540px; margin: 0 auto; padding: 24px 16px; }
 
-.heroCard { background: var(--white); border: 1.5px solid var(--rule); border-radius: 24px; padding: 28px 20px; text-align: center; margin-bottom: 12px; box-shadow: var(--shadow-sm); position: relative; overflow: hidden; }
+.heroCard { background: #FFFFFF; border: none; border-radius: 24px; padding: 28px 20px; text-align: center; margin-bottom: 12px; box-shadow: 0 2px 8px rgba(0,0,0,0.08), 0 1px 3px rgba(0,0,0,0.05); position: relative; overflow: hidden; }
 .heroCard::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 4px; background: var(--grad-main); }
 .avatar { width: 72px; height: 72px; border-radius: 50%; background: var(--grad-main); display: flex; align-items: center; justify-content: center; color: white; font-size: 28px; font-weight: 800; margin: 0 auto 14px; box-shadow: 0 6px 20px rgba(123,47,255,0.3); }
 .name { font-size: 22px; font-weight: 800; color: var(--ink); letter-spacing: -0.3px; margin-bottom: 4px; }
@@ -16,12 +16,12 @@
 .verifiedBadge { display: inline-flex; align-items: center; gap: 4px; font-size: 11px; font-weight: 600; color: var(--green); background: rgba(0,196,140,0.1); border-radius: 10px; padding: 4px 10px; }
 
 .stats { display: grid; grid-template-columns: repeat(3,1fr); gap: 8px; margin-bottom: 12px; }
-.stat { background: var(--white); border: 1.5px solid var(--rule); border-radius: 14px; padding: 14px 8px; text-align: center; box-shadow: var(--shadow-sm); }
+.stat { background: #FFFFFF; border: none; border-radius: 18px; padding: 14px 8px; text-align: center; box-shadow: 0 2px 8px rgba(0,0,0,0.08), 0 1px 3px rgba(0,0,0,0.05); }
 .statIcon { display: block; color: var(--purple); margin: 0 auto 4px; }
 .statVal { display: block; font-size: 20px; font-weight: 800; color: var(--ink); margin-bottom: 3px; }
 .statLbl { font-size: 11px; color: var(--soft); }
 
-.section { background: var(--white); border: 1.5px solid var(--rule); border-radius: 18px; padding: 16px 18px; margin-bottom: 10px; box-shadow: var(--shadow-sm); }
+.section { background: #FFFFFF; border: none; border-radius: 18px; padding: 16px 18px; margin-bottom: 10px; box-shadow: 0 2px 8px rgba(0,0,0,0.08), 0 1px 3px rgba(0,0,0,0.05); }
 .sectionTitle { font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.7px; color: var(--soft); margin-bottom: 14px; }
 
 .helperCard { display: flex; flex-direction: column; gap: 8px; }
@@ -43,7 +43,7 @@
 .actionIcon { font-size: 18px; }
 .actionLabel { flex: 1; font-size: 14px; font-weight: 500; color: var(--ink); text-align: left; }
 
-.logoutBtn { width: 100%; padding: 13px; background: var(--white); color: var(--red); border: 1.5px solid rgba(239,68,68,0.3); border-radius: 14px; font-size: 14px; font-weight: 600; display: flex; align-items: center; justify-content: center; gap: 8px; margin-top: 8px; transition: all 0.18s; }
+.logoutBtn { width: 100%; padding: 13px; background: #FFFFFF; color: var(--red); border: 1.5px solid rgba(239,68,68,0.3); border-radius: 18px; font-size: 14px; font-weight: 600; display: flex; align-items: center; justify-content: center; gap: 8px; margin-top: 8px; transition: all 0.18s; }
 .logoutBtn:hover { background: rgba(239,68,68,0.06); border-color: var(--red); }
 
 .noUser { min-height: 100vh; display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 32px 20px; text-align: center; gap: 12px; }
@@ -79,9 +79,9 @@
 .noUserIso { margin-bottom: 8px; }
 .helperBtn {
   padding: 12px 28px;
-  background: var(--white); color: var(--purple);
+  background: #FFFFFF; color: var(--purple);
   border: 1.5px solid var(--purple);
-  border-radius: 14px; font-size: 14px; font-weight: 600;
+  border-radius: 18px; font-size: 14px; font-weight: 600;
   transition: all 0.18s;
 }
 .helperBtn:hover { background: rgba(123,47,255,0.06); }
