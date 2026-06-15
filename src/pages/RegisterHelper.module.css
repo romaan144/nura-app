@@ -90,8 +90,8 @@
 .input::placeholder { color: var(--soft); }
 .input:disabled { opacity: 0.5; }
 .sendBtn {
-  width: 44px; height: 44px; border-radius: 50%;
-  background: linear-gradient(135deg, #1a1a2e 0%, #2d1b4e 100%); color: white; border: none;
+  width: 34px; height: 34px; border-radius: 50%;
+  background: #1C1C1E; color: white; border: none; align-self: flex-end;
   display: flex; align-items: center; justify-content: center;
   flex-shrink: 0; transition: all 0.18s;
   box-shadow: 0 4px 14px rgba(123,47,255,0.3);

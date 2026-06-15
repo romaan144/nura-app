@@ -259,13 +259,15 @@ export default function RegisterHelper() {
         </div>
       ) : (
         <div className={styles.inputBar}>
-          <input ref={inputRef} className={styles.input}
-            placeholder="Escribe tu respuesta..."
-            value={input} onChange={e => setInput(e.target.value)}
-            onKeyDown={handleKey} disabled={typing} />
-          <button className={styles.sendBtn} onClick={sendMessage} disabled={!input.trim() || typing}>
-            <Send size={16} />
-          </button>
+          <div className={styles.inputPill}>
+            <input ref={inputRef} className={styles.input}
+              placeholder="Escribe tu respuesta..."
+              value={input} onChange={e => setInput(e.target.value)}
+              onKeyDown={handleKey} disabled={typing} />
+            <button className={styles.sendBtn} onClick={sendMessage} disabled={!input.trim() || typing}>
+              <Send size={15} />
+            </button>
+          </div>
         </div>
       )}
     </div>

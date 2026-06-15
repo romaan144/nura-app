@@ -71,11 +71,18 @@
 .suggestionText { width: 100%; text-align: left; font-size: 13px; color: var(--mid); background: rgba(123,47,255,0.06); border: 1.5px dashed var(--purple); border-radius: 10px; padding: 10px 14px; line-height: 1.45; transition: all 0.18s; }
 .suggestionText:hover { color: var(--purple); background: rgba(123,47,255,0.1); }
 
-.inputBar { display: flex; align-items: center; gap: 8px; padding: 10px 12px 12px; background: rgba(248,248,250,0.92); backdrop-filter: blur(24px) saturate(160%); -webkit-backdrop-filter: blur(24px) saturate(160%); border-top: 1px solid rgba(255,255,255,0.5); box-shadow: 0 -4px 16px rgba(13,13,26,0.05); flex-shrink: 0; }
-.input { flex: 1; padding: 10px 16px; border: none; border-radius: 24px; font-size: 14px; outline: none; background: #F8F8FA; color: var(--ink); transition: border-color 0.2s; }
-.input:focus { border-color: var(--purple); background: #FFFFFF; }
-.sendBtn { width: 42px; height: 42px; border-radius: 50%; background: linear-gradient(135deg, #1a1a2e 0%, #2d1b4e 100%); color: white; border: none; display: flex; align-items: center; justify-content: center; flex-shrink: 0; transition: all 0.2s; box-shadow: 0 4px 14px rgba(13,13,26,0.3), inset 0 1px 0 rgba(255,255,255,0.15); }
-.sendBtn:hover:not(:disabled) { transform: scale(1.07); }
-.sendBtn:disabled { background: var(--rule); box-shadow: none; }
+.inputBar { display: flex; align-items: flex-end; gap: 8px; padding: 8px 12px max(16px, env(safe-area-inset-bottom)); background: #F8F8FA; flex-shrink: 0; }
+.inputPill {
+  flex: 1; display: flex; align-items: flex-end;
+  background: white; border-radius: 26px;
+  padding: 8px 8px 8px 16px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.08), 0 1px 3px rgba(0,0,0,0.05);
+  gap: 6px;
+}
+.input { flex: 1; border: none; outline: none; background: transparent; font-size: 15px; color: var(--ink); font-family: 'Inter', sans-serif; padding: 4px 0; resize: none; max-height: 120px; line-height: 1.5; }
+.input::placeholder { color: #aaa; }
+.sendBtn { width: 34px; height: 34px; border-radius: 50%; background: #1C1C1E; color: white; border: none; display: flex; align-items: center; justify-content: center; flex-shrink: 0; transition: all 0.15s; align-self: flex-end; }
+.sendBtn:hover:not(:disabled) { background: var(--purple); transform: scale(1.05); }
+.sendBtn:disabled { background: #ddd; color: #aaa; }
 
 .notFound { display: flex; align-items: center; justify-content: center; height: 100vh; color: var(--mid); }

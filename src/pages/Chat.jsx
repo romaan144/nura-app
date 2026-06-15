@@ -232,12 +232,14 @@ export default function Chat() {
       )}
 
       <div className={styles.inputBar}>
-        <input className={styles.input}
-          placeholder={`Escribe a ${helper.name.split(' ')[0]}...`}
-          value={input} onChange={e => setInput(e.target.value)} onKeyDown={handleKey} />
-        <button className={styles.sendBtn} onClick={() => sendMessage()} disabled={!input.trim()}>
-          <Send size={16} />
-        </button>
+        <div className={styles.inputPill}>
+          <input className={styles.input}
+            placeholder={`Escribe a ${helper.name.split(' ')[0]}...`}
+            value={input} onChange={e => setInput(e.target.value)} onKeyDown={handleKey} />
+          <button className={styles.sendBtn} onClick={() => sendMessage()} disabled={!input.trim()}>
+            <Send size={15} />
+          </button>
+        </div>
       </div>
 
       {showRating && <RatingModal helper={helper} onClose={() => setShowRating(false)} />}
