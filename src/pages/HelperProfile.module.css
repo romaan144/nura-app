@@ -81,7 +81,6 @@
 
 /* ── TABS ── */
 .tabsWrap {
-  position: sticky; top: 57px; z-index: 15;
   padding: 10px 14px;
   background: transparent;
 }
