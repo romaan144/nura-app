@@ -1,3 +1,4 @@
+import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { LogOut, Star, MessageCircle, ChevronRight, Shield, Award, TrendingUp, Sparkles, BarChart2, Users, Clock, Calendar } from 'lucide-react'
 import PageHeader from '../components/PageHeader'
@@ -28,8 +29,6 @@ export default function Profile() {
   const daysSince = user.joined
     ? Math.floor((new Date() - new Date(user.joined)) / (1000 * 60 * 60 * 24))
     : 0
-
-  const totalUnread = (chats || []).reduce((s, c) => s + (c.unread || 0), 0)
 
   return (
     <div className={styles.page}>
