@@ -74,9 +74,7 @@ export default function Profile() {
               <span className={styles.actionLabel}>Mis servicios</span>
               <ChevronRight size={16} color="var(--soft)" />
             </div>
-          </div>
-          <div className={styles.section}>
-            <h3 className={styles.sectionTitle}><BarChart2 size={13} /> Tu perfil de helper</h3>
+            <h3 className={styles.sectionTitle} style={{marginTop:'16px'}}><BarChart2 size={13} /> Tu perfil de helper</h3>
             <div className={styles.helperDashboard}>
               <div className={styles.dashRow}>
                 <div className={styles.dashItem}>
