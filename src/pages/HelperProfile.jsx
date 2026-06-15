@@ -280,6 +280,13 @@ export default function HelperProfile() {
     }
   }, [id])
 
+  // Catch any render errors
+  try {
+    const testRender = h ? JSON.stringify({ id: h.id, name: h.name, rating: h.rating }) : 'null'
+  } catch(e) {
+    return <div style={{padding:'20px',color:'red'}}>Error en datos: {String(e)}</div>
+  }
+
   if (loading) return (
     <div style={{display:'flex',alignItems:'center',justifyContent:'center',height:'100dvh',background:'#F8F8FA'}}>
       <div style={{textAlign:'center',display:'flex',flexDirection:'column',alignItems:'center',gap:'16px'}}>
