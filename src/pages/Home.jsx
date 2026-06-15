@@ -295,19 +295,18 @@ export default function Home({ setSearchState }) {
 
   return (
     <div className={styles.page}>
-      <div className={styles.header}>
-        <div className={styles.headerLeft}><MenuButton /></div>
-        <div className={styles.headerLogoPill}>
+      {/* Floating top — three independent bubbles */}
+      <div className={styles.floatTop}>
+        <MenuButton className={styles.menuBubble} />
+        <div className={styles.logoBubble}>
           <img src="/logo-text.png" alt="Nüra" className={styles.headerLogo} />
         </div>
-        <div className={styles.headerRight}>
-          <button className={styles.profileBtn} onClick={() => navigate('/profile')} style={{flexShrink:0,width:'38px',height:'38px',minWidth:'38px'}}>
-            {user?.name
-              ? <img src={`https://api.dicebear.com/9.x/personas/svg?seed=${encodeURIComponent(user.name)}`} alt="" style={{width:'100%',height:'100%',borderRadius:'50%',objectFit:'cover'}} />
-              : '?'
-            }
-          </button>
-        </div>
+        <button className={styles.profileBubble} onClick={() => navigate('/profile')}>
+          {user?.name
+            ? <img src={`https://api.dicebear.com/9.x/personas/svg?seed=${encodeURIComponent(user.name)}`} alt="" style={{width:'100%',height:'100%',objectFit:'cover'}} />
+            : <span style={{fontSize:'16px',color:'#888'}}>?</span>
+          }
+        </button>
       </div>
 
       <div className={styles.messages}>
@@ -350,32 +349,32 @@ export default function Home({ setSearchState }) {
         <div ref={bottomRef} />
       </div>
 
-      {/* Floating bottom area */}
-      {inputFocused && !input && searchHistory?.length > 0 && (
-        <div className={styles.recentSearches}>
-          <span className={styles.recentLabel}>Búsquedas recientes</span>
-          {searchHistory.slice(0, 3).map((s, i) => (
-            <button key={i} className={styles.recentItem} onClick={() => handleSend(s.query)}>
-              <span className={styles.recentIcon}>🕐</span>
-              <span className={styles.recentText}>{s.query}</span>
-            </button>
-          ))}
-        </div>
-      )}
+      {/* Floating bottom — suggestions + input capsule */}
+      <div className={styles.floatBottom}>
+        {inputFocused && !input && searchHistory?.length > 0 && (
+          <div className={styles.recentSearches}>
+            <span className={styles.recentLabel}>Recientes</span>
+            {searchHistory.slice(0, 3).map((s, i) => (
+              <button key={i} className={styles.recentItem} onClick={() => handleSend(s.query)}>
+                <span className={styles.recentIcon}>🕐</span>
+                <span className={styles.recentText}>{s.query}</span>
+              </button>
+            ))}
+          </div>
+        )}
 
-      {showSuggestions && (
-        <div className={styles.suggestions}>
-          {suggestions.map((s, i) => (
-            <button key={i} className={styles.suggestion} onClick={() => handleSend(s.text)}>
-              <span className={styles.suggestionIcon}>{s.icon}</span>
-              <span className={styles.suggestionText}>{s.text}</span>
-            </button>
-          ))}
-        </div>
-      )}
+        {showSuggestions && (
+          <div className={styles.suggestions}>
+            {suggestions.map((s, i) => (
+              <button key={i} className={styles.suggestion} onClick={() => handleSend(s.text)}>
+                <span className={styles.suggestionIcon}>{s.icon}</span>
+                <span className={styles.suggestionText}>{s.text}</span>
+              </button>
+            ))}
+          </div>
+        )}
 
-      <div className={styles.inputWrap}>
-        <div className={styles.inputBar}>
+        <div className={styles.inputCapsule}>
           <button className={styles.plusBtn}><Plus size={18} /></button>
           <input ref={inputRef} className={styles.input}
             placeholder="Escribe a Nüra..."
