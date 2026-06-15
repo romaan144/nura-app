@@ -299,7 +299,7 @@ export default function HelperProfile() {
             ? <img src={h.avatarUrl} alt={h.name} className={styles.heroAvatar} />
             : <div className={styles.heroAvatarFallback} style={{ background: h.avatarColor }}>{h.avatar}</div>
           }
-          <h1 className={styles.heroName}>{h.name}{h.founder && <span title="Helper Fundador" style={{marginLeft:'6px',fontSize:'16px',verticalAlign:'middle'}}>⭐</span>}</h1>
+          <h1 className={styles.heroName}>{h.name}{h.founder && <Award size={13} color='#92400E' style={{marginLeft:'5px',verticalAlign:'middle',display:'inline',flexShrink:0}} />}</h1>
           <p className={styles.heroSpecialty}>{h.specialty || h.tags?.[0]}</p>
 
           <div className={styles.heroMeta}>
