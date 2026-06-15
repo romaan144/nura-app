@@ -1,72 +1,87 @@
 import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { useUser } from '../context/UserContext'
+import { ArrowRight } from 'lucide-react'
 import styles from './Onboarding.module.css'
 
 const STEPS = [
   {
-    emoji: '✨',
-    title: 'Bienvenido a Nüra',
-    desc: 'La IA que conecta personas con necesidades reales a profesionales verificados cerca de ti.',
-    cta: 'Continuar',
+    visual: '✨',
+    eyebrow: 'BIENVENIDO',
+    title: 'La IA que conecta\npersonas reales',
+    desc: 'Cuéntale a Nüra lo que necesitas con tus palabras. En segundos encuentra al profesional ideal cerca de ti.',
   },
   {
-    emoji: '🔍',
-    title: 'Habla con naturalidad',
-    desc: 'Cuéntale a Nüra lo que necesitas con tus palabras. Ella entiende el contexto y encuentra a la persona adecuada.',
-    cta: 'Continuar',
+    visual: '🛡️',
+    eyebrow: 'PERFILES VERIFICADOS',
+    title: 'Identidad real,\nresultados reales',
+    desc: 'Cada helper verifica su identidad con DNI. El perfil lo construye Nüra — no el propio helper.',
   },
   {
-    emoji: '🛡️',
-    title: 'Perfiles verificados',
-    desc: 'Cada helper tiene su identidad verificada. El perfil lo construye Nüra sola — con valoraciones reales, historial laboral y habilidades detectadas.',
-    cta: 'Continuar',
-  },
-  {
-    emoji: '🚀',
-    title: 'Listo para empezar',
-    desc: '¿Eres alguien que busca ayuda o un profesional que quiere ofrecer sus servicios?',
-    cta: null,
+    visual: '⚡',
+    eyebrow: 'CERCANO A TI',
+    title: 'Presencial o online,\ncomo tú necesites',
+    desc: 'Desde cuidadoras de mayores a técnicos de calderas. En tu zona, cuando lo necesites.',
   },
 ]
 
 export default function OnboardingPage() {
   const [step, setStep] = useState(0)
+  const [name, setName] = useState('')
+  const [showName, setShowName] = useState(false)
   const navigate = useNavigate()
   const { login } = useUser()
 
   function finish(isHelper) {
-    login({ name: 'Usuario', isHelper })
+    localStorage.setItem('nura_onboarded', '1')
+    login({ name: name.trim() || 'Usuario', isHelper })
     navigate('/')
   }
 
   const s = STEPS[step]
   const isLast = step === STEPS.length - 1
 
+  if (showName) return (
+    <div className={styles.page}>
+      <div className={styles.namePage}>
+        <img src="/logo-iso.png" alt="Nüra" className={styles.nameIso} />
+        <h1 className={styles.nameTitle}>¿Cómo te llamas?</h1>
+        <p className={styles.nameDesc}>Para que Nüra pueda saludarte.</p>
+        <input className={styles.nameInput} placeholder="Tu nombre"
+          value={name} onChange={e => setName(e.target.value)} autoFocus
+          onKeyDown={e => e.key === 'Enter' && finish(false)} />
+        <button className={styles.primary} onClick={() => finish(false)}>
+          Empezar <ArrowRight size={17} />
+        </button>
+        <button className={styles.helperCta} onClick={() => navigate('/register-helper')}>
+          Soy profesional y quiero ofrecer mis servicios →
+        </button>
+      </div>
+    </div>
+  )
+
   return (
     <div className={styles.page}>
-      <div className={styles.dots}>
-        {STEPS.map((_, i) => <div key={i} className={`${styles.dot} ${i === step ? styles.dotActive : ''}`} />)}
+      <div className={styles.skip}>
+        <button className={styles.skipBtn} onClick={() => setShowName(true)}>Saltar</button>
       </div>
 
-      <div className={styles.content}>
-        <div className={styles.emoji}>{s.emoji}</div>
+      <div className={styles.content} key={step}>
+        <div className={styles.visual}>{s.visual}</div>
+        <span className={styles.eyebrow}>{s.eyebrow}</span>
         <h1 className={styles.title}>{s.title}</h1>
         <p className={styles.desc}>{s.desc}</p>
       </div>
 
-      <div className={styles.actions}>
-        {!isLast ? (
-          <>
-            <button className={styles.primary} onClick={() => setStep(i => i + 1)}>{s.cta}</button>
-            <button className={styles.skip} onClick={() => finish(false)}>Saltar</button>
-          </>
-        ) : (
-          <>
-            <button className={styles.primary} onClick={() => finish(false)}>Busco ayuda</button>
-            <button className={styles.secondary} onClick={() => navigate('/register-helper')}>Soy un profesional</button>
-          </>
-        )}
+      <div className={styles.bottom}>
+        <div className={styles.dots}>
+          {STEPS.map((_, i) => (
+            <div key={i} className={`${styles.dot} ${i === step ? styles.dotActive : i < step ? styles.dotDone : ''}`} />
+          ))}
+        </div>
+        <button className={styles.primary} onClick={() => isLast ? setShowName(true) : setStep(i => i + 1)}>
+          {isLast ? 'Comenzar' : 'Continuar'} <ArrowRight size={17} />
+        </button>
       </div>
     </div>
   )

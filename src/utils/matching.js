@@ -127,7 +127,6 @@ export async function matchHelpers(analysis, limit = 5, refinement = null, previ
 
   // Fallback to local data
   if (pool.length === 0) {
-    console.log('Using local helpers fallback')
     pool = LOCAL_HELPERS.filter(Boolean).map(normalizeHelper).filter(Boolean)
   }
 

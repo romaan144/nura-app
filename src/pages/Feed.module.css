@@ -23,10 +23,13 @@
 .sectionTabsHidden {}
 .sectionTabsInner {
   display: flex; gap: 4px;
-  background: white;
+  background: rgba(255,255,255,0.72);
+  backdrop-filter: blur(24px) saturate(180%);
+  -webkit-backdrop-filter: blur(24px) saturate(180%);
+  border: 1px solid rgba(255,255,255,0.35);
   border-radius: 20px;
   padding: 4px;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.08), 0 1px 3px rgba(0,0,0,0.05);
+  box-shadow: 0 2px 16px rgba(0,0,0,0.05);
 }
 .sectionTab {
   flex: 1; padding: 8px 0; font-size: 12px; font-weight: 500;
@@ -224,3 +227,12 @@
 /* Suggested card improvement */
 .suggestedCard { display: flex; align-items: center; gap: 10px; padding: 12px var(--page-x); background: white; margin-bottom: 8px; border-radius: var(--card-radius); box-shadow: var(--card-shadow); cursor: pointer; transition: all 0.15s; }
 .suggestedCard:active { opacity: 0.8; }
+
+.emptyFeed {
+  display: flex; flex-direction: column; align-items: center;
+  text-align: center; gap: 14px; padding: 60px 24px;
+}
+.emptyIcon { font-size: 52px; }
+.emptyFeed h3 { font-size: 18px; font-weight: 800; color: rgba(0,0,0,0.7); margin: 0; letter-spacing: -0.3px; }
+.emptyFeed p { font-size: 14px; color: rgba(0,0,0,0.4); margin: 0; line-height: 1.6; max-width: 260px; }
+.exploreBtn { padding: 11px 24px; background: #1C1C1E; color: white; border: none; border-radius: 100px; font-size: 14px; font-weight: 700; cursor: pointer; }
