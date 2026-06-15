@@ -49,7 +49,6 @@ const SUGGESTIONS = {
 
 
 function ResultCard({ helper, onNavigate }) {
-  console.log('HELPER PRICE:', helper.name, helper.price)
   return (
     <div className={styles.resultCard} onClick={() => onNavigate(`/helper/${helper.id}`)}>
       <div className={styles.resultTop}>
@@ -77,10 +76,15 @@ function ResultCard({ helper, onNavigate }) {
           {helper.online && <span className={styles.resultTag}>💻 Online</span>}
           <span className={styles.resultTag}>⏱ {helper.responseTime}</span>
         </div>
-        <button className={styles.resultContact}
-          onClick={e => { e.stopPropagation(); onNavigate(`/chat/${helper.id}`) }}>
-          <MessageCircle size={14} /> Contactar
-        </button>
+        <div style={{display:'flex',alignItems:'center',gap:'8px',flexShrink:0}}>
+          {helper.price && helper.price !== 'Consultar' &&
+            <span style={{fontSize:'13px',fontWeight:700,color:'#7B2FFF'}}>{helper.price}</span>
+          }
+          <button className={styles.resultContact}
+            onClick={e => { e.stopPropagation(); onNavigate(`/chat/${helper.id}`) }}>
+            <MessageCircle size={14} /> Contactar
+          </button>
+        </div>
       </div>
     </div>
   )
