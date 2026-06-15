@@ -60,7 +60,12 @@ function ResultCard({ helper, onNavigate }) {
           {helper.dniVerified && <span className={styles.resultVerified}><Shield size={8} /></span>}
         </div>
         <div className={styles.resultInfo}>
-          <div className={styles.resultName}>{helper.name}</div>
+          <div style={{display:'flex',alignItems:'flex-start',justifyContent:'space-between',gap:'8px'}}>
+            <div className={styles.resultName}>{helper.name}</div>
+            <span style={{fontSize:'13px',fontWeight:700,color:helper.price && helper.price!=='Consultar'?'#7B2FFF':'#aaa',whiteSpace:'nowrap',flexShrink:0}}>
+              {helper.price && helper.price !== 'Consultar' ? helper.price : 'Consultar'}
+            </span>
+          </div>
           <div className={styles.resultSpec}>{helper.specialty}</div>
           <div className={styles.resultMeta}>
             <span className={styles.resultRating}><Star size={11} fill="#F59E0B" color="#F59E0B" /> {helper.rating} <span style={{color:'#aaa'}}>({helper.reviews})</span></span>
@@ -76,15 +81,10 @@ function ResultCard({ helper, onNavigate }) {
           {helper.online && <span className={styles.resultTag}>💻 Online</span>}
           <span className={styles.resultTag}>⏱ {helper.responseTime}</span>
         </div>
-        <div style={{display:'flex',alignItems:'center',gap:'8px',flexShrink:0}}>
-          {helper.price && helper.price !== 'Consultar' &&
-            <span style={{fontSize:'13px',fontWeight:700,color:'#7B2FFF'}}>{helper.price}</span>
-          }
-          <button className={styles.resultContact}
-            onClick={e => { e.stopPropagation(); onNavigate(`/chat/${helper.id}`) }}>
-            <MessageCircle size={14} /> Contactar
-          </button>
-        </div>
+        <button className={styles.resultContact}
+          onClick={e => { e.stopPropagation(); onNavigate(`/chat/${helper.id}`) }}>
+          <MessageCircle size={14} /> Contactar
+        </button>
       </div>
     </div>
   )
