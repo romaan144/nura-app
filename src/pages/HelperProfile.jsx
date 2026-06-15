@@ -27,7 +27,7 @@ function LivePulse({ helper }) {
 
   const facts = [
     { icon: <Brain size={12} />, text: `Personalidad analizada en ${helper.services} servicios reales` },
-    { icon: <Cpu size={12} />, text: `${helper.hiddenSkills?.length || 2} habilidades detectadas sin que ${helper.name.split(' ')[0]} las declarara` },
+    { icon: <Cpu size={12} />, text: `${helper.hiddenSkills?.length || 2} habilidades detectadas sin que ${helper.name?.split(' ')[0] || helper.name} las declarara` },
     { icon: <Activity size={12} />, text: `Reputación actualizada automáticamente tras cada valoración` },
     { icon: <MessageSquare size={12} />, text: `Comportamiento en chats analizado para construir el perfil` },
   ]
@@ -282,9 +282,9 @@ export default function HelperProfile() {
   ]
 
   const score = Math.round(
-    (h.rating / 5) * 40 +
-    (Math.min(h.services, 100) / 100) * 30 +
-    (h.completionRate / 100) * 20 +
+    ((h.rating || 0) / 5) * 40 +
+    (Math.min(h.services || 0, 100) / 100) * 30 +
+    ((h.completionRate || 0) / 100) * 20 +
     (h.dniVerified ? 10 : 0)
   )
   const level = score >= 90 ? { label: 'Experto verificado', color: '#059669', bg: '#ECFDF5' }
@@ -398,7 +398,7 @@ export default function HelperProfile() {
             <section className={styles.section}>
               <h3 className={styles.sectionTitle}><Sparkles size={13} /> Reconocimientos</h3>
               <div className={styles.badgesGrid}>
-                {h.services >= 50 && (
+                {(h.services || 0) >= 50 && (
                   <div className={styles.achieveBadge}>
                     <span className={styles.achieveEmoji}>🏆</span>
                     <span className={styles.achieveLabel}>+50 servicios</span>
@@ -416,7 +416,7 @@ export default function HelperProfile() {
                     <span className={styles.achieveLabel}>Identidad verificada</span>
                   </div>
                 )}
-                {h.completionRate >= 95 && (
+                {(h.completionRate || 0) >= 95 && (
                   <div className={styles.achieveBadge}>
                     <span className={styles.achieveEmoji}>✅</span>
                     <span className={styles.achieveLabel}>+95% completados</span>
@@ -441,10 +441,10 @@ export default function HelperProfile() {
               <div className={styles.nuraDetectedCard}>
                 <div className={styles.nuraDetectedHeader}>
                   <Cpu size={14} color="var(--purple)" />
-                  <span>Detectado por Nüra · no declarado por {h.name.split(' ')[0]}</span>
+                  <span>Detectado por Nüra · no declarado por {h.name?.split(' ')?.[0] || h.name || ''}</span>
                 </div>
                 <p className={styles.nuraDetectedDesc}>
-                  Nüra identificó estas capacidades analizando conversaciones, comportamiento y valoraciones reales. {h.name.split(' ')[0]} nunca las declaró explícitamente.
+                  Nüra identificó estas capacidades analizando conversaciones, comportamiento y valoraciones reales. {h.name?.split(' ')?.[0] || h.name || ''} nunca las declaró explícitamente.
                 </p>
                 <div className={styles.nuraDetectedSkills}>
                   {h.hiddenSkills.map((s, i) => (
@@ -561,7 +561,7 @@ export default function HelperProfile() {
               <div>
                 <p className={styles.empresasIntroTitle}>Historial verificado por terceros</p>
                 <p className={styles.empresasIntroDesc}>
-                  Lo que ves aquí no lo ha escrito {h.name.split(' ')[0]}. Lo han escrito las empresas y personas que han trabajado con él. Imposible de falsificar.
+                  Lo que ves aquí no lo ha escrito {h.name?.split(' ')?.[0] || h.name || ''}. Lo han escrito las empresas y personas que han trabajado con él. Imposible de falsificar.
                 </p>
               </div>
             </div>
@@ -590,7 +590,7 @@ export default function HelperProfile() {
             <div className={styles.companyCta}>
               <Lock size={16} color="var(--soft)" />
               <div>
-                <p className={styles.companyCtaTitle}>¿Has trabajado con {h.name.split(' ')[0]}?</p>
+                <p className={styles.companyCtaTitle}>¿Has trabajado con {h.name?.split(' ')?.[0] || h.name || ''}?</p>
                 <p className={styles.companyCtaDesc}>Las empresas pueden añadir verificaciones al perfil. Disponible en Fase 3.</p>
               </div>
             </div>
@@ -605,7 +605,7 @@ export default function HelperProfile() {
               : (
                 <div className={styles.emptyTab}>
                   <MessageSquare size={32} color="var(--rule)" />
-                  <p>{h.name.split(' ')[0]} aún no ha publicado nada.</p>
+                  <p>{h.name?.split(' ')?.[0] || h.name || ''} aún no ha publicado nada.</p>
                 </div>
               )
             }
@@ -689,7 +689,7 @@ export default function HelperProfile() {
 
             <div className={styles.nuraSeal}>
               <Layers size={13} color="var(--purple)" />
-              <span>Perfil construido por Nüra · No por {h.name.split(' ')[0]} · {h.services} servicios reales · Se actualiza solo</span>
+              <span>Perfil construido por Nüra · No por {h.name?.split(' ')?.[0] || h.name || ''} · {h.services} servicios reales · Se actualiza solo</span>
             </div>
           </div>
         )}
@@ -700,7 +700,7 @@ export default function HelperProfile() {
         <div style={{position:'fixed',inset:0,background:'rgba(0,0,0,0.4)',zIndex:200,display:'flex',alignItems:'flex-end',justifyContent:'center'}}>
           <div style={{background:'white',borderRadius:'24px 24px 0 0',padding:'24px 20px',width:'100%',maxWidth:'500px'}}>
             <div style={{width:'36px',height:'4px',background:'var(--rule)',borderRadius:'2px',margin:'0 auto 20px'}} />
-            <h3 style={{fontSize:'17px',fontWeight:800,color:'var(--ink)',marginBottom:'6px'}}>Contratar a {h.name.split(' ')[0]}</h3>
+            <h3 style={{fontSize:'17px',fontWeight:800,color:'var(--ink)',marginBottom:'6px'}}>Contratar a {h.name?.split(' ')?.[0] || h.name || ''}</h3>
             <p style={{fontSize:'13px',color:'var(--mid)',marginBottom:'20px'}}>{h.price && h.price !== 'Consultar' ? h.price : 'Precio a consultar'} · {h.zone}</p>
             <button onClick={() => { setShowConfirm(false); navigate(`/chat/${h.id}`) }}
               style={{width:'100%',padding:'14px',background:'var(--grad-main)',color:'white',border:'none',borderRadius:'18px',fontSize:'15px',fontWeight:700,boxShadow:'0 4px 16px rgba(123,47,255,0.3)',marginBottom:'10px'}}>
