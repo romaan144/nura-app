@@ -23,3 +23,9 @@
   .content { padding: 0 32px 60px; }
   .list { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
 }
+
+/* Tabs */
+.tabs { display: flex; gap: 6px; margin-bottom: 16px; background: white; border-radius: 16px; padding: 4px; box-shadow: 0 2px 8px rgba(0,0,0,0.06); }
+.tab { flex: 1; padding: 8px; border: none; border-radius: 12px; font-size: 13px; font-weight: 500; color: var(--soft); background: transparent; cursor: pointer; transition: all 0.15s; }
+.tabActive { background: #1C1C1E; color: white; font-weight: 700; }
+.ratedBadge { font-size: 11px; color: #059669; font-weight: 600; }

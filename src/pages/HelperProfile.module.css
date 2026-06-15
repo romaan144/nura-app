@@ -700,3 +700,19 @@
   cursor: pointer; transition: all 0.15s;
   white-space: nowrap;
 }
+
+/* Sticky bottom CTA — glass design */
+.ctaBar {
+  position: sticky;
+  bottom: max(env(safe-area-inset-bottom,0px), 16px);
+  margin: 12px 14px 0;
+  display: flex; gap: 10px;
+  background: rgba(255,255,255,0.72);
+  backdrop-filter: blur(24px) saturate(180%);
+  -webkit-backdrop-filter: blur(24px) saturate(180%);
+  border: 1px solid rgba(255,255,255,0.35);
+  border-radius: 100px;
+  padding: 8px;
+  box-shadow: 0 2px 16px rgba(0,0,0,0.05), 0 0 0 0.5px rgba(0,0,0,0.06);
+  z-index: 10;
+}

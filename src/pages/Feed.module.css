@@ -208,3 +208,13 @@
     margin-right: auto;
   }
 }
+
+/* Like animation */
+.actionLiked svg { animation: heartPop 0.3s cubic-bezier(0.36,0.07,0.19,0.97); }
+@keyframes heartPop {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.4); }
+  100% { transform: scale(1); }
+}
+/* Better author row */
+.authorInfo { display: flex; align-items: center; gap: 10px; cursor: pointer; flex: 1; }
