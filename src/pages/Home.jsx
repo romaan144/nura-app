@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom'
 import { Send, Mic, MicOff, ArrowRight, Plus } from 'lucide-react'
 import { analyzeNeed, matchHelpers } from '../utils/matching'
 import { useUser } from '../context/UserContext'
-import { MenuButton } from '../components/NavBar'
+import PageHeader from '../components/PageHeader'
 import styles from './Home.module.css'
 import Onboarding from '../components/Onboarding'
 

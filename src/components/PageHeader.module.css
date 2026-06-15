@@ -1,0 +1,35 @@
+.header {
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 12px 14px;
+  background: transparent;
+  position: sticky; top: 0; z-index: 20;
+  pointer-events: none;
+}
+.left, .right {
+  pointer-events: all;
+  width: 42px; display: flex; align-items: center;
+}
+.right { justify-content: flex-end; }
+.center {
+  pointer-events: all;
+  display: flex; align-items: center; justify-content: center;
+  flex: 1;
+}
+.logo {
+  height: 26px; width: auto;
+  background: white;
+  padding: 7px 18px;
+  border-radius: 22px;
+  box-shadow: 0 1px 4px rgba(0,0,0,0.08), 0 4px 16px rgba(0,0,0,0.05);
+  display: block;
+}
+.circleBtn {
+  width: 38px; height: 38px; border-radius: 50%;
+  background: white; border: none;
+  display: flex; align-items: center; justify-content: center;
+  color: var(--mid); cursor: pointer;
+  box-shadow: 0 1px 4px rgba(0,0,0,0.08), 0 4px 16px rgba(0,0,0,0.05);
+  transition: all 0.15s;
+}
+.circleBtn:hover { box-shadow: 0 2px 8px rgba(0,0,0,0.12); color: var(--ink); }
+.placeholder { width: 38px; }

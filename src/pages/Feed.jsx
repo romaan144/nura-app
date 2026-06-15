@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom'
 import { Heart, MessageCircle, Share2, Bookmark, Bell, UserPlus, Check, Sparkles } from 'lucide-react'
 import { HELPERS } from '../data/helpers'
 import { COMPANIES } from '../data/companies'
-import { MenuButton } from '../components/NavBar'
+import PageHeader from '../components/PageHeader'
 import { useUser } from '../context/UserContext'
 import styles from './Feed.module.css'
 
@@ -177,14 +177,7 @@ export default function Feed() {
   return (
     <div className={styles.page}>
       {/* Header */}
-      <header className={styles.header}>
-        <MenuButton />
-        <img src="/logo-text.png" alt="Nüra" className={styles.logoText} />
-        <button className={styles.notifBtn} onClick={markNotifsRead}>
-          <Bell size={20} />
-          {unreadNotifs > 0 && <span className={styles.notifBadge}>{unreadNotifs}</span>}
-        </button>
-      </header>
+      <PageHeader rightEl={<button className={styles.notifBtn} onClick={markNotifsRead}><Bell size={18} />{unreadNotifs > 0 && <span className={styles.notifBadge}>{unreadNotifs}</span>}</button>} />
 
       {/* Section tabs */}
       <div className={styles.sectionTabs}>

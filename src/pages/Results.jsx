@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
-import { MenuButton } from '../components/NavBar'
+import PageHeader from '../components/PageHeader'
 import { ArrowLeft, MapPin, Star, Shield, Zap, MessageCircle, Search, X, ChevronRight } from 'lucide-react'
 import { matchHelpers } from '../utils/matching'
 import { useUser } from '../context/UserContext'
@@ -103,10 +103,7 @@ export default function Results({ searchState }) {
 
   return (
     <div className={styles.page}>
-      <header className={styles.header}>
-        <button className={styles.back} onClick={() => navigate('/')}><ArrowLeft size={18} /></button>
-        <img src="/logo-text.png" alt="Nüra" className={styles.logoImg} />
-      </header>
+      <PageHeader showBack />
 
       <div className={styles.content}>
         {/* Query */}

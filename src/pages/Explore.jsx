@@ -2,7 +2,7 @@ import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { Star, MapPin, Shield, Zap, TrendingUp, Search, Filter } from 'lucide-react'
 import { HELPERS } from '../data/helpers'
-import { MenuButton } from '../components/NavBar'
+import PageHeader from '../components/PageHeader'
 import styles from './Explore.module.css'
 
 const CATEGORIES = [
@@ -81,30 +81,13 @@ export default function Explore() {
 
   return (
     <div className={styles.page}>
-      <header className={styles.header}>
-        <div className={styles.headerTop}>
-          <MenuButton />
-          <div>
-            <h1 className={styles.title}>Explorar</h1>
-            <p className={styles.subtitle}>Barcelona · {HELPERS.length} helpers activos</p>
-          </div>
-          <div className={styles.liveIndicator}>
-            <span className={styles.liveDot} />
-            <span>En vivo</span>
-          </div>
-        </div>
-
-        {/* Search */}
+      <PageHeader />
+      <div className={styles.searchWrap}>
         <div className={styles.searchBar}>
           <Search size={14} color="var(--soft)" />
-          <input
-            className={styles.searchInput}
-            placeholder="Buscar por nombre, especialidad o zona..."
-            value={searchText}
-            onChange={e => setSearchText(e.target.value)}
-          />
+          <input className={styles.searchInput} placeholder="Buscar por nombre, especialidad o zona..." value={searchText} onChange={e => setSearchText(e.target.value)} />
         </div>
-      </header>
+      </div>
 
       <div className={styles.content}>
         {/* Activity feed */}

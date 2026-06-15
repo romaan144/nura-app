@@ -1,6 +1,6 @@
 import { useNavigate } from 'react-router-dom'
 import { LogOut, Star, MessageCircle, ChevronRight, Shield, Award, TrendingUp, Sparkles, BarChart2, Users, Clock } from 'lucide-react'
-import { MenuButton } from '../components/NavBar'
+import PageHeader from '../components/PageHeader'
 import { useUser } from '../context/UserContext'
 import { HELPERS } from '../data/helpers'
 import styles from './Profile.module.css'
@@ -33,13 +33,7 @@ export default function Profile() {
 
   return (
     <div className={styles.page}>
-      <header className={styles.header}>
-        <MenuButton />
-        <span className={styles.headerTitle}>Mi perfil</span>
-        <button className={styles.settingsBtn} onClick={() => { logout(); navigate('/') }}>
-          <LogOut size={17} />
-        </button>
-      </header>
+      <PageHeader rightEl={<button className={styles.settingsBtn} onClick={() => { logout(); navigate('/') }}><LogOut size={17} /></button>} />
 
       <div className={styles.content}>
 

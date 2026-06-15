@@ -1,15 +1,9 @@
 .page { min-height: 100vh; background: #F8F8FA; }
 
-.header {
-  display: flex; align-items: center; gap: 12px;
-  padding: 13px 18px;
-  background: rgba(248,248,250,0.92); backdrop-filter: blur(24px) saturate(160%); -webkit-backdrop-filter: blur(24px) saturate(160%); box-shadow: 0 1px 0 rgba(0,0,0,0.04);
-  border-bottom: 1px solid var(--rule);
-  position: sticky; top: 0; z-index: 20;
-}
+
 .back { width: 34px; height: 34px; border-radius: 50%; border: 1.5px solid var(--rule); background: #F8F8FA; color: var(--mid); display: flex; align-items: center; justify-content: center; transition: all 0.18s; flex-shrink: 0; }
 .back:hover { border-color: var(--purple); color: var(--purple); }
-.logoImg { height: 24px; width: auto; position: absolute; left: 50%; transform: translateX(-50%); }
+
 
 .content { max-width: 640px; margin: 0 auto; padding: 18px 14px 32px; }
 

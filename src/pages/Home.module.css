@@ -9,22 +9,8 @@
 }
 
 /* ── HEADER ── */
-.header {
-  display: flex; align-items: center; justify-content: space-between;
-  padding: 12px 14px;
-  background: #F8F8FA;
-  flex-shrink: 0;
-  position: relative;
-}
-.headerLogo {
-  height: 26px; width: auto;
-  position: absolute; left: 50%; transform: translateX(-50%);
-  background: white;
-  padding: 8px 18px;
-  border-radius: 22px;
-  box-shadow: 0 1px 4px rgba(0,0,0,0.08), 0 2px 12px rgba(0,0,0,0.04);
-  display: block;
-}
+
+
 .profileBtn {
   width: 36px; height: 36px; border-radius: 50%;
   background: white;

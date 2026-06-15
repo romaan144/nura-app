@@ -1,3 +1,4 @@
+import PageHeader from '../components/PageHeader'
 import { useState, useEffect } from 'react'
 import { useParams, useNavigate } from 'react-router-dom'
 import {
@@ -284,20 +285,7 @@ export default function HelperProfile() {
   return (
     <div className={styles.page}>
       {/* Header */}
-      <header className={styles.header}>
-        <button className={styles.back} onClick={() => navigate(-1)}><ArrowLeft size={18} /></button>
-        <img src="/logo-text.png" alt="Nüra" className={styles.headerLogo} />
-        <div className={styles.headerActions}>
-          <button className={styles.shareBtn} onClick={handleShare}>
-            {shared ? <span className={styles.copiedLabel}>✓</span> : <Share2 size={15} />}
-          </button>
-          {!hasRated(h.id) && (
-            <button className={styles.rateBtn} onClick={() => setShowRating(true)}>
-              <Star size={13} /> Valorar
-            </button>
-          )}
-        </div>
-      </header>
+      <PageHeader showBack rightEl={<div className={styles.headerActions}><button className={styles.shareBtn} onClick={handleShare}>{shared ? <span>✓</span> : <Share2 size={15} />}</button>{!hasRated(h.id) && <button className={styles.rateBtn} onClick={() => setShowRating(true)}><Star size={13} /> Valorar</button>}</div>} />
 
       <div className={styles.content}>
         {/* Hero */}

@@ -1,13 +1,9 @@
 .page { min-height: 100vh; background: #F8F8FA; padding-bottom: 24px; }
 
-.header {
-  background: rgba(248,248,250,0.92); backdrop-filter: blur(24px) saturate(160%); -webkit-backdrop-filter: blur(24px) saturate(160%);
-  border-bottom: 1px solid rgba(255,255,255,0.5); box-shadow: 0 1px 0 rgba(0,0,0,0.04);
-  padding: 14px 16px; position: sticky; top: 0; z-index: 10;
-}
-.headerTop { display: flex; align-items: flex-start; justify-content: space-between; margin-bottom: 14px; }
-.title { font-size: 24px; font-weight: 800; color: var(--ink); letter-spacing: -0.5px; }
-.subtitle { font-size: 12px; color: var(--soft); margin-top: 2px; }
+
+
+
+
 
 .liveIndicator {
   display: flex; align-items: center; gap: 6px;
@@ -152,3 +148,5 @@
 .newBadge { font-size: 10px; font-weight: 700; color: var(--cyan2); background: rgba(0,180,170,0.1); border-radius: 8px; padding: 3px 8px; }
 
 .empty { text-align: center; padding: 32px; color: var(--soft); font-size: 14px; }
+
+.searchWrap { padding: 0 14px 12px; }
