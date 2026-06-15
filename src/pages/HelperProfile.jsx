@@ -272,13 +272,13 @@ function HelperProfileInner() {
       return
     }
     // 2. Window cache (from search results)
-    const winCached = window.__nuraHelperCache?.[id] || window.__nuraHelperCache?.[parseInt(id)]
+    const winCached = window.__nuraHelperCache?.[id] || window.__nuraHelperCache?.[parseInt(id)] || window.__nuraHelperCache?.[String(id)]
     if (winCached) { setH(winCached); return }
     // 3. Context cache
     const cached = helpersCache?.[parseInt(id)] || helpersCache?.[id] || helpersCache?.[String(id)]
     if (cached) { setH(cached); return }
     // 4. Local
-    const local = HELPERS.find(x => String(x.id) === String(id))
+    const local = HELPERS.find(x => x && String(x.id) === String(id))
     if (local) { setH(local); return }
     // 5. Supabase
     setLoading(true)

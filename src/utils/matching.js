@@ -83,6 +83,7 @@ export function analyzeNeed(userText) {
 }
 
 function normalizeHelper(h) {
+  if (!h) return null
   return {
     ...h,
     avatarColor: h.avatar_color || h.avatarColor || '#1A56DB',
@@ -118,7 +119,7 @@ export async function matchHelpers(analysis, limit = 5, refinement = null, previ
   try {
     const remote = await searchHelpers(analysis.categoria, analysis.palabrasClave)
     if (remote && remote.length > 0) {
-      pool = remote.map(normalizeHelper)
+      pool = remote.map(normalizeHelper).filter(Boolean)
     }
   } catch (e) {
     console.warn('Supabase error, using local:', e)
@@ -127,7 +128,7 @@ export async function matchHelpers(analysis, limit = 5, refinement = null, previ
   // Fallback to local data
   if (pool.length === 0) {
     console.log('Using local helpers fallback')
-    pool = LOCAL_HELPERS.map(normalizeHelper)
+    pool = LOCAL_HELPERS.filter(Boolean).map(normalizeHelper).filter(Boolean)
   }
 
   // Score
