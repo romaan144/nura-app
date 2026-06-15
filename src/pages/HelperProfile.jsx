@@ -1,4 +1,5 @@
 import PageHeader from '../components/PageHeader'
+import ErrorBoundary from '../components/ErrorBoundary'
 import { useState, useEffect } from 'react'
 import { useParams, useNavigate, useLocation } from 'react-router-dom'
 import {
@@ -244,7 +245,7 @@ function PostCard({ post, helper }) {
 }
 
 /* ── MAIN ─────────────────────────────────────────────────────────────── */
-export default function HelperProfile() {
+function HelperProfileInner() {
   const { id } = useParams()
   const navigate = useNavigate()
   const { hasRated, helpersCache, toggleFavorite, isFavorite } = useUser()
@@ -279,13 +280,6 @@ export default function HelperProfile() {
         .finally(() => setLoading(false))
     }
   }, [id])
-
-  // Catch any render errors
-  try {
-    const testRender = h ? JSON.stringify({ id: h.id, name: h.name, rating: h.rating }) : 'null'
-  } catch(e) {
-    return <div style={{padding:'20px',color:'red'}}>Error en datos: {String(e)}</div>
-  }
 
   if (loading) return (
     <div style={{display:'flex',alignItems:'center',justifyContent:'center',height:'100dvh',background:'#F8F8FA'}}>
@@ -749,5 +743,13 @@ export default function HelperProfile() {
         </div>
       )}
     </div>
+  )
+}
+
+export default function HelperProfile() {
+  return (
+    <ErrorBoundary>
+      <HelperProfileInner />
+    </ErrorBoundary>
   )
 }
