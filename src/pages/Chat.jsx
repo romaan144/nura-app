@@ -1,6 +1,6 @@
 import { useState, useEffect, useRef } from 'react'
 import { useParams, useNavigate } from 'react-router-dom'
-import { ArrowLeft, Send, Shield, Star, MapPin, Award } from 'lucide-react'
+import { ArrowLeft, Send, Shield, Star, MapPin, Award, Calendar } from 'lucide-react'
 import { MenuButton } from '../components/NavBar'
 import { HELPERS } from '../data/helpers'
 import { useUser } from '../context/UserContext'
@@ -72,6 +72,52 @@ function formatDateLabel(date) {
   return date.toLocaleDateString('es-ES', { day: 'numeric', month: 'long' })
 }
 
+
+function ConfirmServiceModal({ helper, onClose }) {
+  const [date, setDate] = useState('')
+  const [time, setTime] = useState('')
+  const [note, setNote] = useState('')
+  const [confirmed, setConfirmed] = useState(false)
+
+  if (confirmed) return (
+    <div style={{position:'fixed',inset:0,background:'rgba(0,0,0,0.4)',zIndex:200,display:'flex',alignItems:'center',justifyContent:'center',padding:'20px'}}>
+      <div style={{background:'white',borderRadius:'24px',padding:'32px',textAlign:'center',maxWidth:'320px',width:'100%',boxShadow:'0 8px 40px rgba(0,0,0,0.18)'}}>
+        <div style={{fontSize:'48px',marginBottom:'16px'}}>✅</div>
+        <h3 style={{fontSize:'18px',fontWeight:800,marginBottom:'8px',color:'var(--ink)'}}>Solicitud enviada</h3>
+        <p style={{fontSize:'13px',color:'var(--mid)',marginBottom:'24px',lineHeight:1.6}}>{helper.name.split(' ')[0]} recibirá tu solicitud y confirmará disponibilidad.</p>
+        <button onClick={onClose} style={{padding:'12px 28px',background:'#1C1C1E',color:'white',border:'none',borderRadius:'20px',fontSize:'14px',fontWeight:700}}>Entendido</button>
+      </div>
+    </div>
+  )
+
+  return (
+    <div style={{position:'fixed',inset:0,background:'rgba(0,0,0,0.4)',zIndex:200,display:'flex',alignItems:'flex-end',justifyContent:'center'}}>
+      <div style={{background:'white',borderRadius:'24px 24px 0 0',padding:'24px',width:'100%',maxWidth:'500px',boxShadow:'0 -8px 40px rgba(0,0,0,0.18)'}}>
+        <div style={{width:'36px',height:'4px',background:'var(--rule)',borderRadius:'2px',margin:'0 auto 20px'}} />
+        <h3 style={{fontSize:'17px',fontWeight:800,marginBottom:'4px',color:'var(--ink)'}}>Solicitar servicio</h3>
+        <p style={{fontSize:'13px',color:'var(--mid)',marginBottom:'20px'}}>Con {helper.name.split(' ')[0]} · {helper.price || 'Precio a consultar'}</p>
+        <div style={{display:'flex',flexDirection:'column',gap:'12px',marginBottom:'20px'}}>
+          <input type="date" value={date} onChange={e=>setDate(e.target.value)}
+            style={{padding:'11px 14px',border:'1.5px solid var(--rule)',borderRadius:'14px',fontSize:'14px',outline:'none',fontFamily:'Inter,sans-serif',color:'var(--ink)'}} />
+          <input type="time" value={time} onChange={e=>setTime(e.target.value)}
+            style={{padding:'11px 14px',border:'1.5px solid var(--rule)',borderRadius:'14px',fontSize:'14px',outline:'none',fontFamily:'Inter,sans-serif',color:'var(--ink)'}} />
+          <textarea value={note} onChange={e=>setNote(e.target.value)}
+            placeholder="Cuéntale más detalles (opcional)..."
+            rows={3}
+            style={{padding:'11px 14px',border:'1.5px solid var(--rule)',borderRadius:'14px',fontSize:'14px',outline:'none',resize:'none',fontFamily:'Inter,sans-serif',color:'var(--ink)'}} />
+        </div>
+        <div style={{display:'flex',gap:'10px'}}>
+          <button onClick={onClose} style={{flex:1,padding:'13px',background:'var(--paper)',color:'var(--mid)',border:'none',borderRadius:'18px',fontSize:'14px',fontWeight:600}}>Cancelar</button>
+          <button onClick={()=>setConfirmed(true)} disabled={!date}
+            style={{flex:2,padding:'13px',background:date?'var(--grad-main)':'var(--rule)',color:'white',border:'none',borderRadius:'18px',fontSize:'14px',fontWeight:700,boxShadow:date?'0 4px 14px rgba(123,47,255,0.3)':'none'}}>
+            Enviar solicitud
+          </button>
+        </div>
+      </div>
+    </div>
+  )
+}
+
 export default function Chat() {
   const { id } = useParams()
   const navigate = useNavigate()
@@ -84,6 +130,7 @@ export default function Chat() {
   const [suggested, setSuggested] = useState('')
   const [typing, setTyping] = useState(false)
   const [showRating, setShowRating] = useState(false)
+  const [showConfirm, setShowConfirm] = useState(false)
   const [msgCount, setMsgCount] = useState(0)
   const [showInfo, setShowInfo] = useState(false)
   const bottomRef = useRef(null)
@@ -157,6 +204,16 @@ export default function Chat() {
         </div>
 
 
+        <button onClick={() => setShowConfirm(true)} style={{
+          display:'flex',alignItems:'center',gap:'6px',
+          padding:'8px 14px',background:'var(--grad-main)',
+          color:'white',border:'none',borderRadius:'20px',
+          fontSize:'12px',fontWeight:700,
+          boxShadow:'0 2px 8px rgba(123,47,255,0.3)',
+          flexShrink:0
+        }}>
+          <Calendar size={13} /> Contratar
+        </button>
       </header>
 
       {/* Helper info strip */}
@@ -238,6 +295,7 @@ export default function Chat() {
       </div>
 
       {showRating && <RatingModal helper={helper} onClose={() => setShowRating(false)} />}
+      {showConfirm && <ConfirmServiceModal helper={helper} onClose={() => setShowConfirm(false)} />}
     </div>
   )
 }

@@ -17,6 +17,7 @@ import Feed from './pages/Feed'
 import NotFound from './pages/NotFound'
 import NavBar from './components/NavBar'
 import ScrollToTop from './components/ScrollToTop'
+import OnboardingPage from './pages/Onboarding'
 import Toast from './components/Toast'
 import PageTransition from './components/PageTransition'
 import './index.css'
@@ -41,6 +42,7 @@ function AppRoutes({ showSplash }) {
           } />
           <Route path="/helper/:id" element={<HelperProfile />} />
           <Route path="/chat/:id" element={<Chat />} />
+          <Route path="/onboarding" element={<OnboardingPage />} />
           <Route path="/login" element={user ? <Navigate to="/" /> : <Login />} />
           <Route path="/profile" element={<Profile />} />
           <Route path="/chats" element={<Chats />} />

@@ -1,10 +1,9 @@
 import { useState, useEffect, useRef } from 'react'
-import { MenuButton } from '../components/NavBar'
 import { useNavigate } from 'react-router-dom'
 import { Send, Mic, MicOff, Plus, Star, MapPin, Shield, MessageCircle, Award } from 'lucide-react'
 import { analyzeNeed, matchHelpers } from '../utils/matching'
 import { useUser } from '../context/UserContext'
-
+import { MenuButton } from '../components/NavBar'
 import styles from './Home.module.css'
 import Onboarding from '../components/Onboarding'
 
@@ -25,7 +24,7 @@ function getWelcome(user) {
 
 function detectIntent(text, user) {
   const t = text.toLowerCase()
-  if (user?.isHelper && (t.includes('aprendido') || t.includes('certificado') || t.includes('curso') || t.includes('estudié') || t.includes('trabajé')))
+  if (user?.isHelper && (t.includes('aprendido') || t.includes('certificado') || t.includes('estudié') || t.includes('trabajé')))
     return 'update_profile'
   if (t.includes('empresa') || t.includes('contratar') || t.includes('empleado') || t.includes('trabajó'))
     return 'b2b'
@@ -37,16 +36,15 @@ function detectIntent(text, user) {
 const SUGGESTIONS = {
   default: [
     { icon: '🗣️', text: 'Necesito un logopeda para mi hijo' },
-    { icon: '✍️', text: 'Busco cuidadora para mi padre mayor' },
+    { icon: '❤️', text: 'Busco cuidadora para mi padre mayor' },
     { icon: '🔧', text: 'Técnico de calderas urgente' },
   ],
   helper: [
-    { icon: '✍️', text: 'Acabo de obtener una certificación nueva' },
-    { icon: '🌐', text: 'He trabajado en un nuevo sitio este mes' },
-    { icon: '🖼️', text: 'Quiero actualizar mi disponibilidad' },
+    { icon: '✨', text: 'Acabo de obtener una certificación' },
+    { icon: '🏢', text: 'He trabajado en un nuevo sitio' },
+    { icon: '📅', text: 'Quiero actualizar mi disponibilidad' },
   ],
 }
-
 
 function ResultCard({ helper, onNavigate }) {
   return (
@@ -61,7 +59,10 @@ function ResultCard({ helper, onNavigate }) {
         </div>
         <div className={styles.resultInfo}>
           <div style={{display:'flex',alignItems:'flex-start',justifyContent:'space-between',gap:'8px'}}>
-            <div className={styles.resultName}>{helper.name}{helper.founder && <Award size={12} color='#92400E' style={{marginLeft:'4px',verticalAlign:'middle',flexShrink:0}} />}</div>
+            <div className={styles.resultName}>
+              {helper.name}
+              {helper.founder && <Award size={12} color='#92400E' style={{marginLeft:'4px',verticalAlign:'middle',flexShrink:0}} />}
+            </div>
             <span style={{fontSize:'13px',fontWeight:700,color:helper.price && helper.price!=='Consultar'?'#7B2FFF':'#aaa',whiteSpace:'nowrap',flexShrink:0}}>
               {helper.price && helper.price !== 'Consultar' ? helper.price : 'Consultar'}
             </span>
@@ -98,14 +99,13 @@ export default function Home({ setSearchState }) {
   const [loading, setLoading] = useState(false)
   const [listening, setListening] = useState(false)
   const [showSuggestions, setShowSuggestions] = useState(true)
+  const [lastMatches, setLastMatches] = useState(null)
   const bottomRef = useRef(null)
   const inputRef = useRef(null)
 
   useEffect(() => {
     const lines = getWelcome(user)
-    setTimeout(() => {
-      setMessages([{ id: 1, from: 'nura', lines }])
-    }, 300)
+    setTimeout(() => setMessages([{ id: 1, from: 'nura', lines }]), 300)
   }, [user?.id])
 
   useEffect(() => {
@@ -116,9 +116,7 @@ export default function Home({ setSearchState }) {
     const parts = line.split(/\*\*(.*?)\*\*/g)
     return parts.map((part, i) => {
       if (i % 2 === 1) {
-        if (part.startsWith('grad:')) {
-          return <span key={i} className={styles.gradText}>{part.slice(5)}</span>
-        }
+        if (part.startsWith('grad:')) return <span key={i} className={styles.gradText}>{part.slice(5)}</span>
         return <strong key={i}>{part}</strong>
       }
       return part
@@ -136,6 +134,23 @@ export default function Home({ setSearchState }) {
 
     const intent = detectIntent(msg, user)
 
+    // Refinement — if user is refining previous results
+    if (lastMatches && intent === 'search') {
+      const refined = await matchHelpers({ categoria: 'otro', palabrasClave: msg.toLowerCase().split(' ') }, 4, msg, lastMatches)
+      if (refined?.length) {
+        const resultMsg = {
+          id: Date.now(), from: 'nura',
+          lines: [`He ajustado los resultados según lo que me dices.`],
+          results: refined
+        }
+        setMessages(prev => [...prev, resultMsg])
+        setTimeout(() => setMessages(prev => [...prev, { id: Date.now()+1, from: 'nura', lines: ['¿Te convence alguno o prefieres ajustar la búsqueda?'] }]), 1500)
+        setLastMatches(refined)
+        setLoading(false)
+        return
+      }
+    }
+
     if (intent === 'update_profile') {
       setTimeout(() => {
         setMessages(prev => [...prev, { id: Date.now(), from: 'nura', lines: ['He actualizado tu perfil con esta información. Nüra lo analizará y añadirá las habilidades relevantes automáticamente.'] }])
@@ -145,7 +160,7 @@ export default function Home({ setSearchState }) {
     }
     if (intent === 'b2b') {
       setTimeout(() => {
-        setMessages(prev => [...prev, { id: Date.now(), from: 'nura', lines: ['El acceso empresarial está disponible en Fase 3 de Nüra. Si quieres verificar que alguien ha trabajado contigo, cuéntame su nombre y qué quieres que conste.'] }])
+        setMessages(prev => [...prev, { id: Date.now(), from: 'nura', lines: ['El acceso empresarial está disponible en Fase 3. Si quieres verificar que alguien ha trabajado contigo, cuéntame su nombre y qué quieres que conste.'] }])
         setLoading(false)
       }, 1000)
       return
@@ -161,29 +176,22 @@ export default function Home({ setSearchState }) {
     try {
       setMessages(prev => [...prev, { id: Date.now() + 0.5, from: 'nura', lines: ['Buscando en la red de helpers...'], loading: true }])
       const analysis = await analyzeNeed(msg)
-      const matches = await matchHelpers(analysis)
+      const matches = await matchHelpers(analysis, 4)
       setMessages(prev => prev.filter(m => !m.loading))
+
       if (!matches?.length) {
         setMessages(prev => [...prev, { id: Date.now(), from: 'nura', lines: ['No encontré a nadie disponible ahora mismo. Prueba a describirlo de otra forma.'] }])
         setLoading(false)
         return
       }
+
       addSearch?.(msg)
       setSearchState({ query: msg, analysis, matches })
-      const resultMsg = {
-        id: Date.now(), from: 'nura',
-        lines: [`He encontrado **${matches.length} personas** que pueden ayudarte.`],
-        results: matches.slice(0, 4)
-      }
-      setMessages(prev => [...prev, resultMsg])
+      setLastMatches(matches)
 
-      // Follow-up question after 1.5s
-      setTimeout(() => {
-        setMessages(prev => [...prev, {
-          id: Date.now() + 1, from: 'nura',
-          lines: ['¿Te convence alguno o prefieres ajustar la búsqueda?'],
-        }])
-      }, 1500)
+      const resultMsg = { id: Date.now(), from: 'nura', lines: [`He encontrado **${matches.length} personas** que pueden ayudarte.`], results: matches }
+      setMessages(prev => [...prev, resultMsg])
+      setTimeout(() => setMessages(prev => [...prev, { id: Date.now()+1, from: 'nura', lines: ['¿Te convence alguno o prefieres ajustar la búsqueda?'] }]), 1500)
     } catch {
       setMessages(prev => prev.filter(m => !m.loading))
       setMessages(prev => [...prev, { id: Date.now(), from: 'nura', lines: ['Algo fue mal. Inténtalo de nuevo.'] }])
@@ -211,21 +219,19 @@ export default function Home({ setSearchState }) {
 
   return (
     <div className={styles.page}>
-
       <div className={styles.header}>
         <MenuButton />
-        <div className={styles.headerLogoPill}><img src="/logo-text.png" alt="Nüra" className={styles.headerLogo} /></div>
-        <button className={styles.profileBtn} onClick={() => navigate('/profile')}>
+        <div className={styles.headerLogoPill}>
+          <img src="/logo-text.png" alt="Nüra" className={styles.headerLogo} />
+        </div>
+        <button className={styles.profileBtn} onClick={() => navigate('/profile')} style={{flexShrink:0,width:'38px',height:'38px',minWidth:'38px'}}>
           {user?.name
-            ? <img src={`https://api.dicebear.com/9.x/personas/svg?seed=${encodeURIComponent(user.name)}`}
-                alt={user.name}
-                style={{width:'100%',height:'100%',borderRadius:'50%',objectFit:'cover'}} />
+            ? <img src={`https://api.dicebear.com/9.x/personas/svg?seed=${encodeURIComponent(user.name)}`} alt="" style={{width:'100%',height:'100%',borderRadius:'50%',objectFit:'cover'}} />
             : '?'
           }
         </button>
       </div>
 
-      {/* Messages */}
       <div className={styles.messages}>
         {messages.map(msg => (
           <div key={msg.id}>
@@ -237,21 +243,13 @@ export default function Home({ setSearchState }) {
               )}
               <div className={`${styles.bubble} ${msg.from === 'user' ? styles.bubbleUser : styles.bubbleNura}`}>
                 {msg.text && <p>{msg.text}</p>}
-                {msg.lines?.map((line, i) => (
-                  <p key={i}>{formatLine(line)}</p>
-                ))}
-                {msg.loading && (
-                  <div className={styles.typingDots}>
-                    <span /><span /><span />
-                  </div>
-                )}
+                {msg.lines?.map((line, i) => <p key={i}>{formatLine(line)}</p>)}
+                {msg.loading && <div className={styles.typingDots}><span /><span /><span /></div>}
               </div>
             </div>
             {msg.results && (
               <div className={styles.resultsList}>
-                {msg.results.map(h => (
-                  <ResultCard key={h.id} helper={h} onNavigate={navigate} />
-                ))}
+                {msg.results.map(h => <ResultCard key={h.id} helper={h} onNavigate={navigate} />)}
               </div>
             )}
           </div>
@@ -259,7 +257,6 @@ export default function Home({ setSearchState }) {
         <div ref={bottomRef} />
       </div>
 
-      {/* Suggestions — ChatGPT style with icon + text */}
       {showSuggestions && (
         <div className={styles.suggestions}>
           {suggestions.map((s, i) => (
@@ -271,23 +268,15 @@ export default function Home({ setSearchState }) {
         </div>
       )}
 
-      {/* Input bar — ChatGPT style */}
       <div className={styles.inputWrap}>
         <div className={styles.inputBar}>
           <button className={styles.plusBtn}><Plus size={18} /></button>
-          <input
-            ref={inputRef}
-            className={styles.input}
+          <input ref={inputRef} className={styles.input}
             placeholder="Escribe a Nüra..."
-            value={input}
-            onChange={e => setInput(e.target.value)}
-            onKeyDown={handleKey}
-            disabled={loading}
-          />
+            value={input} onChange={e => setInput(e.target.value)}
+            onKeyDown={handleKey} disabled={loading} />
           {input.trim()
-            ? <button className={styles.sendBtn} onClick={() => handleSend()}>
-                <Send size={16} />
-              </button>
+            ? <button className={styles.sendBtn} onClick={() => handleSend()}><Send size={16} /></button>
             : <button className={`${styles.sendBtn} ${listening ? styles.micActive : styles.micBtn}`} onClick={toggleMic}>
                 {listening ? <MicOff size={16} /> : <Mic size={16} />}
               </button>
