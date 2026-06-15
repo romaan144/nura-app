@@ -1,7 +1,6 @@
 import { useState, useEffect, useRef } from 'react'
 import { useParams, useNavigate } from 'react-router-dom'
 import { ArrowLeft, Send, Shield, Star, MapPin, Award, Calendar } from 'lucide-react'
-import { MenuButton } from '../components/NavBar'
 import { HELPERS } from '../data/helpers'
 import { useUser } from '../context/UserContext'
 import RatingModal from '../components/RatingModal'
@@ -195,7 +194,7 @@ export default function Chat() {
             ? <img src={helper.avatarUrl} alt={helper.name} className={styles.avatarImg} />
             : <div className={styles.avatar} style={{ background: helper.avatarColor }}>{helper.avatar}</div>
           }
-          <div>
+          <div className={styles.helperMeta}>
             <div className={styles.helperName}>
                 {helper.name}
                 {helper.founder && <Award size={12} color='#92400E' style={{marginLeft:'4px',verticalAlign:'middle'}} />}

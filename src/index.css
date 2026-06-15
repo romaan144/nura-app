@@ -198,3 +198,19 @@ body {
 .glassCapsule:focus-within {
   background: rgba(255,255,255,0.86);
 }
+
+/* ── PREMIUM SCROLLBAR ── */
+::-webkit-scrollbar { width: 4px; height: 4px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: rgba(0,0,0,0.12); border-radius: 2px; }
+::-webkit-scrollbar-thumb:hover { background: rgba(0,0,0,0.2); }
+
+/* ── SELECTION ── */
+::selection { background: rgba(123,47,255,0.15); color: inherit; }
+
+/* ── BUTTON RESET ── */
+button { font-family: -apple-system, 'Inter', sans-serif; cursor: pointer; }
+
+/* ── SMOOTH RENDERING ── */
+* { -webkit-tap-highlight-color: transparent; }
+img { -webkit-user-drag: none; }
