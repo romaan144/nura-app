@@ -91,3 +91,8 @@
 .avatarName { font-size: 22px; font-weight: 800; color: var(--ink); margin: 12px 0 4px; letter-spacing: -0.5px; }
 .avatarSub { font-size: 13px; color: var(--soft); margin-bottom: 16px; }
 .editAvatarBtn { font-size: 12px; color: var(--purple); background: rgba(123,47,255,0.08); border: none; border-radius: 14px; padding: 6px 14px; font-weight: 600; }
+
+/* ── EDIT PROFILE ── */
+.editBtn { font-size: 12px; color: var(--purple); background: rgba(123,47,255,0.08); border: none; border-radius: 12px; padding: 5px 12px; font-weight: 600; margin-top: 6px; }
+.editSaveBtn { font-size: 12px; color: white; background: var(--purple); border: none; border-radius: 12px; padding: 5px 14px; font-weight: 700; margin-top: 6px; }
+.editNameInput { font-size: 20px; font-weight: 700; color: var(--ink); border: none; border-bottom: 2px solid var(--purple); outline: none; background: transparent; text-align: center; padding: 4px 8px; font-family: 'Inter', sans-serif; margin-top: 8px; }

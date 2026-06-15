@@ -99,6 +99,7 @@ export default function Home({ setSearchState }) {
   const [loading, setLoading] = useState(false)
   const [listening, setListening] = useState(false)
   const [showSuggestions, setShowSuggestions] = useState(true)
+  const [inputFocused, setInputFocused] = useState(false)
   const [lastMatches, setLastMatches] = useState(null)
   const bottomRef = useRef(null)
   const inputRef = useRef(null)
@@ -292,6 +293,18 @@ export default function Home({ setSearchState }) {
         <div ref={bottomRef} />
       </div>
 
+      {inputFocused && !input && searchHistory?.length > 0 && (
+        <div className={styles.recentSearches}>
+          <span className={styles.recentLabel}>Búsquedas recientes</span>
+          {searchHistory.slice(0, 3).map((s, i) => (
+            <button key={i} className={styles.recentItem} onClick={() => handleSend(s.query)}>
+              <span className={styles.recentIcon}>🕐</span>
+              <span className={styles.recentText}>{s.query}</span>
+            </button>
+          ))}
+        </div>
+      )}
+
       {showSuggestions && (
         <div className={styles.suggestions}>
           {suggestions.map((s, i) => (
@@ -309,7 +322,9 @@ export default function Home({ setSearchState }) {
           <input ref={inputRef} className={styles.input}
             placeholder="Escribe a Nüra..."
             value={input} onChange={e => setInput(e.target.value)}
-            onKeyDown={handleKey} disabled={loading} />
+            onKeyDown={handleKey} disabled={loading}
+            onFocus={() => setInputFocused(true)}
+            onBlur={() => setTimeout(() => setInputFocused(false), 200)} />
           {input.trim()
             ? <button className={styles.sendBtn} onClick={() => handleSend()}><Send size={16} /></button>
             : <button className={`${styles.sendBtn} ${listening ? styles.micActive : styles.micBtn}`} onClick={toggleMic}>

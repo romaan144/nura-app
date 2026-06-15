@@ -541,3 +541,9 @@
 .ratingBarN { font-size: 11px; color: var(--soft); width: 10px; text-align: right; flex-shrink: 0; }
 .ratingBarTrack { flex: 1; height: 5px; background: var(--paper); border-radius: 3px; overflow: hidden; }
 .ratingBarFill { height: 100%; background: #F59E0B; border-radius: 3px; }
+
+/* ── ACHIEVEMENT BADGES ── */
+.badgesGrid { display: flex; flex-wrap: wrap; gap: 8px; }
+.achieveBadge { display: flex; flex-direction: column; align-items: center; gap: 4px; padding: 10px 14px; background: rgba(123,47,255,0.05); border: 1.5px solid rgba(123,47,255,0.12); border-radius: 14px; min-width: 72px; }
+.achieveEmoji { font-size: 22px; }
+.achieveLabel { font-size: 10px; font-weight: 600; color: var(--purple); text-align: center; line-height: 1.3; }

@@ -12,6 +12,7 @@ import { HELPERS } from '../data/helpers'
 import { useUser } from '../context/UserContext'
 import RatingModal from '../components/RatingModal'
 import styles from './HelperProfile.module.css'
+import { showToast } from '../components/Toast'
 
 /* ── LIVE PROFILE PULSE ───────────────────────────────────────────────────
    This is the core of Nüra's concept: the profile is alive, updating now.
@@ -266,7 +267,7 @@ export default function HelperProfile() {
 
   function handleShare() {
     if (navigator.share) navigator.share({ title: h.name, text: `${h.specialty} en Nüra`, url: window.location.href })
-    else { navigator.clipboard?.writeText(window.location.href); setShared(true); setTimeout(() => setShared(false), 2000) }
+    else { navigator.clipboard?.writeText(window.location.href); setShared(true); showToast('Enlace copiado al portapapeles'); setTimeout(() => setShared(false), 2000) }
   }
 
   const tabs = [
@@ -365,6 +366,11 @@ export default function HelperProfile() {
             <span className={styles.statNum}>{h.reviews}</span>
             <span className={styles.statLbl}>Valoraciones</span>
           </div>
+          <div className={styles.statDivider} />
+          <div className={styles.statBox}>
+            <span className={styles.statNum}>{h.rating}</span>
+            <span className={styles.statLbl}>Puntuación</span>
+          </div>
         </div>
 
         {/* Tabs */}
@@ -390,7 +396,50 @@ export default function HelperProfile() {
               <p className={styles.bioText}>{h.bio}</p>
             </div>
 
-            {/* Nüra-detected skills — THE differentiator */}
+
+            {/* Achievement badges */}
+            <section className={styles.section}>
+              <h3 className={styles.sectionTitle}><Sparkles size={13} /> Reconocimientos</h3>
+              <div className={styles.badgesGrid}>
+                {h.services >= 50 && (
+                  <div className={styles.achieveBadge}>
+                    <span className={styles.achieveEmoji}>🏆</span>
+                    <span className={styles.achieveLabel}>+50 servicios</span>
+                  </div>
+                )}
+                {h.rating >= 4.8 && (
+                  <div className={styles.achieveBadge}>
+                    <span className={styles.achieveEmoji}>⭐</span>
+                    <span className={styles.achieveLabel}>Valoración top</span>
+                  </div>
+                )}
+                {h.dniVerified && (
+                  <div className={styles.achieveBadge}>
+                    <span className={styles.achieveEmoji}>🛡️</span>
+                    <span className={styles.achieveLabel}>Identidad verificada</span>
+                  </div>
+                )}
+                {h.completionRate >= 95 && (
+                  <div className={styles.achieveBadge}>
+                    <span className={styles.achieveEmoji}>✅</span>
+                    <span className={styles.achieveLabel}>+95% completados</span>
+                  </div>
+                )}
+                {h.urgent && (
+                  <div className={styles.achieveBadge}>
+                    <span className={styles.achieveEmoji}>⚡</span>
+                    <span className={styles.achieveLabel}>Disponible urgencias</span>
+                  </div>
+                )}
+                {h.founder && (
+                  <div className={styles.achieveBadge} style={{background:'rgba(146,64,14,0.08)',borderColor:'rgba(146,64,14,0.2)'}}>
+                    <span className={styles.achieveEmoji}>🌟</span>
+                    <span className={styles.achieveLabel} style={{color:'#92400E'}}>Helper fundador</span>
+                  </div>
+                )}
+              </div>
+            </section>
+            {/* Nüra-detected skills — THE differentiator */
             {h.hiddenSkills?.length > 0 && (
               <div className={styles.nuraDetectedCard}>
                 <div className={styles.nuraDetectedHeader}>

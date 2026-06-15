@@ -304,3 +304,11 @@
 .resultPriceContact { display: flex; align-items: center; gap: 8px; flex-shrink: 0; }
 .resultPrice { font-size: 13px; font-weight: 700; color: var(--purple); white-space: nowrap; }
 .resultPriceConsult { font-size: 11px; color: #aaa; font-style: italic; }
+
+/* ── RECENT SEARCHES ── */
+.recentSearches { padding: 6px 16px 2px; display: flex; flex-direction: column; gap: 2px; }
+.recentLabel { font-size: 11px; font-weight: 600; color: var(--soft); text-transform: uppercase; letter-spacing: 0.5px; padding: 4px 0; }
+.recentItem { display: flex; align-items: center; gap: 10px; padding: 10px 12px; background: white; border: none; border-radius: 14px; text-align: left; transition: all 0.15s; box-shadow: 0 1px 3px rgba(0,0,0,0.05); }
+.recentItem:hover { box-shadow: 0 2px 8px rgba(0,0,0,0.08); }
+.recentIcon { font-size: 14px; flex-shrink: 0; }
+.recentText { font-size: 13px; color: var(--mid); }

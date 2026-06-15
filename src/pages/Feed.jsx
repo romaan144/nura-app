@@ -5,6 +5,7 @@ import { HELPERS } from '../data/helpers'
 import { COMPANIES } from '../data/companies'
 import { useUser } from '../context/UserContext'
 import PageHeader from '../components/PageHeader'
+import { showToast } from '../components/Toast'
 import styles from './Feed.module.css'
 
 function buildFeed(following, helpers, companies) {
@@ -100,6 +101,15 @@ function SuggestedProfile({ profile, type, onFollow, onUnfollow, isFollowed }) {
 
 export default function Feed() {
   const { following, follow, unfollow, isFollowing, unreadNotifs, markNotifsRead, notifications } = useUser()
+
+  function followWithToast(id, name) {
+    follow(id)
+    showToast(`Siguiendo a ${name || 'este perfil'}`)
+  }
+  function unfollowWithToast(id, name) {
+    unfollow(id)
+    showToast(`Dejaste de seguir a ${name || 'este perfil'}`)
+  }
   const [activeSection, setActiveSection] = useState('para-ti')
   const [showNotifs, setShowNotifs] = useState(false)
 
