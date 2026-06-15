@@ -57,7 +57,7 @@
   50% { box-shadow: 0 1px 3px rgba(0,0,0,0.08), 0 0 0 3px rgba(123,47,255,0.08); }
 }
 .nuraAvatarImg {
-  width: 28px; height: 28px; object-fit: contain;
+  width: 34px; height: 34px; object-fit: contain;
   animation: nuraPulse 3s ease-in-out infinite;
 }
 @keyframes nuraPulse {
