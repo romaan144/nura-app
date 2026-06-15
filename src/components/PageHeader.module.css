@@ -1,51 +1,56 @@
+/* PageHeader — exact same glass as Home floating bubbles */
+
 .header {
-  display: flex; align-items: center; justify-content: space-between;
-  padding: 12px var(--page-x);
+  position: sticky;
+  top: 0;
+  z-index: 20;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: max(env(safe-area-inset-top, 0px), 12px) 14px 10px;
   background: transparent;
-  position: sticky; top: 0; z-index: 20;
   pointer-events: none;
-  min-height: 60px;
 }
-.left, .right {
-  pointer-events: all;
-  width: 42px; display: flex; align-items: center;
-}
-.right { justify-content: flex-end; }
-.center {
-  pointer-events: all;
-  display: flex; align-items: center; justify-content: center;
-  flex: 1;
-}
+.header > * { pointer-events: all; }
+
+/* Left and right — same width so logo stays centered */
+.left { width: 42px; display: flex; justify-content: flex-start; }
+.right { width: 42px; display: flex; justify-content: flex-end; }
+.placeholder { width: 42px; pointer-events: none; }
+
+/* Center logo pill — exact copy of .logoBubble in Home */
+.center { position: absolute; left: 50%; transform: translateX(-50%); }
 .logoPill {
-  background: white;
-  padding: 9px 20px;
-  border-radius: 26px;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.1), 0 1px 3px rgba(0,0,0,0.06);
-  border: 1.5px solid rgba(0,0,0,0.05);
-  display: flex; align-items: center; justify-content: center;
-  overflow: hidden;
-  height: 44px;
-  width: 120px;
+  background: rgba(255,255,255,0.72);
+  backdrop-filter: blur(24px) saturate(180%);
+  -webkit-backdrop-filter: blur(24px) saturate(180%);
+  border: 1px solid rgba(255,255,255,0.35);
+  padding: 11px 36px;
+  border-radius: 100px;
+  box-shadow: 0 2px 16px rgba(0,0,0,0.05), 0 0 0 0.5px rgba(0,0,0,0.06);
+  display: flex;
+  align-items: center;
+  white-space: nowrap;
 }
-.logo {
-  width: 110%;
-  height: auto;
-  object-fit: contain;
-  transform: scale(1.0);
-}
+.logo { height: 22px; width: auto; }
+
+/* Circle buttons — exact copy of menu/profile bubbles in Home */
 .circleBtn {
-  width: 40px; height: 40px; border-radius: 50%;
-  background: white;
-  border: 1.5px solid rgba(0,0,0,0.07);
+  width: 42px; height: 42px;
+  border-radius: 50%;
+  background: rgba(255,255,255,0.72);
+  backdrop-filter: blur(24px) saturate(180%);
+  -webkit-backdrop-filter: blur(24px) saturate(180%);
+  border: 1px solid rgba(255,255,255,0.35);
+  box-shadow: 0 2px 16px rgba(0,0,0,0.05), 0 0 0 0.5px rgba(0,0,0,0.06);
   display: flex; align-items: center; justify-content: center;
-  color: var(--ink); cursor: pointer;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.1), 0 1px 3px rgba(0,0,0,0.06);
-  transition: all 0.15s;
+  color: rgba(0,0,0,0.65);
+  cursor: pointer;
+  transition: opacity 0.2s;
 }
-.circleBtn:hover { box-shadow: 0 4px 14px rgba(0,0,0,0.14); transform: scale(1.04); }
-.placeholder { width: 38px; }
+.circleBtn:active { opacity: 0.6; }
 
 @media (min-width: 768px) {
-  .left { visibility: hidden; } /* Keep space but hide button */
+  .left { visibility: hidden; }
   .header { padding: 14px 24px; }
 }
