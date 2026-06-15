@@ -52,7 +52,7 @@
 .bubbleUser {
   background: var(--grad-main); color: white;
   border-bottom-right-radius: 6px;
-  box-shadow: 0 4px 14px rgba(123,47,255,0.28);
+  box-shadow: 0 2px 8px rgba(123,47,255,0.25);
 }
 .bubbleLine { font-size: 14px; line-height: 1.6; margin-bottom: 4px; }
 .bubbleLine:last-child { margin-bottom: 0; }

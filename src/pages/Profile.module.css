@@ -50,7 +50,7 @@
 .noUserIcon { font-size: 56px; }
 .noUser h2 { font-size: 22px; font-weight: 800; color: var(--ink); }
 .noUser p { font-size: 14px; color: var(--mid); }
-.loginBtn { padding: 14px 32px; background: linear-gradient(135deg, #1a1a2e 0%, #2d1b4e 100%); color: white; border: none; border-radius: 28px; font-size: 15px; font-weight: 700; box-shadow: 0 6px 20px rgba(13,13,26,0.3), inset 0 1px 0 rgba(255,255,255,0.15); }
+.loginBtn { padding: 14px 32px; background: var(--grad-main); color: white; border: none; border-radius: 28px; font-size: 15px; font-weight: 700; box-shadow: 0 4px 16px rgba(123,47,255,0.35); }
 
 .memberSince { font-size: 11px; color: var(--soft); margin-top: 4px; }
 

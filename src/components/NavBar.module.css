@@ -82,13 +82,13 @@
 }
 .drawerItem {
   display: flex; align-items: center; gap: 14px;
-  padding: 13px 12px;
-  border-radius: 12px;
+  padding: 13px 16px;
+  border-radius: 16px;
   color: var(--mid); font-size: 14px; font-weight: 500;
   transition: all 0.15s;
   width: 100%; text-align: left;
 }
-.drawerItem:hover { background: var(--paper); color: var(--ink); }
+.drawerItem:hover { background: #F0F0F2; color: var(--ink); }
 .drawerItemActive {
   background: rgba(123,47,255,0.09);
   color: var(--purple); font-weight: 700;
