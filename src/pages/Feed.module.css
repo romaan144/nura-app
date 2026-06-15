@@ -19,14 +19,8 @@
 .sectionTabs {
   padding: 10px 14px;
   background: transparent;
-  position: sticky; top: 57px; z-index: 15;
-  transition: transform 0.25s ease, opacity 0.25s ease;
 }
-.sectionTabsHidden {
-  transform: translateY(-80px);
-  opacity: 0;
-  pointer-events: none;
-}
+.sectionTabsHidden {}
 .sectionTabsInner {
   display: flex; gap: 4px;
   background: white;
