@@ -176,7 +176,7 @@
 .reviewText { font-size: 13px; color: var(--mid); line-height: 1.55; }
 
 /* ── EXPERIENCE — LinkedIn style timeline ── */
-.expTimeline { display: flex; flex-direction: column; gap: 0; padding-top: 20px; }
+.expTimeline { display: flex; flex-direction: column; gap: 0; padding-top: 0; }
 .expCardFull { display: flex; gap: 14px; position: relative; margin-bottom: 0; background: transparent; }
 .expCardFull:not(:last-child) .expTimelineLeft::after {
   content: ''; position: absolute; left: 19px; top: 46px; bottom: 0;
@@ -234,7 +234,7 @@
 .companyCtaDesc { font-size: 12px; color: var(--soft); line-height: 1.5; }
 
 /* ── POSTS ── */
-.postCard { background: var(--white); border: 1.5px solid var(--rule); border-radius: 18px; padding: 18px; margin-bottom: 14px; box-shadow: var(--shadow-sm); }
+.postCard { background: var(--white); border: none; border-radius: 18px; padding: 18px; margin-bottom: 12px; box-shadow: 0 2px 8px rgba(0,0,0,0.07); }
 .feedIntroWrap { padding-top: 4px; }
 .postHeader { display: flex; align-items: center; gap: 10px; margin-bottom: 12px; }
 .postAvatarImg { width: 40px; height: 40px; border-radius: 50%; object-fit: cover; flex-shrink: 0; box-shadow: 0 2px 8px rgba(0,0,0,0.1); }
@@ -261,7 +261,7 @@
 .commentText { font-size: 13px; color: var(--mid); }
 
 /* ── REPUTATION ── */
-.scoreCard { display: flex; gap: 16px; align-items: center; background: var(--white); border: 1.5px solid var(--rule); border-radius: 18px; padding: 20px; margin-top: 22px; margin-bottom: 14px; box-shadow: var(--shadow-sm); }
+.scoreCard { display: flex; gap: 16px; align-items: center; background: var(--white); border: 1.5px solid var(--rule); border-radius: 18px; padding: 20px; margin-top: 0; margin-bottom: 12px; box-shadow: var(--shadow-sm); }
 .scoreLeft { display: flex; align-items: baseline; gap: 2px; flex-shrink: 0; }
 .scoreNum { font-size: 56px; font-weight: 800; letter-spacing: -3px; }
 .scoreMax { font-size: 20px; color: var(--soft); font-weight: 400; }
@@ -474,7 +474,7 @@
   background: rgba(123,47,255,0.04);
   border: 1.5px solid rgba(123,47,255,0.15);
   border-radius: 14px; padding: 14px;
-  margin-bottom: 16px;
+  margin-top: 0; margin-bottom: 12px;
 }
 .empresasIntroTitle { font-size: 13px; font-weight: 700; color: var(--ink); margin-bottom: 4px; }
 .empresasIntroDesc { font-size: 12px; color: var(--mid); line-height: 1.5; }
