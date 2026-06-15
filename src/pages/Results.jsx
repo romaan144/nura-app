@@ -60,11 +60,11 @@ export default function Results({ searchState }) {
   const [sortBy, setSortBy] = useState('relevance')
   const { cacheHelpers } = useUser()
 
-  // Safety check — if no searchState, go home
-  if (!searchState) {
-    navigate('/')
-    return null
-  }
+  useEffect(() => {
+    if (!searchState) navigate('/')
+  }, [searchState])
+
+  if (!searchState) return null
 
   const { query, analysis, matches } = searchState
   const safeMatches = Array.isArray(matches) ? matches : []
