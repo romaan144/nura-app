@@ -121,12 +121,7 @@ export default function Feed() {
 
   return (
     <div className={styles.page}>
-      <PageHeader rightEl={
-        <button className={styles.notifBtn} onClick={() => { setShowNotifs(s => !s); markNotifsRead() }}>
-          <Bell size={20} />
-          {unreadNotifs > 0 && <span className={styles.notifBadge}>{unreadNotifs}</span>}
-        </button>
-      } />
+      <PageHeader />
 
       <div className={styles.sectionTabs}>
         <div className={styles.sectionTabsInner}>
