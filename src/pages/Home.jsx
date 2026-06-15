@@ -362,15 +362,6 @@ export default function Home({ setSearchState }) {
         </div>
       )}
 
-      {messages.length > 2 && (
-        <div className={styles.newChatRow}>
-          <button className={styles.newChatBtn}
-            onClick={() => { setNuraChatMessages([]); setNuraLastMatches(null); }}>
-            + Nuevo chat
-          </button>
-        </div>
-      )}
-
       {showSuggestions && (
         <div className={styles.suggestions}>
           {suggestions.map((s, i) => (
