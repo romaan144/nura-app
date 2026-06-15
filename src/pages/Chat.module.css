@@ -79,7 +79,7 @@
   box-shadow: 0 2px 8px rgba(0,0,0,0.08), 0 1px 3px rgba(0,0,0,0.05);
   gap: 6px;
 }
-.input { flex: 1; border: none; outline: none; background: transparent; font-size: 15px; color: var(--ink); font-family: 'Inter', sans-serif; padding: 4px 0; resize: none; max-height: 120px; line-height: 1.5; }
+.input { flex: 1; border: none; outline: none; background: transparent; font-size: 16px; color: var(--ink); font-family: 'Inter', sans-serif; padding: 4px 0; resize: none; max-height: 120px; line-height: 1.5; }
 .input::placeholder { color: #aaa; }
 .sendBtn { width: 34px; height: 34px; border-radius: 50%; background: #1C1C1E; color: white; border: none; display: flex; align-items: center; justify-content: center; flex-shrink: 0; transition: all 0.15s; align-self: flex-end; }
 .sendBtn:hover:not(:disabled) { background: var(--purple); transform: scale(1.05); }
