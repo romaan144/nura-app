@@ -1,7 +1,7 @@
 import { useState, useEffect, useRef } from 'react'
 import { MenuButton } from '../components/NavBar'
 import { useNavigate } from 'react-router-dom'
-import { Send, Mic, MicOff, ArrowRight, Plus } from 'lucide-react'
+import { Send, Mic, MicOff, Plus, Star, MapPin, Shield, MessageCircle } from 'lucide-react'
 import { analyzeNeed, matchHelpers } from '../utils/matching'
 import { useUser } from '../context/UserContext'
 
@@ -45,6 +45,34 @@ const SUGGESTIONS = {
     { icon: '🌐', text: 'He trabajado en un nuevo sitio este mes' },
     { icon: '🖼️', text: 'Quiero actualizar mi disponibilidad' },
   ],
+}
+
+
+function ResultCard({ helper, onNavigate }) {
+  return (
+    <div className={styles.resultCard} onClick={() => onNavigate(`/helper/${helper.id}`)}>
+      <div className={styles.resultAvatar}>
+        {helper.avatarUrl
+          ? <img src={helper.avatarUrl} alt={helper.name} className={styles.resultAvatarImg} />
+          : <div className={styles.resultAvatarFallback} style={{background: helper.avatarColor}}>{helper.avatar}</div>
+        }
+      </div>
+      <div className={styles.resultInfo}>
+        <div className={styles.resultName}>{helper.name}</div>
+        <div className={styles.resultSpec}>{helper.specialty}</div>
+        <div className={styles.resultMeta}>
+          <span><Star size={10} fill="#F59E0B" color="#F59E0B" /> {helper.rating}</span>
+          <span>·</span>
+          <span><MapPin size={10} /> {helper.zone}</span>
+          {helper.dniVerified && <><span>·</span><Shield size={10} color="#059669" /></>}
+        </div>
+      </div>
+      <button className={styles.resultContact}
+        onClick={e => { e.stopPropagation(); onNavigate(`/chat/${helper.id}`) }}>
+        <MessageCircle size={14} />
+      </button>
+    </div>
+  )
 }
 
 export default function Home({ setSearchState }) {
@@ -130,7 +158,7 @@ export default function Home({ setSearchState }) {
       setMessages(prev => [...prev, {
         id: Date.now(), from: 'nura',
         lines: [`He encontrado **${matches.length} personas** que pueden ayudarte.`],
-        action: { label: 'Ver resultados', onClick: () => navigate('/results') }
+        results: matches.slice(0, 4)
       }])
     } catch {
       setMessages(prev => prev.filter(m => !m.loading))
@@ -192,10 +220,12 @@ export default function Home({ setSearchState }) {
                   <span /><span /><span />
                 </div>
               )}
-              {msg.action && (
-                <button className={styles.bubbleAction} onClick={msg.action.onClick}>
-                  {msg.action.label} <ArrowRight size={13} />
-                </button>
+              {msg.results && (
+                <div className={styles.resultsList}>
+                  {msg.results.map(h => (
+                    <ResultCard key={h.id} helper={h} onNavigate={navigate} />
+                  ))}
+                </div>
               )}
             </div>
           </div>

@@ -257,3 +257,34 @@
   box-shadow: 0 4px 14px rgba(0,0,0,0.18);
   transform: scale(1.05);
 }
+
+/* ── INLINE RESULTS IN CHAT ── */
+.resultsList {
+  display: flex; flex-direction: column; gap: 8px;
+  margin-top: 8px; width: 100%;
+}
+.resultCard {
+  display: flex; align-items: center; gap: 10px;
+  background: #F8F8FA;
+  border-radius: 16px; padding: 10px 12px;
+  cursor: pointer; transition: all 0.15s;
+}
+.resultCard:hover { background: #F0F0F4; transform: translateY(-1px); }
+.resultAvatar { flex-shrink: 0; }
+.resultAvatarImg { width: 42px; height: 42px; border-radius: 50%; object-fit: cover; box-shadow: 0 2px 6px rgba(0,0,0,0.1); }
+.resultAvatarFallback { width: 42px; height: 42px; border-radius: 50%; display: flex; align-items: center; justify-content: center; color: white; font-weight: 700; font-size: 15px; box-shadow: 0 2px 6px rgba(0,0,0,0.1); }
+.resultInfo { flex: 1; min-width: 0; }
+.resultName { font-size: 13px; font-weight: 700; color: #1a1a1a; margin-bottom: 2px; }
+.resultSpec { font-size: 11px; color: #7B2FFF; font-weight: 500; margin-bottom: 3px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.resultMeta { display: flex; align-items: center; gap: 4px; font-size: 10px; color: #888; }
+.resultContact {
+  width: 34px; height: 34px; border-radius: 50%;
+  background: var(--grad-main); color: white; border: none;
+  display: flex; align-items: center; justify-content: center;
+  flex-shrink: 0; box-shadow: 0 2px 8px rgba(123,47,255,0.3);
+  transition: all 0.15s;
+}
+.resultContact:hover { transform: scale(1.08); }
+
+/* Bubble wider for results */
+.bubbleNura { max-width: 92% !important; }
