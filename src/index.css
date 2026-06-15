@@ -41,6 +41,22 @@
   --radius-md: 16px;
   --radius-lg: 22px;
   --radius-xl: 30px;
+
+  /* Spacing system — use these everywhere */
+  --space-xs:  4px;
+  --space-sm:  8px;
+  --space-md:  12px;
+  --space-lg:  16px;
+  --space-xl:  20px;
+  --space-2xl: 28px;
+
+  /* Card standard */
+  --card-padding: 16px;
+  --card-radius:  18px;
+  --card-shadow:  0 2px 8px rgba(0,0,0,0.08), 0 1px 3px rgba(0,0,0,0.05);
+
+  /* Page horizontal margin */
+  --page-x: 14px;
 }
 
 

@@ -9,27 +9,27 @@
 .filterCount { position: absolute; top: -3px; right: -3px; width: 14px; height: 14px; border-radius: 50%; background: var(--purple); color: white; font-size: 9px; font-weight: 700; display: flex; align-items: center; justify-content: center; }
 
 /* Filter panel */
-.filterPanel { background: white; margin: 0 14px 12px; border-radius: 18px; padding: 16px; box-shadow: 0 2px 8px rgba(0,0,0,0.08), 0 1px 3px rgba(0,0,0,0.05); display: flex; flex-direction: column; gap: 14px; }
+.filterPanel { background: white; margin: 0 14px 12px; border-radius: var(--card-radius); padding: 16px; box-shadow: 0 2px 8px rgba(0,0,0,0.08), 0 1px 3px rgba(0,0,0,0.05); display: flex; flex-direction: column; gap: 14px; }
 .filterRow { display: flex; flex-direction: column; gap: 8px; }
 .filterLabel { font-size: 12px; font-weight: 600; color: var(--mid); }
 .filterPills { display: flex; flex-wrap: wrap; gap: 6px; }
-.filterPill { padding: 6px 12px; background: var(--paper); border: none; border-radius: 14px; font-size: 12px; color: var(--mid); transition: all 0.15s; }
+.filterPill { padding: 6px 12px; background: var(--paper); border: none; border-radius: var(--card-radius); font-size: 12px; color: var(--mid); transition: all 0.15s; }
 .filterPillActive { background: #1C1C1E; color: white; }
 .filterInput { padding: 8px 12px; border: 1.5px solid var(--rule); border-radius: 12px; font-size: 13px; outline: none; background: var(--paper); color: var(--ink); font-family: 'Inter',sans-serif; width: 100px; }
 .clearFilters { display: flex; align-items: center; gap: 5px; background: none; border: none; color: var(--soft); font-size: 12px; padding: 0; align-self: flex-start; }
 
 /* Categories */
-.categories { display: flex; gap: 7px; overflow-x: auto; padding: 0 14px 12px; }
+.categories { display: flex; gap: 7px; overflow-x: auto; padding: 0 var(--page-x) var(--space-md); }
 .categories::-webkit-scrollbar { display: none; }
 .cat { display: flex; align-items: center; gap: 5px; padding: 7px 13px; background: white; border: none; border-radius: 20px; font-size: 12px; font-weight: 500; color: var(--mid); white-space: nowrap; flex-shrink: 0; box-shadow: 0 1px 3px rgba(0,0,0,0.06); transition: all 0.15s; }
 .catActive { background: #1C1C1E; color: white; box-shadow: 0 2px 8px rgba(0,0,0,0.15); }
 
-.content { padding: 0 14px 32px; }
+.content { padding: 0 var(--page-x) 40px; }
 .resultsCount { font-size: 12px; color: var(--soft); margin-bottom: 12px; font-weight: 500; }
 
 /* Grid — 2 columns */
 .grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
-.card { background: white; border-radius: 18px; overflow: hidden; cursor: pointer; transition: all 0.2s; box-shadow: 0 2px 8px rgba(0,0,0,0.08), 0 1px 3px rgba(0,0,0,0.05); display: flex; flex-direction: column; }
+.card { background: white; border-radius: var(--card-radius); overflow: hidden; cursor: pointer; transition: all 0.2s; box-shadow: 0 2px 8px rgba(0,0,0,0.08), 0 1px 3px rgba(0,0,0,0.05); display: flex; flex-direction: column; }
 .card:hover { transform: translateY(-2px); box-shadow: 0 6px 20px rgba(0,0,0,0.12); }
 
 .cardTop { display: flex; justify-content: center; padding: 16px 16px 8px; position: relative; }
@@ -70,7 +70,7 @@
 .featuredTitle { font-size: 14px; font-weight: 700; color: var(--ink); margin-bottom: 12px; }
 .featuredRow { display: flex; gap: 10px; overflow-x: auto; padding-bottom: 4px; }
 .featuredRow::-webkit-scrollbar { display: none; }
-.featuredCard { background: white; border-radius: 18px; padding: 14px 12px; text-align: center; flex-shrink: 0; width: 90px; cursor: pointer; box-shadow: 0 2px 8px rgba(0,0,0,0.08), 0 1px 3px rgba(0,0,0,0.05); transition: all 0.15s; }
+.featuredCard { background: white; border-radius: var(--card-radius); padding: 14px 12px; text-align: center; flex-shrink: 0; width: 90px; cursor: pointer; box-shadow: 0 2px 8px rgba(0,0,0,0.08), 0 1px 3px rgba(0,0,0,0.05); transition: all 0.15s; }
 .featuredCard:hover { transform: translateY(-2px); }
 .featuredAvatar { width: 48px; height: 48px; border-radius: 50%; object-fit: cover; margin-bottom: 6px; }
 .featuredName { font-size: 12px; font-weight: 700; color: var(--ink); margin-bottom: 2px; }

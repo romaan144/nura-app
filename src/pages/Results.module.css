@@ -5,7 +5,7 @@
 .back:hover { border-color: var(--purple); color: var(--purple); }
 
 
-.content { max-width: 640px; margin: 0 auto; padding: 18px 14px 32px; }
+.content { max-width: 640px; margin: 0 auto; padding: 18px var(--page-x) 32px; }
 
 .queryBox { background: #F8F8FA; border: none; border-left: 4px solid var(--purple); border-radius: 18px; padding: 12px 16px; margin-top: 4px; margin-bottom: 10px; }
 .queryLabel { font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.8px; color: var(--soft); margin-bottom: 3px; }
@@ -111,7 +111,7 @@
 
 .sortRow { display: flex; gap: 6px; overflow-x: auto; padding: 0 14px 12px; }
 .sortRow::-webkit-scrollbar { display: none; }
-.sortBtn { padding: 6px 13px; background: white; border: none; border-radius: 16px; font-size: 12px; font-weight: 500; color: var(--mid); white-space: nowrap; flex-shrink: 0; box-shadow: 0 1px 3px rgba(0,0,0,0.06); transition: all 0.15s; }
+.sortBtn { padding: 6px 13px; background: white; border: none; border-radius: var(--card-radius); font-size: 12px; font-weight: 500; color: var(--mid); white-space: nowrap; flex-shrink: 0; box-shadow: 0 1px 3px rgba(0,0,0,0.06); transition: all 0.15s; }
 .sortBtnActive { background: #1C1C1E; color: white; box-shadow: 0 2px 8px rgba(0,0,0,0.15); }
 
 @media (min-width: 768px) {
@@ -121,7 +121,7 @@
   .sortRow { padding: 0 24px 14px; }
 }
 
-.analysisBox { background: rgba(123,47,255,0.04); border: 1.5px solid rgba(123,47,255,0.12); border-radius: 14px; padding: 12px 14px; margin-top: 10px; }
+.analysisBox { background: rgba(123,47,255,0.04); border: 1.5px solid rgba(123,47,255,0.12); border-radius: var(--card-radius); padding: 12px 14px; margin-top: 10px; }
 .analysisLabel { font-size: 10px; font-weight: 700; color: var(--purple); text-transform: uppercase; letter-spacing: 0.6px; display: block; margin-bottom: 4px; }
 .analysisText { font-size: 13px; color: var(--mid); line-height: 1.5; margin-bottom: 8px; }
 .analysisBadge { display: inline-block; font-size: 11px; font-weight: 600; color: var(--purple); background: rgba(123,47,255,0.08); border-radius: 8px; padding: 2px 8px; margin-right: 5px; }

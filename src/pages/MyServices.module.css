@@ -1,9 +1,9 @@
 .page { min-height: 100dvh; background: #F8F8FA; }
-.content { padding: 0 14px 32px; }
+.content { padding: 0 var(--page-x) 40px; }
 .title { font-size: 22px; font-weight: 800; color: var(--ink); margin-bottom: 4px; letter-spacing: -0.5px; }
 .sub { font-size: 13px; color: var(--soft); margin-bottom: 20px; }
 .list { display: flex; flex-direction: column; gap: 10px; }
-.card { background: white; border-radius: 18px; padding: 14px 16px; display: flex; align-items: flex-start; justify-content: space-between; gap: 12px; box-shadow: 0 2px 8px rgba(0,0,0,0.08), 0 1px 3px rgba(0,0,0,0.05); }
+.card { background: white; border-radius: var(--card-radius); padding: var(--card-padding); display: flex; align-items: flex-start; justify-content: space-between; gap: 12px; box-shadow: 0 2px 8px rgba(0,0,0,0.08), 0 1px 3px rgba(0,0,0,0.05); }
 .cardLeft { display: flex; gap: 12px; align-items: flex-start; }
 .avatar { width: 44px; height: 44px; border-radius: 50%; background: var(--paper); font-size: 22px; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
 .helperName { font-size: 14px; font-weight: 700; color: var(--ink); margin-bottom: 2px; }

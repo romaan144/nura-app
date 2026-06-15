@@ -43,7 +43,7 @@
   position: relative;
   background: #FFFFFF;
   border-radius: 28px;
-  margin: 12px 14px 0;
+  margin: 12px var(--page-x) 0;
   overflow: hidden;
   box-shadow: 0 2px 8px rgba(0,0,0,0.08), 0 1px 3px rgba(0,0,0,0.05);
 }
@@ -70,7 +70,7 @@
   display: flex; align-items: stretch;
   background: #FFFFFF;
   border-radius: 28px;
-  margin: 10px 14px 0;
+  margin: 10px var(--page-x) 0;
   box-shadow: 0 2px 8px rgba(0,0,0,0.08), 0 1px 3px rgba(0,0,0,0.05);
   overflow: hidden;
 }
@@ -81,7 +81,7 @@
 
 /* ── TABS ── */
 .tabsWrap {
-  padding: 10px 14px 10px;
+  padding: 10px var(--page-x) 10px;
   background: transparent;
 }
 .tabs {
@@ -111,7 +111,7 @@
 }
 
 /* ── CONTENT ── */
-.content { flex: 1; max-width: 620px; margin: 0 auto; width: 100%; padding: 0 14px 32px; }
+.content { flex: 1; max-width: 620px; margin: 0 auto; width: 100%; padding: 0 var(--page-x) 32px; }
 
 /* ── BIO ── */
 .bioCard { background: #FFFFFF; border-radius: 18px; padding: 20px; margin-top: 0; margin-bottom: 12px; box-shadow: 0 2px 8px rgba(0,0,0,0.08), 0 1px 3px rgba(0,0,0,0.05); border: none; }
@@ -121,7 +121,7 @@
 .nuraDetectedCard {
   background: linear-gradient(135deg, rgba(123,47,255,0.06) 0%, rgba(0,212,200,0.04) 100%);
   border: 1.5px solid rgba(123,47,255,0.25);
-  border-radius: 18px; padding: 18px; margin-bottom: 16px;
+  border-radius: 18px; padding: var(--card-padding) var(--space-xl); margin-bottom: 16px;
 }
 .nuraDetectedHeader { display: flex; align-items: center; gap: 8px; font-size: 13px; font-weight: 800; color: var(--purple); margin-bottom: 6px; letter-spacing: -0.2px; }
 .nuraDetectedDesc { font-size: 12px; color: var(--mid); line-height: 1.55; margin-bottom: 12px; }
@@ -129,7 +129,7 @@
 .nuraSkill { font-size: 12px; font-weight: 600; color: var(--purple); background: rgba(123,47,255,0.1); border: 1.5px dashed rgba(123,47,255,0.4); border-radius: 20px; padding: 5px 13px; }
 
 /* ── SKILLS ── */
-.section { background: #FFFFFF; border: none; border-radius: 18px; padding: 18px; margin-bottom: 12px; box-shadow: 0 2px 8px rgba(0,0,0,0.08), 0 1px 3px rgba(0,0,0,0.05); }
+.section { background: #FFFFFF; border: none; border-radius: 18px; padding: var(--card-padding) var(--space-xl); margin-bottom: 12px; box-shadow: 0 2px 8px rgba(0,0,0,0.08), 0 1px 3px rgba(0,0,0,0.05); }
 .sectionTitle { display: flex; align-items: center; gap: 7px; font-size: 11px; font-weight: 600; color: var(--soft); text-transform: uppercase; letter-spacing: 0.8px; margin-bottom: 12px; }
 .sectionNote { font-size: 11px; color: var(--soft); margin-bottom: 14px; line-height: 1.5; padding: 8px 12px; background: #F8F8FA; border-radius: 8px; border-left: 3px solid var(--rule); }
 .skillsGrid { display: flex; flex-wrap: wrap; gap: 7px; }
@@ -234,7 +234,7 @@
 .companyCtaDesc { font-size: 12px; color: var(--soft); line-height: 1.5; }
 
 /* ── POSTS ── */
-.postCard { background: #FFFFFF; border: none; border-radius: 18px; padding: 18px; margin-bottom: 12px; box-shadow: 0 2px 8px rgba(0,0,0,0.08), 0 1px 3px rgba(0,0,0,0.05); }
+.postCard { background: #FFFFFF; border: none; border-radius: 18px; padding: var(--card-padding) var(--space-xl); margin-bottom: 12px; box-shadow: 0 2px 8px rgba(0,0,0,0.08), 0 1px 3px rgba(0,0,0,0.05); }
 .feedIntroWrap { padding-top: 4px; }
 .postHeader { display: flex; align-items: center; gap: 10px; margin-bottom: 12px; }
 .postAvatarImg { width: 40px; height: 40px; border-radius: 50%; object-fit: cover; flex-shrink: 0; box-shadow: 0 2px 8px rgba(0,0,0,0.1); }
@@ -508,7 +508,7 @@
 .timelineVerified { display: inline-flex; align-items: center; gap: 4px; font-size: 10px; font-weight: 600; color: #059669; background: #ECFDF5; border-radius: 8px; padding: 3px 8px; margin-top: 4px; }
 
 /* ── REPUTATION REDESIGN ── */
-.repHero { display: flex; gap: 16px; background: white; border-radius: 18px; padding: 18px; margin-bottom: 12px; box-shadow: 0 2px 8px rgba(0,0,0,0.08), 0 1px 3px rgba(0,0,0,0.05); }
+.repHero { display: flex; gap: 16px; background: white; border-radius: 18px; padding: var(--card-padding) var(--space-xl); margin-bottom: 12px; box-shadow: 0 2px 8px rgba(0,0,0,0.08), 0 1px 3px rgba(0,0,0,0.05); }
 .repScoreCircle { width: 80px; height: 80px; border-radius: 50%; border: 4px solid; display: flex; flex-direction: column; align-items: center; justify-content: center; flex-shrink: 0; }
 .repScoreNum { font-size: 26px; font-weight: 900; line-height: 1; letter-spacing: -1px; }
 .repScoreLabel { font-size: 10px; color: var(--soft); }
@@ -531,7 +531,7 @@
 .availDot { width: 7px; height: 7px; border-radius: 50%; background: currentColor; flex-shrink: 0; }
 
 /* ── RATING BREAKDOWN ── */
-.ratingBreakdown { display: flex; gap: 16px; background: white; border-radius: 16px; padding: 14px; margin-bottom: 12px; box-shadow: 0 2px 8px rgba(0,0,0,0.07); }
+.ratingBreakdown { display: flex; gap: 16px; background: white; border-radius: var(--card-radius); padding: 14px; margin-bottom: 12px; box-shadow: 0 2px 8px rgba(0,0,0,0.07); }
 .ratingBig { display: flex; flex-direction: column; align-items: center; gap: 4px; flex-shrink: 0; }
 .ratingBigNum { font-size: 36px; font-weight: 900; color: var(--ink); line-height: 1; letter-spacing: -1px; }
 .ratingStars { display: flex; gap: 1px; }
@@ -544,7 +544,7 @@
 
 /* ── ACHIEVEMENT BADGES ── */
 .badgesGrid { display: flex; flex-wrap: wrap; gap: 8px; }
-.achieveBadge { display: flex; flex-direction: column; align-items: center; gap: 4px; padding: 10px 14px; background: rgba(123,47,255,0.05); border: 1.5px solid rgba(123,47,255,0.12); border-radius: 14px; min-width: 72px; }
+.achieveBadge { display: flex; flex-direction: column; align-items: center; gap: 4px; padding: 10px var(--page-x); background: rgba(123,47,255,0.05); border: 1.5px solid rgba(123,47,255,0.12); border-radius: var(--card-radius); min-width: 72px; }
 .achieveEmoji { font-size: 22px; }
 .achieveLabel { font-size: 10px; font-weight: 600; color: var(--purple); text-align: center; line-height: 1.3; }
 
@@ -578,6 +578,6 @@
 .heroCoverage { display: flex; flex-wrap: wrap; justify-content: center; gap: 6px; margin-bottom: 10px; }
 .coverageChip { font-size: 11px; color: var(--mid); background: var(--paper); border-radius: 12px; padding: 4px 10px; font-weight: 500; }
 
-.heroActions { display: flex; gap: 10px; width: 100%; justify-content: center; flex-wrap: wrap; }
-.heroCtaSecondary { display: flex; align-items: center; gap: 7px; padding: 12px 24px; background: white; color: var(--ink); border: 1.5px solid var(--rule); border-radius: 22px; font-size: 14px; font-weight: 700; transition: all 0.15s; box-shadow: 0 2px 8px rgba(0,0,0,0.08); flex: 1; justify-content: center; }
+.heroActions { display: flex; gap: 8px; width: 100%; justify-content: center; padding: 0 8px; }
+.heroCtaSecondary { display: flex; align-items: center; justify-content: center; gap: 6px; padding: 11px 0; background: white; color: var(--ink); border: 1.5px solid var(--rule); border-radius: 22px; font-size: 13px; font-weight: 700; transition: all 0.15s; box-shadow: 0 2px 8px rgba(0,0,0,0.08); flex: 1; }
 .heroCtaSecondary:hover { border-color: var(--ink); }

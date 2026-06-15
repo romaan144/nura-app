@@ -30,7 +30,7 @@
 }
 .sectionTab {
   flex: 1; padding: 8px 0; font-size: 12px; font-weight: 500;
-  color: var(--soft); border-radius: 16px; border: none;
+  color: var(--soft); border-radius: var(--card-radius); border: none;
   transition: all 0.18s; display: flex; align-items: center; justify-content: center; gap: 5px;
 }
 .sectionTab:hover { color: var(--ink); background: var(--paper); }
