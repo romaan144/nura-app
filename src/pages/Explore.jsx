@@ -136,7 +136,7 @@ export default function Explore() {
             {[1,2,3,4,5,6].map(i => <div key={i} className={styles.skeleton} />)}
           </div>
         )}
-        {!loadingHelpers && (<div className={styles.resultsCount}>
+        {!loadingHelpers && (<><div className={styles.resultsCount}>
           {filtered.length} helper{filtered.length !== 1 ? 's' : ''} encontrado{filtered.length !== 1 ? 's' : ''}
         </div>
         <div className={styles.grid}>
@@ -169,7 +169,7 @@ export default function Explore() {
               </div>
             </div>
           ))}
-        </div>)}
+        </div></> )}
       </div>
     </div>
   )
