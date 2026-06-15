@@ -7,8 +7,7 @@ import { HELPERS } from '../data/helpers'
 import styles from './Chats.module.css'
 
 // Mock chat history para demo
-const MOCK_CHATS = [ // Fallback — real chats come from UserContext
-[
+const MOCK_CHATS = [
   {
     helperId: 1,
     helperName: "Carlos Martínez",
