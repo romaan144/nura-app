@@ -7,22 +7,18 @@ import { MenuButton } from '../components/NavBar'
 import { showToast } from '../components/Toast'
 import { haptic } from '../utils/haptic'
 import styles from './Home.module.css'
-import Onboarding from '../components/Onboarding'
 
 function getWelcome(user) {
   const hour = new Date().getHours()
   const greeting = hour < 14 ? 'Buenos días' : hour < 21 ? 'Buenas tardes' : 'Buenas noches'
   if (!user) return [
-    `Hola, soy **Nüra** ✨`,
-    `Cuéntame qué **grad:necesitas** con tus palabras — buscaré a la persona ideal cerca de ti.`,
+    `Hola, soy **Nüra**. Cuéntame qué necesitas y encuentro a la persona ideal cerca de ti.`,
   ]
   if (user.isHelper) return [
-    `${greeting}, **${user.name?.split(' ')[0]}** 👋`,
-    `¿Qué quieres **grad:hacer** hoy?`,
+    `${greeting}, **${user.name?.split(' ')[0]}**. ¿En qué puedo ayudarte hoy?`,
   ]
   return [
-    `${greeting}, **${user.name?.split(' ')[0]}** 👋`,
-    `¿En qué puedo **grad:ayudarte** hoy?`,
+    `${greeting}, **${user.name?.split(' ')[0]}**. ¿En qué puedo ayudarte?`,
   ]
 }
 
@@ -39,18 +35,18 @@ function detectIntent(text, user) {
 
 const SUGGESTIONS = {
   default: [
-    { icon: '❤️', text: 'Cuidadora para mi madre con Alzheimer' },
-    { icon: '🗣️', text: 'Logopeda infantil para mi hijo de 5 años' },
-    { icon: '🔧', text: 'Técnico de calderas con urgencia' },
-    { icon: '🧹', text: 'Limpieza profunda del hogar' },
-    { icon: '🐾', text: 'Cuidador de perros mientras viajo' },
-    { icon: '📚', text: 'Clases de refuerzo de matemáticas' },
+    { text: 'Cuidadora de mayores' },
+    { text: 'Logopeda infantil' },
+    { text: 'Técnico urgente' },
+    { text: 'Limpieza del hogar' },
+    { text: 'Cuidado de mascotas' },
+    { text: 'Clases particulares' },
   ],
   helper: [
-    { icon: '✨', text: 'Acabo de obtener una certificación' },
-    { icon: '🏢', text: 'He trabajado en un nuevo sitio' },
-    { icon: '📅', text: 'Quiero actualizar mi disponibilidad' },
-    { icon: '💬', text: '¿Cómo puedo mejorar mi perfil?' },
+    { text: 'Nueva certificación' },
+    { text: 'Actualizar disponibilidad' },
+    { text: 'Mejorar mi perfil' },
+    { text: 'Nueva experiencia' },
   ],
 }
 
@@ -381,6 +377,16 @@ export default function Home({ setSearchState }) {
               )}
               </div>
             </div>
+            {!user && messages.length === 1 && msg.from === 'nura' && (
+              <div style={{display:'flex',gap:'20px',padding:'4px 0',flexWrap:'wrap'}}>
+                {[['1.000+','helpers verificados'],['4.9★','valoración media'],['< 30 min','tiempo de respuesta']].map(([n,l]) => (
+                  <div key={l} style={{textAlign:'center'}}>
+                    <div style={{fontSize:'15px',fontWeight:800,color:'rgba(0,0,0,0.85)',letterSpacing:'-0.3px'}}>{n}</div>
+                    <div style={{fontSize:'11px',color:'rgba(0,0,0,0.4)',fontWeight:400}}>{l}</div>
+                  </div>
+                ))}
+              </div>
+            )}
             {msg.results && (
               <div className={styles.resultsList}>
                 {msg.results.map(h => <ResultCard key={h.id} helper={h} onNavigate={navigate} onFav={id => { toggleFavorite(id); showToast(isFavorite(id) ? 'Eliminado de favoritos' : 'Guardado en favoritos') }} isFav={isFavorite(h.id)} />)}
@@ -409,7 +415,6 @@ export default function Home({ setSearchState }) {
           <div className={styles.suggestions}>
             {suggestions.map((s, i) => (
               <button key={i} className={styles.suggestion} onClick={() => handleSend(s.text)}>
-                <span className={styles.suggestionIcon}>{s.icon}</span>
                 <span className={styles.suggestionText}>{s.text}</span>
               </button>
             ))}
@@ -419,7 +424,7 @@ export default function Home({ setSearchState }) {
         <div className={styles.inputCapsule}>
           <button className={styles.plusBtn}><Plus size={18} /></button>
           <input ref={inputRef} className={styles.input}
-            placeholder="Escribe a Nüra..."
+            placeholder="¿Qué necesitas?"
             value={input} onChange={e => setInput(e.target.value)}
             onKeyDown={handleKey} disabled={loading}
             onFocus={() => setInputFocused(true)}
@@ -433,7 +438,6 @@ export default function Home({ setSearchState }) {
         </div>
       </div>
 
-      <Onboarding />
     </div>
   )
 }

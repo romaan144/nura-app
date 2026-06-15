@@ -374,7 +374,7 @@ function HelperProfileInner() {
 
           <div className={styles.heroActions}>
             <button className={styles.heroCtaSecondary} onClick={() => navigate(`/chat/${h.id}`)}>
-              <MessageCircle size={15} /> Preguntar
+              <MessageCircle size={15} /> Escribir
             </button>
             <button className={styles.heroCtaBtn} onClick={() => { setShowConfirm(true) }}>
               <Calendar size={15} /> Contratar
@@ -446,6 +446,21 @@ function HelperProfileInner() {
         )}
         {activeTab === 'perfil' && (
           <>
+          {/* Trust signal */}
+          <div style={{
+            display: 'flex', alignItems: 'center', gap: '8px',
+            padding: '10px 14px', margin: '0 0 10px',
+            background: 'rgba(5,150,105,0.05)',
+            border: '1px solid rgba(5,150,105,0.12)',
+            borderRadius: '14px',
+          }}>
+            <span style={{fontSize:'18px'}}>🛡️</span>
+            <div>
+              <div style={{fontSize:'12px',fontWeight:700,color:'#059669',letterSpacing:'-0.1px'}}>Perfil verificado por Nüra</div>
+              <div style={{fontSize:'11px',color:'rgba(0,0,0,0.45)'}}>Identidad confirmada · {h.services || 0} servicios reales · valoraciones auténticas</div>
+            </div>
+          </div>
+
             
 
             {/* Bio */}
