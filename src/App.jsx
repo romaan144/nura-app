@@ -29,35 +29,44 @@ function AppRoutes({ showSplash }) {
   const location = useLocation()
   const { user } = useUser()
 
-  const hideNav = ['/login', '/register-helper', '/splash']
+  const hideNav = ['/login', '/register-helper', '/splash', '/onboarding']
     .some(p => location.pathname.startsWith(p))
 
   return (
     <>
       {showSplash && <Splash />}
+      <ScrollToTop />
+
+      {/* Desktop sidebar — hidden on mobile via CSS */}
+      {!hideNav && <DesktopSidebar />}
+
+      {/* Main content */}
       <div className="desktopMain">
-      <PageTransition>
-        <Routes location={location} key={location.pathname}>
-          <Route path="/" element={<Home setSearchState={setSearchState} />} />
-          <Route path="/results" element={
-            searchState ? <Results searchState={searchState} setSearchState={setSearchState} />
-              : <Navigate to="/" />
-          } />
-          <Route path="/helper/:id" element={<HelperProfile />} />
-          <Route path="/chat/:id" element={<Chat />} />
-          <Route path="/my-services" element={<MyServices />} />
-          <Route path="/onboarding" element={<OnboardingPage />} />
-          <Route path="/login" element={user ? <Navigate to="/" /> : <Login />} />
-          <Route path="/profile" element={<Profile />} />
-          <Route path="/chats" element={<Chats />} />
-          <Route path="/register-helper" element={<RegisterHelper />} />
-          <Route path="/how-it-works" element={<HowItWorks />} />
-        <Route path="/explore" element={<Explore />} />
-        <Route path="/feed" element={<Feed />} />
-          <Route path="*" element={<NotFound />} />
-        </Routes>
-      </PageTransition>
+        <PageTransition>
+          <Routes location={location} key={location.pathname}>
+            <Route path="/" element={<Home setSearchState={setSearchState} />} />
+            <Route path="/results" element={
+              searchState
+                ? <Results searchState={searchState} setSearchState={setSearchState} />
+                : <Navigate to="/" />
+            } />
+            <Route path="/helper/:id" element={<HelperProfile />} />
+            <Route path="/chat/:id" element={<Chat />} />
+            <Route path="/my-services" element={<MyServices />} />
+            <Route path="/onboarding" element={<OnboardingPage />} />
+            <Route path="/login" element={user ? <Navigate to="/" /> : <Login />} />
+            <Route path="/profile" element={<Profile />} />
+            <Route path="/chats" element={<Chats />} />
+            <Route path="/register-helper" element={<RegisterHelper />} />
+            <Route path="/how-it-works" element={<HowItWorks />} />
+            <Route path="/explore" element={<Explore />} />
+            <Route path="/feed" element={<Feed />} />
+            <Route path="*" element={<NotFound />} />
+          </Routes>
+        </PageTransition>
       </div>
+
+      {/* Mobile nav — hidden on desktop via CSS */}
       {!hideNav && <NavBar />}
       <Toast />
     </>
@@ -66,7 +75,6 @@ function AppRoutes({ showSplash }) {
 
 export default function App() {
   const [showSplash, setShowSplash] = useState(true)
-
   useEffect(() => {
     const t = setTimeout(() => setShowSplash(false), 2400)
     return () => clearTimeout(t)
