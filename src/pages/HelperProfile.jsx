@@ -299,7 +299,7 @@ export default function HelperProfile() {
             ? <img src={h.avatarUrl} alt={h.name} className={styles.heroAvatar} />
             : <div className={styles.heroAvatarFallback} style={{ background: h.avatarColor }}>{h.avatar}</div>
           }
-          <h1 className={styles.heroName}>{h.name}</h1>
+          <h1 className={styles.heroName}>{h.name}{h.founder && <span title="Helper Fundador" style={{marginLeft:'6px',fontSize:'16px',verticalAlign:'middle'}}>⭐</span>}</h1>
           <p className={styles.heroSpecialty}>{h.specialty || h.tags?.[0]}</p>
 
           <div className={styles.heroMeta}>
@@ -329,7 +329,7 @@ export default function HelperProfile() {
           <div className={styles.heroBadges}>
             {h.dniVerified && <span className={styles.badgePrimary}><Shield size={10} /> DNI Verificado</span>}
             {h.criminalRecordClear && <span className={styles.badgeSecondary}><CheckCircle size={10} /> Sin antecedentes</span>}
-            {h.founder && <span className={styles.badgeFounder}><Award size={10} /> Fundador</span>}
+
             {h.urgent && <span className={styles.badgeUrgent}><Zap size={10} /> Urgencias</span>}
           </div>
 

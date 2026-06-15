@@ -61,7 +61,7 @@ function ResultCard({ helper, onNavigate }) {
         </div>
         <div className={styles.resultInfo}>
           <div style={{display:'flex',alignItems:'flex-start',justifyContent:'space-between',gap:'8px'}}>
-            <div className={styles.resultName}>{helper.name}</div>
+            <div className={styles.resultName}>{helper.name}{helper.founder && <span title="Helper Fundador" style={{marginLeft:'5px',fontSize:'13px'}}>⭐</span>}</div>
             <span style={{fontSize:'13px',fontWeight:700,color:helper.price && helper.price!=='Consultar'?'#7B2FFF':'#aaa',whiteSpace:'nowrap',flexShrink:0}}>
               {helper.price && helper.price !== 'Consultar' ? helper.price : 'Consultar'}
             </span>
