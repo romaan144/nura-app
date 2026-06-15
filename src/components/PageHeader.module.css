@@ -15,15 +15,22 @@
   display: flex; align-items: center; justify-content: center;
   flex: 1;
 }
-.logo {
-  height: 22px; width: auto;
+.logoPill {
   background: white;
-  padding: 10px 22px;
+  padding: 9px 20px;
   border-radius: 26px;
   box-shadow: 0 2px 8px rgba(0,0,0,0.1), 0 1px 3px rgba(0,0,0,0.06);
   border: 1.5px solid rgba(0,0,0,0.05);
-  display: block;
+  display: flex; align-items: center; justify-content: center;
+  overflow: hidden;
+  height: 44px;
+  width: 120px;
+}
+.logo {
+  width: 180%;
+  height: auto;
   object-fit: contain;
+  transform: scale(1.8);
 }
 .circleBtn {
   width: 40px; height: 40px; border-radius: 50%;
