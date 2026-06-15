@@ -125,18 +125,6 @@ export default function Home({ setSearchState }) {
   const bottomRef = useRef(null)
   const inputRef = useRef(null)
 
-  const navigate = useNavigate()
-
-  // Redirect new users to onboarding
-  useEffect(() => {
-    if (!user) {
-      const t = setTimeout(() => {
-        // Don't auto-redirect, just show a sign-in prompt after 5s
-      }, 5000)
-      return () => clearTimeout(t)
-    }
-  }, [user])
-
   useEffect(() => {
     const lines = getWelcome(user)
     const msgs = [{ id: 1, from: 'nura', lines }]
