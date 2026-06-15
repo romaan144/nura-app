@@ -51,26 +51,36 @@ const SUGGESTIONS = {
 function ResultCard({ helper, onNavigate }) {
   return (
     <div className={styles.resultCard} onClick={() => onNavigate(`/helper/${helper.id}`)}>
-      <div className={styles.resultAvatar}>
-        {helper.avatarUrl
-          ? <img src={helper.avatarUrl} alt={helper.name} className={styles.resultAvatarImg} />
-          : <div className={styles.resultAvatarFallback} style={{background: helper.avatarColor}}>{helper.avatar}</div>
-        }
-      </div>
-      <div className={styles.resultInfo}>
-        <div className={styles.resultName}>{helper.name}</div>
-        <div className={styles.resultSpec}>{helper.specialty}</div>
-        <div className={styles.resultMeta}>
-          <span><Star size={10} fill="#F59E0B" color="#F59E0B" /> {helper.rating}</span>
-          <span>·</span>
-          <span><MapPin size={10} /> {helper.zone}</span>
-          {helper.dniVerified && <><span>·</span><Shield size={10} color="#059669" /></>}
+      <div className={styles.resultTop}>
+        <div className={styles.resultAvatarWrap}>
+          {helper.avatarUrl
+            ? <img src={helper.avatarUrl} alt={helper.name} className={styles.resultAvatarImg} />
+            : <div className={styles.resultAvatarFallback} style={{background: helper.avatarColor}}>{helper.avatar}</div>
+          }
+          {helper.dniVerified && <span className={styles.resultVerified}><Shield size={8} /></span>}
+        </div>
+        <div className={styles.resultInfo}>
+          <div className={styles.resultName}>{helper.name}</div>
+          <div className={styles.resultSpec}>{helper.specialty}</div>
+          <div className={styles.resultMeta}>
+            <span className={styles.resultRating}><Star size={11} fill="#F59E0B" color="#F59E0B" /> {helper.rating} <span style={{color:'#aaa'}}>({helper.reviews})</span></span>
+            <span className={styles.resultDot} />
+            <span className={styles.resultDist}>{helper.distance} km de ti</span>
+          </div>
         </div>
       </div>
-      <button className={styles.resultContact}
-        onClick={e => { e.stopPropagation(); onNavigate(`/chat/${helper.id}`) }}>
-        <MessageCircle size={14} />
-      </button>
+      <div className={styles.resultBottom}>
+        <div className={styles.resultTags}>
+          {helper.urgent && <span className={styles.resultUrgent}>⚡ Urgencias</span>}
+          {helper.presential && <span className={styles.resultTag}>📍 Presencial</span>}
+          {helper.online && <span className={styles.resultTag}>💻 Online</span>}
+          <span className={styles.resultTag}>⏱ {helper.responseTime}</span>
+        </div>
+        <button className={styles.resultContact}
+          onClick={e => { e.stopPropagation(); onNavigate(`/chat/${helper.id}`) }}>
+          <MessageCircle size={14} /> Contactar
+        </button>
+      </div>
     </div>
   )
 }
