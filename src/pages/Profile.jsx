@@ -39,7 +39,7 @@ export default function Profile() {
 
         {/* Hero */}
         <div className={styles.heroCard}>
-          <img src={`https://api.dicebear.com/9.x/personas/svg?seed=${encodeURIComponent(user.name)}`} alt={user.name} className={styles.avatar} style={{objectFit:'cover'}} />
+          <img src={`https://api.dicebear.com/9.x/adventurer-neutral/svg?seed=${encodeURIComponent(user.name)}`} alt={user.name} className={styles.avatar} style={{objectFit:'cover'}} />
           <h2 className={styles.name}>{user.name}</h2>
           <p className={styles.phone}>{user.phone ? `+34 ${user.phone}` : ''}</p>
           {user.isHelper && (
