@@ -214,30 +214,32 @@ export default function Home({ setSearchState }) {
       {/* Messages */}
       <div className={styles.messages}>
         {messages.map(msg => (
-          <div key={msg.id} className={`${styles.msgRow} ${msg.from === 'user' ? styles.msgRowUser : ''}`}>
-            {msg.from === 'nura' && (
-              <div className={styles.nuraAvatar}>
-                <img src="/logo-iso.png" alt="Nüra" className={styles.nuraAvatarImg} />
+          <div key={msg.id}>
+            <div className={`${styles.msgRow} ${msg.from === 'user' ? styles.msgRowUser : ''}`}>
+              {msg.from === 'nura' && (
+                <div className={styles.nuraAvatar}>
+                  <img src="/logo-iso.png" alt="Nüra" className={styles.nuraAvatarImg} />
+                </div>
+              )}
+              <div className={`${styles.bubble} ${msg.from === 'user' ? styles.bubbleUser : styles.bubbleNura}`}>
+                {msg.text && <p>{msg.text}</p>}
+                {msg.lines?.map((line, i) => (
+                  <p key={i}>{formatLine(line)}</p>
+                ))}
+                {msg.loading && (
+                  <div className={styles.typingDots}>
+                    <span /><span /><span />
+                  </div>
+                )}
+              </div>
+            </div>
+            {msg.results && (
+              <div className={styles.resultsList}>
+                {msg.results.map(h => (
+                  <ResultCard key={h.id} helper={h} onNavigate={navigate} />
+                ))}
               </div>
             )}
-            <div className={`${styles.bubble} ${msg.from === 'user' ? styles.bubbleUser : styles.bubbleNura}`}>
-              {msg.text && <p>{msg.text}</p>}
-              {msg.lines?.map((line, i) => (
-                <p key={i}>{formatLine(line)}</p>
-              ))}
-              {msg.loading && (
-                <div className={styles.typingDots}>
-                  <span /><span /><span />
-                </div>
-              )}
-              {msg.results && (
-                <div className={styles.resultsList}>
-                  {msg.results.map(h => (
-                    <ResultCard key={h.id} helper={h} onNavigate={navigate} />
-                  ))}
-                </div>
-              )}
-            </div>
           </div>
         ))}
         <div ref={bottomRef} />
