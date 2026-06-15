@@ -161,7 +161,7 @@ export default function Home({ setSearchState }) {
     <div className={styles.page}>
 
       <PageHeader rightEl={
-          <button className={styles.profileBtn} onClick={() => navigate('/profile')}>
+          <button className={styles.profileBtn} onClick={() => navigate('/profile')} style={{flexShrink:0,width:'40px',height:'40px',minWidth:'40px'}}>
             <div className={styles.profileAvatar}>{user?.name?.[0]?.toUpperCase() || '?'}</div>
           </button>
         } />
