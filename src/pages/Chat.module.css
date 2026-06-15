@@ -202,3 +202,60 @@
   .inputWrap { left: 32px; right: 32px; }
   .quickReplies { left: 32px; right: 32px; }
 }
+
+/* Nüra intervention in chat */
+.nuraAvatarSmall {
+  width: 28px; height: 28px; border-radius: 50%;
+  background: rgba(255,255,255,0.72);
+  backdrop-filter: blur(24px) saturate(180%);
+  -webkit-backdrop-filter: blur(24px) saturate(180%);
+  border: 1px solid rgba(255,255,255,0.35);
+  display: flex; align-items: center; justify-content: center;
+  flex-shrink: 0; align-self: flex-start; margin-top: 2px;
+}
+.msgBubbleNura {
+  background: rgba(123,47,255,0.06) !important;
+  border: 1px solid rgba(123,47,255,0.12) !important;
+  color: rgba(0,0,0,0.75) !important;
+  border-radius: 4px 18px 18px 18px !important;
+  box-shadow: none !important;
+}
+.msgBubbleNura p { font-size: 13px !important; font-style: italic; }
+
+/* Quick replies floating */
+.quickReplies {
+  display: flex; flex-wrap: wrap; gap: 7px;
+  padding: 4px 0 8px;
+}
+.quickReply {
+  padding: 8px 14px;
+  background: rgba(255,255,255,0.72);
+  backdrop-filter: blur(24px) saturate(180%);
+  -webkit-backdrop-filter: blur(24px) saturate(180%);
+  border: 1px solid rgba(255,255,255,0.35);
+  box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+  border-radius: 100px; font-size: 13px; color: rgba(0,0,0,0.65);
+  cursor: pointer; transition: opacity 0.15s; font-weight: 500;
+}
+.quickReply:active { opacity: 0.6; }
+
+/* Suggestion bar */
+.suggestionBar {
+  position: absolute;
+  bottom: 84px; left: 20px; right: 20px;
+  z-index: 15;
+  display: flex; flex-direction: column; gap: 6px;
+  pointer-events: none;
+}
+.suggestionBar > * { pointer-events: all; }
+.suggestionLabel { font-size: 11px; font-weight: 600; color: rgba(0,0,0,0.35); letter-spacing: 0.3px; }
+.suggestionText {
+  padding: 11px 16px; text-align: left;
+  background: rgba(255,255,255,0.72);
+  backdrop-filter: blur(24px) saturate(180%);
+  -webkit-backdrop-filter: blur(24px) saturate(180%);
+  border: 1px solid rgba(255,255,255,0.35);
+  border-radius: 100px; font-size: 13px; color: rgba(0,0,0,0.7);
+  box-shadow: 0 2px 16px rgba(0,0,0,0.06); cursor: pointer;
+  white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+}
