@@ -41,7 +41,7 @@
   background: #F8F8FA; border: 1.5px solid var(--rule);
   border-radius: 18px; padding: 14px 16px;
   cursor: pointer; transition: all 0.2s;
-  box-shadow: var(--shadow-sm);
+  box-shadow: 0 2px 8px rgba(0,0,0,0.08), 0 1px 3px rgba(0,0,0,0.05);
   position: relative; overflow: hidden;
 }
 .card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px; background: var(--grad-main); opacity: 0; transition: opacity 0.2s; }
