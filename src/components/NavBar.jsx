@@ -3,12 +3,13 @@ import { useNavigate, useLocation } from 'react-router-dom'
 import { Search, Compass, MessageCircle, User, Rss, X, Menu } from 'lucide-react'
 import { useUser } from '../context/UserContext'
 import styles from './NavBar.module.css'
+import pageStyles from './PageHeader.module.css'
 
 // Export the trigger button separately so each page header can embed it
 export function MenuButton() {
   return (
     <button
-      className={styles.menuBtn}
+      className={pageStyles.circleBtn}
       onClick={() => window.__openDrawer?.()}
       aria-label="Menú">
       <Menu size={20} />
