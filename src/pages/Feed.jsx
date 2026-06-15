@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
-import { Heart, MessageCircle, Share2, Bookmark, Bell, UserPlus, Check, Sparkles } from 'lucide-react'
+import { Heart, MessageCircle, Share2, Bookmark, Bell, UserPlus, Check, Sparkles, Award, Shield } from 'lucide-react'
 import { HELPERS } from '../data/helpers'
 import { COMPANIES } from '../data/companies'
 import PageHeader from '../components/PageHeader'
@@ -88,7 +88,7 @@ function PostCard({ post }) {
           <div className={styles.authorMeta}>
             <div className={styles.authorName}>
               {author.name}
-              {author.verified && <span className={styles.verifiedDot}>✓</span>}
+{author.founder && <Award size={12} color='#92400E' style={{marginLeft:'3px',verticalAlign:'middle'}} />}
             </div>
             <div className={styles.authorSub}>
               {post.authorType === 'company' ? author.handle : author.specialty}
@@ -238,7 +238,7 @@ export default function Feed() {
                   </div>
                 </div>
                 <div className={styles.companyInfo}>
-                  <div className={styles.companyName}>{c.name} {c.verified && <span className={styles.verifiedDot}>✓</span>}</div>
+                  <div className={styles.companyName}>{c.name} {c.verified && <Shield size={11} color='#059669' style={{marginLeft:'3px',verticalAlign:'middle'}} />}</div>
                   <div className={styles.companySpec}>{c.specialty}</div>
                   <div className={styles.companyFollowers}>{c.followers.toLocaleString()} seguidores</div>
                 </div>
