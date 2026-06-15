@@ -176,7 +176,7 @@ export default function Home({ setSearchState }) {
       setTimeout(() => {
         setMessages(prev => [...prev, {
           id: Date.now() + 1, from: 'nura',
-          lines: ['¿Te convence alguno o quieres que filtre por algo más concreto? Por ejemplo precio, disponibilidad o experiencia específica.'],
+          lines: ['¿Te convence alguno o prefieres ajustar la búsqueda?'],
         }])
       }, 1500)
     } catch {
