@@ -165,7 +165,7 @@ export default function Home({ setSearchState }) {
         <div className={styles.headerLogoPill}><img src="/logo-text.png" alt="Nüra" className={styles.headerLogo} /></div>
         <button className={styles.profileBtn} onClick={() => navigate('/profile')}>
           {user?.name
-            ? <img src={`https://api.dicebear.com/9.x/adventurer-neutral/svg?seed=${encodeURIComponent(user.name)}`}
+            ? <img src={`https://api.dicebear.com/9.x/personas/svg?seed=${encodeURIComponent(user.name)}`}
                 alt={user.name}
                 style={{width:'100%',height:'100%',borderRadius:'50%',objectFit:'cover'}} />
             : '?'
