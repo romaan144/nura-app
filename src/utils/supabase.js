@@ -7,35 +7,57 @@ const headers = {
   'Content-Type': 'application/json',
 }
 
+// Generate consistent color from name
+function nameToColor(name) {
+  const colors = ['#7B2FFF','#059669','#1A56DB','#D97706','#DC2626','#0891B2','#7C3AED','#DB2777']
+  let hash = 0
+  for (let i = 0; i < (name||'').length; i++) hash = name.charCodeAt(i) + ((hash << 5) - hash)
+  return colors[Math.abs(hash) % colors.length]
+}
+
 // Map Supabase column names → app field names
 function normalize(h) {
+  const name = h.name || 'Helper'
+  const avatarUrl = h.avatar_url || null
+  // Generate DiceBear avatar URL for helpers without photo
+  const avatarFallback = `https://api.dicebear.com/9.x/personas/svg?seed=${encodeURIComponent(name)}`
+  
   return {
     id: h.id,
-    name: h.name,
-    specialty: h.speciality, // note: typo in DB
-    category: h.category,
-    bio: h.bio,
-    zone: h.zone,
+    name,
+    specialty: h.speciality || h.specialty || h.category || 'Profesional',
+    category: h.category || 'otro',
+    bio: h.bio || '',
+    zone: h.zone || h.city || 'Barcelona',
     city: h.city || 'Barcelona',
-    price: h.price,
+    price: h.price || null,
     rating: parseFloat(h.rating) || 4.5,
     reviews: parseInt(h.reviews) || 0,
-    distance: parseFloat(h.distance) || 1.5,
+    distance: parseFloat(h.distance) || (Math.random() * 4 + 0.5).toFixed(1) * 1,
     responseTime: h.response_time || '< 1 hora',
-    completionRate: parseInt(h.completion_rate) || 90,
+    completionRate: parseInt(h.completion_rate) || 92,
     services: parseInt(h.services) || 0,
     presential: h.presential ?? true,
     online: h.online ?? false,
     urgent: h.urgent ?? false,
-    verified: h.verified ?? false,
+    verified: h.verified ?? true,
     founder: h.founder ?? false,
     dniVerified: h.dni_verified ?? false,
-    tags: h.tags || [],
-    skills: h.skills || [],
-    languages: h.languages || [],
-    avatarColor: h.avatar_color || '#7B2FFF',
-    avatarUrl: h.avatar_url || null,
+    tags: Array.isArray(h.tags) ? h.tags : (h.tags ? [h.tags] : []),
+    skills: Array.isArray(h.skills) ? h.skills : [],
+    languages: Array.isArray(h.languages) ? h.languages : [],
+    avatarColor: h.avatar_color || nameToColor(name),
+    avatarUrl: avatarUrl || avatarFallback,
+    avatar: name[0]?.toUpperCase() || '?',
     available: h.available ?? true,
+    // Prevent crashes for fields used in profile
+    hiddenSkills: [],
+    education: [],
+    experience: [],
+    posts: [],
+    qualitativeComments: [],
+    evolution: [],
+    personality: null,
   }
 }
 
