@@ -99,6 +99,7 @@ function normalizeHelper(h) {
     distance: parseFloat(h.distance) || 1.0,
     reviews: parseInt(h.reviews) || 0,
     services: parseInt(h.services) || 0,
+    price: h.price || h.price_per_hour || null,
   }
 }
 
