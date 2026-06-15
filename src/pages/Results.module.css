@@ -1,4 +1,4 @@
-.page { min-height: 100vh; background: #F8F8FA; }
+.page { padding-top: 72px; min-height: 100vh; background: #F8F8FA; }
 
 
 .back { width: 34px; height: 34px; border-radius: 50%; border: none; background: #F8F8FA; color: var(--mid); display: flex; align-items: center; justify-content: center; transition: all 0.18s; flex-shrink: 0; }

@@ -1,4 +1,4 @@
-.page { min-height: 100dvh; background: #F8F8FA; }
+.page { padding-top: 72px; min-height: 100dvh; background: #F8F8FA; }
 .content { padding: 0 14px 40px; }
 
 .hero { text-align: center; padding: 16px 20px 28px; }

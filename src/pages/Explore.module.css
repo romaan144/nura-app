@@ -1,4 +1,4 @@
-.page { min-height: 100dvh; background: #F8F8FA; }
+.page { padding-top: 72px; min-height: 100dvh; background: #F8F8FA; }
 
 .searchWrap { padding: 0 14px 10px; }
 .searchBar {
