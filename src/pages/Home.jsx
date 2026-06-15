@@ -310,10 +310,13 @@ export default function Home({ setSearchState }) {
         <div className={styles.logoBubble}>
           <img src="/logo-text.png" alt="Nüra" className={styles.headerLogo} />
         </div>
-        <button className={styles.profileBubble} onClick={() => navigate('/profile')}>
+        <button
+          className={styles.logoBubble}
+          style={{position:'static',transform:'none',padding:'0',width:'42px',height:'42px',borderRadius:'50%',overflow:'hidden',display:'flex',alignItems:'center',justifyContent:'center',pointerEvents:'all'}}
+          onClick={() => navigate('/profile')}>
           {user?.name
             ? <img src={`https://api.dicebear.com/9.x/personas/svg?seed=${encodeURIComponent(user.name)}`} alt="" style={{width:'100%',height:'100%',objectFit:'cover'}} />
-            : <span style={{fontSize:'16px',color:'#888'}}>?</span>
+            : <span style={{fontSize:'16px',color:'rgba(0,0,0,0.5)'}}>?</span>
           }
         </button>
       </div>
