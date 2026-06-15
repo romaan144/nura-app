@@ -17,19 +17,31 @@
 
 /* Section tabs */
 .sectionTabs {
-  display: flex;
-  background: rgba(248,248,250,0.92);
-  backdrop-filter: blur(20px);
-  border-bottom: 1px solid var(--rule);
+  padding: 10px 14px;
+  background: transparent;
   position: sticky; top: 57px; z-index: 15;
+  transition: transform 0.25s ease, opacity 0.25s ease;
+}
+.sectionTabsHidden {
+  transform: translateY(-80px);
+  opacity: 0;
+  pointer-events: none;
+}
+.sectionTabsInner {
+  display: flex; gap: 4px;
+  background: white;
+  border-radius: 20px;
+  padding: 4px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.08), 0 1px 3px rgba(0,0,0,0.05);
 }
 .sectionTab {
-  flex: 1; padding: 13px; font-size: 13px; font-weight: 600;
-  color: var(--soft); border-bottom: 2px solid transparent;
-  transition: all 0.15s; display: flex; align-items: center; justify-content: center; gap: 6px;
+  flex: 1; padding: 8px 0; font-size: 12px; font-weight: 500;
+  color: var(--soft); border-radius: 16px; border: none;
+  transition: all 0.18s; display: flex; align-items: center; justify-content: center; gap: 5px;
 }
-.sectionTabActive { color: var(--purple); border-bottom-color: var(--purple); }
-.followingCount { font-size: 10px; background: var(--purple); color: white; border-radius: 10px; padding: 1px 6px; }
+.sectionTab:hover { color: var(--ink); background: var(--paper); }
+.sectionTabActive { color: white !important; background: #1a1a2e !important; font-weight: 600; box-shadow: 0 2px 8px rgba(0,0,0,0.18); }
+.followingCount { font-size: 10px; background: rgba(255,255,255,0.25); color: white; border-radius: 10px; padding: 1px 6px; }
 
 /* Content */
 .content { max-width: 640px; margin: 0 auto; padding: 14px 0 0; }

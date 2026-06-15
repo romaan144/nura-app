@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, useEffect, useRef } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { Heart, MessageCircle, Share2, Bookmark, Bell, UserPlus, Check, Sparkles, Award, Shield } from 'lucide-react'
 import { HELPERS } from '../data/helpers'
@@ -165,7 +165,21 @@ function SuggestedProfile({ profile, type, onFollow, onUnfollow, isFollowed }) {
 
 export default function Feed() {
   const { following, follow, unfollow, isFollowing, unreadNotifs, markNotifsRead } = useUser()
-  const [activeSection, setActiveSection] = useState('para-ti') // para-ti | siguiendo
+  const [activeSection, setActiveSection] = useState('para-ti')
+  const [hidden, setHidden] = useState(false)
+  const lastScrollY = useRef(0)
+
+  useEffect(() => {
+    const el = document.querySelector('#feedScroll')
+    if (!el) return
+    const onScroll = () => {
+      const curr = el.scrollTop
+      setHidden(curr > lastScrollY.current && curr > 60)
+      lastScrollY.current = curr
+    }
+    el.addEventListener('scroll', onScroll, { passive: true })
+    return () => el.removeEventListener('scroll', onScroll)
+  }, []) // para-ti | siguiendo
 
   const feed = buildFeed(following, HELPERS, COMPANIES)
   const followingFeed = buildFeed(following, HELPERS, COMPANIES).filter(p => !p.recommended)
@@ -180,20 +194,22 @@ export default function Feed() {
       <PageHeader rightEl={<button className={styles.notifBtn} onClick={markNotifsRead}><Bell size={18} />{unreadNotifs > 0 && <span className={styles.notifBadge}>{unreadNotifs}</span>}</button>} />
 
       {/* Section tabs */}
-      <div className={styles.sectionTabs}>
-        <button
-          className={`${styles.sectionTab} ${activeSection === 'para-ti' ? styles.sectionTabActive : ''}`}
-          onClick={() => setActiveSection('para-ti')}>
-          Para ti
-        </button>
-        <button
-          className={`${styles.sectionTab} ${activeSection === 'siguiendo' ? styles.sectionTabActive : ''}`}
-          onClick={() => setActiveSection('siguiendo')}>
-          Siguiendo {following.length > 0 && <span className={styles.followingCount}>{following.length}</span>}
-        </button>
+      <div className={`${styles.sectionTabs} ${hidden ? styles.sectionTabsHidden : ''}`}>
+        <div className={styles.sectionTabsInner}>
+          <button
+            className={`${styles.sectionTab} ${activeSection === 'para-ti' ? styles.sectionTabActive : ''}`}
+            onClick={() => setActiveSection('para-ti')}>
+            Para ti
+          </button>
+          <button
+            className={`${styles.sectionTab} ${activeSection === 'siguiendo' ? styles.sectionTabActive : ''}`}
+            onClick={() => setActiveSection('siguiendo')}>
+            Siguiendo {following.length > 0 && <span className={styles.followingCount}>{following.length}</span>}
+          </button>
+        </div>
       </div>
 
-      <div className={styles.content}>
+      <div className={styles.content} id='feedScroll'>
 
         {/* Suggested to follow */}
         {activeSection === 'para-ti' && (suggestedHelpers.length > 0 || suggestedCompanies.length > 0) && (
