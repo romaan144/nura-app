@@ -101,14 +101,17 @@ function ResultCard({ helper, onNavigate, onFav, isFav }) {
 
 export default function Home({ setSearchState }) {
   const navigate = useNavigate()
-  const { user, addSearch, toggleFavorite, isFavorite, searchHistory } = useUser()
-  const [messages, setMessages] = useState([])
+  const { user, addSearch, toggleFavorite, isFavorite, searchHistory, nuraChatMessages, setNuraChatMessages, nuraLastMatches, setNuraLastMatches } = useUser()
+  // messages persisted in context so they survive navigation
+  const messages = nuraChatMessages
+  const setMessages = setNuraChatMessages
   const [input, setInput] = useState('')
   const [loading, setLoading] = useState(false)
   const [listening, setListening] = useState(false)
   const [showSuggestions, setShowSuggestions] = useState(true)
   const [inputFocused, setInputFocused] = useState(false)
-  const [lastMatches, setLastMatches] = useState(null)
+  const lastMatches = nuraLastMatches
+  const setLastMatches = setNuraLastMatches
   const bottomRef = useRef(null)
   const inputRef = useRef(null)
 
@@ -125,7 +128,10 @@ export default function Home({ setSearchState }) {
       })
     }
 
-    setTimeout(() => setMessages(msgs), 300)
+    // Only init if no previous conversation
+    if (nuraChatMessages.length === 0) {
+      setTimeout(() => setMessages(msgs), 300)
+    }
 
     // Proactive question for helpers after 8s of inactivity
     if (user?.isHelper) {
@@ -279,7 +285,16 @@ export default function Home({ setSearchState }) {
         <div className={styles.headerLogoPill}>
           <img src="/logo-text.png" alt="Nüra" className={styles.headerLogo} />
         </div>
-        <button className={styles.profileBtn} onClick={() => navigate('/profile')} style={{flexShrink:0,width:'38px',height:'38px',minWidth:'38px'}}>
+        <div style={{display:'flex',gap:'6px',alignItems:'center'}}>
+          {messages.length > 1 && (
+            <button
+              onClick={() => { setMessages([]); setLastMatches(null); setTimeout(() => setMessages([{ id: 1, from: 'nura', lines: getWelcome(user) }]), 100) }}
+              style={{width:'34px',height:'34px',borderRadius:'50%',background:'transparent',border:'none',color:'var(--soft)',display:'flex',alignItems:'center',justifyContent:'center',fontSize:'18px'}}
+              title="Nueva conversación">
+              ✏️
+            </button>
+          )}
+          <button className={styles.profileBtn} onClick={() => navigate('/profile')} style={{flexShrink:0,width:'38px',height:'38px',minWidth:'38px'}}>
           {user?.name
             ? <img src={`https://api.dicebear.com/9.x/personas/svg?seed=${encodeURIComponent(user.name)}`} alt="" style={{width:'100%',height:'100%',borderRadius:'50%',objectFit:'cover'}} />
             : '?'

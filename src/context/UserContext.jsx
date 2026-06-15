@@ -12,6 +12,8 @@ export function UserProvider({ children }) {
   const [following, setFollowing] = useState([]) // ids of followed profiles
   const [notifications, setNotifications] = useState([])
   const [favorites, setFavorites] = useState([])
+  const [nuraChatMessages, setNuraChatMessages] = useState([])
+  const [nuraLastMatches, setNuraLastMatches] = useState(null)
 
   useEffect(() => {
     const saved = localStorage.getItem('nura_user')
@@ -144,6 +146,8 @@ export function UserProvider({ children }) {
       following, follow, unfollow, isFollowing,
       notifications, markNotifsRead, unreadNotifs,
       favorites, toggleFavorite, isFavorite,
+      nuraChatMessages, setNuraChatMessages,
+      nuraLastMatches, setNuraLastMatches,
     }}>
       {children}
     </UserContext.Provider>
