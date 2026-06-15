@@ -48,16 +48,16 @@
   box-shadow: 0 2px 8px rgba(0,0,0,0.08), 0 1px 3px rgba(0,0,0,0.05);
 }
 .heroBg { display: none; }
-.heroInner { position: relative; z-index: 1; display: flex; flex-direction: column; align-items: center; padding: 32px 20px 24px; text-align: center; }
+.heroInner { position: relative; z-index: 1; display: flex; flex-direction: column; align-items: center; padding: 28px 20px 20px; text-align: center; gap: 10px; }
 .heroAvatar { width: 96px; height: 96px; border-radius: 50%; object-fit: cover; border: 3px solid white; box-shadow: 0 8px 32px rgba(0,0,0,0.14), 0 0 0 4px rgba(123,47,255,0.08); margin-bottom: 16px; }
 .heroAvatarFallback { width: 96px; height: 96px; border-radius: 50%; display: flex; align-items: center; justify-content: center; color: white; font-size: 32px; font-weight: 800; border: 3px solid white; box-shadow: 0 8px 32px rgba(0,0,0,0.14); margin-bottom: 16px; }
-.heroName { font-size: 22px; font-weight: 800; color: var(--ink); letter-spacing: -0.5px; margin-bottom: 4px; }
-.heroSpecialty { font-size: 14px; font-weight: 600; color: var(--purple); margin-bottom: 12px; }
+.heroName { font-size: 22px; font-weight: 800; color: var(--ink); letter-spacing: -0.5px; }
+.heroSpecialty { font-size: 14px; font-weight: 600; color: var(--purple); }
 .heroMeta { display: flex; align-items: center; gap: 8px; font-size: 12px; color: var(--mid); margin-bottom: 12px; flex-wrap: wrap; justify-content: center; }
 .heroMetaItem { display: flex; align-items: center; gap: 4px; }
 .heroMetaItem strong { font-weight: 700; color: var(--ink); }
 .heroMetaSep { width: 3px; height: 3px; border-radius: 50%; background: var(--rule); }
-.heroModes { display: flex; gap: 6px; flex-wrap: wrap; justify-content: center; margin-bottom: 14px; }
+.heroModes { display: flex; gap: 6px; flex-wrap: wrap; justify-content: center; }
 .heroMode { font-size: 11px; color: var(--mid); background: rgba(255,255,255,0.8); border: none; border-radius: 20px; padding: 4px 11px; backdrop-filter: blur(4px); }
 .heroBadges { display: flex; flex-wrap: wrap; gap: 6px; justify-content: center; }
 .badgePrimary { display: inline-flex; align-items: center; gap: 4px; font-size: 11px; font-weight: 700; color: #059669; background: #ECFDF5; border: 1.5px solid #86EFAC; border-radius: 20px; padding: 4px 11px; }
@@ -124,13 +124,13 @@
   border-radius: 18px; padding: var(--card-padding) var(--space-xl); margin-bottom: 16px;
 }
 .nuraDetectedHeader { display: flex; align-items: center; gap: 8px; font-size: 13px; font-weight: 800; color: var(--purple); margin-bottom: 6px; letter-spacing: -0.2px; }
-.nuraDetectedDesc { font-size: 12px; color: var(--mid); line-height: 1.55; margin-bottom: 12px; }
+.nuraDetectedDesc { font-size: 12px; color: var(--mid); line-height: 1.55; }
 .nuraDetectedSkills { display: flex; flex-wrap: wrap; gap: 7px; }
 .nuraSkill { font-size: 12px; font-weight: 600; color: var(--purple); background: rgba(123,47,255,0.1); border: 1.5px dashed rgba(123,47,255,0.4); border-radius: 20px; padding: 5px 13px; }
 
 /* ── SKILLS ── */
 .section { background: #FFFFFF; border: none; border-radius: 18px; padding: var(--card-padding) var(--space-xl); margin-bottom: 12px; box-shadow: 0 2px 8px rgba(0,0,0,0.08), 0 1px 3px rgba(0,0,0,0.05); }
-.sectionTitle { display: flex; align-items: center; gap: 7px; font-size: 11px; font-weight: 600; color: var(--soft); text-transform: uppercase; letter-spacing: 0.8px; margin-bottom: 12px; }
+.sectionTitle { display: flex; align-items: center; gap: 7px; font-size: 11px; font-weight: 600; color: var(--soft); text-transform: uppercase; letter-spacing: 0.8px; }
 .sectionNote { font-size: 11px; color: var(--soft); margin-bottom: 14px; line-height: 1.5; padding: 8px 12px; background: #F8F8FA; border-radius: 8px; border-left: 3px solid var(--rule); }
 .skillsGrid { display: flex; flex-wrap: wrap; gap: 7px; }
 .skill { font-size: 12px; font-weight: 500; color: var(--ink); background: #F8F8FA; border: none; border-radius: 8px; padding: 6px 12px; }
@@ -198,7 +198,7 @@
 .expPeriodLoc { font-size: 11px; color: var(--soft); }
 .expVerifiedTag { display: inline-flex; align-items: center; gap: 3px; font-size: 9px; font-weight: 700; color: #1E40AF; background: #EFF6FF; border: 1px solid #93C5FD; border-radius: 8px; padding: 3px 7px; white-space: nowrap; flex-shrink: 0; }
 
-.competencies { display: flex; flex-wrap: wrap; gap: 5px; margin-bottom: 14px; }
+.competencies { display: flex; flex-wrap: wrap; gap: 5px; }
 .competency { font-size: 11px; color: var(--mid); background: #F8F8FA; border: none; border-radius: 6px; padding: 3px 9px; }
 
 /* Manager opinion */
@@ -221,7 +221,7 @@
 /* Colleagues */
 .colleaguesBlock { background: #F8F8FA; border-radius: 12px; padding: 14px; }
 .colleaguesTitle { font-size: 10px; font-weight: 700; color: var(--soft); text-transform: uppercase; letter-spacing: 0.8px; margin-bottom: 12px; display: flex; align-items: center; gap: 5px; }
-.colleagueRow { display: flex; gap: 10px; margin-bottom: 12px; }
+.colleagueRow { display: flex; gap: 10px; }
 .colleagueRow:last-child { margin-bottom: 0; }
 .colleagueAvatar { width: 30px; height: 30px; border-radius: 50%; background: var(--rule2); border: none; color: var(--mid); font-size: 10px; font-weight: 700; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
 .colleagueName { font-size: 12px; font-weight: 700; color: var(--ink); }
@@ -236,15 +236,15 @@
 /* ── POSTS ── */
 .postCard { background: #FFFFFF; border: none; border-radius: 18px; padding: var(--card-padding) var(--space-xl); margin-bottom: 12px; box-shadow: 0 2px 8px rgba(0,0,0,0.08), 0 1px 3px rgba(0,0,0,0.05); }
 .feedIntroWrap { padding-top: 4px; }
-.postHeader { display: flex; align-items: center; gap: 10px; margin-bottom: 12px; }
+.postHeader { display: flex; align-items: center; gap: 10px; }
 .postAvatarImg { width: 40px; height: 40px; border-radius: 50%; object-fit: cover; flex-shrink: 0; box-shadow: 0 2px 8px rgba(0,0,0,0.1); }
 .postAvatar { width: 40px; height: 40px; border-radius: 50%; display: flex; align-items: center; justify-content: center; color: white; font-weight: 700; font-size: 14px; flex-shrink: 0; }
 .postMeta { flex: 1; }
 .postName { font-size: 13px; font-weight: 700; color: var(--ink); display: block; }
 .postDate { font-size: 11px; color: var(--soft); }
 .verifiedWorkBadge { display: flex; align-items: center; gap: 3px; font-size: 9px; font-weight: 700; color: #059669; background: #ECFDF5; border: 1px solid #86EFAC; border-radius: 8px; padding: 3px 8px; white-space: nowrap; }
-.postText { font-size: 14px; color: var(--ink); line-height: 1.72; margin-bottom: 12px; }
-.postBadge { display: inline-flex; align-items: center; gap: 6px; font-size: 11px; font-weight: 600; color: #92400E; background: #FEF3C7; border-radius: 10px; padding: 6px 12px; margin-bottom: 12px; }
+.postText { font-size: 14px; color: var(--ink); line-height: 1.72; }
+.postBadge { display: inline-flex; align-items: center; gap: 6px; font-size: 11px; font-weight: 600; color: #92400E; background: #FEF3C7; border-radius: 10px; padding: 6px 12px; }
 .postActions { display: flex; gap: 6px; padding-top: 10px; border-top: 1px solid var(--rule); }
 .postAction { display: flex; align-items: center; gap: 5px; font-size: 13px; font-weight: 500; color: var(--soft); padding: 6px 12px; border-radius: 8px; transition: all 0.15s; }
 .postAction:hover { background: #F8F8FA; color: var(--purple); }
@@ -436,9 +436,9 @@
   margin-bottom: 14px;
   box-shadow: 0 2px 12px rgba(123,47,255,0.06);
 }
-.nuraQuestionHeader { display: flex; align-items: flex-start; gap: 10px; margin-bottom: 12px; }
+.nuraQuestionHeader { display: flex; align-items: flex-start; gap: 10px; }
 .nuraIso { width: 28px; height: 28px; object-fit: contain; flex-shrink: 0; margin-top: 2px; }
-.nuraQuestionFrom { font-size: 10px; font-weight: 700; color: var(--purple); text-transform: uppercase; letter-spacing: 0.5px; display: block; margin-bottom: 4px; }
+.nuraQuestionFrom { font-size: 10px; font-weight: 700; color: var(--purple); text-transform: uppercase; letter-spacing: 0.5px; display: block; }
 .nuraQuestionText { font-size: 13px; color: var(--ink); line-height: 1.55; }
 .nuraQuestionActions { display: flex; gap: 8px; }
 .nuraQuestionBtn { padding: 8px 16px; background: var(--grad-main); color: white; border: none; border-radius: 20px; font-size: 12px; font-weight: 600; transition: all 0.15s; }
@@ -447,7 +447,7 @@
 .nuraInput { flex: 1; padding: 9px 14px; border: 1.5px solid var(--purple); border-radius: 20px; font-size: 13px; outline: none; background: #FFFFFF; color: var(--ink); font-family: 'Inter',sans-serif; }
 .nuraInputSend { width: 36px; height: 36px; border-radius: 50%; background: var(--grad-main); color: white; border: none; font-size: 16px; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
 .nuraInputSend:disabled { background: var(--rule); }
-.nuraQuestionSent { display: flex; align-items: center; gap: 8px; background: rgba(123,47,255,0.06); border: 1.5px solid rgba(123,47,255,0.15); border-radius: 18px; padding: 12px 16px; font-size: 12px; color: var(--purple); font-weight: 500; margin-bottom: 14px; }
+.nuraQuestionSent { display: flex; align-items: center; gap: 8px; background: rgba(123,47,255,0.06); border: 1.5px solid rgba(123,47,255,0.15); border-radius: 18px; padding: 12px 16px; font-size: 12px; color: var(--purple); font-weight: 500; }
 
 /* ── NÜRA VERIFY NOTE ── */
 .nuraVerifyNote {
@@ -476,7 +476,7 @@
   border-radius: 18px; padding: 14px;
   margin-top: 0; margin-bottom: 12px;
 }
-.empresasIntroTitle { font-size: 13px; font-weight: 700; color: var(--ink); margin-bottom: 4px; }
+.empresasIntroTitle { font-size: 13px; font-weight: 700; color: var(--ink); }
 .empresasIntroDesc { font-size: 12px; color: var(--mid); line-height: 1.5; }
 
 /* ── EXPERIENCE TIMELINE (new structure) ── */
@@ -524,7 +524,7 @@
 .repBarFill { height: 100%; border-radius: 3px; transition: width 0.8s ease; }
 
 /* ── AVAILABILITY CHIPS ── */
-.availabilityRow { display: flex; flex-wrap: wrap; gap: 7px; margin-bottom: 12px; }
+.availabilityRow { display: flex; flex-wrap: wrap; gap: 7px; }
 .availChip { display: flex; align-items: center; gap: 6px; padding: 6px 12px; background: white; border-radius: 20px; font-size: 12px; font-weight: 500; color: var(--mid); box-shadow: 0 1px 4px rgba(0,0,0,0.07); }
 .availChipGreen { color: #059669; background: #ECFDF5; }
 .availChipGray { color: var(--soft); background: var(--paper); }
@@ -581,3 +581,53 @@
 .heroActions { display: flex; gap: 8px; width: 100%; justify-content: center; padding: 0 8px; }
 .heroCtaSecondary { display: flex; align-items: center; justify-content: center; gap: 6px; padding: 11px 0; background: white; color: var(--ink); border: 1.5px solid var(--rule); border-radius: 22px; font-size: 13px; font-weight: 700; transition: all 0.15s; box-shadow: 0 2px 8px rgba(0,0,0,0.08); flex: 1; }
 .heroCtaSecondary:hover { border-color: var(--ink); }
+
+/* ── HERO INFO ROW — single clean line ── */
+.heroInfoRow {
+  display: flex; flex-wrap: wrap; align-items: center;
+  justify-content: center; gap: 6px;
+}
+.heroInfoChip {
+  display: inline-flex; align-items: center; gap: 4px;
+  font-size: 11px; font-weight: 500; color: var(--mid);
+  background: var(--paper); border-radius: 12px;
+  padding: 4px 10px;
+}
+.heroInfoChipRed {
+  display: inline-flex; align-items: center; gap: 4px;
+  font-size: 11px; font-weight: 600; color: #DC2626;
+  background: #FEF2F2; border-radius: 12px;
+  padding: 4px 10px;
+}
+.availDot {
+  width: 6px; height: 6px; border-radius: 50%;
+  background: var(--soft); flex-shrink: 0;
+}
+.availDotGreen { background: #22C55E; }
+
+/* 3. Hero action buttons — IDENTICAL size */
+.heroActions {
+  display: flex; gap: 8px;
+  width: 100%; padding: 0 4px;
+  margin-top: 4px;
+}
+.heroCtaSecondary {
+  flex: 1; display: flex; align-items: center; justify-content: center; gap: 6px;
+  height: 44px;
+  background: white; color: var(--ink);
+  border: 1.5px solid var(--rule); border-radius: 22px;
+  font-size: 13px; font-weight: 700;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.07);
+  transition: all 0.15s;
+}
+.heroCtaBtn {
+  flex: 1; display: flex; align-items: center; justify-content: center; gap: 6px;
+  height: 44px;
+  background: var(--grad-main); color: white;
+  border: none; border-radius: 22px;
+  font-size: 13px; font-weight: 700;
+  box-shadow: 0 4px 14px rgba(123,47,255,0.3);
+  transition: all 0.15s;
+}
+.heroCtaSecondary:hover { border-color: var(--ink); }
+.heroCtaBtn:hover { opacity: 0.92; }
