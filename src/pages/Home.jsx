@@ -283,15 +283,14 @@ export default function Home({ setSearchState }) {
   return (
     <div className={styles.page}>
       <div className={styles.header}>
-        <MenuButton />
+        <div className={styles.headerLeft}><MenuButton /></div>
         <div className={styles.headerLogoPill}>
           <img src="/logo-text.png" alt="Nüra" className={styles.headerLogo} />
         </div>
-        <div style={{display:'flex',gap:'6px',alignItems:'center'}}>
+        <div className={styles.headerRight}>
           {messages.length > 1 && (
-            <button
-              onClick={() => { setNuraChatMessages([]); setNuraLastMatches(null); }}
-              style={{padding:'5px 10px',borderRadius:'16px',background:'white',border:'1.5px solid rgba(0,0,0,0.08)',color:'var(--soft)',fontSize:'11px',fontWeight:600,boxShadow:'0 1px 3px rgba(0,0,0,0.06)',whiteSpace:'nowrap',display:'flex',alignItems:'center',gap:'4px',flexShrink:0}}>
+            <button className={styles.newChatBtn}
+              onClick={() => { setNuraChatMessages([]); setNuraLastMatches(null); }}>
               + Nuevo chat
             </button>
           )}

@@ -203,13 +203,14 @@
 
 /* ── HEADER ── */
 .header {
-  display: flex;
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
   align-items: center;
-  justify-content: space-between;
   padding: 12px 14px;
   background: transparent;
-  position: relative;
 }
+.headerLeft { display: flex; justify-content: flex-start; }
+.headerRight { display: flex; justify-content: flex-end; align-items: center; gap: 6px; }
 .headerLogoPill {
   position: absolute;
   left: 50%;
@@ -348,3 +349,17 @@
   .resultsList { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
   .recentSearches { padding: 6px 32px 2px; }
 }
+
+/* New chat button */
+.newChatBtn {
+  padding: 6px 12px;
+  border-radius: 20px;
+  background: white;
+  border: 1.5px solid var(--rule);
+  color: var(--mid);
+  font-size: 12px; font-weight: 600;
+  box-shadow: 0 1px 4px rgba(0,0,0,0.07);
+  white-space: nowrap;
+  transition: all 0.15s;
+}
+.newChatBtn:hover { color: var(--ink); border-color: rgba(0,0,0,0.15); }
