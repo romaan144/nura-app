@@ -1,6 +1,6 @@
 import { useState, useEffect, useRef } from 'react'
 import { useParams, useNavigate } from 'react-router-dom'
-import { ArrowLeft, Send, Shield, Star, User, MapPin } from 'lucide-react'
+import { ArrowLeft, Send, Shield, Star, MapPin, Award } from 'lucide-react'
 import { MenuButton } from '../components/NavBar'
 import { HELPERS } from '../data/helpers'
 import { useUser } from '../context/UserContext'
@@ -142,7 +142,11 @@ export default function Chat() {
             : <div className={styles.avatar} style={{ background: helper.avatarColor }}>{helper.avatar}</div>
           }
           <div>
-            <div className={styles.helperName}>{helper.name}</div>
+            <div className={styles.helperName}>
+                {helper.name}
+                {helper.founder && <Award size={12} color='#92400E' style={{marginLeft:'4px',verticalAlign:'middle'}} />}
+                {helper.dniVerified && <Shield size={11} color='#059669' style={{marginLeft:'4px',verticalAlign:'middle'}} />}
+              </div>
             <div className={styles.helperStatus}>
               {typing
                 ? <span className={styles.typingStatus}>escribiendo...</span>
@@ -152,16 +156,7 @@ export default function Chat() {
           </div>
         </div>
 
-        <div className={styles.headerActions}>
-          {!hasRated(helper.id) && messages.length > 0 && (
-            <button className={styles.rateBtn} onClick={() => setShowRating(true)}>
-              <Star size={13} />
-            </button>
-          )}
-          <button className={styles.profileBtn} onClick={() => navigate(`/helper/${helper.id}`)}>
-            <User size={15} />
-          </button>
-        </div>
+
       </header>
 
       {/* Helper info strip */}
