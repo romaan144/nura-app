@@ -216,14 +216,19 @@
   width: 34px; height: 34px;
   border-radius: 50%;
   background: rgba(255,255,255,0.72);
-  backdrop-filter: blur(16px) saturate(160%);
-  -webkit-backdrop-filter: blur(16px) saturate(160%);
+  backdrop-filter: blur(24px) saturate(180%);
+  -webkit-backdrop-filter: blur(24px) saturate(180%);
   border: 1px solid rgba(255,255,255,0.35);
   display: flex; align-items: center; justify-content: center;
   flex-shrink: 0;
-  box-shadow: 0 1px 8px rgba(0,0,0,0.04);
+  box-shadow: 0 2px 12px rgba(0,0,0,0.06), 0 0 0 0 rgba(123,47,255,0);
   align-self: flex-start;
   margin-top: 2px;
+  animation: nuraGlow 4s ease-in-out infinite;
+}
+@keyframes nuraGlow {
+  0%,100% { box-shadow: 0 2px 12px rgba(0,0,0,0.06), 0 0 0 0 rgba(123,47,255,0); }
+  50% { box-shadow: 0 2px 12px rgba(0,0,0,0.06), 0 0 0 4px rgba(123,47,255,0.06); }
 }
 .nuraAvatarImg {
   width: 28px; height: 28px;
@@ -337,3 +342,12 @@
   0%, 100% { box-shadow: 0 0 0 0 rgba(239,68,68,0.4); }
   50% { box-shadow: 0 0 0 8px rgba(239,68,68,0); }
 }
+
+/* Quick option chips */
+.quickOption {
+  padding: 6px 14px; border-radius: 100px;
+  background: rgba(0,0,0,0.06); border: none;
+  font-size: 13px; font-weight: 500; color: rgba(0,0,0,0.65);
+  cursor: pointer; transition: all 0.15s;
+}
+.quickOption:active { background: rgba(0,0,0,0.1); }

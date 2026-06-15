@@ -56,7 +56,7 @@
 
 .chatInfo { flex: 1; min-width: 0; }
 .chatTop { display: flex; align-items: center; justify-content: space-between; margin-bottom: 4px; gap: 8px; }
-.chatName { font-size: 14px; font-weight: 700; color: var(--ink); }
+.chatName { font-size: 14px; font-weight: 700; color: rgba(0,0,0,0.85); letter-spacing: -0.2px; }
 .chatTime { font-size: 11px; color: var(--soft); flex-shrink: 0; }
 
 .chatBottom { display: flex; align-items: center; justify-content: space-between; gap: 8px; }
