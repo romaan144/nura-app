@@ -49,7 +49,7 @@ const SUGGESTIONS = {
 
 function ResultCard({ helper, onNavigate, onFav, isFav }) {
   return (
-    <div className={styles.resultCard} onClick={() => onNavigate(`/helper/${helper.id}`)}>
+    <div className={styles.resultCard} onClick={() => onNavigate(`/helper/${helper.id}`, { state: { helper } })}>
       <div className={styles.resultTop}>
         <div className={styles.resultAvatarWrap}>
           {helper.avatarUrl

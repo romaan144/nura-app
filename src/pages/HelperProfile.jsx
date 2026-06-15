@@ -1,6 +1,6 @@
 import PageHeader from '../components/PageHeader'
 import { useState, useEffect } from 'react'
-import { useParams, useNavigate } from 'react-router-dom'
+import { useParams, useNavigate, useLocation } from 'react-router-dom'
 import {
   ArrowLeft, Star, Shield, MapPin, MessageCircle, Zap,
   TrendingUp, Clock, CheckCircle, Award, Brain, Globe,
@@ -260,29 +260,24 @@ export default function HelperProfile() {
   // useEffect(() => { if(h) setFaved(isFavorite(h.id)) }, [h?.id])
   const [activeTab, setActiveTab] = useState('perfil')
 
-  const [h, setH] = useState(null)
-  const [loading, setLoading] = useState(true)
+  const location = useLocation()
+  const [loading, setLoading] = useState(false)
+
+  // Priority: navigation state > cache > local data > Supabase fetch
+  const fromState = location.state?.helper
+  const fromCache = helpersCache?.[parseInt(id)] || helpersCache?.[id] || helpersCache?.[String(id)]
+  const fromLocal = HELPERS.find(x => x.id === parseInt(id) || String(x.id) === String(id))
+
+  const [h, setH] = useState(fromState || fromCache || fromLocal || null)
 
   useEffect(() => {
-    // Try local sources first
-    const local =
-      helpersCache?.[parseInt(id)] ||
-      helpersCache?.[id] ||
-      helpersCache?.[String(id)] ||
-      HELPERS.find(x => x.id === parseInt(id) || String(x.id) === String(id))
-
-    if (local) {
-      setH(local)
-      setLoading(false)
-      return
+    if (!h) {
+      setLoading(true)
+      getHelperById(id)
+        .then(remote => { if (remote) setH(remote) })
+        .catch(() => {})
+        .finally(() => setLoading(false))
     }
-
-    // Fetch from Supabase
-    setLoading(true)
-    getHelperById(id).then(remote => {
-      if (remote) setH(remote)
-      setLoading(false)
-    }).catch(() => setLoading(false))
   }, [id])
 
   if (loading) return (

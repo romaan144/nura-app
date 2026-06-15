@@ -117,7 +117,7 @@ export default function Explore() {
             <h3 className={styles.featuredTitle}>⭐ Más valorados esta semana</h3>
             <div className={styles.featuredRow}>
               {[...HELPERS].sort((a,b) => b.rating - a.rating).slice(0,4).map(h => (
-                <div key={h.id} className={styles.featuredCard} onClick={() => navigate(`/helper/${h.id}`)}>
+                <div key={h.id} className={styles.featuredCard} onClick={() => navigate(`/helper/${h.id}`, { state: { helper: h } })}>
                   <img src={h.avatarUrl || `https://api.dicebear.com/9.x/personas/svg?seed=${h.name}`}
                     alt={h.name} className={styles.featuredAvatar} />
                   <div className={styles.featuredName}>{h.name.split(' ')[0]}</div>
@@ -133,7 +133,7 @@ export default function Explore() {
         </div>
         <div className={styles.grid}>
           {filtered.map(h => (
-            <div key={h.id} className={styles.card} onClick={() => navigate(`/helper/${h.id}`)}>
+            <div key={h.id} className={styles.card} onClick={() => navigate(`/helper/${h.id}`, { state: { helper: h } })}>
               <div className={styles.cardTop}>
                 <div className={styles.avatarWrap}>
                   {h.avatarUrl
