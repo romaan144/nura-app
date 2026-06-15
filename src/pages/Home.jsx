@@ -101,7 +101,7 @@ function ResultCard({ helper, onNavigate, onFav, isFav }) {
 
 export default function Home({ setSearchState }) {
   const navigate = useNavigate()
-  const { user, addSearch, toggleFavorite, isFavorite } = useUser()
+  const { user, addSearch, toggleFavorite, isFavorite, searchHistory } = useUser()
   const [messages, setMessages] = useState([])
   const [input, setInput] = useState('')
   const [loading, setLoading] = useState(false)
