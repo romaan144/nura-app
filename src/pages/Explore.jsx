@@ -1,7 +1,8 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { Search, SlidersHorizontal, X, MapPin, Star, Zap } from 'lucide-react'
-import { HELPERS } from '../data/helpers'
+import { HELPERS as LOCAL_HELPERS } from '../data/helpers'
+import { getAllHelpers } from '../utils/supabase'
 import { useUser } from '../context/UserContext'
 import PageHeader from '../components/PageHeader'
 import styles from './Explore.module.css'
@@ -20,6 +21,13 @@ const CATEGORIES = [
 export default function Explore() {
   const navigate = useNavigate()
   const [searchText, setSearchText] = useState('')
+  const [HELPERS, setHELPERS] = useState(LOCAL_HELPERS)
+
+  useEffect(() => {
+    getAllHelpers().then(remote => {
+      if (remote?.length > 0) setHELPERS(remote)
+    })
+  }, [])
   const [activeCategory, setActiveCategory] = useState('all')
   const [showFilters, setShowFilters] = useState(false)
   const [filters, setFilters] = useState({ presential: false, online: false, urgent: false, maxPrice: '', maxDist: '' })
