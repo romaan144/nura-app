@@ -323,3 +323,28 @@
   .headerLogoPill { display: none; } /* Logo is in sidebar */
   .header { justify-content: flex-end; padding: 14px 24px; }
 }
+
+@media (min-width: 768px) {
+  .page {
+    border-right: 1px solid var(--rule);
+    height: 100%;
+    min-height: 100dvh;
+  }
+  /* Hide logo pill on desktop - sidebar has it */
+  .headerLogoPill { display: none; }
+  .header {
+    padding: 14px 24px;
+    justify-content: flex-end;
+    gap: 0;
+    background: rgba(248,248,250,0.95);
+    position: sticky; top: 0; z-index: 10;
+    border-bottom: 1px solid var(--rule);
+  }
+  .messages { padding: 32px 32px 16px; }
+  .inputWrap { padding: 10px 32px 24px; }
+  .suggestions { padding: 4px 32px 8px; }
+  .resultCard { padding: 16px 20px; }
+  /* Results list in 2 columns on desktop */
+  .resultsList { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+  .recentSearches { padding: 6px 32px 2px; }
+}

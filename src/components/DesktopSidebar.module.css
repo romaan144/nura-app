@@ -15,8 +15,10 @@
   /* Logo */
   .logo {
     display: flex; align-items: center; gap: 10px;
-    padding: 24px 20px 20px;
+    padding: 28px 20px 22px;
     border-bottom: 1px solid var(--rule);
+    background: white;
+    position: sticky; top: 0; z-index: 5;
   }
   .logoIso { width: 28px; height: 28px; object-fit: contain; animation: pulse 3s ease-in-out infinite; }
   @keyframes pulse { 0%,100%{transform:scale(1)} 50%{transform:scale(1.06)} }
@@ -26,7 +28,7 @@
   .nav { flex: 1; display: flex; flex-direction: column; padding: 12px 10px; gap: 2px; overflow-y: auto; }
   .navItem {
     display: flex; align-items: center; gap: 12px;
-    padding: 11px 12px; border-radius: 14px;
+    padding: 12px 14px; border-radius: 14px;
     color: var(--mid); font-size: 14px; font-weight: 500;
     transition: all 0.15s; width: 100%; text-align: left;
     border: none; background: transparent; cursor: pointer;

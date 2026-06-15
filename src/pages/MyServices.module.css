@@ -17,3 +17,9 @@
 .empty h3 { font-size: 18px; font-weight: 700; color: var(--ink); margin: 0; }
 .empty p { font-size: 13px; color: var(--soft); margin: 0; }
 .emptyBtn { padding: 12px 28px; background: #1C1C1E; color: white; border: none; border-radius: 20px; font-size: 14px; font-weight: 700; }
+
+@media (min-width: 768px) {
+  .page { max-width: 680px; margin: 0 auto; }
+  .content { padding: 0 32px 60px; }
+  .list { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+}

@@ -109,3 +109,16 @@
   transition: all 0.2s;
 }
 .doneBtn:hover { transform: translateY(-1px); }
+
+@media (min-width: 768px) {
+  .page {
+    max-width: 640px;
+    margin: 0 auto;
+    height: 100%;
+    min-height: 100dvh;
+    border-left: 1px solid var(--rule);
+    border-right: 1px solid var(--rule);
+  }
+  .messages { padding: 24px 32px 16px; }
+  .inputBar { padding: 10px 32px 20px; }
+}

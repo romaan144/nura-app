@@ -70,3 +70,12 @@
 .link { background: none; border: none; color: var(--soft); font-size: 13px; padding: 4px; }
 .terms { font-size: 11px; color: var(--soft); text-align: center; margin-top: 20px; line-height: 1.6; }
 .termsLink { background: none; border: none; color: var(--purple); font-size: 11px; font-weight: 600; padding: 0; }
+
+@media (min-width: 768px) {
+  .page {
+    min-height: 100dvh;
+    padding: 60px 40px;
+  }
+  .blob1, .blob2 { position: absolute; } /* absolute within .page, not fixed */
+  .card { max-width: 400px; }
+}

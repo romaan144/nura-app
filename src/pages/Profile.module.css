@@ -108,3 +108,11 @@
   .content { padding: 0 24px 40px; }
   .avatarSection { padding: 32px 24px 24px; }
 }
+
+@media (min-width: 768px) {
+  .page { max-width: 680px; margin: 0 auto; }
+  .content { padding: 0 32px 60px; }
+  .avatarSection { padding: 40px 32px 28px; }
+  .statsRow { margin: 0 32px 20px; }
+  .section { margin-bottom: 14px; }
+}

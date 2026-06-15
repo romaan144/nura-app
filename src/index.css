@@ -116,3 +116,33 @@ body {
   overflow-y: auto;
   overflow-x: hidden;
 }
+
+/* ══════════════════════════════════════════════════════════
+   DESKTOP FIXES — contain all fixed/sticky elements
+   ══════════════════════════════════════════════════════════ */
+@media (min-width: 768px) {
+
+  /* Pages that use height:100dvh need to fill desktopMain instead */
+  .desktopMain {
+    display: flex;
+    flex-direction: column;
+  }
+
+  /* Home and RegisterHelper — chat pages that need to fill height */
+  .desktopMain > * {
+    flex: 1;
+  }
+
+  /* Notification overlay in Feed — should be within the app, not full screen */
+  /* Fixed by targeting the overlay to be within #root bounds */
+
+  /* Sticky headers on desktop — no offset needed (no top bar) */
+
+  /* Login blobs — contain within the login page */
+
+  /* General padding improvements for desktop content */
+  .desktopMain input,
+  .desktopMain textarea {
+    font-size: 15px; /* Prevent zoom on focus on desktop */
+  }
+}

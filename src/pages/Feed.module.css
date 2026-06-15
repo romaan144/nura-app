@@ -179,3 +179,32 @@
   .content { padding: 0 24px 40px; }
   .sectionTabs { padding: 12px 24px; }
 }
+
+@media (min-width: 768px) {
+  .notifOverlay {
+    position: fixed;
+    inset: 0;
+    /* On desktop, align panel to top-right of the content area */
+  }
+  .notifPanel {
+    margin-top: 60px;
+    margin-right: 20px;
+  }
+  /* Feed tabs don't need sticky on desktop */
+  .sectionTabs {
+    position: relative;
+    top: auto;
+  }
+  /* Sugested section horizontal on desktop */
+  .suggestedList {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+  }
+  /* Post cards max width */
+  .postCard {
+    max-width: 600px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+}
