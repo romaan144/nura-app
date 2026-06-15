@@ -192,8 +192,12 @@ export default function Home({ setSearchState }) {
     if (lastMatches) {
       // User confirms — guide to profile
       if (t.includes('sí') || t.includes('si') || t.includes('me convence') || t.includes('perfecto') || t.includes('ese') || t.includes('bien')) {
+        const topMatch = lastMatches?.[0]
         setTimeout(() => {
-          setMessages(prev => [...prev, { id: Date.now(), from: 'nura', lines: [`Perfecto. Pulsa en el perfil para ver toda la información y contactarle directamente.`] }])
+          setMessages(prev => [...prev, {
+            id: Date.now(), from: 'nura',
+            lines: [`Perfecto. Pulsa en la tarjeta para ver el perfil completo y contactarle directamente.`]
+          }])
           setLoading(false)
         }, 800)
         return
