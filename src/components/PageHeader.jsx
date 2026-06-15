@@ -14,7 +14,7 @@ export default function PageHeader({ showBack, rightEl }) {
         }
       </div>
       <div className={styles.center}>
-        <img src="/logo-text.png" alt="Nüra" className={styles.logo} />
+        <img src="/logo-text-cropped.png" alt="Nüra" className={styles.logo} />
       </div>
       <div className={styles.right}>
         {rightEl || <div className={styles.placeholder} />}
