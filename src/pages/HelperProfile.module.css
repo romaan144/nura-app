@@ -52,10 +52,9 @@
 .statsRow {
   display: flex; align-items: stretch;
   background: var(--white);
-  border-top: 1px solid var(--rule2);
-  border-radius: 0 0 28px 28px;
-  margin: 0 14px;
-  box-shadow: 0 4px 10px rgba(0,0,0,0.06);
+  border-radius: 28px;
+  margin: 10px 14px 0;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.07);
   overflow: hidden;
 }
 .statBox { flex: 1; display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 14px 8px; text-align: center; }
