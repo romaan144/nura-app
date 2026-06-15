@@ -257,6 +257,13 @@ export default function Home({ setSearchState }) {
       addSearch?.(msg)
       setSearchState({ query: msg, analysis, matches })
       setLastMatches(matches)
+      // Cache helpers for instant profile loading
+      if (matches?.length) {
+        const cacheMap = {}
+        matches.forEach(h => { cacheMap[h.id] = h; cacheMap[String(h.id)] = h })
+        // Store in window for HelperProfile to access
+        window.__nuraHelperCache = { ...(window.__nuraHelperCache || {}), ...cacheMap }
+      }
 
       const resultMsg = { id: Date.now(), from: 'nura', lines: [`He encontrado **${matches.length} personas** que pueden ayudarte.`], results: matches }
       setMessages(prev => [...prev, resultMsg])

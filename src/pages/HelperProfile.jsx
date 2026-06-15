@@ -263,22 +263,29 @@ function HelperProfileInner() {
 
   const location = useLocation()
   const [loading, setLoading] = useState(false)
-
-  // Priority: navigation state > cache > local data > Supabase fetch
-  const fromState = location.state?.helper
-  const fromCache = helpersCache?.[parseInt(id)] || helpersCache?.[id] || helpersCache?.[String(id)]
-  const fromLocal = HELPERS.find(x => x.id === parseInt(id) || String(x.id) === String(id))
-
-  const [h, setH] = useState(fromState || fromCache || fromLocal || null)
+  const [h, setH] = useState(null)
 
   useEffect(() => {
-    if (!h) {
-      setLoading(true)
-      getHelperById(id)
-        .then(remote => { if (remote) setH(remote) })
-        .catch(() => {})
-        .finally(() => setLoading(false))
+    // 1. Navigation state (fastest - passed from result card)
+    if (location.state?.helper && String(location.state.helper.id) === String(id)) {
+      setH(location.state.helper)
+      return
     }
+    // 2. Window cache (from search results)
+    const winCached = window.__nuraHelperCache?.[id] || window.__nuraHelperCache?.[parseInt(id)]
+    if (winCached) { setH(winCached); return }
+    // 3. Context cache
+    const cached = helpersCache?.[parseInt(id)] || helpersCache?.[id] || helpersCache?.[String(id)]
+    if (cached) { setH(cached); return }
+    // 4. Local
+    const local = HELPERS.find(x => String(x.id) === String(id))
+    if (local) { setH(local); return }
+    // 5. Supabase
+    setLoading(true)
+    getHelperById(id)
+      .then(remote => { if (remote) setH(remote) })
+      .catch(() => {})
+      .finally(() => setLoading(false))
   }, [id])
 
   if (loading) return (
