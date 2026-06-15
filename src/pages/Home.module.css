@@ -11,21 +11,9 @@
 /* ── HEADER ── */
 
 
-.profileBtn {
-  width: 36px; height: 36px; border-radius: 50%;
-  background: white;
-  border: none;
-  display: flex; align-items: center; justify-content: center;
-  transition: all 0.15s; cursor: pointer;
-  box-shadow: 0 1px 4px rgba(0,0,0,0.08), 0 2px 12px rgba(0,0,0,0.04);
-}
-.profileBtn:hover { box-shadow: 0 2px 8px rgba(0,0,0,0.12); }
-.profileAvatar {
-  width: 40px; height: 40px; border-radius: 50%;
-  background: var(--grad-main); color: white;
-  font-size: 16px; font-weight: 700;
-  display: flex; align-items: center; justify-content: center;
-}
+
+
+
 
 /* ── MESSAGES ── */
 .messages {
@@ -214,28 +202,53 @@
   font-weight: 700;
 }
 
-/* ── HEADER FIXED STRUCTURE ── */
+
+/* ── HEADER ── */
 .header {
-  display: grid;
-  grid-template-columns: 40px 1fr 40px;
+  display: flex;
   align-items: center;
+  justify-content: space-between;
   padding: 12px 14px;
   background: transparent;
   position: relative;
 }
-.headerLeft { display: flex; justify-content: flex-start; }
-.headerCenter { display: flex; justify-content: center; }
-.headerRight { display: flex; justify-content: flex-end; }
-.logoPill {
+.headerLogo {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  height: 22px;
+  width: auto;
   background: white;
-  padding: 9px 20px;
-  border-radius: 26px;
+  padding: 8px 18px;
+  border-radius: 24px;
   box-shadow: 0 2px 8px rgba(0,0,0,0.1), 0 1px 3px rgba(0,0,0,0.06);
   border: 1.5px solid rgba(0,0,0,0.05);
-  display: flex; align-items: center; justify-content: center;
-  overflow: hidden; height: 44px;
+  display: block;
 }
-.headerLogo {
-  width: 110%; height: auto;
-  object-fit: contain;
+.profileBtn {
+  width: 40px;
+  height: 40px;
+  min-width: 40px;
+  min-height: 40px;
+  border-radius: 50%;
+  background: var(--grad-main);
+  border: none;
+  color: white;
+  font-size: 16px;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  flex-shrink: 0;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.12);
+  transition: all 0.15s;
+  overflow: hidden;
+  padding: 0;
+  line-height: 1;
+  aspect-ratio: 1;
+}
+.profileBtn:hover {
+  box-shadow: 0 4px 14px rgba(0,0,0,0.18);
+  transform: scale(1.05);
 }

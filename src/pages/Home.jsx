@@ -161,15 +161,11 @@ export default function Home({ setSearchState }) {
     <div className={styles.page}>
 
       <div className={styles.header}>
-        <div className={styles.headerLeft}><MenuButton /></div>
-        <div className={styles.headerCenter}>
-          <div className={styles.logoPill}><img src="/logo-text.png" alt="Nüra" className={styles.headerLogo} /></div>
-        </div>
-        <div className={styles.headerRight}>
-          <button className={styles.profileBtn} onClick={() => navigate('/profile')}>
-            <div className={styles.profileAvatar}>{user?.name?.[0]?.toUpperCase() || '?'}</div>
-          </button>
-        </div>
+        <MenuButton />
+        <img src="/logo-text.png" alt="Nüra" className={styles.headerLogo} />
+        <button className={styles.profileBtn} onClick={() => navigate('/profile')}>
+          {user?.name?.[0]?.toUpperCase() || '?'}
+        </button>
       </div>
 
       {/* Messages */}
