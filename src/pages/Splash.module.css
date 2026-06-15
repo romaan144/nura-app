@@ -4,6 +4,7 @@
   display: flex; flex-direction: column;
   align-items: center; justify-content: center;
   padding: 0 32px 48px;
+  position: fixed; inset: 0; z-index: 9999;
 }
 .center {
   flex: 1; display: flex; flex-direction: column;
@@ -11,25 +12,46 @@
 }
 .isoWrap {
   width: 80px; height: 80px;
-  animation: appear 0.6s ease forwards, pulse 2s ease-in-out 0.6s infinite;
+  animation: appear 0.5s ease both, pulse 2.2s ease-in-out 0.5s infinite;
 }
 .iso { width: 100%; height: 100%; object-fit: contain; }
-@keyframes appear { from{opacity:0;transform:scale(0.7)} to{opacity:1;transform:scale(1)} }
-@keyframes pulse { 0%,100%{transform:scale(1)} 50%{transform:scale(1.06)} }
-
+@keyframes appear {
+  from { opacity: 0; transform: scale(0.7); }
+  to   { opacity: 1; transform: scale(1); }
+}
+@keyframes pulse {
+  0%, 100% { transform: scale(1); }
+  50%       { transform: scale(1.07); }
+}
 .wordmark {
   height: 28px; width: auto;
-  animation: fadeUp 0.5s ease 0.4s both;
+  animation: fadeUp 0.5s ease 0.5s both;
 }
-@keyframes fadeUp { from{opacity:0;transform:translateY(8px)} to{opacity:1;transform:translateY(0)} }
-
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(10px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
 .tagline {
   font-size: 14px; color: var(--soft); font-weight: 400;
-  animation: fadeUp 0.5s ease 0.7s both;
+  animation: fadeUp 0.5s ease 0.75s both;
 }
-
-.footer { width: 100%; display: flex; flex-direction: column; align-items: center; gap: 12px; }
-.loadBar { width: 100%; max-width: 200px; height: 3px; background: var(--rule); border-radius: 2px; overflow: hidden; }
-.loadBarFill { height: 100%; background: var(--grad-main); border-radius: 2px; animation: load 2.4s ease forwards; }
-@keyframes load { from{width:0} to{width:100%} }
+.footer {
+  width: 100%; display: flex; flex-direction: column;
+  align-items: center; gap: 12px;
+  animation: fadeUp 0.5s ease 0.9s both;
+}
+.loadBar {
+  width: 180px; height: 3px;
+  background: var(--rule); border-radius: 2px; overflow: hidden;
+}
+.loadBarFill {
+  height: 100%;
+  background: var(--grad-main);
+  border-radius: 2px;
+  animation: load 2.2s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+}
+@keyframes load {
+  from { width: 0%; }
+  to   { width: 100%; }
+}
 .footerText { font-size: 11px; color: var(--soft); }

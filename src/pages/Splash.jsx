@@ -5,7 +5,7 @@ import styles from './Splash.module.css'
 export default function Splash() {
   const navigate = useNavigate()
   useEffect(() => {
-    const t = setTimeout(() => navigate('/', { replace: true }), 2800)
+    const t = setTimeout(() => navigate('/', { replace: true }), 2600)
     return () => clearTimeout(t)
   }, [])
 
