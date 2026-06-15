@@ -162,3 +162,39 @@ body {
     font-size: 15px; /* Prevent zoom on focus on desktop */
   }
 }
+
+/* ══════════════════════════════════════════════════════
+   GLASS SYSTEM — mismo material en toda la app
+   ══════════════════════════════════════════════════════ */
+
+/* Burbuja circular (botones nav, back, share) */
+.glassCircle {
+  width: 42px; height: 42px;
+  border-radius: 50%;
+  background: rgba(255,255,255,0.72);
+  backdrop-filter: blur(24px) saturate(180%);
+  -webkit-backdrop-filter: blur(24px) saturate(180%);
+  border: 1px solid rgba(255,255,255,0.35);
+  box-shadow: 0 2px 16px rgba(0,0,0,0.05), 0 0 0 0.5px rgba(0,0,0,0.06);
+  display: flex; align-items: center; justify-content: center;
+  cursor: pointer; flex-shrink: 0;
+  transition: opacity 0.2s;
+  color: rgba(0,0,0,0.65);
+}
+.glassCircle:active { opacity: 0.6; }
+
+/* Cápsula de input */
+.glassCapsule {
+  display: flex; align-items: center; gap: 6px;
+  background: rgba(255,255,255,0.72);
+  backdrop-filter: blur(24px) saturate(180%);
+  -webkit-backdrop-filter: blur(24px) saturate(180%);
+  border: 1px solid rgba(255,255,255,0.35);
+  border-radius: 100px;
+  padding: 9px 9px 9px 18px;
+  box-shadow: 0 2px 16px rgba(0,0,0,0.05), 0 0 0 0.5px rgba(0,0,0,0.06);
+  transition: all 0.25s cubic-bezier(0.25,0.46,0.45,0.94);
+}
+.glassCapsule:focus-within {
+  background: rgba(255,255,255,0.86);
+}
