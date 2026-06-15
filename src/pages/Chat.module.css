@@ -86,3 +86,22 @@
 .sendBtn:disabled { background: #ddd; color: #aaa; }
 
 .notFound { display: flex; align-items: center; justify-content: center; height: 100vh; color: var(--mid); }
+
+/* ── TIMESTAMPS & READ RECEIPTS ── */
+.msgMeta { display: flex; align-items: center; justify-content: flex-end; gap: 4px; margin-top: 2px; padding: 0 2px; }
+.msgTime { font-size: 10px; color: var(--soft); }
+.msgRead { font-size: 10px; color: #7B2FFF; font-weight: 600; }
+.msgSent { font-size: 10px; color: var(--soft); }
+
+/* ── SYSTEM MESSAGE ── */
+.systemMsg { text-align: center; padding: 6px 16px; }
+.systemMsgText { display: inline-block; font-size: 11px; color: var(--soft); background: var(--paper); border-radius: 12px; padding: 4px 12px; }
+
+/* ── QUICK REPLIES ── */
+.quickReplies { display: flex; flex-wrap: wrap; gap: 7px; padding: 8px 0 4px; }
+.quickReply { padding: 7px 14px; background: white; border: 1.5px solid var(--rule); border-radius: 20px; font-size: 12px; color: var(--mid); transition: all 0.15s; box-shadow: 0 1px 3px rgba(0,0,0,0.06); }
+.quickReply:hover { border-color: var(--purple); color: var(--purple); }
+
+/* ── CONTRATAR BUTTON IN HEADER ── */
+.contractBtn { display: flex; align-items: center; gap: 5px; padding: 7px 13px; background: var(--grad-main); color: white; border: none; border-radius: 18px; font-size: 12px; font-weight: 700; box-shadow: 0 2px 8px rgba(123,47,255,0.3); transition: all 0.15s; flex-shrink: 0; }
+.contractBtn:hover { transform: scale(1.03); }

@@ -106,6 +106,20 @@ export default function Home({ setSearchState }) {
   useEffect(() => {
     const lines = getWelcome(user)
     setTimeout(() => setMessages([{ id: 1, from: 'nura', lines }]), 300)
+
+    // Proactive question for helpers after 8s of inactivity
+    if (user?.isHelper) {
+      const t = setTimeout(() => {
+        setMessages(prev => {
+          if (prev.length > 1) return prev // user already engaged
+          return [...prev, {
+            id: Date.now(), from: 'nura',
+            lines: ['Por cierto, ¿has trabajado en algo nuevo últimamente o completado alguna formación? Cuéntamelo para actualizar tu perfil.']
+          }]
+        })
+      }, 8000)
+      return () => clearTimeout(t)
+    }
   }, [user?.id])
 
   useEffect(() => {
@@ -134,17 +148,38 @@ export default function Home({ setSearchState }) {
 
     const intent = detectIntent(msg, user)
 
+    // Context-aware responses
+    const t = msg.toLowerCase()
+    if (lastMatches) {
+      // User confirms — guide to profile
+      if (t.includes('sí') || t.includes('si') || t.includes('me convence') || t.includes('perfecto') || t.includes('ese') || t.includes('bien')) {
+        setTimeout(() => {
+          setMessages(prev => [...prev, { id: Date.now(), from: 'nura', lines: [`Perfecto. Pulsa en el perfil para ver toda la información y contactarle directamente.`] }])
+          setLoading(false)
+        }, 800)
+        return
+      }
+      // User wants to refine
+      if (t.includes('no') || t.includes('otro') || t.includes('más barato') || t.includes('más cerca') || t.includes('diferente') || t.includes('ajusta') || t.includes('filtra')) {
+        const refined = await matchHelpers({ categoria: 'otro', palabrasClave: msg.toLowerCase().split(' ').filter(w => w.length > 3) }, 4, msg, lastMatches)
+        if (refined?.length) {
+          const resultMsg = { id: Date.now(), from: 'nura', lines: [`He ajustado los resultados.`], results: refined }
+          setMessages(prev => [...prev, resultMsg])
+          setTimeout(() => setMessages(prev => [...prev, { id: Date.now()+1, from: 'nura', lines: ['¿Mejor así?'] }]), 1200)
+          setLastMatches(refined)
+          setLoading(false)
+          return
+        }
+      }
+    }
+
     // Refinement — if user is refining previous results
     if (lastMatches && intent === 'search') {
       const refined = await matchHelpers({ categoria: 'otro', palabrasClave: msg.toLowerCase().split(' ') }, 4, msg, lastMatches)
       if (refined?.length) {
-        const resultMsg = {
-          id: Date.now(), from: 'nura',
-          lines: [`He ajustado los resultados según lo que me dices.`],
-          results: refined
-        }
+        const resultMsg = { id: Date.now(), from: 'nura', lines: [`He ajustado los resultados.`], results: refined }
         setMessages(prev => [...prev, resultMsg])
-        setTimeout(() => setMessages(prev => [...prev, { id: Date.now()+1, from: 'nura', lines: ['¿Te convence alguno o prefieres ajustar la búsqueda?'] }]), 1500)
+        setTimeout(() => setMessages(prev => [...prev, { id: Date.now()+1, from: 'nura', lines: ['¿Te convence alguno?'] }]), 1200)
         setLastMatches(refined)
         setLoading(false)
         return

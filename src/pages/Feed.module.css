@@ -165,3 +165,11 @@
 .notifDot { width: 8px; height: 8px; border-radius: 50%; background: var(--purple); flex-shrink: 0; }
 .notifText { flex: 1; font-size: 13px; color: var(--ink); line-height: 1.4; }
 .notifTime { font-size: 11px; color: var(--soft); flex-shrink: 0; }
+
+/* ── POST ENHANCEMENTS ── */
+.postBadge { display: inline-flex; align-items: center; gap: 6px; background: linear-gradient(135deg, rgba(123,47,255,0.08), rgba(0,212,200,0.06)); border: 1.5px solid rgba(123,47,255,0.15); border-radius: 12px; padding: 6px 12px; font-size: 12px; font-weight: 600; color: var(--purple); margin-bottom: 10px; }
+.verifiedWorkBadge { display: inline-flex; align-items: center; gap: 4px; font-size: 10px; font-weight: 600; color: #059669; background: #ECFDF5; border-radius: 8px; padding: 2px 8px; }
+.postMetric { display: flex; gap: 16px; padding: 10px 0; border-top: 1px solid var(--rule2); margin-top: 8px; }
+.postMetricItem { display: flex; flex-direction: column; align-items: center; gap: 2px; }
+.postMetricNum { font-size: 18px; font-weight: 800; color: var(--ink); letter-spacing: -0.5px; }
+.postMetricLabel { font-size: 10px; color: var(--soft); }

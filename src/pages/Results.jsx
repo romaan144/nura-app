@@ -57,6 +57,7 @@ function HelperCard({ helper }) {
 
 export default function Results({ searchState }) {
   const navigate = useNavigate()
+  const [sortBy, setSortBy] = useState('relevance')
   const { cacheHelpers } = useUser()
 
   // Safety check — if no searchState, go home
@@ -155,7 +156,14 @@ export default function Results({ searchState }) {
         </div>
 
         {currentMatches.length > 0 ? (
-          <div className={styles.cards}>
+          <div className={styles.sortRow}>
+        {['relevance','rating','distance','price'].map(s => (
+          <button key={s} className={`${styles.sortBtn} ${sortBy===s?styles.sortBtnActive:''}`} onClick={() => setSortBy(s)}>
+            {{relevance:'Relevancia',rating:'Valoración',distance:'Distancia',price:'Precio'}[s]}
+          </button>
+        ))}
+      </div>
+      <div className={styles.cards}>
             {currentMatches.map((h, i) => h && <HelperCard key={h.id || i} helper={h} />)}
           </div>
         ) : (

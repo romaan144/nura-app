@@ -76,3 +76,6 @@
 }
 
 .empty { padding: 40px 20px; text-align: center; color: var(--soft); font-size: 14px; }
+
+.chatAvatarWrap { position: relative; flex-shrink: 0; }
+.onlineIndicator { position: absolute; bottom: 1px; right: 1px; width: 11px; height: 11px; border-radius: 50%; background: #22C55E; border: 2px solid #F8F8FA; }

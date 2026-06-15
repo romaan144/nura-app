@@ -141,6 +141,13 @@ export default function Chat() {
 
   useEffect(() => { bottomRef.current?.scrollIntoView({ behavior: 'smooth' }) }, [messages, typing])
 
+  // Mark messages as read after 1.5s
+  const [readIndex, setReadIndex] = useState(0)
+  useEffect(() => {
+    const t = setTimeout(() => setReadIndex(messages.length), 1500)
+    return () => clearTimeout(t)
+  }, [messages.length])
+
   useEffect(() => {
     if (msgCount >= 3 && helper && !hasRated(helper.id)) {
       const t = setTimeout(() => setShowRating(true), 1500)
