@@ -1,7 +1,7 @@
 import { useState, useEffect, useRef } from 'react'
 import { MenuButton } from '../components/NavBar'
 import { useNavigate } from 'react-router-dom'
-import { Send, Mic, MicOff, Plus, Star, MapPin, Shield, MessageCircle } from 'lucide-react'
+import { Send, Mic, MicOff, Plus, Star, MapPin, Shield, MessageCircle, Award } from 'lucide-react'
 import { analyzeNeed, matchHelpers } from '../utils/matching'
 import { useUser } from '../context/UserContext'
 
