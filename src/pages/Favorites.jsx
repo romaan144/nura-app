@@ -1,0 +1,57 @@
+import { useNavigate } from 'react-router-dom'
+import { Heart, Star, MapPin } from 'lucide-react'
+import { HELPERS } from '../data/helpers'
+import { useUser } from '../context/UserContext'
+import PageHeader from '../components/PageHeader'
+import styles from './Favorites.module.css'
+
+export default function Favorites() {
+  const navigate = useNavigate()
+  const { favorites, toggleFavorite } = useUser()
+  const saved = HELPERS.filter(h => favorites.includes(h.id))
+
+  return (
+    <div className={styles.page}>
+      <PageHeader showBack />
+      <div className={styles.content}>
+        <h2 className={styles.title}>Favoritos</h2>
+        <p className={styles.sub}>{saved.length} helper{saved.length !== 1 ? 's' : ''} guardado{saved.length !== 1 ? 's' : ''}</p>
+
+        {saved.length === 0 ? (
+          <div className={styles.empty}>
+            <Heart size={52} color="var(--rule)" />
+            <h3>Sin favoritos todavía</h3>
+            <p>Guarda helpers que te interesen para encontrarlos rápido después.</p>
+            <button className={styles.emptyBtn} onClick={() => navigate('/')}>Buscar helpers</button>
+          </div>
+        ) : (
+          <div className={styles.list}>
+            {saved.map(h => (
+              <div key={h.id} className={styles.card} onClick={() => navigate(`/helper/${h.id}`)}>
+                <div className={styles.cardLeft}>
+                  <img src={h.avatarUrl || `https://api.dicebear.com/9.x/personas/svg?seed=${h.name}`}
+                    alt={h.name} className={styles.avatar} />
+                  <div>
+                    <div className={styles.name}>{h.name}</div>
+                    <div className={styles.spec}>{h.specialty}</div>
+                    <div className={styles.meta}>
+                      <Star size={11} fill="#F59E0B" color="#F59E0B" /> {h.rating}
+                      <span>·</span>
+                      <MapPin size={11} /> {h.distance}km
+                      <span>·</span>
+                      {h.price && h.price !== 'Consultar' ? <strong>{h.price}</strong> : <span>Consultar</span>}
+                    </div>
+                  </div>
+                </div>
+                <button className={styles.heartBtn}
+                  onClick={e => { e.stopPropagation(); toggleFavorite(h.id) }}>
+                  <Heart size={18} fill="#EF4444" color="#EF4444" />
+                </button>
+              </div>
+            ))}
+          </div>
+        )}
+      </div>
+    </div>
+  )
+}

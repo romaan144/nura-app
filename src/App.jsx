@@ -20,6 +20,7 @@ import DesktopSidebar from './components/DesktopSidebar'
 import ScrollToTop from './components/ScrollToTop'
 import OnboardingPage from './pages/Onboarding'
 import MyServices from './pages/MyServices'
+import Favorites from './pages/Favorites'
 import Toast from './components/Toast'
 import PageTransition from './components/PageTransition'
 import './index.css'
@@ -53,6 +54,7 @@ function AppRoutes({ showSplash }) {
             <Route path="/helper/:id" element={<HelperProfile />} />
             <Route path="/chat/:id" element={<Chat />} />
             <Route path="/my-services" element={<MyServices />} />
+            <Route path="/favorites" element={<Favorites />} />
             <Route path="/onboarding" element={<OnboardingPage />} />
             <Route path="/login" element={user ? <Navigate to="/" /> : <Login />} />
             <Route path="/profile" element={<Profile />} />

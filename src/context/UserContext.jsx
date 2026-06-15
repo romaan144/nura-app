@@ -11,6 +11,7 @@ export function UserProvider({ children }) {
   const [helpersCache, setHelpersCache] = useState({})
   const [following, setFollowing] = useState([]) // ids of followed profiles
   const [notifications, setNotifications] = useState([])
+  const [favorites, setFavorites] = useState([])
 
   useEffect(() => {
     const saved = localStorage.getItem('nura_user')
@@ -27,6 +28,8 @@ export function UserProvider({ children }) {
     if (savedFollowing) setFollowing(JSON.parse(savedFollowing))
     const savedNotifs = localStorage.getItem('nura_notifications')
     if (savedNotifs) setNotifications(JSON.parse(savedNotifs))
+    const savedFavs = localStorage.getItem('nura_favorites')
+    if (savedFavs) setFavorites(JSON.parse(savedFavs))
   }, [])
 
   function login(userData) {
@@ -112,6 +115,15 @@ export function UserProvider({ children }) {
     return following.includes(id)
   }
 
+  function toggleFavorite(helperId) {
+    const isFav = favorites.includes(helperId)
+    const updated = isFav ? favorites.filter(f => f !== helperId) : [...favorites, helperId]
+    setFavorites(updated)
+    localStorage.setItem('nura_favorites', JSON.stringify(updated))
+    return !isFav
+  }
+  function isFavorite(helperId) { return favorites.includes(helperId) }
+
   function markNotifsRead() {
     const updated = notifications.map(n => ({ ...n, read: true }))
     setNotifications(updated)
@@ -131,6 +143,7 @@ export function UserProvider({ children }) {
       helpersCache, cacheHelpers,
       following, follow, unfollow, isFollowing,
       notifications, markNotifsRead, unreadNotifs,
+      favorites, toggleFavorite, isFavorite,
     }}>
       {children}
     </UserContext.Provider>

@@ -1,0 +1,22 @@
+.page { min-height: 100dvh; background: #F8F8FA; }
+.content { padding: 0 14px 40px; }
+.title { font-size: 22px; font-weight: 800; color: var(--ink); margin-bottom: 4px; letter-spacing: -0.5px; }
+.sub { font-size: 13px; color: var(--soft); margin-bottom: 20px; }
+.list { display: flex; flex-direction: column; gap: 10px; }
+.card { background: white; border-radius: 18px; padding: 14px 16px; display: flex; align-items: center; justify-content: space-between; box-shadow: 0 2px 8px rgba(0,0,0,0.08), 0 1px 3px rgba(0,0,0,0.05); cursor: pointer; transition: all 0.15s; }
+.card:hover { transform: translateY(-1px); box-shadow: 0 4px 16px rgba(0,0,0,0.1); }
+.cardLeft { display: flex; align-items: center; gap: 12px; }
+.avatar { width: 48px; height: 48px; border-radius: 50%; object-fit: cover; }
+.name { font-size: 14px; font-weight: 700; color: var(--ink); margin-bottom: 2px; }
+.spec { font-size: 12px; color: var(--purple); font-weight: 600; margin-bottom: 4px; }
+.meta { display: flex; align-items: center; gap: 5px; font-size: 11px; color: var(--soft); }
+.heartBtn { width: 36px; height: 36px; border-radius: 50%; background: #FEF2F2; border: none; display: flex; align-items: center; justify-content: center; flex-shrink: 0; transition: all 0.15s; }
+.empty { display: flex; flex-direction: column; align-items: center; text-align: center; gap: 14px; padding: 60px 20px; }
+.empty h3 { font-size: 18px; font-weight: 700; color: var(--ink); margin: 0; }
+.empty p { font-size: 13px; color: var(--soft); margin: 0; line-height: 1.6; }
+.emptyBtn { padding: 12px 28px; background: #1C1C1E; color: white; border: none; border-radius: 20px; font-size: 14px; font-weight: 700; }
+@media (min-width: 768px) {
+  .page { max-width: 680px; margin: 0 auto; }
+  .content { padding: 0 32px 60px; }
+  .list { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+}

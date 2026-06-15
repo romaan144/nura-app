@@ -1,9 +1,10 @@
 import { useState, useEffect, useRef } from 'react'
 import { useNavigate } from 'react-router-dom'
-import { Send, Mic, MicOff, Plus, Star, MapPin, Shield, MessageCircle, Award } from 'lucide-react'
+import { Send, Mic, MicOff, Plus, Star, MapPin, Shield, MessageCircle, Award, Heart } from 'lucide-react'
 import { analyzeNeed, matchHelpers } from '../utils/matching'
 import { useUser } from '../context/UserContext'
 import { MenuButton } from '../components/NavBar'
+import { showToast } from '../components/Toast'
 import styles from './Home.module.css'
 import Onboarding from '../components/Onboarding'
 
@@ -46,7 +47,7 @@ const SUGGESTIONS = {
   ],
 }
 
-function ResultCard({ helper, onNavigate }) {
+function ResultCard({ helper, onNavigate, onFav, isFav }) {
   return (
     <div className={styles.resultCard} onClick={() => onNavigate(`/helper/${helper.id}`)}>
       <div className={styles.resultTop}>
@@ -82,10 +83,17 @@ function ResultCard({ helper, onNavigate }) {
           {helper.online && <span className={styles.resultTag}>💻 Online</span>}
           <span className={styles.resultTag}>⏱ {helper.responseTime}</span>
         </div>
-        <button className={styles.resultContact}
-          onClick={e => { e.stopPropagation(); onNavigate(`/chat/${helper.id}`) }}>
-          <MessageCircle size={14} /> Contactar
-        </button>
+        <div style={{display:'flex',gap:'8px',alignItems:'center'}}>
+          <button
+            onClick={e => { e.stopPropagation(); onFav?.(helper.id) }}
+            style={{width:'32px',height:'32px',borderRadius:'50%',background:'white',border:'none',boxShadow:'0 1px 4px rgba(0,0,0,0.1)',display:'flex',alignItems:'center',justifyContent:'center'}}>
+            <Heart size={14} fill={isFav ? '#EF4444' : 'none'} color={isFav ? '#EF4444' : '#999'} />
+          </button>
+          <button className={styles.resultContact}
+            onClick={e => { e.stopPropagation(); onNavigate(`/chat/${helper.id}`) }}>
+            <MessageCircle size={14} /> Contactar
+          </button>
+        </div>
       </div>
     </div>
   )
@@ -93,7 +101,7 @@ function ResultCard({ helper, onNavigate }) {
 
 export default function Home({ setSearchState }) {
   const navigate = useNavigate()
-  const { user, addSearch } = useUser()
+  const { user, addSearch, toggleFavorite, isFavorite } = useUser()
   const [messages, setMessages] = useState([])
   const [input, setInput] = useState('')
   const [loading, setLoading] = useState(false)
@@ -106,7 +114,18 @@ export default function Home({ setSearchState }) {
 
   useEffect(() => {
     const lines = getWelcome(user)
-    setTimeout(() => setMessages([{ id: 1, from: 'nura', lines }]), 300)
+    const msgs = [{ id: 1, from: 'nura', lines }]
+
+    // For users who have searched before — add a personalized insight
+    if (user && searchHistory?.length >= 2) {
+      msgs.push({
+        id: 2, from: 'nura',
+        lines: [`Por cierto, la semana pasada buscaste **${searchHistory[0]?.query}**. ¿Encontraste lo que necesitabas o quieres que vuelva a buscar?`],
+        quickOptions: ['Sí, ya lo resolví ✓', 'No, busca de nuevo']
+      })
+    }
+
+    setTimeout(() => setMessages(msgs), 300)
 
     // Proactive question for helpers after 8s of inactivity
     if (user?.isHelper) {
@@ -281,11 +300,26 @@ export default function Home({ setSearchState }) {
                 {msg.text && <p>{msg.text}</p>}
                 {msg.lines?.map((line, i) => <p key={i}>{formatLine(line)}</p>)}
                 {msg.loading && <div className={styles.typingDots}><span /><span /><span /></div>}
+              {msg.quickOptions && (
+                <div style={{display:'flex',gap:'8px',flexWrap:'wrap',marginTop:'8px'}}>
+                  {msg.quickOptions.map((opt,i) => (
+                    <button key={i}
+                      style={{padding:'7px 14px',background:'var(--paper)',border:'1.5px solid var(--rule)',borderRadius:'16px',fontSize:'12px',color:'var(--mid)',cursor:'pointer',transition:'all 0.15s'}}
+                      onClick={() => {
+                        setShowSuggestions(false)
+                        if (opt.includes('busca')) handleSend(searchHistory[0]?.query)
+                        else setMessages(prev => [...prev, {id:Date.now(),from:'nura',lines:['Me alegra saberlo 🎉 Estoy aquí cuando lo necesites.']}])
+                      }}>
+                      {opt}
+                    </button>
+                  ))}
+                </div>
+              )}
               </div>
             </div>
             {msg.results && (
               <div className={styles.resultsList}>
-                {msg.results.map(h => <ResultCard key={h.id} helper={h} onNavigate={navigate} />)}
+                {msg.results.map(h => <ResultCard key={h.id} helper={h} onNavigate={navigate} onFav={id => { toggleFavorite(id); showToast(isFavorite(id) ? 'Eliminado de favoritos' : 'Guardado en favoritos') }} isFav={isFavorite(h.id)} />)}
               </div>
             )}
           </div>

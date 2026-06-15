@@ -574,3 +574,10 @@
   /* 2-col layout for skills and langs */
   .skillsGrid { column-count: 2; }
 }
+
+.heroCoverage { display: flex; flex-wrap: wrap; justify-content: center; gap: 6px; margin-bottom: 10px; }
+.coverageChip { font-size: 11px; color: var(--mid); background: var(--paper); border-radius: 12px; padding: 4px 10px; font-weight: 500; }
+
+.heroActions { display: flex; gap: 10px; width: 100%; justify-content: center; flex-wrap: wrap; }
+.heroCtaSecondary { display: flex; align-items: center; gap: 7px; padding: 12px 24px; background: white; color: var(--ink); border: 1.5px solid var(--rule); border-radius: 22px; font-size: 14px; font-weight: 700; transition: all 0.15s; box-shadow: 0 2px 8px rgba(0,0,0,0.08); flex: 1; justify-content: center; }
+.heroCtaSecondary:hover { border-color: var(--ink); }

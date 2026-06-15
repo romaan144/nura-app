@@ -4,7 +4,7 @@ import { useParams, useNavigate } from 'react-router-dom'
 import {
   ArrowLeft, Star, Shield, MapPin, MessageCircle, Zap,
   TrendingUp, Clock, CheckCircle, Award, Brain, Globe,
-  Building2, BookOpen, Share2, Lock, Heart, Sparkles,
+  Building2, BookOpen, Share2, Lock, Heart, Sparkles, Calendar,
   ThumbsUp, MessageSquare, AlertCircle, BarChart2, RefreshCw,
   Activity, Cpu, Eye, Layers
 } from 'lucide-react'
@@ -246,13 +246,17 @@ function PostCard({ post, helper }) {
 export default function HelperProfile() {
   const { id } = useParams()
   const navigate = useNavigate()
-  const { hasRated, helpersCache } = useUser()
+  const { hasRated, helpersCache, toggleFavorite, isFavorite } = useUser()
   const [showRating, setShowRating] = useState(false)
+  const [showConfirm, setShowConfirm] = useState(false)
 
   useEffect(() => {
     window.scrollTo(0, 0)
   }, [])
   const [shared, setShared] = useState(false)
+  const [faved, setFaved] = useState(false)
+  // sync faved state
+  // useEffect(() => { if(h) setFaved(isFavorite(h.id)) }, [h?.id])
   const [activeTab, setActiveTab] = useState('perfil')
 
   const h = helpersCache?.[parseInt(id)] || helpersCache?.[id] || HELPERS.find(x => x.id === parseInt(id))
@@ -337,6 +341,13 @@ export default function HelperProfile() {
             {h.online && <span className={styles.heroMode}>💻 Online</span>}
           </div>
 
+          {/* Coverage and mode */}
+          <div className={styles.heroCoverage}>
+            <span className={styles.coverageChip}>📍 {h.zone}</span>
+            {h.presential && <span className={styles.coverageChip}>Presencial</span>}
+            {h.online && <span className={styles.coverageChip}>💻 Online</span>}
+            {h.languages?.slice(0,2).map(l => <span key={l} className={styles.coverageChip}>🌐 {l}</span>)}
+          </div>
           <div className={styles.heroBadges}>
             {h.dniVerified && <span className={styles.badgePrimary}><Shield size={10} /> DNI Verificado</span>}
             {h.criminalRecordClear && <span className={styles.badgeSecondary}><CheckCircle size={10} /> Sin antecedentes</span>}
@@ -344,9 +355,14 @@ export default function HelperProfile() {
             {h.urgent && <span className={styles.badgeUrgent}><Zap size={10} /> Urgencias</span>}
           </div>
 
-          <button className={styles.heroCtaBtn} onClick={() => navigate(`/chat/${h.id}`)}>
-            <MessageCircle size={16} /> Contactar a {h.name.split(' ')[0]}
-          </button>
+          <div className={styles.heroActions}>
+            <button className={styles.heroCtaSecondary} onClick={() => navigate(`/chat/${h.id}`)}>
+              <MessageCircle size={15} /> Preguntar
+            </button>
+            <button className={styles.heroCtaBtn} onClick={() => { setShowConfirm(true) }}>
+              <Calendar size={15} /> Contratar
+            </button>
+          </div>
           </div>
         </div>
 
@@ -699,6 +715,23 @@ export default function HelperProfile() {
       </div>
 
       {showRating && <RatingModal helper={h} onClose={() => setShowRating(false)} />}
+      {showConfirm && (
+        <div style={{position:'fixed',inset:0,background:'rgba(0,0,0,0.4)',zIndex:200,display:'flex',alignItems:'flex-end',justifyContent:'center'}}>
+          <div style={{background:'white',borderRadius:'24px 24px 0 0',padding:'24px 20px',width:'100%',maxWidth:'500px'}}>
+            <div style={{width:'36px',height:'4px',background:'var(--rule)',borderRadius:'2px',margin:'0 auto 20px'}} />
+            <h3 style={{fontSize:'17px',fontWeight:800,color:'var(--ink)',marginBottom:'6px'}}>Contratar a {h.name.split(' ')[0]}</h3>
+            <p style={{fontSize:'13px',color:'var(--mid)',marginBottom:'20px'}}>{h.price && h.price !== 'Consultar' ? h.price : 'Precio a consultar'} · {h.zone}</p>
+            <button onClick={() => { setShowConfirm(false); navigate(`/chat/${h.id}`) }}
+              style={{width:'100%',padding:'14px',background:'var(--grad-main)',color:'white',border:'none',borderRadius:'18px',fontSize:'15px',fontWeight:700,boxShadow:'0 4px 16px rgba(123,47,255,0.3)',marginBottom:'10px'}}>
+              Enviar solicitud de servicio
+            </button>
+            <button onClick={() => setShowConfirm(false)}
+              style={{width:'100%',padding:'12px',background:'transparent',color:'var(--soft)',border:'none',fontSize:'14px'}}>
+              Cancelar
+            </button>
+          </div>
+        </div>
+      )}
     </div>
   )
 }

@@ -155,6 +155,7 @@ export default function Profile() {
           <h3 className={styles.sectionTitle}>Acciones</h3>
           {[
             !user.isHelper && { icon: '✨', label: 'Quiero ser Helper en Nüra', action: () => navigate('/register-helper'), highlight: true },
+            { icon: '❤️', label: 'Mis favoritos', action: () => navigate('/favorites') },
             { icon: '💬', label: 'Mis conversaciones', action: () => navigate('/chats'), badge: totalUnread > 0 ? totalUnread : null },
             { icon: '❓', label: 'Cómo funciona Nüra', action: () => navigate('/how-it-works') },
             { icon: '🔒', label: 'Privacidad y datos', action: () => {} },

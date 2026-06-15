@@ -100,6 +100,22 @@ export default function Explore() {
       </div>
 
       <div className={styles.content}>
+        {!searchText && activeCategory === 'all' && (
+          <div className={styles.featuredSection}>
+            <h3 className={styles.featuredTitle}>⭐ Más valorados esta semana</h3>
+            <div className={styles.featuredRow}>
+              {[...HELPERS].sort((a,b) => b.rating - a.rating).slice(0,4).map(h => (
+                <div key={h.id} className={styles.featuredCard} onClick={() => navigate(`/helper/${h.id}`)}>
+                  <img src={h.avatarUrl || `https://api.dicebear.com/9.x/personas/svg?seed=${h.name}`}
+                    alt={h.name} className={styles.featuredAvatar} />
+                  <div className={styles.featuredName}>{h.name.split(' ')[0]}</div>
+                  <div className={styles.featuredSpec}>{h.specialty?.split(' ')[0]}</div>
+                  <div className={styles.featuredRating}>⭐ {h.rating}</div>
+                </div>
+              ))}
+            </div>
+          </div>
+        )}
         <div className={styles.resultsCount}>
           {filtered.length} helper{filtered.length !== 1 ? 's' : ''} encontrado{filtered.length !== 1 ? 's' : ''}
         </div>

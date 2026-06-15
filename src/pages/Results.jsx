@@ -152,7 +152,15 @@ export default function Results({ searchState }) {
         {/* Results */}
         <div className={styles.resultsHeader}>
           <h2 className={styles.resultsTitle}>{currentMatches.length} personas encontradas</h2>
-          {analysis && <p className={styles.resultsSubtitle}>{analysis.resumen}</p>}
+          {analysis && (
+            <div className={styles.analysisBox}>
+              <span className={styles.analysisLabel}>Nüra entendió</span>
+              <p className={styles.analysisText}>{analysis.resumen}</p>
+              {analysis.urgente && <span className={styles.analysisBadge}>⚡ Urgente</span>}
+              {analysis.presencial && <span className={styles.analysisBadge}>📍 Presencial</span>}
+              {analysis.online && <span className={styles.analysisBadge}>💻 Online</span>}
+            </div>
+          )}
         </div>
 
         {currentMatches.length > 0 ? (
