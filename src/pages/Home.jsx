@@ -53,22 +53,15 @@ function ResultCard({ helper, onNavigate }) {
     <div className={styles.resultCard} onClick={() => onNavigate(`/helper/${helper.id}`)}>
       <div className={styles.resultTop}>
         <div className={styles.resultAvatarWrap}>
-          <div style={{
-            padding: helper.founder ? '2px' : '0',
-            borderRadius: '50%',
-            background: helper.founder ? 'linear-gradient(135deg, #F59E0B, #FCD34D, #F59E0B)' : 'transparent',
-            boxShadow: helper.founder ? '0 0 8px rgba(245,158,11,0.5)' : 'none',
-          }}>
-            {helper.avatarUrl
-              ? <img src={helper.avatarUrl} alt={helper.name} className={styles.resultAvatarImg} style={{border: helper.founder ? '2px solid white' : 'none'}} />
-              : <div className={styles.resultAvatarFallback} style={{background: helper.avatarColor}}>{helper.avatar}</div>
-            }
-          </div>
+          {helper.avatarUrl
+            ? <img src={helper.avatarUrl} alt={helper.name} className={styles.resultAvatarImg} />
+            : <div className={styles.resultAvatarFallback} style={{background: helper.avatarColor}}>{helper.avatar}</div>
+          }
           {helper.dniVerified && <span className={styles.resultVerified}><Shield size={8} /></span>}
         </div>
         <div className={styles.resultInfo}>
           <div style={{display:'flex',alignItems:'flex-start',justifyContent:'space-between',gap:'8px'}}>
-            <div className={styles.resultName}>{helper.name}</div>
+            <div className={styles.resultName}>{helper.name}{helper.founder && <Award size={12} color='#92400E' style={{marginLeft:'4px',verticalAlign:'middle',flexShrink:0}} />}</div>
             <span style={{fontSize:'13px',fontWeight:700,color:helper.price && helper.price!=='Consultar'?'#7B2FFF':'#aaa',whiteSpace:'nowrap',flexShrink:0}}>
               {helper.price && helper.price !== 'Consultar' ? helper.price : 'Consultar'}
             </span>
