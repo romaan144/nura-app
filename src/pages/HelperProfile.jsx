@@ -262,6 +262,7 @@ function HelperProfileInner() {
   const [activeTab, setActiveTab] = useState('perfil')
 
   const location = useLocation()
+  const isFromShare = new URLSearchParams(window.location.search).get('utm_source') === 'share'
   const [loading, setLoading] = useState(false)
   const [h, setH] = useState(null)
 
@@ -306,8 +307,16 @@ function HelperProfileInner() {
   )
 
   function handleShare() {
-    if (navigator.share) navigator.share({ title: h.name, text: `${h.specialty} en Nüra`, url: window.location.href })
-    else { navigator.clipboard?.writeText(window.location.href); setShared(true); showToast('Enlace copiado al portapapeles'); setTimeout(() => setShared(false), 2000) }
+    const shareText = `${h.name} — ${h.specialty} · ${h.rating}⭐ en Nüra`
+    const shareUrl = `${window.location.href}?utm_source=share&utm_medium=native`
+    if (navigator.share) {
+      navigator.share({ title: h.name, text: shareText, url: shareUrl })
+    } else {
+      navigator.clipboard?.writeText(`${shareText}\n${shareUrl}`)
+      showToast('Enlace copiado')
+      setShared(true)
+      setTimeout(() => setShared(false), 2000)
+    }
   }
 
   const tabs = [
@@ -453,7 +462,22 @@ function HelperProfileInner() {
         )}
         {activeTab === 'perfil' && (
           <>
-          {/* Trust signal */}
+          {/* Shared profile banner */}
+        {isFromShare && (
+          <div style={{
+            display:'flex',alignItems:'center',gap:'8px',
+            padding:'10px 14px',marginBottom:'10px',
+            background:'rgba(123,47,255,0.05)',
+            border:'1px solid rgba(123,47,255,0.12)',
+            borderRadius:'14px',
+          }}>
+            <img src="/logo-iso.png" alt="Nüra" style={{width:'20px',height:'20px',objectFit:'contain'}} />
+            <span style={{fontSize:'12px',color:'rgba(0,0,0,0.55)'}}>
+              Perfil encontrado y verificado por <strong style={{color:'var(--purple)'}}>Nüra</strong>
+            </span>
+          </div>
+        )}
+        {/* Trust signal */}
           <div style={{
             display: 'flex', alignItems: 'center', gap: '8px',
             padding: '10px 14px', margin: '0 0 10px',

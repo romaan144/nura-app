@@ -32,12 +32,14 @@ export default function Explore() {
   const { cacheHelpers } = useUser()
 
   const [loadingHelpers, setLoadingHelpers] = useState(true)
+  const [totalCount, setTotalCount] = useState(0)
 
   useEffect(() => {
     getAllHelpers().then(remote => {
       if (remote?.length > 0) {
         setHELPERS(remote)
         cacheHelpers(remote)
+        setTotalCount(remote.length)
       }
       setLoadingHelpers(false)
     }).catch(() => setLoadingHelpers(false))
@@ -148,6 +150,7 @@ export default function Explore() {
           </div>
         )}
         {!loadingHelpers && (<><div className={styles.resultsCount}>
+          {totalCount > 0 && `${filtered.length} de ${totalCount} profesionales` || 
           {filtered.length} helper{filtered.length !== 1 ? 's' : ''} encontrado{filtered.length !== 1 ? 's' : ''}
         </div>
         <div className={styles.grid}>
