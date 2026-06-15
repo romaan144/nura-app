@@ -147,7 +147,6 @@ export async function matchHelpers(analysis, limit = 5, refinement = null, previ
     if (hLevel >= required) score += 10
     if (hLevel === required) score += 5
     if (analysis.urgente && h.urgent) score += 20
-    if (h.founder) score += 15 // Founders get priority
     score += (h.rating || 4.5) * 2
     score -= (h.distance || 1) * 2
     return { ...h, score }

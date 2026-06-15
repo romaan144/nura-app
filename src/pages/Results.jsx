@@ -68,6 +68,7 @@ export default function Results({ searchState }) {
   if (!searchState) return null
 
   const { query, analysis, matches } = searchState
+  const resultCount = currentMatches?.length || 0
   const safeMatches = Array.isArray(matches) ? matches : []
 
   const [refineText, setRefineText] = useState('')

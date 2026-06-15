@@ -345,7 +345,14 @@ function HelperProfileInner() {
             {h.name}
             {h.founder && <Award size={13} color='#92400E' style={{marginLeft:'5px',verticalAlign:'middle'}} />}
           </h1>
-          <p className={styles.heroSpecialty}>{h.specialty || h.tags?.[0]}</p>
+          <div style={{display:'flex',alignItems:'center',gap:'10px',justifyContent:'center',flexWrap:'wrap'}}>
+            <p className={styles.heroSpecialty} style={{margin:0}}>{h.specialty || h.tags?.[0]}</p>
+            {h.price && h.price !== 'Consultar' && (
+              <span style={{fontSize:'14px',fontWeight:700,color:'var(--purple)',background:'rgba(123,47,255,0.08)',borderRadius:'100px',padding:'2px 10px'}}>
+                {h.price}
+              </span>
+            )}
+          </div>
 
           {/* One line: rating · distance · response time */}
           <div className={styles.heroMeta}>

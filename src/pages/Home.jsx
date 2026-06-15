@@ -12,13 +12,13 @@ function getWelcome(user) {
   const hour = new Date().getHours()
   const greeting = hour < 14 ? 'Buenos días' : hour < 21 ? 'Buenas tardes' : 'Buenas noches'
   if (!user) return [
-    `Hola, soy **Nüra**. Cuéntame qué necesitas y encuentro a la persona ideal cerca de ti.`,
+    `Hola. Soy **Nüra**, una IA que entiende lo que necesitas y encuentra a la persona real que puede ayudarte — verificada, cerca de ti y disponible ahora.`,
   ]
   if (user.isHelper) return [
-    `${greeting}, **${user.name?.split(' ')[0]}**. ¿En qué puedo ayudarte hoy?`,
+    `${greeting}, **${user.name?.split(' ')[0]}**. ¿Qué necesitas hoy?`,
   ]
   return [
-    `${greeting}, **${user.name?.split(' ')[0]}**. ¿En qué puedo ayudarte?`,
+    `${greeting}, **${user.name?.split(' ')[0]}**. ¿Qué necesitas?`,
   ]
 }
 
@@ -254,7 +254,11 @@ export default function Home({ setSearchState }) {
       setMessages(prev => prev.filter(m => !m.loading))
 
       if (!matches?.length) {
-        setMessages(prev => [...prev, { id: Date.now(), from: 'nura', lines: ['No encontré a nadie disponible ahora mismo. Prueba a describirlo de otra forma.'] }])
+        setMessages(prev => [...prev, {
+          id: Date.now(), from: 'nura',
+          lines: ['No encontré exactamente lo que describes en tu zona. Puedes ampliar la búsqueda, cambiar la modalidad a online, o cuéntame más detalles del caso.'],
+          chips: ['Ampliar zona', 'Online también', 'Cuéntame más']
+        }])
         setLoading(false)
         return
       }
@@ -379,7 +383,7 @@ export default function Home({ setSearchState }) {
             </div>
             {!user && messages.length === 1 && msg.from === 'nura' && (
               <div style={{display:'flex',gap:'20px',padding:'4px 0',flexWrap:'wrap'}}>
-                {[['1.000+','helpers verificados'],['4.9★','valoración media'],['< 30 min','tiempo de respuesta']].map(([n,l]) => (
+                {[['1.200+','profesionales verificados'],['4.8★','valoración media'],['< 1h','primer contacto']].map(([n,l]) => (
                   <div key={l} style={{textAlign:'center'}}>
                     <div style={{fontSize:'15px',fontWeight:800,color:'rgba(0,0,0,0.85)',letterSpacing:'-0.3px'}}>{n}</div>
                     <div style={{fontSize:'11px',color:'rgba(0,0,0,0.4)',fontWeight:400}}>{l}</div>
