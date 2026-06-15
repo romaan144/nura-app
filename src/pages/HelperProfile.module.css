@@ -85,22 +85,22 @@
   background: transparent;
 }
 .tabs {
-  display: flex; gap: 7px;
-  overflow-x: auto;
+  display: flex; gap: 4px;
+  overflow: hidden;
   background: white;
   border-radius: 20px;
   padding: 4px;
   box-shadow: 0 2px 8px rgba(0,0,0,0.08), 0 1px 3px rgba(0,0,0,0.05);
 }
-.tabs::-webkit-scrollbar { display: none; }
 .tab {
-  display: flex; align-items: center; gap: 5px;
-  padding: 8px 14px;
-  font-size: 12px; font-weight: 500;
+  display: flex; align-items: center; justify-content: center; gap: 4px;
+  padding: 8px 0;
+  font-size: 11px; font-weight: 500;
   color: var(--soft); white-space: nowrap;
   border-radius: 16px;
-  border: none; border-bottom: none;
-  transition: all 0.18s; flex-shrink: 0;
+  border: none;
+  transition: all 0.18s;
+  flex: 1;
 }
 .tab:hover { color: var(--ink); background: var(--paper); }
 .tabActive {
