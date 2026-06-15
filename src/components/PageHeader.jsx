@@ -1,6 +1,6 @@
 import { useNavigate } from 'react-router-dom'
 import { ArrowLeft } from 'lucide-react'
-import { MenuButton } from './NavBar'
+
 import styles from './PageHeader.module.css'
 
 export default function PageHeader({ showBack, rightEl }) {
@@ -10,7 +10,13 @@ export default function PageHeader({ showBack, rightEl }) {
       <div className={styles.left}>
         {showBack
           ? <button className={styles.circleBtn} onClick={() => navigate(-1)}><ArrowLeft size={18} /></button>
-          : <MenuButton />
+          : <button className={styles.circleBtn} onClick={() => window.__openDrawer?.()}>
+              <svg width="18" height="12" viewBox="0 0 18 12" fill="none">
+                <rect width="18" height="2" rx="1" fill="rgba(0,0,0,0.65)"/>
+                <rect y="5" width="14" height="2" rx="1" fill="rgba(0,0,0,0.65)"/>
+                <rect y="10" width="18" height="2" rx="1" fill="rgba(0,0,0,0.65)"/>
+              </svg>
+            </button>
         }
       </div>
       <div className={styles.center}>
