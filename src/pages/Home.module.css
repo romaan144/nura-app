@@ -212,18 +212,24 @@
   background: transparent;
   position: relative;
 }
-.headerLogo {
+.headerLogoPill {
   position: absolute;
   left: 50%;
   transform: translateX(-50%);
-  height: 30px;
-  width: auto;
   background: white;
-  padding: 7px 18px;
-  border-radius: 24px;
+  padding: 9px 20px;
+  border-radius: 26px;
   box-shadow: 0 2px 8px rgba(0,0,0,0.1), 0 1px 3px rgba(0,0,0,0.06);
   border: 1.5px solid rgba(0,0,0,0.05);
-  display: block;
+  display: flex; align-items: center; justify-content: center;
+  overflow: hidden;
+  height: 44px;
+  width: 120px;
+}
+.headerLogo {
+  width: 110%;
+  height: auto;
+  object-fit: contain;
 }
 .profileBtn {
   width: 38px;

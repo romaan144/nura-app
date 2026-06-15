@@ -162,7 +162,7 @@ export default function Home({ setSearchState }) {
 
       <div className={styles.header}>
         <MenuButton />
-        <img src="/logo-text.png" alt="Nüra" className={styles.headerLogo} />
+        <div className={styles.headerLogoPill}><img src="/logo-text.png" alt="Nüra" className={styles.headerLogo} /></div>
         <button className={styles.profileBtn} onClick={() => navigate('/profile')}>
           {user?.name?.[0]?.toUpperCase() || '?'}
         </button>
