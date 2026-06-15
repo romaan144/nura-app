@@ -248,6 +248,7 @@ export default function Home({ setSearchState }) {
       setMessages(prev => [...prev, { id: Date.now() + 0.5, from: 'nura', lines: ['Buscando en la red de helpers...'], loading: true }])
       const analysis = await analyzeNeed(msg)
       const matches = await matchHelpers(analysis, 4)
+      clearInterval(window.__nuraStatusInterval)
       setMessages(prev => prev.filter(m => !m.loading))
 
       if (!matches?.length) {
@@ -269,8 +270,13 @@ export default function Home({ setSearchState }) {
 
       const resultMsg = { id: Date.now(), from: 'nura', lines: [`He encontrado **${matches.length} personas** que pueden ayudarte.`], results: matches }
       setMessages(prev => [...prev, resultMsg])
-      setTimeout(() => setMessages(prev => [...prev, { id: Date.now()+1, from: 'nura', lines: ['¿Te convence alguno o prefieres ajustar la búsqueda?'] }]), 1500)
+      setTimeout(() => setMessages(prev => [...prev, {
+        id: Date.now()+1, from: 'nura',
+        lines: ['¿Te convence alguno o prefieres ajustar la búsqueda?'],
+        chips: ['Más barato', 'Más cerca', 'Mejor valorado', 'Con urgencias']
+      }]), 1500)
     } catch {
+      clearInterval(window.__nuraStatusInterval)
       setMessages(prev => prev.filter(m => !m.loading))
       setMessages(prev => [...prev, { id: Date.now(), from: 'nura', lines: ['Algo fue mal. Inténtalo de nuevo.'] }])
     }
@@ -336,6 +342,16 @@ export default function Home({ setSearchState }) {
                 {msg.text && <p>{msg.text}</p>}
                 {msg.lines?.map((line, i) => <p key={i}>{formatLine(line)}</p>)}
                 {msg.loading && <div className={styles.typingDots}><span /><span /><span /></div>}
+              {msg.chips && (
+                <div style={{display:'flex',flexWrap:'wrap',gap:'6px',marginTop:'8px'}}>
+                  {msg.chips.map((chip,i) => (
+                    <button key={i} onClick={() => handleSend(chip)}
+                      style={{padding:'5px 12px',borderRadius:'100px',background:'rgba(0,0,0,0.06)',border:'none',fontSize:'12px',fontWeight:500,color:'rgba(0,0,0,0.7)',cursor:'pointer',transition:'opacity 0.15s'}}>
+                      {chip}
+                    </button>
+                  ))}
+                </div>
+              )}
               {msg.quickOptions && (
                 <div style={{display:'flex',gap:'8px',flexWrap:'wrap',marginTop:'8px'}}>
                   {msg.quickOptions.map((opt,i) => (

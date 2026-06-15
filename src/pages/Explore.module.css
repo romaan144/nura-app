@@ -94,3 +94,23 @@
   animation: shimmer 1.5s infinite;
 }
 @keyframes shimmer { from { background-position: 200% 0 } to { background-position: -200% 0 } }
+
+/* Better featured section */
+.featuredSection { margin-bottom: 16px; }
+.featuredTitle { font-size: 13px; font-weight: 700; color: var(--ink); margin-bottom: 10px; padding: 0 2px; }
+.featuredRow {
+  display: flex; gap: 10px;
+  overflow-x: auto; padding-bottom: 4px;
+  scroll-snap-type: x mandatory;
+  -webkit-overflow-scrolling: touch;
+}
+.featuredRow::-webkit-scrollbar { display: none; }
+.featuredCard {
+  background: white; border-radius: 18px; padding: 14px 12px;
+  text-align: center; flex-shrink: 0; width: 88px;
+  cursor: pointer;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.08), 0 1px 3px rgba(0,0,0,0.05);
+  transition: transform 0.15s;
+  scroll-snap-align: start;
+}
+.featuredCard:active { transform: scale(0.96); }
