@@ -3,16 +3,19 @@ import { createContext, useContext, useState, useEffect } from 'react'
 const UserContext = createContext(null)
 
 export function UserProvider({ children }) {
-  const [user, setUser] = useState(null)
-  const [chats, setChats] = useState([])
-  const [ratings, setRatings] = useState([])
-  const [searchHistory, setSearchHistory] = useState([])
-  const [contactedHelpers, setContactedHelpers] = useState([])
+  const load = (key, def) => { try { const v = localStorage.getItem(key); return v ? JSON.parse(v) : def } catch { return def } }
+  const save = (key, val) => { try { localStorage.setItem(key, JSON.stringify(val)) } catch {} }
+
+  const [user, setUser] = useState(() => load('nura_user', null))
+  const [chats, setChats] = useState(() => load('nura_chats', []))
+  const [ratings, setRatings] = useState(() => load('nura_ratings', []))
+  const [searchHistory, setSearchHistory] = useState(() => load('nura_search_history', []))
+  const [contactedHelpers, setContactedHelpers] = useState(() => load('nura_contacted', []))
   const [helpersCache, setHelpersCache] = useState({})
-  const [following, setFollowing] = useState([]) // ids of followed profiles
-  const [notifications, setNotifications] = useState([])
-  const [favorites, setFavorites] = useState([])
-  const [nuraChatMessages, setNuraChatMessages] = useState([])
+  const [following, setFollowing] = useState(() => load('nura_following', []))
+  const [notifications, setNotifications] = useState(() => load('nura_notifications', []))
+  const [favorites, setFavorites] = useState(() => load('nura_favorites', []))
+  const [nuraChatMessages, setNuraChatMessages] = useState(() => load('nura_chat_messages', []))
   const [nuraLastMatches, setNuraLastMatches] = useState(null)
 
   useEffect(() => {
@@ -33,6 +36,15 @@ export function UserProvider({ children }) {
     const savedFavs = localStorage.getItem('nura_favorites')
     if (savedFavs) setFavorites(JSON.parse(savedFavs))
   }, [])
+
+  // Auto-persist key state
+  useEffect(() => { save('nura_user', user) }, [user])
+  useEffect(() => { save('nura_chats', chats) }, [chats])
+  useEffect(() => { save('nura_ratings', ratings) }, [ratings])
+  useEffect(() => { save('nura_search_history', searchHistory) }, [searchHistory])
+  useEffect(() => { save('nura_following', following) }, [following])
+  useEffect(() => { save('nura_favorites', favorites) }, [favorites])
+  useEffect(() => { save('nura_chat_messages', nuraChatMessages) }, [nuraChatMessages])
 
   function login(userData) {
     setUser(userData)
@@ -121,7 +133,6 @@ export function UserProvider({ children }) {
     const isFav = favorites.includes(helperId)
     const updated = isFav ? favorites.filter(f => f !== helperId) : [...favorites, helperId]
     setFavorites(updated)
-    localStorage.setItem('nura_favorites', JSON.stringify(updated))
     return !isFav
   }
   function isFavorite(helperId) { return favorites.includes(helperId) }

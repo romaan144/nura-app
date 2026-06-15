@@ -9,16 +9,18 @@ import styles from './Home.module.css'
 import Onboarding from '../components/Onboarding'
 
 function getWelcome(user) {
+  const hour = new Date().getHours()
+  const greeting = hour < 14 ? 'Buenos días' : hour < 21 ? 'Buenas tardes' : 'Buenas noches'
   if (!user) return [
     `Hola, soy **Nüra** ✨`,
     `Cuéntame qué **grad:necesitas** con tus palabras — buscaré a la persona ideal cerca de ti.`,
   ]
   if (user.isHelper) return [
-    `Hola **${user.name?.split(' ')[0]}** 👋`,
-    `¿Qué quieres **grad:hacer** hoy? Puedo buscarte clientes, actualizar tu perfil o lo que necesites.`,
+    `${greeting}, **${user.name?.split(' ')[0]}** 👋`,
+    `¿Qué quieres **grad:hacer** hoy?`,
   ]
   return [
-    `Hola **${user.name?.split(' ')[0]}** 👋`,
+    `${greeting}, **${user.name?.split(' ')[0]}** 👋`,
     `¿En qué puedo **grad:ayudarte** hoy?`,
   ]
 }

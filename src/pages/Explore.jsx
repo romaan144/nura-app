@@ -24,13 +24,16 @@ export default function Explore() {
   const [HELPERS, setHELPERS] = useState(LOCAL_HELPERS)
   const { cacheHelpers } = useUser()
 
+  const [loadingHelpers, setLoadingHelpers] = useState(true)
+
   useEffect(() => {
     getAllHelpers().then(remote => {
       if (remote?.length > 0) {
         setHELPERS(remote)
         cacheHelpers(remote)
       }
-    })
+      setLoadingHelpers(false)
+    }).catch(() => setLoadingHelpers(false))
   }, [])
   const [activeCategory, setActiveCategory] = useState('all')
   const [showFilters, setShowFilters] = useState(false)
@@ -128,7 +131,12 @@ export default function Explore() {
             </div>
           </div>
         )}
-        <div className={styles.resultsCount}>
+        {loadingHelpers && (
+          <div className={styles.skeletonGrid}>
+            {[1,2,3,4,5,6].map(i => <div key={i} className={styles.skeleton} />)}
+          </div>
+        )}
+        {!loadingHelpers && <div className={styles.resultsCount}>
           {filtered.length} helper{filtered.length !== 1 ? 's' : ''} encontrado{filtered.length !== 1 ? 's' : ''}
         </div>
         <div className={styles.grid}>
@@ -161,7 +169,7 @@ export default function Explore() {
               </div>
             </div>
           ))}
-        </div>
+        </div>}
       </div>
     </div>
   )
