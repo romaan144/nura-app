@@ -104,8 +104,8 @@
 }
 .tab:hover { color: var(--ink); background: var(--paper); }
 .tabActive {
-  color: white;
-  background: #1a1a2e;
+  color: #ffffff !important;
+  background: #1a1a2e !important;
   font-weight: 600;
   box-shadow: 0 2px 8px rgba(0,0,0,0.18);
 }
