@@ -213,3 +213,29 @@
   background-clip: text;
   font-weight: 700;
 }
+
+/* ── HEADER FIXED STRUCTURE ── */
+.header {
+  display: grid;
+  grid-template-columns: 40px 1fr 40px;
+  align-items: center;
+  padding: 12px 14px;
+  background: transparent;
+  position: relative;
+}
+.headerLeft { display: flex; justify-content: flex-start; }
+.headerCenter { display: flex; justify-content: center; }
+.headerRight { display: flex; justify-content: flex-end; }
+.logoPill {
+  background: white;
+  padding: 9px 20px;
+  border-radius: 26px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1), 0 1px 3px rgba(0,0,0,0.06);
+  border: 1.5px solid rgba(0,0,0,0.05);
+  display: flex; align-items: center; justify-content: center;
+  overflow: hidden; height: 44px;
+}
+.headerLogo {
+  width: 110%; height: auto;
+  object-fit: contain;
+}

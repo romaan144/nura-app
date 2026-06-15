@@ -1,5 +1,5 @@
 import { useState, useEffect, useRef } from 'react'
-import PageHeader from '../components/PageHeader'
+import { MenuButton } from '../components/NavBar'
 import { useNavigate } from 'react-router-dom'
 import { Send, Mic, MicOff, ArrowRight, Plus } from 'lucide-react'
 import { analyzeNeed, matchHelpers } from '../utils/matching'
@@ -160,11 +160,17 @@ export default function Home({ setSearchState }) {
   return (
     <div className={styles.page}>
 
-      <PageHeader rightEl={
-          <button className={styles.profileBtn} onClick={() => navigate('/profile')} style={{flexShrink:0,width:'40px',height:'40px',minWidth:'40px'}}>
+      <div className={styles.header}>
+        <div className={styles.headerLeft}><MenuButton /></div>
+        <div className={styles.headerCenter}>
+          <div className={styles.logoPill}><img src="/logo-text.png" alt="Nüra" className={styles.headerLogo} /></div>
+        </div>
+        <div className={styles.headerRight}>
+          <button className={styles.profileBtn} onClick={() => navigate('/profile')}>
             <div className={styles.profileAvatar}>{user?.name?.[0]?.toUpperCase() || '?'}</div>
           </button>
-        } />
+        </div>
+      </div>
 
       {/* Messages */}
       <div className={styles.messages}>
