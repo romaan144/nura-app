@@ -108,7 +108,9 @@ export default function Home({ setSearchState }) {
   const [input, setInput] = useState('')
   const [loading, setLoading] = useState(false)
   const [listening, setListening] = useState(false)
-  const [showSuggestions, setShowSuggestions] = useState(true)
+  // showSuggestions: hide once user has chatted
+  const showSuggestions = nuraChatMessages.length <= 1
+  const setShowSuggestions = () => {} // no-op, derived from messages
   const [inputFocused, setInputFocused] = useState(false)
   const lastMatches = nuraLastMatches
   const setLastMatches = setNuraLastMatches
