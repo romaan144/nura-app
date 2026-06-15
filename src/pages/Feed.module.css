@@ -114,3 +114,54 @@
 .emptyFeed h3 { font-size: 18px; font-weight: 800; color: var(--ink); letter-spacing: -0.3px; }
 .emptyFeed p { font-size: 14px; color: var(--soft); line-height: 1.6; max-width: 260px; }
 .exploreBtn { padding: 12px 28px; background: linear-gradient(135deg, #1a1a2e 0%, #2d1b4e 100%); color: white; border: none; border-radius: 28px; font-size: 14px; font-weight: 700; margin-top: 8px; box-shadow: 0 6px 20px rgba(13,13,26,0.3), inset 0 1px 0 rgba(255,255,255,0.12); }
+
+/* ── NOTIFICATION PANEL ── */
+.notifOverlay {
+  position: fixed; inset: 0;
+  background: rgba(0,0,0,0.3);
+  backdrop-filter: blur(4px);
+  z-index: 100;
+  display: flex; align-items: flex-start; justify-content: flex-end;
+  padding: 70px 14px 0;
+  animation: fadeIn 0.15s ease;
+}
+@keyframes fadeIn { from{opacity:0} to{opacity:1} }
+
+.notifPanel {
+  background: white;
+  border-radius: 22px;
+  width: 300px; max-width: 90vw;
+  box-shadow: 0 8px 40px rgba(0,0,0,0.18), 0 2px 8px rgba(0,0,0,0.08);
+  overflow: hidden;
+  animation: slideDown 0.2s ease;
+}
+@keyframes slideDown { from{transform:translateY(-10px);opacity:0} to{transform:translateY(0);opacity:1} }
+
+.notifPanelHeader {
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 16px 18px 12px;
+  border-bottom: 1px solid var(--rule);
+}
+.notifPanelTitle { font-size: 15px; font-weight: 700; color: var(--ink); }
+.notifClose {
+  width: 28px; height: 28px; border-radius: 50%;
+  background: var(--paper); border: none;
+  color: var(--soft); font-size: 13px;
+  display: flex; align-items: center; justify-content: center; cursor: pointer;
+}
+
+.notifEmpty {
+  display: flex; flex-direction: column; align-items: center;
+  gap: 10px; padding: 32px 20px;
+  color: var(--soft); font-size: 13px;
+}
+.notifList { display: flex; flex-direction: column; max-height: 320px; overflow-y: auto; }
+.notifItem {
+  display: flex; align-items: center; gap: 10px;
+  padding: 12px 18px;
+  border-bottom: 1px solid var(--rule2);
+}
+.notifItem:last-child { border-bottom: none; }
+.notifDot { width: 8px; height: 8px; border-radius: 50%; background: var(--purple); flex-shrink: 0; }
+.notifText { flex: 1; font-size: 13px; color: var(--ink); line-height: 1.4; }
+.notifTime { font-size: 11px; color: var(--soft); flex-shrink: 0; }

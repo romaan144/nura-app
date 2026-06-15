@@ -135,6 +135,35 @@ function PostCard({ post }) {
           <Bookmark size={18} fill={saved ? 'var(--purple)' : 'none'} color={saved ? 'var(--purple)' : 'var(--soft)'} />
         </button>
       </div>
+      {/* Notification panel */}
+      {showNotifs && (
+        <div className={styles.notifOverlay} onClick={() => setShowNotifs(false)}>
+          <div className={styles.notifPanel} onClick={e => e.stopPropagation()}>
+            <div className={styles.notifPanelHeader}>
+              <span className={styles.notifPanelTitle}>Notificaciones</span>
+              <button className={styles.notifClose} onClick={() => setShowNotifs(false)}>✕</button>
+            </div>
+            {notifications.length === 0 ? (
+              <div className={styles.notifEmpty}>
+                <Bell size={28} color="var(--rule)" />
+                <p>Sin notificaciones</p>
+              </div>
+            ) : (
+              <div className={styles.notifList}>
+                {notifications.slice(0,10).map((n, i) => (
+                  <div key={i} className={styles.notifItem}>
+                    <div className={styles.notifDot} />
+                    <div className={styles.notifText}>
+                      {n.type === 'followed' ? 'Empezaste a seguir a alguien' : 'Nueva actividad'}
+                    </div>
+                    <span className={styles.notifTime}>Hoy</span>
+                  </div>
+                ))}
+              </div>
+            )}
+          </div>
+        </div>
+      )}
     </div>
   )
 }
@@ -159,13 +188,43 @@ function SuggestedProfile({ profile, type, onFollow, onUnfollow, isFollowed }) {
         onClick={(e) => { e.stopPropagation(); isFollowed ? onUnfollow(profile.id) : onFollow(profile.id) }}>
         {isFollowed ? '✓' : '+ Seguir'}
       </button>
+      {/* Notification panel */}
+      {showNotifs && (
+        <div className={styles.notifOverlay} onClick={() => setShowNotifs(false)}>
+          <div className={styles.notifPanel} onClick={e => e.stopPropagation()}>
+            <div className={styles.notifPanelHeader}>
+              <span className={styles.notifPanelTitle}>Notificaciones</span>
+              <button className={styles.notifClose} onClick={() => setShowNotifs(false)}>✕</button>
+            </div>
+            {notifications.length === 0 ? (
+              <div className={styles.notifEmpty}>
+                <Bell size={28} color="var(--rule)" />
+                <p>Sin notificaciones</p>
+              </div>
+            ) : (
+              <div className={styles.notifList}>
+                {notifications.slice(0,10).map((n, i) => (
+                  <div key={i} className={styles.notifItem}>
+                    <div className={styles.notifDot} />
+                    <div className={styles.notifText}>
+                      {n.type === 'followed' ? 'Empezaste a seguir a alguien' : 'Nueva actividad'}
+                    </div>
+                    <span className={styles.notifTime}>Hoy</span>
+                  </div>
+                ))}
+              </div>
+            )}
+          </div>
+        </div>
+      )}
     </div>
   )
 }
 
 export default function Feed() {
-  const { following, follow, unfollow, isFollowing, unreadNotifs, markNotifsRead } = useUser()
+  const { following, follow, unfollow, isFollowing, unreadNotifs, markNotifsRead, notifications } = useUser()
   const [activeSection, setActiveSection] = useState('para-ti')
+  const [showNotifs, setShowNotifs] = useState(false)
   const [hidden, setHidden] = useState(false)
   const lastScrollY = useRef(0)
 
@@ -191,7 +250,7 @@ export default function Feed() {
   return (
     <div className={styles.page}>
       {/* Header */}
-      <PageHeader rightEl={<button className={styles.notifBtn} onClick={markNotifsRead}><Bell size={18} />{unreadNotifs > 0 && <span className={styles.notifBadge}>{unreadNotifs}</span>}</button>} />
+      <PageHeader rightEl={<button className={styles.notifBtn} onClick={() => { setShowNotifs(s => !s); markNotifsRead() }}><Bell size={18} />{unreadNotifs > 0 && <span className={styles.notifBadge}>{unreadNotifs}</span>}</button>} />
 
       {/* Section tabs */}
       <div className={`${styles.sectionTabs} ${hidden ? styles.sectionTabsHidden : ''}`}>
@@ -268,6 +327,35 @@ export default function Feed() {
           </div>
         )}
       </div>
+      {/* Notification panel */}
+      {showNotifs && (
+        <div className={styles.notifOverlay} onClick={() => setShowNotifs(false)}>
+          <div className={styles.notifPanel} onClick={e => e.stopPropagation()}>
+            <div className={styles.notifPanelHeader}>
+              <span className={styles.notifPanelTitle}>Notificaciones</span>
+              <button className={styles.notifClose} onClick={() => setShowNotifs(false)}>✕</button>
+            </div>
+            {notifications.length === 0 ? (
+              <div className={styles.notifEmpty}>
+                <Bell size={28} color="var(--rule)" />
+                <p>Sin notificaciones</p>
+              </div>
+            ) : (
+              <div className={styles.notifList}>
+                {notifications.slice(0,10).map((n, i) => (
+                  <div key={i} className={styles.notifItem}>
+                    <div className={styles.notifDot} />
+                    <div className={styles.notifText}>
+                      {n.type === 'followed' ? 'Empezaste a seguir a alguien' : 'Nueva actividad'}
+                    </div>
+                    <span className={styles.notifTime}>Hoy</span>
+                  </div>
+                ))}
+              </div>
+            )}
+          </div>
+        </div>
+      )}
     </div>
   )
 }
