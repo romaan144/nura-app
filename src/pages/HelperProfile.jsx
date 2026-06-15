@@ -369,7 +369,7 @@ export default function HelperProfile() {
         {/* ── TAB: PERFIL VIVO ── */}
         {activeTab === 'perfil' && (
           <>
-            <div style={{paddingTop:'20px'}} />
+            
 
             {/* Bio */}
             <div className={styles.bioCard}>
@@ -477,7 +477,7 @@ export default function HelperProfile() {
 
         {/* ── TAB: LABORAL ── */}
         {activeTab === 'empresas' && (
-          <div style={{paddingTop:'20px'}}>
+          <div>
             <div className={styles.empresasIntroCard}>
               <Shield size={16} color="var(--purple)" />
               <div>
@@ -521,7 +521,7 @@ export default function HelperProfile() {
 
         {/* ── TAB: PUBLICACIONES ── */}
         {activeTab === 'feed' && (
-          <div style={{paddingTop:'20px'}}>
+          <div>
             {h.posts?.length > 0
               ? h.posts.map(post => <PostCard key={post.id} post={post} helper={h} />)
               : (
@@ -536,7 +536,7 @@ export default function HelperProfile() {
 
         {/* ── TAB: REPUTACIÓN ── */}
         {activeTab === 'reputacion' && (
-          <div style={{paddingTop:'20px'}}>
+          <div>
             {/* Score */}
             <div className={styles.scoreCard}>
               <div className={styles.scoreLeft}>
