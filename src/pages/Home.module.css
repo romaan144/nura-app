@@ -205,15 +205,15 @@
 /* ── HEADER ── */
 .header {
   position: absolute;
-  top: 0; left: 0; right: 0;
-  z-index: 10;
+  top: max(env(safe-area-inset-top), 12px);
+  left: 14px; right: 14px;
+  z-index: 20;
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: env(safe-area-inset-top, 10px) 14px 10px;
-  background: transparent;
   gap: 8px;
   pointer-events: none;
+  background: transparent;
 }
 .header > * { pointer-events: all; }
 .headerLeft { display: flex; align-items: center; flex-shrink: 0; }
