@@ -295,11 +295,12 @@ export default function Home({ setSearchState }) {
             </button>
           )}
           <button className={styles.profileBtn} onClick={() => navigate('/profile')} style={{flexShrink:0,width:'38px',height:'38px',minWidth:'38px'}}>
-          {user?.name
-            ? <img src={`https://api.dicebear.com/9.x/personas/svg?seed=${encodeURIComponent(user.name)}`} alt="" style={{width:'100%',height:'100%',borderRadius:'50%',objectFit:'cover'}} />
-            : '?'
-          }
-        </button>
+            {user?.name
+              ? <img src={`https://api.dicebear.com/9.x/personas/svg?seed=${encodeURIComponent(user.name)}`} alt="" style={{width:'100%',height:'100%',borderRadius:'50%',objectFit:'cover'}} />
+              : '?'
+            }
+          </button>
+        </div>
       </div>
 
       <div className={styles.messages}>
