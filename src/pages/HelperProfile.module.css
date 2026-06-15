@@ -487,3 +487,22 @@
 .expTimelineBody { flex: 1; padding-bottom: 16px; }
 
 .headerLogo { height: 22px; width: auto; position: absolute; left: 50%; transform: translateX(-50%); }
+
+/* ── UNIFIED TIMELINE ── */
+.unifiedTimeline { display: flex; flex-direction: column; padding: 4px 0; }
+.timelineItem { display: flex; gap: 12px; }
+.timelineLeft { display: flex; flex-direction: column; align-items: center; flex-shrink: 0; width: 42px; }
+.timelineIcon { width: 38px; height: 38px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 18px; flex-shrink: 0; box-shadow: 0 2px 8px rgba(0,0,0,0.08); }
+.timelineIconEdu { background: rgba(123,47,255,0.08); }
+.timelineIconWork { background: rgba(5,150,105,0.08); }
+.timelineConnector { width: 2px; flex: 1; min-height: 16px; background: var(--rule); margin: 4px 0; }
+.timelineBody { flex: 1; padding-bottom: 16px; }
+.timelineCard { background: white; border-radius: 18px; padding: 14px 16px; box-shadow: 0 2px 8px rgba(0,0,0,0.08), 0 1px 3px rgba(0,0,0,0.05); }
+.timelineType { font-size: 10px; font-weight: 700; color: var(--soft); text-transform: uppercase; letter-spacing: 0.6px; margin-bottom: 6px; }
+.timelineTitle { font-size: 14px; font-weight: 800; color: var(--ink); margin-bottom: 2px; letter-spacing: -0.2px; }
+.timelineSub { font-size: 12px; font-weight: 600; color: var(--purple); margin-bottom: 2px; }
+.timelinePeriod { font-size: 11px; color: var(--soft); margin-bottom: 8px; }
+.timelineDetails { font-size: 12px; color: var(--mid); line-height: 1.55; margin-bottom: 8px; }
+.timelineSkills { display: flex; flex-wrap: wrap; gap: 5px; margin-bottom: 10px; }
+.timelineSkill { font-size: 10px; color: var(--mid); background: var(--paper); border-radius: 8px; padding: 3px 8px; }
+.timelineVerified { display: inline-flex; align-items: center; gap: 4px; font-size: 10px; font-weight: 600; color: #059669; background: #ECFDF5; border-radius: 8px; padding: 3px 8px; margin-top: 4px; }
