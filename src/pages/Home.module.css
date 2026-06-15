@@ -211,7 +211,9 @@
   background: transparent;
   gap: 8px;
   position: relative;
+  pointer-events: none;
 }
+.header > * { pointer-events: all; }
 .headerLeft { display: flex; align-items: center; flex-shrink: 0; }
 .headerRight { display: flex; align-items: center; gap: 6px; flex-shrink: 0; }
 .headerLogoPill {

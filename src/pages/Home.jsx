@@ -350,6 +350,7 @@ export default function Home({ setSearchState }) {
         <div ref={bottomRef} />
       </div>
 
+      {/* Floating bottom area */}
       {inputFocused && !input && searchHistory?.length > 0 && (
         <div className={styles.recentSearches}>
           <span className={styles.recentLabel}>Búsquedas recientes</span>
