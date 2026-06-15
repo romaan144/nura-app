@@ -58,6 +58,7 @@ function HelperCard({ helper }) {
 export default function Results({ searchState }) {
   const navigate = useNavigate()
   const [sortBy, setSortBy] = useState('relevance')
+  const [viewMode, setViewMode] = useState('list')
   const { cacheHelpers } = useUser()
 
   useEffect(() => {
@@ -165,6 +166,12 @@ export default function Results({ searchState }) {
 
         {currentMatches.length > 0 ? (
           <>
+            <div className={styles.topBar}>
+              <button className={`${styles.viewBtn} ${viewMode==='list'?styles.viewBtnActive:''}`}
+                onClick={() => setViewMode('list')}>≡ Lista</button>
+              <button className={`${styles.viewBtn} ${viewMode==='grid'?styles.viewBtnActive:''}`}
+                onClick={() => setViewMode('grid')}>⊞ Cuadrícula</button>
+            </div>
             <div className={styles.sortRow}>
               {['relevance','rating','distance','price'].map(s => (
                 <button key={s} className={`${styles.sortBtn} ${sortBy===s?styles.sortBtnActive:''}`} onClick={() => setSortBy(s)}>
@@ -172,7 +179,7 @@ export default function Results({ searchState }) {
                 </button>
               ))}
             </div>
-            <div className={styles.cards}>
+            <div className={`${styles.cards} ${viewMode==='grid'?styles.cardsGrid:''}`}>
               {currentMatches.map((h, i) => h && <HelperCard key={h.id || i} helper={h} />)}
             </div>
           </>

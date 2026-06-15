@@ -5,6 +5,7 @@ import { analyzeNeed, matchHelpers } from '../utils/matching'
 import { useUser } from '../context/UserContext'
 import { MenuButton } from '../components/NavBar'
 import { showToast } from '../components/Toast'
+import { haptic } from '../utils/haptic'
 import styles from './Home.module.css'
 import Onboarding from '../components/Onboarding'
 
@@ -176,6 +177,7 @@ export default function Home({ setSearchState }) {
   async function handleSend(text) {
     const msg = text || input
     if (!msg.trim() || loading) return
+    haptic('light')
 
     setInput('')
     setShowSuggestions(false)
@@ -270,9 +272,14 @@ export default function Home({ setSearchState }) {
 
       const resultMsg = { id: Date.now(), from: 'nura', lines: [`He encontrado **${matches.length} personas** que pueden ayudarte.`], results: matches }
       setMessages(prev => [...prev, resultMsg])
+      const followUp = matches.length >= 3
+        ? '¿Te convence alguno? También puedo filtrar más.'
+        : matches.length > 0
+        ? `Solo encontré ${matches.length} opciones. ¿Quieres que amplíe la búsqueda?`
+        : '¿Reformulamos la búsqueda?'
       setTimeout(() => setMessages(prev => [...prev, {
         id: Date.now()+1, from: 'nura',
-        lines: ['¿Te convence alguno o prefieres ajustar la búsqueda?'],
+        lines: [followUp],
         chips: ['Más barato', 'Más cerca', 'Mejor valorado', 'Con urgencias']
       }]), 1500)
     } catch {

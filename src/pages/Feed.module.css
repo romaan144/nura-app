@@ -218,3 +218,9 @@
 }
 /* Better author row */
 .authorInfo { display: flex; align-items: center; gap: 10px; cursor: pointer; flex: 1; }
+
+/* Company verification badge */
+.companyVerified { display: inline-flex; align-items: center; gap: 3px; font-size: 10px; color: #059669; font-weight: 600; background: #ECFDF5; border-radius: 8px; padding: 2px 7px; }
+/* Suggested card improvement */
+.suggestedCard { display: flex; align-items: center; gap: 10px; padding: 12px var(--page-x); background: white; margin-bottom: 8px; border-radius: var(--card-radius); box-shadow: var(--card-shadow); cursor: pointer; transition: all 0.15s; }
+.suggestedCard:active { opacity: 0.8; }

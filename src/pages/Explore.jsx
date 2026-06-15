@@ -89,9 +89,13 @@ export default function Explore() {
             </div>
           </div>
           <div className={styles.filterRow}>
-            <span className={styles.filterLabel}>Precio máximo (€)</span>
-            <input className={styles.filterInput} type="number" placeholder="ej. 50"
-              value={filters.maxPrice} onChange={e => setFilters(f => ({...f, maxPrice: e.target.value}))} />
+            <div style={{display:'flex',justifyContent:'space-between',alignItems:'center'}}>
+              <span className={styles.filterLabel}>Precio máximo</span>
+              <span className={styles.filterPriceLabel}>{filters.maxPrice ? `${filters.maxPrice}€` : 'Sin límite'}</span>
+            </div>
+            <input className={styles.filterInput} type="range" min="0" max="200" step="5"
+              value={filters.maxPrice || 200}
+              onChange={e => setFilters(f => ({...f, maxPrice: e.target.value === '200' ? '' : e.target.value}))} />
           </div>
           <div className={styles.filterRow}>
             <span className={styles.filterLabel}>Distancia máxima (km)</span>
