@@ -165,11 +165,20 @@ export default function Home({ setSearchState }) {
       }
       addSearch?.(msg)
       setSearchState({ query: msg, analysis, matches })
-      setMessages(prev => [...prev, {
+      const resultMsg = {
         id: Date.now(), from: 'nura',
         lines: [`He encontrado **${matches.length} personas** que pueden ayudarte.`],
         results: matches.slice(0, 4)
-      }])
+      }
+      setMessages(prev => [...prev, resultMsg])
+
+      // Follow-up question after 1.5s
+      setTimeout(() => {
+        setMessages(prev => [...prev, {
+          id: Date.now() + 1, from: 'nura',
+          lines: ['¿Te convence alguno o quieres que filtre por algo más concreto? Por ejemplo precio, disponibilidad o experiencia específica.'],
+        }])
+      }, 1500)
     } catch {
       setMessages(prev => prev.filter(m => !m.loading))
       setMessages(prev => [...prev, { id: Date.now(), from: 'nura', lines: ['Algo fue mal. Inténtalo de nuevo.'] }])
