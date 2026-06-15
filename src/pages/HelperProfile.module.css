@@ -506,3 +506,38 @@
 .timelineSkills { display: flex; flex-wrap: wrap; gap: 5px; margin-bottom: 10px; }
 .timelineSkill { font-size: 10px; color: var(--mid); background: var(--paper); border-radius: 8px; padding: 3px 8px; }
 .timelineVerified { display: inline-flex; align-items: center; gap: 4px; font-size: 10px; font-weight: 600; color: #059669; background: #ECFDF5; border-radius: 8px; padding: 3px 8px; margin-top: 4px; }
+
+/* ── REPUTATION REDESIGN ── */
+.repHero { display: flex; gap: 16px; background: white; border-radius: 18px; padding: 18px; margin-bottom: 12px; box-shadow: 0 2px 8px rgba(0,0,0,0.08), 0 1px 3px rgba(0,0,0,0.05); }
+.repScoreCircle { width: 80px; height: 80px; border-radius: 50%; border: 4px solid; display: flex; flex-direction: column; align-items: center; justify-content: center; flex-shrink: 0; }
+.repScoreNum { font-size: 26px; font-weight: 900; line-height: 1; letter-spacing: -1px; }
+.repScoreLabel { font-size: 10px; color: var(--soft); }
+.repHeroRight { flex: 1; display: flex; flex-direction: column; gap: 8px; }
+.repLevelBadge { display: inline-flex; align-items: center; gap: 5px; font-size: 11px; font-weight: 700; border-radius: 10px; padding: 4px 10px; align-self: flex-start; }
+.repHeroDesc { font-size: 12px; color: var(--mid); line-height: 1.5; }
+.repBars { display: flex; flex-direction: column; gap: 7px; }
+.repBar {}
+.repBarTop { display: flex; justify-content: space-between; margin-bottom: 3px; }
+.repBarLabel { font-size: 11px; color: var(--mid); }
+.repBarVal { font-size: 11px; font-weight: 700; }
+.repBarTrack { height: 5px; background: var(--paper); border-radius: 3px; overflow: hidden; }
+.repBarFill { height: 100%; border-radius: 3px; transition: width 0.8s ease; }
+
+/* ── AVAILABILITY CHIPS ── */
+.availabilityRow { display: flex; flex-wrap: wrap; gap: 7px; margin-bottom: 12px; }
+.availChip { display: flex; align-items: center; gap: 6px; padding: 6px 12px; background: white; border-radius: 20px; font-size: 12px; font-weight: 500; color: var(--mid); box-shadow: 0 1px 4px rgba(0,0,0,0.07); }
+.availChipGreen { color: #059669; background: #ECFDF5; }
+.availChipGray { color: var(--soft); background: var(--paper); }
+.availDot { width: 7px; height: 7px; border-radius: 50%; background: currentColor; flex-shrink: 0; }
+
+/* ── RATING BREAKDOWN ── */
+.ratingBreakdown { display: flex; gap: 16px; background: white; border-radius: 16px; padding: 14px; margin-bottom: 12px; box-shadow: 0 2px 8px rgba(0,0,0,0.07); }
+.ratingBig { display: flex; flex-direction: column; align-items: center; gap: 4px; flex-shrink: 0; }
+.ratingBigNum { font-size: 36px; font-weight: 900; color: var(--ink); line-height: 1; letter-spacing: -1px; }
+.ratingStars { display: flex; gap: 1px; }
+.ratingCount { font-size: 10px; color: var(--soft); }
+.ratingBars { flex: 1; display: flex; flex-direction: column; gap: 5px; justify-content: center; }
+.ratingBarRow { display: flex; align-items: center; gap: 7px; }
+.ratingBarN { font-size: 11px; color: var(--soft); width: 10px; text-align: right; flex-shrink: 0; }
+.ratingBarTrack { flex: 1; height: 5px; background: var(--paper); border-radius: 3px; overflow: hidden; }
+.ratingBarFill { height: 100%; background: #F59E0B; border-radius: 3px; }

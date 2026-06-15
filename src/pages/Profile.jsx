@@ -1,5 +1,5 @@
 import { useNavigate } from 'react-router-dom'
-import { LogOut, Star, MessageCircle, ChevronRight, Shield, Award, TrendingUp, Sparkles, BarChart2, Users, Clock } from 'lucide-react'
+import { LogOut, Star, MessageCircle, ChevronRight, Shield, Award, TrendingUp, Sparkles, BarChart2, Users, Clock, Calendar } from 'lucide-react'
 import PageHeader from '../components/PageHeader'
 import { useUser } from '../context/UserContext'
 import { HELPERS } from '../data/helpers'
@@ -68,6 +68,13 @@ export default function Profile() {
 
         {/* Helper dashboard */}
         {user.isHelper && user.helperProfile && (
+          <div className={styles.section}>
+            <div className={styles.actionRow} onClick={() => navigate('/my-services')}>
+              <span className={styles.actionIcon}><Calendar size={16} /></span>
+              <span className={styles.actionLabel}>Mis servicios</span>
+              <ChevronRight size={16} color="var(--soft)" />
+            </div>
+          </div>
           <div className={styles.section}>
             <h3 className={styles.sectionTitle}><BarChart2 size={13} /> Tu perfil de helper</h3>
             <div className={styles.helperDashboard}>

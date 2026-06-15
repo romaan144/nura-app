@@ -320,8 +320,18 @@ export default function HelperProfile() {
             </div>
           </div>
 
+          {/* Availability */}
+          <div className={styles.availabilityRow}>
+            <div className={`${styles.availChip} ${h.available ? styles.availChipGreen : styles.availChipGray}`}>
+              <span className={styles.availDot} />
+              {h.available ? 'Disponible ahora' : 'No disponible hoy'}
+            </div>
+            {h.responseTime && (
+              <div className={styles.availChip}>⏱ Responde en {h.responseTime}</div>
+            )}
+          </div>
           <div className={styles.heroModes}>
-            <span className={styles.heroAvailable}><span className={styles.availableDot} /> Disponible ahora</span>
+
             {h.presential && <span className={styles.heroMode}>📍 Presencial</span>}
             {h.online && <span className={styles.heroMode}>💻 Online</span>}
           </div>
@@ -453,9 +463,27 @@ export default function HelperProfile() {
             {h.qualitativeComments?.length > 0 && (
               <section className={styles.section}>
                 <h3 className={styles.sectionTitle}><Heart size={13} /> Valoraciones reales</h3>
+                {/* Rating breakdown */}
+                <div className={styles.ratingBreakdown}>
+                  <div className={styles.ratingBig}>
+                    <span className={styles.ratingBigNum}>{h.rating}</span>
+                    <div className={styles.ratingStars}>{[1,2,3,4,5].map(n=><Star key={n} size={14} fill="#F59E0B" color="#F59E0B" />)}</div>
+                    <span className={styles.ratingCount}>{h.reviews} valoraciones</span>
+                  </div>
+                  <div className={styles.ratingBars}>
+                    {[5,4,3,2,1].map(n => (
+                      <div key={n} className={styles.ratingBarRow}>
+                        <span className={styles.ratingBarN}>{n}</span>
+                        <div className={styles.ratingBarTrack}>
+                          <div className={styles.ratingBarFill} style={{width: n===5?'70%':n===4?'20%':n===3?'7%':'3%'}} />
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                </div>
                 <div className={styles.nuraVerifyNote}>
                   <Cpu size={11} />
-                  <span>Nüra analiza el texto semánticamente — los adjetivos se convierten en atributos verificados del perfil</span>
+                  <span>Nüra analiza el texto semánticamente — los adjetivos se convierten en atributos del perfil</span>
                 </div>
                 <div className={styles.reviewsList}>
                   {h.qualitativeComments.map((c, i) => (
