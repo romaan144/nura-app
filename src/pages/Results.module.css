@@ -9,7 +9,7 @@
 }
 .back { width: 34px; height: 34px; border-radius: 50%; border: 1.5px solid var(--rule); background: #F8F8FA; color: var(--mid); display: flex; align-items: center; justify-content: center; transition: all 0.18s; flex-shrink: 0; }
 .back:hover { border-color: var(--purple); color: var(--purple); }
-.logoImg { height: 24px; width: auto; }
+.logoImg { height: 24px; width: auto; position: absolute; left: 50%; transform: translateX(-50%); }
 
 .content { max-width: 640px; margin: 0 auto; padding: 18px 14px 32px; }
 
