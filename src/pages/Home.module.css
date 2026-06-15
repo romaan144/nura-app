@@ -304,3 +304,4 @@
 
 .resultPriceContact { display: flex; align-items: center; gap: 8px; flex-shrink: 0; }
 .resultPrice { font-size: 13px; font-weight: 700; color: var(--purple); white-space: nowrap; }
+.resultPriceConsult { font-size: 11px; color: #aaa; font-style: italic; }
