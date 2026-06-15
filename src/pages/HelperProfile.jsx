@@ -295,11 +295,18 @@ export default function HelperProfile() {
         {/* Hero */}
         <div className={styles.hero}>
           <div className={styles.heroInner}>
-          {h.avatarUrl
-            ? <img src={h.avatarUrl} alt={h.name} className={styles.heroAvatar} />
-            : <div className={styles.heroAvatarFallback} style={{ background: h.avatarColor }}>{h.avatar}</div>
-          }
-          <h1 className={styles.heroName}>{h.name}{h.founder && <Award size={13} color='#92400E' style={{marginLeft:'5px',verticalAlign:'middle',display:'inline',flexShrink:0}} />}</h1>
+          <div style={{
+            padding: h.founder ? '3px' : '0',
+            borderRadius: '50%',
+            background: h.founder ? 'linear-gradient(135deg, #F59E0B, #FCD34D, #F59E0B)' : 'transparent',
+            boxShadow: h.founder ? '0 0 12px rgba(245,158,11,0.5)' : 'none',
+          }}>
+            {h.avatarUrl
+              ? <img src={h.avatarUrl} alt={h.name} className={styles.heroAvatar} style={{border: h.founder ? '3px solid white' : 'none'}} />
+              : <div className={styles.heroAvatarFallback} style={{ background: h.avatarColor }}>{h.avatar}</div>
+            }
+          </div>
+          <h1 className={styles.heroName}>{h.name}</h1>
           <p className={styles.heroSpecialty}>{h.specialty || h.tags?.[0]}</p>
 
           <div className={styles.heroMeta}>
