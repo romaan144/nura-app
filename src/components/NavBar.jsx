@@ -70,10 +70,12 @@ export default function NavBar() {
         </div>
 
         {user && (
-          <div className={styles.drawerUser}>
-            <div className={styles.drawerAvatar}>
-              {user.name?.[0]?.toUpperCase() || '?'}
-            </div>
+          <div className={styles.drawerUser} onClick={() => go('/profile')} style={{cursor:'pointer'}}>
+            <img
+              src={`https://api.dicebear.com/9.x/personas/svg?seed=${encodeURIComponent(user.name || 'user')}`}
+              alt={user.name}
+              className={styles.drawerAvatar}
+            />
             <div>
               <div className={styles.drawerUserName}>{user.name}</div>
               <div className={styles.drawerUserSub}>

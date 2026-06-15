@@ -64,11 +64,10 @@
   background: #F0F0F2;
 }
 .drawerAvatar {
-  width: 38px; height: 38px; border-radius: 50%;
-  background: var(--grad-main); color: white;
-  font-size: 15px; font-weight: 700;
-  display: flex; align-items: center; justify-content: center;
+  width: 42px; height: 42px; border-radius: 50%;
+  object-fit: cover;
   flex-shrink: 0;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.12);
 }
 .drawerUserName { font-size: 14px; font-weight: 700; color: var(--ink); margin-bottom: 2px; }
 .drawerUserSub { font-size: 11px; color: var(--purple); font-weight: 500; }
