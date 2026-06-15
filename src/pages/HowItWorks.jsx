@@ -1,68 +1,99 @@
 import { useNavigate } from 'react-router-dom'
-import { ArrowLeft, ArrowRight } from 'lucide-react'
+import { MessageCircle, Search, Shield, Star, Cpu, TrendingUp } from 'lucide-react'
+import PageHeader from '../components/PageHeader'
 import styles from './HowItWorks.module.css'
 
 const STEPS = [
-  { icon: '💬', title: 'Describes lo que necesitas', desc: 'Con tus propias palabras, sin categorías ni formularios. Igual que se lo contarías a un amigo de confianza.' },
-  { icon: '🧠', title: 'Nüra lo entiende todo', desc: 'La IA detecta automáticamente si es presencial, si es urgente, qué nivel de cualificación hace falta y calcula la distancia en tiempo real.' },
-  { icon: '🔍', title: 'Busca entre personas reales', desc: 'Filtra la red de helpers verificados y encuentra los perfiles más compatibles con tu situación concreta.' },
-  { icon: '👤', title: 'Ves perfiles con evidencia real', desc: 'No anuncios. No CVs inventados. Historial real de servicios, valoraciones de personas reales y verificación de identidad por DNI.' },
-  { icon: '💬', title: 'Contactas de forma segura', desc: 'El primer mensaje lo sugiere Nüra. Tu información personal solo se comparte cuando tú decides.' },
-  { icon: '⭐', title: 'Valoras la experiencia', desc: 'Tu valoración entrena a la IA y mejora el perfil del helper automáticamente. Cada interacción hace a Nüra más inteligente para todos.' },
-]
-
-const FAQS = [
-  { q: '¿Es gratis para quien busca ayuda?', a: 'Sí. La persona que busca ayuda nunca paga nada. Es completamente gratuito, siempre.' },
-  { q: '¿Cómo se verifican los helpers?', a: 'Verificamos su identidad con el DNI, comprobamos referencias y, en servicios con menores o mayores, pedimos certificado de antecedentes.' },
-  { q: '¿Qué es el perfil vivo?', a: 'Es el currículum más honesto que existe. Se construye solo con cada servicio completado, cada valoración recibida y el análisis de comportamiento real. No lo escribe el helper — lo escriben los demás.' },
-  { q: '¿Por qué confiar más que en Milanuncios?', a: 'Milanuncios son anuncios que alguien escribe sobre sí mismo. Nüra muestra historial real verificado por personas reales.' },
+  {
+    icon: <MessageCircle size={28} />,
+    color: '#7B2FFF',
+    bg: 'rgba(123,47,255,0.08)',
+    title: 'Cuéntale a Nüra qué necesitas',
+    desc: 'Escribe con tus palabras. No hay formularios ni categorías. Nüra entiende el contexto, la urgencia y el tipo de ayuda que necesitas.',
+    example: '"Busco logopeda para mi hijo de 6 años, tiene problemas con la R"',
+  },
+  {
+    icon: <Search size={28} />,
+    color: '#059669',
+    bg: 'rgba(5,150,105,0.08)',
+    title: 'Nüra encuentra a la persona ideal',
+    desc: 'En segundos analiza perfiles verificados, distancia, disponibilidad, especialización y reputación real para mostrarte las mejores opciones.',
+    example: 'Resultados ordenados por compatibilidad, distancia y valoración',
+  },
+  {
+    icon: <Shield size={28} />,
+    color: '#1C1C1E',
+    bg: 'rgba(28,28,30,0.06)',
+    title: 'Perfiles verificados e imposibles de falsificar',
+    desc: 'Nüra verifica la identidad con DNI, busca el historial académico en internet y obtiene opiniones directas de empresas y compañeros de trabajo.',
+    example: 'Ningún helper escribe su propio perfil. Nüra lo construye.',
+  },
+  {
+    icon: <Cpu size={28} />,
+    color: '#7B2FFF',
+    bg: 'rgba(123,47,255,0.08)',
+    title: 'El perfil vive y crece solo',
+    desc: 'Con cada servicio, valoración y conversación, Nüra actualiza el perfil automáticamente. Detecta habilidades que el helper ni sabe que tiene.',
+    example: '"Detectado por Nüra: alta empatía en situaciones de crisis"',
+  },
+  {
+    icon: <Star size={28} />,
+    color: '#F59E0B',
+    bg: 'rgba(245,158,11,0.08)',
+    title: 'Valora después de cada servicio',
+    desc: 'Cuando termina el servicio y pagas, puedes valorar. Esa valoración se convierte automáticamente en datos del perfil del helper.',
+    example: 'Las valoraciones no son solo estrellas — son atributos verificados',
+  },
+  {
+    icon: <TrendingUp size={28} />,
+    color: '#059669',
+    bg: 'rgba(5,150,105,0.08)',
+    title: 'El futuro: currículum vivo universal',
+    desc: 'Nüra construirá el currículum más fiable del mundo — no lo que la gente dice de sí misma, sino lo que realmente ha demostrado.',
+    example: 'Fase 3: Las empresas podrán verificar retroactivamente',
+  },
 ]
 
 export default function HowItWorks() {
   const navigate = useNavigate()
   return (
     <div className={styles.page}>
-      <header className={styles.header}>
-        <button className={styles.back} onClick={() => navigate(-1)}><ArrowLeft size={18} /></button>
-        <span className={styles.title}>Cómo funciona</span>
-        <div style={{width:36}} />
-      </header>
-
+      <PageHeader showBack />
       <div className={styles.content}>
         <div className={styles.hero}>
-          <img src="/logo-iso.png" alt="Nüra" className={styles.heroLogo} />
-          <h1 className={styles.heroTitle}>Tan simple como<br/>enviar un mensaje.</h1>
-          <p className={styles.heroDesc}>Nüra entiende lo que necesitas y encuentra a la persona adecuada en segundos.</p>
+          <img src="/logo-iso.png" alt="Nüra" className={styles.heroIso} />
+          <h1 className={styles.heroTitle}>¿Cómo funciona Nüra?</h1>
+          <p className={styles.heroDesc}>La IA que conecta personas con necesidades reales a profesionales verificados cerca de ti.</p>
         </div>
 
         <div className={styles.steps}>
-          {STEPS.map((s, i) => (
+          {STEPS.map((step, i) => (
             <div key={i} className={styles.step}>
               <div className={styles.stepLeft}>
-                <div className={styles.stepIcon}>{s.icon}</div>
+                <div className={styles.stepIconWrap} style={{background: step.bg, color: step.color}}>
+                  {step.icon}
+                </div>
                 {i < STEPS.length - 1 && <div className={styles.stepLine} />}
               </div>
-              <div className={styles.stepContent}>
-                <h3 className={styles.stepTitle}>{s.title}</h3>
-                <p className={styles.stepDesc}>{s.desc}</p>
+              <div className={styles.stepBody}>
+                <span className={styles.stepNum}>Paso {i + 1}</span>
+                <h3 className={styles.stepTitle}>{step.title}</h3>
+                <p className={styles.stepDesc}>{step.desc}</p>
+                <div className={styles.stepExample} style={{borderColor: step.color + '33', color: step.color}}>
+                  <span>💬</span> {step.example}
+                </div>
               </div>
             </div>
           ))}
         </div>
 
-        <div className={styles.faqSection}>
-          <h2 className={styles.faqTitle}>Preguntas frecuentes</h2>
-          {FAQS.map((f, i) => (
-            <div key={i} className={styles.faq}>
-              <h4 className={styles.faqQ}>{f.q}</h4>
-              <p className={styles.faqA}>{f.a}</p>
-            </div>
-          ))}
+        <div className={styles.cta}>
+          <h2 className={styles.ctaTitle}>¿Listo para probar?</h2>
+          <p className={styles.ctaDesc}>Miles de helpers verificados en Barcelona esperan tu mensaje.</p>
+          <button className={styles.ctaBtn} onClick={() => navigate('/')}>
+            Hablar con Nüra →
+          </button>
         </div>
-
-        <button className={styles.ctaBtn} onClick={() => navigate('/')}>
-          Probar Nüra <ArrowRight size={16} />
-        </button>
       </div>
     </div>
   )

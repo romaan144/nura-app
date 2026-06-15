@@ -11,6 +11,7 @@ const MOCK_CHATS = [
   {
     helperId: 1,
     helperName: "Carlos Martínez",
+    avatarUrl: "https://api.dicebear.com/9.x/personas/svg?seed=carlos",
     helperColor: "#1A56DB",
     helperAvatar: "CM",
     lastMsg: "Perfecto, quedamos el lunes a las 10h. Le espero en consulta 😊",
@@ -20,6 +21,7 @@ const MOCK_CHATS = [
   {
     helperId: 5,
     helperName: "Elena Fernández",
+    avatarUrl: "https://api.dicebear.com/9.x/personas/svg?seed=elena",
     helperColor: "#059669",
     helperAvatar: "EF",
     lastMsg: "Sí, puedo empezar esta semana. ¿El miércoles por la mañana le viene bien?",
@@ -29,6 +31,7 @@ const MOCK_CHATS = [
   {
     helperId: 3,
     helperName: "Roberto Sánchez",
+    avatarUrl: "https://api.dicebear.com/9.x/personas/svg?seed=roberto",
     helperColor: "#1E40AF",
     helperAvatar: "RS",
     lastMsg: "Ya he revisado la caldera. Era el termostato. Todo solucionado 👍",
@@ -38,6 +41,7 @@ const MOCK_CHATS = [
   {
     helperId: 7,
     helperName: "Lucía Vidal",
+    avatarUrl: "https://api.dicebear.com/9.x/personas/svg?seed=lucia",
     helperColor: "#DB2777",
     helperAvatar: "LV",
     lastMsg: "Claro, puedo dar clases online también. ¿Qué días le vienen mejor a tu hijo?",
@@ -47,6 +51,7 @@ const MOCK_CHATS = [
   {
     helperId: 4,
     helperName: "María López",
+    avatarUrl: "https://api.dicebear.com/9.x/personas/svg?seed=maria",
     helperColor: "#7C3AED",
     helperAvatar: "ML",
     lastMsg: "Hasta el jueves que viene entonces. Que tenga buena semana 🌸",

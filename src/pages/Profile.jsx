@@ -136,6 +136,20 @@ export default function Profile() {
           </div>
         )}
 
+
+          {searchHistory?.length > 0 && (
+            <div className={styles.section}>
+              <h3 className={styles.sectionTitle}>🕐 Búsquedas recientes</h3>
+              <div className={styles.historyList}>
+                {searchHistory.slice(0,5).map((s,i) => (
+                  <div key={i} className={styles.historyItem}>
+                    <span className={styles.historyQuery}>{s.query}</span>
+                    <span className={styles.historyDate}>{new Date(s.date).toLocaleDateString('es-ES',{day:'numeric',month:'short'})}</span>
+                  </div>
+                ))}
+              </div>
+            </div>
+          )}
         {/* Actions */}
         <div className={styles.section}>
           <h3 className={styles.sectionTitle}>Acciones</h3>

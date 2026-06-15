@@ -10,7 +10,7 @@ import Onboarding from '../components/Onboarding'
 function getWelcome(user) {
   if (!user) return [
     `Hola, soy **Nüra** ✨`,
-    `¿Qué **grad:necesitas** hoy? Cuéntamelo con tus palabras.`,
+    `Cuéntame qué **grad:necesitas** con tus palabras — buscaré a la persona ideal cerca de ti.`,
   ]
   if (user.isHelper) return [
     `Hola **${user.name?.split(' ')[0]}** 👋`,
