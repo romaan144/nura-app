@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react'
+import { useState } from 'react'
 import { BrowserRouter, Routes, Route, Navigate, useLocation } from 'react-router-dom'
 import { useUser } from './context/UserContext'
 
@@ -27,8 +27,9 @@ import Toast from './components/Toast'
 import PageTransition from './components/PageTransition'
 import './index.css'
 
-function AppRoutes({ showSplash }) {
+function AppRoutes() {
   const [searchState, setSearchState] = useState(null)
+  const [showSplash, setShowSplash] = useState(true)
   const location = useLocation()
   const { user } = useUser()
   const [showOnboarding, setShowOnboarding] = useState(() => {
@@ -36,24 +37,25 @@ function AppRoutes({ showSplash }) {
     return !localStorage.getItem('nura_onboarded')
   })
 
-  const handleOnboardingComplete = () => {
-    localStorage.setItem('nura_onboarded', '1')
-    setShowOnboarding(false)
-  }
-
-  const hideNav = ['/login', '/register-helper', '/splash', '/onboarding']
+  const hideNav = ['/login', '/register-helper', '/onboarding']
     .some(p => location.pathname.startsWith(p))
+
+  if (showSplash) {
+    return <Splash onFinish={() => setShowSplash(false)} />
+  }
 
   return (
     <>
-      {showSplash && <Splash onFinish={() => setShowSplash(false)} />}
-      {!showSplash && showOnboarding && <OnboardingOverlay onComplete={handleOnboardingComplete} />}
-      <ScrollToTop />
+      {showOnboarding && (
+        <OnboardingOverlay onComplete={() => {
+          localStorage.setItem('nura_onboarded', '1')
+          setShowOnboarding(false)
+        }} />
+      )}
 
-      {/* Desktop sidebar — hidden on mobile via CSS */}
+      <ScrollToTop />
       {!hideNav && <DesktopSidebar />}
 
-      {/* Main content */}
       <div className="desktopMain">
         <PageTransition>
           <Routes location={location} key={location.pathname}>
@@ -80,19 +82,17 @@ function AppRoutes({ showSplash }) {
         </PageTransition>
       </div>
 
-      {/* Mobile nav — hidden on desktop via CSS */}
       {!hideNav && <NavBar />}
+      {!hideNav && <BottomNav />}
       <Toast />
     </>
   )
 }
 
 export default function App() {
-  const [showSplash, setShowSplash] = useState(true)
-
   return (
     <BrowserRouter>
-      <AppRoutes showSplash={showSplash} />
+      <AppRoutes />
     </BrowserRouter>
   )
 }
