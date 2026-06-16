@@ -6,6 +6,7 @@ import { useUser } from '../context/UserContext'
 import { MenuButton } from '../components/NavBar'
 import { showToast } from '../components/Toast'
 import HelperCard from '../components/HelperCard'
+import HelperCarousel from '../components/HelperCarousel'
 import RegisterGate from '../components/RegisterGate'
 import { haptic } from '../utils/haptic'
 import { scheduleLocalNotification, notifySearchAbandoned } from '../utils/notifications'
@@ -551,9 +552,7 @@ export default function Home({ setSearchState }) {
               </div>
             )}
             {msg.results && (
-              <div className={styles.resultsList}>
-                {(msg.results||[]).map(h => h && <HelperCard key={h.id} helper={h} />)}
-              </div>
+              <HelperCarousel helpers={msg.results} />
             )}
           </div>
         ))}
