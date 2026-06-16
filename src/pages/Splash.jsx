@@ -1,15 +1,13 @@
 import { useEffect, useState } from 'react'
-import { useNavigate } from 'react-router-dom'
 import styles from './Splash.module.css'
 
-export default function Splash() {
-  const navigate = useNavigate()
-  const [phase, setPhase] = useState('logo') // logo → tagline → done
+export default function Splash({ onFinish }) {
+  const [phase, setPhase] = useState('logo')
 
   useEffect(() => {
     const t1 = setTimeout(() => setPhase('tagline'), 600)
     const t2 = setTimeout(() => setPhase('done'), 1400)
-    const t3 = setTimeout(() => navigate('/', { replace: true }), 1800)
+    const t3 = setTimeout(() => onFinish?.(), 1800)
     return () => [t1,t2,t3].forEach(clearTimeout)
   }, [])
 

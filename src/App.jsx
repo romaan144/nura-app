@@ -46,7 +46,7 @@ function AppRoutes({ showSplash }) {
 
   return (
     <>
-      {showSplash && <Splash />}
+      {showSplash && <Splash onFinish={() => setShowSplash(false)} />}
       {!showSplash && showOnboarding && <OnboardingOverlay onComplete={handleOnboardingComplete} />}
       <ScrollToTop />
 
@@ -89,10 +89,6 @@ function AppRoutes({ showSplash }) {
 
 export default function App() {
   const [showSplash, setShowSplash] = useState(true)
-  useEffect(() => {
-    const t = setTimeout(() => setShowSplash(false), 2600)
-    return () => clearTimeout(t)
-  }, [])
 
   return (
     <BrowserRouter>
