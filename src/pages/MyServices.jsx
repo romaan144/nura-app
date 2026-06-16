@@ -57,9 +57,9 @@ export default function MyServices() {
               className={`${styles.tab} ${tab === t ? styles.tabActive : ''}`}
               onClick={() => setTab(t)}>
               {t}
-              {t === 'Próximos' && filtered.length > 0 && tab !== 'Próximos' && (
+              {t === 'Próximos' && tab !== 'Próximos' && (services||[]).filter(s => s.status === 'pending' || s.status === 'confirmed').length > 0 && (
                 <span className={styles.tabBadge}>
-                  {(services||[]).filter(s => s.status === 'pending' || s.status === 'confirmed').length || ''}
+                  {(services||[]).filter(s => s.status === 'pending' || s.status === 'confirmed').length}
                 </span>
               )}
             </button>

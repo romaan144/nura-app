@@ -156,5 +156,7 @@ export async function matchHelpers(analysis, limit = 8, refinement = null, previ
   
   // Always return results — never empty
   const top = sorted.filter(h => h.score > 10)
-  return (top.length > 0 ? top : sorted).slice(0, limit)
+  const withContent = (top.length > 0 ? top : sorted)
+    .filter(h => h.bio || h.specialty || h.tags?.length > 0) // skip empty profiles
+  return (withContent.length > 0 ? withContent : sorted).slice(0, limit)
 }

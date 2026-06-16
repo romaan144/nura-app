@@ -49,7 +49,11 @@ export default function Explore() {
   const [filters, setFilters] = useState({ presential: false, online: false, urgent: false, maxPrice: '', maxDist: '' })
 
   const filtered = HELPERS.filter(h => {
-    const catMatch = activeCategory === 'all' || h.tags?.some(t => t.toLowerCase().includes(activeCategory)) || h.specialty?.toLowerCase().includes(activeCategory) || h.category === activeCategory
+    const catMatch = activeCategory === 'all' || 
+      h.category === activeCategory ||
+      h.specialty?.toLowerCase().includes(activeCategory) ||
+      (h.tags||[]).some(t => t.toLowerCase().includes(activeCategory)) ||
+      h.bio?.toLowerCase().includes(activeCategory)
     const textMatch = !searchText || h.name.toLowerCase().includes(searchText.toLowerCase()) || h.specialty?.toLowerCase().includes(searchText.toLowerCase()) || h.tags?.some(t => t.toLowerCase().includes(searchText.toLowerCase()))
     const presMatch = !filters.presential || h.presential
     const onlineMatch = !filters.online || h.online

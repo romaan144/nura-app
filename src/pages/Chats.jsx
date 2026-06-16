@@ -61,6 +61,22 @@ const MOCK_CHATS = [
   },
 ]
 
+
+function formatChatTime(isoStr) {
+  if (!isoStr) return ''
+  const d = new Date(isoStr)
+  const now = new Date()
+  const diffMs = now - d
+  const diffMins = Math.floor(diffMs / 60000)
+  const diffHours = Math.floor(diffMs / 3600000)
+  const diffDays = Math.floor(diffMs / 86400000)
+  if (diffMins < 1) return 'ahora'
+  if (diffMins < 60) return `${diffMins}m`
+  if (diffHours < 24) return `${diffHours}h`
+  if (diffDays < 7) return `${diffDays}d`
+  return d.toLocaleDateString('es-ES', { day:'numeric', month:'short' })
+}
+
 export default function Chats() {
   const navigate = useNavigate()
   const { chats, markRead, helpersCache } = useUser()
@@ -128,7 +144,7 @@ export default function Chats() {
                 <div className={styles.chatInfo}>
                   <div className={styles.chatTop}>
                     <span className={styles.chatName}>{chat.helperName}</span>
-                    <span className={styles.chatTime}>{formatTime(chat.lastTime)}</span>
+                    <span className={styles.chatTime}>{formatChatTime(chat.lastTime)}<{formatTime(chat.lastTime)}</span>
                   </div>
                   <div className={styles.chatBottom}>
                     <span className={styles.chatLastMsg}>{chat.lastMsg}</span>
