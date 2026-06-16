@@ -492,7 +492,31 @@ function HelperProfileInner() {
         )}
         {activeTab === 'perfil' && (
           <>
-          {/* Shared profile banner */}
+          {/* Building profile banner for Supabase helpers */}
+        {isSupabaseHelper && !isFromShare && (
+          <div style={{
+            background: 'linear-gradient(135deg, rgba(123,47,255,0.05) 0%, rgba(0,212,200,0.04) 100%)',
+            border: '1px solid rgba(123,47,255,0.1)',
+            borderRadius: '16px',
+            padding: '14px 16px',
+            marginBottom: '10px',
+            display: 'flex',
+            gap: '12px',
+            alignItems: 'flex-start',
+          }}>
+            <img src="/logo-iso.png" alt="Nüra" style={{width:'28px',height:'28px',objectFit:'contain',flexShrink:0,marginTop:'2px'}} />
+            <div>
+              <div style={{fontSize:'13px',fontWeight:700,color:'rgba(0,0,0,0.75)',marginBottom:'3px',letterSpacing:'-0.1px'}}>
+                Nüra está construyendo este perfil
+              </div>
+              <div style={{fontSize:'12px',color:'rgba(0,0,0,0.45)',lineHeight:1.6}}>
+                La IA verifica identidad, analiza historial y detecta habilidades automáticamente. El perfil se completa solo con cada servicio realizado.
+              </div>
+            </div>
+          </div>
+        )}
+
+        {/* Shared profile banner */}
         {isFromShare && (
           <div style={{
             display:'flex',alignItems:'center',gap:'8px',
@@ -716,11 +740,26 @@ function HelperProfileInner() {
                   </div>
                 ))}
               </div>
+            ) : isSupabaseHelper ? (
+              <div style={{display:'flex',flexDirection:'column',gap:'8px'}}>
+                {/* Show what we DO know */}
+                <div style={{background:'rgba(255,255,255,0.85)',border:'1px solid rgba(255,255,255,0.5)',borderRadius:'16px',padding:'16px',boxShadow:'0 1px 8px rgba(0,0,0,0.04)'}}>
+                  <div style={{display:'flex',gap:'12px',alignItems:'center'}}>
+                    <div style={{width:'40px',height:'40px',borderRadius:'50%',background:'rgba(123,47,255,0.08)',display:'flex',alignItems:'center',justifyContent:'center',fontSize:'18px',flexShrink:0}}>💼</div>
+                    <div>
+                      <div style={{fontSize:'14px',fontWeight:700,color:'rgba(0,0,0,0.8)',letterSpacing:'-0.1px'}}>{h.specialty || 'Profesional'}</div>
+                      <div style={{fontSize:'12px',color:'rgba(0,0,0,0.45)',marginTop:'2px'}}>{h.zone || h.city || 'Barcelona'} · Autónomo/a</div>
+                    </div>
+                  </div>
+                </div>
+                <div style={{fontSize:'12px',color:'rgba(0,0,0,0.4)',padding:'8px 4px',textAlign:'center',fontStyle:'italic'}}>
+                  Nüra verificará y completará el historial automáticamente con cada servicio realizado.
+                </div>
+              </div>
             ) : (
               <div className={styles.emptyTab} style={{gap:'10px',padding:'28px 16px'}}>
                 <Shield size={32} color="rgba(0,0,0,0.12)" />
-                <p style={{fontWeight:700,color:'rgba(0,0,0,0.6)',fontSize:'15px',margin:0}}>Trayectoria en verificación</p>
-                <p style={{fontSize:'13px',color:'rgba(0,0,0,0.38)',lineHeight:1.6,margin:0,textAlign:'center',maxWidth:'220px'}}>Nüra está recopilando y verificando el historial laboral de este profesional.</p>
+                <p style={{fontWeight:700,color:'rgba(0,0,0,0.6)',fontSize:'15px',margin:0}}>Sin historial verificado</p>
               </div>
             )}
 

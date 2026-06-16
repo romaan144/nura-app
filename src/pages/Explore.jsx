@@ -172,6 +172,9 @@ export default function Explore() {
               <div className={styles.cardBody}>
                 <div className={styles.cardName}>{h.name}</div>
                 <div className={styles.cardSpecialty}>{h.specialty}</div>
+                {h.price && h.price !== 'Consultar' && (
+                  <div style={{fontSize:'11px',fontWeight:700,color:'var(--purple)',marginTop:'2px'}}>{h.price}</div>
+                )}
                 <div className={styles.cardMeta}>
                   <Star size={10} fill="#F59E0B" color="#F59E0B" /> {h.rating}
                   <span className={styles.sep}>·</span>

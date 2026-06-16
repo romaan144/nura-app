@@ -8,6 +8,7 @@ import styles from './Results.module.css'
 
 function HelperCard({ helper }) {
   const navigate = useNavigate()
+  const { user } = useUser()
   if (!helper) return null
 
   return (
