@@ -689,9 +689,10 @@ function HelperProfileInner() {
                 ))}
               </div>
             ) : (
-              <div className={styles.emptyTab}>
-                <Building2 size={32} color="var(--rule)" />
-                <p>Sin historial laboral todavía.</p>
+              <div className={styles.emptyTab} style={{gap:'10px',padding:'28px 16px'}}>
+                <Shield size={32} color="rgba(0,0,0,0.12)" />
+                <p style={{fontWeight:700,color:'rgba(0,0,0,0.6)',fontSize:'15px',margin:0}}>Trayectoria en verificación</p>
+                <p style={{fontSize:'13px',color:'rgba(0,0,0,0.38)',lineHeight:1.6,margin:0,textAlign:'center',maxWidth:'220px'}}>Nüra está recopilando y verificando el historial laboral de este profesional.</p>
               </div>
             )}
 
@@ -711,9 +712,10 @@ function HelperProfileInner() {
             {h.posts?.length > 0
               ? h.posts.map(post => <PostCard key={post.id} post={post} helper={h} />)
               : (
-                <div className={styles.emptyTab}>
-                  <MessageSquare size={32} color="var(--rule)" />
-                  <p>{h.name?.split(' ')?.[0] || h.name || ''} aún no ha publicado nada.</p>
+                <div className={styles.emptyTab} style={{gap:'10px',padding:'28px 16px'}}>
+                  <MessageSquare size={32} color="rgba(0,0,0,0.12)" />
+                  <p style={{fontWeight:700,color:'rgba(0,0,0,0.6)',fontSize:'15px',margin:0}}>Sin publicaciones todavía</p>
+                  <p style={{fontSize:'13px',color:'rgba(0,0,0,0.38)',lineHeight:1.6,margin:0,textAlign:'center'}}>Cuando {h.name?.split(' ')?.[0] || ''} publique actualizaciones aparecerán aquí.</p>
                 </div>
               )
             }

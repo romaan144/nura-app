@@ -4,6 +4,7 @@ import { useNavigate } from 'react-router-dom'
 import { ArrowLeft, Search } from 'lucide-react'
 import { useUser } from '../context/UserContext'
 import { HELPERS } from '../data/helpers'
+
 import styles from './Chats.module.css'
 
 // Mock chat history para demo
