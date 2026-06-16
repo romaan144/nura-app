@@ -87,7 +87,6 @@ export default function MyServices() {
             <button className={styles.emptyBtn} onClick={() => navigate('/')}>
               Buscar con Nüra
             </button>
-            )}
           </div>
         )}
 
