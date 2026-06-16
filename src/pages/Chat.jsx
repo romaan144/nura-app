@@ -384,6 +384,30 @@ export default function Chat() {
               {helper.available && <span style={{fontSize:'11px',color:'#059669',background:'#ECFDF5',border:'1px solid rgba(5,150,105,0.15)',borderRadius:'100px',padding:'3px 10px',fontWeight:600}}>● Disponible</span>}
               <span style={{fontSize:'11px',color:'rgba(0,0,0,0.4)',background:'rgba(0,0,0,0.04)',borderRadius:'100px',padding:'3px 10px'}}>⭐ {helper.rating} · {helper.reviews} reseñas</span>
             </div>
+            {/* Conversation starters */}
+            <div style={{display:'flex',flexDirection:'column',gap:'8px',marginTop:'20px',width:'100%',maxWidth:'280px'}}>
+              <p style={{fontSize:'12px',color:'rgba(0,0,0,0.4)',textAlign:'center',margin:0}}>Empieza la conversación</p>
+              {[
+                `¿Tienes disponibilidad esta semana?`,
+                `¿Cuánto cobras por sesión?`,
+                `¿Puedes contarme más sobre tu experiencia?`,
+              ].map((q,i) => (
+                <button key={i}
+                  onClick={() => sendMessage(q)}
+                  style={{
+                    padding:'11px 16px',
+                    background:'rgba(255,255,255,0.85)',
+                    border:'1px solid rgba(0,0,0,0.08)',
+                    borderRadius:'14px',
+                    fontSize:'13px',color:'rgba(0,0,0,0.7)',
+                    cursor:'pointer',textAlign:'left',
+                    fontFamily:'-apple-system,"Inter",sans-serif',
+                    transition:'opacity 0.15s',
+                  }}>
+                  {q}
+                </button>
+              ))}
+            </div>
           </div>
         )}
 

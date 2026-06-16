@@ -73,7 +73,12 @@ export default function MyServices() {
   const [ratingText, setRatingText] = useState('')
   const [ratingSent, setRatingSent] = useState(false)
 
-  const filtered = (services || []).filter(s => {
+  // Merge real + demo (real take priority by helperId)
+  const realIds = new Set((services||[]).map(s => String(s.helperId)))
+  const demosToShow = DEMO_SERVICES.filter(d => !realIds.has(String(d.helperId)))
+  const allServices = [...(services||[]), ...demosToShow]
+
+  const filtered = allServices.filter(s => {
     if (tab === 'Próximos')   return s.status === 'pending' || s.status === 'confirmed'
     if (tab === 'Completados') return s.status === 'completed'
     return true

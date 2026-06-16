@@ -84,14 +84,20 @@ export default function Explore() {
       h.specialty?.toLowerCase().includes(activeCategory) ||
       (h.tags||[]).some(t => t.toLowerCase().includes(activeCategory)) ||
       h.bio?.toLowerCase().includes(activeCategory)
-    const textMatch = !searchText || h.name.toLowerCase().includes(searchText.toLowerCase()) || h.specialty?.toLowerCase().includes(searchText.toLowerCase()) || h.tags?.some(t => t.toLowerCase().includes(searchText.toLowerCase()))
+    const q = searchText.toLowerCase()
+    const textMatch = !searchText ||
+      h.name?.toLowerCase().includes(q) ||
+      h.specialty?.toLowerCase().includes(q) ||
+      h.bio?.toLowerCase().includes(q) ||
+      h.zone?.toLowerCase().includes(q) ||
+      (h.tags||[]).some(t => t.toLowerCase().includes(q))
     const presMatch = !filters.presential || h.presential
     const onlineMatch = !filters.online || h.online
     const urgentMatch = !filters.urgent || h.urgent
     const priceMatch = !filters.maxPrice || (h.price && parseInt(h.price.replace(/[^0-9]/g,'')) <= parseInt(filters.maxPrice))
     const distMatch = !filters.maxDist || h.distance <= parseFloat(filters.maxDist)
     return catMatch && textMatch && presMatch && onlineMatch && urgentMatch && priceMatch && distMatch
-  })
+  }).sort(sortFn)
 
   const activeFilters = Object.values(filters).filter(Boolean).length
 

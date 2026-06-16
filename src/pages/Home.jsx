@@ -378,7 +378,8 @@ export default function Home({ setSearchState }) {
     }
 
     try {
-      // Contextual loading message
+      // Analyse first so we can use it for contextual loading message
+      const analysis = await analyzeNeed(msg)
       const loadingText = analysis?.urgente
         ? 'Buscando disponibilidad urgente...'
         : analysis?.categoria === 'cuidado'
@@ -387,9 +388,12 @@ export default function Home({ setSearchState }) {
         ? 'Localizando técnicos disponibles...'
         : analysis?.categoria === 'logopeda'
         ? 'Buscando logopedas especializados...'
+        : analysis?.categoria === 'salud'
+        ? 'Buscando profesionales de salud...'
+        : analysis?.categoria === 'legal'
+        ? 'Buscando asesores jurídicos...'
         : 'Analizando tu necesidad y buscando el perfil ideal...'
       setMessages(prev => [...prev, { id: Date.now() + 0.5, from: 'nura', lines: [loadingText], loading: true }])
-      const analysis = await analyzeNeed(msg)
       const matches = await matchHelpers(analysis, 4)
       clearInterval(window.__nuraStatusInterval)
       setMessages(prev => prev.filter(m => !m.loading))
@@ -456,6 +460,20 @@ export default function Home({ setSearchState }) {
       }
 
       // Build smart result message with context
+      const cat = analysis?.categoria || 'otro'
+      const especialidad = cat === 'logopeda' ? 'logopedas'
+        : cat === 'tecnico' ? 'técnicos'
+        : cat === 'limpieza' ? 'profesionales de limpieza'
+        : cat === 'cuidado' ? 'cuidadoras'
+        : cat === 'mascotas' ? 'cuidadores de mascotas'
+        : cat === 'matematicas' ? 'profesores'
+        : cat === 'entrenador' ? 'entrenadores'
+        : cat === 'salud' ? 'profesionales de salud'
+        : cat === 'legal' ? 'asesores legales'
+        : cat === 'hogar' ? 'profesionales del hogar'
+        : 'profesionales'
+      const top = matches?.[0]
+      const zona = top?.zone || top?.city || 'Barcelona'
       const topName = top?.name?.split(' ')?.[0] || ''
       const resultLine = matches.length === 1
         ? `Encontré **1 ${especialidad.slice(0,-1)}** verificado cerca de ti.`
