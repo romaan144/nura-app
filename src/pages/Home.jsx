@@ -587,7 +587,7 @@ export default function Home({ setSearchState }) {
             )}
           </div>
         ))}
-        <div ref={bottomRef} style={{height:'80px',flexShrink:0}} />
+        <div ref={bottomRef} />
       </div>
 
       {/* Floating bottom — suggestions + input capsule */}
