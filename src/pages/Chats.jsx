@@ -67,7 +67,7 @@ export default function Chats() {
   const [search, setSearch] = useState('')
 
   // Merge real chats with mock, real ones take priority
-  const allChats = chats.length > 0 ? [...MOCK_CHATS.filter(m => !chats.find(c => c.helperId === m.helperId)), ...chats] : MOCK_CHATS
+  const allChats = (chats.length > 0 ? [...MOCK_CHATS.filter(m => !chats.find(c => c.helperId === m.helperId)), ...chats] : MOCK_CHATS).filter(Boolean)
   const filtered = allChats.filter(c =>
     c.helperName.toLowerCase().includes(search.toLowerCase()) ||
     c.lastMsg.toLowerCase().includes(search.toLowerCase())
@@ -109,10 +109,10 @@ export default function Chats() {
           </div>
         ) : (
           filtered.map((chat, i) => {
-            const helper = HELPERS.find(h => h.id === chat.helperId)
+            const helper = helpersCache?.[chat.helperId] || HELPERS.find(h => String(h.id) === String(chat.helperId))
             return (
               <button key={i} className={`${styles.chatRow} ${chat.unread > 0 ? styles.chatUnread : ''}`}
-                onClick={() => { markRead?.(chat.helperId); navigate(`/chat/${chat.helperId}`) }}>
+                onClick={() => { const h = getHelper(chat.helperId); markRead?.(chat.helperId); navigate(`/chat/${chat.helperId}`, h ? { state: { helper: h } } : {}) }}>
 
                 <div className={styles.avatarWrap}>
                   {helper?.avatarUrl
