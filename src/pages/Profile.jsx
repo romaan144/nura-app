@@ -177,6 +177,25 @@ export default function Profile() {
           </div>
         )}
 
+        {/* ── First use guidance ───────────────────────────────────────── */}
+        {!searchHistory?.length && !chats?.length && !favorites?.length && (
+          <div style={{
+            background:'rgba(123,47,255,0.04)',border:'1px solid rgba(123,47,255,0.1)',
+            borderRadius:'16px',padding:'16px',
+            display:'flex',alignItems:'flex-start',gap:'12px'
+          }}>
+            <span style={{fontSize:'22px',flexShrink:0}}>💡</span>
+            <div>
+              <div style={{fontSize:'13px',fontWeight:700,color:'rgba(0,0,0,0.7)',marginBottom:'4px'}}>
+                Empieza buscando con Nüra
+              </div>
+              <div style={{fontSize:'12px',color:'rgba(0,0,0,0.45)',lineHeight:1.6}}>
+                Cuéntale qué necesitas en la pantalla principal. Encontrará al profesional ideal en segundos.
+              </div>
+            </div>
+          </div>
+        )}
+
         {/* ── Complete name nudge ─────────────────────────────────────── */}
         {(!user.name || user.name === 'Usuario') && (
           <div className={styles.nudgeCard} onClick={() => { setNameInput(''); setEditingName(true) }}>

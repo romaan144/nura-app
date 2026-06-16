@@ -668,6 +668,19 @@ function HelperProfileInner() {
     }
   }, [h?.id])
 
+  // Category-based cover gradient
+  const COVER_GRADIENTS = {
+    logopedia: 'linear-gradient(135deg,#1A56DB,#0891B2)',
+    tecnico: 'linear-gradient(135deg,#1E40AF,#3730A3)',
+    limpieza: 'linear-gradient(135deg,#059669,#0891B2)',
+    cuidado: 'linear-gradient(135deg,#DB2777,#9333EA)',
+    mascotas: 'linear-gradient(135deg,#D97706,#DC2626)',
+    matematicas: 'linear-gradient(135deg,#7C3AED,#1D4ED8)',
+    entrenador: 'linear-gradient(135deg,#EA580C,#D97706)',
+    otro: 'linear-gradient(135deg,#7B2FFF,#00D4C8)',
+  }
+  const coverGradient = COVER_GRADIENTS[h.category] || COVER_GRADIENTS.otro
+
   // Is the viewer the owner of this profile?
   const isOwner = user?.isHelper && (
     user?.helperProfile?.name === h.name ||

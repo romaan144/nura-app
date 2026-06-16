@@ -121,7 +121,6 @@ export default function RegisterHelper() {
         }])
         // Save to Supabase (async, non-blocking)
         saveHelperToSupabase(newAnswers).then(saved => {
-          if (saved) console.log('Helper saved to Supabase:', saved.id)
         })
         login({ name: newAnswers.name || val, isHelper: true, helperProfile: newAnswers })
         sessionStorage.setItem('nura_helper_registered', '1')

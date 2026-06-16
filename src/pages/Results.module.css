@@ -112,6 +112,7 @@
 .sortRow { display: flex; gap: 6px; overflow-x: auto; padding: 0 14px 12px; }
 .sortRow::-webkit-scrollbar { display: none; }
 .sortBtn { padding: 6px 13px; background: white; border: none; border-radius: var(--card-radius); font-size: 12px; font-weight: 500; color: var(--mid); white-space: nowrap; flex-shrink: 0; box-shadow: 0 1px 3px rgba(0,0,0,0.06); transition: all 0.15s; }
+.sortBtn { transition: all 0.15s; }
 .sortBtnActive { background: #1C1C1E; color: white; box-shadow: 0 2px 8px rgba(0,0,0,0.15); }
 
 @media (min-width: 768px) {
