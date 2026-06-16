@@ -5,6 +5,7 @@ import { analyzeNeed, matchHelpers } from '../utils/matching'
 import { useUser } from '../context/UserContext'
 import { MenuButton } from '../components/NavBar'
 import { showToast } from '../components/Toast'
+import HelperCard from '../components/HelperCard'
 import RegisterGate from '../components/RegisterGate'
 import { haptic } from '../utils/haptic'
 import { scheduleLocalNotification, notifySearchAbandoned } from '../utils/notifications'
@@ -153,73 +154,6 @@ const HELPER_SUGGESTIONS = [
   { text: 'Cambiar mis tarifas' },
 ]
 
-function ResultCard({ helper, onNavigate, onFav, isFav }) {
-  return (
-    <div className={styles.resultCard} onClick={() => onNavigate(`/helper/${helper.id}`, { state: { helper } })}>
-      <div className={styles.resultTop}>
-        <div className={styles.resultAvatarWrap}>
-          {helper.avatarUrl
-            ? <img src={helper.avatarUrl} alt={helper.name} className={styles.resultAvatarImg} />
-            : <div className={styles.resultAvatarFallback} style={{background: helper.avatarColor}}>{helper.avatar}</div>
-          }
-          {helper.dniVerified && <span className={styles.resultVerified}><Shield size={8} /></span>}
-        </div>
-        <div className={styles.resultInfo}>
-          <div style={{display:'flex',alignItems:'flex-start',justifyContent:'space-between',gap:'8px'}}>
-            <div className={styles.resultName}>
-              {helper.name}
-              {helper.founder && <Award size={12} color='#92400E' style={{marginLeft:'4px',verticalAlign:'middle',flexShrink:0}} />}
-            </div>
-            <span style={{fontSize:'13px',fontWeight:700,color:helper.price && helper.price!=='Consultar'?'#7B2FFF':'#aaa',whiteSpace:'nowrap',flexShrink:0}}>
-              {helper.price && helper.price !== 'Consultar' ? helper.price : 'Consultar'}
-            </span>
-          </div>
-          <div className={styles.resultSpec}>{helper.specialty}</div>
-          <div className={styles.resultMeta}>
-            <Star size={11} fill="#F59E0B" color="#F59E0B" />
-            <span className={styles.resultRating}>{helper.rating}</span>
-            <span className={styles.resultMetaDot}>·</span>
-            <MapPin size={10} color="#aaa" />
-            <span>{helper.distance} km</span>
-            <span className={styles.resultMetaDot}>·</span>
-            <span>{helper.reviews} reseñas</span>
-          </div>
-        </div>
-      </div>
-      {helper.bio && (
-        <p style={{fontSize:'12px',color:'rgba(0,0,0,0.45)',margin:'0 0 8px',lineHeight:1.5,
-          display:'-webkit-box',WebkitLineClamp:2,WebkitBoxOrient:'vertical',overflow:'hidden'}}>
-          {helper.bio}
-        </p>
-      )}
-      <div className={styles.resultBottom}>
-        <div className={styles.resultTags}>
-          {helper.available && <span style={{fontSize:'10px',fontWeight:700,color:'#059669'}}>● Disponible</span>}
-          {helper.urgent && <span className={styles.resultUrgent}>⚡ Urgencias</span>}
-          {helper.presential && helper.online
-            ? <span className={styles.resultTag}>Presencial · Online</span>
-            : helper.presential ? <span className={styles.resultTag}>📍 Presencial</span>
-            : helper.online ? <span className={styles.resultTag}>💻 Online</span> : null}
-        </div>
-        <div style={{display:'flex',gap:'6px',alignItems:'center'}}>
-          <button
-            onClick={e => { e.stopPropagation(); onFav?.(helper.id) }}
-            style={{width:'32px',height:'32px',borderRadius:'50%',background:'rgba(255,255,255,0.8)',border:'1px solid rgba(0,0,0,0.06)',display:'flex',alignItems:'center',justifyContent:'center',flexShrink:0}}>
-            <Heart size={13} fill={isFav ? '#EF4444' : 'none'} color={isFav ? '#EF4444' : 'rgba(0,0,0,0.35)'} />
-          </button>
-          <button className={styles.resultContact}
-            onClick={e => {
-              e.stopPropagation()
-              if (!user) { showToast('Crea tu cuenta para contactar'); setTimeout(() => onNavigate('/login'), 600); return }
-              onNavigate(`/chat/${helper.id}`, { state: { helper } })
-            }}>
-            <MessageCircle size={13} /> Contactar
-          </button>
-        </div>
-      </div>
-    </div>
-  )
-}
 
 export default function Home({ setSearchState }) {
   const navigate = useNavigate()
@@ -618,7 +552,7 @@ export default function Home({ setSearchState }) {
             )}
             {msg.results && (
               <div className={styles.resultsList}>
-                {(msg.results||[]).map(h => <ResultCard key={h.id} helper={h} onNavigate={navigate} onFav={id => { if(!user){setShowGate(true);setGateReason('favorite')} else { toggleFavorite(id); showToast(isFavorite(id)?'Eliminado de favoritos':'Guardado en favoritos') } }} isFav={isFavorite(h.id)} />)}
+                {(msg.results||[]).map(h => h && <HelperCard key={h.id} helper={h} />)}
               </div>
             )}
           </div>

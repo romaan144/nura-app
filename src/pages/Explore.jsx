@@ -190,76 +190,7 @@ export default function Explore() {
             </div>
           )}
           {filtered.map(h => (
-            <div key={h.id} className={styles.card}
-              onClick={() => navigate(`/helper/${h.id}`, { state: { helper: h } })}>
-
-              {/* Top row: avatar + info + price */}
-              <div className={styles.cardMain}>
-                <div style={{position:'relative',flexShrink:0}}>
-                  {h.avatarUrl
-                    ? <img src={h.avatarUrl} alt={h.name} className={styles.avatarImg} />
-                    : <div className={styles.avatar} style={{background: h.avatarColor}}>
-                        {h.avatar}
-                      </div>
-                  }
-                  {h.available && (
-                    <span style={{position:'absolute',bottom:1,right:1,width:10,height:10,
-                      borderRadius:'50%',background:'#22C55E',border:'2px solid white'}} />
-                  )}
-                </div>
-
-                <div className={styles.cardInfo}>
-                  <div className={styles.cardName}>
-                    {h.name}
-                    {h.dniVerified && <Shield size={10} color="#059669" style={{marginLeft:4,verticalAlign:'middle'}} />}
-                    {h.founder && <Award size={10} color="#92400E" style={{marginLeft:3,verticalAlign:'middle'}} />}
-                  </div>
-                  <div className={styles.cardSpecialty}>{h.specialty}</div>
-                  {h.price && h.price !== 'Consultar' && (
-                    <div style={{fontSize:'11px',fontWeight:700,color:'var(--purple)',marginTop:'2px'}}>{h.price}</div>
-                  )}
-                  <div className={styles.cardMeta}>
-                    <Star size={10} fill="#F59E0B" color="#F59E0B" />
-                    <span>{h.rating}</span>
-                    <span className={styles.metaDot}>·</span>
-                    <MapPin size={9} color="rgba(0,0,0,0.35)" />
-                    <span>{h.zone || h.city || 'Barcelona'}</span>
-                    <span className={styles.metaDot}>·</span>
-                    <span>{h.reviews} reseñas</span>
-                  </div>
-                </div>
-
-                {/* TOP badge */}
-                {h.rating >= 4.9 && h.reviews >= 20 && (
-                  <div style={{position:'absolute',top:10,right:10,
-                    background:'linear-gradient(135deg,#F59E0B,#EF4444)',
-                    color:'white',fontSize:'9px',fontWeight:800,
-                    padding:'2px 7px',borderRadius:'100px',letterSpacing:'0.3px'}}>
-                    TOP
-                  </div>
-                )}
-              </div>
-
-              {/* Bio snippet */}
-              {h.bio && (
-                <p className={styles.cardBio}>{h.bio.length > 90 ? h.bio.slice(0,90)+'…' : h.bio}</p>
-              )}
-
-              {/* Bottom: tags + contact */}
-              <div className={styles.cardBottom}>
-                <div className={styles.cardTags}>
-                  {h.urgent && <span className={styles.tagUrgent}>⚡ Urgencias</span>}
-                  {h.online && h.presential
-                    ? <span className={styles.tag}>Presencial · Online</span>
-                    : h.presential ? <span className={styles.tag}>📍 Presencial</span>
-                    : h.online ? <span className={styles.tag}>💻 Online</span> : null}
-                </div>
-                <button className={styles.contactBtn}
-                  onClick={e => { e.stopPropagation(); navigate(`/helper/${h.id}`, { state: { helper: h } }) }}>
-                  Ver perfil
-                </button>
-              </div>
-            </div>
+            <HelperCard key={h.id} helper={h} />
           ))}
         </div></> )}
       </div>
