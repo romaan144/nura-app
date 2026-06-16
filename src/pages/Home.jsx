@@ -14,7 +14,8 @@ function getWelcome(user) {
   const hour = new Date().getHours()
   const greeting = hour < 14 ? 'Buenos días' : hour < 21 ? 'Buenas tardes' : 'Buenas noches'
   if (!user) return [
-    `Hola. Soy **Nüra**, una IA que entiende lo que necesitas y encuentra a la persona real que puede ayudarte — verificada, cerca de ti y disponible ahora.`,
+    `Hola. Soy **Nüra**.`,
+    `Cuéntame qué necesitas — en lenguaje natural, sin formularios. Encuentro a la persona real que puede ayudarte.`
   ]
   if (user.isHelper) return [
     `${greeting}, **${user.name?.split(' ')[0]}**. ¿Qué necesitas hoy?`,
@@ -321,10 +322,17 @@ export default function Home({ setSearchState }) {
       // User confirms — guide to profile
       if (t.includes('sí') || t.includes('si') || t.includes('me convence') || t.includes('perfecto') || t.includes('ese') || t.includes('bien')) {
         const topMatch = lastMatches?.[0]
+        const firstName = topMatch?.name?.split(' ')?.[0] || ''
         setTimeout(() => {
           setMessages(prev => [...prev, {
             id: Date.now(), from: 'nura',
-            lines: [`Perfecto. Pulsa en la tarjeta para ver el perfil completo y contactarle directamente.`]
+            lines: [
+              topMatch
+                ? `Perfecto. **${firstName}** tiene ${topMatch.rating}⭐ y suele responder en ${topMatch.responseTime || '< 1 hora'}.`
+                : `Perfecto.`,
+              `Pulsa en la tarjeta para ver el perfil completo y escribirle directamente.`
+            ],
+            chips: topMatch ? [`Escribir a ${firstName}`] : []
           }])
           setLoading(false)
         }, 800)
@@ -387,11 +395,38 @@ export default function Home({ setSearchState }) {
       setMessages(prev => prev.filter(m => !m.loading))
 
       if (!matches?.length) {
+        // Smart recovery: suggest alternatives based on the analysis
+        const categoria = analysis?.categoria || 'otro'
+        const alternativas = {
+          logopeda:    { alt: 'logopeda online', chip1: 'Buscar online', chip2: 'Ampliar zona' },
+          tecnico:     { alt: 'técnico de guardia', chip1: 'Urgencias 24h', chip2: 'Ampliar zona' },
+          limpieza:    { alt: 'servicio de limpieza online', chip1: 'Ampliar zona', chip2: 'Ver todos' },
+          cuidado:     { alt: 'cuidadora a domicilio', chip1: 'Ver cuidadoras', chip2: 'Ampliar zona' },
+          mascotas:    { alt: 'cuidador de mascotas', chip1: 'Ver cuidadores', chip2: 'Ampliar zona' },
+          matematicas: { alt: 'profesor online', chip1: 'Buscar online', chip2: 'Ampliar zona' },
+          entrenador:  { alt: 'entrenador online', chip1: 'Buscar online', chip2: 'Ampliar zona' },
+          otro:        { alt: 'profesional similar', chip1: 'Ampliar zona', chip2: 'Ver todos' },
+        }
+        const rec = alternativas[categoria] || alternativas.otro
+
         setMessages(prev => [...prev, {
           id: Date.now(), from: 'nura',
-          lines: ['No encontré exactamente lo que describes en tu zona. Puedes ampliar la búsqueda, cambiar la modalidad a online, o cuéntame más detalles del caso.'],
-          chips: ['Ampliar zona', 'Online también', 'Cuéntame más']
+          lines: [
+            `No encontré exactamente lo que buscas en tu zona ahora mismo.`,
+            `Puedo buscar **${rec.alt}** o ampliar el radio de búsqueda. ¿Qué prefieres?`
+          ],
+          chips: [rec.chip1, rec.chip2, 'Cuéntame más']
         }])
+
+        // After 2s, proactively suggest Explore
+        setTimeout(() => {
+          setMessages(prev => [...prev, {
+            id: Date.now() + 1, from: 'nura',
+            lines: ['También puedes explorar todos los profesionales disponibles en Nüra.'],
+            chips: ['Ver Explorar']
+          }])
+        }, 2500)
+
         setLoading(false)
         return
       }
@@ -502,7 +537,16 @@ export default function Home({ setSearchState }) {
               {msg.chips && (
                 <div style={{display:'flex',flexWrap:'wrap',gap:'6px',marginTop:'8px'}}>
                   {(msg.chips||[]).map((chip,i) => (
-                    <button key={i} onClick={() => handleSend(chip)}
+                    <button key={i} onClick={() => {
+                      if (chip === 'Ver Explorar') { navigate('/explore'); return }
+                      if (chip === 'Ver todos') { navigate('/explore'); return }
+                      if (chip.startsWith('Escribir a ') && lastMatches?.[0]) {
+                        const h = lastMatches[0]
+                        navigate(`/chat/${h.id}`, { state: { helper: h } })
+                        return
+                      }
+                      handleSend(chip)
+                    }}
                       style={{padding:'5px 12px',borderRadius:'100px',background:'rgba(0,0,0,0.06)',border:'none',fontSize:'12px',fontWeight:500,color:'rgba(0,0,0,0.7)',cursor:'pointer',transition:'opacity 0.15s'}}>
                       {chip}
                     </button>

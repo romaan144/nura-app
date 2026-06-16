@@ -1,19 +1,19 @@
-import { useState } from 'react'
+import { useState, lazy, Suspense } from 'react'
 import { BrowserRouter, Routes, Route, Navigate, useLocation } from 'react-router-dom'
 import { useUser } from './context/UserContext'
 
 import Splash from './pages/Splash'
 import Home from './pages/Home'
 import Results from './pages/Results'
-import HelperProfile from './pages/HelperProfile'
+const HelperProfile = lazy(() => import('./pages/HelperProfile'))
 import Chat from './pages/Chat'
 import Login from './pages/Login'
 import Profile from './pages/Profile'
 import Chats from './pages/Chats'
-import RegisterHelper from './pages/RegisterHelper'
-import HowItWorks from './pages/HowItWorks'
+const RegisterHelper = lazy(() => import('./pages/RegisterHelper'))
+const HowItWorks = lazy(() => import('./pages/HowItWorks'))
 import Explore from './pages/Explore'
-import Feed from './pages/Feed'
+const Feed = lazy(() => import('./pages/Feed'))
 import NotFound from './pages/NotFound'
 import NavBar from './components/NavBar'
 import BottomNav from './components/BottomNav'
@@ -21,7 +21,7 @@ import DesktopSidebar from './components/DesktopSidebar'
 import ScrollToTop from './components/ScrollToTop'
 import OnboardingPage from './pages/Onboarding'
 import OnboardingOverlay from './components/OnboardingOverlay'
-import MyServices from './pages/MyServices'
+const MyServices = lazy(() => import('./pages/MyServices'))
 import Favorites from './pages/Favorites'
 import Toast from './components/Toast'
 import PageTransition from './components/PageTransition'
@@ -59,6 +59,14 @@ function AppRoutes() {
 
       <div className="desktopMain">
         <PageTransition>
+          <Suspense fallback={
+            <div style={{display:'flex',alignItems:'center',justifyContent:'center',
+              height:'100dvh',background:'#F7F7F9'}}>
+              <img src="/logo-iso.png" alt="" style={{width:'36px',opacity:0.35,
+                animation:'pulse 1.5s ease-in-out infinite'}} />
+              <style>{`@keyframes pulse{0%,100%{opacity:0.35}50%{opacity:0.7}}`}</style>
+            </div>
+          }>
           <Routes location={location} key={location.pathname}>
             <Route path="/" element={<Home setSearchState={setSearchState} />} />
             <Route path="/results" element={
@@ -80,6 +88,7 @@ function AppRoutes() {
             <Route path="/feed" element={<Feed />} />
             <Route path="*" element={<NotFound />} />
           </Routes>
+          </Suspense>
         </PageTransition>
       </div>
 
