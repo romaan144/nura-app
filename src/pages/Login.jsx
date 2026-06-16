@@ -29,7 +29,9 @@ export default function Login() {
       if (savedUser?.name && savedUser.name !== 'Usuario') {
         login({ ...savedUser, phone, verified: true })
         requestNotificationPermission().then(g => { if(g) scheduleRetentionNotifications(savedUser.name) })
-        navigate('/')
+        const returnTo = sessionStorage.getItem('nura_return_to')
+        sessionStorage.removeItem('nura_return_to')
+        navigate(returnTo || '/')
       } else {
         setStep('name')
       }
@@ -42,7 +44,9 @@ export default function Login() {
     requestNotificationPermission().then(granted => {
       if (granted) scheduleRetentionNotifications(name.trim())
     })
-    navigate('/')
+    const returnTo = sessionStorage.getItem('nura_return_to')
+    sessionStorage.removeItem('nura_return_to')
+    navigate(returnTo || '/')
   }
 
   const steps = ['phone', 'code', 'name']

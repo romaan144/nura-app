@@ -1,4 +1,4 @@
-import { useNavigate } from 'react-router-dom'
+import { useNavigate, useLocation } from 'react-router-dom'
 import { Shield, Star, MessageCircle, Heart, ArrowRight } from 'lucide-react'
 
 /**
@@ -8,6 +8,7 @@ import { Shield, Star, MessageCircle, Heart, ArrowRight } from 'lucide-react'
  */
 export default function RegisterGate({ onClose, reason = 'contact' }) {
   const navigate = useNavigate()
+  const location = useLocation()
 
   const REASONS = {
     contact: {
@@ -87,7 +88,7 @@ export default function RegisterGate({ onClose, reason = 'contact' }) {
         {/* CTAs */}
         <div style={{display:'flex',flexDirection:'column',gap:'10px'}}>
           <button
-            onClick={() => { onClose(); navigate('/login') }}
+            onClick={() => { onClose(); sessionStorage.setItem('nura_return_to', location.pathname + location.search); navigate('/login') }}
             style={{
               display:'flex',alignItems:'center',justifyContent:'center',gap:'8px',
               width:'100%',padding:'15px',
@@ -99,7 +100,7 @@ export default function RegisterGate({ onClose, reason = 'contact' }) {
             Crear cuenta gratis <ArrowRight size={16} />
           </button>
           <button
-            onClick={() => { onClose(); navigate('/login') }}
+            onClick={() => { onClose(); sessionStorage.setItem('nura_return_to', location.pathname + location.search); navigate('/login') }}
             style={{
               width:'100%',padding:'13px',
               background:'rgba(0,0,0,0.05)',color:'rgba(0,0,0,0.55)',

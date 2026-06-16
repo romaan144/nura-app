@@ -744,7 +744,15 @@ function HelperProfileInner() {
           </div>
 
           <div className={styles.heroActions}>
-            <button className={styles.heroCtaSecondary} onClick={() => { if(!user){setShowGate(true);setGateReason('contact')} else navigate(`/chat/${h.id}`, { state: { helper: h } }) }}>
+            <button className={styles.heroCtaSecondary} onClick={() => {
+                if (!user) {
+                  sessionStorage.setItem('nura_return_to', `/chat/${h.id}`)
+                  sessionStorage.setItem('nura_pending_helper', JSON.stringify(h))
+                  setShowGate(true); setGateReason('contact')
+                } else {
+                  navigate(`/chat/${h.id}`, { state: { helper: h } })
+                }
+              }}>
               <MessageCircle size={15} /> Escribir
             </button>
             <button className={styles.heroCtaBtn} onClick={() => { if(!user){setShowGate(true);setGateReason('contact')} else setShowConfirm(true) }}>
