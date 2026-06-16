@@ -159,7 +159,11 @@ function normalize(h) {
     qualitativeComments: [],
     evolution: [],
     personality: null,
-    isFromSupabase: true, // flag so UI knows to show "profile in progress" state
+    isFromSupabase: true,
+
+    // Dynamic AI data — Claude writes whatever it wants here
+    aiData: h.ai_data || {},
+    aiAnalyzedAt: h.ai_analyzed_at || null,
   }
 }
 

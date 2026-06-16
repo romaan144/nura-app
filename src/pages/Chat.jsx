@@ -4,6 +4,7 @@ import { ArrowLeft, Send, Shield, Star, MapPin, Award, Calendar, Info } from 'lu
 import { HELPERS } from '../data/helpers'
 import { useUser } from '../context/UserContext'
 import { getHelperById } from '../utils/supabase'
+import { appendHelperChatLog } from '../utils/claudeApi'
 import { notifyServiceConfirmed } from '../utils/notifications'
 import RatingModal from '../components/RatingModal'
 import styles from './Chat.module.css'
@@ -228,6 +229,10 @@ export default function Chat() {
       setTyping(false)
       const replyText = getHelperReply(helper, msgCount, msg)
       const reply = { id: Date.now() + 1, text: replyText, from: 'helper', time: new Date().toISOString() }
+      // Log for future Claude analysis (silently)
+      if (helper.isFromSupabase) {
+        appendHelperChatLog(helper.id, msg, replyText).catch(() => {})
+      }
       setMessages(prev => [...prev, reply])
       const newCount = msgCount + 1
       setMsgCount(newCount)

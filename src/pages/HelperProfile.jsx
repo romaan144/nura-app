@@ -202,6 +202,166 @@ function PostCard({ post, helper }) {
 /* ── MAIN ─────────────────────────────────────────────────────────────── */
 
 /* ── BOOKING MODAL ──────────────────────────────────── */
+
+/* ── AI DATA SECTION — renders whatever Claude puts in ai_data ────────────
+   Claude can write any keys to this JSONB field. The UI renders what exists.
+   No schema changes needed — just add keys to ai_data in Supabase.
+   ─────────────────────────────────────────────────────────────────────── */
+function AiDataSection({ aiData, aiAnalyzedAt, helperName }) {
+  if (!aiData || Object.keys(aiData).length === 0) return null
+
+  const firstName = helperName?.split(' ')?.[0] || ''
+
+  // Known renderers for common keys Claude might write
+  const RENDERERS = {
+    summary: (v) => (
+      <div style={{fontSize:'14px',color:'rgba(0,0,0,0.65)',lineHeight:1.7,fontStyle:'italic',
+        borderLeft:'3px solid rgba(123,47,255,0.25)',paddingLeft:'12px'}}>
+        "{v}"
+      </div>
+    ),
+    skills: (v) => Array.isArray(v) && v.length > 0 && (
+      <div style={{display:'flex',flexWrap:'wrap',gap:'6px'}}>
+        {v.map((s,i) => (
+          <span key={i} style={{padding:'4px 10px',borderRadius:'100px',
+            background:'rgba(123,47,255,0.07)',color:'var(--purple)',
+            fontSize:'12px',fontWeight:600,border:'1px solid rgba(123,47,255,0.12)'}}>
+            {s}
+          </span>
+        ))}
+      </div>
+    ),
+    personality: (v) => typeof v === 'object' && (
+      <div style={{display:'flex',flexDirection:'column',gap:'8px'}}>
+        {Object.entries(v).map(([k, val]) => (
+          <div key={k} style={{display:'flex',alignItems:'center',gap:'10px'}}>
+            <span style={{fontSize:'12px',color:'rgba(0,0,0,0.5)',minWidth:'100px',
+              textTransform:'capitalize'}}>{k}</span>
+            <div style={{flex:1,height:'4px',borderRadius:'2px',background:'rgba(0,0,0,0.08)'}}>
+              <div style={{width:`${typeof val==='number'?val:70}%`,height:'100%',
+                borderRadius:'2px',background:'var(--purple)'}} />
+            </div>
+            <span style={{fontSize:'11px',color:'rgba(0,0,0,0.4)',minWidth:'28px',textAlign:'right'}}>
+              {typeof val === 'number' ? val : ''}
+            </span>
+          </div>
+        ))}
+      </div>
+    ),
+    ideal_for: (v) => Array.isArray(v) && v.length > 0 && (
+      <div style={{display:'flex',flexDirection:'column',gap:'4px'}}>
+        {v.map((s,i) => (
+          <div key={i} style={{display:'flex',alignItems:'center',gap:'8px',
+            fontSize:'13px',color:'rgba(0,0,0,0.65)'}}>
+            <span style={{color:'#059669',fontWeight:700}}>✓</span> {s}
+          </div>
+        ))}
+      </div>
+    ),
+    red_flags: (v) => Array.isArray(v) && v.length > 0 && (
+      <div style={{display:'flex',flexDirection:'column',gap:'4px'}}>
+        {v.map((s,i) => (
+          <div key={i} style={{display:'flex',alignItems:'center',gap:'8px',
+            fontSize:'13px',color:'rgba(0,0,0,0.5)'}}>
+            <span style={{color:'#F59E0B'}}>⚠</span> {s}
+          </div>
+        ))}
+      </div>
+    ),
+    certifications: (v) => Array.isArray(v) && v.length > 0 && (
+      <div style={{display:'flex',flexDirection:'column',gap:'6px'}}>
+        {v.map((c,i) => (
+          <div key={i} style={{display:'flex',alignItems:'center',gap:'8px',
+            fontSize:'13px',color:'rgba(0,0,0,0.7)'}}>
+            <Shield size={12} color="#1A56DB" /> {typeof c === 'string' ? c : c.name || JSON.stringify(c)}
+          </div>
+        ))}
+      </div>
+    ),
+  }
+
+  // Labels for known keys
+  const LABELS = {
+    summary: '🤖 Análisis de Nüra',
+    skills: '✨ Habilidades detectadas por IA',
+    personality: '🧠 Perfil de personalidad',
+    ideal_for: '🎯 Ideal para',
+    red_flags: '⚠️ A tener en cuenta',
+    certifications: '📋 Certificaciones verificadas',
+  }
+
+  const entries = Object.entries(aiData)
+
+  return (
+    <div style={{display:'flex',flexDirection:'column',gap:'12px'}}>
+      {/* Header */}
+      <div style={{display:'flex',alignItems:'center',justifyContent:'space-between'}}>
+        <div style={{display:'flex',alignItems:'center',gap:'8px'}}>
+          <img src="/logo-iso.png" alt="Nüra" style={{width:'16px',height:'16px',objectFit:'contain'}} />
+          <span style={{fontSize:'12px',fontWeight:700,color:'var(--purple)',letterSpacing:'0.5px'}}>
+            ANÁLISIS NÜRA IA
+          </span>
+        </div>
+        {aiAnalyzedAt && (
+          <span style={{fontSize:'10px',color:'rgba(0,0,0,0.3)'}}>
+            {new Date(aiAnalyzedAt).toLocaleDateString('es-ES',{day:'numeric',month:'short'})}
+          </span>
+        )}
+      </div>
+
+      {/* Render each key Claude wrote */}
+      {entries.map(([key, value]) => {
+        const renderer = RENDERERS[key]
+        const label = LABELS[key] || key.replace(/_/g,' ')
+        const rendered = renderer ? renderer(value) : (
+          // Fallback: render unknown keys generically
+          typeof value === 'string' ? (
+            <p style={{fontSize:'13px',color:'rgba(0,0,0,0.6)',margin:0,lineHeight:1.6}}>{value}</p>
+          ) : Array.isArray(value) ? (
+            <div style={{display:'flex',flexWrap:'wrap',gap:'6px'}}>
+              {value.map((v,i) => (
+                <span key={i} style={{padding:'3px 8px',borderRadius:'8px',
+                  background:'rgba(0,0,0,0.05)',fontSize:'12px',color:'rgba(0,0,0,0.6)'}}>
+                  {typeof v === 'string' ? v : JSON.stringify(v)}
+                </span>
+              ))}
+            </div>
+          ) : typeof value === 'object' ? (
+            <div style={{display:'flex',flexDirection:'column',gap:'4px'}}>
+              {Object.entries(value).map(([k,v]) => (
+                <div key={k} style={{fontSize:'13px',color:'rgba(0,0,0,0.6)'}}>
+                  <strong style={{color:'rgba(0,0,0,0.75)',textTransform:'capitalize'}}>{k.replace(/_/g,' ')}:</strong> {String(v)}
+                </div>
+              ))}
+            </div>
+          ) : (
+            <span style={{fontSize:'13px',color:'rgba(0,0,0,0.6)'}}>{String(value)}</span>
+          )
+        )
+
+        if (!rendered) return null
+
+        return (
+          <div key={key} style={{
+            background:'rgba(255,255,255,0.85)',
+            border:'1px solid rgba(255,255,255,0.5)',
+            borderRadius:'16px',padding:'14px 16px',
+            boxShadow:'0 1px 8px rgba(0,0,0,0.04)'
+          }}>
+            {!RENDERERS[key] || key !== 'summary' ? (
+              <div style={{fontSize:'11px',fontWeight:700,color:'rgba(0,0,0,0.4)',
+                textTransform:'uppercase',letterSpacing:'0.8px',marginBottom:'10px'}}>
+                {label}
+              </div>
+            ) : null}
+            {rendered}
+          </div>
+        )
+      })}
+    </div>
+  )
+}
+
 function BookingModal({ helper, onClose, onBook, onNavigate }) {
   const [date, setDate] = useState('')
   const [time, setTime] = useState('')
@@ -492,6 +652,14 @@ function HelperProfileInner() {
         )}
         {activeTab === 'perfil' && (
           <>
+          {/* AI Data Section — rendered when Claude has analyzed this profile */}
+          {h.aiData && Object.keys(h.aiData).length > 0 && (
+            <AiDataSection
+              aiData={h.aiData}
+              aiAnalyzedAt={h.aiAnalyzedAt}
+              helperName={h.name}
+            />
+          )}
           {/* Building profile banner for Supabase helpers */}
         {isSupabaseHelper && !isFromShare && (
           <div style={{
