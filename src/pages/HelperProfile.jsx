@@ -266,7 +266,9 @@ function BookingModal({ helper, onClose, onBook, onNavigate }) {
 function HelperProfileInner() {
   const { id } = useParams()
   const navigate = useNavigate()
-  const { hasRated, helpersCache, toggleFavorite, isFavorite } = useUser()
+  const { hasRated, helpersCache, toggleFavorite, isFavorite,
+    addService
+  } = useUser()
   const [showRating, setShowRating] = useState(false)
   const [showConfirm, setShowConfirm] = useState(false)
 

@@ -13,7 +13,8 @@ export default function Profile() {
   const {
     user, logout, updateUser,
     chats, ratings, searchHistory, favorites,
-    totalUnreadChats: totalUnread
+    totalUnreadChats: totalUnread,
+    services
   } = useUser()
   const navigate = useNavigate()
 

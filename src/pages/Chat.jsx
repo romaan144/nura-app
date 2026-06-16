@@ -145,7 +145,9 @@ function ConfirmModal({ helper, onClose, onConfirm }) {
 export default function Chat() {
   const { id } = useParams()
   const navigate = useNavigate()
-  const { addChat, markRead, hasRated, helpersCache, addService } = useUser()
+  const { addChat, markRead, hasRated, helpersCache, addService,
+    services
+  } = useUser()
 
   const [helper, setHelper] = useState(
     helpersCache?.[parseInt(id)] || helpersCache?.[id] || helpersCache?.[String(id)] ||

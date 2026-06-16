@@ -191,6 +191,8 @@ export function UserProvider({ children }) {
       favorites, toggleFavorite, isFavorite,
       nuraChatMessages, setNuraChatMessages,
       nuraLastMatches, setNuraLastMatches,
+      services, addService, updateService,
+      updateUser,
     }}>
       {children}
     </UserContext.Provider>
