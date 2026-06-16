@@ -234,4 +234,3 @@ input:focus-visible, textarea:focus-visible { outline: none; }
   from { opacity: 0; transform: translateY(40px); }
   to   { opacity: 1; transform: translateY(0); }
 }
-// Tue Jun 16 06:30:19 UTC 2026
