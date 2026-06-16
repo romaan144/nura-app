@@ -124,7 +124,8 @@ export default function RegisterHelper() {
           if (saved) console.log('Helper saved to Supabase:', saved.id)
         })
         login({ name: newAnswers.name || val, isHelper: true, helperProfile: newAnswers })
-        setTimeout(() => navigate('/'), 2000)
+        sessionStorage.setItem('nura_helper_registered', '1')
+        setTimeout(() => navigate('/'), 3000)
       }, 1000)
     }
   }

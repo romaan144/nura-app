@@ -136,7 +136,7 @@ function getDynamicSuggestions(user, searchHistory) {
   const final = filtered.length >= 3 ? filtered : pool
 
   // Pick 4 varied suggestions (shuffle deterministically by minute)
-  const seed = Math.floor(Date.now() / (1000 * 60 * 5)) // changes every 5 min
+  const seed = Math.floor(Date.now() / (1000 * 60 * 60 * 24)) // changes daily
   const shuffled = [...final].sort((a, b) => {
     const ha = (a.charCodeAt(0) + seed) % 7
     const hb = (b.charCodeAt(0) + seed) % 7
@@ -243,7 +243,20 @@ export default function Home({ setSearchState }) {
 
   useEffect(() => {
     let lines = getWelcome(user)
-    // If just registered, show special welcome
+    // If helper just registered
+    const helperRegistered = sessionStorage.getItem('nura_helper_registered')
+    if (helperRegistered) {
+      sessionStorage.removeItem('nura_helper_registered')
+      const firstName = user?.name?.split(' ')?.[0] || user?.name || ''
+      lines = [
+        `¡Bienvenido a la red de Nüra, **${firstName}** 🎉`,
+        `Tu perfil ya está activo. Los usuarios pueden encontrarte y contactarte. Nüra irá completando y verificando tu perfil automáticamente.`
+      ]
+      setTimeout(() => setMessages([{ id: 1, from: 'nura', lines }]), 300)
+      return
+    }
+
+    // If just registered (user)
     const justRegistered = sessionStorage.getItem('nura_just_registered')
     if (justRegistered) {
       sessionStorage.removeItem('nura_just_registered')

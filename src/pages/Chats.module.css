@@ -97,3 +97,11 @@
 @media (max-width: 767px) {
   .page { padding-bottom: calc(72px + max(env(safe-area-inset-bottom, 0px), 8px)) !important; }
 }
+
+/* ── Empty state ── */
+.emptyIso { margin-bottom: 4px; }
+.emptyTitle { font-size: 19px; font-weight: 800; color: rgba(0,0,0,0.75); margin: 0; letter-spacing: -0.3px; }
+.emptyDesc { font-size: 14px; color: rgba(0,0,0,0.4); margin: 0; line-height: 1.65; max-width: 240px; text-align: center; }
+.emptyBtn { display: flex; align-items: center; justify-content: center; gap: 8px; width: 100%; max-width: 280px; padding: 13px; background: #1C1C1E; color: white; border: none; border-radius: 100px; font-size: 14px; font-weight: 700; cursor: pointer; transition: opacity 0.2s; font-family: -apple-system,'Inter',sans-serif; }
+.emptyBtn:active { opacity: 0.75; }
+.emptyBtnSecondary { width: 100%; max-width: 280px; padding: 12px; background: rgba(0,0,0,0.05); color: rgba(0,0,0,0.55); border: none; border-radius: 100px; font-size: 14px; font-weight: 600; cursor: pointer; font-family: -apple-system,'Inter',sans-serif; }
