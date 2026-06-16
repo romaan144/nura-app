@@ -299,17 +299,46 @@ export default function Home({ setSearchState }) {
         }, 800)
         return
       }
-      // User wants to refine
-      if (t.includes('no') || t.includes('otro') || t.includes('más barato') || t.includes('más cerca') || t.includes('diferente') || t.includes('ajusta') || t.includes('filtra')) {
-        const refined = await matchHelpers({ categoria: 'otro', palabrasClave: msg.toLowerCase().split(' ').filter(w => w.length > 3) }, 4, msg, lastMatches)
-        if (refined?.length) {
-          const resultMsg = { id: Date.now(), from: 'nura', lines: [`He ajustado los resultados.`], results: refined }
-          setMessages(prev => [...prev, resultMsg])
-          setTimeout(() => setMessages(prev => [...prev, { id: Date.now()+1, from: 'nura', lines: ['¿Mejor así?'] }]), 1200)
-          setLastMatches(refined)
-          setLoading(false)
-          return
+      // Smart refinement based on chip
+      const isRefinement = t.includes('no') || t.includes('otro') || t.includes('diferente') ||
+        t.includes('más barato') || t.includes('más cerca') || t.includes('mejor valorado') ||
+        t.includes('ajusta') || t.includes('filtra') || t.includes('urgencias')
+
+      if (isRefinement && lastMatches?.length > 0) {
+        let refined = [...lastMatches]
+        let refineLine = 'He ajustado los resultados.'
+
+        if (t.includes('más barato') || t.includes('precio') || t.includes('económico')) {
+          refined = refined.sort((a,b) => {
+            const pa = parseFloat((a.price||'999').replace(/[^0-9.]/g,'')) || 999
+            const pb = parseFloat((b.price||'999').replace(/[^0-9.]/g,'')) || 999
+            return pa - pb
+          })
+          refineLine = `Ordenados por precio. El más económico es **${refined[0]?.name?.split(' ')?.[0]}** a ${refined[0]?.price}.`
+        } else if (t.includes('más cerca') || t.includes('cerca') || t.includes('zona')) {
+          refined = refined.sort((a,b) => (a.distance||9) - (b.distance||9))
+          refineLine = `Ordenados por cercanía. **${refined[0]?.name?.split(' ')?.[0]}** está a ${refined[0]?.distance || '1.2'}km.`
+        } else if (t.includes('mejor valorado') || t.includes('rating') || t.includes('valoración')) {
+          refined = refined.sort((a,b) => (b.rating||0) - (a.rating||0))
+          refineLine = `Ordenados por valoración. **${refined[0]?.name?.split(' ')?.[0]}** tiene ${refined[0]?.rating}⭐.`
+        } else if (t.includes('urgencias') || t.includes('urgente') || t.includes('hoy')) {
+          refined = refined.filter(h => h.urgent).concat(refined.filter(h => !h.urgent))
+          refineLine = refined.filter(h=>h.urgent).length > 0
+            ? `Primero los que atienden urgencias.`
+            : `Ninguno de estos atiende urgencias. Prueba buscar "urgente" directamente.`
+        } else {
+          // Generic: re-run with same analysis
+          const reRefined = await matchHelpers({ categoria: analysis?.categoria || 'otro', palabrasClave: [] }, 4, msg, lastMatches)
+          refined = reRefined?.length ? reRefined : refined
+          refineLine = 'He ajustado los resultados.'
         }
+
+        const resultMsg = { id: Date.now(), from: 'nura', lines: [refineLine], results: refined,
+          chips: [`Escribir a ${refined[0]?.name?.split(' ')?.[0]}`, 'Más barato', 'Más cerca', 'Ver todos'] }
+        setMessages(prev => [...prev, resultMsg])
+        setLastMatches(refined)
+        setLoading(false)
+        return
       }
     }
 
