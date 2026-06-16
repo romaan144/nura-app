@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import { useNavigate, useLocation } from 'react-router-dom'
-import { Search, Compass, MessageCircle, User, Rss, X, Menu } from 'lucide-react'
+import { Search, Compass, MessageCircle, User, Rss, X, Menu, Heart, Calendar, HelpCircle, UserPlus } from 'lucide-react'
 import { useUser } from '../context/UserContext'
 import styles from './NavBar.module.css'
 import pageStyles from './PageHeader.module.css'

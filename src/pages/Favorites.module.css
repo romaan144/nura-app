@@ -21,8 +21,7 @@
   .list { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
 }
 
-/* Bottom nav space (mobile only) */
+/* Bottom nav clearance */
 @media (max-width: 767px) {
-  .page { padding-bottom: 72px; }
-  .messages { padding-bottom: 152px; }
+  .page { padding-bottom: calc(72px + max(env(safe-area-inset-bottom, 0px), 8px)) !important; }
 }

@@ -219,3 +219,13 @@ img { -webkit-user-drag: none; }
 *:focus { outline: none; }
 *:focus-visible { outline: 2px solid rgba(123,47,255,0.5); outline-offset: 2px; border-radius: 4px; }
 input:focus-visible, textarea:focus-visible { outline: none; }
+
+/* ── BOTTOM NAV CLEARANCE ─────────────────────────────────
+   Pages with scrollable content need padding to clear the
+   72px bottom nav. Applied globally on mobile.
+   ────────────────────────────────────────────────────────── */
+@media (max-width: 767px) {
+  .pageScrollable {
+    padding-bottom: calc(72px + max(env(safe-area-inset-bottom, 0px), 8px));
+  }
+}

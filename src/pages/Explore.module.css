@@ -128,8 +128,7 @@
 }
 .filterPriceLabel { font-size: 13px; font-weight: 700; color: var(--purple); }
 
-/* Bottom nav space (mobile only) */
+/* Bottom nav clearance */
 @media (max-width: 767px) {
-  .page { padding-bottom: 72px; }
-  .messages { padding-bottom: 152px; }
+  .page { padding-bottom: calc(72px + max(env(safe-area-inset-bottom, 0px), 8px)) !important; }
 }
