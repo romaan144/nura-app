@@ -69,27 +69,24 @@ export default function MyServices() {
         {/* Empty state */}
         {filtered.length === 0 && (
           <div className={styles.empty}>
-            <span style={{fontSize:'48px'}}>📋</span>
-            <h3>
-              {tab === 'Todos' ? 'Sin servicios todavía' :
-               tab === 'Próximos' ? 'Sin servicios próximos' : 'Sin servicios completados'}
-            </h3>
-            <p>
+            <span style={{fontSize:'48px',display:'block',marginBottom:'8px'}}>
+              {tab === 'Completados' ? '✅' : tab === 'Próximos' ? '📅' : '📋'}
+            </span>
+            <strong style={{fontSize:'16px',color:'rgba(0,0,0,0.7)',letterSpacing:'-0.2px'}}>
+              {tab === 'Todos' ? 'Aún no has contratado nada'
+               : tab === 'Próximos' ? 'No tienes servicios próximos'
+               : 'Sin servicios completados'}
+            </strong>
+            <p style={{fontSize:'13px',color:'rgba(0,0,0,0.4)',margin:'4px 0 16px',lineHeight:1.6,textAlign:'center',maxWidth:'220px'}}>
               {tab === 'Todos'
-                ? 'Cuando contrates un helper, aquí verás el historial completo.'
-                : 'Aquí aparecerán tus servicios cuando los tengas.'}
+                ? 'Cuando contactes con un helper y concretes una cita, aparecerá aquí.'
+                : tab === 'Próximos'
+                ? 'Cuando contrates un servicio lo verás aquí con los detalles.'
+                : 'Tus servicios completados y valoraciones aparecerán aquí.'}
             </p>
-            {tab === 'Todos' && (
-              <p style={{fontSize:'13px',color:'rgba(0,0,0,0.4)',margin:'4px 0 16px',lineHeight:1.6}}>
-                {tab === 'Todos'
-                  ? 'Cuando contactes con un helper y concretes una cita, aparecerá aquí.'
-                  : tab === 'Próximos'
-                  ? 'Cuando contrates un servicio lo verás aquí con los detalles.'
-                  : 'Tus servicios completados y valoraciones aparecerán aquí.'}
-              </p>
-              <button className={styles.emptyBtn} onClick={() => navigate('/')}>
-                Buscar con Nüra
-              </button>
+            <button className={styles.emptyBtn} onClick={() => navigate('/')}>
+              Buscar con Nüra
+            </button>
             )}
           </div>
         )}
