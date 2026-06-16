@@ -32,7 +32,7 @@ function AppRoutes({ showSplash }) {
   const location = useLocation()
   const { user } = useUser()
   const [showOnboarding, setShowOnboarding] = useState(() => {
-    if (user) return false  // already has account
+    if (user) return false
     return !localStorage.getItem('nura_onboarded')
   })
 

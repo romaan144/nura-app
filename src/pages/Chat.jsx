@@ -222,11 +222,19 @@ export default function Chat() {
   const lastMsg = messages[messages.length - 1]
   const showQuickReplies = lastMsg?.from === 'helper' && !typing
 
-  const QUICK_REPLIES = [
+  // Context-aware quick replies based on conversation stage
+  const QUICK_REPLIES = msgCount === 0 ? [
     '¿Cuál es el precio exacto?',
-    '¿Cuándo podrías empezar?',
-    'Perfecto, adelante',
-    '¿Tienes referencias?',
+    '¿Cuándo tienes disponibilidad?',
+    '¿Trabajas en mi zona?',
+  ] : msgCount <= 2 ? [
+    'Perfecto, ¿cuándo empezamos?',
+    '¿Puedes venir esta semana?',
+    '¿Tienes referencias de otros clientes?',
+  ] : [
+    'Quiero contratarte',
+    '¿Puedes enviarme más info?',
+    'Necesito pensarlo',
   ]
 
   return (

@@ -142,3 +142,16 @@
   font-weight: 600; cursor: pointer; padding: 4px;
   font-family: -apple-system,'Inter',sans-serif;
 }
+
+.topRow {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+}
+.loginLink {
+  background: none; border: none;
+  font-size: 14px; color: var(--purple);
+  font-weight: 600; padding: 6px 2px;
+  cursor: pointer; font-family: -apple-system,'Inter',sans-serif;
+}

@@ -4,10 +4,10 @@ import { useState, useEffect } from 'react'
 import { useParams, useNavigate, useLocation } from 'react-router-dom'
 import {
   ArrowLeft, Star, Shield, MapPin, MessageCircle, Zap,
-  TrendingUp, Clock, CheckCircle, Award, Brain, Globe,
+  TrendingUp, Clock, CheckCircle, Award, Brain,
   Building2, BookOpen, Share2, Lock, Heart, Sparkles, Calendar,
-  ThumbsUp, MessageSquare, AlertCircle, BarChart2, RefreshCw,
-  Activity, Cpu, Eye, Layers
+  ThumbsUp, MessageSquare, AlertCircle, BarChart2,
+  Activity, Cpu, Layers
 } from 'lucide-react'
 import { HELPERS } from '../data/helpers'
 import { useUser } from '../context/UserContext'
@@ -61,59 +61,6 @@ function LivePulse({ helper }) {
 }
 
 /* ── NÜRA AI PROACTIVE QUESTION ────────────────────────────────────────── */
-function NuraQuestion({ helperName }) {
-  const [answered, setAnswered] = useState(false)
-  const [answer, setAnswer] = useState('')
-  const [sent, setSent] = useState(false)
-
-  if (sent) return (
-    <div className={styles.nuraQuestionSent}>
-      <Sparkles size={14} color="var(--purple)" />
-      <span>Respuesta enviada. Nüra actualizará el perfil de {helperName.split(' ')[0]} en breve.</span>
-    </div>
-  )
-
-  return (
-    <div className={styles.nuraQuestion}>
-      <div className={styles.nuraQuestionHeader}>
-        <img src="/logo-iso.png" alt="Nüra" className={styles.nuraIso} />
-        <div>
-          <span className={styles.nuraQuestionFrom}>Nüra IA · Pregunta proactiva</span>
-          <p className={styles.nuraQuestionText}>
-            {helperName.split(' ')[0]}, ¿has completado alguna formación nueva o trabajado en un contexto diferente en los últimos 3 meses? Tu perfil se actualiza con lo que aprendes.
-          </p>
-        </div>
-      </div>
-      {!answered ? (
-        <div className={styles.nuraQuestionActions}>
-          <button className={styles.nuraQuestionBtn} onClick={() => setAnswered(true)}>
-            Sí, cuéntaselo a Nüra
-          </button>
-          <button className={styles.nuraQuestionSkip} onClick={() => setSent(true)}>
-            No por ahora
-          </button>
-        </div>
-      ) : (
-        <div className={styles.nuraQuestionInput}>
-          <input
-            placeholder="Cuéntale a Nüra qué has aprendido..."
-            value={answer}
-            onChange={e => setAnswer(e.target.value)}
-            className={styles.nuraInput}
-            autoFocus
-          />
-          <button
-            className={styles.nuraInputSend}
-            disabled={!answer.trim()}
-            onClick={() => setSent(true)}
-          >→</button>
-        </div>
-      )}
-    </div>
-  )
-}
-
-/* ── PERSONALITY CIRCLES ──────────────────────────────────────────────── */
 function PersonalityCircle({ label, value, color }) {
   const pct = (value / 10) * 100
   const r = 22

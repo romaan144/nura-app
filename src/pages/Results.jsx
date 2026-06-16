@@ -63,7 +63,7 @@ function HelperCard({ helper }) {
 export default function Results({ searchState }) {
   const navigate = useNavigate()
   const [sortBy, setSortBy] = useState('relevance')
-  const [viewMode, setViewMode] = useState('list')
+  const [viewMode, setViewMode] = useState(() => localStorage.getItem('nura_view_mode') || 'list')
   const { cacheHelpers } = useUser()
 
   useEffect(() => {
@@ -174,9 +174,9 @@ export default function Results({ searchState }) {
           <>
             <div className={styles.topBar}>
               <button className={`${styles.viewBtn} ${viewMode==='list'?styles.viewBtnActive:''}`}
-                onClick={() => setViewMode('list')}>≡ Lista</button>
+                onClick={() => { setViewMode('list'); localStorage.setItem('nura_view_mode','list') }}>≡ Lista</button>
               <button className={`${styles.viewBtn} ${viewMode==='grid'?styles.viewBtnActive:''}`}
-                onClick={() => setViewMode('grid')}>⊞ Cuadrícula</button>
+                onClick={() => { setViewMode('grid'); localStorage.setItem('nura_view_mode','grid') }}>⊞ Cuadrícula</button>
             </div>
             <div className={styles.sortRow}>
               {['relevance','rating','distance','price'].map(s => (

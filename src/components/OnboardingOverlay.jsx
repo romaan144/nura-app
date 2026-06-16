@@ -47,7 +47,12 @@ export default function OnboardingOverlay({ onComplete }) {
 
   if (showName) return (
     <div className={styles.overlay}>
-      <button className={styles.skip} onClick={skip}>Saltar</button>
+      <div className={styles.topRow}>
+        <button className={styles.skip} onClick={skip}>Saltar</button>
+        <button className={styles.loginLink} onClick={() => { skip(); window.location.href = '/login' }}>
+          Ya tengo cuenta
+        </button>
+      </div>
       <div className={styles.namePage}>
         <img src="/logo-iso.png" alt="Nüra" className={styles.nameIso} />
         <h2 className={styles.nameTitle}>¿Cómo te llamas?</h2>
@@ -75,7 +80,12 @@ export default function OnboardingOverlay({ onComplete }) {
 
   return (
     <div className={styles.overlay}>
-      <button className={styles.skip} onClick={skip}>Saltar</button>
+      <div className={styles.topRow}>
+        <button className={styles.skip} onClick={skip}>Saltar</button>
+        <button className={styles.loginLink} onClick={() => { skip(); window.location.href = '/login' }}>
+          Ya tengo cuenta
+        </button>
+      </div>
 
       <div className={styles.content} key={step}>
         <div className={styles.emoji}>{s.emoji}</div>

@@ -454,12 +454,14 @@ export default function Home({ setSearchState }) {
         )}
 
         {showSuggestions && (
+          <div className={styles.suggestionsWrap}>
           <div className={styles.suggestions}>
             {suggestions.map((s, i) => (
               <button key={i} className={styles.suggestion} onClick={() => handleSend(s.text)}>
                 <span className={styles.suggestionText}>{s.text}</span>
               </button>
             ))}
+          </div>
           </div>
         )}
 
