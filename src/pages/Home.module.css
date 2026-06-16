@@ -250,10 +250,11 @@
 .bubble p { margin: 0; line-height: 1.55; letter-spacing: -0.1px; }
 .bubble p:empty { display: none; }
 .bubbleNura {
-  background: rgba(255,255,255,0.78);
-  backdrop-filter: blur(20px) saturate(160%);
-  -webkit-backdrop-filter: blur(20px) saturate(160%);
-  border: 1px solid rgba(255,255,255,0.4);
+  background: rgba(255,255,255,0.85);
+  backdrop-filter: blur(24px) saturate(180%);
+  -webkit-backdrop-filter: blur(24px) saturate(180%);
+  border: 1px solid rgba(255,255,255,0.5);
+  border-left: 2px solid rgba(123,47,255,0.15);
   color: rgba(0,0,0,0.85);
   border-radius: 4px 18px 18px 18px;
   box-shadow: 0 1px 12px rgba(0,0,0,0.04);
@@ -265,10 +266,11 @@
 }
 
 .typingDots {
-  display: flex; gap: 4px; align-items: center; padding: 2px 0;
+  display: flex; gap: 5px; align-items: center; padding: 4px 0;
 }
 .typingDots span {
-  width: 6px; height: 6px; border-radius: 50%; background: #bbb;
+  width: 7px; height: 7px; border-radius: 50%;
+  background: linear-gradient(135deg, var(--purple), #00D4C8);
   animation: tdot 1.4s ease-in-out infinite;
 }
 .typingDots span:nth-child(2) { animation-delay: 0.2s; }

@@ -95,7 +95,15 @@ export default function MyServices() {
   function formatDate(dateStr) {
     if (!dateStr) return ''
     try {
-      return new Date(dateStr).toLocaleDateString('es-ES', { weekday: 'short', day: 'numeric', month: 'short' })
+      const d = new Date(dateStr)
+      const today = new Date(); today.setHours(0,0,0,0)
+      const tomorrow = new Date(today); tomorrow.setDate(tomorrow.getDate()+1)
+      const dayAfter = new Date(today); dayAfter.setDate(dayAfter.getDate()+2)
+      d.setHours(0,0,0,0)
+      if (d.getTime() === today.getTime()) return 'Hoy'
+      if (d.getTime() === tomorrow.getTime()) return 'Mañana'
+      if (d.getTime() === dayAfter.getTime()) return 'Pasado mañana'
+      return d.toLocaleDateString('es-ES', { weekday: 'long', day: 'numeric', month: 'long' })
     } catch { return dateStr }
   }
 

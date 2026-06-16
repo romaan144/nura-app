@@ -49,11 +49,14 @@ function buildFeed(following, helpers, companies) {
   // Score: following=2pts, dynamic(Hoy)=1pt, cert posts=0.5pt
   function postScore(p) {
     let s = 0
-    if (p.following) s += 10
-    if (p.dynamic) s += 5
-    if (p.date === 'Hoy') s += 3
-    if (p.type === 'cert') s += 1
-    if (p.badge) s += 2
+    if (p.following)               s += 10  // followed content first
+    if (p.dynamic)                 s += 6   // AI-generated always fresh
+    if (p.type === 'availability') s += 4   // availability = action
+    if (p.type === 'tip')          s += 3   // Nüra tips useful
+    if (p.date === 'Hoy')          s += 3   // recency
+    if (p.type === 'cert')         s += 2   // credentials = trust
+    if (p.badge)                   s += 2   // social proof
+    if (p.verifiedWork)            s += 1   // work post
     return s
   }
   return posts.sort((a, b) => postScore(b) - postScore(a))
