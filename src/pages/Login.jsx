@@ -38,7 +38,7 @@ export default function Login() {
   function handleName() {
     if (!name.trim()) return
     login({ name: name.trim(), phone, joined: new Date().toISOString() })
-    // Ask for notification permission after login
+    sessionStorage.setItem('nura_just_registered', '1')
     requestNotificationPermission().then(granted => {
       if (granted) scheduleRetentionNotifications(name.trim())
     })
@@ -68,8 +68,8 @@ export default function Login() {
 
         {step === 'phone' && (
           <div className={styles.step}>
-            <h2 className={styles.stepTitle}>¿Cuál es tu número?</h2>
-            <p className={styles.stepDesc}>Te enviamos un código de verificación por SMS.</p>
+            <h2 className={styles.stepTitle}>Accede a Nüra</h2>
+            <p className={styles.stepDesc}>Para contactar helpers y guardar tu historial necesitas una cuenta. Es gratis y tarda 30 segundos.</p>
             <div className={styles.phoneRow}>
               <div className={styles.flag}>🇪🇸 +34</div>
               <input className={styles.input} type="tel" placeholder="612 345 678"

@@ -134,6 +134,14 @@ export default function Home({ setSearchState }) {
 
   useEffect(() => {
     let lines = getWelcome(user)
+    // If just registered, show special welcome
+    const justRegistered = sessionStorage.getItem('nura_just_registered')
+    if (justRegistered) {
+      sessionStorage.removeItem('nura_just_registered')
+      lines = [`Bienvenido a Nüra, **${user?.name?.split(' ')?.[0] || 'tú'}** 🎉 Ya puedes contactar con cualquier profesional. ¿Qué necesitas?`]
+      setTimeout(() => setMessages([{ id: 1, from: 'nura', lines }]), 300)
+      return
+    }
     // If returning user with search history, personalize
     const lastQ = searchHistory?.[0]?.query
     if (user && lastQ && nuraChatMessages.length === 0) {

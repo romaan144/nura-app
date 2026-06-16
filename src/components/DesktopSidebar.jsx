@@ -1,5 +1,5 @@
 import { useNavigate, useLocation } from 'react-router-dom'
-import { Search, Compass, MessageCircle, User, Rss } from 'lucide-react'
+import { Search, Compass, MessageCircle, User, Rss, Heart } from 'lucide-react'
 import { useUser } from '../context/UserContext'
 import styles from './DesktopSidebar.module.css'
 
@@ -12,10 +12,11 @@ export default function DesktopSidebar() {
   if (hideOn.some(p => location.pathname.startsWith(p))) return null
 
   const tabs = [
-    { path: '/', icon: <Search size={20} />, label: 'Buscar' },
-    { path: '/feed', icon: <Rss size={20} />, label: 'Feed' },
+    { path: '/', icon: <Search size={20} />, label: 'Nüra' },
     { path: '/explore', icon: <Compass size={20} />, label: 'Explorar' },
-    { path: '/chats', icon: <MessageCircle size={20} />, label: 'Mensajes', badge: totalUnreadChats },
+    { path: '/chats', icon: <MessageCircle size={20} />, label: 'Chats', badge: totalUnreadChats },
+    { path: '/feed', icon: <Rss size={20} />, label: 'Feed' },
+    { path: '/favorites', icon: <Heart size={20} />, label: 'Favoritos' },
     { path: '/profile', icon: <User size={20} />, label: 'Mi perfil' },
   ]
 

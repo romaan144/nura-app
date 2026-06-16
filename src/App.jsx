@@ -20,6 +20,7 @@ import BottomNav from './components/BottomNav'
 import DesktopSidebar from './components/DesktopSidebar'
 import ScrollToTop from './components/ScrollToTop'
 import OnboardingPage from './pages/Onboarding'
+import OnboardingOverlay from './components/OnboardingOverlay'
 import MyServices from './pages/MyServices'
 import Favorites from './pages/Favorites'
 import Toast from './components/Toast'
@@ -31,7 +32,8 @@ function AppRoutes({ showSplash }) {
   const location = useLocation()
   const { user } = useUser()
   const [showOnboarding, setShowOnboarding] = useState(() => {
-    return !user && !localStorage.getItem('nura_onboarded')
+    if (user) return false  // already has account
+    return !localStorage.getItem('nura_onboarded')
   })
 
   const handleOnboardingComplete = () => {
@@ -45,6 +47,7 @@ function AppRoutes({ showSplash }) {
   return (
     <>
       {showSplash && <Splash />}
+      {!showSplash && showOnboarding && <OnboardingOverlay onComplete={handleOnboardingComplete} />}
       <ScrollToTop />
 
       {/* Desktop sidebar — hidden on mobile via CSS */}
