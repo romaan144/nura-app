@@ -52,16 +52,13 @@ function getWelcome(user, searchHistory, favorites, helpersCache) {
       `¿Qué necesitas hoy? Cuéntamelo y encuentro a la persona exacta.`
     ]
   }
-  if (user.isHelper) return [
-    `${greeting}, **${user.name?.split(' ')[0]}**. ¿Qué necesitas hoy?`,
-  ]
-  const firstName = user.name?.split(' ')?.[0] || user.name
-  const msgs = [
+  // Default greeting
+  if (user.isHelper) return [`${greeting}, **${firstName}**. ¿Qué necesitas hoy?`]
+  return [
     hour < 12 ? `${greeting}, **${firstName}**. ¿En qué puedo ayudarte esta mañana?`
     : hour < 18 ? `${greeting}, **${firstName}**. ¿Qué necesitas?`
     : `${greeting}, **${firstName}**. Cuéntame qué necesitas.`
   ]
-  return msgs
 }
 
 function detectIntent(text, user) {
