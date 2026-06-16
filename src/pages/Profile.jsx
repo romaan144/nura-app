@@ -57,7 +57,11 @@ export default function Profile() {
     setEditingPhone(false)
   }
 
+  // For helpers: find their profile in helpers list
+  const helperProfileId = null // Will be populated from Supabase when real auth exists
+
   const ACTIONS = [
+    ...(user?.isHelper ? [{ icon: '👤', label: 'Mi perfil público', sub: 'Cómo te ven los usuarios', action: () => navigate('/explore') }] : []),
     { icon: '💬', label: 'Mis conversaciones', sub: `${chats?.length || 0} activas`, action: () => navigate('/chats') },
     { icon: '❤️', label: 'Favoritos', sub: `${favorites?.length || 0} guardados`, action: () => navigate('/favorites') },
     { icon: '📋', label: 'Mis servicios', sub: 'Historial y valoraciones', action: () => navigate('/my-services') },
@@ -135,7 +139,7 @@ export default function Profile() {
 
           {user.isHelper && (
             <div className={styles.helperBadges}>
-              <span className={styles.founderBadge}><Award size={11} /> Helper verificado</span>
+              <span className={styles.founderBadge}><Award size={11} /> Helper en Nüra</span>
             </div>
           )}
           {daysSince > 0 && (

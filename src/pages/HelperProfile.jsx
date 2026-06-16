@@ -362,6 +362,157 @@ function AiDataSection({ aiData, aiAnalyzedAt, helperName }) {
   )
 }
 
+
+/* ── OWNER PANEL ──────────────────────────────────────────────────────────
+   Dashboard for helpers viewing their own profile.
+   Allows managing availability, seeing their stats, and quick updates.
+   ─────────────────────────────────────────────────────────────────────── */
+function OwnerPanel({ helper, user, updateUser, navigate }) {
+  const [available, setAvailable] = useState(helper?.available ?? true)
+  const [saved, setSaved] = useState(false)
+
+  async function toggleAvailability() {
+    const next = !available
+    setAvailable(next)
+    // Update in Supabase
+    try {
+      await fetch(`https://oxmohciswebonoumghhu.supabase.co/rest/v1/helpers?id=eq.${helper.id}`, {
+        method: 'PATCH',
+        headers: {
+          'apikey': 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im94bW9oY2lzd2Vib25vdW1naGh1Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDk2MzE4MTUsImV4cCI6MjA2NTIwNzgxNX0.oJQLSV5UEGjV3f6sPnHJT3nOVHXyaQJGzHKVDQkWCHo',
+          'Authorization': 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im94bW9oY2lzd2Vib25vdW1naGh1Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDk2MzE4MTUsImV4cCI6MjA2NTIwNzgxNX0.oJQLSV5UEGjV3f6sPnHJT3nOVHXyaQJGzHKVDQkWCHo',
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ available: next })
+      })
+    } catch {}
+    setSaved(true)
+    setTimeout(() => setSaved(false), 2000)
+  }
+
+  const stats = [
+    { n: helper.reviews || 0,         l: 'Valoraciones' },
+    { n: helper.services || 0,        l: 'Servicios' },
+    { n: `${helper.rating || '—'}★`,  l: 'Media' },
+  ]
+
+  return (
+    <div style={{
+      position: 'fixed', top: 0, left: 0, right: 0, zIndex: 50,
+      padding: 'max(env(safe-area-inset-top,0px),52px) 14px 0',
+      pointerEvents: 'none',
+    }}>
+      <div style={{
+        background: 'rgba(28,28,30,0.95)',
+        backdropFilter: 'blur(32px) saturate(200%)',
+        WebkitBackdropFilter: 'blur(32px) saturate(200%)',
+        borderRadius: '20px',
+        padding: '14px 16px',
+        pointerEvents: 'all',
+        boxShadow: '0 8px 32px rgba(0,0,0,0.25)',
+        marginTop: '8px',
+      }}>
+        {/* Header */}
+        <div style={{display:'flex',alignItems:'center',justifyContent:'space-between',marginBottom:'12px'}}>
+          <div style={{display:'flex',alignItems:'center',gap:'8px'}}>
+            <img src="/logo-iso.png" alt="Nüra" style={{width:'18px',height:'18px',objectFit:'contain',filter:'brightness(10)'}} />
+            <span style={{fontSize:'12px',fontWeight:700,color:'white',letterSpacing:'0.5px'}}>
+              TU PERFIL EN NÜRA
+            </span>
+          </div>
+          {saved && (
+            <span style={{fontSize:'11px',color:'#34D399',fontWeight:600}}>✓ Guardado</span>
+          )}
+        </div>
+
+        {/* Stats */}
+        <div style={{display:'flex',gap:'0',marginBottom:'12px',
+          background:'rgba(255,255,255,0.07)',borderRadius:'12px',overflow:'hidden'}}>
+          {stats.map(({ n, l }, i) => (
+            <div key={l} style={{flex:1,padding:'10px 8px',textAlign:'center',
+              borderRight: i < 2 ? '1px solid rgba(255,255,255,0.08)' : 'none'}}>
+              <div style={{fontSize:'17px',fontWeight:800,color:'white',letterSpacing:'-0.3px'}}>{n}</div>
+              <div style={{fontSize:'10px',color:'rgba(255,255,255,0.45)',fontWeight:500}}>{l}</div>
+            </div>
+          ))}
+        </div>
+
+        {/* Actions */}
+        <div style={{display:'flex',gap:'8px'}}>
+          {/* Availability toggle */}
+          <button
+            onClick={toggleAvailability}
+            style={{
+              flex:1, padding:'10px 8px',
+              background: available ? 'rgba(52,211,153,0.15)' : 'rgba(255,255,255,0.08)',
+              border: available ? '1px solid rgba(52,211,153,0.3)' : '1px solid rgba(255,255,255,0.1)',
+              borderRadius:'12px', cursor:'pointer',
+              display:'flex', flexDirection:'column', alignItems:'center', gap:'3px',
+            }}>
+            <span style={{fontSize:'16px'}}>{available ? '🟢' : '⚫'}</span>
+            <span style={{fontSize:'10px',fontWeight:700,
+              color: available ? '#34D399' : 'rgba(255,255,255,0.45)'}}>
+              {available ? 'Disponible' : 'No disponible'}
+            </span>
+          </button>
+
+          {/* Go to chats */}
+          <button
+            onClick={() => navigate('/chats')}
+            style={{
+              flex:1, padding:'10px 8px',
+              background:'rgba(255,255,255,0.08)',
+              border:'1px solid rgba(255,255,255,0.1)',
+              borderRadius:'12px', cursor:'pointer',
+              display:'flex', flexDirection:'column', alignItems:'center', gap:'3px',
+            }}>
+            <span style={{fontSize:'16px'}}>💬</span>
+            <span style={{fontSize:'10px',fontWeight:700,color:'rgba(255,255,255,0.6)'}}>
+              Mensajes
+            </span>
+          </button>
+
+          {/* Share profile */}
+          <button
+            onClick={() => {
+              const url = `${window.location.href}?utm_source=share&utm_medium=helper`
+              if (navigator.share) navigator.share({ title: helper.name, url })
+              else navigator.clipboard?.writeText(url)
+            }}
+            style={{
+              flex:1, padding:'10px 8px',
+              background:'rgba(255,255,255,0.08)',
+              border:'1px solid rgba(255,255,255,0.1)',
+              borderRadius:'12px', cursor:'pointer',
+              display:'flex', flexDirection:'column', alignItems:'center', gap:'3px',
+            }}>
+            <span style={{fontSize:'16px'}}>🔗</span>
+            <span style={{fontSize:'10px',fontWeight:700,color:'rgba(255,255,255,0.6)'}}>
+              Compartir
+            </span>
+          </button>
+
+          {/* Edit profile */}
+          <button
+            onClick={() => navigate('/register-helper')}
+            style={{
+              flex:1, padding:'10px 8px',
+              background:'rgba(123,47,255,0.2)',
+              border:'1px solid rgba(123,47,255,0.3)',
+              borderRadius:'12px', cursor:'pointer',
+              display:'flex', flexDirection:'column', alignItems:'center', gap:'3px',
+            }}>
+            <span style={{fontSize:'16px'}}>✏️</span>
+            <span style={{fontSize:'10px',fontWeight:700,color:'rgba(180,130,255,1)'}}>
+              Editar
+            </span>
+          </button>
+        </div>
+      </div>
+    </div>
+  )
+}
+
 function BookingModal({ helper, onClose, onBook, onNavigate }) {
   const [date, setDate] = useState('')
   const [time, setTime] = useState('')
@@ -427,7 +578,7 @@ function HelperProfileInner() {
   const { id } = useParams()
   const navigate = useNavigate()
   const { hasRated, helpersCache, toggleFavorite, isFavorite,
-    addService
+    addService, user, updateUser
   } = useUser()
   const [showRating, setShowRating] = useState(false)
   const [showConfirm, setShowConfirm] = useState(false)
@@ -509,6 +660,13 @@ function HelperProfileInner() {
   ]
 
   const isSupabaseHelper = !!h.isFromSupabase
+
+  // Is the viewer the owner of this profile?
+  const isOwner = user?.isHelper && (
+    user?.helperProfile?.name === h.name ||
+    user?.name === h.name ||
+    String(user?.helperId) === String(h.id)
+  )
 
   // Score penalizes low service count (< 5 services = max 60 score)
   const serviceCount = h.services || 0
