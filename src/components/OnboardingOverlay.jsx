@@ -5,22 +5,22 @@ import styles from './OnboardingOverlay.module.css'
 
 const STEPS = [
   {
-    emoji: '✨',
-    eyebrow: 'BIENVENIDO A NÜRA',
-    title: 'La IA que conecta\npersonas reales',
-    desc: 'Dile a Nüra lo que necesitas. En segundos te presenta al profesional ideal verificado cerca de ti.',
+    emoji: '🗣️',
+    eyebrow: 'NUEVA FORMA DE BUSCAR',
+    title: 'Cuéntalo con\ntus palabras',
+    desc: '"Necesito una cuidadora para mi madre los martes por la mañana en el Eixample." Así de fácil. Nüra entiende.',
   },
   {
     emoji: '🛡️',
-    eyebrow: 'CONFIANZA REAL',
-    title: 'Cada perfil,\nverificado por Nüra',
-    desc: 'DNI comprobado. Valoraciones auténticas. Experiencia real. Nüra construye el perfil — no el propio profesional.',
+    eyebrow: 'CONFIANZA TOTAL',
+    title: 'Cada perfil,\nconstruido por IA',
+    desc: 'DNI verificado, valoraciones reales, historial comprobado. Nüra construye el perfil del profesional — no él mismo.',
   },
   {
-    emoji: '⚡',
-    eyebrow: 'EN TU ZONA',
-    title: 'Presencial o online,\ncuando lo necesites',
-    desc: 'Cuidadoras, técnicos, logopedas, entrenadores, clases. Más de 1.200 profesionales en Barcelona.',
+    emoji: '✅',
+    eyebrow: '1.200+ PROFESIONALES',
+    title: 'La persona exacta,\nen minutos',
+    desc: 'Logopedas, cuidadoras, técnicos, profesores, entrenadores, psicólogos. En Barcelona y expandiendo.',
   },
 ]
 
@@ -36,6 +36,7 @@ export default function OnboardingOverlay({ onComplete }) {
     localStorage.setItem('nura_onboarded', '1')
     if (name.trim()) {
       login({ name: name.trim(), joined: new Date().toISOString() })
+      sessionStorage.setItem('nura_just_onboarded', name.trim())
     }
     onComplete()
   }
@@ -59,7 +60,7 @@ export default function OnboardingOverlay({ onComplete }) {
         <p className={styles.nameDesc}>Para que Nüra pueda saludarte. Es opcional.</p>
         <input
           className={styles.nameInput}
-          placeholder="Tu nombre"
+          placeholder="Escribe tu nombre..."
           value={name}
           onChange={e => setName(e.target.value)}
           onKeyDown={e => e.key === 'Enter' && finish()}
@@ -67,7 +68,7 @@ export default function OnboardingOverlay({ onComplete }) {
           maxLength={40}
         />
         <button className={styles.primary} onClick={finish}>
-          {name.trim() ? 'Empezar' : 'Continuar sin nombre'} <ArrowRight size={16} />
+          {name.trim() ? `¡Empezar, ${name.split(' ')[0]}!` : 'Empezar sin nombre'} <ArrowRight size={16} />
         </button>
         <button className={styles.helperLink} onClick={() => { skip(); window.location.href = '/register-helper' }}>
           Soy profesional y quiero ofrecer servicios →
@@ -102,7 +103,7 @@ export default function OnboardingOverlay({ onComplete }) {
         </div>
         <button className={styles.primary}
           onClick={() => isLast ? setShowName(true) : setStep(i => i + 1)}>
-          {isLast ? 'Comenzar' : 'Continuar'} <ArrowRight size={16} />
+          {isLast ? '¡Empezar con Nüra!' : 'Continuar'} <ArrowRight size={16} />
         </button>
       </div>
     </div>

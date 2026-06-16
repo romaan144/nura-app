@@ -243,6 +243,19 @@ export default function Home({ setSearchState }) {
 
   useEffect(() => {
     let lines = getWelcome(user)
+    // If just came from onboarding with a name — magic first moment
+    const justOnboarded = sessionStorage.getItem('nura_just_onboarded')
+    if (justOnboarded) {
+      sessionStorage.removeItem('nura_just_onboarded')
+      const firstName = justOnboarded.split(' ')[0]
+      lines = [
+        `¡Hola, **${firstName}**! Soy Nüra.`,
+        `Cuéntame qué necesitas y encontraré a la persona real que puede ayudarte — verificada, en tu zona y disponible ahora.`
+      ]
+      setTimeout(() => setMessages([{ id: 1, from: 'nura', lines }]), 400)
+      return
+    }
+
     // If helper just registered
     const helperRegistered = sessionStorage.getItem('nura_helper_registered')
     if (helperRegistered) {

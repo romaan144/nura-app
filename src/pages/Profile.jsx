@@ -164,7 +164,7 @@ export default function Profile() {
         </div>
 
         {/* ── Activity context message ──────────────────────────────────── */}
-        {(chats?.length > 0 || services?.length > 0) && (
+        {(chats?.length > 0 || (services||[]).length > 0) && (
           <div style={{
             background:'rgba(123,47,255,0.04)',border:'1px solid rgba(123,47,255,0.08)',
             borderRadius:'16px',padding:'14px 16px',fontSize:'13px',
