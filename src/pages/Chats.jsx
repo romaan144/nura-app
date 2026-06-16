@@ -65,7 +65,7 @@ export default function Chats() {
   const navigate = useNavigate()
   const { chats, markRead, helpersCache } = useUser()
   function getHelper(id) {
-    return helpersCache?.[id] || helpersCache?.[parseInt(id)] || HELPERS.find(h => String(h.id) === String(id))
+    return helpersCache?.[id] || helpersCache?.[parseInt(id)] || HELPERS.filter(Boolean).find(h => String(h.id) === String(id))
   }
   const [search, setSearch] = useState('')
 
@@ -112,7 +112,7 @@ export default function Chats() {
           </div>
         ) : (
           filtered.map((chat, i) => {
-            const helper = helpersCache?.[chat.helperId] || HELPERS.find(h => String(h.id) === String(chat.helperId))
+            const helper = helpersCache?.[chat.helperId] || HELPERS.filter(Boolean).find(h => String(h.id) === String(chat.helperId))
             return (
               <button key={i} className={`${styles.chatRow} ${chat.unread > 0 ? styles.chatUnread : ''}`}
                 onClick={() => { const h = getHelper(chat.helperId); markRead?.(chat.helperId); navigate(`/chat/${chat.helperId}`, h ? { state: { helper: h } } : {}) }}>

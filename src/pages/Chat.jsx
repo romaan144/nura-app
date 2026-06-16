@@ -149,7 +149,7 @@ export default function Chat() {
 
   const [helper, setHelper] = useState(
     helpersCache?.[parseInt(id)] || helpersCache?.[id] || helpersCache?.[String(id)] ||
-    HELPERS.find(h => String(h.id) === String(id)) || null
+    HELPERS.filter(Boolean).find(h => String(h.id) === String(id)) || null
   )
 
   useEffect(() => {

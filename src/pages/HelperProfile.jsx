@@ -299,7 +299,7 @@ function HelperProfileInner() {
     const cached = helpersCache?.[parseInt(id)] || helpersCache?.[id] || helpersCache?.[String(id)]
     if (cached) { setH(cached); return }
     // 4. Local
-    const local = HELPERS.find(x => x && String(x.id) === String(id))
+    const local = HELPERS.filter(Boolean).find(x =>  x && String(x.id) === String(id))
     if (local) { setH(local); return }
     // 5. Supabase
     setLoading(true)
