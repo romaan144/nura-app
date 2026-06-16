@@ -9,6 +9,11 @@ export default function Favorites() {
   const navigate = useNavigate()
   const { favorites, toggleFavorite, helpersCache } = useUser()
   const allHelpers = [...HELPERS.filter(Boolean), ...Object.values(helpersCache || {}).filter(h => h?.id && !HELPERS.filter(Boolean).find(l => l && String(l.id) === String(h.id)))]
+
+  // Demo favorites when user has none — shows what a real account looks like
+  const DEMO_FAVORITE_IDS = [1, 5] // Carlos (logopeda) + Elena (cuidadora)
+  const effectiveFavorites = favorites.length > 0 ? favorites : DEMO_FAVORITE_IDS
+
   const saved = allHelpers.filter(h => h && (favorites||[]).some(fid => String(fid) === String(h.id)))
 
   return (

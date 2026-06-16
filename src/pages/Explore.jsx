@@ -55,8 +55,16 @@ export default function Explore() {
   const [filters, setFilters] = useState({ presential: false, online: false, urgent: false, maxPrice: '', maxDist: '' })
 
   const filtered = HELPERS.filter(h => {
+    // Map UI category IDs to data categories
+    const CATEGORY_MAP = {
+      'clases': ['matematicas', 'clases'],
+      'fitness': ['entrenador', 'fitness'],
+      'salud': ['otro', 'salud'],
+      'hogar': ['tecnico', 'limpieza'],
+    }
+    const mappedCats = CATEGORY_MAP[activeCategory] || [activeCategory]
     const catMatch = activeCategory === 'all' || 
-      h.category === activeCategory ||
+      mappedCats.some(mc => h.category === mc) ||
       h.specialty?.toLowerCase().includes(activeCategory) ||
       (h.tags||[]).some(t => t.toLowerCase().includes(activeCategory)) ||
       h.bio?.toLowerCase().includes(activeCategory)

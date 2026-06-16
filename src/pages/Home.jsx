@@ -401,7 +401,17 @@ export default function Home({ setSearchState }) {
     }
 
     try {
-      setMessages(prev => [...prev, { id: Date.now() + 0.5, from: 'nura', lines: ['Buscando en la red de helpers...'], loading: true }])
+      // Contextual loading message
+      const loadingText = analysis?.urgente
+        ? 'Buscando disponibilidad urgente...'
+        : analysis?.categoria === 'cuidado'
+        ? 'Revisando cuidadoras verificadas en tu zona...'
+        : analysis?.categoria === 'tecnico'
+        ? 'Localizando técnicos disponibles...'
+        : analysis?.categoria === 'logopeda'
+        ? 'Buscando logopedas especializados...'
+        : 'Analizando tu necesidad y buscando el perfil ideal...'
+      setMessages(prev => [...prev, { id: Date.now() + 0.5, from: 'nura', lines: [loadingText], loading: true }])
       const analysis = await analyzeNeed(msg)
       const matches = await matchHelpers(analysis, 4)
       clearInterval(window.__nuraStatusInterval)
