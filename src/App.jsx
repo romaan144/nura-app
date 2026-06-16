@@ -26,6 +26,7 @@ import Favorites from './pages/Favorites'
 import Toast from './components/Toast'
 import PageTransition from './components/PageTransition'
 import './index.css'
+import AppErrorBoundary from './components/AppErrorBoundary'
 
 function AppRoutes() {
   const [searchState, setSearchState] = useState(null)
@@ -91,8 +92,10 @@ function AppRoutes() {
 
 export default function App() {
   return (
-    <BrowserRouter>
-      <AppRoutes />
-    </BrowserRouter>
+    <AppErrorBoundary>
+      <BrowserRouter>
+        <AppRoutes />
+      </BrowserRouter>
+    </AppErrorBoundary>
   )
 }
