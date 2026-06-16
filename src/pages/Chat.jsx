@@ -24,8 +24,32 @@ function generateFirstMessage(helper) {
 }
 
 // ── Smart replies based on conversation stage ─────────────────────────────
-function getHelperReply(helper, count) {
+function getHelperReply(helper, count, userMsg = '') {
   const name = helper.name?.split(' ')?.[0] || ''
+  const t = userMsg.toLowerCase()
+  
+  // Universal keyword responses (override category)
+  if (t.includes('precio') || t.includes('cuánto') || t.includes('coste') || t.includes('tarifa'))
+    return `Mi tarifa es ${helper.price || 'a consultar según el servicio'}. ¿Te parece bien?`
+  if (t.includes('disponib') || t.includes('cuándo') || t.includes('horario') || t.includes('esta semana'))
+    return `Sí, tengo disponibilidad. ¿Qué día y hora te vendría mejor?`
+  if (t.includes('dónde') || t.includes('zona') || t.includes('domicilio') || t.includes('online'))
+    return helper.online && helper.presential
+      ? `Trabajo tanto presencial en ${helper.zone || 'tu zona'} como online. ¿Cuál prefieres?`
+      : `Trabajo en ${helper.zone || 'Barcelona'}. ¿Te queda bien?`
+  if (t.includes('urgente') || t.includes('hoy') || t.includes('ahora') || t.includes('rápido'))
+    return helper.urgent
+      ? `Sí, atiendo urgencias. ¿Me cuentas más?`
+      : `No hago urgencias normalmente, pero dime qué necesitas y lo vemos.`
+  if (t.includes('gracias') || t.includes('perfecto') || t.includes('genial') || t.includes('de acuerdo'))
+    return `¡Perfecto! Cuando quieras cerramos los detalles. Estoy disponible.`
+  if (t.includes('referencia') || t.includes('opinión') || t.includes('reseña') || t.includes('valoración'))
+    return `Tengo ${helper.reviews || 0} valoraciones en Nüra con una media de ${helper.rating || 4.5}⭐. Puedes verlas en mi perfil.`
+  if (t.includes('contrat') || t.includes('reservar') || t.includes('apuntar'))
+    return `Con mucho gusto. Dime cuándo y te confirmo disponibilidad.`
+  if (t.includes('hola') || t.includes('buenas') || t.includes('buenos'))
+    return `¡Hola! Soy ${name}. ¿En qué puedo ayudarte?`
+
   const replies = {
     logopeda: [
       `¡Hola! Claro, tengo disponibilidad esta semana. ¿Me cuentas más sobre el caso para ver si es mi especialidad?`,
@@ -79,7 +103,10 @@ function getNuraIntervention(helper, count) {
 }
 
 function formatTime(date) {
-  return `${date.getHours()}:${String(date.getMinutes()).padStart(2,'0')}`
+  if (!date) return ''
+  const d = typeof date === 'string' ? new Date(date) : date
+  if (isNaN(d.getTime())) return ''
+  return `${d.getHours()}:${String(d.getMinutes()).padStart(2,'0')}`
 }
 function formatDateLabel(date) {
   if (date.toDateString() === new Date().toDateString()) return 'Hoy'
@@ -160,13 +187,13 @@ export default function Chat() {
     }
   }, [id])
 
-  const [messages, setMessages] = useState([])
+  const [messages, setMessages] = useState(() => getChatHistory(id) || [])
   const [input, setInput] = useState('')
   const [suggested, setSuggested] = useState('')
   const [typing, setTyping] = useState(false)
   const [showRating, setShowRating] = useState(false)
   const [showConfirm, setShowConfirm] = useState(false)
-  const [msgCount, setMsgCount] = useState(0)
+  const [msgCount, setMsgCount] = useState(() => Math.floor((getChatHistory(id)?.filter(m => m.from === 'helper')?.length || 0)))
   const bottomRef = useRef(null)
 
   useEffect(() => {
@@ -174,6 +201,13 @@ export default function Chat() {
   }, [helper?.id])
 
   useEffect(() => { bottomRef.current?.scrollIntoView({ behavior: 'smooth' }) }, [messages, typing])
+
+  // Persist chat history per helper
+  useEffect(() => {
+    if (messages.length > 0 && helper) {
+      saveChatHistory(id, messages)
+    }
+  }, [messages])
 
   if (!helper) return (
     <div style={{display:'flex',alignItems:'center',justifyContent:'center',height:'100dvh',background:'#F7F7F9'}}>
@@ -184,7 +218,7 @@ export default function Chat() {
   function sendMessage(text) {
     const msg = text || input
     if (!msg.trim() || typing) return
-    const newMsg = { id: Date.now(), text: msg, from: 'user', time: new Date() }
+    const newMsg = { id: Date.now(), text: msg, from: 'user', time: new Date().toISOString() }
     setMessages(prev => [...prev, newMsg])
     setInput(''); setSuggested('')
     addChat?.(helper.id, helper.name, helper.avatarColor, helper.avatar, msg)
@@ -192,8 +226,8 @@ export default function Chat() {
     const delay = 1000 + Math.random() * 600
     setTimeout(() => {
       setTyping(false)
-      const replyText = getHelperReply(helper, msgCount)
-      const reply = { id: Date.now() + 1, text: replyText, from: 'helper', time: new Date() }
+      const replyText = getHelperReply(helper, msgCount, msg)
+      const reply = { id: Date.now() + 1, text: replyText, from: 'helper', time: new Date().toISOString() }
       setMessages(prev => [...prev, reply])
       const newCount = msgCount + 1
       setMsgCount(newCount)
@@ -203,7 +237,7 @@ export default function Chat() {
       const nura = getNuraIntervention(helper, newCount)
       if (nura) {
         setTimeout(() => {
-          setMessages(prev => [...prev, { id: Date.now() + 2, text: nura, from: 'nura', time: new Date() }])
+          setMessages(prev => [...prev, { id: Date.now() + 2, text: nura, from: 'nura', time: new Date().toISOString() }])
         }, 800)
       }
     }, delay)

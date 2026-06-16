@@ -16,6 +16,7 @@ export function UserProvider({ children }) {
   const [notifications, setNotifications] = useState(() => load('nura_notifications', []))
   const [favorites, setFavorites] = useState(() => load('nura_favorites', []))
   const [nuraChatMessages, setNuraChatMessages] = useState(() => load('nura_chat_messages', []))
+  const [chatHistories, setChatHistories] = useState(() => load('nura_chat_histories', {}))
   const [services, setServices] = useState(() => load('nura_services', []))
   const [nuraLastMatches, setNuraLastMatches] = useState(null)
 
@@ -46,6 +47,7 @@ export function UserProvider({ children }) {
   useEffect(() => { save('nura_following', following) }, [following])
   useEffect(() => { save('nura_favorites', favorites) }, [favorites])
   useEffect(() => { save('nura_chat_messages', nuraChatMessages) }, [nuraChatMessages])
+  useEffect(() => { save('nura_chat_histories', chatHistories) }, [chatHistories])
   useEffect(() => { save('nura_services', services) }, [services])
 
   function login(userData) {
@@ -90,6 +92,14 @@ export function UserProvider({ children }) {
     localStorage.removeItem('nura_user')
     localStorage.removeItem('nura_chats')
     localStorage.removeItem('nura_following')
+  }
+
+  function saveChatHistory(helperId, messages) {
+    setChatHistories(prev => ({ ...prev, [String(helperId)]: messages }))
+  }
+
+  function getChatHistory(helperId) {
+    return chatHistories[String(helperId)] || []
   }
 
   function addChat(helperId, helperName, helperColor, helperAvatar, lastMsg) {
@@ -193,6 +203,7 @@ export function UserProvider({ children }) {
       nuraLastMatches, setNuraLastMatches,
       services, addService, updateService,
       updateUser,
+      chatHistories, saveChatHistory, getChatHistory,
     }}>
       {children}
     </UserContext.Provider>
