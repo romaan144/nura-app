@@ -14,6 +14,7 @@ import { useUser } from '../context/UserContext'
 import RatingModal from '../components/RatingModal'
 import styles from './HelperProfile.module.css'
 import { showToast } from '../components/Toast'
+import RegisterGate from '../components/RegisterGate'
 import { getHelperById } from '../utils/supabase'
 
 /* ── LIVE PROFILE PULSE ───────────────────────────────────────────────────
@@ -267,6 +268,8 @@ function HelperProfileInner() {
   // sync faved state
   // useEffect(() => { if(h) setFaved(isFavorite(h.id)) }, [h?.id])
   const [activeTab, setActiveTab] = useState('perfil')
+  const [showGate, setShowGate] = useState(false)
+  const [gateReason, setGateReason] = useState('contact')
 
   const location = useLocation()
   const isFromShare = new URLSearchParams(window.location.search).get('utm_source') === 'share'
@@ -404,10 +407,10 @@ function HelperProfileInner() {
           </div>
 
           <div className={styles.heroActions}>
-            <button className={styles.heroCtaSecondary} onClick={() => navigate(`/chat/${h.id}`, { state: { helper: h } })}>
+            <button className={styles.heroCtaSecondary} onClick={() => { if(!user){setShowGate(true);setGateReason('contact')} else navigate(`/chat/${h.id}`, { state: { helper: h } }) }}>
               <MessageCircle size={15} /> Escribir
             </button>
-            <button className={styles.heroCtaBtn} onClick={() => { setShowConfirm(true) }}>
+            <button className={styles.heroCtaBtn} onClick={() => { if(!user){setShowGate(true);setGateReason('contact')} else setShowConfirm(true) }}>
               <Calendar size={15} /> Contratar
             </button>
           </div>

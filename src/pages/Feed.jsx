@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import RegisterGate from '../components/RegisterGate'
 import { useNavigate } from 'react-router-dom'
 import { Heart, MessageCircle, Share2, Bookmark, UserPlus, Check, Shield, Award } from 'lucide-react'
 import { HELPERS } from '../data/helpers'
@@ -6,6 +7,7 @@ import { COMPANIES } from '../data/companies'
 import { useUser } from '../context/UserContext'
 import PageHeader from '../components/PageHeader'
 import { showToast } from '../components/Toast'
+
 import styles from './Feed.module.css'
 
 // ── Build feed — deterministic order, not random ───────────────────────────
@@ -49,7 +51,8 @@ function buildFeed(following, helpers, companies) {
 // ── Post Card ──────────────────────────────────────────────────────────────
 function PostCard({ post }) {
   const navigate = useNavigate()
-  const { follow, unfollow, isFollowing } = useUser()
+  const { follow, unfollow, isFollowing, user } = useUser()
+  const [showGateLocal, setShowGateLocal] = useState(false)
   const [liked, setLiked] = useState(false)
   const [likes, setLikes] = useState(post.likes || 0)
   const [saved, setSaved] = useState(false)
@@ -58,6 +61,7 @@ function PostCard({ post }) {
 
   function handleFollow(e) {
     e.stopPropagation()
+    if (!user) { setShowGateLocal(true); return }
     if (followed) {
       unfollow(author.id)
       showToast('Dejaste de seguir')
@@ -137,6 +141,8 @@ function PostCard({ post }) {
           <Bookmark size={17} fill={saved?'var(--purple)':'none'} color={saved?'var(--purple)':'rgba(0,0,0,0.35)'} />
         </button>
       </div>
+      {showGate && <RegisterGate reason="follow" onClose={() => setShowGate(false)} />}
+      {showGateLocal && <RegisterGate reason="follow" onClose={() => setShowGateLocal(false)} />}
     </div>
   )
 }
@@ -145,6 +151,7 @@ function PostCard({ post }) {
 export default function Feed() {
   const { following } = useUser()
   const [tab, setTab] = useState('para-ti')
+  const [showGate, setShowGate] = useState(false)
 
   const allPosts = buildFeed(following, HELPERS, COMPANIES)
   const displayPosts = tab === 'siguiendo'
@@ -190,6 +197,7 @@ export default function Feed() {
           ))
         )}
       </div>
+      {showGate && <RegisterGate reason="follow" onClose={() => setShowGate(false)} />}
     </div>
   )
 }

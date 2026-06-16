@@ -87,7 +87,7 @@ function formatDateLabel(date) {
 }
 
 // ── Confirm Service Modal ─────────────────────────────────────────────────
-function ConfirmModal({ helper, onClose }) {
+function ConfirmModal({ helper, onClose, onConfirm }) {
   const [date, setDate] = useState('')
   const [time, setTime] = useState('')
   const [note, setNote] = useState('')
@@ -100,7 +100,16 @@ function ConfirmModal({ helper, onClose }) {
         <div style={{fontSize:'52px',marginBottom:'16px',lineHeight:1}}>✅</div>
         <h3 style={{fontSize:'19px',fontWeight:800,marginBottom:'8px',color:'rgba(0,0,0,0.85)',letterSpacing:'-0.3px'}}>Solicitud enviada</h3>
         <p style={{fontSize:'13px',color:'rgba(0,0,0,0.45)',marginBottom:'24px',lineHeight:1.6}}>{name} recibirá tu solicitud y te confirmará disponibilidad.</p>
-        <button onClick={onClose} style={{padding:'13px 28px',background:'#1C1C1E',color:'white',border:'none',borderRadius:'100px',fontSize:'14px',fontWeight:700,cursor:'pointer'}}>Entendido</button>
+        <div style={{display:'flex',flexDirection:'column',gap:'8px',width:'100%'}}>
+          <button onClick={() => { onClose(); navigate('/my-services') }}
+            style={{padding:'13px 28px',background:'#1C1C1E',color:'white',border:'none',borderRadius:'100px',fontSize:'14px',fontWeight:700,cursor:'pointer',width:'100%'}}>
+            Ver mis servicios
+          </button>
+          <button onClick={onClose}
+            style={{padding:'12px',background:'transparent',color:'rgba(0,0,0,0.4)',border:'none',fontSize:'14px',cursor:'pointer'}}>
+            Volver al chat
+          </button>
+        </div>
       </div>
     </div>
   )
@@ -122,7 +131,7 @@ function ConfirmModal({ helper, onClose }) {
         </div>
         <div style={{display:'flex',gap:'10px'}}>
           <button onClick={onClose} style={{flex:1,padding:'14px',background:'rgba(0,0,0,0.05)',color:'rgba(0,0,0,0.55)',border:'none',borderRadius:'100px',fontSize:'14px',fontWeight:600,cursor:'pointer'}}>Cancelar</button>
-          <button onClick={()=>{ setDone(true); notifyServiceConfirmed(helper.name?.split(' ')?.[0] || helper.name) }} disabled={!date}
+          <button onClick={()=>{ onConfirm?.(date, time, note); setDone(true); notifyServiceConfirmed(helper.name?.split(' ')?.[0] || helper.name) }} disabled={!date}
             style={{flex:2,padding:'14px',background:date?'#1C1C1E':'rgba(0,0,0,0.1)',color:date?'white':'rgba(0,0,0,0.3)',border:'none',borderRadius:'100px',fontSize:'14px',fontWeight:700,cursor:date?'pointer':'default',transition:'all 0.2s'}}>
             Enviar solicitud
           </button>
@@ -136,7 +145,7 @@ function ConfirmModal({ helper, onClose }) {
 export default function Chat() {
   const { id } = useParams()
   const navigate = useNavigate()
-  const { addChat, markRead, hasRated, helpersCache } = useUser()
+  const { addChat, markRead, hasRated, helpersCache, addService } = useUser()
 
   const [helper, setHelper] = useState(
     helpersCache?.[parseInt(id)] || helpersCache?.[id] || helpersCache?.[String(id)] ||
@@ -351,7 +360,7 @@ export default function Chat() {
       </div>
 
       {showRating && <RatingModal helper={helper} onClose={() => setShowRating(false)} />}
-      {showConfirm && <ConfirmModal helper={helper} onClose={() => setShowConfirm(false)} />}
+      {showConfirm && <ConfirmModal helper={helper} onClose={() => setShowConfirm(false)} onConfirm={(date, time, note) => { addService(helper, date, time, note) }} />}
     </div>
   )
 }

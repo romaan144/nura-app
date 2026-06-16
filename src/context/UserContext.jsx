@@ -16,6 +16,7 @@ export function UserProvider({ children }) {
   const [notifications, setNotifications] = useState(() => load('nura_notifications', []))
   const [favorites, setFavorites] = useState(() => load('nura_favorites', []))
   const [nuraChatMessages, setNuraChatMessages] = useState(() => load('nura_chat_messages', []))
+  const [services, setServices] = useState(() => load('nura_services', []))
   const [nuraLastMatches, setNuraLastMatches] = useState(null)
 
   useEffect(() => {
@@ -45,10 +46,35 @@ export function UserProvider({ children }) {
   useEffect(() => { save('nura_following', following) }, [following])
   useEffect(() => { save('nura_favorites', favorites) }, [favorites])
   useEffect(() => { save('nura_chat_messages', nuraChatMessages) }, [nuraChatMessages])
+  useEffect(() => { save('nura_services', services) }, [services])
 
   function login(userData) {
     setUser(userData)
     localStorage.setItem('nura_user', JSON.stringify(userData))
+  }
+
+  function addService(helper, date, time, note) {
+    const service = {
+      id: Date.now(),
+      helperId: helper.id,
+      helperName: helper.name,
+      specialty: helper.specialty,
+      avatarUrl: helper.avatarUrl,
+      avatarColor: helper.avatarColor,
+      avatar: helper.avatar,
+      date,
+      time,
+      note,
+      price: helper.price,
+      status: 'pending',
+      createdAt: new Date().toISOString(),
+    }
+    setServices(prev => [service, ...prev])
+    return service
+  }
+
+  function updateService(id, updates) {
+    setServices(prev => prev.map(s => s.id === id ? { ...s, ...updates } : s))
   }
 
   function updateUser(updates) {

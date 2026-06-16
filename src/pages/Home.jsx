@@ -5,6 +5,7 @@ import { analyzeNeed, matchHelpers } from '../utils/matching'
 import { useUser } from '../context/UserContext'
 import { MenuButton } from '../components/NavBar'
 import { showToast } from '../components/Toast'
+import RegisterGate from '../components/RegisterGate'
 import { haptic } from '../utils/haptic'
 import { scheduleLocalNotification } from '../utils/notifications'
 import styles from './Home.module.css'
@@ -105,6 +106,7 @@ function ResultCard({ helper, onNavigate, onFav, isFav }) {
           </button>
         </div>
       </div>
+      {showGate && <RegisterGate reason={gateReason} onClose={() => setShowGate(false)} />}
     </div>
   )
 }
@@ -118,6 +120,8 @@ export default function Home({ setSearchState }) {
   const [input, setInput] = useState('')
   const [loading, setLoading] = useState(false)
   const [listening, setListening] = useState(false)
+  const [showGate, setShowGate] = useState(false)
+  const [gateReason, setGateReason] = useState('contact')
   // showSuggestions: hide once user has chatted
   const showSuggestions = nuraChatMessages.length <= 1
   const setShowSuggestions = () => {} // no-op, derived from messages
@@ -411,7 +415,7 @@ export default function Home({ setSearchState }) {
             )}
             {msg.results && (
               <div className={styles.resultsList}>
-                {msg.results.map(h => <ResultCard key={h.id} helper={h} onNavigate={navigate} onFav={id => { toggleFavorite(id); showToast(isFavorite(id) ? 'Eliminado de favoritos' : 'Guardado en favoritos') }} isFav={isFavorite(h.id)} />)}
+                {msg.results.map(h => <ResultCard key={h.id} helper={h} onNavigate={navigate} onFav={id => { if(!user){setShowGate(true);setGateReason('favorite')} else { toggleFavorite(id); showToast(isFavorite(id)?'Eliminado de favoritos':'Guardado en favoritos') } }} isFav={isFavorite(h.id)} />)}
               </div>
             )}
           </div>
@@ -460,6 +464,7 @@ export default function Home({ setSearchState }) {
         </div>
       </div>
 
+      {showGate && <RegisterGate reason={gateReason} onClose={() => setShowGate(false)} />}
     </div>
   )
 }
