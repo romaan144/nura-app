@@ -277,7 +277,7 @@ export const HELPERS = [
     ],
     evolution: [{ period: "2022", rating: 4.5, services: 18 }, { period: "2023", rating: 4.7, services: 33 }, { period: "2024", rating: 4.7, services: 51 }],
   },
-  ,{
+  {
     id: 9, name: "Dra. Carme Solà Puig", avatar: "CS", avatarColor: "#7C3AED",
     avatarUrl: "https://api.dicebear.com/9.x/personas/svg?seed=carme",
     specialty: "Psicóloga clínica y neuropsicóloga", category: "otro",

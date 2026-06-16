@@ -92,7 +92,7 @@ export default function RegisterHelper() {
 
       {/* Messages */}
       <div className={styles.messages}>
-        {messages.map(m => (
+        {(messages||[]).map(m => (
           <div key={m.id} className={`${styles.msgRow} ${m.from === 'user' ? styles.msgRowUser : ''}`}>
             {m.from === 'nura' && (
               <div className={styles.nuraAvatar}>

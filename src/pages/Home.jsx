@@ -184,7 +184,7 @@ export default function Home({ setSearchState }) {
 
   function formatLine(line) {
     const parts = line.split(/\*\*(.*?)\*\*/g)
-    return parts.map((part, i) => {
+    return (parts||[]).map((part, i) => {
       if (i % 2 === 1) {
         if (part.startsWith('grad:')) return <span key={i} className={styles.gradText}>{part.slice(5)}</span>
         return <strong key={i}>{part}</strong>
@@ -392,7 +392,7 @@ export default function Home({ setSearchState }) {
                 {msg.loading && <div className={styles.typingDots}><span /><span /><span /></div>}
               {msg.chips && (
                 <div style={{display:'flex',flexWrap:'wrap',gap:'6px',marginTop:'8px'}}>
-                  {msg.chips.map((chip,i) => (
+                  {msg.(chips||[]).map((chip,i) => (
                     <button key={i} onClick={() => handleSend(chip)}
                       style={{padding:'5px 12px',borderRadius:'100px',background:'rgba(0,0,0,0.06)',border:'none',fontSize:'12px',fontWeight:500,color:'rgba(0,0,0,0.7)',cursor:'pointer',transition:'opacity 0.15s'}}>
                       {chip}
@@ -402,7 +402,7 @@ export default function Home({ setSearchState }) {
               )}
               {msg.quickOptions && (
                 <div style={{display:'flex',gap:'8px',flexWrap:'wrap',marginTop:'8px'}}>
-                  {msg.quickOptions.map((opt,i) => (
+                  {msg.(quickOptions||[]).map((opt,i) => (
                     <button key={i}
                       style={{padding:'7px 14px',background:'var(--paper)',border:'1.5px solid var(--rule)',borderRadius:'16px',fontSize:'12px',color:'var(--mid)',cursor:'pointer',transition:'all 0.15s'}}
                       onClick={() => {
@@ -429,7 +429,7 @@ export default function Home({ setSearchState }) {
             )}
             {msg.results && (
               <div className={styles.resultsList}>
-                {msg.results.map(h => <ResultCard key={h.id} helper={h} onNavigate={navigate} onFav={id => { if(!user){setShowGate(true);setGateReason('favorite')} else { toggleFavorite(id); showToast(isFavorite(id)?'Eliminado de favoritos':'Guardado en favoritos') } }} isFav={isFavorite(h.id)} />)}
+                {msg.(results||[]).map(h => <ResultCard key={h.id} helper={h} onNavigate={navigate} onFav={id => { if(!user){setShowGate(true);setGateReason('favorite')} else { toggleFavorite(id); showToast(isFavorite(id)?'Eliminado de favoritos':'Guardado en favoritos') } }} isFav={isFavorite(h.id)} />)}
               </div>
             )}
           </div>
@@ -454,7 +454,7 @@ export default function Home({ setSearchState }) {
         {showSuggestions && (
           <div className={styles.suggestionsWrap}>
           <div className={styles.suggestions}>
-            {suggestions.map((s, i) => (
+            {(suggestions||[]).map((s, i) => (
               <button key={i} className={styles.suggestion} onClick={() => handleSend(s.text)}>
                 <span className={styles.suggestionText}>{s.text}</span>
               </button>

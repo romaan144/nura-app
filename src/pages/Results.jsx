@@ -147,7 +147,7 @@ export default function Results({ searchState }) {
           </div>
           {refinements.length > 0 && (
             <div className={styles.refinementsApplied}>
-              {refinements.map((r, i) => (
+              {(refinements||[]).map((r, i) => (
                 <span key={i} className={styles.refinementTag}>
                   {r} <button onClick={() => removeRefinement(i)}><X size={9} /></button>
                 </span>
@@ -158,7 +158,7 @@ export default function Results({ searchState }) {
 
         {/* Results */}
         <div className={styles.resultsHeader}>
-          <h2 className={styles.resultsTitle}>{currentMatches.length} personas encontradas</h2>
+          <h2 className={styles.resultsTitle}>{(currentMatches||[]).length} personas encontradas</h2>
           {analysis && (
             <div className={styles.analysisBox}>
               <span className={styles.analysisLabel}>Nüra entendió</span>
@@ -170,7 +170,7 @@ export default function Results({ searchState }) {
           )}
         </div>
 
-        {currentMatches.length > 0 ? (
+        {(currentMatches||[]).length > 0 ? (
           <>
             <div className={styles.topBar}>
               <button className={`${styles.viewBtn} ${viewMode==='list'?styles.viewBtnActive:''}`}
@@ -186,7 +186,7 @@ export default function Results({ searchState }) {
               ))}
             </div>
             <div className={`${styles.cards} ${viewMode==='grid'?styles.cardsGrid:''}`}>
-              {currentMatches.map((h, i) => h && <HelperCard key={h.id || i} helper={h} />)}
+              {(currentMatches||[]).map((h, i) => h && <HelperCard key={h.id || i} helper={h} />)}
             </div>
           </>
         ) : (

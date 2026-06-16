@@ -32,7 +32,7 @@ export default function Favorites() {
           </div>
         ) : (
           <div className={styles.list}>
-            {saved.map(h => (
+            {(saved||[]).map(h => (
               <div key={h.id} className={styles.card} onClick={() => navigate(`/helper/${h.id}`, { state: { helper: h } })}>
                 <div className={styles.cardLeft}>
                   <img src={h.avatarUrl || `https://api.dicebear.com/9.x/personas/svg?seed=${h.name}`}

@@ -581,7 +581,7 @@ function HelperProfileInner() {
                   Nüra identificó estas capacidades analizando conversaciones, comportamiento y valoraciones reales. {h.name?.split(' ')?.[0] || h.name || ''} nunca las declaró explícitamente.
                 </p>
                 <div className={styles.nuraDetectedSkills}>
-                  {h.hiddenSkills.map((s, i) => (
+                  {(h.hiddenSkills||[]).map((s, i) => (
                     <span key={i} className={styles.nuraSkill}>{s}</span>
                   ))}
                 </div>
@@ -595,7 +595,7 @@ function HelperProfileInner() {
               <section className={styles.section}>
                 <h3 className={styles.sectionTitle}><CheckCircle size={13} /> Especialidades declaradas</h3>
                 <div className={styles.skillsGrid}>
-                  {h.skills.map((s, i) => <span key={i} className={styles.skill}>{s}</span>)}
+                  {(h.skills||[]).map((s, i) => <span key={i} className={styles.skill}>{s}</span>)}
                 </div>
               </section>
             )}
@@ -609,7 +609,7 @@ function HelperProfileInner() {
                   <span>Nüra buscó el plan de estudios en internet — asignatura por asignatura, universidad por universidad</span>
                 </div>
                 <div className={styles.eduTimeline}>
-                  {h.education.map((ed, i) => (
+                  {(h.education||[]).map((ed, i) => (
                     <div key={i} className={styles.eduItem}>
                       <div className={styles.eduTimelineLeft}>
                         <div className={styles.eduIcon}>🎓</div>
@@ -634,7 +634,7 @@ function HelperProfileInner() {
               <section className={styles.section}>
                 <h3 className={styles.sectionTitle}><Globe size={13} /> Idiomas</h3>
                 <div className={styles.langRow}>
-                  {h.languages.map((l, i) => <span key={i} className={styles.langTag}>{l}</span>)}
+                  {(h.languages||[]).map((l, i) => <span key={i} className={styles.langTag}>{l}</span>)}
                 </div>
               </section>
             )}
@@ -666,7 +666,7 @@ function HelperProfileInner() {
                   <span>Nüra analiza el texto semánticamente — los adjetivos se convierten en atributos del perfil</span>
                 </div>
                 <div className={styles.reviewsList}>
-                  {h.qualitativeComments.map((c, i) => (
+                  {(h.qualitativeComments||[]).map((c, i) => (
                     <div key={i} className={styles.reviewItem}>
                       <div className={styles.reviewAvatar}>{c.avatar?.[0] || c.user?.[0]}</div>
                       <div className={styles.reviewBody}>
@@ -702,11 +702,11 @@ function HelperProfileInner() {
 
             {h.experience?.length > 0 ? (
               <div className={styles.expTimeline}>
-                {h.experience.map((ex, i) => (
+                {(h.experience||[]).map((ex, i) => (
                   <div key={i} className={styles.expTimelineItem}>
                     <div className={styles.expTimelineLeft}>
                       <div className={styles.expLogo}>{ex.companyLogo}</div>
-                      {i < h.experience.length - 1 && <div className={styles.expConnector} />}
+                      {i < (h.experience||[]).length - 1 && <div className={styles.expConnector} />}
                     </div>
                     <div className={styles.expTimelineBody}>
                       <ExperienceCard exp={ex} />
@@ -798,8 +798,8 @@ function HelperProfileInner() {
               <section className={styles.section}>
                 <h3 className={styles.sectionTitle}><TrendingUp size={13} /> Trayectoria en Nüra</h3>
                 <div className={styles.evoTimeline}>
-                  {h.evolution.map((pt, i) => {
-                    const isLast = i === h.evolution.length - 1
+                  {(h.evolution||[]).map((pt, i) => {
+                    const isLast = i === (h.evolution||[]).length - 1
                     const prev = h.evolution[i - 1]
                     const improved = prev && pt.rating > prev.rating
                     return (
