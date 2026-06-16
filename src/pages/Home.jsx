@@ -455,6 +455,10 @@ export default function Home({ setSearchState }) {
           }
         })
         window.__nuraHelperCache = { ...(window.__nuraHelperCache || {}), ...cacheMap }
+        // Store match reason for profile view
+        if (matchExplanation && top?.id) {
+          window.__nuraMatchReasons = { ...(window.__nuraMatchReasons||{}), [String(top.id)]: matchExplanation }
+        }
         // Also cache in UserContext via cacheHelpers
         cacheHelpers?.(matches)
       }
@@ -479,8 +483,41 @@ export default function Home({ setSearchState }) {
         ? `Encontré **1 ${especialidad.slice(0,-1)}** verificado cerca de ti.`
         : `Encontré **${matches.length} ${especialidad}** verificados en ${zona}.`
 
-      const followLine = matches.length >= 3
-        ? `El mejor valorado es **${topName}** con ${top?.rating}⭐. ¿Te escribo a alguno?`
+      // Build rich match explanation — the core AI differentiator
+      function buildMatchReason(helper, analysis) {
+        if (!helper) return null
+        const name = helper.name?.split(' ')?.[0]
+        const reasons = []
+
+        // Specialty match
+        if (helper.specialty) reasons.push(`especialista en ${helper.specialty.toLowerCase()}`)
+
+        // Experience signal
+        if (helper.reviews >= 80) reasons.push(`${helper.reviews} clientes satisfechos`)
+        else if (helper.reviews >= 30) reasons.push(`${helper.reviews} valoraciones`)
+
+        // Distance
+        if (helper.distance) reasons.push(`a ${helper.distance}km de ti`)
+
+        // Response time
+        if (helper.responseTime) reasons.push(`responde en ${helper.responseTime}`)
+
+        // Urgency match
+        if (analysis?.urgente && helper.urgent) reasons.push('atiende urgencias hoy')
+
+        // Modality match
+        if (analysis?.modalidad === 'online' && helper.online) reasons.push('disponible online')
+        else if (analysis?.modalidad === 'presencial' && helper.presential) reasons.push('visita a domicilio')
+
+        if (reasons.length === 0) return `**${name}** está disponible y tiene ${helper.rating}⭐`
+
+        const mainReason = reasons.slice(0, 2).join(' y ')
+        return `**${name}** es mi recomendación: ${mainReason}. ${helper.rating}⭐ de media.`
+      }
+
+      const matchExplanation = buildMatchReason(top, analysis)
+      const followLine = matches.length >= 3 && matchExplanation
+        ? matchExplanation
         : matches.length > 0
         ? `Solo hay ${matches.length} disponibles ahora. ¿Ampliamos la búsqueda?`
         : null

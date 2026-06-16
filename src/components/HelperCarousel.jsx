@@ -37,7 +37,10 @@ function CarouselCard({ helper }) {
   return (
     <div
       className={styles.card}
-      onClick={() => navigate(`/helper/${helper.id}`, { state: { helper } })}>
+      onClick={() => {
+      const reason = window.__nuraMatchReasons?.[String(helper.id)]
+      navigate(`/helper/${helper.id}`, { state: { helper, fromSearch: true, matchReason: reason } })
+    }}>
 
       {/* Avatar + availability */}
       <div className={styles.avatarWrap}>

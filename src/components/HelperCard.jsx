@@ -44,7 +44,10 @@ export default function HelperCard({ helper, onContact, compact = false, showCon
   return (
     <div
       className={styles.card}
-      onClick={() => navigate(`/helper/${helper.id}`, { state: { helper } })}>
+      onClick={() => {
+      const reason = window.__nuraMatchReasons?.[String(helper.id)]
+      navigate(`/helper/${helper.id}`, { state: { helper, fromSearch: true, matchReason: reason } })
+    }}>
 
       {/* TOP BADGE */}
       {helper.rating >= 4.9 && helper.reviews >= 20 && (

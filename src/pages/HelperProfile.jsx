@@ -676,6 +676,11 @@ function HelperProfileInner() {
   const coverGradient = COVER_GRADIENTS[h.category] || COVER_GRADIENTS.otro
 
   // Is the viewer the owner of this profile?
+  // Was this profile opened from a Nüra search result?
+  const fromSearch = location.state?.fromSearch || location.state?.matchReason
+  const matchReason = location.state?.matchReason
+
+  // Is the viewer the owner of this profile?
   const isOwner = user?.isHelper && (
     user?.helperProfile?.name === h.name ||
     user?.name === h.name ||
