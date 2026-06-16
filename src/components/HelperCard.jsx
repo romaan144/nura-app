@@ -89,6 +89,10 @@ export default function HelperCard({ helper, onContact, compact = false, showCon
               <span className={styles.dot}>·</span>
               <span>Resp. {helper.responseTime}</span>
             </>}
+            {helper.completionRate >= 95 && <>
+              <span className={styles.dot}>·</span>
+              <span style={{color:'#059669',fontWeight:600}}>{helper.completionRate}% completado</span>
+            </>}
           </div>
         </div>
 

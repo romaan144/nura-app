@@ -706,7 +706,14 @@ function HelperProfileInner() {
       <div className={styles.content}>
         {/* Hero */}
         <div className={styles.hero}>
-          <div className={styles.heroInner}>
+          {/* Gradient cover strip */}
+          <div style={{
+            position: 'absolute', top: 0, left: 0, right: 0,
+            height: '88px',
+            background: coverGradient,
+            borderRadius: '28px 28px 0 0',
+          }} />
+          <div className={styles.heroInner} style={{position:'relative', zIndex:1}}>
           {h.avatarUrl
             ? <img src={h.avatarUrl} alt={h.name} className={styles.heroAvatar} />
             : <div className={styles.heroAvatarFallback} style={{ background: h.avatarColor }}>{h.avatar}</div>

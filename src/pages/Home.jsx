@@ -475,6 +475,40 @@ export default function Home({ setSearchState }) {
 
   return (
     <div className={styles.page}>
+      {/* New search button — appears when chat has content */}
+      {messages.length > 1 && (
+        <div style={{
+          position:'absolute', top:'max(env(safe-area-inset-top,0px),52px)',
+          right:'16px', zIndex:25,
+          marginTop:'8px',
+        }}>
+          <button
+            onClick={() => {
+              setMessages([])
+              setLastMatches([])
+              setInput('')
+              setTimeout(() => {
+                setMessages([{ id: 1, from: 'nura', lines: getWelcome(user) }])
+              }, 100)
+            }}
+            style={{
+              padding:'6px 12px',
+              background:'rgba(255,255,255,0.85)',
+              backdropFilter:'blur(20px)',
+              WebkitBackdropFilter:'blur(20px)',
+              border:'1px solid rgba(0,0,0,0.08)',
+              borderRadius:'100px',
+              fontSize:'11px', fontWeight:600,
+              color:'rgba(0,0,0,0.5)',
+              cursor:'pointer',
+              boxShadow:'0 1px 8px rgba(0,0,0,0.06)',
+              display:'flex', alignItems:'center', gap:'4px',
+            }}>
+            ✕ Nueva búsqueda
+          </button>
+        </div>
+      )}
+
       {/* Floating top — three independent bubbles */}
       <div className={styles.floatTop}>
         <button
