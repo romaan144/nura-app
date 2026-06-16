@@ -63,7 +63,10 @@ const MOCK_CHATS = [
 
 export default function Chats() {
   const navigate = useNavigate()
-  const { chats, markRead } = useUser()
+  const { chats, markRead, helpersCache } = useUser()
+  function getHelper(id) {
+    return helpersCache?.[id] || helpersCache?.[parseInt(id)] || HELPERS.find(h => String(h.id) === String(id))
+  }
   const [search, setSearch] = useState('')
 
   // Merge real chats with mock, real ones take priority
