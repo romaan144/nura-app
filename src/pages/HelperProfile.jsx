@@ -4,7 +4,7 @@ import { useState, useEffect } from 'react'
 import { useParams, useNavigate, useLocation } from 'react-router-dom'
 import {
   ArrowLeft, Star, Shield, MapPin, MessageCircle, Zap,
-  TrendingUp, Clock, CheckCircle, Award, Brain,
+  TrendingUp, Clock, CheckCircle, Award, Brain, Globe,
   Building2, BookOpen, Share2, Lock, Heart, Sparkles, Calendar,
   ThumbsUp, MessageSquare, AlertCircle, BarChart2,
   Activity, Cpu, Layers

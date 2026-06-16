@@ -141,7 +141,6 @@ function PostCard({ post }) {
           <Bookmark size={17} fill={saved?'var(--purple)':'none'} color={saved?'var(--purple)':'rgba(0,0,0,0.35)'} />
         </button>
       </div>
-      {showGate && <RegisterGate reason="follow" onClose={() => setShowGate(false)} />}
       {showGateLocal && <RegisterGate reason="follow" onClose={() => setShowGateLocal(false)} />}
     </div>
   )
