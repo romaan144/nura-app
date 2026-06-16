@@ -3,6 +3,7 @@ import RegisterGate from '../components/RegisterGate'
 import { useNavigate } from 'react-router-dom'
 import { Heart, MessageCircle, Share2, Bookmark, UserPlus, Check, Shield, Award } from 'lucide-react'
 import { HELPERS } from '../data/helpers'
+import { generateDynamicPosts } from '../utils/feedGenerator'
 import { COMPANIES } from '../data/companies'
 import { useUser } from '../context/UserContext'
 import PageHeader from '../components/PageHeader'
@@ -39,6 +40,10 @@ function buildFeed(following, helpers, companies) {
   unfollowedCompanies.forEach(c => {
     c.posts?.slice(0,1).forEach(p => posts.push({ ...p, author: c, authorType: 'company', suggested: true }))
   })
+
+  // Add dynamic AI-generated posts (availability, tips, new helpers)
+  const dynamicPosts = generateDynamicPosts(helpers, 6)
+  posts.push(...dynamicPosts)
 
   // Sort by most recent (by date string priority) — following first, then suggested
   return posts.sort((a, b) => {
@@ -105,11 +110,13 @@ function PostCard({ post }) {
         </div>
 
         {/* Follow button */}
+        {post.authorType !== 'nura' && (
         <button
           className={followed ? styles.followingBtn : styles.followBtn}
           onClick={handleFollow}>
           {followed ? <><Check size={12} /> Siguiendo</> : <><UserPlus size={12} /> Seguir</>}
         </button>
+        )}
       </div>
 
       {/* Content */}

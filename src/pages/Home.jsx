@@ -7,7 +7,7 @@ import { MenuButton } from '../components/NavBar'
 import { showToast } from '../components/Toast'
 import RegisterGate from '../components/RegisterGate'
 import { haptic } from '../utils/haptic'
-import { scheduleLocalNotification } from '../utils/notifications'
+import { scheduleLocalNotification, notifySearchAbandoned } from '../utils/notifications'
 import styles from './Home.module.css'
 
 function getWelcome(user) {

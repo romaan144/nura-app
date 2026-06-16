@@ -661,6 +661,13 @@ function HelperProfileInner() {
 
   const isSupabaseHelper = !!h.isFromSupabase
 
+  // Schedule a gentle reminder if user viewed but didn't contact
+  useEffect(() => {
+    if (h && !isOwner) {
+      notifyHelperViewed(h.name?.split(' ')?.[0] || h.name, h.specialty)
+    }
+  }, [h?.id])
+
   // Is the viewer the owner of this profile?
   const isOwner = user?.isHelper && (
     user?.helperProfile?.name === h.name ||
