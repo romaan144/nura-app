@@ -107,7 +107,6 @@ function ResultCard({ helper, onNavigate, onFav, isFav }) {
           </button>
         </div>
       </div>
-      {showGate && <RegisterGate reason={gateReason} onClose={() => setShowGate(false)} />}
     </div>
   )
 }
