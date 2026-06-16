@@ -35,22 +35,118 @@ function detectIntent(text, user) {
   return 'search'
 }
 
-const SUGGESTIONS = {
-  default: [
-    { text: 'Cuidadora de mayores' },
-    { text: 'Logopeda infantil' },
-    { text: 'Técnico urgente' },
-    { text: 'Limpieza del hogar' },
-    { text: 'Cuidado de mascotas' },
-    { text: 'Clases particulares' },
-  ],
-  helper: [
-    { text: 'Nueva certificación' },
-    { text: 'Actualizar disponibilidad' },
-    { text: 'Mejorar mi perfil' },
-    { text: 'Nueva experiencia' },
-  ],
+// ── DYNAMIC SUGGESTIONS ───────────────────────────────────────────────────
+// Rotates based on time of day, day of week, and user history
+function getDynamicSuggestions(user, searchHistory) {
+  const hour = new Date().getHours()
+  const day  = new Date().getDay() // 0=Sun, 6=Sat
+  const isWeekend = day === 0 || day === 6
+  const isMorning = hour >= 7 && hour < 13
+  const isAfternoon = hour >= 13 && hour < 20
+  const isEvening = hour >= 20 || hour < 7
+
+  // Pool of all possible suggestions
+  const ALL = [
+    // Cuidado
+    'Cuidadora de mayores en casa',
+    'Cuidado de mi abuela con Alzheimer',
+    'Niñera para mis hijos',
+    'Acompañante para persona mayor',
+    'Auxiliar a domicilio',
+    // Técnicos
+    'Técnico urgente hoy',
+    'Fontanero para una gotera',
+    'Electricista certificado',
+    'Reparar la caldera',
+    'Pintor para el salón',
+    // Salud
+    'Logopeda infantil',
+    'Fisioterapeuta a domicilio',
+    'Psicólogo online',
+    'Nutricionista personalizado',
+    // Educación
+    'Clases de matemáticas',
+    'Profesor de inglés',
+    'Refuerzo escolar para el cole',
+    // Limpieza
+    'Limpieza del hogar',
+    'Limpieza profunda',
+    'Persona de limpieza semanal',
+    // Mascotas
+    'Cuidado de mascotas',
+    'Paseos para mi perro',
+    'Cuidar mi gato en vacaciones',
+    // Fitness
+    'Entrenador personal',
+    'Clases de yoga a domicilio',
+    'Pilates personalizado',
+  ]
+
+  // Time-based pools
+  let pool = []
+
+  if (isWeekend) {
+    pool = [
+      'Limpieza profunda este fin de semana',
+      'Paseos para mi perro',
+      'Entrenador personal',
+      'Clases de yoga a domicilio',
+      'Técnico urgente hoy',
+      'Cuidado de mascotas',
+    ]
+  } else if (isMorning) {
+    pool = [
+      'Cuidadora de mayores en casa',
+      'Logopeda infantil',
+      'Clases de matemáticas',
+      'Profesor de inglés',
+      'Limpieza del hogar',
+      'Fontanero para una gotera',
+    ]
+  } else if (isAfternoon) {
+    pool = [
+      'Refuerzo escolar para el cole',
+      'Fisioterapeuta a domicilio',
+      'Niñera para mis hijos',
+      'Técnico urgente hoy',
+      'Paseos para mi perro',
+      'Nutricionista personalizado',
+    ]
+  } else { // evening
+    pool = [
+      'Cuidadora de mayores en casa',
+      'Psicólogo online',
+      'Entrenador personal',
+      'Auxiliar a domicilio',
+      'Reparar la caldera',
+      'Clases de inglés online',
+    ]
+  }
+
+  // Remove things user already searched
+  const searched = (searchHistory || []).map(s => s.query?.toLowerCase() || '')
+  const filtered = pool.filter(s =>
+    !searched.some(q => s.toLowerCase().includes(q.slice(0,8)))
+  )
+  const final = filtered.length >= 3 ? filtered : pool
+
+  // Pick 4 varied suggestions (shuffle deterministically by minute)
+  const seed = Math.floor(Date.now() / (1000 * 60 * 5)) // changes every 5 min
+  const shuffled = [...final].sort((a, b) => {
+    const ha = (a.charCodeAt(0) + seed) % 7
+    const hb = (b.charCodeAt(0) + seed) % 7
+    return ha - hb
+  })
+
+  return shuffled.slice(0, 4).map(text => ({ text }))
 }
+
+const HELPER_SUGGESTIONS = [
+  { text: 'Añadir nueva certificación' },
+  { text: 'Actualizar disponibilidad' },
+  { text: 'Añadir experiencia reciente' },
+  { text: 'Cambiar mis tarifas' },
+]
 
 function ResultCard({ helper, onNavigate, onFav, isFav }) {
   return (
@@ -85,24 +181,34 @@ function ResultCard({ helper, onNavigate, onFav, isFav }) {
           </div>
         </div>
       </div>
+      {helper.bio && (
+        <p style={{fontSize:'12px',color:'rgba(0,0,0,0.45)',margin:'0 0 8px',lineHeight:1.5,
+          display:'-webkit-box',WebkitLineClamp:2,WebkitBoxOrient:'vertical',overflow:'hidden'}}>
+          {helper.bio}
+        </p>
+      )}
       <div className={styles.resultBottom}>
         <div className={styles.resultTags}>
+          {helper.available && <span style={{fontSize:'10px',fontWeight:700,color:'#059669'}}>● Disponible</span>}
           {helper.urgent && <span className={styles.resultUrgent}>⚡ Urgencias</span>}
           {helper.presential && helper.online
             ? <span className={styles.resultTag}>Presencial · Online</span>
             : helper.presential ? <span className={styles.resultTag}>📍 Presencial</span>
             : helper.online ? <span className={styles.resultTag}>💻 Online</span> : null}
-          <span className={styles.resultTag}>⏱ {helper.responseTime}</span>
         </div>
-        <div style={{display:'flex',gap:'8px',alignItems:'center'}}>
+        <div style={{display:'flex',gap:'6px',alignItems:'center'}}>
           <button
             onClick={e => { e.stopPropagation(); onFav?.(helper.id) }}
-            style={{width:'32px',height:'32px',borderRadius:'50%',background:'white',border:'none',boxShadow:'0 1px 4px rgba(0,0,0,0.1)',display:'flex',alignItems:'center',justifyContent:'center'}}>
-            <Heart size={14} fill={isFav ? '#EF4444' : 'none'} color={isFav ? '#EF4444' : '#999'} />
+            style={{width:'32px',height:'32px',borderRadius:'50%',background:'rgba(255,255,255,0.8)',border:'1px solid rgba(0,0,0,0.06)',display:'flex',alignItems:'center',justifyContent:'center',flexShrink:0}}>
+            <Heart size={13} fill={isFav ? '#EF4444' : 'none'} color={isFav ? '#EF4444' : 'rgba(0,0,0,0.35)'} />
           </button>
           <button className={styles.resultContact}
-            onClick={e => { e.stopPropagation(); onNavigate(`/chat/${helper.id}`) }}>
-            <MessageCircle size={14} /> Contactar
+            onClick={e => {
+              e.stopPropagation()
+              if (!user) { showToast('Crea tu cuenta para contactar'); setTimeout(() => onNavigate('/login'), 600); return }
+              onNavigate(`/chat/${helper.id}`, { state: { helper } })
+            }}>
+            <MessageCircle size={13} /> Contactar
           </button>
         </div>
       </div>
@@ -346,8 +452,7 @@ export default function Home({ setSearchState }) {
     setListening(true)
   }
 
-  const allSuggestions = user?.isHelper ? SUGGESTIONS.helper : SUGGESTIONS.default
-  const suggestions = allSuggestions.slice(0, 3)
+  const suggestions = user?.isHelper ? HELPER_SUGGESTIONS : getDynamicSuggestions(user, searchHistory)
 
   return (
     <div className={styles.page}>

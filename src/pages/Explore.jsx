@@ -159,7 +159,7 @@ export default function Explore() {
         </div>
         <div className={styles.grid}>
           {filtered.map(h => (
-            <div key={h.id} className={styles.card} onClick={() => navigate(`/helper/${h.id}`, { state: { helper: h } })}>
+            <div key={h.id} className={styles.card} style={{position:'relative'}} onClick={() => navigate(`/helper/${h.id}`, { state: { helper: h } })}>
               <div className={styles.cardTop}>
                 <div className={styles.avatarWrap}>
                   {h.avatarUrl
