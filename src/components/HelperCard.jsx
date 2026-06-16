@@ -85,6 +85,10 @@ export default function HelperCard({ helper, onContact, compact = false, showCon
               <Zap size={9} color="#DC2626" />
               <span style={{ color: '#DC2626', fontWeight: 600 }}>Urgencias</span>
             </>}
+            {helper.responseTime && !helper.urgent && <>
+              <span className={styles.dot}>·</span>
+              <span>Resp. {helper.responseTime}</span>
+            </>}
           </div>
         </div>
 

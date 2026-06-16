@@ -88,10 +88,28 @@ function getHelperReply(helper, count, userMsg = '') {
       `¿Tienes alguna lesión o condición física que deba tener en cuenta?`,
     ],
   }
-  const r = replies[helper.category] || [
-    `¡Hola! Gracias por contactarme. ¿Cuándo te vendría bien hablar con más detalle?`,
-    `Cuéntame un poco más sobre lo que necesitas para poder orientarte mejor.`,
-    `Podemos quedar para una primera consulta si lo ves bien.`,
+  const extraReplies = {
+    salud: [
+      `Hola, con mucho gusto. ¿Me comentas qué síntomas o dudas tienes? Así puedo orientarte mejor antes de la consulta.`,
+      `Puedo hacer la primera valoración de forma presencial u online, como prefieras.`,
+      `Cuéntame con más detalle y te digo si es algo que trato directamente o si te derivo a un especialista.`,
+    ],
+    legal: [
+      `Buenos días. ¿Me explicas brevemente la situación? Con eso puedo decirte si es de mi especialidad y el enfoque que daría.`,
+      `La primera consulta es orientativa, sin compromiso. ¿Tienes alguna documentación relacionada?`,
+      `Trabajo principalmente en Barcelona pero puedo hacer consultas por videollamada también.`,
+    ],
+    hogar: [
+      `Hola, cuéntame el proyecto. ¿Es una reforma completa, una habitación o algo más puntual?`,
+      `¿Tienes ya alguna idea de lo que quieres o empezamos desde cero? En ambos casos podemos trabajar.`,
+      `Puedo visitarte sin compromiso para ver el espacio y darte una valoración más concreta.`,
+    ],
+  }
+  const allReplies = { ...replies, ...extraReplies }
+  const r = allReplies[helper.category] || [
+    `Hola, gracias por escribirme. ¿Me cuentas un poco más sobre lo que necesitas?`,
+    `Cuéntame con más detalle para poder orientarte mejor.`,
+    `Podemos hacer una primera consulta sin compromiso esta semana si te parece bien.`,
   ]
   return r[Math.min(count, r.length - 1)]
 }

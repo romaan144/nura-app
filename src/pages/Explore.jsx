@@ -51,16 +51,32 @@ export default function Explore() {
     }).catch(() => setLoadingHelpers(false))
   }, [])
   const [activeCategory, setActiveCategory] = useState('all')
+  const [sortBy, setSortBy] = useState('quality') // quality | price | rating
   const [showFilters, setShowFilters] = useState(false)
   const [filters, setFilters] = useState({ presential: false, online: false, urgent: false, maxPrice: '', maxDist: '' })
+
+  // Sort filtered results
+  const sortFn = (a, b) => {
+    if (sortBy === 'price') {
+      const pa = parseFloat((a.price || '999').replace(/[^0-9.]/g,'')) || 999
+      const pb = parseFloat((b.price || '999').replace(/[^0-9.]/g,'')) || 999
+      return pa - pb
+    }
+    if (sortBy === 'rating') return (b.rating || 0) - (a.rating || 0)
+    // quality: rating × log(reviews+1)
+    const sa = (a.rating||0) * Math.log((a.reviews||0)+1)
+    const sb = (b.rating||0) * Math.log((b.reviews||0)+1)
+    return sb - sa
+  }
 
   const filtered = HELPERS.filter(h => {
     // Map UI category IDs to data categories
     const CATEGORY_MAP = {
       'clases': ['matematicas', 'clases'],
       'fitness': ['entrenador', 'fitness'],
-      'salud': ['otro', 'salud'],
-      'hogar': ['tecnico', 'limpieza'],
+      'salud': ['salud', 'otro'],
+      'hogar': ['hogar', 'tecnico', 'limpieza'],
+      'legal': ['legal'],
     }
     const mappedCats = CATEGORY_MAP[activeCategory] || [activeCategory]
     const catMatch = activeCategory === 'all' || 
@@ -171,6 +187,29 @@ export default function Explore() {
           <div className={styles.resultsCount}>
           {totalCount > 0 ? `${filtered.length} de ${totalCount} profesionales` : `${filtered.length} profesionales`}
         </div>
+        {/* Sort pills */}
+        <div style={{display:'flex',gap:'6px',marginBottom:'12px',overflowX:'auto',paddingBottom:'2px'}}>
+          {[
+            {id:'quality', label:'Mejor valorado'},
+            {id:'rating',  label:'Mayor rating'},
+            {id:'price',   label:'Menor precio'},
+          ].map(s => (
+            <button key={s.id}
+              onClick={() => setSortBy(s.id)}
+              style={{
+                flexShrink:0, padding:'6px 14px',
+                background: sortBy===s.id ? '#1C1C1E' : 'rgba(255,255,255,0.7)',
+                color: sortBy===s.id ? 'white' : 'rgba(0,0,0,0.55)',
+                border: sortBy===s.id ? 'none' : '1px solid rgba(0,0,0,0.08)',
+                borderRadius:'100px', fontSize:'12px', fontWeight:600,
+                cursor:'pointer', transition:'all 0.15s',
+                fontFamily:'-apple-system,"Inter",sans-serif',
+              }}>
+              {s.label}
+            </button>
+          ))}
+        </div>
+
         <div className={styles.grid}>
           {filtered.length === 0 && !loadingHelpers && (
             <div style={{gridColumn:'1/-1',textAlign:'center',padding:'48px 24px',
