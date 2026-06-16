@@ -80,6 +80,13 @@ export default function MyServices() {
                 : 'Aquí aparecerán tus servicios cuando los tengas.'}
             </p>
             {tab === 'Todos' && (
+              <p style={{fontSize:'13px',color:'rgba(0,0,0,0.4)',margin:'4px 0 16px',lineHeight:1.6}}>
+                {tab === 'Todos'
+                  ? 'Cuando contactes con un helper y concretes una cita, aparecerá aquí.'
+                  : tab === 'Próximos'
+                  ? 'Cuando contrates un servicio lo verás aquí con los detalles.'
+                  : 'Tus servicios completados y valoraciones aparecerán aquí.'}
+              </p>
               <button className={styles.emptyBtn} onClick={() => navigate('/')}>
                 Buscar con Nüra
               </button>

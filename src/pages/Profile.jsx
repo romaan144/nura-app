@@ -146,17 +146,32 @@ export default function Profile() {
         {/* ── Activity stats ──────────────────────────────────────────── */}
         <div className={styles.statsRow}>
           {[
-            { n: searchHistory?.length || 0, l: 'Búsquedas' },
-            { n: chats?.length || 0, l: 'Contactos' },
-            { n: favorites?.length || 0, l: 'Favoritos' },
-          ].map(({ n, l }, i) => (
+            { n: searchHistory?.length || 0, l: 'Búsquedas', path: '/' },
+            { n: chats?.length || 0, l: 'Contactos', path: '/chats' },
+            { n: favorites?.length || 0, l: 'Favoritos', path: '/favorites' },
+          ].map(({ n, l, path }, i) => (
             <div key={l} className={styles.statItem}
-              style={{borderRight: i<2 ? '1px solid rgba(0,0,0,0.06)' : 'none'}}>
+              style={{borderRight: i<2 ? '1px solid rgba(0,0,0,0.06)' : 'none', cursor:'pointer'}}
+              onClick={() => navigate(path)}>
               <span className={styles.statNum}>{n}</span>
               <span className={styles.statLbl}>{l}</span>
             </div>
           ))}
         </div>
+
+        {/* ── Activity context message ──────────────────────────────────── */}
+        {(chats?.length > 0 || services?.length > 0) && (
+          <div style={{
+            background:'rgba(123,47,255,0.04)',border:'1px solid rgba(123,47,255,0.08)',
+            borderRadius:'16px',padding:'14px 16px',fontSize:'13px',
+            color:'rgba(0,0,0,0.5)',lineHeight:1.6,
+          }}>
+            {services?.length > 0
+              ? `Tienes ${services.length} servicio${services.length>1?'s':''} registrado${services.length>1?'s':''}. Nüra construye tu historial automáticamente.`
+              : `Has contactado con ${chats.length} profesional${chats.length>1?'es':''}. Cada conversación mejora tu experiencia en Nüra.`
+            }
+          </div>
+        )}
 
         {/* ── Complete name nudge ─────────────────────────────────────── */}
         {(!user.name || user.name === 'Usuario') && (

@@ -37,9 +37,15 @@ export default function Explore() {
   useEffect(() => {
     getAllHelpers().then(remote => {
       if (remote?.length > 0) {
-        setHELPERS(remote)
-        cacheHelpers(remote)
-        setTotalCount(remote.length)
+        // Sort by quality: rating * log(reviews+1) — rewards both high rating AND volume
+        const sorted = [...remote].sort((a, b) => {
+          const scoreA = (a.rating || 0) * Math.log((a.reviews || 0) + 1)
+          const scoreB = (b.rating || 0) * Math.log((b.reviews || 0) + 1)
+          return scoreB - scoreA
+        })
+        setHELPERS(sorted)
+        cacheHelpers(sorted)
+        setTotalCount(sorted.length)
       }
       setLoadingHelpers(false)
     }).catch(() => setLoadingHelpers(false))

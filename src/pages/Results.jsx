@@ -77,6 +77,13 @@ export default function Results({ searchState }) {
   const resultCount = currentMatches?.length || 0
   const safeMatches = Array.isArray(matches) ? matches : []
 
+  // Persist so page reload works
+  useEffect(() => {
+    if (effectiveState && matches?.length > 0) {
+      try { sessionStorage.setItem('nura_last_search', JSON.stringify(effectiveState)) } catch {}
+    }
+  }, [])
+
   const [refineText, setRefineText] = useState('')
   const [refinements, setRefinements] = useState([])
   const [currentMatches, setCurrentMatches] = useState(safeMatches)

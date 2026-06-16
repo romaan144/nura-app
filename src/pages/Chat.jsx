@@ -199,7 +199,26 @@ export default function Chat() {
   const bottomRef = useRef(null)
 
   useEffect(() => {
-    if (helper) { setSuggested(generateFirstMessage(helper)); markRead?.(helper.id) }
+    if (!helper) return
+    setSuggested(generateFirstMessage(helper))
+    markRead?.(helper.id)
+
+    // Send initial greeting if no history
+    if (!hasHistory) {
+      setTyping(true)
+      const delay = 800 + Math.random() * 400
+      setTimeout(() => {
+        setTyping(false)
+        const greeting = getHelperReply(helper, 0, '')
+        const greetMsg = {
+          id: Date.now(),
+          from: 'helper',
+          text: greeting,
+          time: new Date().toISOString()
+        }
+        setMessages([greetMsg])
+      }, delay)
+    }
   }, [helper?.id])
 
   useEffect(() => { bottomRef.current?.scrollIntoView({ behavior: 'smooth' }) }, [messages, typing])
