@@ -914,6 +914,24 @@ function HelperProfileInner() {
             </div>
 
 
+            {/* ── Nüra match reason banner ── */}
+            {matchReason && (
+              <div style={{
+                display:'flex',alignItems:'flex-start',gap:'8px',
+                background:'linear-gradient(135deg,rgba(123,47,255,0.07),rgba(0,212,200,0.05))',
+                border:'1px solid rgba(123,47,255,0.12)',
+                borderRadius:'14px', padding:'11px 14px',
+                marginBottom:'4px', width:'100%', boxSizing:'border-box',
+                textAlign:'left',
+              }}>
+                <span style={{fontSize:'15px',flexShrink:0,marginTop:'1px'}}>✨</span>
+                <p style={{fontSize:'12px',color:'rgba(0,0,0,0.55)',margin:0,lineHeight:1.6}}>
+                  <strong style={{color:'#7B2FFF',fontWeight:700}}>Nüra te la recomienda</strong>
+                  {' '}— {matchReason}
+                </p>
+              </div>
+            )}
+
             {/* Achievement badges */}
             <section className={styles.section}>
               <h3 className={styles.sectionTitle}><Sparkles size={13} /> Reconocimientos</h3>

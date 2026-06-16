@@ -720,7 +720,7 @@ export default function Home({ setSearchState }) {
         <div className={styles.inputCapsule}>
           <button className={styles.plusBtn}><Plus size={18} /></button>
           <input ref={inputRef} className={styles.input}
-            placeholder="¿Qué necesitas?"
+            placeholder="Cuéntame qué necesitas..."
             value={input} onChange={e => setInput(e.target.value)}
             onKeyDown={handleKey} disabled={loading}
             onFocus={() => setInputFocused(true)}
