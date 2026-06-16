@@ -16,9 +16,9 @@ function buildFeed(following, helpers, companies) {
 
   // Following content first
   const followedHelpers = helpers.filter(h =>
-    following.includes(h.id) || following.includes(String(h.id))
+    (following||[]).includes(h.id) || (following||[]).includes(String(h.id))
   )
-  const followedCompanies = companies.filter(c => following.includes(c.id))
+  const followedCompanies = companies.filter(c => (following||[]).includes(c.id))
 
   followedHelpers.forEach(h => {
     h.posts?.forEach(p => posts.push({ ...p, author: h, authorType: 'helper', following: true }))
@@ -29,9 +29,9 @@ function buildFeed(following, helpers, companies) {
 
   // Then suggested (not following)
   const unfollowedHelpers = helpers.filter(h =>
-    !following.includes(h.id) && !following.includes(String(h.id))
+    !(following||[]).includes(h.id) && !(following||[]).includes(String(h.id))
   )
-  const unfollowedCompanies = companies.filter(c => !following.includes(c.id))
+  const unfollowedCompanies = companies.filter(c => !(following||[]).includes(c.id))
 
   unfollowedHelpers.forEach(h => {
     h.posts?.slice(0,1).forEach(p => posts.push({ ...p, author: h, authorType: 'helper', suggested: true }))

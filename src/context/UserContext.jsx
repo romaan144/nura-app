@@ -93,10 +93,10 @@ export function UserProvider({ children }) {
   }
 
   function addChat(helperId, helperName, helperColor, helperAvatar, lastMsg) {
-    const existing = chats.find(c => c.helperId === helperId)
+    const existing = (chats||[]).find(c => c.helperId === helperId)
     let updated
     if (existing) {
-      updated = chats.map(c => c.helperId === helperId
+      updated = (chats||[]).map(c => c.helperId === helperId
         ? { ...c, lastMsg, lastTime: new Date().toISOString(), unread: (c.unread || 0) + 1 }
         : c)
     } else {
@@ -112,7 +112,7 @@ export function UserProvider({ children }) {
   }
 
   function markRead(helperId) {
-    const updated = chats.map(c => c.helperId === helperId ? { ...c, unread: 0 } : c)
+    const updated = (chats||[]).map(c => c.helperId === helperId ? { ...c, unread: 0 } : c)
     setChats(updated)
     localStorage.setItem('nura_chats', JSON.stringify(updated))
   }
@@ -124,7 +124,7 @@ export function UserProvider({ children }) {
   }
 
   function hasRated(helperId) {
-    return ratings.some(r => r.helperId === helperId)
+    return (ratings||[]).some(r => r.helperId === helperId)
   }
 
   function addSearch(query) {
@@ -140,7 +140,7 @@ export function UserProvider({ children }) {
   }
 
   function follow(id) {
-    if (following.includes(id)) return
+    if ((following||[]).includes(id)) return
     const updated = [...following, id]
     setFollowing(updated)
     localStorage.setItem('nura_following', JSON.stringify(updated))
@@ -152,30 +152,30 @@ export function UserProvider({ children }) {
   }
 
   function unfollow(id) {
-    const updated = following.filter(f => f !== id)
+    const updated = (following||[]).filter(f => f !== id)
     setFollowing(updated)
     localStorage.setItem('nura_following', JSON.stringify(updated))
   }
 
   function isFollowing(id) {
-    return following.includes(id)
+    return (following||[]).includes(id)
   }
 
   function toggleFavorite(helperId) {
     const isFav = favorites.includes(helperId)
-    const updated = isFav ? favorites.filter(f => f !== helperId) : [...favorites, helperId]
+    const updated = isFav ? (favorites||[]).filter(f => f !== helperId) : [...favorites, helperId]
     setFavorites(updated)
     return !isFav
   }
   function isFavorite(helperId) { return favorites.includes(helperId) }
 
   function markNotifsRead() {
-    const updated = notifications.map(n => ({ ...n, read: true }))
+    const updated = (notifications||[]).map(n => ({ ...n, read: true }))
     setNotifications(updated)
     localStorage.setItem('nura_notifications', JSON.stringify(updated))
   }
 
-  const unreadNotifs = notifications.filter(n => !n.read).length
+  const unreadNotifs = (notifications||[]).filter(n => !n.read).length
   const totalUnreadChats = chats.reduce((s, c) => s + (c.unread || 0), 0)
 
   return (

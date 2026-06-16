@@ -70,7 +70,7 @@ export default function Chats() {
   const [search, setSearch] = useState('')
 
   // Merge real chats with mock, real ones take priority
-  const allChats = (chats.length > 0 ? [...MOCK_CHATS.filter(m => !chats.find(c => c.helperId === m.helperId)), ...chats] : MOCK_CHATS).filter(Boolean)
+  const allChats = (chats.length > 0 ? [...MOCK_CHATS.filter(m => !(chats||[]).find(c => c.helperId === m.helperId)), ...chats] : MOCK_CHATS).filter(Boolean)
   const filtered = allChats.filter(c =>
     c.helperName.toLowerCase().includes(search.toLowerCase()) ||
     c.lastMsg.toLowerCase().includes(search.toLowerCase())

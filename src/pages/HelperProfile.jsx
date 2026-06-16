@@ -736,7 +736,7 @@ function HelperProfileInner() {
         {activeTab === 'feed' && (
           <div>
             {h.posts?.length > 0
-              ? h.posts.map(post => <PostCard key={post.id} post={post} helper={h} />)
+              ? h.posts?.map(post => <PostCard key={post.id} post={post} helper={h} />)
               : (
                 <div className={styles.emptyTab} style={{gap:'10px',padding:'28px 16px'}}>
                   <MessageSquare size={32} color="rgba(0,0,0,0.12)" />

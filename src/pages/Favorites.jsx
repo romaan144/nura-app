@@ -9,7 +9,7 @@ export default function Favorites() {
   const navigate = useNavigate()
   const { favorites, toggleFavorite, helpersCache } = useUser()
   const allHelpers = [...HELPERS, ...Object.values(helpersCache || {}).filter(h => h?.id && !HELPERS.find(l => String(l.id) === String(h.id)))]
-  const saved = allHelpers.filter(h => h && favorites.some(fid => String(fid) === String(h.id)))
+  const saved = allHelpers.filter(h => h && (favorites||[]).some(fid => String(fid) === String(h.id)))
 
   return (
     <div className={styles.page}>
