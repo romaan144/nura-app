@@ -51,6 +51,12 @@ export function UserProvider({ children }) {
     localStorage.setItem('nura_user', JSON.stringify(userData))
   }
 
+  function updateUser(updates) {
+    const updated = { ...user, ...updates }
+    setUser(updated)
+    localStorage.setItem('nura_user', JSON.stringify(updated))
+  }
+
   function logout() {
     setUser(null)
     setChats([]); setRatings([]); setSearchHistory([])
