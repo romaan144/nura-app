@@ -869,28 +869,6 @@ function HelperProfileInner() {
               </div>
             </div>
           </div>
-
-          {/* Services derived from tags/specialty for Supabase helpers */}
-          {isSupabaseHelper && h.specialty && (
-            <section className={styles.section}>
-              <h3 className={styles.sectionTitle}>🛠️ Servicios ofrecidos</h3>
-              <div style={{display:'flex',flexWrap:'wrap',gap:'8px'}}>
-                {[
-                  h.specialty,
-                  ...(h.tags || []).filter(t => t !== h.specialty).slice(0, 4)
-                ].filter(Boolean).map((s, i) => (
-                  <span key={i} style={{
-                    padding:'8px 14px',
-                    background:'rgba(123,47,255,0.06)',
-                    border:'1px solid rgba(123,47,255,0.12)',
-                    borderRadius:'100px',
-                    fontSize:'13px',fontWeight:500,
-                    color:'rgba(0,0,0,0.7)',
-                  }}>{s}</span>
-                ))}
-              </div>
-            </section>
-          )}
         )}
 
         {/* Shared profile banner */}
@@ -1087,6 +1065,27 @@ function HelperProfileInner() {
                 </div>
               </section>
             )}
+          {/* Services derived from tags/specialty for Supabase helpers */}
+          {isSupabaseHelper && h.specialty && (
+            <section className={styles.section}>
+              <h3 className={styles.sectionTitle}>🛠️ Servicios ofrecidos</h3>
+              <div style={{display:'flex',flexWrap:'wrap',gap:'8px'}}>
+                {[
+                  h.specialty,
+                  ...(h.tags || []).filter(t => t !== h.specialty).slice(0, 4)
+                ].filter(Boolean).map((s, i) => (
+                  <span key={i} style={{
+                    padding:'8px 14px',
+                    background:'rgba(123,47,255,0.06)',
+                    border:'1px solid rgba(123,47,255,0.12)',
+                    borderRadius:'100px',
+                    fontSize:'13px',fontWeight:500,
+                    color:'rgba(0,0,0,0.7)',
+                  }}>{s}</span>
+                ))}
+              </div>
+            </section>
+          )}
           </>
         )}
 
