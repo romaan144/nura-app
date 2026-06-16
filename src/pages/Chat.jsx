@@ -189,6 +189,7 @@ export default function Chat() {
   }, [id])
 
   const [messages, setMessages] = useState(() => getChatHistory(id) || [])
+  const hasHistory = getChatHistory(id)?.length > 0
   const [input, setInput] = useState('')
   const [suggested, setSuggested] = useState('')
   const [typing, setTyping] = useState(false)

@@ -158,6 +158,23 @@ export default function Explore() {
           {totalCount > 0 ? `${filtered.length} de ${totalCount} profesionales` : `${filtered.length} profesionales`}
         </div>
         <div className={styles.grid}>
+          {filtered.length === 0 && !loadingHelpers && (
+            <div style={{gridColumn:'1/-1',textAlign:'center',padding:'48px 24px',
+              display:'flex',flexDirection:'column',alignItems:'center',gap:'12px'}}>
+              <span style={{fontSize:'44px'}}>🔍</span>
+              <p style={{fontSize:'16px',fontWeight:700,color:'rgba(0,0,0,0.6)',margin:0,letterSpacing:'-0.2px'}}>
+                Sin resultados
+              </p>
+              <p style={{fontSize:'14px',color:'rgba(0,0,0,0.4)',margin:0}}>
+                Prueba con otra categoría o ajusta el precio
+              </p>
+              <button onClick={() => { setActiveCategory('all'); setPriceMax(200) }}
+                style={{padding:'10px 22px',background:'#1C1C1E',color:'white',border:'none',
+                  borderRadius:'100px',fontSize:'13px',fontWeight:700,cursor:'pointer',marginTop:'4px'}}>
+                Ver todos
+              </button>
+            </div>
+          )}
           {filtered.map(h => (
             <div key={h.id} className={styles.card} style={{position:'relative'}} onClick={() => navigate(`/helper/${h.id}`, { state: { helper: h } })}>
               <div className={styles.cardTop}>

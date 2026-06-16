@@ -150,6 +150,11 @@ function PostCard({ post }) {
 export default function Feed() {
   const { following } = useUser()
   const [tab, setTab] = useState('para-ti')
+  const [feedLoading, setFeedLoading] = useState(true)
+  useEffect(() => {
+    const t = setTimeout(() => setFeedLoading(false), 400)
+    return () => clearTimeout(t)
+  }, [])
   const [showGate, setShowGate] = useState(false)
 
   const allPosts = buildFeed(following, HELPERS, COMPANIES)
@@ -181,7 +186,27 @@ export default function Feed() {
 
       {/* Feed */}
       <div className={styles.feed}>
-        {displayPosts.length === 0 ? (
+        {feedLoading && (
+          <div style={{display:'flex',flexDirection:'column',gap:'10px'}}>
+            {[1,2].map(i => (
+              <div key={i} style={{background:'rgba(255,255,255,0.85)',borderRadius:'20px',padding:'16px',
+                animation:'pulse 1.5s ease-in-out infinite',boxShadow:'0 1px 8px rgba(0,0,0,0.04)'}}>
+                <div style={{display:'flex',gap:'10px',alignItems:'center',marginBottom:'14px'}}>
+                  <div style={{width:'38px',height:'38px',borderRadius:'50%',background:'rgba(0,0,0,0.06)',flexShrink:0}} />
+                  <div style={{flex:1}}>
+                    <div style={{height:'13px',borderRadius:'7px',background:'rgba(0,0,0,0.06)',width:'50%',marginBottom:'6px'}} />
+                    <div style={{height:'10px',borderRadius:'5px',background:'rgba(0,0,0,0.04)',width:'35%'}} />
+                  </div>
+                  <div style={{width:'60px',height:'26px',borderRadius:'13px',background:'rgba(0,0,0,0.06)'}} />
+                </div>
+                <div style={{height:'12px',borderRadius:'6px',background:'rgba(0,0,0,0.04)',width:'95%',marginBottom:'8px'}} />
+                <div style={{height:'12px',borderRadius:'6px',background:'rgba(0,0,0,0.04)',width:'80%'}} />
+              </div>
+            ))}
+            <style>{`@keyframes pulse{0%,100%{opacity:1}50%{opacity:0.6}}`}</style>
+          </div>
+        )}
+        {!feedLoading && displayPosts.length === 0 ? (
           <div className={styles.empty}>
             <span style={{fontSize:'44px'}}>👥</span>
             <h3>Aún no sigues a nadie</h3>
@@ -191,7 +216,7 @@ export default function Feed() {
             </button>
           </div>
         ) : (
-          displayPosts.map((post, i) => (
+          !feedLoading && displayPosts.map((post, i) => (
             <PostCard key={post.id || i} post={post} />
           ))
         )}

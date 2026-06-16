@@ -4,6 +4,56 @@ import { ArrowLeft, Send } from 'lucide-react'
 import { useUser } from '../context/UserContext'
 import styles from './RegisterHelper.module.css'
 
+const SUPABASE_URL = 'https://oxmohciswebonoumghhu.supabase.co'
+const SUPABASE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im94bW9oY2lzd2Vib25vdW1naGh1Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDk2MzE4MTUsImV4cCI6MjA2NTIwNzgxNX0.oJQLSV5UEGjV3f6sPnHJT3nOVHXyaQJGzHKVDQkWCHo'
+
+async function saveHelperToSupabase(answers) {
+  try {
+    const payload = {
+      name: answers.name || 'Helper',
+      specialty: answers.specialty || '',
+      bio: `${answers.experience || ''}. ${answers.differentiator || ''}`.trim().replace(/^\. /, ''),
+      zone: answers.zone || 'Barcelona',
+      city: 'Barcelona',
+      price: answers.price || null,
+      category: 'otro',
+      presential: (answers.modality || '').toLowerCase().includes('presencial') || true,
+      online: (answers.modality || '').toLowerCase().includes('online'),
+      available: true,
+      verified: false,
+      dni_verified: false,
+      founder: false,
+      rating: 0,
+      reviews: 0,
+      services: 0,
+      response_time: '< 2 horas',
+      completion_rate: 100,
+      qualification_level: 'experienced',
+      tags: [answers.specialty || ''].filter(Boolean),
+      ai_data: {
+        formation: answers.formation,
+        self_registered: true,
+        registered_at: new Date().toISOString(),
+      }
+    }
+    const res = await fetch(`${SUPABASE_URL}/rest/v1/helpers`, {
+      method: 'POST',
+      headers: {
+        'apikey': SUPABASE_KEY,
+        'Authorization': `Bearer ${SUPABASE_KEY}`,
+        'Content-Type': 'application/json',
+        'Prefer': 'return=representation'
+      },
+      body: JSON.stringify(payload)
+    })
+    const data = await res.json()
+    return data?.[0] || null
+  } catch (e) {
+    console.warn('Supabase save failed:', e)
+    return null
+  }
+}
+
 const QUESTIONS = [
   { id: 'name',          text: '¡Hola! Soy Nüra y voy a construir tu perfil profesional. ¿Cómo te llamas?', placeholder: 'Tu nombre completo' },
   { id: 'specialty',     text: 'Encantada, {name}. ¿Cuál es tu especialidad principal?', placeholder: 'Ej: logopeda, cuidadora, técnico de calderas...' },
@@ -69,6 +119,10 @@ export default function RegisterHelper() {
           id: Date.now(), from: 'nura',
           text: `Perfecto, ${newAnswers.name || val}. He construido tu perfil. Nüra lo verificará en las próximas horas. ¡Bienvenido a la red!`
         }])
+        // Save to Supabase (async, non-blocking)
+        saveHelperToSupabase(newAnswers).then(saved => {
+          if (saved) console.log('Helper saved to Supabase:', saved.id)
+        })
         login({ name: newAnswers.name || val, isHelper: true, helperProfile: newAnswers })
         setTimeout(() => navigate('/'), 2000)
       }, 1000)
