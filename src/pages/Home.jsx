@@ -1,6 +1,6 @@
 import { useState, useEffect, useRef } from 'react'
 import { useNavigate } from 'react-router-dom'
-import { Send, Mic, MicOff, Plus, Star, MapPin, Shield, MessageCircle, Award, Heart } from 'lucide-react'
+import { Send, Mic, MicOff, Plus } from 'lucide-react'
 import { analyzeNeed, matchHelpers } from '../utils/matching'
 import { useUser } from '../context/UserContext'
 import { MenuButton } from '../components/NavBar'
@@ -426,18 +426,27 @@ export default function Home({ setSearchState }) {
         cacheHelpers?.(matches)
       }
 
-      const resultMsg = { id: Date.now(), from: 'nura', lines: [`He encontrado **${matches.length} personas** que pueden ayudarte.`], results: matches }
-      setMessages(prev => [...prev, resultMsg])
-      const followUp = matches.length >= 3
-        ? '¿Te convence alguno? También puedo filtrar más.'
+      // Build smart result message with context
+      const topName = top?.name?.split(' ')?.[0] || ''
+      const resultLine = matches.length === 1
+        ? `Encontré **1 ${especialidad.slice(0,-1)}** verificado cerca de ti.`
+        : `Encontré **${matches.length} ${especialidad}** verificados en ${zona}.`
+
+      const followLine = matches.length >= 3
+        ? `El mejor valorado es **${topName}** con ${top?.rating}⭐. ¿Te escribo a alguno?`
         : matches.length > 0
-        ? `Solo encontré ${matches.length} opciones. ¿Quieres que amplíe la búsqueda?`
-        : '¿Reformulamos la búsqueda?'
-      setTimeout(() => setMessages(prev => [...prev, {
-        id: Date.now()+1, from: 'nura',
-        lines: [followUp],
-        chips: ['Más barato', 'Más cerca', 'Mejor valorado', 'Con urgencias']
-      }]), 1500)
+        ? `Solo hay ${matches.length} disponibles ahora. ¿Ampliamos la búsqueda?`
+        : null
+
+      const resultMsg = {
+        id: Date.now(), from: 'nura',
+        lines: followLine ? [resultLine, followLine] : [resultLine],
+        results: matches,
+        chips: matches.length > 0
+          ? [`Escribir a ${topName}`, 'Más barato', 'Más cerca', 'Ver todos']
+          : ['Ampliar búsqueda', 'Cambiar zona', 'Online también']
+      }
+      setMessages(prev => [...prev, resultMsg])
     } catch {
       clearInterval(window.__nuraStatusInterval)
       setMessages(prev => prev.filter(m => !m.loading))

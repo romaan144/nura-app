@@ -1,5 +1,5 @@
 import { useNavigate } from 'react-router-dom'
-import { ArrowRight, Shield, Star, Zap, Heart, MapPin, MessageCircle } from 'lucide-react'
+import { ArrowRight, Shield, Star, Zap, MapPin } from 'lucide-react'
 import PageHeader from '../components/PageHeader'
 import styles from './HowItWorks.module.css'
 

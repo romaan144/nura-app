@@ -1,6 +1,6 @@
 import { useState, useEffect, useRef } from 'react'
 import { useParams, useNavigate } from 'react-router-dom'
-import { ArrowLeft, Send, Shield, Star, MapPin, Award, Calendar, Info } from 'lucide-react'
+import { ArrowLeft, Send, Shield, Award, Calendar } from 'lucide-react'
 import { HELPERS } from '../data/helpers'
 import { useUser } from '../context/UserContext'
 import { getHelperById } from '../utils/supabase'

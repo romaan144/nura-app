@@ -2,13 +2,7 @@ import PageHeader from '../components/PageHeader'
 import ErrorBoundary from '../components/ErrorBoundary'
 import { useState, useEffect } from 'react'
 import { useParams, useNavigate, useLocation } from 'react-router-dom'
-import {
-  ArrowLeft, Star, Shield, MapPin, MessageCircle, Zap,
-  TrendingUp, Clock, CheckCircle, Award, Brain, Globe,
-  Building2, BookOpen, Share2, Lock, Heart, Sparkles, Calendar,
-  ThumbsUp, MessageSquare, AlertCircle, BarChart2,
-  Activity, Cpu, Layers
-} from 'lucide-react'
+import { Star, Shield, MapPin, MessageCircle, Zap, TrendingUp, Clock, CheckCircle, Award, Brain, Globe, Building2, BookOpen, Share2, Lock, Heart, Sparkles, Calendar, ThumbsUp, MessageSquare, AlertCircle, BarChart2, Activity, Cpu, Layers } from 'lucide-react'
 import { HELPERS } from '../data/helpers'
 import { useUser } from '../context/UserContext'
 import RatingModal from '../components/RatingModal'

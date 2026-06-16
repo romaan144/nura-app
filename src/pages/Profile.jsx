@@ -1,10 +1,6 @@
 import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
-import {
-  LogOut, Star, MessageCircle, ChevronRight, Shield, Award,
-  Edit2, Check, X, Calendar, Heart, Search, Bell, HelpCircle,
-  UserPlus, Settings, Clock
-} from 'lucide-react'
+import { LogOut, ChevronRight, Award, Edit2, Check, X } from 'lucide-react'
 import PageHeader from '../components/PageHeader'
 import { useUser } from '../context/UserContext'
 import styles from './Profile.module.css'
@@ -240,6 +236,19 @@ export default function Profile() {
         </button>
 
         <p className={styles.version}>Nüra · v1.0 · Barcelona</p>
+
+        {/* Demo reset — hidden, long-press accessible */}
+        <button
+          onDoubleClick={() => {
+            if (window.confirm('¿Resetear demo? Se borrarán todos los datos locales.')) {
+              localStorage.clear()
+              sessionStorage.clear()
+              window.location.href = '/'
+            }
+          }}
+          style={{background:'none',border:'none',color:'transparent',padding:'12px',cursor:'default',userSelect:'none',fontSize:'1px'}}>
+          reset
+        </button>
       </div>
     </div>
   )

@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
-import { Calendar, Clock, CheckCircle, Star, ChevronRight, Search } from 'lucide-react'
+import { Calendar, CheckCircle, ChevronRight } from 'lucide-react'
 import { useUser } from '../context/UserContext'
 import PageHeader from '../components/PageHeader'
 import styles from './MyServices.module.css'

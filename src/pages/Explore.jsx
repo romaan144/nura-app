@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
-import { Search, SlidersHorizontal, X, MapPin, Star, Zap } from 'lucide-react'
+import { Search, SlidersHorizontal, X } from 'lucide-react'
 import { HELPERS as LOCAL_HELPERS } from '../data/helpers'
 import { getAllHelpers } from '../utils/supabase'
 import { useUser } from '../context/UserContext'
