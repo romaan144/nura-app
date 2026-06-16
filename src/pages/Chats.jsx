@@ -144,7 +144,7 @@ export default function Chats() {
                 <div className={styles.chatInfo}>
                   <div className={styles.chatTop}>
                     <span className={styles.chatName}>{chat.helperName}</span>
-                    <span className={styles.chatTime}>{formatChatTime(chat.lastTime)}<{formatTime(chat.lastTime)}</span>
+                    <span className={styles.chatTime}>{formatChatTime(chat.lastTime)}</span>
                   </div>
                   <div className={styles.chatBottom}>
                     <span className={styles.chatLastMsg}>{chat.lastMsg}</span>
