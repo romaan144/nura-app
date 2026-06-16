@@ -19,7 +19,6 @@ function getWelcome(user) {
   if (user.isHelper) return [
     `${greeting}, **${user.name?.split(' ')[0]}**. ¿Qué necesitas hoy?`,
   ]
-  const lastSearch = searchHistory?.[0]?.query
   return [
     `${greeting}, **${user.name?.split(' ')[0]}**. ¿Qué necesitas hoy?`,
   ]
