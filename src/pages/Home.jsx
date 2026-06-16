@@ -20,7 +20,6 @@ function getWelcome(user) {
     `${greeting}, **${user.name?.split(' ')[0]}**. ¿Qué necesitas hoy?`,
   ]
   const firstName = user.name?.split(' ')?.[0] || user.name
-  const hour = new Date().getHours()
   const msgs = [
     hour < 12 ? `${greeting}, **${firstName}**. ¿En qué puedo ayudarte esta mañana?`
     : hour < 18 ? `${greeting}, **${firstName}**. ¿Qué necesitas?`
