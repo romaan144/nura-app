@@ -19,8 +19,9 @@ function getWelcome(user) {
   if (user.isHelper) return [
     `${greeting}, **${user.name?.split(' ')[0]}**. ¿Qué necesitas hoy?`,
   ]
+  const lastSearch = searchHistory?.[0]?.query
   return [
-    `${greeting}, **${user.name?.split(' ')[0]}**. ¿Qué necesitas?`,
+    `${greeting}, **${user.name?.split(' ')[0]}**. ¿Qué necesitas hoy?`,
   ]
 }
 
@@ -132,7 +133,14 @@ export default function Home({ setSearchState }) {
   const inputRef = useRef(null)
 
   useEffect(() => {
-    const lines = getWelcome(user)
+    let lines = getWelcome(user)
+    // If returning user with search history, personalize
+    const lastQ = searchHistory?.[0]?.query
+    if (user && lastQ && nuraChatMessages.length === 0) {
+      const hour = new Date().getHours()
+      const g = hour < 14 ? 'Buenos días' : hour < 21 ? 'Buenas tardes' : 'Buenas noches'
+      lines = [`${g}, **${user.name?.split(' ')?.[0] || user.name}**. ¿Sigues buscando *${lastQ}* o necesitas algo diferente?`]
+    }
     const msgs = [{ id: 1, from: 'nura', lines }]
 
     // For users who have searched before — add a personalized insight

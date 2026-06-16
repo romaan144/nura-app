@@ -360,7 +360,7 @@ export default function Chat() {
       </div>
 
       {showRating && <RatingModal helper={helper} onClose={() => setShowRating(false)} />}
-      {showConfirm && <ConfirmModal helper={helper} onClose={() => setShowConfirm(false)} onConfirm={(date, time, note) => { addService(helper, date, time, note) }} />}
+      {showConfirm && <ConfirmModal helper={helper} onClose={() => setShowConfirm(false)} onNavigate={navigate} onConfirm={(date, time, note) => { addService(helper, date, time, note) }} />}
     </div>
   )
 }

@@ -128,13 +128,13 @@ export default function MyServices() {
 
                 {/* Rate CTA */}
                 {(s.status === 'pending' || s.status === 'confirmed') && !rated && (
-                  <button className={styles.rateBtn}
-                    onClick={e => {
-                      e.stopPropagation()
-                      setRatingModal(s); setRatingVal(5)
-                    }}>
-                    <Star size={13} /> Valorar y marcar como completado
-                  </button>
+                  <div style={{display:'flex',gap:'6px',padding:'0 0 2px'}}>
+                    <button className={styles.rateBtn}
+                      onClick={e => { e.stopPropagation(); updateService(s.id, { status: 'completed' }); setRatingModal({...s, status:'completed'}); setRatingVal(5) }}
+                      style={{flex:1}}>
+                      <CheckCircle size={13} /> Marcar completado y valorar
+                    </button>
+                  </div>
                 )}
                 {rated && (
                   <div className={styles.ratedRow}>

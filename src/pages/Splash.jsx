@@ -7,9 +7,9 @@ export default function Splash() {
   const [phase, setPhase] = useState('logo') // logo → tagline → done
 
   useEffect(() => {
-    const t1 = setTimeout(() => setPhase('tagline'), 800)
-    const t2 = setTimeout(() => setPhase('done'), 1800)
-    const t3 = setTimeout(() => navigate('/', { replace: true }), 2200)
+    const t1 = setTimeout(() => setPhase('tagline'), 600)
+    const t2 = setTimeout(() => setPhase('done'), 1400)
+    const t3 = setTimeout(() => navigate('/', { replace: true }), 1800)
     return () => [t1,t2,t3].forEach(clearTimeout)
   }, [])
 

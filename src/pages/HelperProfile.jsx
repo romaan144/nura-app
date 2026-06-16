@@ -253,6 +253,69 @@ function PostCard({ post, helper }) {
 }
 
 /* ── MAIN ─────────────────────────────────────────────────────────────── */
+
+/* ── BOOKING MODAL ──────────────────────────────────── */
+function BookingModal({ helper, onClose, onBook, onNavigate }) {
+  const [date, setDate] = useState('')
+  const [time, setTime] = useState('')
+  const [note, setNote] = useState('')
+  const [done, setDone] = useState(false)
+  const name = helper?.name?.split(' ')?.[0] || helper?.name || ''
+
+  function confirm() {
+    onBook?.(helper, date, time, note)
+    setDone(true)
+  }
+
+  const style = {
+    overlay: {position:'fixed',inset:0,background:'rgba(0,0,0,0.5)',backdropFilter:'blur(8px)',zIndex:300,display:'flex',alignItems:'flex-end',justifyContent:'center'},
+    sheet: {background:'rgba(255,255,255,0.96)',backdropFilter:'blur(32px)',borderRadius:'24px 24px 0 0',padding:'24px 20px 36px',width:'100%',maxWidth:'500px'},
+    handle: {width:'36px',height:'4px',background:'rgba(0,0,0,0.1)',borderRadius:'2px',margin:'0 auto 20px'},
+    input: {width:'100%',padding:'12px 16px',border:'1px solid rgba(0,0,0,0.1)',borderRadius:'14px',fontSize:'15px',outline:'none',fontFamily:'-apple-system,Inter,sans-serif',background:'rgba(0,0,0,0.03)',boxSizing:'border-box'},
+    btnPrimary: {width:'100%',padding:'14px',background:'#1C1C1E',color:'white',border:'none',borderRadius:'100px',fontSize:'14px',fontWeight:700,cursor:'pointer',transition:'opacity 0.2s'},
+    btnSecondary: {width:'100%',padding:'12px',background:'rgba(0,0,0,0.05)',color:'rgba(0,0,0,0.55)',border:'none',borderRadius:'100px',fontSize:'14px',fontWeight:600,cursor:'pointer'},
+  }
+
+  return (
+    <div style={style.overlay}>
+      <div style={style.sheet}>
+        <div style={style.handle} />
+        {done ? (
+          <div style={{textAlign:'center',display:'flex',flexDirection:'column',alignItems:'center',gap:'12px',padding:'16px 0'}}>
+            <span style={{fontSize:'52px'}}>✅</span>
+            <h3 style={{fontSize:'19px',fontWeight:800,margin:0,color:'rgba(0,0,0,0.85)',letterSpacing:'-0.3px'}}>Solicitud enviada</h3>
+            <p style={{fontSize:'13px',color:'rgba(0,0,0,0.45)',margin:0,lineHeight:1.6}}>{name} confirmará disponibilidad en breve.</p>
+            <p style={{fontSize:'12px',color:'rgba(0,0,0,0.35)',margin:0}}>Haz seguimiento en <strong style={{color:'var(--purple)'}}>Mis servicios</strong>.</p>
+            <div style={{display:'flex',flexDirection:'column',gap:'8px',width:'100%',marginTop:'8px'}}>
+              <button onClick={() => { onClose(); onNavigate('/my-services') }} style={style.btnPrimary}>Ver Mis servicios</button>
+              <button onClick={onClose} style={style.btnSecondary}>Cerrar</button>
+            </div>
+          </div>
+        ) : (
+          <>
+            <h3 style={{fontSize:'17px',fontWeight:800,margin:'0 0 4px',color:'rgba(0,0,0,0.85)',letterSpacing:'-0.3px'}}>Solicitar servicio</h3>
+            <p style={{fontSize:'13px',color:'rgba(0,0,0,0.4)',margin:'0 0 20px'}}>{name} · {helper?.price || 'Precio a consultar'}</p>
+            <div style={{display:'flex',flexDirection:'column',gap:'10px',marginBottom:'20px'}}>
+              <input type="date" value={date} onChange={e=>setDate(e.target.value)} style={style.input} />
+              <input type="time" value={time} onChange={e=>setTime(e.target.value)} style={style.input} />
+              <textarea value={note} onChange={e=>setNote(e.target.value)}
+                placeholder="Detalles adicionales (opcional)..." rows={3}
+                style={{...style.input, resize:'none'}} />
+            </div>
+            <div style={{display:'flex',gap:'8px'}}>
+              <button onClick={onClose} style={{...style.btnSecondary,flex:1}}>Cancelar</button>
+              <button onClick={confirm} disabled={!date}
+                style={{...style.btnPrimary,flex:2,opacity:date?1:0.4}}>
+                Enviar solicitud
+              </button>
+            </div>
+          </>
+        )}
+      </div>
+    </div>
+  )
+}
+
 function HelperProfileInner() {
   const { id } = useParams()
   const navigate = useNavigate()
@@ -822,23 +885,7 @@ function HelperProfileInner() {
       </div>
 
       {showRating && <RatingModal helper={h} onClose={() => setShowRating(false)} />}
-      {showConfirm && (
-        <div style={{position:'fixed',inset:0,background:'rgba(0,0,0,0.4)',zIndex:200,display:'flex',alignItems:'flex-end',justifyContent:'center'}}>
-          <div style={{background:'white',borderRadius:'24px 24px 0 0',padding:'24px 20px',width:'100%',maxWidth:'500px'}}>
-            <div style={{width:'36px',height:'4px',background:'var(--rule)',borderRadius:'2px',margin:'0 auto 20px'}} />
-            <h3 style={{fontSize:'17px',fontWeight:800,color:'var(--ink)',marginBottom:'6px'}}>Contratar a {h.name?.split(' ')?.[0] || h.name || ''}</h3>
-            <p style={{fontSize:'13px',color:'var(--mid)',marginBottom:'20px'}}>{h.price && h.price !== 'Consultar' ? h.price : 'Precio a consultar'} · {h.zone}</p>
-            <button onClick={() => { setShowConfirm(false); navigate(`/chat/${h.id}`) }}
-              style={{width:'100%',padding:'14px',background:'var(--grad-main)',color:'white',border:'none',borderRadius:'18px',fontSize:'15px',fontWeight:700,boxShadow:'0 4px 16px rgba(123,47,255,0.3)',marginBottom:'10px'}}>
-              Enviar solicitud de servicio
-            </button>
-            <button onClick={() => setShowConfirm(false)}
-              style={{width:'100%',padding:'12px',background:'transparent',color:'var(--soft)',border:'none',fontSize:'14px'}}>
-              Cancelar
-            </button>
-          </div>
-        </div>
-      )}
+      {showConfirm && <BookingModal helper={h} onClose={() => setShowConfirm(false)} onBook={addService} onNavigate={navigate} />}
     </div>
   )
 }
