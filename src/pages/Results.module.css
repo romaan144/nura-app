@@ -129,7 +129,9 @@
 .topBar { display: flex; gap: 6px; padding: 0 14px 8px; }
 .viewBtn { padding: 6px 14px; border-radius: 20px; border: none; background: white; color: var(--soft); font-size: 12px; font-weight: 500; box-shadow: 0 1px 4px rgba(0,0,0,0.07); cursor: pointer; transition: all 0.15s; }
 .viewBtnActive { background: #1C1C1E; color: white; }
-.cardsGrid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+.cardsGrid { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+.cardsGrid .cardBio { display: none; }
+.cardsGrid .cardMeta { font-size: 10px; }
 
 .nuráContext { padding: 10px 0 4px; }
 

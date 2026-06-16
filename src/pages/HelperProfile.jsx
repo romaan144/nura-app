@@ -27,9 +27,16 @@ function LivePulse({ helper }) {
     return () => clearInterval(t)
   }, [])
 
-  const facts = [
+  const isSupabase = !!helper.isFromSupabase
+  const firstName = helper.name?.split(' ')?.[0] || helper.name || ''
+
+  const facts = isSupabase ? [
+    { icon: <Activity size={12} />, text: `Reputación calculada a partir de ${helper.reviews} valoraciones reales` },
+    { icon: <Shield size={12} />, text: `Identidad verificada con documento oficial` },
+    { icon: <Cpu size={12} />, text: `Perfil en construcción — Nüra lo irá completando automáticamente` },
+  ] : [
     { icon: <Brain size={12} />, text: `Personalidad analizada en ${helper.services} servicios reales` },
-    { icon: <Cpu size={12} />, text: `${helper.hiddenSkills?.length || 2} habilidades detectadas sin que ${helper.name?.split(' ')[0] || helper.name} las declarara` },
+    { icon: <Cpu size={12} />, text: `${helper.hiddenSkills?.length || 2} habilidades detectadas sin que ${firstName} las declarara` },
     { icon: <Activity size={12} />, text: `Reputación actualizada automáticamente tras cada valoración` },
     { icon: <MessageSquare size={12} />, text: `Comportamiento en chats analizado para construir el perfil` },
   ]
@@ -328,15 +335,21 @@ function HelperProfileInner() {
 
   const isSupabaseHelper = !!h.isFromSupabase
 
+  // Score penalizes low service count (< 5 services = max 60 score)
+  const serviceCount = h.services || 0
+  const serviceScore = serviceCount === 0 ? 0
+    : serviceCount < 5 ? Math.round((serviceCount / 5) * 15)
+    : Math.round((Math.min(serviceCount, 100) / 100) * 30)
   const score = Math.round(
     ((h.rating || 0) / 5) * 40 +
-    (Math.min(h.services || 0, 100) / 100) * 30 +
+    serviceScore +
     ((h.completionRate || 0) / 100) * 20 +
     (h.dniVerified ? 10 : 0)
   )
-  const level = score >= 90 ? { label: 'Experto verificado', color: '#059669', bg: '#ECFDF5' }
-    : score >= 75 ? { label: 'Referente de confianza', color: '#1A56DB', bg: '#EFF6FF' }
-    : { label: 'Con historial', color: '#D97706', bg: '#FFFBEB' }
+  const level = score >= 85 ? { label: 'Experto verificado', color: '#059669', bg: '#ECFDF5' }
+    : score >= 65 ? { label: 'Referente de confianza', color: '#1A56DB', bg: '#EFF6FF' }
+    : score >= 40 ? { label: 'Con historial', color: '#D97706', bg: '#FFFBEB' }
+    : { label: 'Perfil nuevo', color: '#6B7280', bg: '#F9FAFB' }
 
   return (
     <div className={styles.page}>

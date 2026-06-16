@@ -9,7 +9,7 @@ export default function Favorites() {
   const navigate = useNavigate()
   const { favorites, toggleFavorite, helpersCache } = useUser()
   const allHelpers = [...HELPERS, ...Object.values(helpersCache || {}).filter(h => h?.id && !HELPERS.find(l => String(l.id) === String(h.id)))]
-  const saved = HELPERS.filter(h => favorites.includes(h.id))
+  const saved = allHelpers.filter(h => h && favorites.some(fid => String(fid) === String(h.id)))
 
   return (
     <div className={styles.page}>
@@ -20,15 +20,20 @@ export default function Favorites() {
 
         {saved.length === 0 ? (
           <div className={styles.empty}>
-            <Heart size={52} color="var(--rule)" />
-            <h3>Sin favoritos todavía</h3>
-            <p>Guarda helpers que te interesen para encontrarlos rápido después.</p>
-            <button className={styles.emptyBtn} onClick={() => navigate('/')}>Buscar helpers</button>
+            <div className={styles.emptyIcon}>🤍</div>
+            <h3 className={styles.emptyTitle}>Sin favoritos todavía</h3>
+            <p className={styles.emptyDesc}>Cuando encuentres un helper que te interese, pulsa el corazón para guardarlo aquí.</p>
+            <button className={styles.emptyBtn} onClick={() => navigate('/explore')}>
+              Explorar profesionales
+            </button>
+            <button className={styles.emptyBtnSecondary} onClick={() => navigate('/')}>
+              Buscar con Nüra
+            </button>
           </div>
         ) : (
           <div className={styles.list}>
             {saved.map(h => (
-              <div key={h.id} className={styles.card} onClick={() => navigate(`/helper/${h.id}`)}>
+              <div key={h.id} className={styles.card} onClick={() => navigate(`/helper/${h.id}`, { state: { helper: h } })}>
                 <div className={styles.cardLeft}>
                   <img src={h.avatarUrl || `https://api.dicebear.com/9.x/personas/svg?seed=${h.name}`}
                     alt={h.name} className={styles.avatar} />
