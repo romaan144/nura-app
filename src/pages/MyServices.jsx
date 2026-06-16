@@ -5,6 +5,56 @@ import { useUser } from '../context/UserContext'
 import PageHeader from '../components/PageHeader'
 import styles from './MyServices.module.css'
 
+// Demo services for realistic preview
+const DEMO_SERVICES = [
+  {
+    id: 'demo1',
+    helperId: 5,
+    helperName: 'Elena Fernández Ros',
+    specialty: 'Auxiliar de geriatría',
+    avatarUrl: 'https://api.dicebear.com/9.x/personas/svg?seed=ElenaFernandez',
+    avatarColor: '#059669',
+    avatar: 'EF',
+    date: (() => { const d = new Date(); d.setDate(d.getDate()+1); return d.toISOString().split('T')[0] })(),
+    time: '09:30',
+    note: 'Cuidado matutino, acompañamiento y medicación',
+    price: '14€/h',
+    status: 'confirmed',
+    isDemo: true,
+  },
+  {
+    id: 'demo2',
+    helperId: 1,
+    helperName: 'Carlos Martínez Vidal',
+    specialty: 'Logopeda',
+    avatarUrl: 'https://api.dicebear.com/9.x/personas/svg?seed=CarlosMartinez',
+    avatarColor: '#1A56DB',
+    avatar: 'CM',
+    date: (() => { const d = new Date(); d.setDate(d.getDate()+3); return d.toISOString().split('T')[0] })(),
+    time: '17:00',
+    note: 'Primera sesión de evaluación — Sofía',
+    price: '50€/sesión',
+    status: 'pending',
+    isDemo: true,
+  },
+  {
+    id: 'demo3',
+    helperId: 3,
+    helperName: 'Roberto Sánchez Ferrer',
+    specialty: 'Técnico de calderas',
+    avatarUrl: 'https://api.dicebear.com/9.x/personas/svg?seed=RobertoSanchez',
+    avatarColor: '#1E40AF',
+    avatar: 'RS',
+    date: (() => { const d = new Date(); d.setDate(d.getDate()-2); return d.toISOString().split('T')[0] })(),
+    time: '11:00',
+    note: 'Revisión caldera — reparación válvula expansión',
+    price: '65€',
+    status: 'completed',
+    isDemo: true,
+    rated: true,
+  },
+]
+
 const STATUS = {
   pending:   { label: 'Pendiente',   color: '#D97706', bg: '#FFFBEB' },
   confirmed: { label: 'Confirmado',  color: '#059669', bg: '#ECFDF5' },

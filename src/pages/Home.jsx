@@ -15,7 +15,7 @@ function getWelcome(user) {
   const greeting = hour < 14 ? 'Buenos días' : hour < 21 ? 'Buenas tardes' : 'Buenas noches'
   if (!user) return [
     `Hola. Soy **Nüra**.`,
-    `Cuéntame qué necesitas — en lenguaje natural, sin formularios. Encuentro a la persona real que puede ayudarte.`
+    `Cuéntame qué necesitas. Busco entre más de 1.200 profesionales verificados en Barcelona y encuentro a la persona exacta que puede ayudarte — con nombre, precio y disponibilidad real.`
   ]
   if (user.isHelper) return [
     `${greeting}, **${user.name?.split(' ')[0]}**. ¿Qué necesitas hoy?`,
