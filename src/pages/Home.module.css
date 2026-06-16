@@ -283,32 +283,11 @@
   display: flex; flex-direction: column; gap: 10px;
   margin-top: 8px;
 }
-.resultCard {
-  background: rgba(255,255,255,0.85);
-  border: 1px solid rgba(255,255,255,0.5);
-  border-radius: 18px; padding: 14px;
-  cursor: pointer; transition: all 0.18s;
-  box-shadow: 0 1px 12px rgba(0,0,0,0.06);
-}
+
 .resultCard:active { transform: scale(0.99); opacity: 0.9; }
-.resultTop { display: flex; align-items: flex-start; gap: 12px; margin-bottom: 10px; }
-.resultAvatarWrap { position: relative; flex-shrink: 0; }
-.resultAvatarImg { width: 50px; height: 50px; border-radius: 50%; object-fit: cover; box-shadow: 0 2px 8px rgba(0,0,0,0.12); display: block; }
-.resultAvatarFallback { width: 50px; height: 50px; border-radius: 50%; display: flex; align-items: center; justify-content: center; color: white; font-weight: 700; font-size: 18px; }
-.resultVerified { position: absolute; bottom: 0; right: 0; width: 16px; height: 16px; border-radius: 50%; background: #059669; color: white; display: flex; align-items: center; justify-content: center; border: 2px solid white; }
-.resultInfo { flex: 1; min-width: 0; }
-.resultName { font-size: clamp(13px, 3.8vw, 15px); font-weight: 800; color: #1a1a1a; }
-.resultSpec { font-size: clamp(11px, 3.2vw, 13px); color: #7B2FFF; font-weight: 600; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
-.resultMeta { display: flex; align-items: center; gap: 5px; font-size: 11px; color: #888; margin-top: 3px; }
-.resultRating { font-weight: 600; color: #555; }
+
 .resultDot { width: 3px; height: 3px; border-radius: 50%; background: #ccc; }
 .resultDist { color: #888; }
-.resultMetaDot { color: #ddd; margin: 0 1px; }
-.resultBottom { display: flex; align-items: center; justify-content: space-between; gap: 8px; }
-.resultTags { display: flex; flex-wrap: wrap; gap: 5px; flex: 1; }
-.resultTag { font-size: 10px; color: #666; background: #F0F0F4; border-radius: 8px; padding: 3px 8px; }
-.resultUrgent { font-size: 10px; color: #DC2626; background: #FEF2F2; border-radius: 8px; padding: 3px 8px; font-weight: 600; }
-.resultContact { display: flex; align-items: center; gap: 6px; padding: 8px 14px; background: var(--grad-main); color: white; border: none; border-radius: 20px; font-size: 12px; font-weight: 600; flex-shrink: 0; box-shadow: 0 2px 8px rgba(123,47,255,0.3); cursor: pointer; transition: all 0.15s; }
 
 /* ── RECENT SEARCHES ────────────────────────────────── */
 .recentSearches { display: flex; flex-direction: column; gap: 4px; padding: 0 2px; }

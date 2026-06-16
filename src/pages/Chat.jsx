@@ -109,8 +109,13 @@ function formatTime(date) {
   if (isNaN(d.getTime())) return ''
   return `${d.getHours()}:${String(d.getMinutes()).padStart(2,'0')}`
 }
-function formatDateLabel(date) {
+function formatDateLabel(dateStr) {
+  if (!dateStr) return ''
+  const date = typeof dateStr === 'string' ? new Date(dateStr) : dateStr
+  if (isNaN(date.getTime())) return ''
   if (date.toDateString() === new Date().toDateString()) return 'Hoy'
+  const yesterday = new Date(); yesterday.setDate(yesterday.getDate()-1)
+  if (date.toDateString() === yesterday.toDateString()) return 'Ayer'
   return date.toLocaleDateString('es-ES', { weekday:'long', day:'numeric', month:'long' })
 }
 

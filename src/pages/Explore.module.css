@@ -38,23 +38,17 @@
 
 /* Grid — single column, rich cards */
 .grid { display: flex; flex-direction: column; gap: 10px; }
-.card { background: rgba(255,255,255,0.85); border: 1px solid rgba(255,255,255,0.5); border-radius: 20px; overflow: hidden; cursor: pointer; transition: opacity 0.15s; box-shadow: 0 1px 12px rgba(0,0,0,0.05); display: flex; flex-direction: column; gap: 10px; padding: 14px; position: relative; }
+
 .card:active { opacity: 0.75; }
 
-.cardTop { display: flex; justify-content: center; padding: 16px 16px 8px; position: relative; }
-.avatarWrap { position: relative; }
-.avatarImg { width: 52px; height: 52px; border-radius: 50%; object-fit: cover; display: block; }
-.avatar { width: 52px; height: 52px; border-radius: 50%; display: flex; align-items: center; justify-content: center; color: white; font-weight: 700; font-size: 18px; box-shadow: 0 2px 8px rgba(0,0,0,0.12); }
 .urgentBadge { position: absolute; bottom: 0; right: 0; width: 18px; height: 18px; border-radius: 50%; background: #EF4444; color: white; display: flex; align-items: center; justify-content: center; border: 2px solid white; }
 
 .cardBody { padding: 0 12px 8px; text-align: center; flex: 1; }
-.cardName { font-size: 15px; font-weight: 700; color: rgba(0,0,0,0.85); letter-spacing: -0.2px; display: flex; align-items: center; }
-.cardSpecialty { font-size: 11px; color: var(--purple); font-weight: 600; margin-bottom: 5px; }
-.cardMeta { display: flex; align-items: center; justify-content: center; gap: 4px; font-size: 11px; color: var(--soft); }
+
 .sep { color: var(--rule); }
 
 .cardFooter { display: flex; align-items: center; justify-content: space-between; padding: 8px 12px 12px; }
-.price { font-size: 12px; font-weight: 700; color: var(--purple); }
+
 .cardBadges { display: flex; gap: 3px; }
 .badge { font-size: 12px; }
 
@@ -133,18 +127,8 @@
   .page { padding-bottom: calc(72px + max(env(safe-area-inset-bottom, 0px), 8px)) !important; }
 }
 
-.cardMain { display: flex; align-items: flex-start; gap: 12px; position: relative; }
-.cardInfo { flex: 1; min-width: 0; }
-.cardSpecialty { font-size: 12px; color: rgba(0,0,0,0.45); margin-top: 1px; }
-.cardMeta { display: flex; align-items: center; gap: 4px; font-size: 11px; color: rgba(0,0,0,0.4); margin-top: 4px; flex-wrap: wrap; }
-.metaDot { color: rgba(0,0,0,0.2); }
-.cardBio { font-size: 12px; color: rgba(0,0,0,0.5); line-height: 1.55; margin: 0; letter-spacing: -0.1px; }
-.cardBottom { display: flex; align-items: center; justify-content: space-between; gap: 8px; }
-.cardTags { display: flex; gap: 5px; flex-wrap: wrap; flex: 1; }
 .tag { font-size: 10px; color: rgba(0,0,0,0.45); background: rgba(0,0,0,0.04); border-radius: 100px; padding: 3px 8px; font-weight: 500; }
-.tagUrgent { font-size: 10px; color: #DC2626; background: #FEF2F2; border-radius: 100px; padding: 3px 8px; font-weight: 600; }
-.contactBtn { padding: 8px 16px; background: #1C1C1E; color: white; border: none; border-radius: 100px; font-size: 12px; font-weight: 700; cursor: pointer; flex-shrink: 0; transition: opacity 0.15s; font-family: -apple-system,'Inter',sans-serif; }
-.contactBtn:active { opacity: 0.7; }
+
 
 /* Desktop: 2-column grid for richer cards */
 @media (min-width: 768px) {

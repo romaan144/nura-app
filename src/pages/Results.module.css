@@ -1,9 +1,7 @@
 .page { padding-top: 72px; min-height: 100vh; background: #F8F8FA; }
 
-
 .back { width: 34px; height: 34px; border-radius: 50%; border: none; background: #F8F8FA; color: var(--mid); display: flex; align-items: center; justify-content: center; transition: all 0.18s; flex-shrink: 0; }
 .back:hover { border-color: var(--purple); color: var(--purple); }
-
 
 .content { max-width: 640px; margin: 0 auto; padding: 18px var(--page-x) 32px; }
 
@@ -48,22 +46,14 @@
 .card:hover { border-color: transparent; box-shadow: 0 2px 8px rgba(0,0,0,0.08), 0 1px 3px rgba(0,0,0,0.05); transform: translateY(-2px); }
 .card:hover::before { opacity: 1; }
 
-.cardMain { display: flex; align-items: center; gap: 12px; margin-bottom: 12px; }
-.avatar { width: 46px; height: 46px; border-radius: 50%; display: flex; align-items: center; justify-content: center; color: white; font-weight: 700; font-size: 15px; flex-shrink: 0; box-shadow: 0 3px 12px rgba(0,0,0,0.15); }
-.cardInfo { flex: 1; min-width: 0; }
-.cardName { font-size: 15px; font-weight: 800; color: var(--ink); display: flex; align-items: center; gap: 5px; letter-spacing: -0.2px; }
 .verifiedDot { color: var(--green); display: flex; }
 .founderDot { font-size: 11px; }
-.cardMeta { display: flex; align-items: center; gap: 4px; font-size: 12px; color: var(--soft); margin-bottom: 6px; }
-.ratingVal { font-weight: 600; color: var(--mid); }
-.dot { width: 3px; height: 3px; border-radius: 50%; background: var(--rule); }
-.cardTags { display: flex; flex-wrap: wrap; gap: 4px; }
+
 .tag { font-size: 10px; font-weight: 500; color: var(--soft); background: #F8F8FA; border: none; border-radius: 6px; padding: 2px 7px; }
 .cardRight { display: flex; flex-direction: column; align-items: flex-end; gap: 6px; flex-shrink: 0; }
-.price { font-size: 15px; font-weight: 700; color: var(--purple); white-space: nowrap; }
 
 .cardActions { display: flex; align-items: center; justify-content: space-between; gap: 8px; }
-.btnPrimary { display: flex; align-items: center; gap: 5px; padding: 9px 18px; background: var(--grad-main); color: white; border-radius: 22px; font-size: 13px; font-weight: 700; transition: all 0.2s; box-shadow: 0 2px 8px rgba(123,47,255,0.3); }
+
 .btnPrimary:hover { transform: translateY(-1px); box-shadow: 0 5px 16px rgba(123,47,255,0.35); }
 .btnSecondary { padding: 8px 14px; background: #F8F8FA; color: var(--mid); border: none; border-radius: 20px; font-size: 12px; font-weight: 500; transition: all 0.18s; }
 .btnSecondary:hover { border-color: var(--purple); color: var(--purple); }
@@ -88,26 +78,7 @@
   border-radius: 8px; padding: 2px 7px;
 }
 
-.avatarImg { width: 46px; height: 46px; border-radius: 50%; object-fit: cover; flex-shrink: 0; box-shadow: 0 3px 12px rgba(0,0,0,0.12); }
-
-.cardSpecialty {
-  font-size: 12px;
-  font-weight: 600;
-  color: var(--purple);
-  margin-bottom: 5px;
-  text-transform: capitalize;
-}
-
 .actionsLeft { display: flex; gap: 7px; align-items: center; }
-
-.price {
-  font-size: 16px; font-weight: 800;
-  background: var(--grad-main);
-  -webkit-background-clip: text; -webkit-text-fill-color: transparent;
-  background-clip: text;
-  white-space: nowrap; flex-shrink: 0;
-}
-.priceConsult { font-size: 11px; font-weight: 600; color: var(--soft); font-style: italic; }
 
 .sortRow { display: flex; gap: 6px; overflow-x: auto; padding: 0 14px 12px; }
 .sortRow::-webkit-scrollbar { display: none; }
@@ -131,17 +102,10 @@
 .viewBtn { padding: 6px 14px; border-radius: 20px; border: none; background: white; color: var(--soft); font-size: 12px; font-weight: 500; box-shadow: 0 1px 4px rgba(0,0,0,0.07); cursor: pointer; transition: all 0.15s; }
 .viewBtnActive { background: #1C1C1E; color: white; }
 .cardsGrid { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
-.cardsGrid .cardBio { display: none; }
-.cardsGrid .cardMeta { font-size: 10px; }
+.cardsGrid 
+.cardsGrid 
 
 .nuráContext { padding: 10px 0 4px; }
-
-.cardTags { display: flex; gap: 5px; flex-wrap: wrap; flex: 1; }
-.availBadge { font-size: 10px; font-weight: 600; color: #059669; background: #ECFDF5; border-radius: 100px; padding: 3px 8px; }
-.verifiedBadge { font-size: 10px; font-weight: 600; color: #1A56DB; background: #EFF6FF; border-radius: 100px; padding: 3px 8px; display: flex; align-items: center; gap: 3px; }
-.urgentBadge { font-size: 10px; font-weight: 600; color: #DC2626; background: #FEF2F2; border-radius: 100px; padding: 3px 8px; }
-
-.cardBio { font-size: 12px; color: rgba(0,0,0,0.45); line-height: 1.5; margin-top: 2px; letter-spacing: -0.1px; }
 
 /* Bottom nav clearance */
 @media (max-width: 767px) {
