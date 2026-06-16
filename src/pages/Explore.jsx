@@ -150,8 +150,7 @@ export default function Explore() {
           </div>
         )}
         {!loadingHelpers && (<><div className={styles.resultsCount}>
-          {totalCount > 0 && `${filtered.length} de ${totalCount} profesionales` || 
-          {filtered.length} helper{filtered.length !== 1 ? 's' : ''} encontrado{filtered.length !== 1 ? 's' : ''}
+          {totalCount > 0 ? `${filtered.length} de ${totalCount} profesionales` : `${filtered.length} profesionales`}
         </div>
         <div className={styles.grid}>
           {filtered.map(h => (

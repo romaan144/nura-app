@@ -104,7 +104,7 @@ function normalizeHelper(h) {
   }
 }
 
-export async function matchHelpers(analysis, limit = 5, refinement = null, previousResults = null) {
+export async function matchHelpers(analysis, limit = 8, refinement = null, previousResults = null) {
   // Refinement mode
   if (refinement && previousResults?.length > 0) {
     return applyRefinement(previousResults, refinement).slice(0, limit)

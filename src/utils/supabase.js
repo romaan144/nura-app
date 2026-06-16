@@ -151,14 +151,15 @@ function normalize(h) {
     qualificationLevel: h.qualification_level || 'professional',
     skills: Array.isArray(h.skills) ? h.skills : [],
     languages: Array.isArray(h.languages) ? h.languages : [],
-    // Generated rich data
-    hiddenSkills: genHiddenSkills(h.category),
-    education: genEducation(h.category),
-    experience: genExperience(h.category, h.zone, h.services),
-    posts: genPosts(name, specialty),
-    qualitativeComments: genReviews(h.reviews),
-    evolution: genEvolution(h.services),
-    personality: genPersonality(h.rating),
+    // Real data only — no generated content
+    hiddenSkills: [],
+    education: [],
+    experience: [],
+    posts: [],
+    qualitativeComments: [],
+    evolution: [],
+    personality: null,
+    isFromSupabase: true, // flag so UI knows to show "profile in progress" state
   }
 }
 

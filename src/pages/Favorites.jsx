@@ -7,7 +7,8 @@ import styles from './Favorites.module.css'
 
 export default function Favorites() {
   const navigate = useNavigate()
-  const { favorites, toggleFavorite } = useUser()
+  const { favorites, toggleFavorite, helpersCache } = useUser()
+  const allHelpers = [...HELPERS, ...Object.values(helpersCache || {}).filter(h => h?.id && !HELPERS.find(l => String(l.id) === String(h.id)))]
   const saved = HELPERS.filter(h => favorites.includes(h.id))
 
   return (

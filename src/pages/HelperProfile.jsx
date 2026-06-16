@@ -326,6 +326,8 @@ function HelperProfileInner() {
     { id: 'reputacion', label: 'Reputación', icon: <BarChart2 size={12} /> },
   ]
 
+  const isSupabaseHelper = !!h.isFromSupabase
+
   const score = Math.round(
     ((h.rating || 0) / 5) * 40 +
     (Math.min(h.services || 0, 100) / 100) * 30 +
@@ -389,7 +391,7 @@ function HelperProfileInner() {
           </div>
 
           <div className={styles.heroActions}>
-            <button className={styles.heroCtaSecondary} onClick={() => navigate(`/chat/${h.id}`)}>
+            <button className={styles.heroCtaSecondary} onClick={() => navigate(`/chat/${h.id}`, { state: { helper: h } })}>
               <MessageCircle size={15} /> Escribir
             </button>
             <button className={styles.heroCtaBtn} onClick={() => { setShowConfirm(true) }}>
@@ -543,7 +545,7 @@ function HelperProfileInner() {
               </div>
             </section>
             {/* Nüra-detected skills — THE differentiator */}
-            {h.hiddenSkills?.length > 0 && (
+            {h.hiddenSkills?.length > 0 && !isSupabaseHelper && (
               <div className={styles.nuraDetectedCard}>
                 <div className={styles.nuraDetectedHeader}>
                   <Cpu size={14} color="var(--purple)" />
@@ -744,7 +746,7 @@ function HelperProfileInner() {
             </div>
 
             {/* Personality */}
-            {h.personality && (
+            {h.personality && !isSupabaseHelper && (
               <section className={styles.section}>
                 <h3 className={styles.sectionTitle}><Brain size={13} /> Análisis de personalidad</h3>
                 <div className={styles.nuraVerifyNote}>
@@ -764,7 +766,7 @@ function HelperProfileInner() {
             )}
 
             {/* Evolution */}
-            {h.evolution?.length > 0 && (
+            {h.evolution?.length > 0 && !isSupabaseHelper && (
               <section className={styles.section}>
                 <h3 className={styles.sectionTitle}><TrendingUp size={13} /> Trayectoria en Nüra</h3>
                 <div className={styles.evoTimeline}>

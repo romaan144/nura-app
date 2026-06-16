@@ -111,7 +111,7 @@ function ResultCard({ helper, onNavigate, onFav, isFav }) {
 
 export default function Home({ setSearchState }) {
   const navigate = useNavigate()
-  const { user, addSearch, toggleFavorite, isFavorite, searchHistory, nuraChatMessages, setNuraChatMessages, nuraLastMatches, setNuraLastMatches } = useUser()
+  const { user, addSearch, toggleFavorite, isFavorite, searchHistory, nuraChatMessages, setNuraChatMessages, nuraLastMatches, setNuraLastMatches, cacheHelpers } = useUser()
   // messages persisted in context so they survive navigation
   const messages = nuraChatMessages
   const setMessages = setNuraChatMessages
@@ -277,12 +277,19 @@ export default function Home({ setSearchState }) {
         `Tienes ${matches.length} profesionales esperando tu mensaje en Nüra.`,
         2 * 60 * 60 * 1000
       )
-      // Cache helpers for instant profile loading
+      // Cache helpers for instant profile + chat loading
       if (matches?.length) {
         const cacheMap = {}
-        matches.forEach(h => { cacheMap[h.id] = h; cacheMap[String(h.id)] = h })
-        // Store in window for HelperProfile to access
+        matches.forEach(h => {
+          if (h?.id) {
+            cacheMap[h.id] = h
+            cacheMap[String(h.id)] = h
+            cacheMap[parseInt(h.id)] = h
+          }
+        })
         window.__nuraHelperCache = { ...(window.__nuraHelperCache || {}), ...cacheMap }
+        // Also cache in UserContext via cacheHelpers
+        cacheHelpers?.(matches)
       }
 
       const resultMsg = { id: Date.now(), from: 'nura', lines: [`He encontrado **${matches.length} personas** que pueden ayudarte.`], results: matches }

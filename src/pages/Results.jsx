@@ -11,46 +11,51 @@ function HelperCard({ helper }) {
   if (!helper) return null
 
   return (
-    <div className={styles.card} onClick={() => navigate(`/helper/${helper.id}`)}>
+    <div className={styles.card} onClick={() => navigate(`/helper/${helper.id}`, { state: { helper } })}>
+      {/* Top: avatar + info */}
       <div className={styles.cardMain}>
-        {helper.avatarUrl
-          ? <img src={helper.avatarUrl} alt={helper.name} className={styles.avatarImg} />
-          : <div className={styles.avatar} style={{ background: helper.avatarColor || '#1A56DB' }}>{helper.avatar || '?'}</div>
-        }
+        <div style={{position:'relative',flexShrink:0}}>
+          {helper.avatarUrl
+            ? <img src={helper.avatarUrl} alt={helper.name} className={styles.avatarImg} />
+            : <div className={styles.avatar} style={{ background: helper.avatarColor || '#1A56DB' }}>{helper.avatar || '?'}</div>
+          }
+          {helper.available && (
+            <span style={{position:'absolute',bottom:1,right:1,width:10,height:10,borderRadius:'50%',background:'#22C55E',border:'2px solid white'}} />
+          )}
+        </div>
         <div className={styles.cardInfo}>
           <div className={styles.cardName}>
             {helper.name}
-            {helper.verified && <span className={styles.verifiedDot}><Shield size={9} /></span>}
+            {helper.dniVerified && <Shield size={9} color="#059669" style={{marginLeft:4,verticalAlign:'middle'}} />}
           </div>
           <div className={styles.cardSpecialty}>{helper.specialty || (helper.tags && helper.tags[0]) || ''}</div>
+          {helper.bio && (
+            <div className={styles.cardBio}>{helper.bio.length > 70 ? helper.bio.slice(0,70)+'...' : helper.bio}</div>
+          )}
           <div className={styles.cardMeta}>
-            <Star size={11} fill="#F59E0B" color="#F59E0B" />
+            <Star size={10} fill="#F59E0B" color="#F59E0B" />
             <span className={styles.ratingVal}>{helper.rating}</span>
             <span className={styles.dot} />
-            <MapPin size={10} />
             <span>{helper.distance}km</span>
-            {helper.urgent && <><span className={styles.dot} /><Zap size={10} color="var(--red)" /><span style={{color:'var(--red)',fontWeight:600}}>Hoy</span></>}
-          </div>
-          <div className={styles.matchReason}>
-            💡 {helper.zone} · {helper.responseTime} respuesta · {helper.completionRate}% completados
+            <span className={styles.dot} />
+            <span>{helper.responseTime}</span>
+            {helper.urgent && <><span className={styles.dot} /><span style={{color:'#DC2626',fontWeight:600,fontSize:10}}>Urgencias</span></>}
           </div>
         </div>
-        <div className={styles.cardRight}>
-          <ChevronRight size={16} color="var(--soft)" />
+        <div style={{display:'flex',flexDirection:'column',alignItems:'flex-end',gap:6,flexShrink:0}}>
+          {helper.price && helper.price !== 'Consultar'
+            ? <span className={styles.price}>{helper.price}</span>
+            : null
+          }
+          <ChevronRight size={14} color="rgba(0,0,0,0.25)" />
         </div>
       </div>
-      <div className={styles.cardActions}>
-        <div className={styles.actionsLeft}>
-          <button className={styles.btnPrimary} onClick={e => { e.stopPropagation(); navigate(`/chat/${helper.id}`) }}>
-            <MessageCircle size={13} /> Contactar
-          </button>
-          <button className={styles.btnSecondary} onClick={e => { e.stopPropagation(); navigate(`/helper/${helper.id}`) }}>
-            Ver perfil
-          </button>
-        </div>
-        {helper.price && helper.price !== 'Consultar' && <div className={styles.price}>{helper.price}</div>}
-        {helper.price === 'Consultar' && <div className={styles.priceConsult}>Precio a consultar</div>}
-      </div>
+
+      {/* Bottom: single primary action */}
+      <button className={styles.btnPrimary}
+        onClick={e => { e.stopPropagation(); navigate(`/chat/${helper.id}`, { state: { helper } }) }}>
+        <MessageCircle size={13} /> Contactar
+      </button>
     </div>
   )
 }
