@@ -20,3 +20,9 @@
   .content { padding: 0 32px 60px; }
   .list { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
 }
+
+/* Bottom nav space (mobile only) */
+@media (max-width: 767px) {
+  .page { padding-bottom: 72px; }
+  .messages { padding-bottom: 152px; }
+}

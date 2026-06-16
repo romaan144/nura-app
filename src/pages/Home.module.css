@@ -351,3 +351,9 @@
   cursor: pointer; transition: all 0.15s;
 }
 .quickOption:active { background: rgba(0,0,0,0.1); }
+
+/* Bottom nav space (mobile only) */
+@media (max-width: 767px) {
+  .page { padding-bottom: 72px; }
+  .messages { padding-bottom: 152px; }
+}

@@ -236,3 +236,9 @@
 .emptyFeed h3 { font-size: 18px; font-weight: 800; color: rgba(0,0,0,0.7); margin: 0; letter-spacing: -0.3px; }
 .emptyFeed p { font-size: 14px; color: rgba(0,0,0,0.4); margin: 0; line-height: 1.6; max-width: 260px; }
 .exploreBtn { padding: 11px 24px; background: #1C1C1E; color: white; border: none; border-radius: 100px; font-size: 14px; font-weight: 700; cursor: pointer; }
+
+/* Bottom nav space (mobile only) */
+@media (max-width: 767px) {
+  .page { padding-bottom: 72px; }
+  .messages { padding-bottom: 152px; }
+}

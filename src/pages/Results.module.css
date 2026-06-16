@@ -139,3 +139,9 @@
 .urgentBadge { font-size: 10px; font-weight: 600; color: #DC2626; background: #FEF2F2; border-radius: 100px; padding: 3px 8px; }
 
 .cardBio { font-size: 12px; color: rgba(0,0,0,0.45); line-height: 1.5; margin-top: 2px; letter-spacing: -0.1px; }
+
+/* Bottom nav space (mobile only) */
+@media (max-width: 767px) {
+  .page { padding-bottom: 72px; }
+  .messages { padding-bottom: 152px; }
+}

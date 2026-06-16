@@ -46,10 +46,13 @@ export default function NavBar() {
 
   const tabs = [
     { path: '/', icon: <Search size={20} />, label: 'Buscar' },
-    { path: '/feed', icon: <Rss size={20} />, label: 'Feed' },
     { path: '/explore', icon: <Compass size={20} />, label: 'Explorar' },
     { path: '/chats', icon: <MessageCircle size={20} />, label: 'Chats', badge: totalUnreadChats },
-    { path: '/profile', icon: <User size={20} />, label: 'Mi perfil' },
+    { path: '/feed', icon: <Rss size={20} />, label: 'Feed' },
+    { path: '/favorites', icon: <Heart size={20} />, label: 'Favoritos' },
+    { path: '/my-services', icon: <Calendar size={20} />, label: 'Mis servicios' },
+    { path: '/how-it-works', icon: <HelpCircle size={20} />, label: 'Cómo funciona' },
+    { path: '/register-helper', icon: <UserPlus size={20} />, label: 'Ser Helper' },
   ]
 
   function go(path) { navigate(path); setOpen(false) }

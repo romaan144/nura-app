@@ -704,7 +704,7 @@
 /* Sticky bottom CTA — glass design */
 .ctaBar {
   position: sticky;
-  bottom: max(env(safe-area-inset-bottom,0px), 16px);
+  bottom: max(env(safe-area-inset-bottom,0px), 80px);
   margin: 12px 14px 0;
   display: flex; gap: 10px;
   background: rgba(255,255,255,0.72);
@@ -716,3 +716,6 @@
   box-shadow: 0 2px 16px rgba(0,0,0,0.05), 0 0 0 0.5px rgba(0,0,0,0.06);
   z-index: 10;
 }
+
+/* Bottom nav space */
+@media (max-width: 767px) { .page { padding-bottom: 72px; } }

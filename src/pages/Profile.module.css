@@ -77,3 +77,9 @@
   .content { max-width: 480px; margin: 0 auto; padding: 12px 24px 40px; }
   .heroCard { padding: 36px 28px 28px; }
 }
+
+/* Bottom nav space (mobile only) */
+@media (max-width: 767px) {
+  .page { padding-bottom: 72px; }
+  .messages { padding-bottom: 152px; }
+}

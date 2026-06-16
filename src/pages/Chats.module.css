@@ -92,3 +92,9 @@
   .content { padding: 0; }
   .chatRow { padding: 14px 32px; }
 }
+
+/* Bottom nav space (mobile only) */
+@media (max-width: 767px) {
+  .page { padding-bottom: 72px; }
+  .messages { padding-bottom: 152px; }
+}
