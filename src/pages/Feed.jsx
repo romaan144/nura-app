@@ -46,11 +46,17 @@ function buildFeed(following, helpers, companies) {
   posts.push(...dynamicPosts)
 
   // Sort by most recent (by date string priority) — following first, then suggested
-  return posts.sort((a, b) => {
-    if (a.following && !b.following) return -1
-    if (!a.following && b.following) return 1
-    return 0
-  })
+  // Score: following=2pts, dynamic(Hoy)=1pt, cert posts=0.5pt
+  function postScore(p) {
+    let s = 0
+    if (p.following) s += 10
+    if (p.dynamic) s += 5
+    if (p.date === 'Hoy') s += 3
+    if (p.type === 'cert') s += 1
+    if (p.badge) s += 2
+    return s
+  }
+  return posts.sort((a, b) => postScore(b) - postScore(a))
 }
 
 // ── Post Card ──────────────────────────────────────────────────────────────

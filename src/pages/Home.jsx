@@ -487,10 +487,14 @@ export default function Home({ setSearchState }) {
 
       const resultMsg = {
         id: Date.now(), from: 'nura',
-        lines: followLine ? [resultLine, followLine] : [resultLine],
+        lines: followLine
+          ? (user ? [resultLine, followLine] : [resultLine, followLine, '💬 Para contactarles, crea tu cuenta gratis. Solo tarda 30 segundos.'])
+          : (user ? [resultLine] : [resultLine, '💬 Crea tu cuenta gratis para escribirles.']),
         results: matches,
         chips: matches.length > 0
-          ? [`Escribir a ${topName}`, 'Más barato', 'Más cerca', 'Ver todos']
+          ? (user
+            ? [`Escribir a ${topName}`, 'Más barato', 'Más cerca', 'Ver todos']
+            : [`Crear cuenta`, 'Más barato', 'Más cerca', 'Ver todos'])
           : ['Ampliar búsqueda', 'Cambiar zona', 'Online también']
       }
       setMessages(prev => [...prev, resultMsg])
@@ -601,6 +605,7 @@ export default function Home({ setSearchState }) {
                     <button key={i} onClick={() => {
                       if (chip === 'Ver Explorar') { navigate('/explore'); return }
                       if (chip === 'Ver todos') { navigate('/explore'); return }
+                      if (chip === 'Crear cuenta') { navigate('/login'); return }
                       if (chip.startsWith('Escribir a ') && lastMatches?.[0]) {
                         const h = lastMatches[0]
                         navigate(`/chat/${h.id}`, { state: { helper: h } })
