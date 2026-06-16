@@ -12,13 +12,46 @@ import { haptic } from '../utils/haptic'
 import { scheduleLocalNotification, notifySearchAbandoned } from '../utils/notifications'
 import styles from './Home.module.css'
 
-function getWelcome(user) {
+function getWelcome(user, searchHistory, favorites, helpersCache) {
   const hour = new Date().getHours()
   const greeting = hour < 14 ? 'Buenos días' : hour < 21 ? 'Buenas tardes' : 'Buenas noches'
+  const firstName = user?.name?.split(' ')?.[0] || user?.name
+
   if (!user) return [
     `Hola. Soy **Nüra**.`,
     `Cuéntame qué necesitas. Busco entre más de 1.200 profesionales verificados en Barcelona y encuentro a la persona exacta que puede ayudarte — con nombre, precio y disponibilidad real.`
   ]
+
+  // Use what Nüra knows about this user
+  const lastSearch = searchHistory?.[searchHistory.length - 1]?.query
+  const favHelpers = (favorites || [])
+    .map(id => helpersCache?.[id] || helpersCache?.[String(id)])
+    .filter(Boolean)
+  const topFav = favHelpers[0]
+
+  // Returning user with history
+  if (lastSearch && searchHistory?.length > 2) {
+    return [
+      `${greeting}, **${firstName}**.`,
+      `La última vez buscaste **${lastSearch}**. ¿Sigues necesitando algo parecido o tienes una nueva necesidad?`
+    ]
+  }
+
+  // User with favorites
+  if (topFav && favorites?.length > 0) {
+    return [
+      `${greeting}, **${firstName}**.`,
+      `Tienes **${topFav.name?.split(' ')?.[0]}** guardado en favoritos. ¿Quieres contactarle o buscas a alguien diferente?`
+    ]
+  }
+
+  // First or second visit
+  if (searchHistory?.length === 1) {
+    return [
+      `Bienvenido de nuevo, **${firstName}**.`,
+      `¿Qué necesitas hoy? Cuéntamelo y encuentro a la persona exacta.`
+    ]
+  }
   if (user.isHelper) return [
     `${greeting}, **${user.name?.split(' ')[0]}**. ¿Qué necesitas hoy?`,
   ]
@@ -158,7 +191,7 @@ const HELPER_SUGGESTIONS = [
 
 export default function Home({ setSearchState }) {
   const navigate = useNavigate()
-  const { user, addSearch, toggleFavorite, isFavorite, searchHistory, nuraChatMessages, setNuraChatMessages, nuraLastMatches, setNuraLastMatches, cacheHelpers } = useUser()
+  const { user, addSearch, toggleFavorite, isFavorite, searchHistory, favorites, helpersCache, nuraChatMessages, setNuraChatMessages, nuraLastMatches, setNuraLastMatches, cacheHelpers } = useUser()
   // messages persisted in context so they survive navigation
   const messages = nuraChatMessages
   const setMessages = setNuraChatMessages

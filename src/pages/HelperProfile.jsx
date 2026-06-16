@@ -242,7 +242,20 @@ function AiDataSection({ aiData, aiAnalyzedAt, helperName }) {
         ))}
       </div>
     ),
-    ideal_for: (v) => Array.isArray(v) && v.length > 0 && (
+    ideal_for: (v) => v && (
+      <div style={{
+        background:'rgba(123,47,255,0.04)',border:'1px solid rgba(123,47,255,0.08)',
+        borderRadius:'12px',padding:'10px 14px',
+      }}>
+        <span style={{fontSize:'11px',fontWeight:700,color:'#7B2FFF',letterSpacing:'0.5px',textTransform:'uppercase'}}>
+          Ideal para
+        </span>
+        <p style={{fontSize:'13px',color:'rgba(0,0,0,0.65)',margin:'4px 0 0',lineHeight:1.6}}>
+          {Array.isArray(v) ? v.join(', ') : v}
+        </p>
+      </div>
+    ),
+    _ideal_for_old: (v) => Array.isArray(v) && v.length > 0 && (
       <div style={{display:'flex',flexDirection:'column',gap:'4px'}}>
         {v.map((s,i) => (
           <div key={i} style={{display:'flex',alignItems:'center',gap:'8px',
@@ -548,8 +561,42 @@ function BookingModal({ helper, onClose, onBook, onNavigate }) {
             <h3 style={{fontSize:'17px',fontWeight:800,margin:'0 0 4px',color:'rgba(0,0,0,0.85)',letterSpacing:'-0.3px'}}>Solicitar servicio</h3>
             <p style={{fontSize:'13px',color:'rgba(0,0,0,0.4)',margin:'0 0 20px'}}>{name} · {helper?.price || 'Precio a consultar'}</p>
             <div style={{display:'flex',flexDirection:'column',gap:'10px',marginBottom:'20px'}}>
-              <input type="date" value={date} onChange={e=>setDate(e.target.value)} style={style.input} />
-              <input type="time" value={time} onChange={e=>setTime(e.target.value)} style={style.input} />
+              {/* Day pills */}
+              <div>
+                <p style={{fontSize:'11px',fontWeight:700,color:'rgba(0,0,0,0.4)',margin:'0 0 8px',letterSpacing:'0.5px',textTransform:'uppercase'}}>Fecha</p>
+                <div style={{display:'flex',gap:'6px',overflowX:'auto',paddingBottom:'4px'}}>
+                  {Array.from({length:7},(_,i)=>{
+                    const d=new Date(); d.setDate(d.getDate()+i)
+                    const iso=d.toISOString().split('T')[0]
+                    const lbl=i===0?'Hoy':i===1?'Mañana':d.toLocaleDateString('es-ES',{weekday:'short',day:'numeric'})
+                    return (
+                      <button key={i} onClick={()=>setDate(iso)} style={{
+                        flexShrink:0,padding:'8px 14px',
+                        background:date===iso?'#1C1C1E':'rgba(0,0,0,0.05)',
+                        color:date===iso?'white':'rgba(0,0,0,0.6)',
+                        border:'none',borderRadius:'100px',fontSize:'12px',fontWeight:600,
+                        cursor:'pointer',fontFamily:'inherit',transition:'all 0.15s',
+                        whiteSpace:'nowrap',
+                      }}>{lbl}</button>
+                    )
+                  })}
+                </div>
+              </div>
+              {/* Time pills */}
+              <div>
+                <p style={{fontSize:'11px',fontWeight:700,color:'rgba(0,0,0,0.4)',margin:'0 0 8px',letterSpacing:'0.5px',textTransform:'uppercase'}}>Hora</p>
+                <div style={{display:'flex',gap:'6px',flexWrap:'wrap'}}>
+                  {['9:00','10:00','11:00','12:00','16:00','17:00','18:00','19:00'].map(t=>(
+                    <button key={t} onClick={()=>setTime(t)} style={{
+                      padding:'7px 12px',
+                      background:time===t?'#1C1C1E':'rgba(0,0,0,0.05)',
+                      color:time===t?'white':'rgba(0,0,0,0.6)',
+                      border:'none',borderRadius:'100px',fontSize:'12px',fontWeight:600,
+                      cursor:'pointer',fontFamily:'inherit',transition:'all 0.15s',
+                    }}>{t}</button>
+                  ))}
+                </div>
+              </div>
               <textarea value={note} onChange={e=>setNote(e.target.value)}
                 placeholder="Detalles adicionales (opcional)..." rows={3}
                 style={{...style.input, resize:'none'}} />
@@ -1214,7 +1261,7 @@ function HelperProfileInner() {
             </div>
 
             {/* Personality */}
-            {h.personality && !isSupabaseHelper && (
+            {h.personality && !isSupabaseHelper && !h.aiData?.personality && (
               <section className={styles.section}>
                 <h3 className={styles.sectionTitle}><Brain size={13} /> Análisis de personalidad</h3>
                 <div className={styles.nuraVerifyNote}>
