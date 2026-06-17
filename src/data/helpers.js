@@ -132,9 +132,8 @@ export const HELPERS = [
     aiData: {
         summary: "Roberto es técnico certificado por Gas Natural con 15 años en calderas y calefacción. Urgencias resueltas en media de 47 minutos. Nunca ha dejado un trabajo sin terminar.",
         skills: ["calderas Roca", "calderas Junkers", "calefacción central", "gas natural", "urgencias"],
-        personality: {"ideal_for": "Urgencias de caldera, revisiones anuales y cualquier problema de calefacción o gas en Barcelona",
         personality: {"Puntualidad": 9.9, "Resolución": 9.8, "Comunicación": 8.9, "Limpieza": 9.4},
-        ideal_for: "Urgencias de caldera, revisiones anuales, instalaciones nuevas",
+        ideal_for: "Urgencias de caldera, revisiones anuales e instalaciones nuevas en Barcelona",
       },
     aiAnalyzedAt: "2025-06-15T10:00:00Z",
   },
