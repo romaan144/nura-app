@@ -49,7 +49,7 @@ export default function HelperCard({ helper, onContact, compact = false, showCon
       className={styles.card}
       onClick={() => {
       const reason = window.__nuraMatchReasons?.[String(helper.id)]
-      navigate(`/helper/${helper.id}`, { state: { helper, fromSearch: true, matchReason: reason } })
+      navigate(`/helper/${helper.id}`, { state: { helper, fromSearch: true, matchReason: reason, userQuery: window.__nuraLastQuery, analysis: window.__nuraLastAnalysis } })
     }}>
 
       {/* MAIN ROW: avatar + info + price */}

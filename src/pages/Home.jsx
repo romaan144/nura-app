@@ -468,6 +468,8 @@ export default function Home({ setSearchState }) {
       }
 
       addSearch?.(msg)
+      window.__nuraLastQuery = msg  // Store for chat pre-fill
+      window.__nuraLastAnalysis = analysis
       setSearchState({ query: msg, analysis, matches })
       setLastMatches(matches)
       // Schedule reminder if user doesn't contact

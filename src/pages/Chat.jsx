@@ -1,5 +1,5 @@
 import { useState, useEffect, useRef } from 'react'
-import { useParams, useNavigate } from 'react-router-dom'
+import { useParams, useNavigate, useLocation } from 'react-router-dom'
 import { ArrowLeft, Send, Shield, Award, Calendar } from 'lucide-react'
 import { HELPERS } from '../data/helpers'
 import { useUser } from '../context/UserContext'
@@ -260,6 +260,7 @@ function ConfirmModal({ helper, onClose, onConfirm }) {
 export default function Chat() {
   const { id } = useParams()
   const navigate = useNavigate()
+  const location = useLocation()
   const { addChat, markRead, hasRated, helpersCache, addService,
     services, getChatHistory, saveChatHistory
   } = useUser()
@@ -283,7 +284,25 @@ export default function Chat() {
     return []
   })
   const hasHistory = (getChatHistory(id)?.length > 0) || (location.state?.demoHistory?.length > 0)
-  const [input, setInput] = useState('')
+  const userQuery = location.state?.userQuery || window.__nuraLastQuery
+  const fromSearch = !!userQuery && !hasHistory
+
+  // Pre-fill input with contextual message when coming from search
+  const buildPreFill = (helper, query) => {
+    if (!helper || !query) return ''
+    const name = helper.name?.split(' ')?.[0] || ''
+    return `Hola ${name}, Nüra me ha recomendado tu perfil. ${query}. ¿Podrías ayudarme?`
+  }
+
+  const [input, setInput] = useState(() =>
+    (!!location.state?.userQuery || !!window.__nuraLastQuery) && !hasHistory
+      ? buildPreFill(
+          helpersCache?.[parseInt(id)] || helpersCache?.[id] ||
+          HELPERS.filter(Boolean).find(h => String(h.id) === String(id)),
+          location.state?.userQuery || window.__nuraLastQuery
+        )
+      : ''
+  )
   const [suggested, setSuggested] = useState('')
   const [typing, setTyping] = useState(false)
   const [showRating, setShowRating] = useState(false)
@@ -453,6 +472,20 @@ export default function Chat() {
               ? <img src={helper.avatarUrl} alt={helper.name} className={styles.emptyChatImg} />
               : <div className={styles.emptyChatAvatar} style={{ background: helper.avatarColor }}>{helper.avatar}</div>
             }
+            {fromSearch && userQuery ? (
+              <div style={{
+                background:'linear-gradient(135deg,rgba(123,47,255,0.06),rgba(0,212,200,0.04))',
+                border:'1px solid rgba(123,47,255,0.12)',
+                borderRadius:'14px',padding:'10px 14px',
+                marginBottom:'4px',maxWidth:'260px',textAlign:'left',
+              }}>
+                <p style={{fontSize:'11px',fontWeight:700,color:'var(--purple)',margin:'0 0 4px',
+                  letterSpacing:'0.3px',textTransform:'uppercase'}}>Nüra preparó tu mensaje</p>
+                <p style={{fontSize:'12px',color:'rgba(0,0,0,0.5)',margin:0,lineHeight:1.6}}>
+                  He redactado un primer mensaje basado en lo que necesitas. Revísalo y envíalo cuando quieras.
+                </p>
+              </div>
+            ) : null}
             <p className={styles.emptyChatName}>{helper.name}</p>
             <p className={styles.emptyChatDesc}>{helper.specialty} · {helper.zone}</p>
             {helper.price && <p className={styles.emptyChatPrice}>{helper.price}</p>}

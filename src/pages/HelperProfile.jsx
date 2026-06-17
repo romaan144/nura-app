@@ -875,7 +875,7 @@ function HelperProfileInner() {
                   sessionStorage.setItem('nura_pending_helper', JSON.stringify(h))
                   setShowGate(true); setGateReason('contact')
                 } else {
-                  navigate(`/chat/${h.id}`, { state: { helper: h } })
+                  navigate(`/chat/${h.id}`, { state: { helper: h, userQuery: location.state?.userQuery || window.__nuraLastQuery, analysis: location.state?.analysis || window.__nuraLastAnalysis } })
                 }
               }}>
               <MessageCircle size={15} /> Escribir a {h.name?.split(' ')?.[0]}

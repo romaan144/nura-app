@@ -26,7 +26,7 @@ function CarouselCard({ helper, isTopPick }) {
       setTimeout(() => navigate('/login'), 600)
       return
     }
-    navigate(`/chat/${helper.id}`, { state: { helper } })
+    navigate(`/chat/${helper.id}`, { state: { helper, userQuery: window.__nuraLastQuery, analysis: window.__nuraLastAnalysis } })
   }
 
   function handleFav(e) {
