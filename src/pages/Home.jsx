@@ -712,7 +712,9 @@ export default function Home({ setSearchState }) {
               )}
               </div>
             </div>
-            {!user && messages.length === 1 && msg.from === 'nura' && (
+            {messages.length === 1 && msg.from === 'nura' && (
+              <>
+              {!user && (
               <div style={{display:'flex',gap:'20px',padding:'4px 0',flexWrap:'wrap'}}>
                 {[['1.200+','profesionales verificados'],['4.8★','valoración media'],['< 1h','primer contacto']].map(([n,l]) => (
                   <div key={l} style={{textAlign:'center'}}>
@@ -721,8 +723,9 @@ export default function Home({ setSearchState }) {
                   </div>
                 ))}
               </div>
+              )}
 
-              {/* ── Disponibles ahora strip ─────────────────── */}
+              {/* Disponibles ahora strip */}
               <div style={{width:'100%',marginTop:'12px'}}>
                 <p style={{fontSize:'11px',fontWeight:700,color:'rgba(0,0,0,0.3)',
                   letterSpacing:'0.5px',textTransform:'uppercase',margin:'0 0 8px'}}>
@@ -779,7 +782,7 @@ export default function Home({ setSearchState }) {
                   </button>
                 </div>
               </div>
-
+              </>
             )}
             {msg.results && (
               <HelperCarousel helpers={msg.results} />
