@@ -3,6 +3,7 @@ import { Star, Shield, MessageCircle, Heart, MapPin } from 'lucide-react'
 import { useUser } from '../context/UserContext'
 import { showToast } from './Toast'
 import styles from './HelperCarousel.module.css'
+import { haptic } from '../utils/haptic'
 
 /**
  * HelperCarousel — horizontal scroll of compact helper cards.
@@ -17,6 +18,7 @@ function CarouselCard({ helper }) {
 
   function handleContact(e) {
     e.stopPropagation()
+    haptic('medium')
     if (!user) {
       sessionStorage.setItem('nura_return_to', `/chat/${helper.id}`)
       sessionStorage.setItem('nura_pending_helper', JSON.stringify(helper))

@@ -7,9 +7,18 @@ export default function NotFound() {
     <div className={styles.page}>
       <div className={styles.content}>
         <img src="/logo-iso.png" alt="Nüra" className={styles.logo} />
-        <h1 className={styles.title}>Página no encontrada</h1>
-        <p className={styles.desc}>La página que buscas no existe o ha sido movida.</p>
-        <button className={styles.btn} onClick={() => navigate('/')}>Volver al inicio</button>
+        <h1 className={styles.title}>Esta página no existe</h1>
+        <p className={styles.desc}>
+          Puede que el enlace haya cambiado o que ya no esté disponible.
+        </p>
+        <button className={styles.btn} onClick={() => navigate('/')}>
+          Volver a Nüra
+        </button>
+        <button
+          className={styles.btnSecondary}
+          onClick={() => navigate('/explore')}>
+          Explorar profesionales
+        </button>
       </div>
     </div>
   )

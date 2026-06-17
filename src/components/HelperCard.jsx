@@ -3,6 +3,7 @@ import { Star, MapPin, Shield, Zap, Award, MessageCircle, Heart } from 'lucide-r
 import { useUser } from '../context/UserContext'
 import { showToast } from './Toast'
 import styles from './HelperCard.module.css'
+import { haptic } from '../utils/haptic'
 
 /**
  * HelperCard — single card component used in Home, Results and Explore.
@@ -23,6 +24,7 @@ export default function HelperCard({ helper, onContact, compact = false, showCon
 
   function handleContact(e) {
     e.stopPropagation()
+    haptic('medium')
     if (onContact) { onContact(helper); return }
     if (!user) {
       sessionStorage.setItem('nura_return_to', `/chat/${helper.id}`)
@@ -36,6 +38,7 @@ export default function HelperCard({ helper, onContact, compact = false, showCon
 
   function handleFav(e) {
     e.stopPropagation()
+    haptic('light')
     if (!user) { showToast('Inicia sesión para guardar favoritos'); return }
     toggleFavorite(helper.id)
     showToast(isFavorite(helper.id) ? 'Eliminado de favoritos' : 'Guardado en favoritos')

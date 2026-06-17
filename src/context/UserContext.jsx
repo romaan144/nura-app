@@ -12,7 +12,12 @@ export function UserProvider({ children }) {
   const [searchHistory, setSearchHistory] = useState(() => load('nura_search_history', []))
   const [contactedHelpers, setContactedHelpers] = useState(() => load('nura_contacted', []))
   const [helpersCache, setHelpersCache] = useState({})
-  const [following, setFollowing] = useState(() => load('nura_following', []))
+  const [following, setFollowing] = useState(() => {
+    const stored = load('nura_following', null)
+    // Demo: pre-seed with Carlos (1) and Elena (5) if no real data
+    if (stored !== null) return stored
+    return [1, 5]  // Carlos logopeda + Elena cuidadora
+  })
   const [notifications, setNotifications] = useState(() => load('nura_notifications', []))
   const [favorites, setFavorites] = useState(() => load('nura_favorites', []))
   const [nuraChatMessages, setNuraChatMessages] = useState(() => load('nura_chat_messages', []))
