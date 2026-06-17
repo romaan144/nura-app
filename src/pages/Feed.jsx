@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import RegisterGate from '../components/RegisterGate'
 import { useNavigate } from 'react-router-dom'
 import { Heart, MessageCircle, Share2, Bookmark, UserPlus, Check, Shield, Award } from 'lucide-react'
