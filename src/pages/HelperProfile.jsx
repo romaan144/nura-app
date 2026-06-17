@@ -758,7 +758,7 @@ function HelperProfileInner() {
   // Is the viewer the owner of this profile?
   // Was this profile opened from a Nüra search result?
   const fromSearch = location.state?.fromSearch || location.state?.matchReason
-  const matchReason = location.state?.matchReason
+  const matchReason = location.state?.matchReason || (() => { try { const r = JSON.parse(sessionStorage.getItem('nura_match_reasons') || '{}'); return r[String(id)] } catch { return null } })()
 
   // Is the viewer the owner of this profile?
   const isOwner = user?.isHelper && (

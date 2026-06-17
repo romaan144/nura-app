@@ -211,7 +211,7 @@ export default function Home({ setSearchState }) {
   useEffect(() => {
     let lines = getWelcome(user)
     // If just came from onboarding with a name — magic first moment
-    const justOnboarded = sessionStorage.getItem('nura_just_onboarded')
+    let justOnboarded; try { justOnboarded = sessionStorage.getItem('nura_just_onboarded') } catch {}
     if (justOnboarded) {
       sessionStorage.removeItem('nura_just_onboarded')
       const firstName = justOnboarded.split(' ')[0]
@@ -240,7 +240,7 @@ export default function Home({ setSearchState }) {
     }
 
     // If helper just registered
-    const helperRegistered = sessionStorage.getItem('nura_helper_registered')
+    let helperRegistered; try { helperRegistered = sessionStorage.getItem('nura_helper_registered') } catch {}
     if (helperRegistered) {
       sessionStorage.removeItem('nura_helper_registered')
       const firstName = user?.name?.split(' ')?.[0] || user?.name || ''
@@ -253,7 +253,7 @@ export default function Home({ setSearchState }) {
     }
 
     // If just registered (user)
-    const justRegistered = sessionStorage.getItem('nura_just_registered')
+    let justRegistered; try { justRegistered = sessionStorage.getItem('nura_just_registered') } catch {}
     if (justRegistered) {
       sessionStorage.removeItem('nura_just_registered')
       lines = [`Bienvenido a Nüra, **${user?.name?.split(' ')?.[0] || 'tú'}**. Ya puedes contactar con cualquier profesional. ¿Qué necesitas?`]
@@ -280,8 +280,9 @@ export default function Home({ setSearchState }) {
     }
 
     // Proactive question for helpers after 8s of inactivity
+    const timers = []
     if (user?.isHelper) {
-      const t = setTimeout(() => {
+      timers.push(setTimeout(() => {
         setMessages(prev => {
           if (prev.length > 1) return prev // user already engaged
           return [...prev, {
@@ -289,9 +290,9 @@ export default function Home({ setSearchState }) {
             lines: ['Por cierto, ¿has trabajado en algo nuevo últimamente o completado alguna formación? Cuéntamelo para actualizar tu perfil.']
           }]
         })
-      }, 8000)
-      return () => clearTimeout(t)
+      }, 8000))
     }
+    return () => timers.forEach(clearTimeout)
   }, [user?.id])
 
   useEffect(() => {
@@ -480,8 +481,10 @@ export default function Home({ setSearchState }) {
       }
 
       addSearch?.(msg, analysis?.categoria)
-      window.__nuraLastQuery = msg  // Store for chat pre-fill
+      window.__nuraLastQuery = msg
+      try { sessionStorage.setItem('nura_last_query', msg) } catch {}
       window.__nuraLastAnalysis = analysis
+      try { sessionStorage.setItem('nura_last_analysis', JSON.stringify(analysis)) } catch {}
       setSearchState({ query: msg, analysis, matches })
       setLastMatches(matches)
       // Schedule reminder if user doesn't contact
@@ -511,6 +514,7 @@ export default function Home({ setSearchState }) {
             if (reason) reasons[String(h.id)] = reason
           })
           window.__nuraMatchReasons = { ...(window.__nuraMatchReasons||{}), ...reasons }
+      try { sessionStorage.setItem('nura_match_reasons', JSON.stringify(window.__nuraMatchReasons)) } catch {}
         }
         // Also cache in UserContext via cacheHelpers
         cacheHelpers?.(matches)

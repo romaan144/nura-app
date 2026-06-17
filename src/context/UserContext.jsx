@@ -4,7 +4,7 @@ const UserContext = createContext(null)
 
 export function UserProvider({ children }) {
   const load = (key, def) => { try { const v = localStorage.getItem(key); return v ? JSON.parse(v) : def } catch { return def } }
-  const save = (key, val) => { try { localStorage.setItem(key, JSON.stringify(val)) } catch {} }
+  const save = (key, val) => { try { if (val === null) { localStorage.removeItem(key) } else { localStorage.setItem(key, JSON.stringify(val)) } } catch(e) { console.warn('localStorage write failed:', e) } }
 
   const [user, setUser] = useState(() => load('nura_user', null))
   const [chats, setChats] = useState(() => load('nura_chats', []))
@@ -26,12 +26,13 @@ export function UserProvider({ children }) {
   const [nuraLastMatches, setNuraLastMatches] = useState(null)
 
   useEffect(() => {
-    const saved = localStorage.getItem('nura_user')
-    if (saved) setUser(JSON.parse(saved))
-    const savedChats = localStorage.getItem('nura_chats')
-    if (savedChats) setChats(JSON.parse(savedChats))
-    const savedRatings = localStorage.getItem('nura_ratings')
-    if (savedRatings) setRatings(JSON.parse(savedRatings))
+    try {
+    const savedUser = load('nura_user', null)
+    if (savedUser) setUser(savedUser)
+    const savedChats = load('nura_chats', [])
+    if (savedChats.length) setChats(savedChats)
+    const savedRatings = load('nura_ratings', [])
+    if (savedRatings.length) setRatings(savedRatings)
     const savedHistory = localStorage.getItem('nura_history')
     if (savedHistory) setSearchHistory(JSON.parse(savedHistory))
     const savedContacted = localStorage.getItem('nura_contacted')
@@ -42,6 +43,7 @@ export function UserProvider({ children }) {
     if (savedNotifs) setNotifications(JSON.parse(savedNotifs))
     const savedFavs = localStorage.getItem('nura_favorites')
     if (savedFavs) setFavorites(JSON.parse(savedFavs))
+    } catch (e) { console.warn('localStorage unavailable:', e) }
   }, [])
 
   // Auto-persist key state
@@ -57,7 +59,7 @@ export function UserProvider({ children }) {
 
   function login(userData) {
     setUser(userData)
-    localStorage.setItem('nura_user', JSON.stringify(userData))
+    save('nura_user', userData)
   }
 
   function addService(helper, date, time, note) {
@@ -87,16 +89,16 @@ export function UserProvider({ children }) {
   function updateUser(updates) {
     const updated = { ...user, ...updates }
     setUser(updated)
-    localStorage.setItem('nura_user', JSON.stringify(updated))
+    save('nura_user', updated)
   }
 
   function logout() {
     setUser(null)
     setChats([]); setRatings([]); setSearchHistory([])
     setContactedHelpers([]); setFollowing([]); setNotifications([])
-    localStorage.removeItem('nura_user')
-    localStorage.removeItem('nura_chats')
-    localStorage.removeItem('nura_following')
+    save('nura_user', null)
+    save('nura_chats', null)
+    save('nura_following', null)
   }
 
   function saveChatHistory(helperId, messages) {
@@ -118,24 +120,24 @@ export function UserProvider({ children }) {
       updated = [...chats, { helperId, helperName, helperColor, helperAvatar, lastMsg, lastTime: new Date().toISOString(), unread: 0 }]
     }
     setChats(updated)
-    localStorage.setItem('nura_chats', JSON.stringify(updated))
+    save('nura_chats', updated)
     if (!contactedHelpers.includes(helperId)) {
       const c = [...contactedHelpers, helperId]
       setContactedHelpers(c)
-      localStorage.setItem('nura_contacted', JSON.stringify(c))
+      save('nura_contacted', c)
     }
   }
 
   function markRead(helperId) {
     const updated = (chats||[]).map(c => c.helperId === helperId ? { ...c, unread: 0 } : c)
     setChats(updated)
-    localStorage.setItem('nura_chats', JSON.stringify(updated))
+    save('nura_chats', updated)
   }
 
   function addRating(helperId, rating, comment) {
     const updated = [...ratings, { helperId, rating, comment, date: new Date().toISOString() }]
     setRatings(updated)
-    localStorage.setItem('nura_ratings', JSON.stringify(updated))
+    save('nura_ratings', updated)
   }
 
   function hasRated(helperId) {
@@ -145,7 +147,7 @@ export function UserProvider({ children }) {
   function addSearch(query, category) {
     const updated = [{ query, category, date: new Date().toISOString() }, ...searchHistory].slice(0, 10)
     setSearchHistory(updated)
-    localStorage.setItem('nura_history', JSON.stringify(updated))
+    save('nura_history', updated)
   }
 
   function cacheHelpers(helpers) {
@@ -158,18 +160,18 @@ export function UserProvider({ children }) {
     if ((following||[]).includes(id)) return
     const updated = [...following, id]
     setFollowing(updated)
-    localStorage.setItem('nura_following', JSON.stringify(updated))
+    save('nura_following', updated)
     // Add notification
     const notif = { id: Date.now(), type: 'followed', profileId: id, date: new Date().toISOString(), read: false }
     const updatedNotifs = [notif, ...notifications].slice(0, 50)
     setNotifications(updatedNotifs)
-    localStorage.setItem('nura_notifications', JSON.stringify(updatedNotifs))
+    save('nura_notifications', updatedNotifs)
   }
 
   function unfollow(id) {
     const updated = (following||[]).filter(f => f !== id)
     setFollowing(updated)
-    localStorage.setItem('nura_following', JSON.stringify(updated))
+    save('nura_following', updated)
   }
 
   function isFollowing(id) {
@@ -187,7 +189,7 @@ export function UserProvider({ children }) {
   function markNotifsRead() {
     const updated = (notifications||[]).map(n => ({ ...n, read: true }))
     setNotifications(updated)
-    localStorage.setItem('nura_notifications', JSON.stringify(updated))
+    save('nura_notifications', updated)
   }
 
   const unreadNotifs = (notifications||[]).filter(n => !n.read).length
