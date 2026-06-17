@@ -114,14 +114,14 @@
 .content { flex: 1; max-width: 620px; margin: 0 auto; width: 100%; padding: 0 var(--page-x) 32px; }
 
 /* ── BIO ── */
-.bioCard { background: #FFFFFF; border-radius: 18px; padding: 20px; margin-top: 0; margin-bottom: 12px; box-shadow: 0 2px 8px rgba(0,0,0,0.08), 0 1px 3px rgba(0,0,0,0.05); border: none; }
+.bioCard { background: #FFFFFF; border: 1px solid rgba(0,0,0,0.04); border-radius: var(--radius-lg); padding: 18px 20px; margin-bottom: 10px; box-shadow: var(--shadow-xs); }
 .bioText { font-size: 14px; color: var(--mid); line-height: 1.75; }
 
 /* ── NÜRA DETECTED ── */
 .nuraDetectedCard {
   background: linear-gradient(135deg, rgba(123,47,255,0.06) 0%, rgba(0,212,200,0.04) 100%);
   border: 1.5px solid rgba(123,47,255,0.25);
-  border-radius: 18px; padding: var(--card-padding) var(--space-xl); margin-bottom: 16px;
+  border-radius: var(--radius-lg); padding: 18px 20px; margin-bottom: 10px;
 }
 .nuraDetectedHeader { display: flex; align-items: center; gap: 8px; font-size: var(--text-sm); font-weight: 800; color: var(--purple); margin-bottom: 6px; letter-spacing: -0.2px; }
 .nuraDetectedDesc { font-size: var(--text-xs); color: var(--mid); line-height: 1.55; }
@@ -129,8 +129,8 @@
 .nuraSkill { font-size: var(--text-xs); font-weight: 600; color: var(--purple); background: rgba(123,47,255,0.1); border: 1.5px dashed rgba(123,47,255,0.4); border-radius: 20px; padding: 5px 13px; }
 
 /* ── SKILLS ── */
-.section { background: #FFFFFF; border: none; border-radius: 18px; padding: var(--card-padding) var(--space-xl); margin-bottom: 12px; box-shadow: 0 2px 8px rgba(0,0,0,0.08), 0 1px 3px rgba(0,0,0,0.05); }
-.sectionTitle { display: flex; align-items: center; gap: 7px; font-size: var(--text-xs); font-weight: 600; color: var(--soft); text-transform: uppercase; letter-spacing: 0.8px; }
+.section { background: #FFFFFF; border: 1px solid rgba(0,0,0,0.04); border-radius: var(--radius-lg); padding: 18px 20px; margin-bottom: 10px; box-shadow: var(--shadow-xs); }
+.sectionTitle { display: flex; align-items: center; gap: 6px; font-size: var(--text-xs); font-weight: 700; color: var(--soft); text-transform: uppercase; letter-spacing: 0.6px; margin-bottom: 14px; }
 .sectionNote { font-size: var(--text-xs); color: var(--soft); margin-bottom: 14px; line-height: 1.5; padding: 8px 12px; background: #F8F8FA; border-radius: 8px; border-left: 3px solid var(--rule); }
 .skillsGrid { display: flex; flex-wrap: wrap; gap: 7px; }
 .skill { font-size: var(--text-xs); font-weight: 500; color: var(--ink); background: #F8F8FA; border: none; border-radius: 8px; padding: 6px 12px; }
@@ -765,3 +765,46 @@
   white-space: nowrap;
 }
 .heroCtaBtnSecondary:active { opacity: 0.7; }
+
+/* ── TRUST LINE ── */
+.trustLine {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 10px 16px;
+  background: #FFFFFF;
+  border: 1px solid rgba(0,0,0,0.04);
+  border-radius: var(--radius-lg);
+  margin-bottom: 10px;
+  box-shadow: var(--shadow-xs);
+  font-size: var(--text-xs);
+  color: rgba(0,0,0,0.55);
+  font-weight: 500;
+  flex-wrap: wrap;
+}
+.trustLine strong { font-weight: 700; color: rgba(0,0,0,0.8); }
+.trustLineDot { color: rgba(0,0,0,0.2); margin: 0 2px; }
+.trustLineGreen { color: #059669; font-weight: 600; }
+
+/* ── PROFILE TOGGLE ── */
+.profileToggle {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  width: 100%;
+  padding: 12px;
+  margin: 4px 0;
+  background: #FFFFFF;
+  border: 1px solid rgba(0,0,0,0.06);
+  border-radius: var(--radius-md);
+  font-size: var(--text-sm);
+  font-weight: 600;
+  color: rgba(0,0,0,0.4);
+  cursor: pointer;
+  font-family: inherit;
+  transition: opacity 0.15s;
+  box-shadow: var(--shadow-xs);
+  -webkit-tap-highlight-color: transparent;
+}
+.profileToggle:active { opacity: 0.7; }

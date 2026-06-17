@@ -907,22 +907,18 @@ function HelperProfileInner() {
           </div>
         </div>
 
-        {/* Trust line — rating + reviews + completion in one scannable row */}
-        <div style={{display:'flex',alignItems:'center',gap:'6px',
-          padding:'8px 14px',background:'rgba(0,0,0,0.04)',borderRadius:'10px',
-          fontSize:'13px',color:'rgba(0,0,0,0.65)',fontWeight:500,
-          flexWrap:'wrap',
-        }}>
-          <Star size={12} fill='#F59E0B' color='#F59E0B' />
-          <span style={{fontWeight:700,color:'rgba(0,0,0,0.8)'}}>{h.rating}</span>
-          <span style={{color:'rgba(0,0,0,0.3)'}}>·</span>
+        {/* Trust line */}
+        <div className={styles.trustLine}>
+          <Star size={11} fill='#F59E0B' color='#F59E0B' />
+          <strong>{h.rating}</strong>
+          <span className={styles.trustLineDot}>·</span>
           <span>{h.reviews} valoraciones</span>
           {h.completionRate && (<>
-            <span style={{color:'rgba(0,0,0,0.3)'}}>·</span>
-            <span style={{color:'#059669',fontWeight:600}}>{h.completionRate}% completados</span>
+            <span className={styles.trustLineDot}>·</span>
+            <span className={styles.trustLineGreen}>{h.completionRate}% completados</span>
           </>)}
           {h.services && (<>
-            <span style={{color:'rgba(0,0,0,0.3)'}}>·</span>
+            <span className={styles.trustLineDot}>·</span>
             <span>{h.services} servicios</span>
           </>)}
         </div>
@@ -1091,14 +1087,7 @@ function HelperProfileInner() {
           {/* ── Ver perfil completo toggle ── */}
           <button
             onClick={() => setShowFullProfile(p => !p)}
-            style={{
-              display:'flex',alignItems:'center',justifyContent:'center',gap:'6px',
-              width:'100%',padding:'11px',margin:'4px 0',
-              background:'rgba(0,0,0,0.03)',border:'1px solid rgba(0,0,0,0.07)',
-              borderRadius:'14px',fontSize:'13px',fontWeight:600,
-              color:'rgba(0,0,0,0.45)',cursor:'pointer',fontFamily:'inherit',
-              transition:'all 0.15s',
-            }}>
+            className={styles.profileToggle}>
             <ChevronDown size={14} style={{transition:'transform 0.2s',transform:showFullProfile?'rotate(180deg)':'none'}} />
             {showFullProfile ? 'Ocultar detalle' : `Ver perfil completo de ${h.name?.split(' ')?.[0]}`}
           </button>
