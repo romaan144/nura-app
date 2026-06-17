@@ -338,3 +338,12 @@
   .page { padding-bottom: 72px; }
 
 }
+
+/* ── Message entry animation ──────────────────────────────── */
+@keyframes msgIn {
+  from { opacity: 0; transform: translateY(8px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+.msgRow {
+  animation: msgIn 0.25s ease both;
+}

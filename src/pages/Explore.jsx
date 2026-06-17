@@ -105,11 +105,20 @@ export default function Explore() {
     <div className={styles.page}>
       <PageHeader />
 
+      {/* Helper count */}
+      {totalCount > 0 && (
+        <p style={{fontSize:'12px',color:'rgba(0,0,0,0.35)',margin:'0 0 8px',paddingLeft:'2px'}}>
+          {filtered.length < totalCount
+            ? `${filtered.length} de ${totalCount} profesionales`
+            : `${totalCount} profesionales en Barcelona`}
+        </p>
+      )}
+
       <div className={styles.searchWrap}>
         <div className={styles.searchBar}>
           <Search size={15} color="var(--soft)" />
           <input className={styles.searchInput}
-            placeholder="Buscar helpers..."
+            placeholder="Buscar por nombre, especialidad o zona..."
             value={searchText} onChange={e => setSearchText(e.target.value)} />
           <button className={`${styles.filterBtn} ${activeFilters > 0 ? styles.filterBtnActive : ''}`}
             onClick={() => setShowFilters(s => !s)}>

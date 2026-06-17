@@ -259,3 +259,12 @@
   box-shadow: 0 2px 16px rgba(0,0,0,0.06); cursor: pointer;
   white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
 }
+
+/* ── Message entry animation ──────────────────────────────── */
+@keyframes msgIn {
+  from { opacity: 0; transform: translateY(6px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+.msgRow {
+  animation: msgIn 0.22s ease both;
+}

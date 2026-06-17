@@ -255,16 +255,7 @@ function AiDataSection({ aiData, aiAnalyzedAt, helperName }) {
         </p>
       </div>
     ),
-    _ideal_for_old: (v) => Array.isArray(v) && v.length > 0 && (
-      <div style={{display:'flex',flexDirection:'column',gap:'4px'}}>
-        {v.map((s,i) => (
-          <div key={i} style={{display:'flex',alignItems:'center',gap:'8px',
-            fontSize:'13px',color:'rgba(0,0,0,0.65)'}}>
-            <span style={{color:'#059669',fontWeight:700}}>✓</span> {s}
-          </div>
-        ))}
-      </div>
-    ),
+
     red_flags: (v) => Array.isArray(v) && v.length > 0 && (
       <div style={{display:'flex',flexDirection:'column',gap:'4px'}}>
         {v.map((s,i) => (

@@ -215,7 +215,7 @@ export default function Home({ setSearchState }) {
       const firstName = justOnboarded.split(' ')[0]
       lines = [
         `¡Hola, **${firstName}**! Soy Nüra.`,
-        `Cuéntame qué necesitas y encontraré a la persona real que puede ayudarte — verificada, en tu zona y disponible ahora.`
+        `Cuéntame lo que necesitas — sin formularios, sin filtros. Solo cuéntame.`
       ]
       setTimeout(() => setMessages([{ id: 1, from: 'nura', lines }]), 400)
       return
@@ -227,8 +227,8 @@ export default function Home({ setSearchState }) {
       sessionStorage.removeItem('nura_helper_registered')
       const firstName = user?.name?.split(' ')?.[0] || user?.name || ''
       lines = [
-        `¡Bienvenido a la red de Nüra, **${firstName}** 🎉`,
-        `Tu perfil ya está activo. Los usuarios pueden encontrarte y contactarte. Nüra irá completando y verificando tu perfil automáticamente.`
+        `¡Ya eres parte de Nüra, **${firstName}** 🎉`,
+        `Tu perfil ya está visible. Los primeros usuarios pueden encontrarte desde ahora. Nüra lo irá enriqueciendo automáticamente con cada interacción.`
       ]
       setTimeout(() => setMessages([{ id: 1, from: 'nura', lines }]), 300)
       return
@@ -446,8 +446,8 @@ export default function Home({ setSearchState }) {
         setMessages(prev => [...prev, {
           id: Date.now(), from: 'nura',
           lines: [
-            `No encontré exactamente lo que buscas en tu zona ahora mismo.`,
-            `Puedo buscar **${rec.alt}** o ampliar el radio de búsqueda. ¿Qué prefieres?`
+            `Ahora mismo no hay nadie disponible exactamente para eso en tu zona.`,
+            `Puedo buscar **${rec.alt}** o ampliar un poco el radio. ¿Qué prefieres?`
           ],
           chips: [rec.chip1, rec.chip2, 'Cuéntame más']
         }])
