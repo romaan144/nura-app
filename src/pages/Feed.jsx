@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react'
+import { Briefcase, Users2 } from 'lucide-react'
 import RegisterGate from '../components/RegisterGate'
 import { useNavigate } from 'react-router-dom'
 import { Heart, MessageCircle, Share2, Bookmark, UserPlus, Check, Shield, Award } from 'lucide-react'
@@ -149,13 +150,13 @@ function PostCard({ post }) {
       {/* Badge */}
       {post.badge && <div className={styles.badge}>{post.badge}</div>}
       {post.type === 'availability' && !post.badge && (
-        <div className={styles.availabilityBadge}>🟢 Disponible esta semana</div>
+        <div className={styles.availabilityBadge}><span style={{display:'inline-block',width:'7px',height:'7px',borderRadius:'50%',background:'#059669',marginRight:'5px',verticalAlign:'middle'}}/>Disponible esta semana</div>
       )}
       {post.type === 'tip' && !post.badge && (
-        <div className={styles.tipBadge}>💡 Consejo profesional</div>
+        <div className={styles.tipBadge}>Consejo profesional</div>
       )}
       {post.type === 'hiring' && (
-        <div className={styles.hiringBadge}>💼 Oferta de empleo · Perfil Nüra requerido</div>
+        <div className={styles.hiringBadge}><Briefcase size={10} style={{marginRight:'4px'}}/> Oferta de empleo · Perfil Nüra requerido</div>
       )}
 
       {/* Actions */}
@@ -245,7 +246,7 @@ export default function Feed() {
         )}
         {!feedLoading && displayPosts.length === 0 ? (
           <div className={styles.empty}>
-            <span style={{fontSize:'44px'}}>👥</span>
+            <Users2 size={44} color='rgba(0,0,0,0.12)' strokeWidth={1.2} />
             <h3>Aún no sigues a nadie</h3>
             <p>Sigue a helpers para ver sus publicaciones aquí. Están en la tab "Para ti".</p>
             <button className={styles.emptyBtn} onClick={() => setTab('para-ti')}>

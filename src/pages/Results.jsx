@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react'
+import { MapPin, Monitor, Zap, User, Star, Search } from 'lucide-react'
 import { useNavigate } from 'react-router-dom'
 import PageHeader from '../components/PageHeader'
 import HelperCard from '../components/HelperCard'
@@ -78,11 +79,11 @@ export default function Results({ searchState }) {
         {analysis && (
           <div className={styles.analysisPill}>
             <span className={styles.pill + ' ' + styles.pillNormal}>
-              {analysis.presencial ? '📍 Presencial' : '💻 Online'}
+              {analysis.presencial ? 'Presencial' : 'Online'}
             </span>
-            {analysis.urgente && <span className={styles.pill + ' ' + styles.pillUrgent}>⚡ Urgente</span>}
+            {analysis.urgente && <span className={styles.pill + ' ' + styles.pillUrgent}>Urgente</span>}
             <span className={styles.pill + ' ' + styles.pillNormal}>
-              {{ student:'👤 Sin titulación', experienced:'⭐ Con experiencia', professional:'🎓 Profesional' }[analysis.nivelRequerido] || '⭐ Con experiencia'}
+              {{ student:'Sin titulación', experienced:'Con experiencia', professional:'🎓 Profesional' }[analysis.nivelRequerido] || 'Con experiencia'}
             </span>
           </div>
         )}
@@ -117,9 +118,9 @@ export default function Results({ searchState }) {
             <div className={styles.analysisBox}>
               <span className={styles.analysisLabel}>Nüra entendió</span>
               <p className={styles.analysisText}>{analysis.resumen}</p>
-              {analysis.urgente && <span className={styles.analysisBadge}>⚡ Urgente</span>}
-              {analysis.presencial && <span className={styles.analysisBadge}>📍 Presencial</span>}
-              {analysis.online && <span className={styles.analysisBadge}>💻 Online</span>}
+              {analysis.urgente && <span className={styles.analysisBadge}>Urgente</span>}
+              {analysis.presencial && <span className={styles.analysisBadge}>Presencial</span>}
+              {analysis.online && <span className={styles.analysisBadge}>Online</span>}
             </div>
           )}
         </div>
@@ -145,7 +146,7 @@ export default function Results({ searchState }) {
           </>
         ) : (
           <div style={{padding:'32px 20px',textAlign:'center',display:'flex',flexDirection:'column',alignItems:'center',gap:'16px'}}>
-            <span style={{fontSize:'52px'}}>🔍</span>
+            <Search size={44} color='rgba(0,0,0,0.12)' strokeWidth={1.3} />
             <div>
               <h3 style={{fontSize:'18px',fontWeight:800,color:'rgba(0,0,0,0.75)',margin:'0 0 8px',letterSpacing:'-0.3px'}}>
                 Sin resultados ahora mismo

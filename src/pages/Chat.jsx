@@ -53,7 +53,7 @@ function getHelperReply(helper, count, userMsg = '') {
     return options[Math.floor(Math.random() * options.length)]
   }
   if (t.includes('referencia') || t.includes('opinión') || t.includes('reseña') || t.includes('valoración'))
-    return `Tengo ${helper.reviews || 0} valoraciones en Nüra con una media de ${helper.rating || 4.5}⭐. Puedes verlas en mi perfil.`
+    return `Tengo ${helper.reviews || 0} valoraciones en Nüra con una media de ${helper.rating || 4.5} estrellas. Puedes verlas en mi perfil.`
   if (t.includes('contrat') || t.includes('reservar') || t.includes('apuntar'))
     return `Con mucho gusto. Dime cuándo y te confirmo disponibilidad.`
   if (t.includes('hola') || t.includes('buenas') || t.includes('buenos'))
@@ -126,9 +126,9 @@ function getHelperReply(helper, count, userMsg = '') {
 function getNuraIntervention(helper, count) {
   const name = helper.name?.split(' ')?.[0] || helper.name
   const interventions = {
-    2: `💡 La conversación va bien. Cuando quieras formalizar, pulsa **Contratar** arriba.`,
-    4: `💡 **${name}** tiene ${helper.rating || 4.8}⭐ de media. Puedes ver sus valoraciones completas en su perfil.`,
-    6: `💡 Si contratas a **${name}**, quedará registrado en **Mis Servicios** con todos los detalles.`,
+    2: `La conversación va bien. Cuando quieras formalizar, pulsa **Contratar** arriba.`,
+    4: `**${name}** tiene ${helper.rating || 4.8}⭐ de media. Puedes ver sus valoraciones completas en su perfil.`,
+    6: `Si contratas a **${name}**, quedará registrado en **Mis Servicios** con todos los detalles.`,
   }
   return interventions[count] || null
 }
@@ -171,7 +171,7 @@ function ConfirmModal({ helper, onClose, onConfirm }) {
                 {helper.avatar||name[0]}
               </div>
           }
-          <span style={{position:'absolute',bottom:-2,right:-2,fontSize:'20px'}}>✅</span>
+          <span style={{position:'absolute',bottom:-2,right:-2,width:'20px',height:'20px',background:'#22C55E',borderRadius:'50%',display:'flex',alignItems:'center',justifyContent:'center'}}><svg width='11' height='11' viewBox='0 0 12 12' fill='none'><path d='M2 6l3 3 5-5' stroke='white' strokeWidth='1.8' strokeLinecap='round' strokeLinejoin='round'/></svg></span>
         </div>
         <h3 style={{fontSize:'19px',fontWeight:800,marginBottom:'4px',color:'rgba(0,0,0,0.85)',letterSpacing:'-0.3px'}}>¡Solicitud enviada!</h3>
         <p style={{fontSize:'13px',color:'rgba(0,0,0,0.45)',marginBottom:'12px',lineHeight:1.6}}>{name} confirmará disponibilidad en breve.</p>

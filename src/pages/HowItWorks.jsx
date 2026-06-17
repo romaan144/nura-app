@@ -1,5 +1,5 @@
 import { useNavigate } from 'react-router-dom'
-import { ArrowRight, Shield, Star, Zap, MapPin } from 'lucide-react'
+import { ArrowRight, Shield, Star, Zap, MapPin, UserCheck } from 'lucide-react'
 import PageHeader from '../components/PageHeader'
 import styles from './HowItWorks.module.css'
 
@@ -142,7 +142,7 @@ export default function HowItWorks() {
           textAlign:'center',display:'flex',flexDirection:'column',
           alignItems:'center',gap:'10px',marginBottom:'12px',
         }}>
-          <span style={{fontSize:'32px'}}>👋</span>
+          <UserCheck size={28} color='var(--purple)' strokeWidth={1.6} />
           <h3 style={{fontSize:'17px',fontWeight:800,margin:0,
             color:'rgba(0,0,0,0.8)',letterSpacing:'-0.3px'}}>
             ¿Eres profesional?

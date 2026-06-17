@@ -1,5 +1,5 @@
 import { useNavigate, useLocation } from 'react-router-dom'
-import { Shield, Star, MessageCircle, Heart, ArrowRight } from 'lucide-react'
+import { Shield, Star, MessageCircle, Heart, ArrowRight, User, Sparkles } from 'lucide-react'
 
 /**
  * RegisterGate — bottom sheet that appears when unregistered user
@@ -12,22 +12,22 @@ export default function RegisterGate({ onClose, reason = 'contact' }) {
 
   const REASONS = {
     contact: {
-      emoji: '💬',
+      Icon: MessageCircle,
       title: 'Escríbele directamente',
       desc: 'Crea tu cuenta gratis para contactar con este profesional y gestionar todos tus servicios desde un solo lugar.',
     },
     favorite: {
-      emoji: '❤️',
+      Icon: Heart,
       title: 'Guarda tus favoritos',
       desc: 'Crea tu cuenta para guardar helpers y acceder a ellos rápidamente cuando los necesites.',
     },
     follow: {
-      emoji: '👤',
+      Icon: User,
       title: 'Sigue a este profesional',
       desc: 'Crea tu cuenta para seguir a helpers y ver sus actualizaciones de disponibilidad.',
     },
     default: {
-      emoji: '✨',
+      Icon: Sparkles,
       title: 'Únete a Nüra',
       desc: 'Crea tu cuenta gratis para acceder a todos los profesionales verificados cerca de ti.',
     },
@@ -65,7 +65,7 @@ export default function RegisterGate({ onClose, reason = 'contact' }) {
 
         {/* Icon + headline */}
         <div style={{textAlign:'center',marginBottom:'20px'}}>
-          <div style={{fontSize:'44px',marginBottom:'12px',lineHeight:1}}>{r.emoji}</div>
+          <div style={{fontSize:'44px',marginBottom:'12px',lineHeight:1}}>{(() => { const IC = r.Icon; return IC ? <IC size={36} strokeWidth={1.4} color='var(--purple)' /> : null })()}</div>
           <h2 style={{fontSize:'20px',fontWeight:800,color:'rgba(0,0,0,0.85)',letterSpacing:'-0.4px',margin:'0 0 8px'}}>
             {r.title}
           </h2>

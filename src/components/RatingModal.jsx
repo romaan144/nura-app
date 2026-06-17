@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { Star, X } from 'lucide-react'
+import { Star, X, CheckCircle } from 'lucide-react'
 import { useUser } from '../context/UserContext'
 import styles from './RatingModal.module.css'
 
@@ -58,7 +58,7 @@ export default function RatingModal({ helper, onClose }) {
           </>
         ) : (
           <div className={styles.doneState}>
-            <div className={styles.doneIcon}>🙏</div>
+            <div className={styles.doneIcon}><CheckCircle size={48} color='#059669' strokeWidth={1.4} /></div>
             <h3 className={styles.title}>¡Gracias!</h3>
             <p className={styles.desc}>Tu valoración ya forma parte del perfil de {helper.name.split(' ')[0]} en Nüra.</p>
           </div>

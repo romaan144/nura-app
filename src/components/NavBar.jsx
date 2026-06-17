@@ -78,7 +78,7 @@ export default function NavBar() {
             <div>
               <div className={styles.drawerUserName}>{user.name}</div>
               <div className={styles.drawerUserSub}>
-                {user.isHelper ? '✦ Helper verificado' : 'Miembro de Nüra'}
+                {user.isHelper ? 'Helper verificado' : 'Miembro de Nüra'}
               </div>
             </div>
           </div>

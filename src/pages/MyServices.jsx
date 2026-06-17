@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
-import { Calendar, CheckCircle, ChevronRight } from 'lucide-react'
+import { Calendar, CheckCircle, ChevronRight, Star, ClipboardList } from 'lucide-react'
 import { useUser } from '../context/UserContext'
 import PageHeader from '../components/PageHeader'
 import styles from './MyServices.module.css'
@@ -133,7 +133,7 @@ export default function MyServices() {
         {filtered.length === 0 && (
           <div className={styles.empty}>
             <span style={{fontSize:'48px',display:'block',marginBottom:'8px'}}>
-              {tab === 'Completados' ? '✅' : tab === 'Próximos' ? '📅' : '📋'}
+              {tab === 'Completados' ? <CheckCircle size={13} /> : tab === 'Próximos' ? <Calendar size={13} /> : <ClipboardList size={13} />}
             </span>
             <strong style={{fontSize:'16px',color:'rgba(0,0,0,0.7)',letterSpacing:'-0.2px'}}>
               {tab === 'Todos' ? 'Aún no has contratado nada'
@@ -221,7 +221,7 @@ export default function MyServices() {
             <div style={{width:'36px',height:'4px',background:'rgba(0,0,0,0.1)',borderRadius:'2px',margin:'0 auto 20px'}} />
             {ratingSent ? (
               <div style={{textAlign:'center',padding:'20px 0',display:'flex',flexDirection:'column',alignItems:'center',gap:'12px'}}>
-                <span style={{fontSize:'52px'}}>⭐</span>
+                <Star size={44} color='#F59E0B' fill='#F59E0B' strokeWidth={1.5} />
                 <h3 style={{fontSize:'18px',fontWeight:800,color:'rgba(0,0,0,0.85)',margin:0,letterSpacing:'-0.3px'}}>¡Gracias por valorar!</h3>
                 <p style={{fontSize:'13px',color:'rgba(0,0,0,0.45)',margin:0}}>Tu valoración ayuda a toda la comunidad.</p>
               </div>
@@ -235,7 +235,7 @@ export default function MyServices() {
                   {[1,2,3,4,5].map(n => (
                     <button key={n} onClick={() => setRatingVal(n)}
                       style={{fontSize:'34px',background:'none',border:'none',cursor:'pointer',opacity:n<=ratingVal?1:0.25,transition:'opacity 0.15s'}}>
-                      ⭐
+                      <Star size={18} fill={ratingVal >= i ? '#F59E0B' : 'none'} color='#F59E0B' />
                     </button>
                   ))}
                 </div>

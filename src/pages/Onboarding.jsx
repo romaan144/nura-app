@@ -3,22 +3,23 @@ import { useNavigate } from 'react-router-dom'
 import { useUser } from '../context/UserContext'
 import { ArrowRight } from 'lucide-react'
 import styles from './Onboarding.module.css'
+import { Shield, Zap, Sparkles } from 'lucide-react'
 
 const STEPS = [
   {
-    visual: '✨',
+    Visual: Sparkles,
     eyebrow: 'BIENVENIDO',
     title: 'La IA que conecta\npersonas reales',
     desc: 'Cuéntale a Nüra lo que necesitas con tus palabras. En segundos encuentra al profesional ideal cerca de ti.',
   },
   {
-    visual: '🛡️',
+    Visual: Shield,
     eyebrow: 'PERFILES VERIFICADOS',
     title: 'Identidad real,\nresultados reales',
     desc: 'Cada helper verifica su identidad con DNI. El perfil lo construye Nüra — no el propio helper.',
   },
   {
-    visual: '⚡',
+    Visual: Zap,
     eyebrow: 'CERCANO A TI',
     title: 'Presencial o online,\ncomo tú necesites',
     desc: 'Desde cuidadoras de mayores a técnicos de calderas. En tu zona, cuando lo necesites.',
@@ -67,7 +68,7 @@ export default function OnboardingPage() {
       </div>
 
       <div className={styles.content} key={step}>
-        <div className={styles.visual}>{s.visual}</div>
+        <div className={styles.visual}>{s.Visual && <s.Visual size={36} strokeWidth={1.4} color='var(--purple)' />}</div>
         <span className={styles.eyebrow}>{s.eyebrow}</span>
         <h1 className={styles.title}>{s.title}</h1>
         <p className={styles.desc}>{s.desc}</p>

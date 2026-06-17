@@ -229,7 +229,7 @@ export default function Home({ setSearchState }) {
       sessionStorage.removeItem('nura_helper_registered')
       const firstName = user?.name?.split(' ')?.[0] || user?.name || ''
       lines = [
-        `¡Ya eres parte de Nüra, **${firstName}** 🎉`,
+        `¡Ya eres parte de Nüra, **${firstName}**!`,
         `Tu perfil ya está visible. Los primeros usuarios pueden encontrarte desde ahora. Nüra lo irá enriqueciendo automáticamente con cada interacción.`
       ]
       setTimeout(() => setMessages([{ id: 1, from: 'nura', lines }]), 300)
@@ -240,7 +240,7 @@ export default function Home({ setSearchState }) {
     const justRegistered = sessionStorage.getItem('nura_just_registered')
     if (justRegistered) {
       sessionStorage.removeItem('nura_just_registered')
-      lines = [`Bienvenido a Nüra, **${user?.name?.split(' ')?.[0] || 'tú'}** 🎉 Ya puedes contactar con cualquier profesional. ¿Qué necesitas?`]
+      lines = [`Bienvenido a Nüra, **${user?.name?.split(' ')?.[0] || 'tú'}**. Ya puedes contactar con cualquier profesional. ¿Qué necesitas?`]
       setTimeout(() => setMessages([{ id: 1, from: 'nura', lines }]), 300)
       return
     }
@@ -321,7 +321,7 @@ export default function Home({ setSearchState }) {
             id: Date.now(), from: 'nura',
             lines: [
               topMatch
-                ? `Perfecto. **${firstName}** tiene ${topMatch.rating}⭐ y suele responder en ${topMatch.responseTime || '< 1 hora'}.`
+                ? `Perfecto. **${firstName}** tiene ${topMatch.rating}★ y suele responder en ${topMatch.responseTime || '< 1 hora'}.`
                 : `Perfecto.`,
               `Pulsa en la tarjeta para ver el perfil completo y escribirle directamente.`
             ],
@@ -548,10 +548,10 @@ export default function Home({ setSearchState }) {
         if (analysis?.modalidad === 'online' && helper.online) reasons.push('disponible online')
         else if (analysis?.modalidad === 'presencial' && helper.presential) reasons.push('visita a domicilio')
 
-        if (reasons.length === 0) return `**${name}** está disponible y tiene ${helper.rating}⭐`
+        if (reasons.length === 0) return `**${name}** está disponible y tiene ${helper.rating}★`
 
         const mainReason = reasons.slice(0, 2).join(' y ')
-        return `**${name}** es mi recomendación: ${mainReason}. ${helper.rating}⭐ de media.`
+        return `**${name}** es mi recomendación: ${mainReason}. ${helper.rating}★ de media.`
       }
 
       const matchExplanation = buildMatchReason(top, analysis)

@@ -2,22 +2,23 @@ import { useState } from 'react'
 import { ArrowRight, X } from 'lucide-react'
 import { useUser } from '../context/UserContext'
 import styles from './OnboardingOverlay.module.css'
+import { MessageCircle, Shield, Users } from 'lucide-react'
 
 const STEPS = [
   {
-    emoji: '🗣️',
+    Icon: MessageCircle,
     eyebrow: 'NUEVA FORMA DE BUSCAR',
     title: 'Cuéntalo con\ntus palabras',
     desc: '"Necesito una cuidadora para mi madre los martes por la mañana en el Eixample." Así de fácil. Nüra entiende.',
   },
   {
-    emoji: '🛡️',
+    Icon: Shield,
     eyebrow: 'CONFIANZA TOTAL',
     title: 'Cada perfil,\nconstruido por IA',
     desc: 'DNI verificado, valoraciones reales, historial comprobado. Nüra construye el perfil del profesional — no él mismo.',
   },
   {
-    emoji: '✅',
+    Icon: Users,
     eyebrow: '1.200+ PROFESIONALES',
     title: 'La persona exacta,\nen minutos',
     desc: 'Logopedas, cuidadoras, técnicos, profesores, entrenadores, psicólogos. En Barcelona y expandiendo.',
@@ -89,7 +90,7 @@ export default function OnboardingOverlay({ onComplete }) {
       </div>
 
       <div className={styles.content} key={step}>
-        <div className={styles.emoji}>{s.emoji}</div>
+        <div className={styles.emoji}>{s.Icon && <s.Icon size={40} strokeWidth={1.5} color='var(--purple)' />}</div>
         <p className={styles.eyebrow}>{s.eyebrow}</p>
         <h1 className={styles.title}>{s.title}</h1>
         <p className={styles.desc}>{s.desc}</p>

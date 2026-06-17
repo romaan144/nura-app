@@ -9,21 +9,21 @@ import PageHeader from '../components/PageHeader'
 import styles from './Explore.module.css'
 
 const CATEGORIES = [
-  { id: 'all', label: 'Todos', icon: '✦' },
-  { id: 'cuidado', label: 'Cuidados', icon: '❤️' },
-  { id: 'logopeda', label: 'Logopedia', icon: '🗣️' },
-  { id: 'limpieza', label: 'Limpieza', icon: '🧹' },
-  { id: 'tecnico', label: 'Técnicos', icon: '🔧' },
-  { id: 'mascotas', label: 'Mascotas', icon: '🐾' },
-  { id: 'clases', label: 'Clases', icon: '📚' },
-  { id: 'entrenador', label: 'Fitness', icon: '💪' },
-  { id: 'psicologia', label: 'Psicología', icon: '🧠' },
-  { id: 'nutricion', label: 'Nutrición', icon: '🥗' },
-  { id: 'fisioterapia', label: 'Fisio', icon: '🦴' },
-  { id: 'idiomas', label: 'Idiomas', icon: '🌍' },
-  { id: 'informatica', label: 'Informática', icon: '💻' },
-  { id: 'musica', label: 'Música', icon: '🎵' },
-  { id: 'acompañamiento', label: 'Acompañamiento', icon: '🤝' },
+  { id: 'all',           label: 'Todos',         icon: 'Grid3X3' },
+  { id: 'cuidado',       label: 'Cuidados',       icon: 'Heart' },
+  { id: 'logopeda',      label: 'Logopedia',      icon: 'MessageSquare' },
+  { id: 'limpieza',      label: 'Limpieza',       icon: 'Sparkles' },
+  { id: 'tecnico',       label: 'Técnicos',       icon: 'Wrench' },
+  { id: 'mascotas',      label: 'Mascotas',       icon: 'PawPrint' },
+  { id: 'clases',        label: 'Clases',         icon: 'BookOpen' },
+  { id: 'entrenador',    label: 'Fitness',        icon: 'Dumbbell' },
+  { id: 'psicologia',    label: 'Psicología',     icon: 'Brain' },
+  { id: 'nutricion',     label: 'Nutrición',      icon: 'Apple' },
+  { id: 'fisioterapia',  label: 'Fisio',          icon: 'Activity' },
+  { id: 'idiomas',       label: 'Idiomas',        icon: 'Globe' },
+  { id: 'informatica',   label: 'Informática',    icon: 'Monitor' },
+  { id: 'musica',        label: 'Música',         icon: 'Music' },
+  { id: 'acompañamiento',label: 'Acompañamiento', icon: 'Users' },
 ]
 
 export default function Explore() {
@@ -172,7 +172,8 @@ export default function Explore() {
         {CATEGORIES.map(c => (
           <button key={c.id} className={`${styles.cat} ${activeCategory === c.id ? styles.catActive : ''}`}
             onClick={() => setActiveCategory(c.id)}>
-            <span>{c.icon}</span> {c.label}
+            {(() => { const icons = { Grid3X3, Heart, MessageSquare, Sparkles, Wrench, PawPrint, BookOpen, Dumbbell, Brain, Apple, Activity, Globe, Monitor, Music, Users }; const IC = icons[c.icon]; return IC ? <IC size={13} strokeWidth={1.8} /> : null })()}
+            <span>{c.label}</span>
           </button>
         ))}
       </div>

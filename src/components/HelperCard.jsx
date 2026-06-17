@@ -1,5 +1,5 @@
 import { useNavigate } from 'react-router-dom'
-import { Star, MapPin, Shield, Zap, Award, MessageCircle, Heart } from 'lucide-react'
+import { Star, MapPin, Shield, Zap, Award, MessageCircle, Heart, Monitor, MapPinned } from 'lucide-react'
 import { useUser } from '../context/UserContext'
 import { showToast } from './Toast'
 import styles from './HelperCard.module.css'
@@ -130,9 +130,9 @@ export default function HelperCard({ helper, onContact, compact = false, showCon
           {helper.presential && helper.online
             ? <span className={styles.tag}>Presencial · Online</span>
             : helper.presential
-            ? <span className={styles.tag}>📍 Presencial</span>
+            ? <span className={styles.tag}><MapPinned size={9} /> Presencial</span>
             : helper.online
-            ? <span className={styles.tag}>💻 Online</span>
+            ? <span className={styles.tag}><Monitor size={9} /> Online</span>
             : null}
         </div>
 

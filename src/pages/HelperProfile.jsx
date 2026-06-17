@@ -271,7 +271,7 @@ function AiDataSection({ aiData, aiAnalyzedAt, helperName }) {
         {v.map((s,i) => (
           <div key={i} style={{display:'flex',alignItems:'center',gap:'8px',
             fontSize:'13px',color:'rgba(0,0,0,0.5)'}}>
-            <span style={{color:'#F59E0B'}}>⚠</span> {s}
+            <span style={{color:'#F59E0B',fontSize:'11px',fontWeight:700}}>!</span> {s}
           </div>
         ))}
       </div>
@@ -290,9 +290,9 @@ function AiDataSection({ aiData, aiAnalyzedAt, helperName }) {
 
   // Labels for known keys
   const LABELS = {
-    summary: '🤖 Análisis de Nüra',
-    skills: '✨ Habilidades detectadas por IA',
-    personality: '🧠 Perfil de personalidad',
+    summary: 'Análisis de Nüra',
+    skills: 'Habilidades detectadas por IA',
+    personality: 'Perfil de personalidad',
     ideal_for: '🎯 Ideal para',
     red_flags: '⚠️ A tener en cuenta',
     certifications: '📋 Certificaciones verificadas',
@@ -559,7 +559,7 @@ function BookingModal({ helper, onClose, onBook, onNavigate }) {
                     {helper?.avatar||name?.[0]}
                   </div>
               }
-              <span style={{position:'absolute',bottom:-2,right:-2,fontSize:'22px'}}>✅</span>
+              <span style={{position:'absolute',bottom:-2,right:-2,width:'22px',height:'22px',background:'#22C55E',borderRadius:'50%',display:'flex',alignItems:'center',justifyContent:'center'}}><svg width='12' height='12' viewBox='0 0 12 12' fill='none'><path d='M2 6l3 3 5-5' stroke='white' strokeWidth='1.8' strokeLinecap='round' strokeLinejoin='round'/></svg></span>
             </div>
             <div>
               <h3 style={{fontSize:'19px',fontWeight:800,margin:'0 0 4px',color:'rgba(0,0,0,0.85)',letterSpacing:'-0.3px'}}>

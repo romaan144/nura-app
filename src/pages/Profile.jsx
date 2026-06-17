@@ -34,7 +34,7 @@ export default function Profile() {
           Crear cuenta
         </button>
         <button className={styles.helperBtn} onClick={() => navigate('/register-helper')}>
-          ✨ Quiero ser Helper
+          <Sparkles size={14} strokeWidth={1.8} style={{marginRight:'6px'}} /> Quiero ser Helper
         </button>
       </div>
     </div>
@@ -57,11 +57,11 @@ export default function Profile() {
   const helperProfileId = null // Will be populated from Supabase when real auth exists
 
   const ACTIONS = [
-    ...(user?.isHelper ? [{ icon: '👤', label: 'Mi perfil público', sub: 'Cómo te ven los usuarios', action: () => navigate('/explore') }] : [{ icon: '✨', label: 'Ofrecer mis servicios', sub: 'Únete como helper en Nüra', action: () => navigate('/register-helper') }]),
-    { icon: '💬', label: 'Mis conversaciones', sub: `${chats?.length || 0} activas`, action: () => navigate('/chats') },
-    { icon: '❤️', label: 'Favoritos', sub: `${favorites?.length || 0} guardados`, action: () => navigate('/favorites') },
-    { icon: '📋', label: 'Mis servicios', sub: 'Historial y valoraciones', action: () => navigate('/my-services') },
-    { icon: '❓', label: 'Cómo funciona Nüra', sub: 'Guía rápida', action: () => navigate('/how-it-works') },
+    ...(user?.isHelper ? [{ icon: User, label: 'Mi perfil público', sub: 'Cómo te ven los usuarios', action: () => navigate('/explore') }] : [{ icon: Sparkles, label: 'Ofrecer mis servicios', sub: 'Únete como helper en Nüra', action: () => navigate('/register-helper') }]),
+    { icon: MessageCircle, label: 'Mis conversaciones', sub: `${chats?.length || 0} activas`, action: () => navigate('/chats') },
+    { icon: Heart, label: 'Favoritos', sub: `${favorites?.length || 0} guardados`, action: () => navigate('/favorites') },
+    { icon: ClipboardList, label: 'Mis servicios', sub: 'Historial y valoraciones', action: () => navigate('/my-services') },
+    { icon: HelpCircle, label: 'Cómo funciona Nüra', sub: 'Guía rápida', action: () => navigate('/how-it-works') },
   ]
 
   return (
@@ -220,7 +220,7 @@ export default function Profile() {
         <div className={styles.section}>
           {ACTIONS.map((a, i) => (
             <button key={i} className={styles.actionRow} onClick={a.action}>
-              <span className={styles.actionIcon}>{a.icon}</span>
+              <span className={styles.actionIcon}>{typeof a.icon === 'string' ? a.icon : <a.icon size={17} strokeWidth={1.8} />}</span>
               <div className={styles.actionMeta}>
                 <span className={styles.actionLabel}>{a.label}</span>
                 <span className={styles.actionSub}>{a.sub}</span>
