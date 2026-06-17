@@ -520,7 +520,7 @@ export default function Home({ setSearchState }) {
       const topName = top?.name?.split(' ')?.[0] || ''
       const resultLine = matches.length === 1
         ? `Encontré **1 ${especialidad.slice(0,-1)}** verificado cerca de ti.`
-        : `Encontré **${matches.length} ${especialidad}** verificados en ${zona}.`
+        : `Encontré **${matches.length} ${especialidad}** cerca de ti en ${zona}.`
 
       // Build rich match explanation — the core AI differentiator
       function buildMatchReason(helper, analysis) {

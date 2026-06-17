@@ -142,7 +142,7 @@ export default function HelperCard({ helper, onContact, compact = false, showCon
           </button>
           {showContact && (
             <button className={styles.contactBtn} onClick={handleContact}>
-              <MessageCircle size={12} /> Contactar
+              <MessageCircle size={12} /> Escribir
             </button>
           )}
         </div>
