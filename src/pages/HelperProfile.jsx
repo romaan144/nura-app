@@ -883,27 +883,24 @@ function HelperProfileInner() {
           </div>
         </div>
 
-        {/* Stats */}
-        <div className={styles.statsRow}>
-          <div className={styles.statBox}>
-            <span className={styles.statNum}>{h.services}</span>
-            <span className={styles.statLbl}>Servicios</span>
-          </div>
-          <div className={styles.statDivider} />
-          <div className={styles.statBox}>
-            <span className={styles.statNum}>{h.completionRate}%</span>
-            <span className={styles.statLbl}>Completados</span>
-          </div>
-          <div className={styles.statDivider} />
-          <div className={styles.statBox}>
-            <span className={styles.statNum}>{h.reviews}</span>
-            <span className={styles.statLbl}>Valoraciones</span>
-          </div>
-          <div className={styles.statDivider} />
-          <div className={styles.statBox}>
-            <span className={styles.statNum}>{h.rating}</span>
-            <span className={styles.statLbl}>Puntuación</span>
-          </div>
+        {/* Trust line — rating + reviews + completion in one scannable row */}
+        <div style={{display:'flex',alignItems:'center',gap:'6px',
+          padding:'8px 14px',background:'rgba(0,0,0,0.04)',borderRadius:'10px',
+          fontSize:'13px',color:'rgba(0,0,0,0.65)',fontWeight:500,
+          flexWrap:'wrap',
+        }}>
+          <Star size={12} fill='#F59E0B' color='#F59E0B' />
+          <span style={{fontWeight:700,color:'rgba(0,0,0,0.8)'}}>{h.rating}</span>
+          <span style={{color:'rgba(0,0,0,0.3)'}}>·</span>
+          <span>{h.reviews} valoraciones</span>
+          {h.completionRate && (<>
+            <span style={{color:'rgba(0,0,0,0.3)'}}>·</span>
+            <span style={{color:'#059669',fontWeight:600}}>{h.completionRate}% completados</span>
+          </>)}
+          {h.services && (<>
+            <span style={{color:'rgba(0,0,0,0.3)'}}>·</span>
+            <span>{h.services} servicios</span>
+          </>)}
         </div>
 
         {/* Tabs */}

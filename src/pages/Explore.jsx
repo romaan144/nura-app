@@ -8,22 +8,13 @@ import { useUser } from '../context/UserContext'
 import PageHeader from '../components/PageHeader'
 import styles from './Explore.module.css'
 
-const CATEGORIES = [
-  { id: 'all',           label: 'Todos',         icon: 'Grid3X3' },
-  { id: 'cuidado',       label: 'Cuidados',       icon: 'Heart' },
-  { id: 'logopeda',      label: 'Logopedia',      icon: 'MessageSquare' },
-  { id: 'limpieza',      label: 'Limpieza',       icon: 'Sparkles' },
-  { id: 'tecnico',       label: 'Técnicos',       icon: 'Wrench' },
-  { id: 'mascotas',      label: 'Mascotas',       icon: 'PawPrint' },
-  { id: 'clases',        label: 'Clases',         icon: 'BookOpen' },
-  { id: 'entrenador',    label: 'Fitness',        icon: 'Dumbbell' },
-  { id: 'psicologia',    label: 'Psicología',     icon: 'Brain' },
-  { id: 'nutricion',     label: 'Nutrición',      icon: 'Apple' },
-  { id: 'fisioterapia',  label: 'Fisio',          icon: 'Activity' },
-  { id: 'idiomas',       label: 'Idiomas',        icon: 'Globe' },
-  { id: 'informatica',   label: 'Informática',    icon: 'Monitor' },
-  { id: 'musica',        label: 'Música',         icon: 'Music' },
-  { id: 'acompañamiento',label: 'Acompañamiento', icon: 'Users' },
+const QUICK_FILTERS = [
+  { id: 'all',       label: 'Todos',     icon: 'Grid3X3' },
+  { id: 'cuidado',   label: 'Cuidado',   icon: 'Heart' },
+  { id: 'tecnico',   label: 'Técnicos',  icon: 'Wrench' },
+  { id: 'clases',    label: 'Clases',    icon: 'BookOpen' },
+  { id: 'salud',     label: 'Salud',     icon: 'Activity' },
+  { id: 'legal',     label: 'Legal',     icon: 'Shield' },
 ]
 
 export default function Explore() {
@@ -115,11 +106,20 @@ export default function Explore() {
         </p>
       )}
 
+      <div style={{padding:'0 0 10px',display:'flex',alignItems:'baseline',justifyContent:'space-between'}}>
+        <h2 style={{fontSize:'18px',fontWeight:800,color:'rgba(0,0,0,0.85)',letterSpacing:'-0.4px',margin:0}}>
+          Profesionales verificados
+        </h2>
+        <span style={{fontSize:'12px',color:'rgba(0,0,0,0.35)',fontWeight:500}}>
+          {filtered.length} cerca de ti
+        </span>
+      </div>
+
       <div className={styles.searchWrap}>
         <div className={styles.searchBar}>
           <Search size={15} color="var(--soft)" />
           <input className={styles.searchInput}
-            placeholder="Buscar por nombre, especialidad o zona..."
+            placeholder="Nombre, especialidad o zona..."
             value={searchText} onChange={e => setSearchText(e.target.value)} />
           <button className={`${styles.filterBtn} ${activeFilters > 0 ? styles.filterBtnActive : ''}`}
             onClick={() => setShowFilters(s => !s)}>
@@ -169,33 +169,17 @@ export default function Explore() {
 
       {/* Categories */}
       <div className={styles.categories}>
-        {CATEGORIES.map(c => (
+        {QUICK_FILTERS.map(c => (
           <button key={c.id} className={`${styles.cat} ${activeCategory === c.id ? styles.catActive : ''}`}
             onClick={() => setActiveCategory(c.id)}>
-            {(() => { const icons = { Grid3X3, Heart, MessageSquare, Sparkles, Wrench, PawPrint, BookOpen, Dumbbell, Brain, Apple, Activity, Globe, Monitor, Music, Users }; const IC = icons[c.icon]; return IC ? <IC size={13} strokeWidth={1.8} /> : null })()}
+            {(() => { const IC = { Grid3X3, Heart, Wrench, BookOpen, Activity, Shield }[c.icon]; return IC ? <IC size={13} strokeWidth={1.8} /> : null })()}
             <span>{c.label}</span>
           </button>
         ))}
       </div>
 
       <div className={styles.content}>
-        {!searchText && activeCategory === 'all' && (
-          <div className={styles.featuredSection}>
-            <h3 className={styles.featuredTitle}>⭐ Más valorados esta semana</h3>
-            <div className={styles.featuredRow}>
-              {[...HELPERS].sort((a,b) => b.rating - a.rating).slice(0,4).map(h => (
-                <div key={h.id} className={styles.featuredCard} onClick={() => navigate(`/helper/${h.id}`, { state: { helper: h } })}>
-                  <img src={h.avatarUrl || `https://api.dicebear.com/9.x/personas/svg?seed=${h.name}`}
-                    alt={h.name} className={styles.featuredAvatar} />
-                  <div className={styles.featuredName}>{h.name.split(' ')[0]}</div>
-                  <div className={styles.featuredSpec}>{h.specialty?.split(' ')[0]}</div>
-                  <div className={styles.featuredRating}>⭐ {h.rating}</div>
-                </div>
-              ))}
-            </div>
-          </div>
-        )}
-        {loadingHelpers && (
+                {loadingHelpers && (
           <div className={styles.skeletonGrid}>
             {[1,2,3,4,5,6].map(i => <div key={i} className={styles.skeleton} />)}
           </div>
@@ -204,29 +188,6 @@ export default function Explore() {
           <div className={styles.resultsCount}>
           {totalCount > 0 ? `${filtered.length} de ${totalCount} profesionales` : `${filtered.length} profesionales`}
         </div>
-        {/* Sort pills */}
-        <div style={{display:'flex',gap:'6px',marginBottom:'12px',overflowX:'auto',paddingBottom:'2px'}}>
-          {[
-            {id:'quality', label:'Mejor valorado'},
-            {id:'rating',  label:'Mayor rating'},
-            {id:'price',   label:'Menor precio'},
-          ].map(s => (
-            <button key={s.id}
-              onClick={() => setSortBy(s.id)}
-              style={{
-                flexShrink:0, padding:'6px 14px',
-                background: sortBy===s.id ? '#1C1C1E' : 'rgba(255,255,255,0.7)',
-                color: sortBy===s.id ? 'white' : 'rgba(0,0,0,0.55)',
-                border: sortBy===s.id ? 'none' : '1px solid rgba(0,0,0,0.08)',
-                borderRadius:'100px', fontSize:'12px', fontWeight:600,
-                cursor:'pointer', transition:'all 0.15s',
-                fontFamily:'-apple-system,"Inter",sans-serif',
-              }}>
-              {s.label}
-            </button>
-          ))}
-        </div>
-
         <div className={styles.grid}>
           {filtered.length === 0 && !loadingHelpers && (
             <div style={{gridColumn:'1/-1',textAlign:'center',padding:'48px 24px',

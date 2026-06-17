@@ -5,22 +5,10 @@ import styles from './OnboardingOverlay.module.css'
 
 const STEPS = [
   {
-    Icon: MessageCircle,
-    eyebrow: 'NUEVA FORMA DE BUSCAR',
-    title: 'Cuéntalo con\ntus palabras',
-    desc: '"Necesito una cuidadora para mi madre los martes por la mañana en el Eixample." Así de fácil. Nüra entiende.',
-  },
-  {
-    Icon: Shield,
-    eyebrow: 'CONFIANZA TOTAL',
-    title: 'Cada perfil,\nconstruido por IA',
-    desc: 'DNI verificado, valoraciones reales, historial comprobado. Nüra construye el perfil del profesional — no él mismo.',
-  },
-  {
     Icon: Users,
-    eyebrow: '1.200+ PROFESIONALES',
-    title: 'La persona exacta,\nen minutos',
-    desc: 'Logopedas, cuidadoras, técnicos, profesores, entrenadores, psicólogos. En Barcelona y expandiendo.',
+    eyebrow: 'BIENVENIDO A NÜRA',
+    title: 'La IA que conecta\npersonas reales',
+    desc: 'Cuéntame lo que necesitas — en tus palabras, sin formularios. Encuentro a la persona exacta verificada y disponible.',
   },
 ]
 
