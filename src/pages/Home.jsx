@@ -721,6 +721,65 @@ export default function Home({ setSearchState }) {
                   </div>
                 ))}
               </div>
+
+              {/* ── Disponibles ahora strip ─────────────────── */}
+              <div style={{width:'100%',marginTop:'12px'}}>
+                <p style={{fontSize:'11px',fontWeight:700,color:'rgba(0,0,0,0.3)',
+                  letterSpacing:'0.5px',textTransform:'uppercase',margin:'0 0 8px'}}>
+                  Disponibles ahora
+                </p>
+                <div style={{display:'flex',gap:'8px',overflowX:'auto',paddingBottom:'2px'}}>
+                  {HELPERS.filter(h=>h.available).slice(0,5).map(h=>(
+                    <button key={h.id}
+                      onClick={()=>navigate(`/helper/${h.id}`,{state:{helper:h}})}
+                      style={{
+                        flexShrink:0,display:'flex',flexDirection:'column',
+                        alignItems:'center',gap:'5px',
+                        background:'rgba(255,255,255,0.85)',
+                        border:'1px solid rgba(255,255,255,0.5)',
+                        borderRadius:'16px',padding:'10px 10px 8px',
+                        cursor:'pointer',minWidth:'68px',
+                        WebkitBackdropFilter:'blur(20px)',
+                        backdropFilter:'blur(20px)',
+                      }}>
+                      {h.avatarUrl
+                        ?<img src={h.avatarUrl} alt={h.name}
+                            style={{width:'38px',height:'38px',borderRadius:'50%',objectFit:'cover'}}/>
+                        :<div style={{width:'38px',height:'38px',borderRadius:'50%',
+                            background:h.avatarColor||'#7B2FFF',color:'white',fontSize:'13px',
+                            fontWeight:700,display:'flex',alignItems:'center',justifyContent:'center'}}>
+                            {h.avatar}
+                          </div>
+                      }
+                      <span style={{fontSize:'10px',fontWeight:600,color:'rgba(0,0,0,0.7)',
+                        textAlign:'center',lineHeight:1.3,
+                        maxWidth:'58px',overflow:'hidden',
+                        display:'-webkit-box',WebkitLineClamp:2,WebkitBoxOrient:'vertical'}}>
+                        {h.name.split(' ')[0]}
+                      </span>
+                      <span style={{fontSize:'9px',color:'#059669',fontWeight:700,
+                        background:'#ECFDF5',borderRadius:'100px',padding:'1px 5px'}}>
+                        ● Libre
+                      </span>
+                    </button>
+                  ))}
+                  <button onClick={()=>navigate('/explore')}
+                    style={{
+                      flexShrink:0,display:'flex',flexDirection:'column',
+                      alignItems:'center',justifyContent:'center',gap:'4px',
+                      background:'rgba(123,47,255,0.05)',
+                      border:'1px dashed rgba(123,47,255,0.25)',
+                      borderRadius:'16px',padding:'10px 10px 8px',
+                      cursor:'pointer',minWidth:'68px',
+                    }}>
+                    <span style={{fontSize:'18px'}}>→</span>
+                    <span style={{fontSize:'9px',fontWeight:700,color:'#7B2FFF',textAlign:'center',lineHeight:1.3}}>
+                      Ver todos
+                    </span>
+                  </button>
+                </div>
+              </div>
+
             )}
             {msg.results && (
               <HelperCarousel helpers={msg.results} />
