@@ -55,7 +55,7 @@ async function saveHelperToSupabase(answers) {
 }
 
 const QUESTIONS = [
-  { id: 'name',          text: '¡Hola! Soy Nüra y voy a construir tu perfil profesional. ¿Cómo te llamas?', placeholder: 'Tu nombre completo' },
+  { id: 'name',          text: '¡Hola! Soy Nüra. Voy a construir tu perfil para que las personas adecuadas puedan encontrarte. ¿Cómo te llamas?', placeholder: 'Tu nombre completo' },
   { id: 'specialty',     text: 'Encantada, {name}. ¿Cuál es tu especialidad principal?', placeholder: 'Ej: logopeda, cuidadora, técnico de calderas...' },
   { id: 'formation',     text: '¿Qué formación tienes? Buscaré tus estudios para verificarlos.', placeholder: 'Ej: Grado en Logopedia, FP Atención Sociosanitaria...' },
   { id: 'experience',    text: '¿Cuántos años llevas trabajando en esto? ¿En qué contextos?', placeholder: 'Ej: 5 años, clínica privada y domicilio' },

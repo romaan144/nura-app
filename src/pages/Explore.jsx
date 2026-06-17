@@ -237,7 +237,7 @@ export default function Explore() {
               <p style={{fontSize:'14px',color:'rgba(0,0,0,0.4)',margin:0}}>
                 Prueba con otra categoría o ajusta el precio
               </p>
-              <button onClick={() => { setActiveCategory('all'); setPriceMax(200) }}
+              <button onClick={() => { setActiveCategory('all'); setPriceMax(200); setSearchText('') }}
                 style={{padding:'10px 22px',background:'#1C1C1E',color:'white',border:'none',
                   borderRadius:'100px',fontSize:'13px',fontWeight:700,cursor:'pointer',marginTop:'4px'}}>
                 Ver todos

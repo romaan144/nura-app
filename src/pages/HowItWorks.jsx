@@ -54,7 +54,21 @@ export default function HowItWorks() {
           <p className={styles.heroDesc}>No es un buscador. No es un directorio. Es una inteligencia artificial que entiende lo que necesitas y encuentra a la persona exacta que puede ayudarte.</p>
         </div>
 
-        {/* Steps */}
+        {/* Philosophy statement */}
+      <div style={{
+        textAlign:'center', padding:'0 20px 8px',
+        borderBottom:'1px solid rgba(0,0,0,0.06)', marginBottom:'4px',
+      }}>
+        <p style={{
+          fontSize:'17px', fontWeight:800, color:'rgba(0,0,0,0.8)',
+          letterSpacing:'-0.4px', lineHeight:1.5, margin:0,
+          fontStyle:'italic',
+        }}>
+          "La IA no reemplaza humanos.<br/>Nüra conecta humanos."
+        </p>
+      </div>
+
+      {/* Steps */}
         <div className={styles.steps}>
           {STEPS.map((s, i) => (
             <div key={i} className={styles.step}>

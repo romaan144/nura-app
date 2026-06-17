@@ -754,15 +754,21 @@ export default function Home({ setSearchState }) {
                             {h.avatar}
                           </div>
                       }
-                      <span style={{fontSize:'10px',fontWeight:600,color:'rgba(0,0,0,0.7)',
-                        textAlign:'center',lineHeight:1.3,
-                        maxWidth:'58px',overflow:'hidden',
-                        display:'-webkit-box',WebkitLineClamp:2,WebkitBoxOrient:'vertical'}}>
+                      <span style={{fontSize:'10px',fontWeight:700,color:'rgba(0,0,0,0.75)',
+                        textAlign:'center',lineHeight:1.2,maxWidth:'62px'}}>
                         {h.name.split(' ')[0]}
                       </span>
-                      <span style={{fontSize:'9px',color:'#059669',fontWeight:700,
-                        background:'#ECFDF5',borderRadius:'100px',padding:'1px 5px'}}>
-                        ● Libre
+                      <span style={{fontSize:'9px',color:'rgba(0,0,0,0.4)',
+                        textAlign:'center',lineHeight:1.2,maxWidth:'62px',
+                        overflow:'hidden',textOverflow:'ellipsis',whiteSpace:'nowrap'}}>
+                        {h.tags?.[0] || h.specialty?.split(' ')[0]}
+                      </span>
+                      <span style={{fontSize:'8px',color:'#059669',fontWeight:700,
+                        background:'#ECFDF5',borderRadius:'100px',padding:'1px 5px',
+                        display:'flex',alignItems:'center',gap:'2px'}}>
+                        <span style={{width:'5px',height:'5px',borderRadius:'50%',
+                          background:'#059669',display:'inline-block'}}/>
+                        Libre
                       </span>
                     </button>
                   ))}
