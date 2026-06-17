@@ -131,8 +131,8 @@ export const HELPERS = [
     evolution: [{ period: "2021", rating: 4.7, services: 45 }, { period: "2022", rating: 4.8, services: 72 }, { period: "2023", rating: 4.8, services: 89 }, { period: "2024", rating: 4.8, services: 112 }],
     aiData: {
         summary: "Roberto es técnico certificado por Gas Natural con 15 años en calderas y calefacción. Urgencias resueltas en media de 47 minutos. Nunca ha dejado un trabajo sin terminar.",
-        skills: ["calderas Roca", "calderas Junkers", "calefacción central", "gas natural", "urgencias",
-      { id: 3, type: "tip", text: "Consejo: revisa la caldera antes de que llegue el frío. Cada otoño atiendo urgencias evitables. Una revisión de 30 minutos en septiembre puede salvarte el invierno.", date: "Hace 3 días", likes: 41, comments: 8, verifiedWork: false }],
+        skills: ["calderas Roca", "calderas Junkers", "calefacción central", "gas natural", "urgencias"],
+        personality: {"ideal_for": "Urgencias de caldera, revisiones anuales y cualquier problema de calefacción o gas en Barcelona",
         personality: {"Puntualidad": 9.9, "Resolución": 9.8, "Comunicación": 8.9, "Limpieza": 9.4},
         ideal_for: "Urgencias de caldera, revisiones anuales, instalaciones nuevas",
       },
@@ -215,8 +215,8 @@ export const HELPERS = [
     evolution: [{ period: "2022", rating: 4.7, services: 30 }, { period: "2023", rating: 4.9, services: 58 }, { period: "2024", rating: 4.9, services: 89 }],
     aiData: {
         summary: "Elena tiene formación específica en Alzheimer y demencias. Lleva 89 familias atendidas en domicilio. Destaca por su paciencia excepcional y capacidad de crear vínculo con el mayor.",
-        skills: ["Alzheimer", "demencias", "fisioterapia básica", "medicación", "compañía",
-      { id: 3, type: "availability", text: "🟢 Tengo huecos disponibles esta semana en el Eixample y Gràcia. Primera visita de presentación gratuita para familias con mayores.", date: "Hoy", likes: 14, comments: 3, verifiedWork: false }],
+        skills: ["Alzheimer", "demencias", "fisioterapia básica", "medicación", "compañía"],
+        personality: {"ideal_for": "Personas mayores con Alzheimer, demencia o dependencia moderada que necesitan compañía y asistencia domiciliaria",
         personality: {"Empatía": 9.9, "Paciencia": 9.8, "Fiabilidad": 9.7, "Discreción": 9.6},
         ideal_for: "Personas mayores con Alzheimer, demencia o dependencia moderada",
       },

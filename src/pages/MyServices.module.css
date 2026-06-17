@@ -46,3 +46,9 @@
 @media (min-width: 768px) {
   .content { max-width: 560px; margin: 0 auto; padding: 12px 24px; }
 }
+
+@keyframes fadeSlideIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+.serviceCard { animation: fadeSlideIn 0.3s ease both; }
