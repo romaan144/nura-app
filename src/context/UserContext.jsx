@@ -142,8 +142,8 @@ export function UserProvider({ children }) {
     return (ratings||[]).some(r => r.helperId === helperId)
   }
 
-  function addSearch(query) {
-    const updated = [{ query, date: new Date().toISOString() }, ...searchHistory].slice(0, 10)
+  function addSearch(query, category) {
+    const updated = [{ query, category, date: new Date().toISOString() }, ...searchHistory].slice(0, 10)
     setSearchHistory(updated)
     localStorage.setItem('nura_history', JSON.stringify(updated))
   }

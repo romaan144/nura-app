@@ -76,6 +76,8 @@ export default function HelperCard({ helper, onContact, compact = false, showCon
             <span>{helper.rating}</span>
             <span className={styles.dot}>·</span>
             <MapPin size={9} color="rgba(0,0,0,0.35)" />
+            {helper.distance && <span style={{fontWeight:600}}>{helper.distance}km</span>}
+            {helper.distance && <span className={styles.dot}>·</span>}
             <span>{helper.zone || helper.city || 'Barcelona'}</span>
             {helper.reviews > 0 && <>
               <span className={styles.dot}>·</span>

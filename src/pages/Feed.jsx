@@ -223,6 +223,68 @@ export default function Feed() {
 
       {/* Feed */}
       <div className={styles.feed}>
+
+        {/* Nüra personalized section — based on last search */}
+        {tab === 'para-ti' && searchHistory?.length > 0 && (() => {
+          const lastQ = searchHistory[0]?.query
+          const lastCat = searchHistory[0]?.category
+          const words = lastQ.toLowerCase().split(/\s+/).filter(w => w.length > 3)
+          const related = HELPERS.filter(h =>
+            h.available && (
+              (lastCat && h.category === lastCat) ||
+              words.some(w =>
+                h.specialty?.toLowerCase().includes(w) ||
+                h.category?.toLowerCase().includes(w) ||
+                h.bio?.toLowerCase().includes(w) ||
+                (h.tags||[]).some(t => t.toLowerCase().includes(w))
+              )
+            )
+          ).slice(0, 3)
+          if (!related.length || !lastQ) return null
+          return (
+            <div style={{
+              background:'linear-gradient(135deg,rgba(123,47,255,0.06),rgba(0,212,200,0.04))',
+              border:'1px solid rgba(123,47,255,0.1)',
+              borderRadius:'20px',padding:'16px',marginBottom:'10px',
+            }}>
+              <div style={{display:'flex',alignItems:'center',gap:'6px',marginBottom:'12px'}}>
+                <img src="/logo-iso.png" alt="Nüra" style={{width:'14px',height:'14px',objectFit:'contain'}} />
+                <span style={{fontSize:'11px',fontWeight:700,color:'var(--purple)',letterSpacing:'0.4px',textTransform:'uppercase'}}>
+                  Basado en tu búsqueda
+                </span>
+              </div>
+              <p style={{fontSize:'13px',color:'rgba(0,0,0,0.55)',margin:'0 0 12px',lineHeight:1.5}}>
+                Buscaste <strong style={{color:'rgba(0,0,0,0.75)'}}>{lastQ}</strong>. Estos profesionales están disponibles ahora.
+              </p>
+              <div style={{display:'flex',gap:'8px',overflowX:'auto',paddingBottom:'2px'}}>
+                {related.map(h => (
+                  <div key={h.id}
+                    onClick={() => navigate(`/helper/${h.id}`, { state: { helper: h } })}
+                    style={{
+                      flexShrink:0,cursor:'pointer',
+                      background:'white',borderRadius:'14px',
+                      padding:'10px 12px',minWidth:'120px',
+                      boxShadow:'0 1px 4px rgba(0,0,0,0.07)',
+                      display:'flex',flexDirection:'column',alignItems:'center',gap:'6px',
+                    }}>
+                    <img src={h.avatarUrl} alt={h.name}
+                      style={{width:'40px',height:'40px',borderRadius:'50%',objectFit:'cover'}} />
+                    <span style={{fontSize:'12px',fontWeight:700,color:'rgba(0,0,0,0.8)',textAlign:'center'}}>
+                      {h.name.split(' ')[0]}
+                    </span>
+                    <span style={{fontSize:'10px',color:'rgba(0,0,0,0.45)',textAlign:'center',lineHeight:1.3}}>
+                      {h.specialty}
+                    </span>
+                    <span style={{fontSize:'10px',color:'#059669',fontWeight:600}}>
+                      Disponible
+                    </span>
+                  </div>
+                ))}
+              </div>
+            </div>
+          )
+        })()}
+
         {feedLoading && (
           <div style={{display:'flex',flexDirection:'column',gap:'10px'}}>
             {[1,2].map(i => (

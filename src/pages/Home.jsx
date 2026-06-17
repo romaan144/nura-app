@@ -463,7 +463,7 @@ export default function Home({ setSearchState }) {
         return
       }
 
-      addSearch?.(msg)
+      addSearch?.(msg, analysis?.categoria)
       window.__nuraLastQuery = msg  // Store for chat pre-fill
       window.__nuraLastAnalysis = analysis
       setSearchState({ query: msg, analysis, matches })

@@ -851,17 +851,13 @@ function HelperProfileInner() {
             <span>{h.responseTime}</span>
           </div>
 
-          {/* Status + key badges — only non-obvious info */}
+          {/* Status badges — only decision-critical signals */}
           <div className={styles.heroTags}>
             <span className={h.available ? styles.tagGreen : styles.tagGray}>
               <span className={styles.dot} />{h.available ? 'Disponible' : 'No disponible'}
             </span>
-            {h.presential && h.online
-              ? <span className={styles.tag}>Presencial · Online</span>
-              : h.presential ? <span className={styles.tag}>Solo presencial</span>
-              : <span className={styles.tag}>Solo online</span>}
+            {h.dniVerified && <span className={styles.tagBlue}><Shield size={10} /> DNI verificado</span>}
             {h.urgent && <span className={styles.tagRed}><Zap size={10} /> Urgencias</span>}
-            {h.dniVerified && <span className={styles.tagBlue}><Shield size={10} /> Verificado</span>}
           </div>
 
           <div className={styles.heroActions}>

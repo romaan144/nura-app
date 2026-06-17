@@ -119,7 +119,7 @@ export default function Explore() {
         <div className={styles.searchBar}>
           <Search size={15} color="var(--soft)" />
           <input className={styles.searchInput}
-            placeholder="Nombre, especialidad o zona..."
+            placeholder="¿A quién buscas?"
             value={searchText} onChange={e => setSearchText(e.target.value)} />
           <button className={`${styles.filterBtn} ${activeFilters > 0 ? styles.filterBtnActive : ''}`}
             onClick={() => setShowFilters(s => !s)}>
