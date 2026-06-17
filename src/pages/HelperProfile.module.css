@@ -48,10 +48,10 @@
   box-shadow: 0 2px 8px rgba(0,0,0,0.08), 0 1px 3px rgba(0,0,0,0.05);
 }
 .heroBg { display: none; }
-.heroInner { position: relative; z-index: 1; display: flex; flex-direction: column; align-items: center; padding: 52px 20px 20px; text-align: center; gap: 8px; }
-.heroAvatar { width: 96px; height: 96px; border-radius: 50%; object-fit: cover; border: 3px solid white; box-shadow: 0 8px 32px rgba(0,0,0,0.14), 0 0 0 4px rgba(123,47,255,0.08); margin-bottom: 16px; }
-.heroAvatarFallback { width: 96px; height: 96px; border-radius: 50%; display: flex; align-items: center; justify-content: center; color: white; font-size: 32px; font-weight: 800; border: 3px solid white; box-shadow: 0 8px 32px rgba(0,0,0,0.14); margin-bottom: 16px; }
-.heroName { font-size: 22px; font-weight: 800; color: var(--ink); letter-spacing: -0.5px; }
+.heroInner { position: relative; z-index: 1; display: flex; flex-direction: column; align-items: flex-start; padding: 58px 20px 20px; text-align: left; gap: 0; }
+.heroAvatar { width: 72px; height: 72px; border-radius: 50%; object-fit: cover; border: 3px solid white; box-shadow: 0 4px 16px rgba(0,0,0,0.12), 0 0 0 3px rgba(123,47,255,0.1); margin-bottom: 0; }
+.heroAvatarFallback { width: 72px; height: 72px; border-radius: 50%; display: flex; align-items: center; justify-content: center; color: white; font-size: 26px; font-weight: 800; border: 3px solid white; box-shadow: 0 4px 16px rgba(0,0,0,0.12); margin-bottom: 0; }
+.heroName { font-size: 20px; font-weight: 800; color: var(--ink); letter-spacing: -0.4px; line-height: 1.2; }
 .heroSpecialty { font-size: 14px; font-weight: 600; color: var(--purple); }
 .heroMeta { display: flex; align-items: center; gap: 8px; font-size: var(--text-xs); color: var(--mid); margin-bottom: 12px; flex-wrap: wrap; justify-content: center; }
 .heroMetaItem { display: flex; align-items: center; gap: 4px; }

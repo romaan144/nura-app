@@ -794,74 +794,94 @@ function HelperProfileInner() {
           {/* Gradient cover strip */}
           <div style={{
             position: 'absolute', top: 0, left: 0, right: 0,
-            height: '88px',
+            height: '80px',
             background: coverGradient,
             borderRadius: '28px 28px 0 0',
           }} />
           <div className={styles.heroInner} style={{position:'relative', zIndex:1}}>
-          {h.avatarUrl
-            ? <img src={h.avatarUrl} alt={h.name} className={styles.heroAvatar} />
-            : <div className={styles.heroAvatarFallback} style={{ background: h.avatarColor }}>{h.avatar}</div>
-          }
-          {/* Name */}
-          <h1 className={styles.heroName}>
-            {h.name}
-            {h.founder && <Award size={13} color='#92400E' style={{marginLeft:'5px',verticalAlign:'middle'}} />}
-          </h1>
-          {/* ── Nüra match reason — FIRST thing user reads ── */}
-          {matchReason && (
-            <div style={{
-              display:'flex',alignItems:'flex-start',gap:'8px',
-              background:'linear-gradient(135deg,rgba(123,47,255,0.08),rgba(0,212,200,0.04))',
-              border:'1px solid rgba(123,47,255,0.15)',
-              borderRadius:'12px',padding:'10px 13px',
-              width:'100%',boxSizing:'border-box',textAlign:'left',
-              marginTop:'6px',
-            }}>
-              <Sparkles size={13} color='#7B2FFF' strokeWidth={1.7} style={{flexShrink:0,marginTop:'2px'}} />
-              <p style={{fontSize:'12px',color:'rgba(0,0,0,0.6)',margin:0,lineHeight:1.65}}>
-                <strong style={{color:'#7B2FFF',fontWeight:700}}>Por qué Nüra la recomienda: </strong>
-                {matchReason}
-              </p>
+
+            {/* ── TOP ROW: Avatar + Name + Key facts ── */}
+            <div style={{display:'flex',alignItems:'flex-start',gap:'14px',width:'100%'}}>
+              {/* Avatar */}
+              <div style={{flexShrink:0,position:'relative'}}>
+                {h.avatarUrl
+                  ? <img src={h.avatarUrl} alt={h.name} className={styles.heroAvatar} />
+                  : <div className={styles.heroAvatarFallback} style={{background:h.avatarColor}}>{h.avatar}</div>
+                }
+                {h.available && (
+                  <span style={{position:'absolute',bottom:2,right:2,width:'12px',height:'12px',
+                    background:'#22C55E',border:'2px solid white',borderRadius:'50%'}} />
+                )}
+              </div>
+
+              {/* Name + specialty + meta */}
+              <div style={{flex:1,minWidth:0,paddingTop:'2px'}}>
+                <h1 className={styles.heroName} style={{textAlign:'left',marginBottom:'2px'}}>
+                  {h.name?.split(' ').slice(0,2).join(' ')}
+                  {h.founder && <Award size={12} color='#92400E' style={{marginLeft:'5px',verticalAlign:'middle'}} />}
+                </h1>
+                <p style={{fontSize:'var(--text-sm)',fontWeight:600,color:'var(--purple)',margin:'0 0 6px',textAlign:'left'}}>
+                  {h.specialty || h.tags?.[0]}
+                </p>
+                {/* Key facts row */}
+                <div style={{display:'flex',alignItems:'center',gap:'6px',flexWrap:'wrap'}}>
+                  <span style={{display:'flex',alignItems:'center',gap:'3px',fontSize:'var(--text-xs)',fontWeight:600,color:'rgba(0,0,0,0.7)'}}>
+                    <Star size={10} fill='#F59E0B' color='#F59E0B'/>{h.rating}
+                    <span style={{color:'rgba(0,0,0,0.25)',fontWeight:400}}>({h.reviews})</span>
+                  </span>
+                  {h.distance && (
+                    <span style={{display:'flex',alignItems:'center',gap:'3px',fontSize:'var(--text-xs)',color:'rgba(0,0,0,0.45)'}}>
+                      <span style={{color:'rgba(0,0,0,0.2)'}}>·</span>
+                      <MapPin size={9} color='rgba(0,0,0,0.3)'/>{h.distance}km
+                    </span>
+                  )}
+                  {h.price && h.price !== 'Consultar' && (
+                    <span style={{display:'flex',alignItems:'center',gap:'3px',fontSize:'var(--text-xs)'}}>
+                      <span style={{color:'rgba(0,0,0,0.2)'}}>·</span>
+                      <span style={{fontWeight:700,color:'var(--purple)'}}>{h.price}</span>
+                    </span>
+                  )}
+                </div>
+                {/* DNI badge inline */}
+                {h.dniVerified && (
+                  <div style={{display:'inline-flex',alignItems:'center',gap:'3px',marginTop:'6px',
+                    fontSize:'var(--text-xs)',fontWeight:600,color:'#059669',
+                    background:'#ECFDF5',borderRadius:'100px',padding:'2px 8px',
+                  }}>
+                    <Shield size={9}/> Verificado
+                  </div>
+                )}
+              </div>
             </div>
-          )}
-          <div style={{display:'flex',alignItems:'center',gap:'10px',justifyContent:'center',flexWrap:'wrap'}}>
-            <p className={styles.heroSpecialty} style={{margin:0}}>{h.specialty || h.tags?.[0]}</p>
-            {h.distance && (
-              <span style={{fontSize:'12px',fontWeight:600,color:'rgba(0,0,0,0.45)'}}>
-                {h.distance}km · {h.zone || h.city || 'Barcelona'}
-              </span>
+
+            {/* ── Match reason banner ── */}
+            {matchReason && (
+              <div style={{
+                display:'flex',alignItems:'flex-start',gap:'8px',
+                background:'rgba(123,47,255,0.05)',
+                border:'1px solid rgba(123,47,255,0.12)',
+                borderRadius:'12px',padding:'10px 13px',
+                width:'100%',boxSizing:'border-box',marginTop:'12px',
+              }}>
+                <Sparkles size={12} color='var(--purple)' strokeWidth={1.8} style={{flexShrink:0,marginTop:'1px'}}/>
+                <p style={{fontSize:'var(--text-xs)',color:'rgba(0,0,0,0.55)',margin:0,lineHeight:1.6}}>
+                  <strong style={{color:'var(--purple)',fontWeight:700}}>Por qué Nüra la recomienda: </strong>
+                  {matchReason}
+                </p>
+              </div>
             )}
-            {h.price && h.price !== 'Consultar' && (
-              <span style={{fontSize:'14px',fontWeight:700,color:'var(--purple)',background:'rgba(123,47,255,0.08)',borderRadius:'100px',padding:'2px 10px'}}>
-                {h.price}
-              </span>
-            )}
-          </div>
 
-          {/* One line: rating · distance · response time */}
-          <div className={styles.heroMeta}>
-            <Star size={12} fill="#F59E0B" color="#F59E0B" />
-            <strong>{h.rating}</strong>
-            <span className={styles.heroMetaDot}>·</span>
-            <MapPin size={12} color="var(--soft)" />
-            <span>{h.distance} km</span>
-            <span className={styles.heroMetaDot}>·</span>
-            <Clock size={12} color="var(--soft)" />
-            <span>{h.responseTime}</span>
-          </div>
-
-          {/* Status badges — only decision-critical signals */}
-          <div className={styles.heroTags}>
-            <span className={h.available ? styles.tagGreen : styles.tagGray}>
-              <span className={styles.dot} />{h.available ? 'Disponible' : 'No disponible'}
-            </span>
-            {h.dniVerified && <span className={styles.tagBlue}><Shield size={10} /> DNI verificado</span>}
-            {h.urgent && <span className={styles.tagRed}><Zap size={10} /> Urgencias</span>}
-          </div>
-
-          <div className={styles.heroActions}>
-            <button className={styles.heroCtaSecondary} onClick={() => {
+            {/* ── Primary CTA ── */}
+            <div style={{display:'flex',gap:'8px',width:'100%',marginTop:'14px'}}>
+              <button style={{
+                flex:1,height:'44px',display:'flex',alignItems:'center',
+                justifyContent:'center',gap:'7px',
+                background:'var(--purple)',color:'white',border:'none',
+                borderRadius:'var(--radius-full)',fontSize:'var(--text-sm)',
+                fontWeight:700,cursor:'pointer',fontFamily:'inherit',
+                boxShadow:'0 2px 12px rgba(123,47,255,0.3)',
+                transition:'opacity 0.15s',WebkitTapHighlightColor:'transparent',
+              }} onClick={() => {
                 if (!user) {
                   sessionStorage.setItem('nura_return_to', `/chat/${h.id}`)
                   sessionStorage.setItem('nura_pending_helper', JSON.stringify(h))
@@ -870,12 +890,20 @@ function HelperProfileInner() {
                   navigate(`/chat/${h.id}`, { state: { helper: h, userQuery: location.state?.userQuery || window.__nuraLastQuery, analysis: location.state?.analysis || window.__nuraLastAnalysis } })
                 }
               }}>
-              <MessageCircle size={15} /> Escribir a {h.name?.split(' ')?.[0]}
-            </button>
-            <button className={styles.heroCtaBtnSecondary} onClick={() => { if(!user){setShowGate(true);setGateReason('contact')} else setShowConfirm(true) }}>
-              <Calendar size={15} /> Contratar
-            </button>
-          </div>
+                <MessageCircle size={15}/> Escribir a {h.name?.split(' ')?.[0]}
+              </button>
+              <button style={{
+                height:'44px',padding:'0 16px',display:'flex',alignItems:'center',
+                gap:'6px',background:'white',color:'rgba(0,0,0,0.6)',
+                border:'1.5px solid rgba(0,0,0,0.1)',borderRadius:'var(--radius-full)',
+                fontSize:'var(--text-sm)',fontWeight:600,cursor:'pointer',
+                fontFamily:'inherit',transition:'opacity 0.15s',
+                WebkitTapHighlightColor:'transparent',
+              }} onClick={() => { if(!user){setShowGate(true);setGateReason('contact')} else setShowConfirm(true) }}>
+                <Calendar size={14}/> Contratar
+              </button>
+            </div>
+
           </div>
         </div>
 
