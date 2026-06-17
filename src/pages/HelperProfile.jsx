@@ -806,6 +806,11 @@ function HelperProfileInner() {
           </h1>
           <div style={{display:'flex',alignItems:'center',gap:'10px',justifyContent:'center',flexWrap:'wrap'}}>
             <p className={styles.heroSpecialty} style={{margin:0}}>{h.specialty || h.tags?.[0]}</p>
+            {h.distance && (
+              <span style={{fontSize:'12px',fontWeight:600,color:'rgba(0,0,0,0.45)'}}>
+                📍 {h.distance}km · {h.zone || h.city || 'Barcelona'}
+              </span>
+            )}
             {h.price && h.price !== 'Consultar' && (
               <span style={{fontSize:'14px',fontWeight:700,color:'var(--purple)',background:'rgba(123,47,255,0.08)',borderRadius:'100px',padding:'2px 10px'}}>
                 {h.price}
@@ -1196,7 +1201,9 @@ function HelperProfileInner() {
               <div>
                 <p className={styles.empresasIntroTitle}>Historial verificado por terceros</p>
                 <p className={styles.empresasIntroDesc}>
-                  Lo que ves aquí no lo ha escrito {h.name?.split(' ')?.[0] || h.name || ''}. Lo han escrito las empresas y personas que han trabajado con él. Imposible de falsificar.
+                  Lo que ves aquí no lo ha escrito {h.name?.split(' ')?.[0] || h.name || ''}. Lo han escrito las empresas y personas que han trabajado con {
+                  ['Dra','Elena','Sara','María','Marta','Lucía','Carme','Laia'].some(n => h.name?.startsWith(n)) ? 'ella' : 'él'
+                }. Imposible de falsificar.
                 </p>
               </div>
             </div>

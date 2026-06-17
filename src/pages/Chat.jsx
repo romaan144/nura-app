@@ -43,8 +43,15 @@ function getHelperReply(helper, count, userMsg = '') {
     return helper.urgent
       ? `Sí, atiendo urgencias. ¿Me cuentas más?`
       : `No hago urgencias normalmente, pero dime qué necesitas y lo vemos.`
-  if (t.includes('gracias') || t.includes('perfecto') || t.includes('genial') || t.includes('de acuerdo'))
-    return `¡Perfecto! Cuando quieras cerramos los detalles. Estoy disponible.`
+  if (t.includes('gracias') || t.includes('perfecto') || t.includes('genial') || t.includes('de acuerdo')) {
+    const firstName = helper.name?.split(' ')?.[0] || ''
+    const options = [
+      `¡Perfecto! Cuando quieras cerramos los detalles, ${firstName}.`,
+      `Genial. Avísame cuando quieras concretar y lo organizamos.`,
+      `De nada. Estoy aquí para lo que necesites.`,
+    ]
+    return options[Math.floor(Math.random() * options.length)]
+  }
   if (t.includes('referencia') || t.includes('opinión') || t.includes('reseña') || t.includes('valoración'))
     return `Tengo ${helper.reviews || 0} valoraciones en Nüra con una media de ${helper.rating || 4.5}⭐. Puedes verlas en mi perfil.`
   if (t.includes('contrat') || t.includes('reservar') || t.includes('apuntar'))
