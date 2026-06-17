@@ -1,6 +1,6 @@
 import { useState, useEffect, useRef } from 'react'
 import { useNavigate } from 'react-router-dom'
-import { Send, Mic, MicOff, Plus } from 'lucide-react'
+import { Send, Mic, MicOff, Plus, Clock } from 'lucide-react'
 import { analyzeNeed, matchHelpers } from '../utils/matching'
 import { HELPERS } from '../data/helpers'
 import { useUser } from '../context/UserContext'

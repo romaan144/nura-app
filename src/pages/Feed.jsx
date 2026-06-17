@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react'
-import { Briefcase, Users2 } from 'lucide-react'
+import { Briefcase, Users2, Award, Bookmark, Check, MessageCircle, Share2, Shield, UserPlus } from 'lucide-react'
 import RegisterGate from '../components/RegisterGate'
 import { useNavigate } from 'react-router-dom'
 import { Heart, MessageCircle, Share2, Bookmark, UserPlus, Check, Shield, Award } from 'lucide-react'

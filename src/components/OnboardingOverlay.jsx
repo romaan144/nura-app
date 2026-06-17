@@ -3,6 +3,7 @@ import { ArrowRight, X } from 'lucide-react'
 import { useUser } from '../context/UserContext'
 import styles from './OnboardingOverlay.module.css'
 import { MessageCircle, Shield, Users } from 'lucide-react'
+import { MessageCircle, Shield, Users } from 'lucide-react'
 
 const STEPS = [
   {
