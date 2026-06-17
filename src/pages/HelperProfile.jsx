@@ -547,13 +547,42 @@ function BookingModal({ helper, onClose, onBook, onNavigate }) {
         <div style={style.handle} />
         {done ? (
           <div style={{textAlign:'center',display:'flex',flexDirection:'column',alignItems:'center',gap:'12px',padding:'16px 0'}}>
-            <span style={{fontSize:'52px'}}>✅</span>
-            <h3 style={{fontSize:'19px',fontWeight:800,margin:0,color:'rgba(0,0,0,0.85)',letterSpacing:'-0.3px'}}>Solicitud enviada</h3>
-            <p style={{fontSize:'13px',color:'rgba(0,0,0,0.45)',margin:0,lineHeight:1.6}}>{name} confirmará disponibilidad en breve.</p>
-            <p style={{fontSize:'12px',color:'rgba(0,0,0,0.35)',margin:0}}>Haz seguimiento en <strong style={{color:'var(--purple)'}}>Mis servicios</strong>.</p>
-            <div style={{display:'flex',flexDirection:'column',gap:'8px',width:'100%',marginTop:'8px'}}>
-              <button onClick={() => { onClose(); onNavigate('/my-services') }} style={style.btnPrimary}>Ver Mis servicios</button>
-              <button onClick={onClose} style={style.btnSecondary}>Cerrar</button>
+            {/* Helper avatar */}
+            <div style={{position:'relative'}}>
+              {helper?.avatarUrl
+                ? <img src={helper.avatarUrl} alt={name}
+                    style={{width:'68px',height:'68px',borderRadius:'50%',border:'3px solid #22C55E'}} />
+                : <div style={{width:'68px',height:'68px',borderRadius:'50%',background:helper?.avatarColor||'#7B2FFF',
+                    display:'flex',alignItems:'center',justifyContent:'center',color:'white',fontSize:'24px',fontWeight:700,
+                    border:'3px solid #22C55E'}}>
+                    {helper?.avatar||name?.[0]}
+                  </div>
+              }
+              <span style={{position:'absolute',bottom:-2,right:-2,fontSize:'22px'}}>✅</span>
+            </div>
+            <div>
+              <h3 style={{fontSize:'19px',fontWeight:800,margin:'0 0 4px',color:'rgba(0,0,0,0.85)',letterSpacing:'-0.3px'}}>
+                ¡Solicitud enviada!
+              </h3>
+              <p style={{fontSize:'13px',color:'rgba(0,0,0,0.5)',margin:0,lineHeight:1.6}}>
+                {name} recibirá tu solicitud y confirmará en breve.
+              </p>
+            </div>
+            {/* Booking summary */}
+            {(date || time) && (
+              <div style={{background:'rgba(0,0,0,0.03)',border:'1px solid rgba(0,0,0,0.06)',
+                borderRadius:'14px',padding:'12px 16px',width:'100%',textAlign:'left'}}>
+                {date && <p style={{margin:'0 0 4px',fontSize:'13px',color:'rgba(0,0,0,0.6)'}}>
+                  📅 {new Date(date).toLocaleDateString('es-ES',{weekday:'long',day:'numeric',month:'long'})}
+                </p>}
+                {time && <p style={{margin:0,fontSize:'13px',color:'rgba(0,0,0,0.6)'}}>🕐 {time}h</p>}
+              </div>
+            )}
+            <div style={{display:'flex',flexDirection:'column',gap:'8px',width:'100%',marginTop:'4px'}}>
+              <button onClick={() => { onClose(); onNavigate('/my-services') }} style={style.btnPrimary}>
+                Ver Mis servicios
+              </button>
+              <button onClick={onClose} style={style.btnSecondary}>Volver al perfil</button>
             </div>
           </div>
         ) : (

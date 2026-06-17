@@ -153,12 +153,33 @@ function ConfirmModal({ helper, onClose, onConfirm }) {
   if (done) return (
     <div style={{position:'fixed',inset:0,background:'rgba(0,0,0,0.5)',backdropFilter:'blur(8px)',zIndex:200,display:'flex',alignItems:'center',justifyContent:'center',padding:'20px'}}>
       <div style={{background:'rgba(255,255,255,0.95)',backdropFilter:'blur(32px)',border:'1px solid rgba(255,255,255,0.5)',borderRadius:'24px',padding:'36px 28px',textAlign:'center',maxWidth:'320px',width:'100%',boxShadow:'0 8px 40px rgba(0,0,0,0.12)'}}>
-        <div style={{fontSize:'52px',marginBottom:'16px',lineHeight:1}}>✅</div>
-        <h3 style={{fontSize:'19px',fontWeight:800,marginBottom:'8px',color:'rgba(0,0,0,0.85)',letterSpacing:'-0.3px'}}>Solicitud enviada</h3>
-        <p style={{fontSize:'13px',color:'rgba(0,0,0,0.45)',marginBottom:'24px',lineHeight:1.6}}>{name} recibirá tu solicitud y te confirmará disponibilidad.</p>
+        {/* Avatar with checkmark */}
+        <div style={{position:'relative',display:'inline-block',marginBottom:'12px'}}>
+          {helper.avatarUrl
+            ? <img src={helper.avatarUrl} alt={name}
+                style={{width:'64px',height:'64px',borderRadius:'50%',border:'3px solid #22C55E',display:'block'}} />
+            : <div style={{width:'64px',height:'64px',borderRadius:'50%',background:helper.avatarColor||'#7B2FFF',
+                display:'flex',alignItems:'center',justifyContent:'center',color:'white',fontSize:'22px',fontWeight:700,
+                border:'3px solid #22C55E'}}>
+                {helper.avatar||name[0]}
+              </div>
+          }
+          <span style={{position:'absolute',bottom:-2,right:-2,fontSize:'20px'}}>✅</span>
+        </div>
+        <h3 style={{fontSize:'19px',fontWeight:800,marginBottom:'4px',color:'rgba(0,0,0,0.85)',letterSpacing:'-0.3px'}}>¡Solicitud enviada!</h3>
+        <p style={{fontSize:'13px',color:'rgba(0,0,0,0.45)',marginBottom:'12px',lineHeight:1.6}}>{name} confirmará disponibilidad en breve.</p>
+        {(date || time) && (
+          <div style={{background:'rgba(0,0,0,0.03)',border:'1px solid rgba(0,0,0,0.06)',borderRadius:'12px',
+            padding:'10px 14px',marginBottom:'20px',textAlign:'left'}}>
+            {date && <p style={{margin:'0 0 3px',fontSize:'12px',color:'rgba(0,0,0,0.55)'}}>
+              📅 {new Date(date).toLocaleDateString('es-ES',{weekday:'long',day:'numeric',month:'long'})}
+            </p>}
+            {time && <p style={{margin:0,fontSize:'12px',color:'rgba(0,0,0,0.55)'}}>🕐 {time}h</p>}
+          </div>
+        )}
         <div style={{display:'flex',flexDirection:'column',gap:'8px',width:'100%'}}>
           <button onClick={() => { onClose(); navigate('/my-services') }}
-            style={{padding:'13px 28px',background:'#1C1C1E',color:'white',border:'none',borderRadius:'100px',fontSize:'14px',fontWeight:700,cursor:'pointer',width:'100%'}}>
+            style={{padding:'13px',background:'#1C1C1E',color:'white',border:'none',borderRadius:'100px',fontSize:'14px',fontWeight:700,cursor:'pointer',width:'100%'}}>
             Ver mis servicios
           </button>
           <button onClick={onClose}

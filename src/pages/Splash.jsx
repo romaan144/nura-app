@@ -25,7 +25,7 @@ export default function Splash({ onFinish }) {
         <div className={styles.loadBar}>
           <div className={styles.loadFill} />
         </div>
-        <p className={styles.tagline}>La IA que conecta personas</p>
+        <p className={styles.tagline}>La IA que conecta personas reales</p>
       </div>
     </div>
   )
