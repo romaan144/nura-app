@@ -2,7 +2,7 @@ import PageHeader from '../components/PageHeader'
 import ErrorBoundary from '../components/ErrorBoundary'
 import { useState, useEffect } from 'react'
 import { useParams, useNavigate, useLocation } from 'react-router-dom'
-import { Star, Shield, MapPin, MessageCircle, Zap, TrendingUp, Clock, CheckCircle, Award, Brain, Globe, Building2, BookOpen, Share2, Lock, Heart, Sparkles, Calendar, ThumbsUp, MessageSquare, AlertCircle, BarChart2, Activity, Cpu, Layers, Target, AlertTriangle, FileCheck, GraduationCap, Wrench, Briefcase, Link, Edit3, MapPinned } from 'lucide-react'
+import { Star, Shield, MapPin, MessageCircle, Zap, TrendingUp, Clock, CheckCircle, Award, Brain, Globe, Building2, BookOpen, Share2, Lock, Heart, Sparkles, Calendar, ThumbsUp, MessageSquare, AlertCircle, BarChart2, Activity, Cpu, Layers, Target, AlertTriangle, FileCheck, GraduationCap, Wrench, Briefcase, Link, Edit3, MapPinned, ChevronDown } from 'lucide-react'
 import { HELPERS } from '../data/helpers'
 import { useUser } from '../context/UserContext'
 import RatingModal from '../components/RatingModal'
@@ -666,7 +666,8 @@ function HelperProfileInner() {
   const [faved, setFaved] = useState(false)
   // sync faved state
   // useEffect(() => { if(h) setFaved(isFavorite(h.id)) }, [h?.id])
-  const [activeTab, setActiveTab] = useState('perfil')
+  const [expandedSections, setExpandedSections] = useState([])
+  const toggleSection = (s) => setExpandedSections(prev => prev.includes(s) ? prev.filter(x=>x!==s) : [...prev,s])
   const [showGate, setShowGate] = useState(false)
   const [gateReason, setGateReason] = useState('contact')
 
@@ -735,12 +736,7 @@ function HelperProfileInner() {
     }
   }
 
-  const tabs = [
-    { id: 'perfil', label: 'Perfil vivo', icon: <Activity size={12} /> },
-    { id: 'empresas', label: 'Trayectoria', icon: <TrendingUp size={12} /> },
-    { id: 'feed', label: 'Posts', icon: <MessageSquare size={12} /> },
-    { id: 'reputacion', label: 'Reputación', icon: <BarChart2 size={12} /> },
-  ]
+
 
   const isSupabaseHelper = !!h.isFromSupabase
 
@@ -911,21 +907,11 @@ function HelperProfileInner() {
         </div>
 
         {/* Tabs */}
-        <div className={styles.tabsWrap}>
-          <div className={styles.tabs}>
-            {tabs.map(tab => (
-              <button key={tab.id}
-                className={`${styles.tab} ${activeTab === tab.id ? styles.tabActive : ''}`}
-                onClick={() => setActiveTab(tab.id)}>
-                {tab.icon} <span>{tab.label}</span>
-              </button>
-            ))}
-          </div>
-        </div>
+  
 
         {/* ── TAB: PERFIL VIVO ── */}
         {/* Availability quick view */}
-        {activeTab === 'perfil' && (
+        {true && (
           <section className={styles.section} style={{marginBottom:'10px'}}>
             <h3 className={styles.sectionTitle}><Calendar size={13} /> Disponibilidad esta semana</h3>
             <div style={{display:'flex',gap:'6px',overflowX:'auto',paddingBottom:'4px'}}>
@@ -948,7 +934,7 @@ function HelperProfileInner() {
             </div>
           </section>
         )}
-        {activeTab === 'perfil' && (
+        {true && (
           <>
           {/* AI Data Section — rendered when Claude has analyzed this profile */}
           {h.aiData && Object.keys(h.aiData).length > 0 && (
@@ -1080,6 +1066,21 @@ function HelperProfileInner() {
                 )}
               </div>
             </section>
+
+          {/* ── Ver perfil completo toggle ── */}
+          <button
+            onClick={() => setShowFullProfile(p => !p)}
+            style={{
+              display:'flex',alignItems:'center',justifyContent:'center',gap:'6px',
+              width:'100%',padding:'11px',margin:'4px 0',
+              background:'rgba(0,0,0,0.03)',border:'1px solid rgba(0,0,0,0.07)',
+              borderRadius:'14px',fontSize:'13px',fontWeight:600,
+              color:'rgba(0,0,0,0.45)',cursor:'pointer',fontFamily:'inherit',
+              transition:'all 0.15s',
+            }}>
+            <ChevronDown size={14} style={{transition:'transform 0.2s',transform:showFullProfile?'rotate(180deg)':'none'}} />
+            {showFullProfile ? 'Ocultar detalle' : `Ver perfil completo de ${h.name?.split(' ')?.[0]}`}
+          </button>
             {/* Nüra-detected skills — THE differentiator */}
             {h.hiddenSkills?.length > 0 && !isSupabaseHelper && (
               <div className={styles.nuraDetectedCard}>
@@ -1101,6 +1102,8 @@ function HelperProfileInner() {
 
 
             {/* Declared skills */}
+            {showFullProfile && (
+              <>
             {h.skills?.length > 0 && (
               <section className={styles.section}>
                 <h3 className={styles.sectionTitle}><CheckCircle size={13} /> Especialidades declaradas</h3>
@@ -1109,8 +1112,11 @@ function HelperProfileInner() {
                 </div>
               </section>
             )}
+              </>)}
 
             {/* Education */}
+            {showFullProfile && (
+              <>
             {h.education?.length > 0 && (
               <section className={styles.section}>
                 <h3 className={styles.sectionTitle}><BookOpen size={13} /> Formación académica</h3>
@@ -1138,8 +1144,11 @@ function HelperProfileInner() {
                 </div>
               </section>
             )}
+              </>)}
 
             {/* Languages */}
+            {showFullProfile && (
+              <>
             {h.languages?.length > 0 && (
               <section className={styles.section}>
                 <h3 className={styles.sectionTitle}><Globe size={13} /> Idiomas</h3>
@@ -1148,8 +1157,11 @@ function HelperProfileInner() {
                 </div>
               </section>
             )}
+              </>)}
 
             {/* Reviews — semantic analysis */}
+            {showFullProfile && (
+              <>
             {h.qualitativeComments?.length > 0 && (
               <section className={styles.section}>
                 <h3 className={styles.sectionTitle}><Heart size={13} /> Valoraciones reales</h3>
@@ -1194,6 +1206,7 @@ function HelperProfileInner() {
                 </div>
               </section>
             )}
+              </>)}
           {/* Services derived from tags/specialty for Supabase helpers */}
           {isSupabaseHelper && h.specialty && (
             <section className={styles.section}>
@@ -1219,7 +1232,7 @@ function HelperProfileInner() {
         )}
 
         {/* ── TAB: LABORAL ── */}
-        {activeTab === 'empresas' && (
+        {true && (
           <div>
             <div className={styles.empresasIntroCard}>
               <Shield size={16} color="var(--purple)" />
@@ -1281,7 +1294,7 @@ function HelperProfileInner() {
         )}
 
         {/* ── TAB: PUBLICACIONES ── */}
-        {activeTab === 'feed' && (
+        {true && (
           <div>
             {h.posts?.length > 0
               ? h.posts?.map(post => <PostCard key={post.id} post={post} helper={h} />)
@@ -1297,7 +1310,7 @@ function HelperProfileInner() {
         )}
 
         {/* ── TAB: REPUTACIÓN ── */}
-        {activeTab === 'reputacion' && (
+        {true && (
           <div>
             {/* Score */}
             <div className={styles.scoreCard}>
@@ -1322,6 +1335,8 @@ function HelperProfileInner() {
             </div>
 
             {/* Personality */}
+            {showFullProfile && (
+              <>
             {h.personality && !isSupabaseHelper && !h.aiData?.personality && (
               <section className={styles.section}>
                 <h3 className={styles.sectionTitle}><Brain size={13} /> Análisis de personalidad</h3>
@@ -1340,8 +1355,11 @@ function HelperProfileInner() {
                 </div>
               </section>
             )}
+              </>)}
 
             {/* Evolution */}
+            {showFullProfile && (
+              <>
             {h.evolution?.length > 0 && !isSupabaseHelper && (
               <section className={styles.section}>
                 <h3 className={styles.sectionTitle}><TrendingUp size={13} /> Trayectoria en Nüra</h3>
@@ -1370,6 +1388,7 @@ function HelperProfileInner() {
                 </div>
               </section>
             )}
+              </>)}
 
             <div className={styles.nuraSeal}>
               <Layers size={13} color="var(--purple)" />
