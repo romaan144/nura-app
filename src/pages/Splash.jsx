@@ -5,9 +5,9 @@ export default function Splash({ onFinish }) {
   const [phase, setPhase] = useState('logo')
 
   useEffect(() => {
-    const t1 = setTimeout(() => setPhase('tagline'), 600)
-    const t2 = setTimeout(() => setPhase('done'), 1400)
-    const t3 = setTimeout(() => onFinish?.(), 1800)
+    const t1 = setTimeout(() => setPhase('tagline'), 400)
+    const t2 = setTimeout(() => setPhase('done'), 900)
+    const t3 = setTimeout(() => onFinish?.(), 1200)
     return () => [t1,t2,t3].forEach(clearTimeout)
   }, [])
 

@@ -215,11 +215,27 @@ export default function Home({ setSearchState }) {
     if (justOnboarded) {
       sessionStorage.removeItem('nura_just_onboarded')
       const firstName = justOnboarded.split(' ')[0]
-      lines = [
-        `¡Hola, **${firstName}**! Soy Nüra.`,
-        `Cuéntame lo que necesitas — sin formularios, sin filtros. Solo cuéntame.`
-      ]
-      setTimeout(() => setMessages([{ id: 1, from: 'nura', lines }]), 400)
+      const hour = new Date().getHours()
+      const momentoDelDia = hour < 12 ? 'Buenos días' : hour < 20 ? 'Buenas tardes' : 'Buenas noches'
+      const ejemplos = hour < 12
+        ? ['Cuidadora para mi madre esta mañana', 'Técnico urgente hoy', 'Logopeda para mi hijo']
+        : hour < 20
+        ? ['Niñera para esta tarde', 'Limpieza profunda esta semana', 'Entrenador personal']
+        : ['Cuidado de mayores mañana', 'Fontanero urgente', 'Profesor de repaso']
+      const welcomeMsg = {
+        id: 1, from: 'nura',
+        lines: [
+          `${momentoDelDia}, **${firstName}**. Soy Nüra.`,
+          `Cuéntame lo que necesitas. Encuentro a la persona exacta cerca de ti.`
+        ],
+        chips: ejemplos
+      }
+      setTimeout(() => setMessages([welcomeMsg]), 150)
+      // Auto-focus input after welcome so user can start immediately
+      setTimeout(() => {
+        const inp = document.querySelector('textarea, input[type="text"]')
+        if (inp) inp.focus()
+      }, 600)
       return
     }
 

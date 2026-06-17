@@ -14,6 +14,7 @@ const STEPS = [
 
 export default function OnboardingOverlay({ onComplete }) {
   const [step, setStep] = useState(0)
+  const [finishing, setFinishing] = useState(false)
   const [showName, setShowName] = useState(false)
   const [name, setName] = useState('')
   const { login } = useUser()
@@ -26,7 +27,8 @@ export default function OnboardingOverlay({ onComplete }) {
       login({ name: name.trim(), joined: new Date().toISOString() })
       sessionStorage.setItem('nura_just_onboarded', name.trim())
     }
-    onComplete()
+    setFinishing(true)
+    setTimeout(onComplete, 380)
   }
 
   function skip() {
@@ -35,7 +37,7 @@ export default function OnboardingOverlay({ onComplete }) {
   }
 
   if (showName) return (
-    <div className={styles.overlay}>
+    <div className={`${styles.overlay} ${finishing ? styles.overlayOut : ''}`}>
       <div className={styles.topRow}>
         <button className={styles.skip} onClick={skip}>Saltar</button>
         <button className={styles.loginLink} onClick={() => { skip(); window.location.href = '/login' }}>
@@ -68,7 +70,7 @@ export default function OnboardingOverlay({ onComplete }) {
   const s = STEPS[step]
 
   return (
-    <div className={styles.overlay}>
+    <div className={`${styles.overlay} ${finishing ? styles.overlayOut : ''}`}>
       <div className={styles.topRow}>
         <button className={styles.skip} onClick={skip}>Saltar</button>
         <button className={styles.loginLink} onClick={() => { skip(); window.location.href = '/login' }}>
