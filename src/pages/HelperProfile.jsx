@@ -10,6 +10,7 @@ import styles from './HelperProfile.module.css'
 import { showToast } from '../components/Toast'
 import RegisterGate from '../components/RegisterGate'
 import { getHelperById } from '../utils/supabase'
+import { notifyHelperViewed } from '../utils/notifications'
 
 /* ── LIVE PROFILE PULSE ───────────────────────────────────────────────────
    This is the core of Nüra's concept: the profile is alive, updating now.
