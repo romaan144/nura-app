@@ -52,11 +52,6 @@ export default function HelperCard({ helper, onContact, compact = false, showCon
       navigate(`/helper/${helper.id}`, { state: { helper, fromSearch: true, matchReason: reason } })
     }}>
 
-      {/* TOP BADGE */}
-      {helper.rating >= 4.9 && helper.reviews >= 20 && (
-        <div className={styles.topBadge}>TOP</div>
-      )}
-
       {/* MAIN ROW: avatar + info + price */}
       <div className={styles.main}>
         <div className={styles.avatarWrap}>
