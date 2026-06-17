@@ -486,8 +486,15 @@ export default function Home({ setSearchState }) {
         })
         window.__nuraHelperCache = { ...(window.__nuraHelperCache || {}), ...cacheMap }
         // Store match reason for profile view
-        if (matchExplanation && top?.id) {
-          window.__nuraMatchReasons = { ...(window.__nuraMatchReasons||{}), [String(top.id)]: matchExplanation }
+        // Store match reasons for ALL results
+        if (matches?.length > 0) {
+          const reasons = {}
+          matches.forEach((h, i) => {
+            if (!h?.id) return
+            const reason = buildMatchReason(h, analysis)
+            if (reason) reasons[String(h.id)] = reason
+          })
+          window.__nuraMatchReasons = { ...(window.__nuraMatchReasons||{}), ...reasons }
         }
         // Also cache in UserContext via cacheHelpers
         cacheHelpers?.(matches)
