@@ -189,10 +189,64 @@ function formatDateLabel(dateStr) {
   return date.toLocaleDateString('es-ES', { weekday:'long', day:'numeric', month:'long' })
 }
 
+
+// ── Extract date/time from conversation ──────────────────────────────────
+function extractDateFromMessages(messages) {
+  const text = (messages || [])
+    .map(m => (m.text || m.lines?.join(' ') || '').toLowerCase())
+    .join(' ')
+
+  let extractedDate = ''
+  let extractedTime = ''
+
+  // Extract time: "a las 10", "10h", "10:00", "las 9"
+  const timeMatch = text.match(/(?:a las |las )?(\d{1,2})(?::00)?(?:h|:00)?\ ?(?:de la (?:mañana|tarde))?/)
+  if (timeMatch) {
+    const h = parseInt(timeMatch[1])
+    if (h >= 7 && h <= 22) {
+      extractedTime = `${h}:00`
+    }
+  }
+
+  // Extract day of week → map to next occurrence
+  const today = new Date()
+  const days = { lunes:1, martes:2, miércoles:3, jueves:4, viernes:5, sábado:6, domingo:0 }
+  for (const [dayName, dayNum] of Object.entries(days)) {
+    if (text.includes(dayName)) {
+      const d = new Date()
+      const diff = (dayNum - d.getDay() + 7) % 7 || 7
+      d.setDate(d.getDate() + diff)
+      extractedDate = d.toISOString().split('T')[0]
+      break
+    }
+  }
+
+  // "mañana"
+  if (!extractedDate && text.includes('mañana')) {
+    const d = new Date()
+    d.setDate(d.getDate() + 1)
+    extractedDate = d.toISOString().split('T')[0]
+  }
+
+  // "hoy"
+  if (!extractedDate && text.includes('hoy')) {
+    extractedDate = new Date().toISOString().split('T')[0]
+  }
+
+  // "esta semana" or "próxima" → default to next available weekday
+  if (!extractedDate && (text.includes('esta semana') || text.includes('próxima semana'))) {
+    const d = new Date()
+    d.setDate(d.getDate() + (d.getDay() === 5 ? 3 : d.getDay() === 6 ? 2 : 1))
+    extractedDate = d.toISOString().split('T')[0]
+  }
+
+  return { extractedDate, extractedTime }
+}
+
 // ── Confirm Service Modal ─────────────────────────────────────────────────
-function ConfirmModal({ helper, onClose, onConfirm }) {
-  const [date, setDate] = useState('')
-  const [time, setTime] = useState('')
+function ConfirmModal({ helper, onClose, onConfirm, prefillDate, prefillTime }) {
+  const [date, setDate] = useState(prefillDate || '')
+  const [time, setTime] = useState(prefillTime || '')
   const [note, setNote] = useState('')
   const [done, setDone] = useState(false)
   const name = helper.name?.split(' ')?.[0] || helper.name
@@ -243,7 +297,18 @@ function ConfirmModal({ helper, onClose, onConfirm }) {
       <div style={{background:'rgba(255,255,255,0.95)',WebkitBackdropFilter: 'blur(32px)', backdropFilter:'blur(32px)',border:'1px solid rgba(255,255,255,0.5)',borderRadius:'24px 24px 0 0',padding:'24px 20px 32px',width:'100%',maxWidth:'500px',boxShadow:'0 -8px 40px rgba(0,0,0,0.1)'}}>
         <div style={{width:'36px',height:'4px',background:'rgba(0,0,0,0.1)',borderRadius:'2px',margin:'0 auto 24px'}} />
         <h3 style={{fontSize:'18px',fontWeight:800,marginBottom:'4px',color:'rgba(0,0,0,0.85)',letterSpacing:'-0.3px'}}>Solicitar servicio</h3>
-        <p style={{fontSize:'13px',color:'rgba(0,0,0,0.45)',marginBottom:'20px'}}>Con {name} · {helper.price || 'Precio a consultar'}</p>
+        <p style={{fontSize:'13px',color:'rgba(0,0,0,0.45)',marginBottom: prefillDate ? '12px' : '20px'}}>Con {name} · {helper.price || 'Precio a consultar'}</p>
+        {prefillDate && (
+          <div style={{display:'flex',alignItems:'center',gap:'6px',
+            background:'rgba(123,47,255,0.06)',border:'1px solid rgba(123,47,255,0.1)',
+            borderRadius:'10px',padding:'8px 12px',marginBottom:'16px',
+          }}>
+            <img src="/logo-iso.png" alt="" style={{width:'12px',height:'12px',opacity:0.7}} />
+            <span style={{fontSize:'11px',color:'var(--purple)',fontWeight:600}}>
+              Nüra detectó la fecha de vuestra conversación
+            </span>
+          </div>
+        )}
         <div style={{display:'flex',flexDirection:'column',gap:'10px',marginBottom:'20px'}}>
           {/* Day pills */}
           <div>
@@ -663,7 +728,17 @@ export default function Chat() {
       </div>
 
       {showRating && <RatingModal helper={helper} onClose={() => setShowRating(false)} />}
-      {showConfirm && <ConfirmModal helper={helper} onClose={() => setShowConfirm(false)} onNavigate={navigate} onConfirm={(date, time, note) => { addService(helper, date, time, note) }} />}
+      {showConfirm && (() => {
+        const { extractedDate, extractedTime } = extractDateFromMessages(messages)
+        return <ConfirmModal
+          helper={helper}
+          onClose={() => setShowConfirm(false)}
+          onNavigate={navigate}
+          prefillDate={extractedDate}
+          prefillTime={extractedTime}
+          onConfirm={(date, time, note) => { addService(helper, date, time, note) }}
+        />
+      })()}
     </div>
   )
 }
