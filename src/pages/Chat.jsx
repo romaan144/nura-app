@@ -379,8 +379,8 @@ export default function Chat() {
 
   // Context-aware quick replies based on conversation stage
   // Context-aware next steps — push toward booking
-  const lastMsg = messages[messages.length - 1]?.text?.toLowerCase() || ''
-  const mentionedPrice = messages.some(m => m.text?.includes('€') || m.text?.toLowerCase().includes('precio'))
+  const lastMsgText = messages[messages.length - 1]?.text?.toLowerCase() || ''
+  const mentionedPrice = messages.some(m => m.text?.includes('€') || m.text?.toLowerCase()?.includes('precio'))
   const mentionedDate  = messages.some(m => m.text?.toLowerCase().includes('lunes') || m.text?.toLowerCase().includes('martes') || m.text?.toLowerCase().includes('semana') || m.text?.toLowerCase().includes('mañana'))
 
   const QUICK_REPLIES = msgCount === 0 ? [
