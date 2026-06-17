@@ -2,7 +2,7 @@ import PageHeader from '../components/PageHeader'
 import ErrorBoundary from '../components/ErrorBoundary'
 import { useState, useEffect } from 'react'
 import { useParams, useNavigate, useLocation } from 'react-router-dom'
-import { Star, Shield, MapPin, MessageCircle, Zap, TrendingUp, Clock, CheckCircle, Award, Brain, Globe, Building2, BookOpen, Share2, Lock, Heart, Sparkles, Calendar, ThumbsUp, MessageSquare, AlertCircle, BarChart2, Activity, Cpu, Layers } from 'lucide-react'
+import { Star, Shield, MapPin, MessageCircle, Zap, TrendingUp, Clock, CheckCircle, Award, Brain, Globe, Building2, BookOpen, Share2, Lock, Heart, Sparkles, Calendar, ThumbsUp, MessageSquare, AlertCircle, BarChart2, Activity, Cpu, Layers, Target, AlertTriangle, FileCheck, GraduationCap, Wrench, Briefcase, Link, Edit3, MapPinned } from 'lucide-react'
 import { HELPERS } from '../data/helpers'
 import { useUser } from '../context/UserContext'
 import RatingModal from '../components/RatingModal'
@@ -293,9 +293,9 @@ function AiDataSection({ aiData, aiAnalyzedAt, helperName }) {
     summary: 'Análisis de Nüra',
     skills: 'Habilidades detectadas por IA',
     personality: 'Perfil de personalidad',
-    ideal_for: '🎯 Ideal para',
-    red_flags: '⚠️ A tener en cuenta',
-    certifications: '📋 Certificaciones verificadas',
+    ideal_for: 'Ideal para',
+    red_flags: 'A tener en cuenta',
+    certifications: 'Certificaciones verificadas',
   }
 
   const entries = Object.entries(aiData)
@@ -429,7 +429,7 @@ function OwnerPanel({ helper, user, updateUser, navigate }) {
             </span>
           </div>
           {saved && (
-            <span style={{fontSize:'11px',color:'#34D399',fontWeight:600}}>✓ Guardado</span>
+            <span style={{fontSize:'11px',color:'#34D399',fontWeight:600,display:'flex',alignItems:'center',gap:'3px'}}><CheckCircle size={11} color='#34D399'/>Guardado</span>
           )}
         </div>
 
@@ -457,7 +457,7 @@ function OwnerPanel({ helper, user, updateUser, navigate }) {
               borderRadius:'12px', cursor:'pointer',
               display:'flex', flexDirection:'column', alignItems:'center', gap:'3px',
             }}>
-            <span style={{fontSize:'16px'}}>{available ? '🟢' : '⚫'}</span>
+            <span style={{width:'10px',height:'10px',borderRadius:'50%',background:available?'#22C55E':'rgba(0,0,0,0.2)',display:'inline-block'}} />
             <span style={{fontSize:'10px',fontWeight:700,
               color: available ? '#34D399' : 'rgba(255,255,255,0.45)'}}>
               {available ? 'Disponible' : 'No disponible'}
@@ -474,7 +474,7 @@ function OwnerPanel({ helper, user, updateUser, navigate }) {
               borderRadius:'12px', cursor:'pointer',
               display:'flex', flexDirection:'column', alignItems:'center', gap:'3px',
             }}>
-            <span style={{fontSize:'16px'}}>💬</span>
+            <MessageCircle size={16} strokeWidth={1.7} />
             <span style={{fontSize:'10px',fontWeight:700,color:'rgba(255,255,255,0.6)'}}>
               Mensajes
             </span>
@@ -494,7 +494,7 @@ function OwnerPanel({ helper, user, updateUser, navigate }) {
               borderRadius:'12px', cursor:'pointer',
               display:'flex', flexDirection:'column', alignItems:'center', gap:'3px',
             }}>
-            <span style={{fontSize:'16px'}}>🔗</span>
+            <Link size={16} strokeWidth={1.7} />
             <span style={{fontSize:'10px',fontWeight:700,color:'rgba(255,255,255,0.6)'}}>
               Compartir
             </span>
@@ -510,7 +510,7 @@ function OwnerPanel({ helper, user, updateUser, navigate }) {
               borderRadius:'12px', cursor:'pointer',
               display:'flex', flexDirection:'column', alignItems:'center', gap:'3px',
             }}>
-            <span style={{fontSize:'16px'}}>✏️</span>
+            <Edit3 size={16} strokeWidth={1.7} />
             <span style={{fontSize:'10px',fontWeight:700,color:'rgba(180,130,255,1)'}}>
               Editar
             </span>
@@ -574,9 +574,9 @@ function BookingModal({ helper, onClose, onBook, onNavigate }) {
               <div style={{background:'rgba(0,0,0,0.03)',border:'1px solid rgba(0,0,0,0.06)',
                 borderRadius:'14px',padding:'12px 16px',width:'100%',textAlign:'left'}}>
                 {date && <p style={{margin:'0 0 4px',fontSize:'13px',color:'rgba(0,0,0,0.6)'}}>
-                  📅 {new Date(date).toLocaleDateString('es-ES',{weekday:'long',day:'numeric',month:'long'})}
+                  {new Date(date).toLocaleDateString('es-ES',{weekday:'long',day:'numeric',month:'long'})}
                 </p>}
-                {time && <p style={{margin:0,fontSize:'13px',color:'rgba(0,0,0,0.6)'}}>🕐 {time}h</p>}
+                {time && <p style={{margin:0,fontSize:'13px',color:'rgba(0,0,0,0.6)'}}><Clock size={12} style={{marginRight:'4px',verticalAlign:'middle'}}/>{time}h</p>}
               </div>
             )}
             <div style={{display:'flex',flexDirection:'column',gap:'8px',width:'100%',marginTop:'4px'}}>
@@ -718,7 +718,7 @@ function HelperProfileInner() {
   )
 
   function handleShare() {
-    const shareText = `${h.name} — ${h.specialty} · ${h.rating}⭐ en Nüra`
+    const shareText = `${h.name} — ${h.specialty} · ${h.rating}★ en Nüra`
     const shareUrl = `${window.location.href}?utm_source=share&utm_medium=native`
     if (navigator.share) {
       navigator.share({ title: h.name, text: shareText, url: shareUrl })
@@ -811,7 +811,7 @@ function HelperProfileInner() {
             <p className={styles.heroSpecialty} style={{margin:0}}>{h.specialty || h.tags?.[0]}</p>
             {h.distance && (
               <span style={{fontSize:'12px',fontWeight:600,color:'rgba(0,0,0,0.45)'}}>
-                📍 {h.distance}km · {h.zone || h.city || 'Barcelona'}
+                {h.distance}km · {h.zone || h.city || 'Barcelona'}
               </span>
             )}
             {h.price && h.price !== 'Consultar' && (
@@ -905,7 +905,7 @@ function HelperProfileInner() {
         {/* Availability quick view */}
         {activeTab === 'perfil' && (
           <section className={styles.section} style={{marginBottom:'10px'}}>
-            <h3 className={styles.sectionTitle}>📅 Disponibilidad esta semana</h3>
+            <h3 className={styles.sectionTitle}><Calendar size={13} /> Disponibilidad esta semana</h3>
             <div style={{display:'flex',gap:'6px',overflowX:'auto',paddingBottom:'4px'}}>
               {['Lun','Mar','Mié','Jue','Vie','Sáb','Dom'].map((day,i) => {
                 const available = h.available && i < 5
@@ -983,7 +983,7 @@ function HelperProfileInner() {
             border: '1px solid rgba(5,150,105,0.12)',
             borderRadius: '14px',
           }}>
-            <span style={{fontSize:'18px'}}>🛡️</span>
+            <Shield size={16} color='var(--purple)' strokeWidth={1.6} />
             <div>
               <div style={{fontSize:'12px',fontWeight:700,color:'#059669',letterSpacing:'-0.1px'}}>Perfil verificado por Nüra</div>
               <div style={{fontSize:'11px',color:'rgba(0,0,0,0.45)'}}>Identidad confirmada · {h.services || 0} servicios reales · valoraciones auténticas</div>
@@ -1008,7 +1008,7 @@ function HelperProfileInner() {
                 marginBottom:'4px', width:'100%', boxSizing:'border-box',
                 textAlign:'left',
               }}>
-                <span style={{fontSize:'15px',flexShrink:0,marginTop:'1px'}}>✨</span>
+                <Sparkles size={14} color='#7B2FFF' strokeWidth={1.7} style={{flexShrink:0,marginTop:'1px'}} />
                 <p style={{fontSize:'12px',color:'rgba(0,0,0,0.55)',margin:0,lineHeight:1.6}}>
                   <strong style={{color:'#7B2FFF',fontWeight:700}}>Nüra te la recomienda</strong>
                   {' '}— {matchReason}
@@ -1022,37 +1022,37 @@ function HelperProfileInner() {
               <div className={styles.badgesGrid}>
                 {(h.services || 0) >= 50 && (
                   <div className={styles.achieveBadge}>
-                    <span className={styles.achieveEmoji}>🏆</span>
+                    <Award size={16} color='#F59E0B' strokeWidth={1.6} />
                     <span className={styles.achieveLabel}>+50 servicios</span>
                   </div>
                 )}
                 {h.rating >= 4.8 && (
                   <div className={styles.achieveBadge}>
-                    <span className={styles.achieveEmoji}>⭐</span>
+                    <Star size={16} color='#F59E0B' fill='#F59E0B' strokeWidth={1.6} />
                     <span className={styles.achieveLabel}>Valoración top</span>
                   </div>
                 )}
                 {h.dniVerified && (
                   <div className={styles.achieveBadge}>
-                    <span className={styles.achieveEmoji}>🛡️</span>
+                    <Shield size={16} color='#059669' strokeWidth={1.6} />
                     <span className={styles.achieveLabel}>Identidad verificada</span>
                   </div>
                 )}
                 {(h.completionRate || 0) >= 95 && (
                   <div className={styles.achieveBadge}>
-                    <span className={styles.achieveEmoji}>✅</span>
+                    <CheckCircle size={16} color='#059669' strokeWidth={1.6} />
                     <span className={styles.achieveLabel}>+95% completados</span>
                   </div>
                 )}
                 {h.urgent && (
                   <div className={styles.achieveBadge}>
-                    <span className={styles.achieveEmoji}>⚡</span>
+                    <Zap size={16} color='#7B2FFF' strokeWidth={1.6} />
                     <span className={styles.achieveLabel}>Disponible urgencias</span>
                   </div>
                 )}
                 {h.founder && (
                   <div className={styles.achieveBadge} style={{background:'rgba(146,64,14,0.08)',borderColor:'rgba(146,64,14,0.2)'}}>
-                    <span className={styles.achieveEmoji}>🌟</span>
+                    <Sparkles size={16} color='#7B2FFF' strokeWidth={1.6} />
                     <span className={styles.achieveLabel} style={{color:'#92400E'}}>Helper fundador</span>
                   </div>
                 )}
@@ -1100,7 +1100,7 @@ function HelperProfileInner() {
                   {(h.education||[]).map((ed, i) => (
                     <div key={i} className={styles.eduItem}>
                       <div className={styles.eduTimelineLeft}>
-                        <div className={styles.eduIcon}>🎓</div>
+                        <div className={styles.eduIcon}><GraduationCap size={16} color='var(--purple)' strokeWidth={1.6} /></div>
                       </div>
                       <div className={styles.eduBody}>
                         <div className={styles.eduTitle}>{ed.title}</div>
@@ -1175,7 +1175,7 @@ function HelperProfileInner() {
           {/* Services derived from tags/specialty for Supabase helpers */}
           {isSupabaseHelper && h.specialty && (
             <section className={styles.section}>
-              <h3 className={styles.sectionTitle}>🛠️ Servicios ofrecidos</h3>
+              <h3 className={styles.sectionTitle}><Wrench size={13} /> Servicios ofrecidos</h3>
               <div style={{display:'flex',flexWrap:'wrap',gap:'8px'}}>
                 {[
                   h.specialty,

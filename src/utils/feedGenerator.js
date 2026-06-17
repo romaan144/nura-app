@@ -38,7 +38,7 @@ export function generateAvailabilityPost(helper, index) {
     date: 'Hoy',
     likes: Math.floor(seededRandom(seed, index + 2) * 15) + 2,
     comments: Math.floor(seededRandom(seed, index + 3) * 5),
-    badge: '📅 Disponible esta semana',
+    badge: 'Disponible esta semana',
     author: helper,
     authorType: 'helper',
     suggested: true,
@@ -50,27 +50,27 @@ export function generateAvailabilityPost(helper, index) {
 const NURA_TIPS = [
   {
     text: '¿Sabías que los mejores helpers de Nüra responden en menos de 1 hora? Cuando contactes, cuanto más específico seas en tu mensaje, más rápida y precisa será la respuesta.',
-    badge: '💡 Consejo de Nüra',
+    badge: 'Consejo de Nüra',
   },
   {
     text: 'En Nüra, cada valoración es verificada. Solo pueden dejar reseña quienes han contratado el servicio. Eso significa que un helper con 4.9⭐ realmente lo merece.',
-    badge: '🛡️ Confianza Nüra',
+    badge: 'Confianza Nüra',
   },
   {
-    text: 'Si tienes una urgencia, busca el rayo ⚡ en el perfil del helper. Significa que atiende casos urgentes, incluso hoy.',
-    badge: '⚡ Urgencias en Nüra',
+    text: 'Si tienes una urgencia, busca el rayo  en el perfil del helper. Significa que atiende casos urgentes, incluso hoy.',
+    badge: 'Urgencias en Nüra',
   },
   {
-    text: 'Los helpers con DNI verificado tienen un escudo verde 🛡️ en su perfil. Su identidad ha sido comprobada por Nüra antes de aparecer en la plataforma.',
-    badge: '✓ Verificación de identidad',
+    text: 'Los helpers con DNI verificado tienen un escudo verde  en su perfil. Su identidad ha sido comprobada por Nüra antes de aparecer en la plataforma.',
+    badge: 'Verificación de identidad',
   },
   {
     text: 'Puedes hablar con varios helpers antes de decidir. No hay compromiso hasta que tú lo decides. Nüra está aquí para que encuentres a la persona correcta, no a la primera.',
-    badge: '💬 Sin compromiso',
+    badge: 'Sin compromiso',
   },
   {
     text: 'El perfil vivo de cada helper en Nüra se actualiza automáticamente. La IA analiza sus valoraciones, sus chats y su trayectoria para mantenerte siempre con la información más precisa.',
-    badge: '🤖 Perfil inteligente',
+    badge: 'Perfil inteligente',
   },
 ]
 
@@ -109,7 +109,7 @@ export function generateNewHelperPost(helper) {
     date: 'Nuevo en Nüra',
     likes: Math.floor(Math.random() * 8) + 1,
     comments: 0,
-    badge: '✨ Nuevo en Nüra',
+    badge: 'Nuevo en Nüra',
     author: helper,
     authorType: 'helper',
     suggested: true,

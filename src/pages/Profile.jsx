@@ -180,7 +180,7 @@ export default function Profile() {
             borderRadius:'16px',padding:'16px',
             display:'flex',alignItems:'flex-start',gap:'12px'
           }}>
-            <span style={{fontSize:'22px',flexShrink:0}}>💡</span>
+            <span style={{width:'22px',height:'22px',display:'flex',alignItems:'center',justifyContent:'center'}}><AlertCircle size={18} color='#7B2FFF' strokeWidth={1.6}/></span>
             <div>
               <div style={{fontSize:'13px',fontWeight:700,color:'rgba(0,0,0,0.7)',marginBottom:'4px'}}>
                 Empieza buscando con Nüra
@@ -195,7 +195,7 @@ export default function Profile() {
         {/* ── Complete name nudge ─────────────────────────────────────── */}
         {(!user.name || user.name === 'Usuario') && (
           <div className={styles.nudgeCard} onClick={() => { setNameInput(''); setEditingName(true) }}>
-            <span style={{fontSize:'20px'}}>👋</span>
+            <span style={{width:'20px',height:'20px',display:'flex',alignItems:'center',justifyContent:'center'}}><UserCheck size={18} color='var(--purple)' strokeWidth={1.6}/></span>
             <div>
               <div className={styles.nudgeTitle}>Añade tu nombre</div>
               <div className={styles.nudgeDesc}>Para que los helpers sepan quién les contacta</div>
@@ -207,7 +207,7 @@ export default function Profile() {
         {/* ── Become helper CTA ───────────────────────────────────────── */}
         {!user.isHelper && (
           <div className={styles.helperCta} onClick={() => navigate('/register-helper')}>
-            <span style={{fontSize:'22px'}}>✨</span>
+            <span style={{width:'22px',height:'22px',display:'flex',alignItems:'center',justifyContent:'center'}}><Sparkles size={18} color='var(--purple)' strokeWidth={1.6}/></span>
             <div style={{flex:1}}>
               <div className={styles.nudgeTitle}>Ofrece tus servicios en Nüra</div>
               <div className={styles.nudgeDesc}>Crea tu perfil de helper gratis</div>

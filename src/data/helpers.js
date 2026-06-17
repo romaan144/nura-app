@@ -28,29 +28,29 @@ export const HELPERS = [
       { title: "Máster en Logopedia Clínica Infantil", institution: "Universitat de Barcelona", year: "2017–2019", details: "TFM sobre intervención en dislalia funcional en etapa escolar.", verified: true },
     ],
     experience: [
-      { role: "Logopeda infantil", company: "Clínica Sant Pau", companyLogo: "🏥", period: "2019–2022", location: "Barcelona", competencies: ["diagnóstico fonológico", "terapia grupal e individual", "coordinación con pedagogos", "informes clínicos"], verifiedByCompany: true,
-        managerOpinion: { name: "Dra. Marta Puig", role: "Directora clínica", text: "Carlos demostró una capacidad excepcional para conectar con niños difíciles. Sus resultados superaron consistentemente los estándares del equipo.", avatar: "MP", rating: 5 },
+      { role: "Logopeda infantil", company: "Clínica Sant Pau", companyLogo: "SP", period: "2019–2022", location: "Barcelona", competencies: ["diagnóstico fonológico", "terapia grupal e individual", "coordinación con pedagogos", "informes clínicos"], verifiedByCompany: true,
+managerOpinion: { name:"Dra. Marta Puig", role:"Directora clínica", text:"Carlos demostró una capacidad excepcional para conectar con niños difíciles. Sus resultados superaron consistentemente los estándares del equipo.", avatar:"MP", rating: 5 },
         colleagueOpinions: [
-          { name: "Joan Ferrer", role: "Logopeda", text: "Un compañero extraordinario. Siempre dispuesto a compartir casos y buscar soluciones en equipo.", avatar: "JF" },
-          { name: "Silvia Costa", role: "Psicóloga infantil", text: "La coordinación con Carlos era perfecta. Muy profesional y empático.", avatar: "SC" },
+{ name:"Joan Ferrer", role:"Logopeda", text:"Un compañero extraordinario. Siempre dispuesto a compartir casos y buscar soluciones en equipo.", avatar:"JF"},
+{ name:"Silvia Costa", role:"Psicóloga infantil", text:"La coordinación con Carlos era perfecta. Muy profesional y empático.", avatar:"SC"},
         ]
       },
-      { role: "Logopeda autónomo", company: "Consulta propia", companyLogo: "🏠", period: "2022–presente", location: "Eixample, Barcelona", competencies: ["gestión de agenda", "atención a domicilio", "comunicación con familias"], verifiedByCompany: false },
+      { role: "Logopeda autónomo", company: "Consulta propia", companyLogo: "CP", period: "2022–presente", location: "Eixample, Barcelona", competencies: ["gestión de agenda", "atención a domicilio", "comunicación con familias"], verifiedByCompany: false },
     ],
     languages: ["Español (nativo)", "Catalán (nativo)", "Inglés (B2)"],
     personality: { patience: 9.8, empathy: 9.5, communication: 9.2, punctuality: 9.7, autonomy: 8.8 },
     skills: ["dislalia funcional", "retraso del lenguaje", "tartamudez", "TEA", "disfemia", "terapia Hanen"],
     hiddenSkills: ["estimulación temprana", "apoyo psicopedagógico básico"],
     qualitativeComments: [
-      { text: "Muy paciente con mi hijo de 5 años", user: "Ana M.", date: "Mar 2026", avatar: "AM" },
-      { text: "Explica genial a los niños y a los padres", user: "Pedro R.", date: "Feb 2026", avatar: "PR" },
-      { text: "Llegó puntual y se adaptó perfectamente", user: "Lucía G.", date: "Ene 2026", avatar: "LG" },
-      { text: "Mi hija lo adora, es muy cercano", user: "Marta P.", date: "Dic 2025", avatar: "MP" },
+{ text:"Muy paciente con mi hijo de 5 años", user:"Ana M.", date:"Mar 2026", avatar:"AM"},
+{ text:"Explica genial a los niños y a los padres", user:"Pedro R.", date:"Feb 2026", avatar:"PR"},
+{ text:"Llegó puntual y se adaptó perfectamente", user:"Lucía G.", date:"Ene 2026", avatar:"LG"},
+{ text:"Mi hija lo adora, es muy cercano", user:"Marta P.", date:"Dic 2025", avatar:"MP"},
     ],
     posts: [
-      { id: 1, type: "work", text: "Hoy hemos completado el proceso de corrección de dislalia con Pablo, 8 años. Después de 6 meses de trabajo constante ya pronuncia perfectamente la R. Momentos como este son los que dan sentido a este trabajo. ¡Felicidades a Pablo y a su familia! 🎉", date: "Hace 2 días", likes: 34, comments: 8, verifiedWork: true, image: null },
-      { id: 2, type: "cert", text: "Acabo de obtener la certificación avanzada en el Método Hanen para padres. Ahora puedo ofrecer talleres a familias para que continúen el trabajo en casa. Un paso más en mejorar los resultados de nuestros niños.", date: "Hace 1 semana", likes: 28, comments: 5, verifiedWork: false, badge: "🏆 Certificación verificada por Nüra" },
-      { id: 3, type: "work", text: "Sesión de grupo hoy con 4 niños de 4-5 años trabajando la conciencia fonológica a través del juego. El aprendizaje es mucho más efectivo cuando se convierte en diversión.", date: "Hace 2 semanas", likes: 19, comments: 3, verifiedWork: true },
+{ id: 1, type:"work", text:"Hoy hemos completado el proceso de corrección de dislalia con Pablo, 8 años. Después de 6 meses de trabajo constante ya pronuncia perfectamente la R. Momentos como este son los que dan sentido a este trabajo. ¡Felicidades a Pablo y a su familia!", date:"Hace 2 días", likes: 34, comments: 8, verifiedWork: true, image: null },
+{ id: 2, type:"cert", text:"Acabo de obtener la certificación avanzada en el Método Hanen para padres. Ahora puedo ofrecer talleres a familias para que continúen el trabajo en casa. Un paso más en mejorar los resultados de nuestros niños.", date:"Hace 1 semana", likes: 28, comments: 5, verifiedWork: false, badge:"Certificación verificada por Nüra"},
+{ id: 3, type:"work", text:"Sesión de grupo hoy con 4 niños de 4-5 años trabajando la conciencia fonológica a través del juego. El aprendizaje es mucho más efectivo cuando se convierte en diversión.", date:"Hace 2 semanas", likes: 19, comments: 3, verifiedWork: true },
     ],
     evolution: [
       { period: "2022", rating: 4.6, services: 12 },
@@ -70,9 +70,9 @@ export const HELPERS = [
     founder: false, dniVerified: true, criminalRecordClear: true,
     education: [{ title: "Grado en Logopedia", institution: "Universitat Autònoma de Barcelona (UAB)", year: "2015–2019", details: "Plan de estudios UAB: Anatomía del aparato fonador, Audiología, Patología del lenguaje adulto, Neurolingüística.", verified: true }],
     experience: [
-      { role: "Logopeda", company: "Hospital Vall d'Hebron", companyLogo: "🏥", period: "2019–2021", location: "Barcelona", competencies: ["disfagia neurológica", "trabajo en equipo multidisciplinar", "rehabilitación post-ACV"], verifiedByCompany: true,
-        managerOpinion: { name: "Dr. Josep Roca", role: "Jefe de neurología", text: "Sara aportó rigor clínico y una capacidad de adaptación notable con pacientes de alta complejidad.", avatar: "JR", rating: 5 },
-        colleagueOpinions: [{ name: "Núria Mas", role: "Fisioterapeuta", text: "Colaborar con Sara fue un placer. Muy organizada y siempre pensando en el bienestar del paciente.", avatar: "NM" }]
+      { role: "Logopeda", company: "Hospital Vall d'Hebron", companyLogo: "SP", period: "2019–2021", location: "Barcelona", competencies: ["disfagia neurológica", "trabajo en equipo multidisciplinar", "rehabilitación post-ACV"], verifiedByCompany: true,
+managerOpinion: { name:"Dr. Josep Roca", role:"Jefe de neurología", text:"Sara aportó rigor clínico y una capacidad de adaptación notable con pacientes de alta complejidad.", avatar:"JR", rating: 5 },
+colleagueOpinions: [{ name:"Núria Mas", role:"Fisioterapeuta", text:"Colaborar con Sara fue un placer. Muy organizada y siempre pensando en el bienestar del paciente.", avatar:"NM"}]
       },
     ],
     languages: ["Español (nativo)", "Catalán (nativo)", "Inglés (C1)"],
@@ -80,11 +80,11 @@ export const HELPERS = [
     skills: ["disfagia", "trastornos de voz", "logopedia infantil", "adultos neurológicos"],
     hiddenSkills: ["rehabilitación post-covid vocal"],
     qualitativeComments: [
-      { text: "Muy profesional y cercana", user: "Jordi L.", date: "Feb 2026", avatar: "JL" },
-      { text: "Puntual y atenta con mi madre mayor", user: "Carmen S.", date: "Ene 2026", avatar: "CS" },
+{ text:"Muy profesional y cercana", user:"Jordi L.", date:"Feb 2026", avatar:"JL"},
+{ text:"Puntual y atenta con mi madre mayor", user:"Carmen S.", date:"Ene 2026", avatar:"CS"},
     ],
     posts: [
-      { id: 1, type: "work", text: "Primera semana de domicilios en Gràcia completada. 6 pacientes, 6 historias únicas. El domicilio permite ver al paciente en su entorno real y adaptar la terapia de forma mucho más efectiva.", date: "Hace 3 días", likes: 22, comments: 4, verifiedWork: true },
+{ id: 1, type:"work", text:"Primera semana de domicilios en Gràcia completada. 6 pacientes, 6 historias únicas. El domicilio permite ver al paciente en su entorno real y adaptar la terapia de forma mucho más efectiva.", date:"Hace 3 días", likes: 22, comments: 4, verifiedWork: true },
     ],
     evolution: [{ period: "2023", rating: 4.5, services: 10 }, { period: "2024", rating: 4.7, services: 22 }, { period: "2025", rating: 4.7, services: 34 }],
     aiData: {
@@ -109,24 +109,24 @@ export const HELPERS = [
       { title: "Certificación Técnico Gas Natural", institution: "Naturgy — Homologación oficial", year: "2010", details: "Habilitado para instalación y mantenimiento de sistemas de gas natural.", verified: true },
     ],
     experience: [
-      { role: "Técnico de mantenimiento senior", company: "Endesa Servicios", companyLogo: "⚡", period: "2007–2015", location: "Barcelona", competencies: ["mantenimiento preventivo", "reparación urgente", "atención al cliente", "trabajo en altura"], verifiedByCompany: true,
-        managerOpinion: { name: "Alejandro Vidal", role: "Director técnico", text: "Roberto fue uno de nuestros técnicos más fiables durante 8 años. Su tiempo de respuesta en urgencias era el mejor del equipo.", avatar: "AV", rating: 5 },
-        colleagueOpinions: [{ name: "Paco Llopis", role: "Técnico", text: "El mejor compañero que he tenido. Siempre resuelve el problema a la primera.", avatar: "PL" }]
+      { role: "Técnico de mantenimiento senior", company: "Endesa Servicios", companyLogo: "EN", period: "2007–2015", location: "Barcelona", competencies: ["mantenimiento preventivo", "reparación urgente", "atención al cliente", "trabajo en altura"], verifiedByCompany: true,
+managerOpinion: { name:"Alejandro Vidal", role:"Director técnico", text:"Roberto fue uno de nuestros técnicos más fiables durante 8 años. Su tiempo de respuesta en urgencias era el mejor del equipo.", avatar:"AV", rating: 5 },
+colleagueOpinions: [{ name:"Paco Llopis", role:"Técnico", text:"El mejor compañero que he tenido. Siempre resuelve el problema a la primera.", avatar:"PL"}]
       },
-      { role: "Autónomo", company: "Instalaciones Sánchez", companyLogo: "🔧", period: "2015–presente", location: "Barcelona", competencies: ["gestión de clientes", "presupuestación", "coordinación de obra"], verifiedByCompany: false },
+      { role: "Autónomo", company: "Instalaciones Sánchez", companyLogo: "IS", period: "2015–presente", location: "Barcelona", competencies: ["gestión de clientes", "presupuestación", "coordinación de obra"], verifiedByCompany: false },
     ],
     languages: ["Español (nativo)", "Catalán (B2)"],
     personality: { patience: 8.5, empathy: 8.2, communication: 9.0, punctuality: 9.8, autonomy: 9.9 },
     skills: ["calderas de condensación", "suelo radiante", "bomba de calor", "gas natural", "gasoil", "aerotermia"],
     hiddenSkills: ["fontanería básica", "electricidad de baja tensión"],
     qualitativeComments: [
-      { text: "Llegó en 1 hora, resolvió en 20 minutos", user: "Marc T.", date: "Mar 2026", avatar: "MT" },
-      { text: "Muy profesional, precio justo", user: "Rosa B.", date: "Feb 2026", avatar: "RB" },
-      { text: "Lleva arreglándome la caldera 5 años", user: "Antonio V.", date: "Ene 2026", avatar: "AV" },
+{ text:"Llegó en 1 hora, resolvió en 20 minutos", user:"Marc T.", date:"Mar 2026", avatar:"MT"},
+{ text:"Muy profesional, precio justo", user:"Rosa B.", date:"Feb 2026", avatar:"RB"},
+{ text:"Lleva arreglándome la caldera 5 años", user:"Antonio V.", date:"Ene 2026", avatar:"AV"},
     ],
     posts: [
-      { id: 1, type: "work", text: "Urgencia resuelta esta mañana en 45 minutos. Caldera Junkers sin calefacción en pleno enero. El problema: termostato averiado. Siempre es mejor un mantenimiento preventivo que una urgencia en invierno 🔧", date: "Hace 1 día", likes: 41, comments: 7, verifiedWork: true },
-      { id: 2, type: "work", text: "Instalación de aerotermia completada en un piso del Eixample. La familia ahorra un 60% en calefacción respecto a su antigua caldera de gas. El futuro del hogar eficiente ya está aquí.", date: "Hace 5 días", likes: 67, comments: 12, verifiedWork: true },
+{ id: 1, type:"work", text:"Urgencia resuelta esta mañana en 45 minutos. Caldera Junkers sin calefacción en pleno enero. El problema: termostato averiado. Siempre es mejor un mantenimiento preventivo que una urgencia en invierno", date:"Hace 1 día", likes: 41, comments: 7, verifiedWork: true },
+{ id: 2, type:"work", text:"Instalación de aerotermia completada en un piso del Eixample. La familia ahorra un 60% en calefacción respecto a su antigua caldera de gas. El futuro del hogar eficiente ya está aquí.", date:"Hace 5 días", likes: 67, comments: 12, verifiedWork: true },
     ],
     evolution: [{ period: "2021", rating: 4.7, services: 45 }, { period: "2022", rating: 4.8, services: 72 }, { period: "2023", rating: 4.8, services: 89 }, { period: "2024", rating: 4.8, services: 112 }],
     aiData: {
@@ -148,8 +148,8 @@ export const HELPERS = [
     founder: true, dniVerified: true, criminalRecordClear: true,
     education: [{ title: "Certificado de Profesionalidad — Limpieza de superficies", institution: "SEPE", year: "2018", details: "Módulos: Técnicas de limpieza, Productos y maquinaria, Gestión de residuos, Prevención de riesgos.", verified: true }],
     experience: [
-      { role: "Limpiadora de hogar", company: "Limpiezas Hogar Barcelona", companyLogo: "🧹", period: "2018–2021", location: "Barcelona", competencies: ["limpieza profunda", "planchado", "organización del hogar", "discreción"], verifiedByCompany: true,
-        managerOpinion: { name: "Rosa Puigdomènech", role: "Directora de operaciones", text: "María fue una de nuestras mejores empleadas. Cero incidencias en 3 años. Las familias la pedían específicamente.", avatar: "RP", rating: 5 },
+      { role: "Limpiadora de hogar", company: "Limpiezas Hogar Barcelona", companyLogo: "LH", period: "2018–2021", location: "Barcelona", competencies: ["limpieza profunda", "planchado", "organización del hogar", "discreción"], verifiedByCompany: true,
+managerOpinion: { name:"Rosa Puigdomènech", role:"Directora de operaciones", text:"María fue una de nuestras mejores empleadas. Cero incidencias en 3 años. Las familias la pedían específicamente.", avatar:"RP", rating: 5 },
         colleagueOpinions: []
       },
     ],
@@ -158,11 +158,11 @@ export const HELPERS = [
     skills: ["limpieza profunda", "planchado", "organización", "productos ecológicos", "cristales", "terrazas"],
     hiddenSkills: ["pequeños arreglos del hogar", "cuidado de plantas"],
     qualitativeComments: [
-      { text: "Mi casa siempre impecable, muy de fiar", user: "Elena R.", date: "Mar 2026", avatar: "ER" },
-      { text: "Lleva 2 años con nosotros, no la cambiaría", user: "Familia Soler", date: "Feb 2026", avatar: "FS" },
+{ text:"Mi casa siempre impecable, muy de fiar", user:"Elena R.", date:"Mar 2026", avatar:"ER"},
+{ text:"Lleva 2 años con nosotros, no la cambiaría", user:"Familia Soler", date:"Feb 2026", avatar:"FS"},
     ],
     posts: [
-      { id: 1, type: "work", text: "Limpieza post-obra terminada hoy en Sant Gervasi. 4 horas, 120m². El polvo de obra es de los más difíciles de eliminar pero con los productos adecuados el resultado es perfecto ✨", date: "Hace 4 días", likes: 18, comments: 3, verifiedWork: true },
+{ id: 1, type:"work", text:"Limpieza post-obra terminada hoy en Sant Gervasi. 4 horas, 120m². El polvo de obra es de los más difíciles de eliminar pero con los productos adecuados el resultado es perfecto", date:"Hace 4 días", likes: 18, comments: 3, verifiedWork: true },
     ],
     evolution: [{ period: "2022", rating: 4.6, services: 20 }, { period: "2023", rating: 4.8, services: 38 }, { period: "2024", rating: 4.8, services: 58 }],
     aiData: {
@@ -187,14 +187,14 @@ export const HELPERS = [
       { title: "Formación especializada en Alzheimer", institution: "Fundació Pasqual Maragall", year: "2020", details: "Técnicas de comunicación y estimulación cognitiva para personas con demencia.", verified: true },
     ],
     experience: [
-      { role: "Auxiliar de geriatría", company: "Residencia Les Corts", companyLogo: "🏡", period: "2018–2022", location: "Barcelona", competencies: ["higiene personal", "administración de medicación", "estimulación cognitiva", "urgencias sanitarias básicas"], verifiedByCompany: true,
-        managerOpinion: { name: "Dra. Pilar Mas", role: "Directora médica", text: "Elena tiene una capacidad empática fuera de lo común. Los residentes con Alzheimer avanzado respondían a su presencia de una forma que muy pocos consiguen.", avatar: "PM", rating: 5 },
+      { role: "Auxiliar de geriatría", company: "Residencia Les Corts", companyLogo: "RC", period: "2018–2022", location: "Barcelona", competencies: ["higiene personal", "administración de medicación", "estimulación cognitiva", "urgencias sanitarias básicas"], verifiedByCompany: true,
+managerOpinion: { name:"Dra. Pilar Mas", role:"Directora médica", text:"Elena tiene una capacidad empática fuera de lo común. Los residentes con Alzheimer avanzado respondían a su presencia de una forma que muy pocos consiguen.", avatar:"PM", rating: 5 },
         colleagueOpinions: [
-          { name: "Montse Vilar", role: "Auxiliar de enfermería", text: "La mejor compañera que he tenido en geriatría. Siempre tranquila, incluso en las situaciones más difíciles.", avatar: "MV" },
+{ name:"Montse Vilar", role:"Auxiliar de enfermería", text:"La mejor compañera que he tenido en geriatría. Siempre tranquila, incluso en las situaciones más difíciles.", avatar:"MV"},
         ]
       },
-      { role: "Cuidadora a domicilio", company: "Atendo — Barcelona", companyLogo: "💙", period: "2022–2024", location: "Barcelona", competencies: ["acompañamiento personalizado", "fisioterapia básica de mantenimiento", "coordinación médica"], verifiedByCompany: true,
-        managerOpinion: { name: "Carles Font", role: "Coordinador de servicios", text: "Con Elena teníamos cero incidencias y cero quejas. Las familias la renovaban siempre.", avatar: "CF", rating: 5 },
+      { role: "Cuidadora a domicilio", company: "Atendo — Barcelona", companyLogo: "AT", period: "2022–2024", location: "Barcelona", competencies: ["acompañamiento personalizado", "fisioterapia básica de mantenimiento", "coordinación médica"], verifiedByCompany: true,
+managerOpinion: { name:"Carles Font", role:"Coordinador de servicios", text:"Con Elena teníamos cero incidencias y cero quejas. Las familias la renovaban siempre.", avatar:"CF", rating: 5 },
         colleagueOpinions: []
       },
     ],
@@ -203,13 +203,13 @@ export const HELPERS = [
     skills: ["Alzheimer", "Parkinson", "movilidad reducida", "higiene personal", "estimulación cognitiva", "acompañamiento emocional"],
     hiddenSkills: ["cocina saludable para mayores", "gestión del estrés familiar"],
     qualitativeComments: [
-      { text: "Muy cariñosa con mi madre, como de la familia", user: "Jordi P.", date: "Mar 2026", avatar: "JP" },
-      { text: "Sabe cómo tratar a personas con demencia", user: "Ana F.", date: "Feb 2026", avatar: "AF" },
-      { text: "Le tenemos una confianza total", user: "Familia Rovira", date: "Ene 2026", avatar: "FR" },
+{ text:"Muy cariñosa con mi madre, como de la familia", user:"Jordi P.", date:"Mar 2026", avatar:"JP"},
+{ text:"Sabe cómo tratar a personas con demencia", user:"Ana F.", date:"Feb 2026", avatar:"AF"},
+{ text:"Le tenemos una confianza total", user:"Familia Rovira", date:"Ene 2026", avatar:"FR"},
     ],
     posts: [
-      { id: 1, type: "work", text: "Hoy hemos completado el primer mes con Manuel, 82 años, Alzheimer moderado. Al principio no me reconocía. Esta semana me llamó Elena por primera vez. Pequeños momentos que lo significan todo ❤️", date: "Hace 2 días", likes: 89, comments: 21, verifiedWork: true },
-      { id: 2, type: "cert", text: "Formación completada en estimulación cognitiva avanzada para demencias. Nuevas técnicas para mantener las funciones cognitivas el mayor tiempo posible. Cada herramienta cuenta.", date: "Hace 3 semanas", likes: 34, comments: 6, verifiedWork: false, badge: "🏆 Formación verificada por Nüra" },
+{ id: 1, type:"work", text:"Hoy hemos completado el primer mes con Manuel, 82 años, Alzheimer moderado. Al principio no me reconocía. Esta semana me llamó Elena por primera vez. Pequeños momentos que lo significan todo", date:"Hace 2 días", likes: 89, comments: 21, verifiedWork: true },
+{ id: 2, type:"cert", text:"Formación completada en estimulación cognitiva avanzada para demencias. Nuevas técnicas para mantener las funciones cognitivas el mayor tiempo posible. Cada herramienta cuenta.", date:"Hace 3 semanas", likes: 34, comments: 6, verifiedWork: false, badge:"Formación verificada por Nüra"},
     ],
     evolution: [{ period: "2022", rating: 4.7, services: 30 }, { period: "2023", rating: 4.9, services: 58 }, { period: "2024", rating: 4.9, services: 89 }],
     aiData: {
@@ -231,8 +231,8 @@ export const HELPERS = [
     founder: false, dniVerified: true, criminalRecordClear: false,
     education: [{ title: "Curso de Cuidador y Adiestrador de animales", institution: "Escola Cinòfila de Catalunya", year: "2021", details: "Módulos: Etología animal, Primeros auxilios veterinarios, Nutrición canina, Adiestramiento básico.", verified: true }],
     experience: [
-      { role: "Auxiliar veterinaria", company: "Clínica Veterinaria Les Corts", companyLogo: "🐾", period: "2021–2023", location: "Barcelona", competencies: ["atención al animal", "asistencia en consultas", "administración de medicación"], verifiedByCompany: true,
-        managerOpinion: { name: "Dr. Pau Roca", role: "Veterinario titular", text: "Marta tiene una conexión natural con los animales. Los perros más nerviosos se calmaban con ella.", avatar: "PR", rating: 5 },
+      { role: "Auxiliar veterinaria", company: "Clínica Veterinaria Les Corts", companyLogo: "VL", period: "2021–2023", location: "Barcelona", competencies: ["atención al animal", "asistencia en consultas", "administración de medicación"], verifiedByCompany: true,
+managerOpinion: { name:"Dr. Pau Roca", role:"Veterinario titular", text:"Marta tiene una conexión natural con los animales. Los perros más nerviosos se calmaban con ella.", avatar:"PR", rating: 5 },
         colleagueOpinions: []
       },
     ],
@@ -241,11 +241,11 @@ export const HELPERS = [
     skills: ["perros pequeños y grandes", "paseos", "estancia en casa", "adiestramiento básico", "primeros auxilios animales"],
     hiddenSkills: ["cuidado de gatos", "pequeños roedores"],
     qualitativeComments: [
-      { text: "Mi perro la adora, vuelve cansado y feliz", user: "David M.", date: "Mar 2026", avatar: "DM" },
-      { text: "Manda fotos constantemente, muy tranquilizador", user: "Laura S.", date: "Feb 2026", avatar: "LS" },
+{ text:"Mi perro la adora, vuelve cansado y feliz", user:"David M.", date:"Mar 2026", avatar:"DM"},
+{ text:"Manda fotos constantemente, muy tranquilizador", user:"Laura S.", date:"Feb 2026", avatar:"LS"},
     ],
     posts: [
-      { id: 1, type: "work", text: "Fin de semana con Bruno y Lola, dos golden retrievers que vinieron a casa mientras sus dueños estaban de viaje. 48 horas de paseos, juegos y mucho amor 🐕🐕", date: "Hace 6 días", likes: 56, comments: 9, verifiedWork: true },
+{ id: 1, type:"work", text:"Fin de semana con Bruno y Lola, dos golden retrievers que vinieron a casa mientras sus dueños estaban de viaje. 48 horas de paseos, juegos y mucho amor", date:"Hace 6 días", likes: 56, comments: 9, verifiedWork: true },
     ],
     evolution: [{ period: "2022", rating: 4.7, services: 15 }, { period: "2023", rating: 4.8, services: 29 }, { period: "2024", rating: 4.8, services: 43 }],
     aiData: {
@@ -270,19 +270,19 @@ export const HELPERS = [
       { title: "Bachillerato Científico", institution: "Escola Sagrada Família", year: "2019–2021", details: "Matrícula de honor en Matemáticas y Física.", verified: true },
     ],
     experience: [
-      { role: "Profesora particular", company: "Cuenta propia", companyLogo: "📚", period: "2022–presente", location: "Barcelona", competencies: ["adaptación al nivel del alumno", "paciencia pedagógica", "preparación de exámenes"], verifiedByCompany: false },
+      { role: "Profesora particular", company: "Cuenta propia", companyLogo: "CP", period: "2022–presente", location: "Barcelona", competencies: ["adaptación al nivel del alumno", "paciencia pedagógica", "preparación de exámenes"], verifiedByCompany: false },
     ],
     languages: ["Español (nativo)", "Catalán (nativo)", "Inglés (C1)", "Francés (B1)"],
     personality: { patience: 9.7, empathy: 9.3, communication: 9.6, punctuality: 9.9, autonomy: 9.0 },
     skills: ["matemáticas ESO", "Bachillerato", "física", "estadística", "preparación selectividad"],
     hiddenSkills: ["programación básica Python", "razonamiento lógico"],
     qualitativeComments: [
-      { text: "Mi hijo pasó de suspender a sacar un 7 en dos meses", user: "Pilar G.", date: "Mar 2026", avatar: "PG" },
-      { text: "Explica muy bien, tiene mucha paciencia", user: "Tomàs R.", date: "Feb 2026", avatar: "TR" },
+{ text:"Mi hijo pasó de suspender a sacar un 7 en dos meses", user:"Pilar G.", date:"Mar 2026", avatar:"PG"},
+{ text:"Explica muy bien, tiene mucha paciencia", user:"Tomàs R.", date:"Feb 2026", avatar:"TR"},
     ],
     posts: [
-      { id: 1, type: "work", text: "Resultados de selectividad de mis alumnos de este año: 5 aprobados, nota media 7.8. Orgullosísima de todos ellos. Un año de mucho trabajo pero con resultados que valen la pena 🎓", date: "Hace 1 semana", likes: 73, comments: 15, verifiedWork: true },
-      { id: 2, type: "work", text: "Método nuevo para explicar las integrales: uso chocolate y porciones reales para visualizar el área bajo la curva. Lo que parecía imposible de entender se vuelve tangible. La pedagogía está en los detalles.", date: "Hace 2 semanas", likes: 45, comments: 11, verifiedWork: false },
+{ id: 1, type:"work", text:"Resultados de selectividad de mis alumnos de este año: 5 aprobados, nota media 7.8. Orgullosísima de todos ellos. Un año de mucho trabajo pero con resultados que valen la pena", date:"Hace 1 semana", likes: 73, comments: 15, verifiedWork: true },
+{ id: 2, type:"work", text:"Método nuevo para explicar las integrales: uso chocolate y porciones reales para visualizar el área bajo la curva. Lo que parecía imposible de entender se vuelve tangible. La pedagogía está en los detalles.", date:"Hace 2 semanas", likes: 45, comments: 11, verifiedWork: false },
     ],
     evolution: [{ period: "2022", rating: 4.8, services: 8 }, { period: "2023", rating: 4.9, services: 17 }, { period: "2024", rating: 4.9, services: 28 }],
     aiData: {
@@ -307,9 +307,9 @@ export const HELPERS = [
       { title: "Certificación NSCA-CPT", institution: "National Strength and Conditioning Association", year: "2019", details: "Certificación internacional de entrenador personal. Válida en 35 países.", verified: true },
     ],
     experience: [
-      { role: "Entrenador personal", company: "Holmes Place Barcelona", companyLogo: "🏋️", period: "2018–2022", location: "Barcelona", competencies: ["evaluación física", "diseño de programas", "motivación del cliente", "nutrición básica"], verifiedByCompany: true,
-        managerOpinion: { name: "Sandra Pons", role: "Directora de fitness", text: "David era el entrenador con mejor retención de clientes del centro. Su capacidad de motivar a largo plazo es excepcional.", avatar: "SP", rating: 5 },
-        colleagueOpinions: [{ name: "Marc Alonso", role: "Entrenador de running", text: "Un profesional como hay pocos. Siempre actualizado, siempre mejorando.", avatar: "MA" }]
+      { role: "Entrenador personal", company: "Holmes Place Barcelona", companyLogo: "HP", period: "2018–2022", location: "Barcelona", competencies: ["evaluación física", "diseño de programas", "motivación del cliente", "nutrición básica"], verifiedByCompany: true,
+managerOpinion: { name:"Sandra Pons", role:"Directora de fitness", text:"David era el entrenador con mejor retención de clientes del centro. Su capacidad de motivar a largo plazo es excepcional.", avatar:"SP", rating: 5 },
+colleagueOpinions: [{ name:"Marc Alonso", role:"Entrenador de running", text:"Un profesional como hay pocos. Siempre actualizado, siempre mejorando.", avatar:"MA"}]
       },
     ],
     languages: ["Español (nativo)", "Catalán (B2)", "Inglés (B2)"],
@@ -317,12 +317,12 @@ export const HELPERS = [
     skills: ["pérdida de peso", "ganancia muscular", "running", "movilidad", "entrenamiento funcional", "HIIT"],
     hiddenSkills: ["nutrición deportiva básica", "yoga funcional"],
     qualitativeComments: [
-      { text: "He perdido 8kg en 3 meses, increíble", user: "Sergio A.", date: "Mar 2026", avatar: "SA" },
-      { text: "Primera sesión gratis y ya me enganché", user: "Nuria C.", date: "Feb 2026", avatar: "NC" },
+{ text:"He perdido 8kg en 3 meses, increíble", user:"Sergio A.", date:"Mar 2026", avatar:"SA"},
+{ text:"Primera sesión gratis y ya me enganché", user:"Nuria C.", date:"Feb 2026", avatar:"NC"},
     ],
     posts: [
-      { id: 1, type: "work", text: "6 meses con Sergio. Empezó sin poder hacer una flexión. Hoy completó su primera sesión de crossfit. Esto es lo que significa transformar una vida, no solo un cuerpo 💪", date: "Hace 3 días", likes: 98, comments: 18, verifiedWork: true },
-      { id: 2, type: "cert", text: "Certificación en nutrición deportiva completada. Ahora puedo ofrecer planes nutricionales complementarios al entrenamiento. El cuerpo se construye en la cocina y en el gimnasio.", date: "Hace 2 semanas", likes: 44, comments: 8, verifiedWork: false, badge: "🏆 Certificación verificada por Nüra" },
+{ id: 1, type:"work", text:"6 meses con Sergio. Empezó sin poder hacer una flexión. Hoy completó su primera sesión de crossfit. Esto es lo que significa transformar una vida, no solo un cuerpo", date:"Hace 3 días", likes: 98, comments: 18, verifiedWork: true },
+{ id: 2, type:"cert", text:"Certificación en nutrición deportiva completada. Ahora puedo ofrecer planes nutricionales complementarios al entrenamiento. El cuerpo se construye en la cocina y en el gimnasio.", date:"Hace 2 semanas", likes: 44, comments: 8, verifiedWork: false, badge:"Certificación verificada por Nüra"},
     ],
     evolution: [{ period: "2022", rating: 4.5, services: 18 }, { period: "2023", rating: 4.7, services: 33 }, { period: "2024", rating: 4.7, services: 51 }],
     aiData: {
@@ -360,27 +360,27 @@ export const HELPERS = [
       { title: "Certificación en ACT y Mindfulness Clínico", institution: "Institut ACT Barcelona", year: "2018", details: "Terapia de Aceptación y Compromiso aplicada a trastornos de ansiedad y estado de ánimo.", verified: true },
     ],
     experience: [
-      { role: "Psicóloga clínica y supervisora", company: "Institut de Salut Mental de Barcelona", companyLogo: "🧠", period: "2016–2022", location: "Barcelona", competencies: ["psicoterapia individual", "supervisión clínica", "formación de residentes PIR", "investigación aplicada", "coordinación multidisciplinar"], verifiedByCompany: true,
-        managerOpinion: { name: "Dr. Francesc Vilar", role: "Director clínico", text: "La Dra. Solà es una clínica excepcional. Su capacidad para integrar evidencia científica con una escucha verdaderamente humana es lo que la diferencia. Nuestros pacientes con trauma complejo evolucionaban notablemente mejor bajo su supervisión.", avatar: "FV", rating: 5 },
+      { role: "Psicóloga clínica y supervisora", company: "Institut de Salut Mental de Barcelona", companyLogo: "IS", period: "2016–2022", location: "Barcelona", competencies: ["psicoterapia individual", "supervisión clínica", "formación de residentes PIR", "investigación aplicada", "coordinación multidisciplinar"], verifiedByCompany: true,
+managerOpinion: { name:"Dr. Francesc Vilar", role:"Director clínico", text:"La Dra. Solà es una clínica excepcional. Su capacidad para integrar evidencia científica con una escucha verdaderamente humana es lo que la diferencia. Nuestros pacientes con trauma complejo evolucionaban notablemente mejor bajo su supervisión.", avatar:"FV", rating: 5 },
         colleagueOpinions: [
-          { name: "Mireia Camps", role: "Psiquiatra", text: "Carme tiene una visión integradora que pocos clínicos alcanzan. Siempre actualizada, siempre generosa con el equipo.", avatar: "MC" },
-          { name: "Pau Ferrer", role: "Trabajador social", text: "Las sesiones de supervisión con ella han sido las más formativas de mi carrera.", avatar: "PF" },
+{ name:"Mireia Camps", role:"Psiquiatra", text:"Carme tiene una visión integradora que pocos clínicos alcanzan. Siempre actualizada, siempre generosa con el equipo.", avatar:"MC"},
+{ name:"Pau Ferrer", role:"Trabajador social", text:"Las sesiones de supervisión con ella han sido las más formativas de mi carrera.", avatar:"PF"},
         ]
       },
-      { role: "Psicóloga clínica en consulta privada", company: "Consulta privada Dra. Solà", companyLogo: "🏠", period: "2022–presente", location: "Eixample, Barcelona", competencies: ["psicoterapia adultos", "neuropsicología clínica", "peritajes psicológicos", "formación profesional"], verifiedByCompany: false },
+      { role: "Psicóloga clínica en consulta privada", company: "Consulta privada Dra. Solà", companyLogo: "CP", period: "2022–presente", location: "Eixample, Barcelona", competencies: ["psicoterapia adultos", "neuropsicología clínica", "peritajes psicológicos", "formación profesional"], verifiedByCompany: false },
     ],
     languages: ["Catalán (nativo)", "Español (nativo)", "Inglés (C2)", "Francés (B2)"],
     personality: { patience: 9.9, empathy: 9.8, communication: 9.7, punctuality: 9.6, autonomy: 9.9 },
     skills: ["EMDR", "ACT", "TCC", "neuropsicología clínica", "trauma complejo", "TDAH adultos", "peritajes", "supervisión PIR"],
     hiddenSkills: ["liderazgo de equipos clínicos", "didáctica académica avanzada"],
     qualitativeComments: [
-      { text: "15 años buscando al profesional adecuado. La encontré.", user: "Anónimo", date: "Mar 2026", avatar: "A" },
-      { text: "Combina rigor científico con una calidez humana inusual", user: "Anónimo", date: "Feb 2026", avatar: "A" },
-      { text: "Me enseñó a entender mi propia mente. Transformador.", user: "Anónimo", date: "Ene 2026", avatar: "A" },
+{ text:"15 años buscando al profesional adecuado. La encontré.", user:"Anónimo", date:"Mar 2026", avatar:"A"},
+{ text:"Combina rigor científico con una calidez humana inusual", user:"Anónimo", date:"Feb 2026", avatar:"A"},
+{ text:"Me enseñó a entender mi propia mente. Transformador.", user:"Anónimo", date:"Ene 2026", avatar:"A"},
     ],
     posts: [
-      { id: 1, type: "work", text: "Publicación reciente en Journal of Clinical Psychology sobre el uso de EMDR en trauma de apego. Acceso abierto disponible en ResearchGate. El trauma complejo sigue siendo una de las áreas más infravaloradas en salud mental.", date: "Hace 3 días", likes: 156, comments: 23, verifiedWork: false },
-      { id: 2, type: "cert", text: "Semana de supervisión avanzada en trauma con el equipo del Trauma Institute de Nueva York. Cada año de formación continuada es una deuda que tenemos con nuestros pacientes.", date: "Hace 2 semanas", likes: 89, comments: 14, verifiedWork: false, badge: "🏆 Formación internacional verificada" },
+{ id: 1, type:"work", text:"Publicación reciente en Journal of Clinical Psychology sobre el uso de EMDR en trauma de apego. Acceso abierto disponible en ResearchGate. El trauma complejo sigue siendo una de las áreas más infravaloradas en salud mental.", date:"Hace 3 días", likes: 156, comments: 23, verifiedWork: false },
+{ id: 2, type:"cert", text:"Semana de supervisión avanzada en trauma con el equipo del Trauma Institute de Nueva York. Cada año de formación continuada es una deuda que tenemos con nuestros pacientes.", date:"Hace 2 semanas", likes: 89, comments: 14, verifiedWork: false, badge:"Formación internacional verificada"},
     ],
     evolution: [{ period: "2022", rating: 4.8, services: 40 }, { period: "2023", rating: 4.9, services: 78 }, { period: "2024", rating: 4.9, services: 127 }],
   },
@@ -409,26 +409,26 @@ export const HELPERS = [
       { title: "Máster en Acceso a la Abogacía", institution: "Universitat de Barcelona", year: "2012–2013", details: "Especialización en derecho empresarial y litigación mercantil.", verified: true },
     ],
     experience: [
-      { role: "Abogado senior — Departamento Mercantil", company: "Garrigues Barcelona", companyLogo: "⚖️", period: "2014–2021", location: "Barcelona", competencies: ["M&A", "due diligence", "contratos internacionales", "arbitraje", "operaciones de inversión", "reestructuraciones societarias"], verifiedByCompany: true,
-        managerOpinion: { name: "Marta Alonso", role: "Socia directora — Garrigues BCN", text: "Jordi es uno de los abogados más completos que he tenido en el despacho. Su capacidad de simplificar lo complejo para el cliente es extraordinaria. No es habitual.", avatar: "MA", rating: 5 },
+      { role: "Abogado senior — Departamento Mercantil", company: "Garrigues Barcelona", companyLogo: "GA", period: "2014–2021", location: "Barcelona", competencies: ["M&A", "due diligence", "contratos internacionales", "arbitraje", "operaciones de inversión", "reestructuraciones societarias"], verifiedByCompany: true,
+managerOpinion: { name:"Marta Alonso", role:"Socia directora — Garrigues BCN", text:"Jordi es uno de los abogados más completos que he tenido en el despacho. Su capacidad de simplificar lo complejo para el cliente es extraordinaria. No es habitual.", avatar:"MA", rating: 5 },
         colleagueOpinions: [
-          { name: "Rafael Soler", role: "Abogado senior", text: "El mejor en operaciones de M&A que he visto en su rango de edad. Metódico, claro y siempre orientado al resultado.", avatar: "RS" },
+{ name:"Rafael Soler", role:"Abogado senior", text:"El mejor en operaciones de M&A que he visto en su rango de edad. Metódico, claro y siempre orientado al resultado.", avatar:"RS"},
         ]
       },
-      { role: "Abogado independiente — Legal Advisor", company: "Jordi Prat Legal", companyLogo: "🏛️", period: "2021–presente", location: "Barcelona / Remoto", competencies: ["asesoramiento a fundadores", "rondas de inversión", "pactos de socios", "propiedad intelectual tecnológica", "RGPD avanzado"], verifiedByCompany: false },
+      { role: "Abogado independiente — Legal Advisor", company: "Jordi Prat Legal", companyLogo: "JP", period: "2021–presente", location: "Barcelona / Remoto", competencies: ["asesoramiento a fundadores", "rondas de inversión", "pactos de socios", "propiedad intelectual tecnológica", "RGPD avanzado"], verifiedByCompany: false },
     ],
     languages: ["Catalán (nativo)", "Español (nativo)", "Inglés (C2)", "Francés (B1)"],
     personality: { patience: 9.0, empathy: 8.5, communication: 9.6, punctuality: 9.8, autonomy: 9.9 },
     skills: ["pactos de socios", "contratos de inversión", "M&A startups", "propiedad intelectual", "RGPD", "term sheets", "due diligence"],
     hiddenSkills: ["comunicación a inversores", "negociación de alto nivel"],
     qualitativeComments: [
-      { text: "Nos ahorró un error que nos hubiera costado la empresa", user: "Fundador, startup Barcelona", date: "Mar 2026", avatar: "F" },
-      { text: "Explica el lenguaje legal en términos que un founder entiende", user: "CEO, SaaS B2B", date: "Feb 2026", avatar: "C" },
-      { text: "Trabajó con nosotros en nuestra Serie A. Impecable.", user: "Co-fundadora, fintech", date: "Dic 2025", avatar: "C" },
+{ text:"Nos ahorró un error que nos hubiera costado la empresa", user:"Fundador, startup Barcelona", date:"Mar 2026", avatar:"F"},
+{ text:"Explica el lenguaje legal en términos que un founder entiende", user:"CEO, SaaS B2B", date:"Feb 2026", avatar:"C"},
+{ text:"Trabajó con nosotros en nuestra Serie A. Impecable.", user:"Co-fundadora, fintech", date:"Dic 2025", avatar:"C"},
     ],
     posts: [
-      { id: 1, type: "work", text: "Cerramos esta semana el pacto de socios y el contrato de inversión de una startup de impacto en Barcelona. 6 meses de trabajo conjunto. Ver a un equipo fundador crecer con las herramientas legales correctas es una de las partes más gratificantes de este trabajo.", date: "Hace 2 días", likes: 78, comments: 12, verifiedWork: true },
-      { id: 2, type: "work", text: "Hilo sobre los 5 errores más comunes que cometen los fundadores en sus pactos de socios y cómo evitarlos. Basado en 30+ operaciones reales. El más caro: no regular el vesting desde el inicio.", date: "Hace 1 semana", likes: 234, comments: 41, verifiedWork: false },
+{ id: 1, type:"work", text:"Cerramos esta semana el pacto de socios y el contrato de inversión de una startup de impacto en Barcelona. 6 meses de trabajo conjunto. Ver a un equipo fundador crecer con las herramientas legales correctas es una de las partes más gratificantes de este trabajo.", date:"Hace 2 días", likes: 78, comments: 12, verifiedWork: true },
+{ id: 2, type:"work", text:"Hilo sobre los 5 errores más comunes que cometen los fundadores en sus pactos de socios y cómo evitarlos. Basado en 30+ operaciones reales. El más caro: no regular el vesting desde el inicio.", date:"Hace 1 semana", likes: 234, comments: 41, verifiedWork: false },
     ],
     evolution: [{ period: "2021", rating: 4.7, services: 8 }, { period: "2022", rating: 4.8, services: 22 }, { period: "2023", rating: 4.8, services: 34 }, { period: "2024", rating: 4.8, services: 43 }],
   },
@@ -459,26 +459,26 @@ export const HELPERS = [
       { title: "Máster en Medicina Preventiva y Salud Pública", institution: "Escola Nacional de Sanitat — Madrid", year: "2018", details: "Especialización en epidemiología clínica y evaluación de tecnologías sanitarias.", verified: true },
     ],
     experience: [
-      { role: "Médica adjunta — Servicio de Medicina Interna", company: "Hospital Clínic de Barcelona", companyLogo: "🏥", period: "2015–2022", location: "Barcelona", competencies: ["diagnóstico diferencial complejo", "coordinación de equipos", "investigación clínica", "docencia universitaria", "atención a casos de alta complejidad"], verifiedByCompany: true,
-        managerOpinion: { name: "Dr. Antoni Mas", role: "Jefe de servicio — Medicina Interna", text: "La Dra. Mercadé tiene una capacidad diagnóstica sobresaliente. Pero lo que la distingue es cómo comunica con el paciente. Hace accesible lo complejo sin simplificarlo.", avatar: "AM", rating: 5 },
+      { role: "Médica adjunta — Servicio de Medicina Interna", company: "Hospital Clínic de Barcelona", companyLogo: "SP", period: "2015–2022", location: "Barcelona", competencies: ["diagnóstico diferencial complejo", "coordinación de equipos", "investigación clínica", "docencia universitaria", "atención a casos de alta complejidad"], verifiedByCompany: true,
+managerOpinion: { name:"Dr. Antoni Mas", role:"Jefe de servicio — Medicina Interna", text:"La Dra. Mercadé tiene una capacidad diagnóstica sobresaliente. Pero lo que la distingue es cómo comunica con el paciente. Hace accesible lo complejo sin simplificarlo.", avatar:"AM", rating: 5 },
         colleagueOpinions: [
-          { name: "Núria Valls", role: "Médica residente (R4)", text: "Aprendí más en 3 meses trabajando con ella que en los 2 años anteriores.", avatar: "NV" },
-          { name: "Dr. Marc Puig", role: "Cardiólogo", text: "Una internista de referencia. Siempre la primera a quien consulto casos complejos.", avatar: "MP" },
+{ name:"Núria Valls", role:"Médica residente (R4)", text:"Aprendí más en 3 meses trabajando con ella que en los 2 años anteriores.", avatar:"NV"},
+{ name:"Dr. Marc Puig", role:"Cardiólogo", text:"Una internista de referencia. Siempre la primera a quien consulto casos complejos.", avatar:"MP"},
         ]
       },
-      { role: "Médica en consulta privada y domicilio", company: "Consulta privada Dra. Mercadé", companyLogo: "🩺", period: "2022–presente", location: "Barcelona", competencies: ["segunda opinión médica", "planes de salud preventivos", "acompañamiento diagnóstico", "análisis avanzados"], verifiedByCompany: false },
+      { role: "Médica en consulta privada y domicilio", company: "Consulta privada Dra. Mercadé", companyLogo: "DR", period: "2022–presente", location: "Barcelona", competencies: ["segunda opinión médica", "planes de salud preventivos", "acompañamiento diagnóstico", "análisis avanzados"], verifiedByCompany: false },
     ],
     languages: ["Catalán (nativo)", "Español (nativo)", "Inglés (C2)", "Alemán (B1)"],
     personality: { patience: 9.7, empathy: 9.9, communication: 9.8, punctuality: 9.9, autonomy: 9.8 },
     skills: ["medicina interna", "diagnóstico diferencial", "nutrición clínica", "medicina preventiva", "segunda opinión", "análisis clínicos avanzados"],
     hiddenSkills: ["comunicación médico-paciente avanzada", "medicina integrativa"],
     qualitativeComments: [
-      { text: "Encontró lo que ningún otro médico había visto en 3 años", user: "Paciente, 47 años", date: "Mar 2026", avatar: "P" },
-      { text: "Explica para que el paciente comprenda, no para que se rinda", user: "Familiar de paciente", date: "Feb 2026", avatar: "F" },
-      { text: "La mejor consulta de segunda opinión que he tenido en mi vida", user: "Ejecutiva, 52 años", date: "Ene 2026", avatar: "E" },
+{ text:"Encontró lo que ningún otro médico había visto en 3 años", user:"Paciente, 47 años", date:"Mar 2026", avatar:"P"},
+{ text:"Explica para que el paciente comprenda, no para que se rinda", user:"Familiar de paciente", date:"Feb 2026", avatar:"F"},
+{ text:"La mejor consulta de segunda opinión que he tenido en mi vida", user:"Ejecutiva, 52 años", date:"Ene 2026", avatar:"E"},
     ],
     posts: [
-      { id: 1, type: "work", text: "Esta semana diagnostiqué un hipotiroidismo subclínico que llevaba 4 años sin detectarse en una paciente con fatiga crónica. El diagnóstico estaba en los síntomas, no solo en los números. Hay que escuchar más.", date: "Hace 1 día", likes: 203, comments: 34, verifiedWork: false },
+{ id: 1, type:"work", text:"Esta semana diagnostiqué un hipotiroidismo subclínico que llevaba 4 años sin detectarse en una paciente con fatiga crónica. El diagnóstico estaba en los síntomas, no solo en los números. Hay que escuchar más.", date:"Hace 1 día", likes: 203, comments: 34, verifiedWork: false },
     ],
     evolution: [{ period: "2022", rating: 4.8, services: 24 }, { period: "2023", rating: 4.9, services: 56 }, { period: "2024", rating: 4.9, services: 89 }],
   },
@@ -506,24 +506,24 @@ export const HELPERS = [
       { title: "Grado en Arquitectura", institution: "Escola Tècnica Superior d'Arquitectura de Barcelona (ETSAB — UPC)", year: "2009–2015", details: "Matrícula de honor en Proyectos Arquitectónicos y Estructuras. Premio Col·legi d'Arquitectes de Catalunya al mejor proyecto fin de carrera.", verified: true },
     ],
     experience: [
-      { role: "Arquitecto asociado", company: "Enric Ruiz-Geli / Cloud 9 Studio", companyLogo: "🏛️", period: "2017–2020", location: "Barcelona", competencies: ["proyectos innovadores", "integración tecnología-arquitectura", "coordinación de obra", "BIM avanzado", "presentaciones internacionales"], verifiedByCompany: true,
-        managerOpinion: { name: "Enric Ruiz-Geli", role: "Director del estudio", text: "Marc tiene una visión arquitectónica que integra sostenibilidad sin renunciar a la belleza. Eso es difícil. Trabajar con él en los proyectos del pabellón de España fue una experiencia formativa para todos.", avatar: "ER", rating: 5 },
+      { role: "Arquitecto asociado", company: "Enric Ruiz-Geli / Cloud 9 Studio", companyLogo: "JP", period: "2017–2020", location: "Barcelona", competencies: ["proyectos innovadores", "integración tecnología-arquitectura", "coordinación de obra", "BIM avanzado", "presentaciones internacionales"], verifiedByCompany: true,
+managerOpinion: { name:"Enric Ruiz-Geli", role:"Director del estudio", text:"Marc tiene una visión arquitectónica que integra sostenibilidad sin renunciar a la belleza. Eso es difícil. Trabajar con él en los proyectos del pabellón de España fue una experiencia formativa para todos.", avatar:"ER", rating: 5 },
         colleagueOpinions: [
-          { name: "Júlia Casas", role: "Arquitecta", text: "Aprendí más de detalle constructivo con Marc que en toda la carrera.", avatar: "JC" },
+{ name:"Júlia Casas", role:"Arquitecta", text:"Aprendí más de detalle constructivo con Marc que en toda la carrera.", avatar:"JC"},
         ]
       },
-      { role: "Arquitecto independiente", company: "Tort Arquitectura", companyLogo: "🏠", period: "2020–presente", location: "Barcelona", competencies: ["reformas integrales", "dirección de obra", "interiorismo", "eficiencia energética", "gestión de licencias"], verifiedByCompany: false },
+      { role: "Arquitecto independiente", company: "Tort Arquitectura", companyLogo: "CP", period: "2020–presente", location: "Barcelona", competencies: ["reformas integrales", "dirección de obra", "interiorismo", "eficiencia energética", "gestión de licencias"], verifiedByCompany: false },
     ],
     languages: ["Catalán (nativo)", "Español (nativo)", "Inglés (C2)", "Alemán (C1)", "Italiano (B2)"],
     personality: { patience: 9.2, empathy: 8.8, communication: 9.5, punctuality: 9.6, autonomy: 9.9 },
     skills: ["proyectos residenciales", "reforma integral", "diseño sostenible", "eficiencia energética", "dirección de obra", "BIM", "interiorismo"],
     hiddenSkills: ["gestión de promotores", "photovoltaica integrada en arquitectura"],
     qualitativeComments: [
-      { text: "Transformó nuestro piso en algo que no habríamos imaginado nunca", user: "Propietarios Sarrià", date: "Mar 2026", avatar: "P" },
-      { text: "Muy transparente en costes y plazos. Cero sorpresas.", user: "Pareja, reforma Eixample", date: "Ene 2026", avatar: "P" },
+{ text:"Transformó nuestro piso en algo que no habríamos imaginado nunca", user:"Propietarios Sarrià", date:"Mar 2026", avatar:"P"},
+{ text:"Muy transparente en costes y plazos. Cero sorpresas.", user:"Pareja, reforma Eixample", date:"Ene 2026", avatar:"P"},
     ],
     posts: [
-      { id: 1, type: "work", text: "Reforma finalizada en el Eixample: un piso de 1960 transformado con criterios de passive house. La calefacción de invierno pasó de 180€/mes a 45€/mes. La arquitectura bien hecha no es más cara — es más inteligente.", date: "Hace 4 días", likes: 312, comments: 48, verifiedWork: true },
+{ id: 1, type:"work", text:"Reforma finalizada en el Eixample: un piso de 1960 transformado con criterios de passive house. La calefacción de invierno pasó de 180€/mes a 45€/mes. La arquitectura bien hecha no es más cara — es más inteligente.", date:"Hace 4 días", likes: 312, comments: 48, verifiedWork: true },
     ],
     evolution: [{ period: "2020", rating: 4.7, services: 6 }, { period: "2021", rating: 4.8, services: 14 }, { period: "2022", rating: 4.8, services: 22 }, { period: "2023", rating: 4.8, services: 34 }],
   },

@@ -805,7 +805,7 @@ export default function Home({ setSearchState }) {
             <span className={styles.recentLabel}>Recientes</span>
             {searchHistory.slice(0, 3).map((s, i) => (
               <button key={i} className={styles.recentItem} onClick={() => handleSend(s.query)}>
-                <span className={styles.recentIcon}>🕐</span>
+                <Clock size={12} color='rgba(0,0,0,0.35)' style={{flexShrink:0}} />
                 <span className={styles.recentText}>{s.query}</span>
               </button>
             ))}

@@ -44,9 +44,9 @@ function genEducation(s) {
 function genExperience(s, zone, services) {
   const yrs = Math.max(1, Math.round((parseInt(services)||20) / 25))
   const end = new Date().getFullYear()
-  const roles = { logopeda:'Logopeda', tecnico:'Técnico de mantenimiento', limpieza:'Auxiliar de limpieza', cuidado:'Auxiliar de geriatría', mascotas:'Cuidador/a de mascotas', entrenador:'Entrenador personal', matematicas:'Profesor/a particular' }
-  const companies = { logopeda:'Clínica logopédica privada', tecnico:'Servicio técnico Barcelona', limpieza:'Empresa de servicios de limpieza', cuidado:'Centro de atención a mayores', mascotas:'Servicio de cuidado de mascotas', entrenador:'Centro deportivo', matematicas:'Academia de refuerzo escolar' }
-  const logos = { logopeda:'🏥', tecnico:'🔧', limpieza:'🧹', cuidado:'❤️', mascotas:'🐾', entrenador:'💪', matematicas:'📚' }
+  const roles = { logopeda:'+', tecnico:'⚙', limpieza:'◎', cuidado:'♡', mascotas:'◆', entrenador:'▷', matematicas:'◇' }
+  const companies = { logopeda:'+', tecnico:'⚙', limpieza:'◎', cuidado:'♡', mascotas:'◆', entrenador:'▷', matematicas:'◇' }
+  const logos = { logopeda:'LG', tecnico:'TC', limpieza:'LM', cuidado:'CU', mascotas:'MA', matematicas:'MT', entrenador:'EN', salud:'SA', legal:'LG', hogar:'HG', otro:'OT' }
   const skills = {
     logopeda:['diagnóstico fonológico','terapia individual','coordinación con familias'],
     tecnico:['reparaciones urgentes','mantenimiento preventivo','atención al cliente'],

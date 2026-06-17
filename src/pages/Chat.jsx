@@ -179,9 +179,9 @@ function ConfirmModal({ helper, onClose, onConfirm }) {
           <div style={{background:'rgba(0,0,0,0.03)',border:'1px solid rgba(0,0,0,0.06)',borderRadius:'12px',
             padding:'10px 14px',marginBottom:'20px',textAlign:'left'}}>
             {date && <p style={{margin:'0 0 3px',fontSize:'12px',color:'rgba(0,0,0,0.55)'}}>
-              📅 {new Date(date).toLocaleDateString('es-ES',{weekday:'long',day:'numeric',month:'long'})}
+              {new Date(date).toLocaleDateString('es-ES',{weekday:'long',day:'numeric',month:'long'})}
             </p>}
-            {time && <p style={{margin:0,fontSize:'12px',color:'rgba(0,0,0,0.55)'}}>🕐 {time}h</p>}
+            {time && <p style={{margin:0,fontSize:'12px',color:'rgba(0,0,0,0.55)'}}>{time}h</p>}
           </div>
         )}
         <div style={{display:'flex',flexDirection:'column',gap:'8px',width:'100%'}}>
@@ -445,7 +445,7 @@ export default function Chat() {
             <p className={styles.emptyChatDesc}>{helper.specialty} · {helper.zone}</p>
             {helper.price && <p className={styles.emptyChatPrice}>{helper.price}</p>}
             <div style={{display:'flex',gap:'8px',flexWrap:'wrap',justifyContent:'center',marginTop:'4px'}}>
-              {helper.dniVerified && <span style={{fontSize:'11px',color:'#059669',background:'#ECFDF5',border:'1px solid rgba(5,150,105,0.15)',borderRadius:'100px',padding:'3px 10px',fontWeight:600}}>✓ Verificado</span>}
+              {helper.dniVerified && <span style={{fontSize:'11px',color:'#059669',background:'#ECFDF5',border:'1px solid rgba(5,150,105,0.15)',borderRadius:'100px',padding:'3px 10px',fontWeight:600}}>Verificado</span>}
               {helper.available && <span style={{fontSize:'11px',color:'#059669',background:'#ECFDF5',border:'1px solid rgba(5,150,105,0.15)',borderRadius:'100px',padding:'3px 10px',fontWeight:600}}>● Disponible</span>}
               <span style={{fontSize:'11px',color:'rgba(0,0,0,0.4)',background:'rgba(0,0,0,0.04)',borderRadius:'100px',padding:'3px 10px'}}>⭐ {helper.rating} · {helper.reviews} reseñas</span>
             </div>
@@ -529,7 +529,7 @@ export default function Chat() {
       {/* Nüra suggestion for first message */}
       {suggested && messages.length === 0 && (
         <div className={styles.suggestionBar}>
-          <span className={styles.suggestionLabel}>💡 Nüra sugiere</span>
+          <span className={styles.suggestionLabel}>Nüra sugiere</span>
           <button className={styles.suggestionText} onClick={() => sendMessage(suggested)}>{suggested}</button>
         </div>
       )}

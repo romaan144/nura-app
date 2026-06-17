@@ -31,7 +31,7 @@ export function scheduleRetentionNotifications(userName = 'tú') {
 
 export function notifyServiceConfirmed(helperName) {
   scheduleLocalNotification(
-    '✅ Solicitud enviada',
+    'Solicitud enviada',
     `${helperName} recibirá tu solicitud y te confirmará en breve.`
   )
 }
@@ -85,7 +85,7 @@ export function notifyMorningReminder(name, pendingCount) {
 export function notifyWeeklyDigest(newHelpers = 0) {
   // Weekly digest — 7 days after last notification
   scheduleLocalNotification(
-    '📅 Esta semana en Nüra',
+    'Esta semana en Nüra',
     newHelpers > 0
       ? `${newHelpers} nuevos profesionales se han unido cerca de ti.`
       : 'Nuevos helpers disponibles. ¿Qué necesitas esta semana?',

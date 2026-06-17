@@ -138,12 +138,12 @@ export default function Explore() {
               {['presential','online'].map(k => (
                 <button key={k} className={`${styles.filterPill} ${filters[k] ? styles.filterPillActive : ''}`}
                   onClick={() => setFilters(f => ({...f, [k]: !f[k]}))}>
-                  {k === 'presential' ? '📍 Presencial' : '💻 Online'}
+                  {k === 'presential' ? 'Presencial' : 'Online'}
                 </button>
               ))}
               <button className={`${styles.filterPill} ${filters.urgent ? styles.filterPillActive : ''}`}
                 onClick={() => setFilters(f => ({...f, urgent: !f.urgent}))}>
-                ⚡ Urgencias
+                Urgencias
               </button>
             </div>
           </div>
@@ -231,7 +231,7 @@ export default function Explore() {
           {filtered.length === 0 && !loadingHelpers && (
             <div style={{gridColumn:'1/-1',textAlign:'center',padding:'48px 24px',
               display:'flex',flexDirection:'column',alignItems:'center',gap:'12px'}}>
-              <span style={{fontSize:'44px'}}>🔍</span>
+              <Search size={40} color='rgba(0,0,0,0.12)' strokeWidth={1.3} />
               <p style={{fontSize:'16px',fontWeight:700,color:'rgba(0,0,0,0.6)',margin:0,letterSpacing:'-0.2px'}}>
                 Sin resultados
               </p>
