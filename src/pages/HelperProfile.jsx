@@ -692,6 +692,13 @@ function HelperProfileInner() {
       .finally(() => setLoading(false))
   }, [id])
 
+  // Schedule a gentle reminder if user viewed but didn't contact
+  useEffect(() => {
+    if (h && !isOwner) {
+      notifyHelperViewed(h.name?.split(' ')?.[0] || h.name, h.specialty)
+    }
+  }, [h?.id])
+
   if (loading) return (
     <div style={{display:'flex',alignItems:'center',justifyContent:'center',height:'100dvh',background:'#F8F8FA'}}>
       <div style={{textAlign:'center',display:'flex',flexDirection:'column',alignItems:'center',gap:'16px'}}>
@@ -731,12 +738,7 @@ function HelperProfileInner() {
 
   const isSupabaseHelper = !!h.isFromSupabase
 
-  // Schedule a gentle reminder if user viewed but didn't contact
-  useEffect(() => {
-    if (h && !isOwner) {
-      notifyHelperViewed(h.name?.split(' ')?.[0] || h.name, h.specialty)
-    }
-  }, [h?.id])
+
 
   // Category-based cover gradient
   const COVER_GRADIENTS = {
