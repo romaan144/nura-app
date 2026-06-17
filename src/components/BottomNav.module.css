@@ -47,7 +47,8 @@
 .label {
   font-size: var(--text-xs);
   font-weight: 500;
-  color: rgba(0,0,0,0.35);
+  color: rgba(0,0,0,0.3);
+  letter-spacing: 0.1px;
   font-family: -apple-system, 'Inter', sans-serif;
   letter-spacing: -0.1px;
   transition: color 0.15s;
