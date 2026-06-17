@@ -138,15 +138,39 @@ function getHelperReply(helper, count, userMsg = '') {
   return r[Math.min(count, r.length - 1)]
 }
 
-// ── Nüra intervention — helps close the deal ─────────────────────────────
-function getNuraIntervention(helper, count) {
+// ── Nüra intervention — context-aware, detects booking moments ────────────
+function getNuraIntervention(helper, count, messages) {
   const name = helper.name?.split(' ')?.[0] || helper.name
-  const interventions = {
-    2: `La conversación va bien. Cuando quieras formalizar, pulsa **Contratar** arriba.`,
-    4: `**${name}** tiene ${helper.rating || 4.8}⭐ de media. Puedes ver sus valoraciones completas en su perfil.`,
-    6: `Si contratas a **${name}**, quedará registrado en **Mis Servicios** con todos los detalles.`,
+  if (count < 2) return null
+
+  // Read all message text to detect booking signals
+  const allText = (messages || [])
+    .map(m => (m.text || m.lines?.join(' ') || '').toLowerCase())
+    .join(' ')
+
+  const hasDia = /lunes|martes|miércoles|jueves|viernes|sábado|domingo|mañana|semana|esta semana|próxima|pasado|día [0-9]/i.test(allText)
+  const hasHora = /[0-9]+h|[0-9]+:[0-9]+|por la mañana|por la tarde|por la noche|a las/i.test(allText)
+  const hasPrecio = /€|precio|cobro|cuesta|tarifa/i.test(allText)
+  const hasPositivo = /perfecto|genial|ok|bien|de acuerdo|confirmado|confirmamos|me viene|me parece|trato|vale|sí|claro/i.test(allText)
+  const hasBookingSignal = hasDia && hasPositivo
+
+  // BOOKING MOMENT: date mentioned + positive response → push CTA now
+  if (hasBookingSignal && count >= 3) {
+    return `Todo apunta a que habéis llegado a un acuerdo. ¿Confirmo la reserva con **${name}**?`
   }
-  return interventions[count] || null
+
+  // Price discussed → reassure
+  if (hasPrecio && count === 3) {
+    return `El precio está claro. Si todo te parece bien, puedes confirmar desde el botón **Contratar**.`
+  }
+
+  // Count-based fallbacks for when no signals detected
+  const fallbacks = {
+    2: `¿Necesitas algo más antes de decidir? Puedo buscar alternativas si quieres comparar.`,
+    5: `**${name}** tiene ${helper.rating || 4.8}★ de media con ${helper.reviews || 0} valoraciones reales.`,
+    7: `Cuando estés listo, confirma la reserva. Quedará en **Mis Servicios** con todos los detalles.`,
+  }
+  return fallbacks[count] || null
 }
 
 function formatTime(date) {
@@ -390,10 +414,17 @@ export default function Chat() {
       addChat?.(helper.id, helper.name, helper.avatarColor, helper.avatar, replyText)
 
       // Nüra intervention at key moments
-      const nura = getNuraIntervention(helper, newCount)
+      const nura = getNuraIntervention(helper, newCount, messages)
       if (nura) {
         setTimeout(() => {
-          setMessages(prev => [...prev, { id: Date.now() + 2, text: nura, from: 'nura', time: new Date().toISOString() }])
+          const isBookingMoment = nura.includes('Confirmo la reserva') || nura.includes('confirmar')
+          setMessages(prev => [...prev, {
+            id: Date.now() + 2,
+            text: nura,
+            from: 'nura',
+            time: new Date().toISOString(),
+            chips: isBookingMoment ? ['Confirmar reserva', 'Todavía no'] : undefined,
+          }])
         }, 800)
       }
     }, delay)
@@ -558,6 +589,28 @@ export default function Chat() {
               )}
               <div className={`${styles.msgBubble} ${isNura ? styles.msgBubbleNura : ''}`}>
                 <p>{msg.text}</p>
+                {isNura && msg.chips && (
+                  <div style={{display:'flex',gap:'6px',marginTop:'8px',flexWrap:'wrap'}}>
+                    {msg.chips.map((chip, ci) => (
+                      <button key={ci}
+                        onClick={() => {
+                          if (chip === 'Confirmar reserva') { setShowConfirm(true); return }
+                          if (chip === 'Todavía no') return
+                          sendMessage(chip)
+                        }}
+                        style={{
+                          padding:'5px 12px',borderRadius:'100px',fontSize:'12px',fontWeight:600,
+                          cursor:'pointer',border:'none',
+                          background: chip === 'Confirmar reserva'
+                            ? 'var(--purple)' : 'rgba(0,0,0,0.07)',
+                          color: chip === 'Confirmar reserva' ? 'white' : 'rgba(0,0,0,0.6)',
+                          fontFamily:'inherit',
+                        }}>
+                        {chip}
+                      </button>
+                    ))}
+                  </div>
+                )}
                 <span className={msg.from === 'user' ? styles.msgTime : styles.msgTimeHelper}>{formatTime(msg.time)}</span>
               </div>
             </div>
