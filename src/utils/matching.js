@@ -174,7 +174,8 @@ const CATEGORY_KEYWORDS = {
     'francés','alemán','italiano','clase particular','academia','tutorías',
     'selectividad','bachillerato','eso','primaria','universidad','oposiciones',
     'guitarra','ballet','ajedrez','suspenso','examen','instituto','cole'],
-  entrenador: ['entrenador','gym','gimnasio','deporte','ejercicio','fitness','correr',
+  entrenador: [
+    'perder peso', 'adelgazar', 'bajar de peso', 'dieta y ejercicio','entrenador','gym','gimnasio','deporte','ejercicio','fitness','correr',
     'adelgazar','musculación','yoga','pilates','running','crossfit','natación',
     'ciclismo','spinning','zumba','baile','aeróbic','pesas','cardio','ponerse en forma',
     'músculo','forma'],

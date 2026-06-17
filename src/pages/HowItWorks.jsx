@@ -107,6 +107,33 @@ export default function HowItWorks() {
           ))}
         </div>
 
+        {/* Sobre Nüra */}
+        <div id="about" style={{
+          background:'rgba(255,255,255,0.7)',
+          border:'1px solid rgba(0,0,0,0.06)',
+          borderRadius:'20px', padding:'24px 20px',
+          marginBottom:'12px',
+        }}>
+          <p style={{fontSize:'11px',fontWeight:700,color:'rgba(123,47,255,0.6)',
+            letterSpacing:'0.5px',textTransform:'uppercase',margin:'0 0 10px'}}>
+            Sobre Nüra
+          </p>
+          <h3 style={{fontSize:'18px',fontWeight:800,color:'rgba(0,0,0,0.85)',
+            letterSpacing:'-0.4px',margin:'0 0 10px',lineHeight:1.3}}>
+            Construida para conectar personas reales
+          </h3>
+          <p style={{fontSize:'14px',color:'rgba(0,0,0,0.55)',lineHeight:1.7,margin:'0 0 12px'}}>
+            Nüra nació de una pregunta simple: ¿por qué es tan difícil encontrar a la persona adecuada cuando más la necesitas?
+          </p>
+          <p style={{fontSize:'14px',color:'rgba(0,0,0,0.55)',lineHeight:1.7,margin:'0 0 12px'}}>
+            No creemos que la IA deba reemplazar el contacto humano. Creemos que debe facilitar que dos personas se encuentren — la que necesita ayuda y la que puede darla.
+          </p>
+          <p style={{fontSize:'14px',color:'rgba(0,0,0,0.55)',lineHeight:1.7,margin:0,
+            fontStyle:'italic',borderLeft:'3px solid rgba(123,47,255,0.2)',paddingLeft:'12px'}}>
+            "La tecnología más poderosa es la que pone en contacto a personas."
+          </p>
+        </div>
+
         {/* Helper CTA */}
         <div style={{
           background:'linear-gradient(135deg,rgba(123,47,255,0.06),rgba(0,212,200,0.04))',
