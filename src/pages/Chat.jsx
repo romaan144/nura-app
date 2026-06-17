@@ -261,7 +261,7 @@ export default function Chat() {
   const { id } = useParams()
   const navigate = useNavigate()
   const { addChat, markRead, hasRated, helpersCache, addService,
-    services
+    services, getChatHistory, saveChatHistory
   } = useUser()
 
   const [helper, setHelper] = useState(
