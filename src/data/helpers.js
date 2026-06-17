@@ -215,7 +215,6 @@ export const HELPERS = [
     aiData: {
         summary: "Elena tiene formación específica en Alzheimer y demencias. Lleva 89 familias atendidas en domicilio. Destaca por su paciencia excepcional y capacidad de crear vínculo con el mayor.",
         skills: ["Alzheimer", "demencias", "fisioterapia básica", "medicación", "compañía"],
-        personality: {"ideal_for": "Personas mayores con Alzheimer, demencia o dependencia moderada que necesitan compañía y asistencia domiciliaria",
         personality: {"Empatía": 9.9, "Paciencia": 9.8, "Fiabilidad": 9.7, "Discreción": 9.6},
         ideal_for: "Personas mayores con Alzheimer, demencia o dependencia moderada",
       },

@@ -2,6 +2,7 @@ import { useState, useEffect, useRef } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { Send, Mic, MicOff, Plus } from 'lucide-react'
 import { analyzeNeed, matchHelpers } from '../utils/matching'
+import { HELPERS } from '../data/helpers'
 import { useUser } from '../context/UserContext'
 import { MenuButton } from '../components/NavBar'
 import { showToast } from '../components/Toast'
@@ -19,7 +20,7 @@ function getWelcome(user, searchHistory, favorites, helpersCache) {
 
   if (!user) return [
     `Hola. Soy **Nüra**.`,
-    `Cuéntame qué necesitas. Busco entre más de 1.200 profesionales verificados en Barcelona y encuentro a la persona exacta que puede ayudarte — con nombre, precio y disponibilidad real.`
+    `Cuéntame lo que necesitas — en lenguaje normal, sin formularios. Encuentro a la persona real que puede ayudarte.`,
   ]
 
   // Use what Nüra knows about this user
@@ -55,9 +56,10 @@ function getWelcome(user, searchHistory, favorites, helpersCache) {
   // Default greeting
   if (user.isHelper) return [`${greeting}, **${firstName}**. ¿Qué necesitas hoy?`]
   return [
-    hour < 12 ? `${greeting}, **${firstName}**. ¿En qué puedo ayudarte esta mañana?`
-    : hour < 18 ? `${greeting}, **${firstName}**. ¿Qué necesitas?`
-    : `${greeting}, **${firstName}**. Cuéntame qué necesitas.`
+    `${greeting}, **${firstName}**.`,
+    hour < 12 ? `¿En qué puedo ayudarte esta mañana?`
+    : hour < 18 ? `Cuéntame qué necesitas y lo encontramos.`
+    : `¿Qué necesitas esta noche?`
   ]
 }
 
