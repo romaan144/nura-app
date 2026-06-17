@@ -164,6 +164,13 @@ export default function Chats() {
       </div>
 
       <div className={styles.list}>
+        {filtered.length === 0 && search.trim() && (
+          <div style={{textAlign:'center',padding:'48px 24px',color:'rgba(0,0,0,0.4)'}}>
+            <Search size={36} color='rgba(0,0,0,0.12)' strokeWidth={1.3} style={{marginBottom:'12px'}}/>
+            <p style={{fontSize:'14px',fontWeight:500}}>Sin resultados para "{search}"</p>
+            <p style={{fontSize:'12px',marginTop:'4px'}}>Prueba con el nombre del helper</p>
+          </div>
+        )}
         {filtered.map((chat, i) => {
           const helper = getHelper(chat.helperId)
           const isDemo = demosToShow.some(d => d.helperId === chat.helperId)

@@ -2,13 +2,14 @@
    HELPER CARD — shared across Home, Results, Explore
    ══════════════════════════════════════════════════════ */
 .card {
-  background: rgba(255,255,255,0.88);
-  border: 1px solid rgba(255,255,255,0.5);
+  background: rgba(255,255,255,0.92);
+  border: 1px solid rgba(0,0,0,0.06);
   border-radius: 20px;
   padding: 14px;
   display: flex;
   flex-direction: column;
   gap: 10px;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.05), 0 4px 12px rgba(0,0,0,0.04);
   cursor: pointer;
   position: relative;
   box-shadow: 0 1px 12px rgba(0,0,0,0.05);
