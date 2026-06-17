@@ -83,7 +83,7 @@ export default function Results({ searchState }) {
             </span>
             {analysis.urgente && <span className={styles.pill + ' ' + styles.pillUrgent}>Urgente</span>}
             <span className={styles.pill + ' ' + styles.pillNormal}>
-              {{ student:'Sin titulación', experienced:'Con experiencia', professional:'🎓 Profesional' }[analysis.nivelRequerido] || 'Con experiencia'}
+              {{ student:'Sin titulación', experienced:'Con experiencia', professional:'Profesional' }[analysis.nivelRequerido] || 'Con experiencia'}
             </span>
           </div>
         )}

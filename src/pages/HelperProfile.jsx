@@ -1230,7 +1230,7 @@ function HelperProfileInner() {
                 {/* Show what we DO know */}
                 <div style={{background:'rgba(255,255,255,0.85)',border:'1px solid rgba(255,255,255,0.5)',borderRadius:'16px',padding:'16px',boxShadow:'0 1px 8px rgba(0,0,0,0.04)'}}>
                   <div style={{display:'flex',gap:'12px',alignItems:'center'}}>
-                    <div style={{width:'40px',height:'40px',borderRadius:'50%',background:'rgba(123,47,255,0.08)',display:'flex',alignItems:'center',justifyContent:'center',fontSize:'18px',flexShrink:0}}>💼</div>
+                    <div style={{width:'40px',height:'40px',borderRadius:'50%',background:'rgba(123,47,255,0.08)',display:'flex',alignItems:'center',justifyContent:'center',flexShrink:0}}><Briefcase size={18} color='var(--purple)' strokeWidth={1.6} /></div>
                     <div>
                       <div style={{fontSize:'14px',fontWeight:700,color:'rgba(0,0,0,0.8)',letterSpacing:'-0.1px'}}>{h.specialty || 'Profesional'}</div>
                       <div style={{fontSize:'12px',color:'rgba(0,0,0,0.45)',marginTop:'2px'}}>{h.zone || h.city || 'Barcelona'} · Autónomo/a</div>

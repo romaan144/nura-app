@@ -564,8 +564,8 @@ export default function Home({ setSearchState }) {
       const resultMsg = {
         id: Date.now(), from: 'nura',
         lines: followLine
-          ? (user ? [resultLine, followLine] : [resultLine, followLine, '💬 Para contactarles, crea tu cuenta gratis. Solo tarda 30 segundos.'])
-          : (user ? [resultLine] : [resultLine, '💬 Crea tu cuenta gratis para escribirles.']),
+          ? (user ? [resultLine, followLine] : [resultLine, followLine, 'Para contactarles, crea tu cuenta gratis. Solo tarda 30 segundos.'])
+          : (user ? [resultLine] : [resultLine, 'Crea tu cuenta gratis para escribirles.']),
         results: matches,
         chips: matches.length > 0
           ? (user
