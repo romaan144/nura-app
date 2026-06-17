@@ -133,6 +133,12 @@ function PostCard({ post }) {
 
       {/* Badge */}
       {post.badge && <div className={styles.badge}>{post.badge}</div>}
+      {post.type === 'availability' && !post.badge && (
+        <div className={styles.availabilityBadge}>🟢 Disponible esta semana</div>
+      )}
+      {post.type === 'tip' && !post.badge && (
+        <div className={styles.tipBadge}>💡 Consejo profesional</div>
+      )}
       {post.type === 'hiring' && (
         <div className={styles.hiringBadge}>💼 Oferta de empleo · Perfil Nüra requerido</div>
       )}
