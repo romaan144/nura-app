@@ -30,6 +30,21 @@ function getHelperReply(helper, count, userMsg = '') {
   const name = helper.name?.split(' ')?.[0] || ''
   const t = userMsg.toLowerCase()
   
+  // When coming from Nüra recommendation — acknowledge it
+  if (t.includes('nüra me ha recomendado') || t.includes('nura me ha recomendado')) {
+    const cat = helper.category || 'otro'
+    const specific = {
+      logopeda: `Hola, me alegra que Nüra te haya dirigido aquí. ¿Me cuentas la edad y qué dificultades concretas observas?`,
+      cuidado: `Hola, con mucho gusto. ¿Puedes contarme un poco sobre tu familiar — movilidad, horarios, lo que necesite?`,
+      tecnico: `Hola, dime en qué consiste el problema exactamente. Así vengo preparado con lo necesario.`,
+      limpieza: `Hola, disponibilidad tengo. ¿Cuántos metros es la vivienda y con qué frecuencia lo necesitarías?`,
+      entrenador: `Hola, la primera sesión es gratis para evaluar punto de partida y objetivos. ¿Esta semana te viene bien?`,
+      salud: `Hola, cuéntame qué te ocurre. Así valoro si puedo ayudarte y cómo.`,
+      legal: `Hola, para orientarte bien necesito saber más sobre el caso. ¿Qué tipo de situación es?`,
+    }
+    return specific[cat] || `Hola, encantado/a. Cuéntame más sobre lo que necesitas para ver cómo puedo ayudarte.`
+  }
+
   // Universal keyword responses (override category)
   if (t.includes('precio') || t.includes('cuánto') || t.includes('coste') || t.includes('tarifa'))
     return `Mi tarifa es ${helper.price || 'a consultar según el servicio'}. ¿Te parece bien?`
@@ -56,7 +71,8 @@ function getHelperReply(helper, count, userMsg = '') {
     return `Tengo ${helper.reviews || 0} valoraciones en Nüra con una media de ${helper.rating || 4.5} estrellas. Puedes verlas en mi perfil.`
   if (t.includes('contrat') || t.includes('reservar') || t.includes('apuntar'))
     return `Con mucho gusto. Dime cuándo y te confirmo disponibilidad.`
-  if (t.includes('hola') || t.includes('buenas') || t.includes('buenos'))
+  // Only generic greeting if ONLY a greeting (no other content)
+  if ((t.includes('hola') || t.includes('buenas') || t.includes('buenos')) && t.length < 15)
     return `¡Hola! Soy ${name}. ¿En qué puedo ayudarte?`
 
   const replies = {
@@ -291,7 +307,9 @@ export default function Chat() {
   const buildPreFill = (helper, query) => {
     if (!helper || !query) return ''
     const name = helper.name?.split(' ')?.[0] || ''
-    return `Hola ${name}, Nüra me ha recomendado tu perfil. ${query}. ¿Podrías ayudarme?`
+    // Clean up the query — remove trailing punctuation, make it lowercase if it starts as such
+    const q = query.trim().replace(/[.?!]+$/, '')
+    return `Hola ${name}, Nüra me ha recomendado tu perfil. ${q}. ¿Puedes ayudarme?`
   }
 
   const [input, setInput] = useState(() =>

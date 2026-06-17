@@ -11,7 +11,7 @@ import { haptic } from '../utils/haptic'
  * Tapping a card goes to chat directly (not profile).
  * Compact format: avatar, name, specialty, rating, price, one CTA.
  */
-function CarouselCard({ helper, isTopPick }) {
+function CarouselCard({ helper, isTopPick, matchReason }) {
   const navigate = useNavigate()
   const { user, toggleFavorite, isFavorite } = useUser()
   const fav = isFavorite(helper.id)
@@ -74,8 +74,20 @@ function CarouselCard({ helper, isTopPick }) {
         <span>{helper.distance || 1.2}km</span>
       </div>
 
+      {/* Match reason micro-text — why Nüra chose this helper */}
+      {matchReason && (
+        <p style={{
+          fontSize:'10px',color:'rgba(0,0,0,0.45)',margin:'2px 0 0',
+          lineHeight:1.4,display:'-webkit-box',WebkitLineClamp:2,
+          WebkitBoxOrient:'vertical',overflow:'hidden',
+          fontStyle:'italic',
+        }}>
+          {matchReason.replace(/^\*\*[^*]+\*\*[^:]+: /,'')}
+        </p>
+      )}
+
       {/* Top tag */}
-      {helper.tags?.[0] && (
+      {!matchReason && helper.tags?.[0] && (
         <div style={{
           fontSize:'9px',color:'rgba(0,0,0,0.4)',
           background:'rgba(0,0,0,0.04)',
@@ -104,7 +116,7 @@ export default function HelperCarousel({ helpers }) {
   return (
     <div className={styles.wrap}>
       <div className={styles.track}>
-        {helpers.map((h, i) => h && <CarouselCard key={h.id} helper={h} isTopPick={i === 0} />)}
+        {helpers.map((h, i) => { const reason = window.__nuraMatchReasons?.[String(h.id)]; return h && <CarouselCard key={h.id} helper={h} isTopPick={i === 0} matchReason={reason} /> })}
       </div>
     </div>
   )
