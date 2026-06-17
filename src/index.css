@@ -6,8 +6,45 @@
 
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
+body {
+  font-size: var(--text-base);
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+}
+
 :root {
-  /* Nüra palette — from the logo */
+  /* ── TYPE SCALE (6 stops — Apple pattern) ─────────── */
+  --text-xs:   11px;   /* captions, badges, timestamps */
+  --text-sm:   13px;   /* secondary, meta, labels */
+  --text-base: 15px;   /* body, messages, descriptions */
+  --text-md:   17px;   /* subheadings, emphasized body */
+  --text-lg:   22px;   /* section titles, card headers */
+  --text-xl:   28px;   /* page titles, hero text */
+
+  /* ── SHADOW SCALE (4 tokens) ───────────────────────── */
+  --shadow-xs:  0 1px 3px rgba(13,13,26,0.06);
+  --shadow-sm:  0 2px 8px rgba(13,13,26,0.08);
+  --shadow-md:  0 4px 20px rgba(13,13,26,0.10);
+  --shadow-lg:  0 12px 40px rgba(13,13,26,0.14);
+
+  /* ── SPACING SCALE (8-point grid) ──────────────────── */
+  --space-1:  4px;
+  --space-2:  8px;
+  --space-3: 12px;
+  --space-4: 16px;
+  --space-5: 20px;
+  --space-6: 24px;
+
+  /* ── RADIUS SCALE ───────────────────────────────────── */
+  --radius-sm:  10px;
+  --radius-md:  16px;
+  --radius-lg:  20px;
+  --radius-xl:  28px;
+  --radius-full: 100px;
+
+  /* ── Nüra palette — from the logo ─────────────────── */
   --red:      #FF3B3B;
   --red2:     #E8002D;
   --cyan:     #00D4C8;
