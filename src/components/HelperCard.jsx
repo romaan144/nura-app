@@ -116,6 +116,19 @@ export default function HelperCard({ helper, onContact, compact = false, showCon
         </p>
       )}
 
+      {/* SPECIALTY TAGS */}
+      {helper.tags?.length > 0 && (
+        <div style={{display:'flex',gap:'4px',flexWrap:'wrap',marginTop:'-4px'}}>
+          {helper.tags.slice(0,3).map((tag,i) => (
+            <span key={i} style={{
+              fontSize:'10px',color:'rgba(0,0,0,0.45)',
+              background:'rgba(0,0,0,0.04)',
+              borderRadius:'100px',padding:'2px 8px',fontWeight:500,
+            }}>{tag}</span>
+          ))}
+        </div>
+      )}
+
       {/* BOTTOM: tags + actions */}
       <div className={styles.bottom}>
         <div className={styles.tags}>

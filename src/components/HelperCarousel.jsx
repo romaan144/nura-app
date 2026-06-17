@@ -74,6 +74,18 @@ function CarouselCard({ helper }) {
         <span>{helper.distance || 1.2}km</span>
       </div>
 
+      {/* Top tag */}
+      {helper.tags?.[0] && (
+        <div style={{
+          fontSize:'9px',color:'rgba(0,0,0,0.4)',
+          background:'rgba(0,0,0,0.04)',
+          borderRadius:'100px',padding:'2px 7px',
+          alignSelf:'center',fontWeight:500,
+          whiteSpace:'nowrap',overflow:'hidden',textOverflow:'ellipsis',
+          maxWidth:'120px',
+        }}>{helper.tags[0]}</div>
+      )}
+
       {/* Price */}
       {helper.price && helper.price !== 'Consultar' && (
         <div className={styles.price}>{helper.price}</div>

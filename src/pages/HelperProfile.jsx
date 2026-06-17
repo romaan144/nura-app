@@ -209,12 +209,21 @@ function AiDataSection({ aiData, aiAnalyzedAt, helperName }) {
   // Known renderers for common keys Claude might write
   const RENDERERS = {
     summary: (v) => (
-      <div style={{fontSize:'14px',color:'rgba(0,0,0,0.65)',lineHeight:1.7,fontStyle:'italic',
-        borderLeft:'3px solid rgba(123,47,255,0.25)',paddingLeft:'12px'}}>
-        "{v}"
+      <div style={{
+        fontSize:'14px',color:'rgba(0,0,0,0.7)',lineHeight:1.75,
+        background:'rgba(123,47,255,0.04)',
+        borderLeft:'3px solid rgba(123,47,255,0.3)',
+        borderRadius:'0 10px 10px 0',
+        padding:'12px 14px',
+      }}>
+        <div style={{fontSize:'10px',fontWeight:700,color:'rgba(123,47,255,0.7)',
+          letterSpacing:'0.5px',textTransform:'uppercase',marginBottom:'6px'}}>
+          Análisis de Nüra
+        </div>
+        {v}
       </div>
     ),
-    skills: (v) => Array.isArray(v) && v.length > 0 && (
+    skills: (v) => { const arr = Array.isArray(v) ? v : (v ? String(v).split(',').map(s=>s.trim()) : []); return arr.filter(Boolean).length > 0 && (
       <div style={{display:'flex',flexWrap:'wrap',gap:'6px'}}>
         {v.map((s,i) => (
           <span key={i} style={{padding:'4px 10px',borderRadius:'100px',
@@ -224,7 +233,7 @@ function AiDataSection({ aiData, aiAnalyzedAt, helperName }) {
           </span>
         ))}
       </div>
-    ),
+    ); },
     personality: (v) => typeof v === 'object' && (
       <div style={{display:'flex',flexDirection:'column',gap:'8px'}}>
         {Object.entries(v).map(([k, val]) => (
@@ -232,7 +241,7 @@ function AiDataSection({ aiData, aiAnalyzedAt, helperName }) {
             <span style={{fontSize:'12px',color:'rgba(0,0,0,0.5)',minWidth:'100px',
               textTransform:'capitalize'}}>{k}</span>
             <div style={{flex:1,height:'4px',borderRadius:'2px',background:'rgba(0,0,0,0.08)'}}>
-              <div style={{width:`${typeof val==='number'?val:70}%`,height:'100%',
+              <div style={{width:`${typeof val==='number' ? (val > 10 ? val : val*10) : 70}%`,height:'100%',
                 borderRadius:'2px',background:'var(--purple)'}} />
             </div>
             <span style={{fontSize:'11px',color:'rgba(0,0,0,0.4)',minWidth:'28px',textAlign:'right'}}>
