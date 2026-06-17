@@ -42,7 +42,7 @@ function getWelcome(user, searchHistory, favorites, helpersCache) {
   if (topFav && favorites?.length > 0) {
     return [
       `${greeting}, **${firstName}**.`,
-      `Tienes **${topFav.name?.split(' ')?.[0]}** guardado en favoritos. ¿Quieres contactarle o buscas a alguien diferente?`
+      `**${topFav.name?.split(' ')?.[0]}** está en tus favoritos. ¿Le escribo?`
     ]
   }
 
@@ -244,22 +244,18 @@ export default function Home({ setSearchState }) {
       setTimeout(() => setMessages([{ id: 1, from: 'nura', lines }]), 300)
       return
     }
-    // If returning user with search history, personalize
+    // Returning user — single message + immediate action chips
     const lastQ = searchHistory?.[0]?.query
+    const msgs = [{ id: 1, from: 'nura', lines }]
     if (user && lastQ && nuraChatMessages.length === 0) {
       const hour = new Date().getHours()
       const g = hour < 14 ? 'Buenos días' : hour < 21 ? 'Buenas tardes' : 'Buenas noches'
-      lines = [`${g}, **${user.name?.split(' ')?.[0] || user.name}**. ¿Sigues buscando *${lastQ}* o necesitas algo diferente?`]
-    }
-    const msgs = [{ id: 1, from: 'nura', lines }]
-
-    // For users who have searched before — add a personalized insight
-    if (user && searchHistory?.length >= 2) {
-      msgs.push({
-        id: 2, from: 'nura',
-        lines: [`Por cierto, la semana pasada buscaste **${searchHistory[0]?.query}**. ¿Encontraste lo que necesitabas o quieres que vuelva a buscar?`],
-        quickOptions: ['Sí, ya lo resolví ✓', 'No, busca de nuevo']
-      })
+      const firstName = user.name?.split(' ')?.[0] || user.name
+      msgs[0] = {
+        id: 1, from: 'nura',
+        lines: [`${g}, **${firstName}**. La última vez buscaste **${lastQ}**.`],
+        chips: ['Buscar de nuevo', 'Buscar algo diferente']
+      }
     }
 
     // Only init if no previous conversation
@@ -681,6 +677,14 @@ export default function Home({ setSearchState }) {
                 <div style={{display:'flex',flexWrap:'wrap',gap:'6px',marginTop:'8px'}}>
                   {(msg.chips||[]).map((chip,i) => (
                     <button key={i} onClick={() => {
+                      if (chip === 'Buscar de nuevo' && searchHistory?.[0]?.query) {
+                        handleSend(searchHistory[0].query); return
+                      }
+                      if (chip === 'Buscar algo diferente') {
+                        setMessages([{ id: Date.now(), from: 'nura', lines: ['Cuéntame qué necesitas.'] }])
+                        setTimeout(() => document.querySelector('textarea,input[type=text]')?.focus(), 100)
+                        return
+                      }
                       if (chip === 'Ver Explorar') { navigate('/explore'); return }
                       if (chip === 'Ver todos') { navigate('/explore'); return }
                       if (chip === 'Crear cuenta') { navigate('/login'); return }
