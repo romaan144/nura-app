@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { useUser } from '../context/UserContext'
-import { ArrowRight, MessageCircle, Brain, Users } from 'lucide-react'
+import { ArrowRight, MessageCircle, Brain, Users, Sparkles, Shield, Zap } from 'lucide-react'
 import styles from './Onboarding.module.css'
 
 const STEPS = [
