@@ -93,6 +93,36 @@ export default function HowItWorks() {
           ))}
         </div>
 
+        {/* Helper CTA */}
+        <div style={{
+          background:'linear-gradient(135deg,rgba(123,47,255,0.06),rgba(0,212,200,0.04))',
+          border:'1px solid rgba(123,47,255,0.12)',
+          borderRadius:'20px',padding:'24px 20px',
+          textAlign:'center',display:'flex',flexDirection:'column',
+          alignItems:'center',gap:'10px',marginBottom:'12px',
+        }}>
+          <span style={{fontSize:'32px'}}>👋</span>
+          <h3 style={{fontSize:'17px',fontWeight:800,margin:0,
+            color:'rgba(0,0,0,0.8)',letterSpacing:'-0.3px'}}>
+            ¿Eres profesional?
+          </h3>
+          <p style={{fontSize:'13px',color:'rgba(0,0,0,0.45)',margin:0,
+            lineHeight:1.6,maxWidth:'260px'}}>
+            Únete como helper. Nüra construye tu perfil automáticamente y te conecta con quienes te necesitan.
+          </p>
+          <button
+            onClick={() => navigate('/register-helper')}
+            style={{
+              padding:'12px 24px',
+              background:'linear-gradient(135deg,#7B2FFF,#00D4C8)',
+              color:'white',border:'none',borderRadius:'100px',
+              fontSize:'14px',fontWeight:700,cursor:'pointer',
+              fontFamily:'-apple-system,"Inter",sans-serif',
+            }}>
+            Registrarme como helper
+          </button>
+        </div>
+
         {/* CTA */}
         <div className={styles.ctaCard}>
           <img src="/logo-iso.png" alt="Nüra" className={styles.ctaIso} />

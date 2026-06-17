@@ -129,7 +129,20 @@ function PostCard({ post }) {
       </div>
 
       {/* Content */}
-      <p className={styles.postText}>{post.text}</p>
+      <p className={styles.postText} style={{
+        display: '-webkit-box',
+        WebkitLineClamp: expanded ? 'unset' : 4,
+        WebkitBoxOrient: 'vertical',
+        overflow: expanded ? 'visible' : 'hidden',
+      }}>{post.text}</p>
+      {isLong && !expanded && (
+        <button
+          onClick={() => setExpanded(true)}
+          style={{fontSize:'12px',color:'var(--purple)',fontWeight:600,
+            background:'none',border:'none',padding:'0',cursor:'pointer',marginTop:'-4px'}}>
+          Ver más
+        </button>
+      )}
 
       {/* Badge */}
       {post.badge && <div className={styles.badge}>{post.badge}</div>}
