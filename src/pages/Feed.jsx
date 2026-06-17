@@ -70,6 +70,8 @@ function PostCard({ post }) {
   const [liked, setLiked] = useState(false)
   const [likes, setLikes] = useState(post.likes || 0)
   const [saved, setSaved] = useState(false)
+  const [expanded, setExpanded] = useState(false)
+  const isLong = post.text?.length > 200
   const author = post.author
   const followed = isFollowing(author.id)
 
