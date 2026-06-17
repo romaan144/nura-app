@@ -226,7 +226,7 @@ export const HELPERS = [
     specialty: "Cuidadora de animales", category: "mascotas",
     tags: ["cuidado perros", "paseos", "certificada", "fin de semana"],
     rating: 4.5, reviews: 43, distance: 2.0, zone: "Les Corts", city: "Barcelona",
-    price: "20€/día", bio: "Cuidadora de perros certificada. Disponible fines de semana. Seguro de responsabilidad civil incluido. También acoge mascotas en casa.", verified: true, available: true, presential: true, online: false,
+    price: "20€/día", bio: "Cuidadora de perros certificada. Disponible fines de semana. Seguro de responsabilidad civil incluido. También acoge mascotas en casa.", verified: true, available: false, presential: true, online: false,
     qualificationLevel: "experienced", responseTime: "< 45 min", completionRate: 96, services: 43,
     founder: false, dniVerified: true, criminalRecordClear: false,
     education: [{ title: "Curso de Cuidador y Adiestrador de animales", institution: "Escola Cinòfila de Catalunya", year: "2021", details: "Módulos: Etología animal, Primeros auxilios veterinarios, Nutrición canina, Adiestramiento básico.", verified: true }],
@@ -299,7 +299,7 @@ export const HELPERS = [
     specialty: "Entrenador personal", category: "entrenador",
     tags: ["entrenador personal", "NSCA", "domicilio", "primera gratis"],
     rating: 4.3, reviews: 51, distance: 1.8, zone: "Sant Gervasi", city: "Barcelona",
-    price: "35€/sesión", bio: "Entrenador personal certificado NSCA. Primera sesión de evaluación gratuita. Trabajo a domicilio, exterior o en tu gimnasio.", verified: true, available: true, presential: true, online: true,
+    price: "35€/sesión", bio: "Entrenador personal certificado NSCA. Primera sesión de evaluación gratuita. Trabajo a domicilio, exterior o en tu gimnasio.", verified: true, available: false, presential: true, online: true,
     qualificationLevel: "professional", responseTime: "< 30 min", completionRate: 94, services: 51,
     founder: false, dniVerified: true, criminalRecordClear: true,
     education: [
@@ -400,7 +400,7 @@ export const HELPERS = [
         ideal_for: "Empresas, autónomos y startups que necesitan asesoría legal mercantil",
       },
     aiAnalyzedAt: "2025-06-15T10:00:00Z",
-    verified: true, available: true, presential: true, online: true,
+    verified: true, available: false, presential: true, online: true,
     qualificationLevel: "professional", responseTime: "< 2 horas", completionRate: 97, services: 43,
     founder: false, dniVerified: true, criminalRecordClear: true,
     education: [
@@ -498,7 +498,7 @@ export const HELPERS = [
         ideal_for: "Reformas de viviendas, locales comerciales y proyectos de diseño interior",
       },
     aiAnalyzedAt: "2025-06-15T10:00:00Z",
-    verified: true, available: true, presential: true, online: true,
+    verified: true, available: false, presential: true, online: true,
     qualificationLevel: "professional", responseTime: "< 3 horas", completionRate: 96, services: 34,
     founder: false, dniVerified: true, criminalRecordClear: true,
     education: [

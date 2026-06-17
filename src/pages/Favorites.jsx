@@ -14,7 +14,7 @@ export default function Favorites() {
   const DEMO_FAVORITE_IDS = [1, 5] // Carlos (logopeda) + Elena (cuidadora)
   const effectiveFavorites = favorites.length > 0 ? favorites : DEMO_FAVORITE_IDS
 
-  const saved = allHelpers.filter(h => h && (favorites||[]).some(fid => String(fid) === String(h.id)))
+  const saved = allHelpers.filter(h => h && effectiveFavorites.some(fid => String(fid) === String(h.id)))
 
   return (
     <div className={styles.page}>
