@@ -378,18 +378,30 @@ export default function Chat() {
   const showQuickReplies = lastMsg?.from === 'helper' && !typing
 
   // Context-aware quick replies based on conversation stage
+  // Context-aware next steps — push toward booking
+  const lastMsg = messages[messages.length - 1]?.text?.toLowerCase() || ''
+  const mentionedPrice = messages.some(m => m.text?.includes('€') || m.text?.toLowerCase().includes('precio'))
+  const mentionedDate  = messages.some(m => m.text?.toLowerCase().includes('lunes') || m.text?.toLowerCase().includes('martes') || m.text?.toLowerCase().includes('semana') || m.text?.toLowerCase().includes('mañana'))
+
   const QUICK_REPLIES = msgCount === 0 ? [
-    '¿Cuál es el precio exacto?',
-    '¿Cuándo tienes disponibilidad?',
+    '¿Tienes disponibilidad esta semana?',
+    '¿Cuál es tu precio?',
     '¿Trabajas en mi zona?',
-  ] : msgCount <= 2 ? [
-    'Perfecto, ¿cuándo empezamos?',
-    '¿Puedes venir esta semana?',
-    '¿Tienes referencias de otros clientes?',
+  ] : mentionedDate && mentionedPrice ? [
+    'Perfecto, lo confirmo',
+    'Quiero reservar',
+  ] : mentionedDate ? [
+    '¿Cuánto cobras?',
+    'Me interesa, ¿cómo lo reservamos?',
+  ] : mentionedPrice ? [
+    '¿Tienes hueco esta semana?',
+    'Me parece bien el precio',
+  ] : msgCount <= 3 ? [
+    '¿Cuándo puedes empezar?',
+    '¿Tienes experiencia con casos como el mío?',
   ] : [
     'Quiero contratarte',
-    '¿Puedes enviarme más info?',
-    'Necesito pensarlo',
+    'Voy a reservar ahora',
   ]
 
   return (

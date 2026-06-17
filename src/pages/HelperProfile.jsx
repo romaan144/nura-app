@@ -298,7 +298,12 @@ function AiDataSection({ aiData, aiAnalyzedAt, helperName }) {
     certifications: 'Certificaciones verificadas',
   }
 
-  const entries = Object.entries(aiData)
+  // Reorder: ideal_for first (3-second answer), then summary, then rest
+  const KEY_ORDER = ['ideal_for', 'summary', 'skills', 'personality', 'red_flags', 'certifications']
+  const entries = [
+    ...KEY_ORDER.filter(k => aiData[k] !== undefined).map(k => [k, aiData[k]]),
+    ...Object.entries(aiData).filter(([k]) => !KEY_ORDER.includes(k))
+  ]
 
   return (
     <div style={{display:'flex',flexDirection:'column',gap:'12px'}}>
@@ -807,6 +812,23 @@ function HelperProfileInner() {
             {h.name}
             {h.founder && <Award size={13} color='#92400E' style={{marginLeft:'5px',verticalAlign:'middle'}} />}
           </h1>
+          {/* ── Nüra match reason — FIRST thing user reads ── */}
+          {matchReason && (
+            <div style={{
+              display:'flex',alignItems:'flex-start',gap:'8px',
+              background:'linear-gradient(135deg,rgba(123,47,255,0.08),rgba(0,212,200,0.04))',
+              border:'1px solid rgba(123,47,255,0.15)',
+              borderRadius:'12px',padding:'10px 13px',
+              width:'100%',boxSizing:'border-box',textAlign:'left',
+              marginTop:'6px',
+            }}>
+              <Sparkles size={13} color='#7B2FFF' strokeWidth={1.7} style={{flexShrink:0,marginTop:'2px'}} />
+              <p style={{fontSize:'12px',color:'rgba(0,0,0,0.6)',margin:0,lineHeight:1.65}}>
+                <strong style={{color:'#7B2FFF',fontWeight:700}}>Por qué Nüra la recomienda: </strong>
+                {matchReason}
+              </p>
+            </div>
+          )}
           <div style={{display:'flex',alignItems:'center',gap:'10px',justifyContent:'center',flexWrap:'wrap'}}>
             <p className={styles.heroSpecialty} style={{margin:0}}>{h.specialty || h.tags?.[0]}</p>
             {h.distance && (
@@ -856,9 +878,9 @@ function HelperProfileInner() {
                   navigate(`/chat/${h.id}`, { state: { helper: h } })
                 }
               }}>
-              <MessageCircle size={15} /> Escribir
+              <MessageCircle size={15} /> Escribir a {h.name?.split(' ')?.[0]}
             </button>
-            <button className={styles.heroCtaBtn} onClick={() => { if(!user){setShowGate(true);setGateReason('contact')} else setShowConfirm(true) }}>
+            <button className={styles.heroCtaBtnSecondary} onClick={() => { if(!user){setShowGate(true);setGateReason('contact')} else setShowConfirm(true) }}>
               <Calendar size={15} /> Contratar
             </button>
           </div>

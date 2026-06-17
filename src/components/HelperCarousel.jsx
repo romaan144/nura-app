@@ -11,7 +11,7 @@ import { haptic } from '../utils/haptic'
  * Tapping a card goes to chat directly (not profile).
  * Compact format: avatar, name, specialty, rating, price, one CTA.
  */
-function CarouselCard({ helper }) {
+function CarouselCard({ helper, isTopPick }) {
   const navigate = useNavigate()
   const { user, toggleFavorite, isFavorite } = useUser()
   const fav = isFavorite(helper.id)
@@ -104,7 +104,7 @@ export default function HelperCarousel({ helpers }) {
   return (
     <div className={styles.wrap}>
       <div className={styles.track}>
-        {helpers.map(h => h && <CarouselCard key={h.id} helper={h} />)}
+        {helpers.map((h, i) => h && <CarouselCard key={h.id} helper={h} isTopPick={i === 0} />)}
       </div>
     </div>
   )
