@@ -9,7 +9,6 @@
   background: rgba(255,255,255,0.82);
   -webkit-backdrop-filter: blur(32px) saturate(200%);
   backdrop-filter: blur(32px) saturate(200%);
-  -webkit-backdrop-filter: blur(32px) saturate(200%);
   border-top: 0.5px solid rgba(0,0,0,0.08);
   padding: 6px 0 max(env(safe-area-inset-bottom), 8px);
 }
