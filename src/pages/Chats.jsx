@@ -193,7 +193,13 @@ export default function Chats() {
                   ? <img src={chat.avatarUrl} alt={chat.helperName} className={styles.avatarImg} />
                   : <div className={styles.avatar} style={{background: chat.helperColor}}>{chat.helperAvatar}</div>
                 }
-                {chat.unread === 0 && <span className={styles.onlineDot} />}
+                {/* Online status — green if active recently */}
+                <span className={styles.onlineDot} style={{
+                  background: chat.unread > 0 ? '#22C55E' 
+                    : (new Date() - new Date(chat.lastTime)) < 1000*60*60*2 ? '#22C55E'
+                    : (new Date() - new Date(chat.lastTime)) < 1000*60*60*24 ? '#F59E0B'
+                    : 'rgba(0,0,0,0.2)',
+                }} />
               </div>
 
               <div className={styles.chatInfo}>

@@ -57,7 +57,7 @@ export default function Profile() {
   const helperProfileId = null // Will be populated from Supabase when real auth exists
 
   const ACTIONS = [
-    ...(user?.isHelper ? [{ icon: '👤', label: 'Mi perfil público', sub: 'Cómo te ven los usuarios', action: () => navigate('/explore') }] : []),
+    ...(user?.isHelper ? [{ icon: '👤', label: 'Mi perfil público', sub: 'Cómo te ven los usuarios', action: () => navigate('/explore') }] : [{ icon: '✨', label: 'Ofrecer mis servicios', sub: 'Únete como helper en Nüra', action: () => navigate('/register-helper') }]),
     { icon: '💬', label: 'Mis conversaciones', sub: `${chats?.length || 0} activas`, action: () => navigate('/chats') },
     { icon: '❤️', label: 'Favoritos', sub: `${favorites?.length || 0} guardados`, action: () => navigate('/favorites') },
     { icon: '📋', label: 'Mis servicios', sub: 'Historial y valoraciones', action: () => navigate('/my-services') },

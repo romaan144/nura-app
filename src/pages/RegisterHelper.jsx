@@ -117,8 +117,12 @@ export default function RegisterHelper() {
         setDone(true)
         setMessages(prev => [...prev, {
           id: Date.now(), from: 'nura',
-          text: `Perfecto, ${newAnswers.name || val}. He construido tu perfil. Nüra lo verificará en las próximas horas. ¡Bienvenido a la red!`
+          text: `Perfecto, ${newAnswers.name || val}. He construido tu perfil. Nüra irá completando y enriqueciendo tu perfil con cada interacción. ¡Ya formas parte de la red! 🎉`
         }])
+        setTimeout(() => setMessages(prev => [...prev, {
+          id: Date.now()+1, from: 'nura',
+          text: `✨ Cada valoración que recibas fortalece tu posición en Nüra. ¡Mucha suerte!`
+        }]), 1800)
         // Save to Supabase (async, non-blocking)
         saveHelperToSupabase(newAnswers).then(saved => {
         })
