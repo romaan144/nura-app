@@ -6,9 +6,8 @@
 .wrap {
   margin-top: 0;
   position: relative;
-  /* Fade out right edge to hint scroll */
-  -webkit-mask-image: linear-gradient(to right, black 85%, transparent 100%);
-  mask-image: linear-gradient(to right, black 85%, transparent 100%);
+  overflow: visible;  /* allow absolute label to show above card */
+  /* Fade right edge — only on track, not wrap, to avoid clipping label */
 }
 
 /* Horizontal scroll track */
@@ -17,8 +16,10 @@
   flex-direction: row;
   gap: 8px;
   overflow-x: auto;
-  overflow-y: hidden;
-  padding: 2px 4px 8px;
+  overflow-y: visible;
+  padding: 12px 4px 8px;  /* top padding makes room for absolute label */
+  -webkit-mask-image: linear-gradient(to right, black 85%, transparent 100%);
+  mask-image: linear-gradient(to right, black 85%, transparent 100%);
   scroll-snap-type: x mandatory;
   -webkit-overflow-scrolling: touch;
 }
@@ -40,6 +41,7 @@
   box-shadow: var(--shadow-sm);
   transition: opacity 0.15s;
   -webkit-tap-highlight-color: transparent;
+  position: relative;   /* needed for absolute label */
 }
 .card:active { opacity: 0.75; }
 
@@ -135,15 +137,20 @@
 
 /* Top pick label — discrete, elegant */
 .topPickLabel {
-  align-self: center;
+  position: absolute;
+  top: -10px;
+  left: 50%;
+  transform: translateX(-50%);
   font-size: 9px; font-weight: 600;
   letter-spacing: 0.3px;
   color: var(--purple);
+  background: white;
   padding: 2px 8px;
   border: 1px solid rgba(123,47,255,0.25);
   border-radius: var(--radius-full);
   white-space: nowrap;
-  margin-bottom: 4px;
+  z-index: 1;
+  pointer-events: none;
 }
 
 /* Top pick card border */
