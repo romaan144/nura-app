@@ -141,3 +141,72 @@
 @media (min-width: 768px) {
   .grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
 }
+
+/* ── AI SEARCH ── */
+.searchForm { display: flex; width: 100%; }
+
+.clearBtn {
+  background: none; border: none; cursor: pointer;
+  color: rgba(0,0,0,0.35); padding: 4px;
+  display: flex; align-items: center;
+  transition: color 0.15s;
+}
+.clearBtn:hover { color: rgba(0,0,0,0.6); }
+
+.aiHeader {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  padding: 10px 14px;
+  background: rgba(123,47,255,0.04);
+  border: 1px solid rgba(123,47,255,0.1);
+  border-radius: var(--radius-md);
+  margin-bottom: 10px;
+  font-size: var(--text-sm);
+  color: rgba(0,0,0,0.65);
+}
+.aiHeader > span { display: flex; align-items: center; gap: 6px; }
+.aiHeader strong { color: var(--ink); }
+.priceCtx { font-size: var(--text-xs); color: rgba(0,0,0,0.45); margin: 2px 0 0; line-height: 1.5; }
+
+.listHeader {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  margin-bottom: 8px;
+}
+.listCount { font-size: var(--text-xs); color: rgba(0,0,0,0.4); font-weight: 500; }
+
+.searching {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 20px 0;
+  font-size: var(--text-sm);
+  color: var(--purple);
+  font-weight: 500;
+  justify-content: center;
+}
+
+/* Match reason pill under each card */
+.matchReason {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  padding: 5px 10px;
+  margin-top: 4px;
+  font-size: var(--text-xs);
+  color: rgba(123,47,255,0.7);
+  font-weight: 500;
+  line-height: 1.4;
+}
+
+@keyframes pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.4; }
+}
+
+/* Content wrapper */
+.content {
+  padding: 0 14px 100px;
+}
