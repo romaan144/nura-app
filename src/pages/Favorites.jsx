@@ -21,13 +21,13 @@ export default function Favorites() {
       <PageHeader showBack />
       <div className={styles.content}>
         <h2 className={styles.title}>Favoritos</h2>
-        <p className={styles.sub}>{saved.length} helper{saved.length !== 1 ? 's' : ''} guardado{saved.length !== 1 ? 's' : ''}</p>
+        <p className={styles.sub}>{saved.length} profesional{saved.length !== 1 ? 's' : ''} guardado{saved.length !== 1 ? 's' : ''}</p>
 
         {saved.length === 0 ? (
           <div className={styles.empty}>
             <div className={styles.emptyIcon}><Heart size={48} color='rgba(123,47,255,0.2)' strokeWidth={1.3} fill='rgba(123,47,255,0.06)' /></div>
             <h3 className={styles.emptyTitle}>Sin favoritos todavía</h3>
-            <p className={styles.emptyDesc}>Cuando encuentres un helper que te interese, pulsa el corazón para guardarlo aquí.</p>
+            <p className={styles.emptyDesc}>Cuando encuentres un profesional que te interese, pulsa el corazón para guardarlo aquí.</p>
             <button className={styles.emptyBtn} onClick={() => navigate('/explore')}>
               Explorar profesionales
             </button>

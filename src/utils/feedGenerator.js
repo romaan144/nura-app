@@ -49,7 +49,7 @@ export function generateAvailabilityPost(helper, index) {
 // ── TIP POSTS FROM NÜRA ───────────────────────────────────────────────────
 const NURA_TIPS = [
   {
-    text: '¿Sabías que los mejores helpers de Nüra responden en menos de 1 hora? Cuando contactes, cuanto más específico seas en tu mensaje, más rápida y precisa será la respuesta.',
+    text: '¿Sabías que los mejores profesionales de Nüra responden en menos de 1 hora? Cuando contactes, cuanto más específico seas en tu mensaje, más rápida y precisa será la respuesta.',
     badge: 'Consejo de Nüra',
   },
   {
@@ -57,7 +57,7 @@ const NURA_TIPS = [
     badge: 'Confianza Nüra',
   },
   {
-    text: 'Si tienes una urgencia, busca el rayo  en el perfil del helper. Significa que atiende casos urgentes, incluso hoy.',
+    text: 'Si tienes una urgencia, busca el rayo  en el perfil del profesional. Significa que atiende casos urgentes, incluso hoy.',
     badge: 'Urgencias en Nüra',
   },
   {

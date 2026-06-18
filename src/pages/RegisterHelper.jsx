@@ -10,7 +10,7 @@ const SUPABASE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZ
 async function saveHelperToSupabase(answers) {
   try {
     const payload = {
-      name: answers.name || 'Helper',
+      name: answers.name || 'Profesional',
       specialty: answers.specialty || '',
       bio: `${answers.experience || ''}. ${answers.differentiator || ''}`.trim().replace(/^\. /, ''),
       zone: answers.zone || 'Barcelona',

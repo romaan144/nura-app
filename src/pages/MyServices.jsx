@@ -142,7 +142,7 @@ export default function MyServices() {
             </strong>
             <p style={{fontSize:'var(--text-sm)',color:'rgba(0,0,0,0.4)',margin:'4px 0 16px',lineHeight:1.6,textAlign:'center',maxWidth:'220px'}}>
               {tab === 'Todos'
-                ? 'Cuando contactes con un helper y concretes una cita, aparecerá aquí.'
+                ? 'Cuando contactes con un profesional y concretes una cita, aparecerá aquí.'
                 : tab === 'Próximos'
                 ? 'Cuando contrates un servicio lo verás aquí con los detalles.'
                 : 'Tus servicios completados y valoraciones aparecerán aquí.'}

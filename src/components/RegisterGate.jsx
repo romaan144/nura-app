@@ -19,12 +19,12 @@ export default function RegisterGate({ onClose, reason = 'contact' }) {
     favorite: {
       Icon: Heart,
       title: 'Guarda tus favoritos',
-      desc: 'Crea tu cuenta para guardar helpers y acceder a ellos rápidamente cuando los necesites.',
+      desc: 'Crea tu cuenta para guardar profesionales y acceder a ellos rápidamente cuando los necesites.',
     },
     follow: {
       Icon: User,
       title: 'Sigue a este profesional',
-      desc: 'Crea tu cuenta para seguir a helpers y ver sus actualizaciones de disponibilidad.',
+      desc: 'Crea tu cuenta para seguir a profesionales y ver sus actualizaciones de disponibilidad.',
     },
     default: {
       Icon: Sparkles,

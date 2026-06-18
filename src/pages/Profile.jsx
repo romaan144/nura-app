@@ -26,7 +26,7 @@ export default function Profile() {
       <div className={styles.noUser}>
         <img src="/logo-iso.png" alt="Nüra" className={styles.noUserLogo} />
         <h2 className={styles.noUserTitle}>Tu perfil en Nüra</h2>
-        <p className={styles.noUserDesc}>Accede a tu historial de búsquedas, conversaciones y helpers favoritos.</p>
+        <p className={styles.noUserDesc}>Accede a tu historial de búsquedas, conversaciones y profesionales favoritos.</p>
         <button className={styles.loginBtn} onClick={() => navigate('/login')}>
           Iniciar sesión
         </button>
@@ -57,7 +57,7 @@ export default function Profile() {
   const helperProfileId = null // Will be populated from Supabase when real auth exists
 
   const ACTIONS = [
-    ...(user?.isHelper ? [{ icon: User, label: 'Mi perfil público', sub: 'Cómo te ven los usuarios', action: () => navigate('/explore') }] : [{ icon: Sparkles, label: 'Ofrecer mis servicios', sub: 'Únete como helper en Nüra', action: () => navigate('/register-helper') }]),
+    ...(user?.isHelper ? [{ icon: User, label: 'Mi perfil público', sub: 'Cómo te ven los usuarios', action: () => navigate('/explore') }] : [{ icon: Sparkles, label: 'Ofrecer mis servicios', sub: 'Ofrece tus servicios en Nüra', action: () => navigate('/register-helper') }]),
     { icon: MessageCircle, label: 'Mis conversaciones', sub: `${chats?.length || 0} activas`, action: () => navigate('/chats') },
     { icon: Heart, label: 'Favoritos', sub: `${favorites?.length || 0} guardados`, action: () => navigate('/favorites') },
     { icon: ClipboardList, label: 'Mis servicios', sub: 'Historial y valoraciones', action: () => navigate('/my-services') },
@@ -198,7 +198,7 @@ export default function Profile() {
             <span style={{width:'20px',height:'20px',display:'flex',alignItems:'center',justifyContent:'center'}}><UserCheck size={18} color='var(--purple)' strokeWidth={1.6}/></span>
             <div>
               <div className={styles.nudgeTitle}>Añade tu nombre</div>
-              <div className={styles.nudgeDesc}>Para que los helpers sepan quién les contacta</div>
+              <div className={styles.nudgeDesc}>Para que los profesionales sepan quién les contacta</div>
             </div>
             <ChevronRight size={16} color="rgba(0,0,0,0.3)" />
           </div>

@@ -15,7 +15,7 @@ const STEPS = [
     Visual: Shield,
     eyebrow: 'PERFILES VERIFICADOS',
     title: 'Identidad real,\nresultados reales',
-    desc: 'Cada helper verifica su identidad con DNI. El perfil lo construye Nüra — no el propio helper.',
+    desc: 'Cada profesional verifica su identidad con DNI. El perfil lo construye Nüra — no el propio profesional.',
   },
   {
     Visual: Zap,

@@ -115,9 +115,9 @@ function genPersonality(rating) {
   return { patience: v(), empathy: v(), communication: v(), punctuality: v(), autonomy: v() }
 }
 
-// ── NORMALIZE — maps Supabase row → same structure as local helpers ────────
+// ── NORMALIZE — maps Supabase row → same structure as local profesionals ────────
 function normalize(h) {
-  const name = h.name || 'Helper'
+  const name = h.name || 'Profesional'
   const specialty = h.speciality || h.specialty || h.category || 'Profesional'
   const avatarUrl = h.avatar_url || `https://api.dicebear.com/9.x/personas/svg?seed=${encodeURIComponent(name)}`
 

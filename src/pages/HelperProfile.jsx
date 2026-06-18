@@ -1079,7 +1079,7 @@ function HelperProfileInner() {
                 {h.founder && (
                   <div className={styles.achieveBadge} style={{background:'rgba(146,64,14,0.08)',borderColor:'rgba(146,64,14,0.2)'}}>
                     <Sparkles size={16} color='#7B2FFF' strokeWidth={1.6} />
-                    <span className={styles.achieveLabel} style={{color:'#92400E'}}>Helper fundador</span>
+                    <span className={styles.achieveLabel} style={{color:'#92400E'}}>Profesional fundador</span>
                   </div>
                 )}
               </div>

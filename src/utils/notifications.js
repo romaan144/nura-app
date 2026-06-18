@@ -88,7 +88,7 @@ export function notifyWeeklyDigest(newHelpers = 0) {
     'Esta semana en Nüra',
     newHelpers > 0
       ? `${newHelpers} nuevos profesionales se han unido cerca de ti.`
-      : 'Nuevos helpers disponibles. ¿Qué necesitas esta semana?',
+      : 'Nuevos profesionales disponibles. ¿Qué necesitas esta semana?',
     7 * 24 * 60 * 60 * 1000
   )
 }

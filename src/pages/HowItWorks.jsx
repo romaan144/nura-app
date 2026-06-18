@@ -28,7 +28,7 @@ const STEPS = [
 ]
 
 const TRUST = [
-  { icon: <Shield size={20} />, title: 'Identidad verificada', desc: 'Cada helper verifica su DNI. Una persona, un perfil. Sin duplicados.' },
+  { icon: <Shield size={20} />, title: 'Identidad verificada', desc: 'Cada profesional verifica su DNI. Una persona, un perfil. Sin duplicados.' },
   { icon: <Star size={20} />, title: 'Valoraciones auténticas', desc: 'Solo pueden valorar quienes han contratado. Sin reseñas falsas.' },
   { icon: <MapPin size={20} />, title: 'Cerca de ti', desc: 'Profesionales en tu zona. Presencial cuando lo necesites.' },
   { icon: <Zap size={20} />, title: 'Respuesta rápida', desc: 'La mayoría responde en menos de 1 hora. Urgencias disponibles.' },
@@ -149,7 +149,7 @@ export default function HowItWorks() {
           </h3>
           <p style={{fontSize:'var(--text-sm)',color:'rgba(0,0,0,0.45)',margin:0,
             lineHeight:1.6,maxWidth:'260px'}}>
-            Únete como helper. Nüra construye tu perfil automáticamente y te conecta con quienes te necesitan.
+            Ofrece tus servicios. Nüra construye tu perfil automáticamente y te conecta con quienes te necesitan.
           </p>
           <button
             onClick={() => navigate('/register-helper')}
@@ -160,7 +160,7 @@ export default function HowItWorks() {
               fontSize:'var(--text-sm)',fontWeight:700,cursor:'pointer',
               fontFamily:'-apple-system,"Inter",sans-serif',
             }}>
-            Registrarme como helper
+            Crear mi perfil profesional
           </button>
         </div>
 

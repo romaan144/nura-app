@@ -52,7 +52,7 @@ export default function DesktopSidebar() {
             alt="" className={styles.userAvatar} />
           <div className={styles.userInfo}>
             <div className={styles.userName}>{user.name}</div>
-            <div className={styles.userSub}>{user.isHelper ? 'Helper' : 'Miembro'}</div>
+            <div className={styles.userSub}>{user.isHelper ? 'Profesional' : 'Miembro'}</div>
           </div>
         </div>
       )}

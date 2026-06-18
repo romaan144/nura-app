@@ -309,7 +309,7 @@ export default function Feed() {
           <div className={styles.empty}>
             <Users2 size={44} color='rgba(0,0,0,0.12)' strokeWidth={1.2} />
             <h3>Aún no sigues a nadie</h3>
-            <p>Sigue a helpers para ver sus publicaciones aquí. Están en la tab "Para ti".</p>
+            <p>Sigue a profesionales para ver sus publicaciones aquí. Están en la tab "Para ti".</p>
             <button className={styles.emptyBtn} onClick={() => setTab('para-ti')}>
               Ver sugerencias
             </button>

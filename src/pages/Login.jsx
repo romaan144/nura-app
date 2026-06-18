@@ -73,7 +73,7 @@ export default function Login() {
         {step === 'phone' && (
           <div className={styles.step}>
             <h2 className={styles.stepTitle}>Accede a Nüra</h2>
-            <p className={styles.stepDesc}>Para contactar helpers y guardar tu historial necesitas una cuenta. Es gratis y tarda 30 segundos.</p>
+            <p className={styles.stepDesc}>Para contactar profesionales y guardar tu historial necesitas una cuenta. Es gratis y tarda 30 segundos.</p>
             <div className={styles.phoneRow}>
               <div className={styles.flag}>🇪🇸 +34</div>
               <input className={styles.input} type="tel" placeholder="612 345 678"
@@ -115,7 +115,7 @@ export default function Login() {
         {step === 'name' && (
           <div className={styles.step}>
             <h2 className={styles.stepTitle}>¿Cómo te llamas?</h2>
-            <p className={styles.stepDesc}>Para que los helpers sepan quién les contacta.</p>
+            <p className={styles.stepDesc}>Para que los profesionales sepan quién les contacta.</p>
             <input className={styles.input} placeholder="Tu nombre completo"
               value={name} onChange={e => setName(e.target.value)} autoFocus
               onKeyDown={e => e.key === 'Enter' && handleName()} />

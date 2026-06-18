@@ -21,9 +21,9 @@ export default function Explore() {
   const navigate = useNavigate()
   const [searchText, setSearchText] = useState('')
   const [HELPERS, setHELPERS] = useState(LOCAL_HELPERS)
-  const { cacheHelpers } = useUser()
+  const { cacheProfesionals } = useUser()
 
-  const [loadingHelpers, setLoadingHelpers] = useState(true)
+  const [loadingHelpers, setLoadingProfesionals] = useState(true)
   const [totalCount, setTotalCount] = useState(0)
 
   useEffect(() => {
@@ -36,11 +36,11 @@ export default function Explore() {
           return scoreB - scoreA
         })
         setHELPERS(sorted)
-        cacheHelpers(sorted)
+        cacheProfesionals(sorted)
         setTotalCount(sorted.length)
       }
-      setLoadingHelpers(false)
-    }).catch(() => setLoadingHelpers(false))
+      setLoadingProfesionals(false)
+    }).catch(() => setLoadingProfesionals(false))
   }, [])
   const [activeCategory, setActiveCategory] = useState('all')
   const [sortBy, setSortBy] = useState('quality') // quality | price | rating
@@ -97,7 +97,7 @@ export default function Explore() {
     <div className={styles.page}>
       <PageHeader />
 
-      {/* Helper count */}
+      {/* Profesional count */}
       {totalCount > 0 && (
         <p style={{fontSize:'var(--text-xs)',color:'rgba(0,0,0,0.35)',margin:'0 0 8px',paddingLeft:'2px'}}>
           {filtered.length < totalCount
