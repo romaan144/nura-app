@@ -185,7 +185,7 @@ function PostCard({ post }) {
 
 // ── Main Feed ──────────────────────────────────────────────────────────────
 export default function Feed() {
-  const { following } = useUser()
+  const { following, searchHistory } = useUser()
   const [tab, setTab] = useState('para-ti')
   const [feedLoading, setFeedLoading] = useState(true)
   useEffect(() => {
