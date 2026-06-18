@@ -19,7 +19,7 @@ function getWelcome(user, searchHistory, favorites, helpersCache) {
 
   if (!user) return [
     `Hola. Soy **Nüra**.`,
-    `¿Qué necesitas? Cuéntamelo como se lo contarías a un amigo. Encuentro a la persona adecuada — verificada y disponible — en minutos.`,
+    `Cuéntame qué necesitas. Yo me encargo de encontrar a la persona adecuada.`,
   ]
 
   // Use what Nüra knows about this user
