@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
-import { Calendar, CheckCircle, ChevronRight, Star, ClipboardList } from 'lucide-react'
+import { Calendar, CheckCircle, ChevronRight, Star, ClipboardList, MessageCircle, RotateCcw } from 'lucide-react'
 import { useUser } from '../context/UserContext'
 import PageHeader from '../components/PageHeader'
 import styles from './MyServices.module.css'
@@ -193,8 +193,9 @@ export default function MyServices() {
                 </div>
 
                 {/* Rate CTA */}
+                {/* Pending/confirmed → mark complete */}
                 {(s.status === 'pending' || s.status === 'confirmed') && !rated && (
-                  <div style={{display:'flex',gap:'6px',padding:'0 0 2px'}}>
+                  <div className={styles.postActions}>
                     <button className={styles.rateBtn}
                       onClick={e => { e.stopPropagation(); updateService(s.id, { status: 'completed' }); setRatingModal({...s, status:'completed'}); setRatingVal(5) }}
                       style={{flex:1}}>
@@ -202,10 +203,36 @@ export default function MyServices() {
                     </button>
                   </div>
                 )}
+
+                {/* Completed + not yet rated → rate CTA */}
+                {s.status === 'completed' && !rated && (
+                  <div className={styles.postActions}>
+                    <button className={styles.actionBtn}
+                      onClick={e => { e.stopPropagation(); setRatingModal(s); setRatingVal(5) }}>
+                      <Star size={12} /> Valorar a {s.helperName?.split(' ')?.[0]}
+                    </button>
+                    <button className={styles.actionBtnSecondary}
+                      onClick={e => { e.stopPropagation(); navigate(`/chat/${s.helperId}`, { state: { helper: { id: s.helperId, name: s.helperName, specialty: s.specialty, avatarUrl: s.avatarUrl } } }) }}>
+                      <MessageCircle size={12} /> Escribir
+                    </button>
+                  </div>
+                )}
+
+                {/* Completed + rated → rebooking CTA */}
                 {rated && (
-                  <div className={styles.ratedRow}>
-                    <CheckCircle size={13} color="#059669" />
-                    <span>Valorado · Gracias por tu opinión</span>
+                  <div className={styles.postActions}>
+                    <div className={styles.ratedRow} style={{flex:1}}>
+                      <CheckCircle size={12} color="#059669" />
+                      <span>Valorado</span>
+                    </div>
+                    <button className={styles.actionBtnSecondary}
+                      onClick={e => { e.stopPropagation(); navigate('/') }}>
+                      <RotateCcw size={11} /> Buscar de nuevo
+                    </button>
+                    <button className={styles.actionBtnSecondary}
+                      onClick={e => { e.stopPropagation(); navigate(`/chat/${s.helperId}`, { state: { helper: { id: s.helperId, name: s.helperName, specialty: s.specialty, avatarUrl: s.avatarUrl } } }) }}>
+                      <MessageCircle size={11} /> Repetir
+                    </button>
                   </div>
                 )}
               </div>
@@ -235,20 +262,20 @@ export default function MyServices() {
                   {[1,2,3,4,5].map(n => (
                     <button key={n} onClick={() => setRatingVal(n)}
                       style={{fontSize:'34px',background:'none',border:'none',cursor:'pointer',opacity:n<=ratingVal?1:0.25,transition:'opacity 0.15s'}}>
-                      <Star size={18} fill={ratingVal >= i ? '#F59E0B' : 'none'} color='#F59E0B' />
+                      <Star size={18} fill={ratingVal >= n ? '#F59E0B' : 'none'} color='#F59E0B' />
                     </button>
                   ))}
                 </div>
                 <textarea value={ratingText} onChange={e=>setRatingText(e.target.value)}
                   placeholder="¿Qué destacarías? (opcional)" rows={3}
-                  style={{width:'100%',padding:'12px 16px',border:'1px solid rgba(0,0,0,0.1)',borderRadius:'14px',fontSize:'15px',outline:'none',resize:'none',fontFamily:'-apple-system,Inter,sans-serif',background:'rgba(0,0,0,0.03)',boxSizing:'border-box',marginBottom:'12px'}} />
+                  style={{width:'100%',padding:'12px 16px',border:'1px solid rgba(0,0,0,0.1)',borderRadius:'14px',fontSize:'15px',outline:'none',resize:'none',fontFamily:'inherit',background:'rgba(0,0,0,0.03)',boxSizing:'border-box',marginBottom:'12px'}} />
                 <div style={{display:'flex',gap:'8px'}}>
                   <button onClick={() => setRatingModal(null)}
                     style={{flex:1,padding:'13px',background:'rgba(0,0,0,0.05)',color:'rgba(0,0,0,0.55)',border:'none',borderRadius:'100px',fontSize:'14px',fontWeight:600,cursor:'pointer'}}>
                     Cancelar
                   </button>
                   <button onClick={submitRating}
-                    style={{flex:2,padding:'13px',background:'#1C1C1E',color:'white',border:'none',borderRadius:'100px',fontSize:'14px',fontWeight:700,cursor:'pointer'}}>
+                    style={{flex:2,padding:'13px',background:'var(--purple)',color:'white',border:'none',borderRadius:'var(--radius-full)',fontSize:'var(--text-sm)',fontWeight:700,cursor:'pointer',fontFamily:'inherit'}}>
                     Enviar valoración
                   </button>
                 </div>
