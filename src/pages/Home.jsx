@@ -213,6 +213,8 @@ export default function Home({ setSearchState }) {
   const bottomRef  = useRef(null)
   const inputRef   = useRef(null)
   const floatRef   = useRef(null)
+  const topRef     = useRef(null)
+  const [topH, setTopH] = useState(80)
   const [floatH, setFloatH] = useState(160)
 
   useEffect(() => {
@@ -634,21 +636,30 @@ export default function Home({ setSearchState }) {
 
   const suggestions = user?.isHelper ? HELPER_SUGGESTIONS : getDynamicSuggestions(user, searchHistory)
 
-  // Dynamic padding: measure floatBottom position + height so last message is never hidden
+  // Dynamic padding: measure both floatTop and floatBottom for perfect layout
   useEffect(() => {
-    const el = floatRef.current
-    if (!el) return
-    const ro = new ResizeObserver(() => {
-      const rect = el.getBoundingClientRect()
+    const bottom = floatRef.current
+    const top    = topRef.current
+    if (!bottom) return
+
+    const measure = () => {
+      // Bottom padding: floatBottom real position from bottom of viewport
+      const bRect = bottom.getBoundingClientRect()
       const windowH = window.innerHeight
-      // Distance from bottom of viewport to bottom of floatBottom
-      const distanceFromBottom = windowH - rect.bottom
-      // Total space the float occupies from the bottom: its height + its offset from bottom
-      const floatTotalH = rect.height + distanceFromBottom
-      // Add 24px premium visual margin so last message breathes above float
-      setFloatH(Math.ceil(floatTotalH) + 24)
-    })
-    ro.observe(el)
+      const floatTotalH = bRect.height + (windowH - bRect.bottom)
+      setFloatH(Math.ceil(floatTotalH) + 24)  // +24px visual margin
+
+      // Top padding: floatTop real height + its top offset
+      if (top) {
+        const tRect = top.getBoundingClientRect()
+        setTopH(Math.ceil(tRect.bottom) + 8)  // floatTop bottom + 8px gap
+      }
+    }
+
+    const ro = new ResizeObserver(measure)
+    ro.observe(bottom)
+    if (top) ro.observe(top)
+    measure()  // measure immediately on mount
     return () => ro.disconnect()
   }, [])
 
@@ -659,7 +670,7 @@ export default function Home({ setSearchState }) {
 
 
       {/* Floating top — three independent bubbles */}
-      <div className={styles.floatTop}>
+      <div className={styles.floatTop} ref={topRef}>
         <button
           className={styles.logoBubble}
           style={{position:'static',transform:'none',padding:'0',width:'42px',height:'42px',borderRadius:'50%',display:'flex',alignItems:'center',justifyContent:'center',pointerEvents:'all'}}
@@ -684,7 +695,7 @@ export default function Home({ setSearchState }) {
         </button>
       </div>
 
-      <div className={styles.messages} style={{paddingBottom: floatH + 'px'}}>
+      <div className={styles.messages} style={{paddingBottom: floatH + 'px', paddingTop: topH + 'px'}}>
         {messages.map((msg, msgIdx) => {
           const prevMsg = messages[msgIdx - 1]
           const prevHadResults = prevMsg?.results?.length > 0
@@ -755,14 +766,9 @@ export default function Home({ setSearchState }) {
           </div>
           )
         })}
-        <div ref={bottomRef} />
-      </div>
-
-      {/* Floating bottom — suggestions + input capsule */}
-      <div className={styles.floatBottom} ref={floatRef}>
-        {/* Nueva búsqueda — appears naturally in the flow after results */}
+        {/* Nueva búsqueda — in scroll flow, never hidden by float */}
         {messages.length > 1 && (
-          <div className={styles.newSearchRow}>
+          <div className={styles.newSearchRow} style={{marginTop:'16px', marginBottom:'8px'}}>
             <button className={styles.newSearchBtn}
               onClick={() => {
                 setMessages([])
@@ -776,6 +782,11 @@ export default function Home({ setSearchState }) {
             </button>
           </div>
         )}
+        <div ref={bottomRef} />
+      </div>
+
+      {/* Floating bottom — suggestions + input capsule only */}
+      <div className={styles.floatBottom} ref={floatRef}>
         {inputFocused && !input && searchHistory?.length > 0 && (
           <div className={styles.recentSearches}>
             <span className={styles.recentLabel}>Recientes</span>

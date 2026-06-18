@@ -19,11 +19,14 @@
   inset: 0;
   overflow-y: auto;
   overflow-x: hidden;
-  padding: 96px 16px 80px; /* fallback — overridden by JS */
+  /* padding-top and padding-bottom controlled by JS — see Home.jsx ResizeObserver */
+  padding: 80px 16px 0;  /* fallback only, overridden immediately by JS */
   display: flex;
   flex-direction: column;
-  gap: 0;     /* semantic spacing via margin on each element */
+  gap: 0;
   -webkit-overflow-scrolling: touch;
+  scroll-behavior: smooth;
+  overflow-anchor: auto;
 }
 
 /* ── FLOATING TOP LAYER ─────────────────────────────── */
@@ -311,7 +314,7 @@
 
 /* ── DESKTOP ── */
 @media (min-width: 768px) {
-  .messages { padding: 88px 32px 130px; }
+  .messages { padding-left: 32px; padding-right: 32px; }
   .floatTop { left: 24px; right: 24px; }
   .floatBottom { left: 24px; right: 24px; max-width: 660px; margin: 0 auto; left: 50%; transform: translateX(-50%); width: calc(100% - 48px); }
   .resultsList { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
