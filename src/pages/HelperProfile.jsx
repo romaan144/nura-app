@@ -21,6 +21,11 @@ function ExperienceCard({ exp }) {
         <div className={styles.expRole}>{exp.role}</div>
         <div className={styles.expCompany}>{exp.company}</div>
         <div className={styles.expPeriod}>{exp.period}</div>
+        {exp.verifiedByCompany && (
+          <div className={styles.expVerified}>
+            <Shield size={9} color="var(--green)" /> Verificado por empresa
+          </div>
+        )}
       </div>
       {exp.description && (
         <p className={styles.expDesc}>{exp.description}</p>
@@ -31,6 +36,25 @@ function ExperienceCard({ exp }) {
             <li key={i}>{a}</li>
           ))}
         </ul>
+      )}
+      {exp.competencies?.length > 0 && (
+        <div className={styles.expCompetencies}>
+          {exp.competencies.slice(0,4).map((c,i) => (
+            <span key={i} className={styles.expCompPill}>{c}</span>
+          ))}
+        </div>
+      )}
+      {exp.managerOpinion && (
+        <div className={styles.managerQuote}>
+          <div className={styles.managerQuoteText}>
+            "{exp.managerOpinion.text.length > 100
+              ? exp.managerOpinion.text.slice(0,100)+'…'
+              : exp.managerOpinion.text}"
+          </div>
+          <div className={styles.managerQuoteAuthor}>
+            — {exp.managerOpinion.name}, {exp.managerOpinion.role}
+          </div>
+        </div>
       )}
     </div>
   )
@@ -501,6 +525,30 @@ function HelperProfileInner() {
               <p>Historial verificado por terceros. No lo ha escrito {firstName}.</p>
             </div>
 
+            {/* Verified stats */}
+            {(h.services > 0 || h.completionRate > 0) && (
+              <div className={styles.verifiedStats}>
+                {h.services > 0 && (
+                  <div className={styles.statPill}>
+                    <span className={styles.statPillNum}>{h.services}</span>
+                    <span className={styles.statPillLabel}>servicios</span>
+                  </div>
+                )}
+                {h.completionRate > 0 && (
+                  <div className={styles.statPill}>
+                    <span className={styles.statPillNum}>{h.completionRate}%</span>
+                    <span className={styles.statPillLabel}>satisfacción</span>
+                  </div>
+                )}
+                {h.reviews > 0 && (
+                  <div className={styles.statPill}>
+                    <span className={styles.statPillNum}>{h.reviews}</span>
+                    <span className={styles.statPillLabel}>valoraciones</span>
+                  </div>
+                )}
+              </div>
+            )}
+
             {/* Experiencia laboral */}
             {h.experience?.length > 0 && (
               <section className={styles.section}>
@@ -537,10 +585,48 @@ function HelperProfileInner() {
                           <div className={styles.eduTitle}>{edu.title || edu.degree}</div>
                           <div className={styles.eduInst}>{edu.institution || edu.school}</div>
                           {edu.year && <div className={styles.eduYear}>{edu.year}</div>}
+                          {edu.details && (
+                            <p className={styles.eduDetails}>
+                              {edu.details.length > 130 ? edu.details.slice(0,130)+'…' : edu.details}
+                            </p>
+                          )}
+                          {edu.verified && (
+                            <div className={styles.eduVerified}>
+                              <Shield size={9} color="var(--green)" /> Verificado
+                            </div>
+                          )}
                         </div>
                       </div>
                     </div>
                   ))}
+                </div>
+              </section>
+            )}
+
+            {/* Certificaciones — extracted from education */}
+            {h.education?.some(e => /certif|acredit|colegia|título/i.test(e.title)) && (
+              <section className={styles.section}>
+                <h3 className={styles.sectionTitle}>
+                  <Award size={13} /> Certificaciones y acreditaciones
+                </h3>
+                <div className={styles.certList}>
+                  {h.education
+                    .filter(e => /certif|acredit|colegia/i.test(e.title))
+                    .map((cert, i) => (
+                      <div key={i} className={styles.certItem}>
+                        <div className={styles.certIcon}>
+                          <CheckCircle size={13} color="var(--green)" />
+                        </div>
+                        <div className={styles.certBody}>
+                          <div className={styles.certTitle}>{cert.title}</div>
+                          <div className={styles.certInst}>
+                            {cert.institution}
+                            {cert.year && <span> · {cert.year}</span>}
+                          </div>
+                        </div>
+                      </div>
+                    ))
+                  }
                 </div>
               </section>
             )}

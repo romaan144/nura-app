@@ -382,3 +382,77 @@
 .mt4  { margin-top: 4px; }
 .mb4  { margin-bottom: 4px; }
 .mb2  { margin-bottom: 2px; }
+
+/* ── VERIFIED STATS ── */
+.verifiedStats {
+  display: flex; gap: 10px;
+  margin-bottom: 20px;
+}
+.statPill {
+  flex: 1; display: flex; flex-direction: column; align-items: center;
+  padding: 10px 8px;
+  background: #FFFFFF; border: 1px solid rgba(0,0,0,0.06);
+  border-radius: var(--radius-md); box-shadow: var(--shadow-xs);
+}
+.statPillNum {
+  font-size: var(--text-md); font-weight: 800;
+  color: var(--ink); letter-spacing: -0.5px;
+}
+.statPillLabel {
+  font-size: 10px; color: rgba(0,0,0,0.38);
+  font-weight: 500; margin-top: 1px;
+}
+
+/* ── EXPERIENCE ENHANCEMENTS ── */
+.expVerified {
+  display: flex; align-items: center; gap: 4px;
+  font-size: 10px; color: var(--green); font-weight: 600;
+  margin-top: 3px;
+}
+.expCompetencies {
+  display: flex; flex-wrap: wrap; gap: 4px; margin-top: 8px;
+}
+.expCompPill {
+  font-size: 10px; color: rgba(0,0,0,0.5);
+  background: rgba(0,0,0,0.04);
+  border: 1px solid rgba(0,0,0,0.07);
+  border-radius: var(--radius-full);
+  padding: 2px 8px;
+}
+.managerQuote {
+  margin-top: 10px; padding: 10px 12px;
+  background: rgba(123,47,255,0.04);
+  border-left: 2px solid rgba(123,47,255,0.2);
+  border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+}
+.managerQuoteText {
+  font-size: var(--text-xs); color: rgba(0,0,0,0.6);
+  font-style: italic; line-height: 1.5; margin-bottom: 5px;
+}
+.managerQuoteAuthor {
+  font-size: 10px; color: rgba(0,0,0,0.38); font-weight: 600;
+}
+
+/* ── EDUCATION ENHANCEMENTS ── */
+.eduDetails {
+  font-size: 10px; color: rgba(0,0,0,0.5);
+  line-height: 1.5; margin: 5px 0 0; font-style: italic;
+}
+.eduVerified {
+  display: flex; align-items: center; gap: 3px;
+  font-size: 10px; color: var(--green); font-weight: 600;
+  margin-top: 4px;
+}
+
+/* ── CERTIFICACIONES ── */
+.certList { display: flex; flex-direction: column; gap: 8px; }
+.certItem {
+  display: flex; align-items: flex-start; gap: 10px;
+  padding: 10px 12px;
+  background: #FFFFFF; border: 1px solid rgba(5,150,105,0.12);
+  border-radius: var(--radius-md); box-shadow: var(--shadow-xs);
+}
+.certIcon { flex-shrink: 0; margin-top: 1px; }
+.certBody { flex: 1; }
+.certTitle { font-size: var(--text-xs); font-weight: 700; color: var(--ink); margin-bottom: 2px; }
+.certInst  { font-size: 10px; color: rgba(0,0,0,0.45); }
