@@ -29,7 +29,7 @@
 }
 
 .visual { font-size: 80px; line-height: 1; margin-bottom: 8px; }
-.eyebrow { font-size: 11px; font-weight: 700; color: var(--purple); letter-spacing: 1.5px; }
+.eyebrow { font-size: var(--text-xs); font-weight: 700; color: var(--purple); letter-spacing: 1.5px; }
 .title {
   font-size: 30px; font-weight: 800; color: rgba(0,0,0,0.85);
   letter-spacing: -0.8px; line-height: 1.15; margin: 0;
@@ -70,4 +70,4 @@
   box-sizing: border-box;
 }
 .nameInput::placeholder { color: rgba(0,0,0,0.25); font-weight: 300; }
-.helperCta { background: none; border: none; font-size: 13px; color: var(--purple); font-weight: 600; padding: 8px; text-align: center; }
+.helperCta { background: none; border: none; font-size: var(--text-sm); color: var(--purple); font-weight: 600; padding: 8px; text-align: center; }

@@ -658,7 +658,7 @@ export default function Home({ setSearchState }) {
               WebkitBackdropFilter:'blur(20px)',
               border:'1px solid rgba(0,0,0,0.08)',
               borderRadius:'100px',
-              fontSize:'11px', fontWeight:600,
+              fontSize:'var(--text-xs)', fontWeight:600,
               color:'rgba(0,0,0,0.5)',
               cursor:'pointer',
               boxShadow:'0 1px 8px rgba(0,0,0,0.06)',
@@ -730,7 +730,7 @@ export default function Home({ setSearchState }) {
                       }
                       handleSend(chip)
                     }}
-                      style={{padding:'5px 12px',borderRadius:'100px',background:'rgba(0,0,0,0.06)',border:'none',fontSize:'12px',fontWeight:500,color:'rgba(0,0,0,0.7)',cursor:'pointer',transition:'opacity 0.15s'}}>
+                      style={{padding:'5px 12px',borderRadius:'100px',background:'rgba(0,0,0,0.06)',border:'none',fontSize:'var(--text-xs)',fontWeight:500,color:'rgba(0,0,0,0.7)',cursor:'pointer',transition:'opacity 0.15s'}}>
                       {chip}
                     </button>
                   ))}
@@ -740,7 +740,7 @@ export default function Home({ setSearchState }) {
                 <div style={{display:'flex',gap:'8px',flexWrap:'wrap',marginTop:'8px'}}>
                   {(msg.quickOptions||[]).map((opt,i) => (
                     <button key={i}
-                      style={{padding:'7px 14px',background:'var(--paper)',border:'1.5px solid var(--rule)',borderRadius:'16px',fontSize:'12px',color:'var(--mid)',cursor:'pointer',transition:'all 0.15s'}}
+                      style={{padding:'7px 14px',background:'var(--paper)',border:'1.5px solid var(--rule)',borderRadius:'16px',fontSize:'var(--text-xs)',color:'var(--mid)',cursor:'pointer',transition:'all 0.15s'}}
                       onClick={() => {
                         setShowSuggestions(false)
                         if (opt.includes('busca')) handleSend(searchHistory[0]?.query)
@@ -759,8 +759,8 @@ export default function Home({ setSearchState }) {
               <div style={{display:'flex',gap:'20px',padding:'4px 0',flexWrap:'wrap'}}>
                 {[['1.200+','profesionales verificados'],['4.8★','valoración media'],['< 1h','primer contacto']].map(([n,l]) => (
                   <div key={l} style={{textAlign:'center'}}>
-                    <div style={{fontSize:'15px',fontWeight:800,color:'rgba(0,0,0,0.85)',letterSpacing:'-0.3px'}}>{n}</div>
-                    <div style={{fontSize:'11px',color:'rgba(0,0,0,0.4)',fontWeight:400}}>{l}</div>
+                    <div style={{fontSize:'var(--text-base)',fontWeight:800,color:'rgba(0,0,0,0.85)',letterSpacing:'-0.3px'}}>{n}</div>
+                    <div style={{fontSize:'var(--text-xs)',color:'rgba(0,0,0,0.4)',fontWeight:400}}>{l}</div>
                   </div>
                 ))}
               </div>
@@ -768,7 +768,7 @@ export default function Home({ setSearchState }) {
 
               {/* Disponibles ahora strip */}
               <div style={{width:'100%',marginTop:'12px'}}>
-                <p style={{fontSize:'11px',fontWeight:700,color:'rgba(0,0,0,0.3)',
+                <p style={{fontSize:'var(--text-xs)',fontWeight:700,color:'rgba(0,0,0,0.3)',
                   letterSpacing:'0.5px',textTransform:'uppercase',margin:'0 0 8px'}}>
                   Disponibles ahora
                 </p>
@@ -790,16 +790,16 @@ export default function Home({ setSearchState }) {
                         ?<img src={h.avatarUrl} alt={h.name}
                             style={{width:'38px',height:'38px',borderRadius:'50%',objectFit:'cover'}}/>
                         :<div style={{width:'38px',height:'38px',borderRadius:'50%',
-                            background:h.avatarColor||'#7B2FFF',color:'white',fontSize:'13px',
+                            background:h.avatarColor||'#7B2FFF',color:'white',fontSize:'var(--text-sm)',
                             fontWeight:700,display:'flex',alignItems:'center',justifyContent:'center'}}>
                             {h.avatar}
                           </div>
                       }
-                      <span style={{fontSize:'10px',fontWeight:700,color:'rgba(0,0,0,0.75)',
+                      <span style={{fontSize:'var(--text-xs)',fontWeight:700,color:'rgba(0,0,0,0.75)',
                         textAlign:'center',lineHeight:1.2,maxWidth:'62px'}}>
                         {h.name.split(' ')[0]}
                       </span>
-                      <span style={{fontSize:'9px',color:'rgba(0,0,0,0.4)',
+                      <span style={{fontSize:'var(--text-xs)',color:'rgba(0,0,0,0.4)',
                         textAlign:'center',lineHeight:1.2,maxWidth:'62px',
                         overflow:'hidden',textOverflow:'ellipsis',whiteSpace:'nowrap'}}>
                         {h.tags?.[0] || h.specialty?.split(' ')[0]}
@@ -822,8 +822,8 @@ export default function Home({ setSearchState }) {
                       borderRadius:'16px',padding:'10px 10px 8px',
                       cursor:'pointer',minWidth:'68px',
                     }}>
-                    <span style={{fontSize:'18px'}}>→</span>
-                    <span style={{fontSize:'9px',fontWeight:700,color:'#7B2FFF',textAlign:'center',lineHeight:1.3}}>
+                    <span style={{fontSize:'var(--text-md)'}}>→</span>
+                    <span style={{fontSize:'var(--text-xs)',fontWeight:700,color:'#7B2FFF',textAlign:'center',lineHeight:1.3}}>
                       Ver todos
                     </span>
                   </button>

@@ -211,13 +211,13 @@ function AiDataSection({ aiData, aiAnalyzedAt, helperName }) {
   const RENDERERS = {
     summary: (v) => (
       <div style={{
-        fontSize:'14px',color:'rgba(0,0,0,0.7)',lineHeight:1.75,
+        fontSize:'var(--text-sm)',color:'rgba(0,0,0,0.7)',lineHeight:1.75,
         background:'rgba(123,47,255,0.04)',
         borderLeft:'3px solid rgba(123,47,255,0.3)',
         borderRadius:'0 10px 10px 0',
         padding:'12px 14px',
       }}>
-        <div style={{fontSize:'10px',fontWeight:700,color:'rgba(123,47,255,0.7)',
+        <div style={{fontSize:'var(--text-xs)',fontWeight:700,color:'rgba(123,47,255,0.7)',
           letterSpacing:'0.5px',textTransform:'uppercase',marginBottom:'6px'}}>
           Análisis de Nüra
         </div>
@@ -239,7 +239,7 @@ function AiDataSection({ aiData, aiAnalyzedAt, helperName }) {
       <div style={{display:'flex',flexDirection:'column',gap:'8px'}}>
         {Object.entries(v).map(([k, val]) => (
           <div key={k} style={{display:'flex',alignItems:'center',gap:'10px'}}>
-            <span style={{fontSize:'12px',color:'rgba(0,0,0,0.5)',minWidth:'100px',
+            <span style={{fontSize:'var(--text-xs)',color:'rgba(0,0,0,0.5)',minWidth:'100px',
               textTransform:'capitalize'}}>{k}</span>
             <div style={{flex:1,height:'4px',borderRadius:'2px',background:'rgba(0,0,0,0.08)'}}>
               <div style={{width:`${typeof val==='number' ? (val > 10 ? val : val*10) : 70}%`,height:'100%',
@@ -316,7 +316,7 @@ function AiDataSection({ aiData, aiAnalyzedAt, helperName }) {
           </span>
         </div>
         {aiAnalyzedAt && (
-          <span style={{fontSize:'10px',color:'rgba(0,0,0,0.3)'}}>
+          <span style={{fontSize:'var(--text-xs)',color:'rgba(0,0,0,0.3)'}}>
             {new Date(aiAnalyzedAt).toLocaleDateString('es-ES',{day:'numeric',month:'short'})}
           </span>
         )}
@@ -444,8 +444,8 @@ function OwnerPanel({ helper, user, updateUser, navigate }) {
           {stats.map(({ n, l }, i) => (
             <div key={l} style={{flex:1,padding:'10px 8px',textAlign:'center',
               borderRight: i < 2 ? '1px solid rgba(255,255,255,0.08)' : 'none'}}>
-              <div style={{fontSize:'17px',fontWeight:800,color:'white',letterSpacing:'-0.3px'}}>{n}</div>
-              <div style={{fontSize:'10px',color:'rgba(255,255,255,0.45)',fontWeight:500}}>{l}</div>
+              <div style={{fontSize:'var(--text-md)',fontWeight:800,color:'white',letterSpacing:'-0.3px'}}>{n}</div>
+              <div style={{fontSize:'var(--text-xs)',color:'rgba(255,255,255,0.45)',fontWeight:500}}>{l}</div>
             </div>
           ))}
         </div>
@@ -463,7 +463,7 @@ function OwnerPanel({ helper, user, updateUser, navigate }) {
               display:'flex', flexDirection:'column', alignItems:'center', gap:'3px',
             }}>
             <span style={{width:'10px',height:'10px',borderRadius:'50%',background:available?'#22C55E':'rgba(0,0,0,0.2)',display:'inline-block'}} />
-            <span style={{fontSize:'10px',fontWeight:700,
+            <span style={{fontSize:'var(--text-xs)',fontWeight:700,
               color: available ? '#34D399' : 'rgba(255,255,255,0.45)'}}>
               {available ? 'Disponible' : 'No disponible'}
             </span>
@@ -480,7 +480,7 @@ function OwnerPanel({ helper, user, updateUser, navigate }) {
               display:'flex', flexDirection:'column', alignItems:'center', gap:'3px',
             }}>
             <MessageCircle size={16} strokeWidth={1.7} />
-            <span style={{fontSize:'10px',fontWeight:700,color:'rgba(255,255,255,0.6)'}}>
+            <span style={{fontSize:'var(--text-xs)',fontWeight:700,color:'rgba(255,255,255,0.6)'}}>
               Mensajes
             </span>
           </button>
@@ -500,7 +500,7 @@ function OwnerPanel({ helper, user, updateUser, navigate }) {
               display:'flex', flexDirection:'column', alignItems:'center', gap:'3px',
             }}>
             <Link size={16} strokeWidth={1.7} />
-            <span style={{fontSize:'10px',fontWeight:700,color:'rgba(255,255,255,0.6)'}}>
+            <span style={{fontSize:'var(--text-xs)',fontWeight:700,color:'rgba(255,255,255,0.6)'}}>
               Compartir
             </span>
           </button>
@@ -516,7 +516,7 @@ function OwnerPanel({ helper, user, updateUser, navigate }) {
               display:'flex', flexDirection:'column', alignItems:'center', gap:'3px',
             }}>
             <Edit3 size={16} strokeWidth={1.7} />
-            <span style={{fontSize:'10px',fontWeight:700,color:'rgba(180,130,255,1)'}}>
+            <span style={{fontSize:'var(--text-xs)',fontWeight:700,color:'rgba(180,130,255,1)'}}>
               Editar
             </span>
           </button>
@@ -543,8 +543,8 @@ function BookingModal({ helper, onClose, onBook, onNavigate }) {
     sheet: {background:'rgba(255,255,255,0.96)',WebkitBackdropFilter: 'blur(32px)', backdropFilter:'blur(32px)',borderRadius:'24px 24px 0 0',padding:'24px 20px 36px',width:'100%',maxWidth:'500px'},
     handle: {width:'36px',height:'4px',background:'rgba(0,0,0,0.1)',borderRadius:'2px',margin:'0 auto 20px'},
     input: {width:'100%',padding:'12px 16px',border:'1px solid rgba(0,0,0,0.1)',borderRadius:'14px',fontSize:'var(--text-base)',outline:'none',fontFamily:'-apple-system,Inter,sans-serif',background:'rgba(0,0,0,0.03)',boxSizing:'border-box'},
-    btnPrimary: {width:'100%',padding:'14px',background:'var(--purple)',color:'white',border:'none',borderRadius:'100px',fontSize:'14px',fontWeight:700,cursor:'pointer',transition:'opacity 0.2s'},
-    btnSecondary: {width:'100%',padding:'12px',background:'rgba(0,0,0,0.05)',color:'rgba(0,0,0,0.55)',border:'none',borderRadius:'100px',fontSize:'14px',fontWeight:600,cursor:'pointer'},
+    btnPrimary: {width:'100%',padding:'14px',background:'var(--purple)',color:'white',border:'none',borderRadius:'100px',fontSize:'var(--text-sm)',fontWeight:700,cursor:'pointer',transition:'opacity 0.2s'},
+    btnSecondary: {width:'100%',padding:'12px',background:'rgba(0,0,0,0.05)',color:'rgba(0,0,0,0.55)',border:'none',borderRadius:'100px',fontSize:'var(--text-sm)',fontWeight:600,cursor:'pointer'},
   }
 
   return (
@@ -593,7 +593,7 @@ function BookingModal({ helper, onClose, onBook, onNavigate }) {
           </div>
         ) : (
           <>
-            <h3 style={{fontSize:'17px',fontWeight:800,margin:'0 0 4px',color:'rgba(0,0,0,0.85)',letterSpacing:'-0.3px'}}>Solicitar servicio</h3>
+            <h3 style={{fontSize:'var(--text-md)',fontWeight:800,margin:'0 0 4px',color:'rgba(0,0,0,0.85)',letterSpacing:'-0.3px'}}>Solicitar servicio</h3>
             <p style={{fontSize:'var(--text-sm)',color:'rgba(0,0,0,0.4)',margin:'0 0 20px'}}>{name} · {helper?.price || 'Precio a consultar'}</p>
             <div style={{display:'flex',flexDirection:'column',gap:'10px',marginBottom:'20px'}}>
               {/* Day pills */}
@@ -787,7 +787,7 @@ function HelperProfileInner() {
   return (
     <div className={styles.page}>
       {/* Header */}
-      <PageHeader showBack rightEl={<button className={styles.shareBtn} onClick={handleShare}>{shared ? <span style={{fontSize:'14px',fontWeight:700,color:'#059669'}}>✓</span> : <Share2 size={17} color="#1a1a1a" />}</button>} />
+      <PageHeader showBack rightEl={<button className={styles.shareBtn} onClick={handleShare}>{shared ? <span style={{fontSize:'var(--text-sm)',fontWeight:700,color:'#059669'}}>✓</span> : <Share2 size={17} color="#1a1a1a" />}</button>} />
 
       <div className={styles.content}>
         {/* Hero */}
@@ -943,9 +943,9 @@ function HelperProfileInner() {
                     border: available ? '1px solid rgba(5,150,105,0.2)' : '1px solid var(--rule)',
                     flexShrink:0
                   }}>
-                    <span style={{fontSize:'10px',color:'var(--soft)',fontWeight:600}}>{day}</span>
-                    <span style={{fontSize:'14px'}}>{available ? '✓' : '–'}</span>
-                    {available && <span style={{fontSize:'9px',color:'#059669',fontWeight:600}}>Libre</span>}
+                    <span style={{fontSize:'var(--text-xs)',color:'var(--soft)',fontWeight:600}}>{day}</span>
+                    <span style={{fontSize:'var(--text-sm)'}}>{available ? '✓' : '–'}</span>
+                    {available && <span style={{fontSize:'var(--text-xs)',color:'#059669',fontWeight:600}}>Libre</span>}
                   </div>
                 )
               })}
@@ -1278,7 +1278,7 @@ function HelperProfileInner() {
                   <div style={{display:'flex',gap:'12px',alignItems:'center'}}>
                     <div style={{width:'40px',height:'40px',borderRadius:'50%',background:'rgba(123,47,255,0.08)',display:'flex',alignItems:'center',justifyContent:'center',flexShrink:0}}><Briefcase size={18} color='var(--purple)' strokeWidth={1.6} /></div>
                     <div>
-                      <div style={{fontSize:'14px',fontWeight:700,color:'rgba(0,0,0,0.8)',letterSpacing:'-0.1px'}}>{h.specialty || 'Profesional'}</div>
+                      <div style={{fontSize:'var(--text-sm)',fontWeight:700,color:'rgba(0,0,0,0.8)',letterSpacing:'-0.1px'}}>{h.specialty || 'Profesional'}</div>
                       <div style={{fontSize:'var(--text-xs)',color:'rgba(0,0,0,0.45)',marginTop:'2px'}}>{h.zone || h.city || 'Barcelona'} · Autónomo/a</div>
                     </div>
                   </div>

@@ -93,7 +93,7 @@ function CarouselCard({ helper, isTopPick, matchReason }) {
       {/* Match reason micro-text — why Nüra chose this helper */}
       {matchReason && (
         <p style={{
-          fontSize:'10px',color:'rgba(0,0,0,0.45)',margin:'2px 0 0',
+          fontSize:'var(--text-xs)',color:'rgba(0,0,0,0.45)',margin:'2px 0 0',
           lineHeight:1.4,display:'-webkit-box',WebkitLineClamp:2,
           WebkitBoxOrient:'vertical',overflow:'hidden',
           fontStyle:'italic',
@@ -105,7 +105,7 @@ function CarouselCard({ helper, isTopPick, matchReason }) {
       {/* Top tag */}
       {!matchReason && helper.tags?.[0] && (
         <div style={{
-          fontSize:'9px',color:'rgba(0,0,0,0.4)',
+          fontSize:'var(--text-xs)',color:'rgba(0,0,0,0.4)',
           background:'rgba(0,0,0,0.04)',
           borderRadius:'100px',padding:'2px 7px',
           alignSelf:'center',fontWeight:500,

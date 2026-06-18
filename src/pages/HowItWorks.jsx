@@ -60,7 +60,7 @@ export default function HowItWorks() {
         borderBottom:'1px solid rgba(0,0,0,0.06)', marginBottom:'4px',
       }}>
         <p style={{
-          fontSize:'17px', fontWeight:800, color:'rgba(0,0,0,0.8)',
+          fontSize:'var(--text-md)', fontWeight:800, color:'rgba(0,0,0,0.8)',
           letterSpacing:'-0.4px', lineHeight:1.5, margin:0,
           fontStyle:'italic',
         }}>
@@ -114,21 +114,21 @@ export default function HowItWorks() {
           borderRadius:'20px', padding:'24px 20px',
           marginBottom:'12px',
         }}>
-          <p style={{fontSize:'11px',fontWeight:700,color:'rgba(123,47,255,0.6)',
+          <p style={{fontSize:'var(--text-xs)',fontWeight:700,color:'rgba(123,47,255,0.6)',
             letterSpacing:'0.5px',textTransform:'uppercase',margin:'0 0 10px'}}>
             Sobre Nüra
           </p>
-          <h3 style={{fontSize:'18px',fontWeight:800,color:'rgba(0,0,0,0.85)',
+          <h3 style={{fontSize:'var(--text-md)',fontWeight:800,color:'rgba(0,0,0,0.85)',
             letterSpacing:'-0.4px',margin:'0 0 10px',lineHeight:1.3}}>
             Construida para conectar personas reales
           </h3>
-          <p style={{fontSize:'14px',color:'rgba(0,0,0,0.55)',lineHeight:1.7,margin:'0 0 12px'}}>
+          <p style={{fontSize:'var(--text-sm)',color:'rgba(0,0,0,0.55)',lineHeight:1.7,margin:'0 0 12px'}}>
             Nüra nació de una pregunta simple: ¿por qué es tan difícil encontrar a la persona adecuada cuando más la necesitas?
           </p>
-          <p style={{fontSize:'14px',color:'rgba(0,0,0,0.55)',lineHeight:1.7,margin:'0 0 12px'}}>
+          <p style={{fontSize:'var(--text-sm)',color:'rgba(0,0,0,0.55)',lineHeight:1.7,margin:'0 0 12px'}}>
             No creemos que la IA deba reemplazar el contacto humano. Creemos que debe facilitar que dos personas se encuentren — la que necesita ayuda y la que puede darla.
           </p>
-          <p style={{fontSize:'14px',color:'rgba(0,0,0,0.55)',lineHeight:1.7,margin:0,
+          <p style={{fontSize:'var(--text-sm)',color:'rgba(0,0,0,0.55)',lineHeight:1.7,margin:0,
             fontStyle:'italic',borderLeft:'3px solid rgba(123,47,255,0.2)',paddingLeft:'12px'}}>
             "La tecnología más poderosa es la que pone en contacto a personas."
           </p>
@@ -143,11 +143,11 @@ export default function HowItWorks() {
           alignItems:'center',gap:'10px',marginBottom:'12px',
         }}>
           <UserCheck size={28} color='var(--purple)' strokeWidth={1.6} />
-          <h3 style={{fontSize:'17px',fontWeight:800,margin:0,
+          <h3 style={{fontSize:'var(--text-md)',fontWeight:800,margin:0,
             color:'rgba(0,0,0,0.8)',letterSpacing:'-0.3px'}}>
             ¿Eres profesional?
           </h3>
-          <p style={{fontSize:'13px',color:'rgba(0,0,0,0.45)',margin:0,
+          <p style={{fontSize:'var(--text-sm)',color:'rgba(0,0,0,0.45)',margin:0,
             lineHeight:1.6,maxWidth:'260px'}}>
             Únete como helper. Nüra construye tu perfil automáticamente y te conecta con quienes te necesitan.
           </p>
@@ -157,7 +157,7 @@ export default function HowItWorks() {
               padding:'12px 24px',
               background:'linear-gradient(135deg,#7B2FFF,#00D4C8)',
               color:'white',border:'none',borderRadius:'100px',
-              fontSize:'14px',fontWeight:700,cursor:'pointer',
+              fontSize:'var(--text-sm)',fontWeight:700,cursor:'pointer',
               fontFamily:'-apple-system,"Inter",sans-serif',
             }}>
             Registrarme como helper

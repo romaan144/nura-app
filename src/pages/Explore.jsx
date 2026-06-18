@@ -99,7 +99,7 @@ export default function Explore() {
 
       {/* Helper count */}
       {totalCount > 0 && (
-        <p style={{fontSize:'12px',color:'rgba(0,0,0,0.35)',margin:'0 0 8px',paddingLeft:'2px'}}>
+        <p style={{fontSize:'var(--text-xs)',color:'rgba(0,0,0,0.35)',margin:'0 0 8px',paddingLeft:'2px'}}>
           {filtered.length < totalCount
             ? `${filtered.length} de ${totalCount} profesionales`
             : `${totalCount} profesionales en Barcelona`}
@@ -107,10 +107,10 @@ export default function Explore() {
       )}
 
       <div style={{padding:'0 0 10px',display:'flex',alignItems:'baseline',justifyContent:'space-between'}}>
-        <h2 style={{fontSize:'18px',fontWeight:800,color:'rgba(0,0,0,0.85)',letterSpacing:'-0.4px',margin:0}}>
+        <h2 style={{fontSize:'var(--text-md)',fontWeight:800,color:'rgba(0,0,0,0.85)',letterSpacing:'-0.4px',margin:0}}>
           Profesionales verificados
         </h2>
-        <span style={{fontSize:'12px',color:'rgba(0,0,0,0.35)',fontWeight:500}}>
+        <span style={{fontSize:'var(--text-xs)',color:'rgba(0,0,0,0.35)',fontWeight:500}}>
           {filtered.length} cerca de ti
         </span>
       </div>
@@ -196,12 +196,12 @@ export default function Explore() {
               <p style={{fontSize:'16px',fontWeight:700,color:'rgba(0,0,0,0.6)',margin:0,letterSpacing:'-0.2px'}}>
                 Sin resultados
               </p>
-              <p style={{fontSize:'14px',color:'rgba(0,0,0,0.4)',margin:0}}>
+              <p style={{fontSize:'var(--text-sm)',color:'rgba(0,0,0,0.4)',margin:0}}>
                 Prueba con otra categoría o ajusta el precio
               </p>
               <button onClick={() => { setActiveCategory('all'); setPriceMax(200); setSearchText('') }}
                 style={{padding:'10px 22px',background:'var(--purple)',color:'white',border:'none',
-                  borderRadius:'100px',fontSize:'13px',fontWeight:700,cursor:'pointer',marginTop:'4px'}}>
+                  borderRadius:'100px',fontSize:'var(--text-sm)',fontWeight:700,cursor:'pointer',marginTop:'4px'}}>
                 Ver todos
               </button>
             </div>

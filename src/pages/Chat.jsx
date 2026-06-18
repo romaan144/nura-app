@@ -260,7 +260,7 @@ function ConfirmModal({ helper, onClose, onConfirm, prefillDate, prefillTime }) 
             ? <img src={helper.avatarUrl} alt={name}
                 style={{width:'64px',height:'64px',borderRadius:'50%',border:'3px solid #22C55E',display:'block'}} />
             : <div style={{width:'64px',height:'64px',borderRadius:'50%',background:helper.avatarColor||'#7B2FFF',
-                display:'flex',alignItems:'center',justifyContent:'center',color:'white',fontSize:'22px',fontWeight:700,
+                display:'flex',alignItems:'center',justifyContent:'center',color:'white',fontSize:'var(--text-lg)',fontWeight:700,
                 border:'3px solid #22C55E'}}>
                 {helper.avatar||name[0]}
               </div>
@@ -268,23 +268,23 @@ function ConfirmModal({ helper, onClose, onConfirm, prefillDate, prefillTime }) 
           <span style={{position:'absolute',bottom:-2,right:-2,width:'20px',height:'20px',background:'#22C55E',borderRadius:'50%',display:'flex',alignItems:'center',justifyContent:'center'}}><svg width='11' height='11' viewBox='0 0 12 12' fill='none'><path d='M2 6l3 3 5-5' stroke='white' strokeWidth='1.8' strokeLinecap='round' strokeLinejoin='round'/></svg></span>
         </div>
         <h3 style={{fontSize:'19px',fontWeight:800,marginBottom:'4px',color:'rgba(0,0,0,0.85)',letterSpacing:'-0.3px'}}>¡Solicitud enviada!</h3>
-        <p style={{fontSize:'13px',color:'rgba(0,0,0,0.45)',marginBottom:'12px',lineHeight:1.6}}>{name} confirmará disponibilidad en breve.</p>
+        <p style={{fontSize:'var(--text-sm)',color:'rgba(0,0,0,0.45)',marginBottom:'12px',lineHeight:1.6}}>{name} confirmará disponibilidad en breve.</p>
         {(date || time) && (
           <div style={{background:'rgba(0,0,0,0.03)',border:'1px solid rgba(0,0,0,0.06)',borderRadius:'12px',
             padding:'10px 14px',marginBottom:'20px',textAlign:'left'}}>
-            {date && <p style={{margin:'0 0 3px',fontSize:'12px',color:'rgba(0,0,0,0.55)'}}>
+            {date && <p style={{margin:'0 0 3px',fontSize:'var(--text-xs)',color:'rgba(0,0,0,0.55)'}}>
               {new Date(date).toLocaleDateString('es-ES',{weekday:'long',day:'numeric',month:'long'})}
             </p>}
-            {time && <p style={{margin:0,fontSize:'12px',color:'rgba(0,0,0,0.55)'}}>{time}h</p>}
+            {time && <p style={{margin:0,fontSize:'var(--text-xs)',color:'rgba(0,0,0,0.55)'}}>{time}h</p>}
           </div>
         )}
         <div style={{display:'flex',flexDirection:'column',gap:'8px',width:'100%'}}>
           <button onClick={() => { onClose(); navigate('/my-services') }}
-            style={{padding:'13px',background:'var(--purple)',color:'white',border:'none',borderRadius:'100px',fontSize:'14px',fontWeight:700,cursor:'pointer',width:'100%'}}>
+            style={{padding:'13px',background:'var(--purple)',color:'white',border:'none',borderRadius:'100px',fontSize:'var(--text-sm)',fontWeight:700,cursor:'pointer',width:'100%'}}>
             Ver mis servicios
           </button>
           <button onClick={onClose}
-            style={{padding:'12px',background:'transparent',color:'rgba(0,0,0,0.4)',border:'none',fontSize:'14px',cursor:'pointer'}}>
+            style={{padding:'12px',background:'transparent',color:'rgba(0,0,0,0.4)',border:'none',fontSize:'var(--text-sm)',cursor:'pointer'}}>
             Volver al chat
           </button>
         </div>
@@ -296,15 +296,15 @@ function ConfirmModal({ helper, onClose, onConfirm, prefillDate, prefillTime }) 
     <div style={{position:'fixed',inset:0,background:'rgba(0,0,0,0.4)',WebkitBackdropFilter: 'blur(8px)', backdropFilter:'blur(8px)',zIndex:200,display:'flex',alignItems:'flex-end',justifyContent:'center'}}>
       <div style={{background:'rgba(255,255,255,0.95)',WebkitBackdropFilter: 'blur(32px)', backdropFilter:'blur(32px)',border:'1px solid rgba(255,255,255,0.5)',borderRadius:'24px 24px 0 0',padding:'24px 20px 32px',width:'100%',maxWidth:'500px',boxShadow:'0 -8px 40px rgba(0,0,0,0.1)'}}>
         <div style={{width:'36px',height:'4px',background:'rgba(0,0,0,0.1)',borderRadius:'2px',margin:'0 auto 24px'}} />
-        <h3 style={{fontSize:'18px',fontWeight:800,marginBottom:'4px',color:'rgba(0,0,0,0.85)',letterSpacing:'-0.3px'}}>Solicitar servicio</h3>
-        <p style={{fontSize:'13px',color:'rgba(0,0,0,0.45)',marginBottom: prefillDate ? '12px' : '20px'}}>Con {name} · {helper.price || 'Precio a consultar'}</p>
+        <h3 style={{fontSize:'var(--text-md)',fontWeight:800,marginBottom:'4px',color:'rgba(0,0,0,0.85)',letterSpacing:'-0.3px'}}>Solicitar servicio</h3>
+        <p style={{fontSize:'var(--text-sm)',color:'rgba(0,0,0,0.45)',marginBottom: prefillDate ? '12px' : '20px'}}>Con {name} · {helper.price || 'Precio a consultar'}</p>
         {prefillDate && (
           <div style={{display:'flex',alignItems:'center',gap:'6px',
             background:'rgba(123,47,255,0.06)',border:'1px solid rgba(123,47,255,0.1)',
             borderRadius:'10px',padding:'8px 12px',marginBottom:'16px',
           }}>
             <img src="/logo-iso.png" alt="" style={{width:'12px',height:'12px',opacity:0.7}} />
-            <span style={{fontSize:'11px',color:'var(--purple)',fontWeight:600}}>
+            <span style={{fontSize:'var(--text-xs)',color:'var(--purple)',fontWeight:600}}>
               Nüra detectó la fecha de vuestra conversación
             </span>
           </div>
@@ -312,7 +312,7 @@ function ConfirmModal({ helper, onClose, onConfirm, prefillDate, prefillTime }) 
         <div style={{display:'flex',flexDirection:'column',gap:'10px',marginBottom:'20px'}}>
           {/* Day pills */}
           <div>
-            <p style={{fontSize:'11px',fontWeight:700,color:'rgba(0,0,0,0.4)',margin:'0 0 8px',letterSpacing:'0.5px',textTransform:'uppercase'}}>Fecha</p>
+            <p style={{fontSize:'var(--text-xs)',fontWeight:700,color:'rgba(0,0,0,0.4)',margin:'0 0 8px',letterSpacing:'0.5px',textTransform:'uppercase'}}>Fecha</p>
             <div style={{display:'flex',gap:'6px',overflowX:'auto',paddingBottom:'4px'}}>
               {Array.from({length:7},(_,i)=>{
                 const d=new Date(); d.setDate(d.getDate()+i)
@@ -323,7 +323,7 @@ function ConfirmModal({ helper, onClose, onConfirm, prefillDate, prefillTime }) 
                     flexShrink:0,padding:'8px 14px',
                     background:date===iso?'var(--purple)':'rgba(0,0,0,0.05)',
                     color:date===iso?'white':'rgba(0,0,0,0.6)',
-                    border:'none',borderRadius:'100px',fontSize:'12px',fontWeight:600,
+                    border:'none',borderRadius:'100px',fontSize:'var(--text-xs)',fontWeight:600,
                     cursor:'pointer',fontFamily:'inherit',transition:'all 0.15s',whiteSpace:'nowrap',
                   }}>{lbl}</button>
                 )
@@ -332,14 +332,14 @@ function ConfirmModal({ helper, onClose, onConfirm, prefillDate, prefillTime }) 
           </div>
           {/* Time pills */}
           <div>
-            <p style={{fontSize:'11px',fontWeight:700,color:'rgba(0,0,0,0.4)',margin:'0 0 8px',letterSpacing:'0.5px',textTransform:'uppercase'}}>Hora</p>
+            <p style={{fontSize:'var(--text-xs)',fontWeight:700,color:'rgba(0,0,0,0.4)',margin:'0 0 8px',letterSpacing:'0.5px',textTransform:'uppercase'}}>Hora</p>
             <div style={{display:'flex',gap:'6px',flexWrap:'wrap'}}>
               {['9:00','10:00','11:00','12:00','16:00','17:00','18:00','19:00'].map(t=>(
                 <button key={t} onClick={()=>setTime(t)} style={{
                   padding:'7px 12px',
                   background:time===t?'var(--purple)':'rgba(0,0,0,0.05)',
                   color:time===t?'white':'rgba(0,0,0,0.6)',
-                  border:'none',borderRadius:'100px',fontSize:'12px',fontWeight:600,
+                  border:'none',borderRadius:'100px',fontSize:'var(--text-xs)',fontWeight:600,
                   cursor:'pointer',fontFamily:'inherit',transition:'all 0.15s',
                 }}>{t}</button>
               ))}
@@ -347,12 +347,12 @@ function ConfirmModal({ helper, onClose, onConfirm, prefillDate, prefillTime }) 
           </div>
           <textarea value={note} onChange={e=>setNote(e.target.value)}
             placeholder="Detalles adicionales (opcional)..." rows={3}
-            style={{padding:'12px 16px',border:'1px solid rgba(0,0,0,0.1)',borderRadius:'14px',fontSize:'15px',outline:'none',resize:'none',fontFamily:'-apple-system,Inter,sans-serif',color:'rgba(0,0,0,0.85)',background:'rgba(0,0,0,0.03)'}} />
+            style={{padding:'12px 16px',border:'1px solid rgba(0,0,0,0.1)',borderRadius:'14px',fontSize:'var(--text-base)',outline:'none',resize:'none',fontFamily:'-apple-system,Inter,sans-serif',color:'rgba(0,0,0,0.85)',background:'rgba(0,0,0,0.03)'}} />
         </div>
         <div style={{display:'flex',gap:'10px'}}>
-          <button onClick={onClose} style={{flex:1,padding:'14px',background:'rgba(0,0,0,0.05)',color:'rgba(0,0,0,0.55)',border:'none',borderRadius:'100px',fontSize:'14px',fontWeight:600,cursor:'pointer'}}>Cancelar</button>
+          <button onClick={onClose} style={{flex:1,padding:'14px',background:'rgba(0,0,0,0.05)',color:'rgba(0,0,0,0.55)',border:'none',borderRadius:'100px',fontSize:'var(--text-sm)',fontWeight:600,cursor:'pointer'}}>Cancelar</button>
           <button onClick={()=>{ onConfirm?.(date, time, note); setDone(true); notifyServiceConfirmed(helper.name?.split(' ')?.[0] || helper.name); haptic('success') }} disabled={!date}
-            style={{flex:2,padding:'14px',background:date?'var(--purple)':'rgba(0,0,0,0.1)',color:date?'white':'rgba(0,0,0,0.3)',border:'none',borderRadius:'100px',fontSize:'14px',fontWeight:700,cursor:date?'pointer':'default',transition:'all 0.2s'}}>
+            style={{flex:2,padding:'14px',background:date?'var(--purple)':'rgba(0,0,0,0.1)',color:date?'white':'rgba(0,0,0,0.3)',border:'none',borderRadius:'100px',fontSize:'var(--text-sm)',fontWeight:700,cursor:date?'pointer':'default',transition:'all 0.2s'}}>
             Enviar solicitud
           </button>
         </div>
@@ -593,9 +593,9 @@ export default function Chat() {
                 borderRadius:'14px',padding:'10px 14px',
                 marginBottom:'4px',maxWidth:'260px',textAlign:'left',
               }}>
-                <p style={{fontSize:'11px',fontWeight:700,color:'var(--purple)',margin:'0 0 4px',
+                <p style={{fontSize:'var(--text-xs)',fontWeight:700,color:'var(--purple)',margin:'0 0 4px',
                   letterSpacing:'0.3px',textTransform:'uppercase'}}>Nüra preparó tu mensaje</p>
-                <p style={{fontSize:'12px',color:'rgba(0,0,0,0.5)',margin:0,lineHeight:1.6}}>
+                <p style={{fontSize:'var(--text-xs)',color:'rgba(0,0,0,0.5)',margin:0,lineHeight:1.6}}>
                   He redactado un primer mensaje basado en lo que necesitas. Revísalo y envíalo cuando quieras.
                 </p>
               </div>
@@ -604,13 +604,13 @@ export default function Chat() {
             <p className={styles.emptyChatDesc}>{helper.specialty} · {helper.zone}</p>
             {helper.price && <p className={styles.emptyChatPrice}>{helper.price}</p>}
             <div style={{display:'flex',gap:'8px',flexWrap:'wrap',justifyContent:'center',marginTop:'4px'}}>
-              {helper.dniVerified && <span style={{fontSize:'11px',color:'#059669',background:'#ECFDF5',border:'1px solid rgba(5,150,105,0.15)',borderRadius:'100px',padding:'3px 10px',fontWeight:600}}>Verificado</span>}
-              {helper.available && <span style={{fontSize:'11px',color:'#059669',background:'#ECFDF5',border:'1px solid rgba(5,150,105,0.15)',borderRadius:'100px',padding:'3px 10px',fontWeight:600}}>● Disponible</span>}
-              <span style={{fontSize:'11px',color:'rgba(0,0,0,0.4)',background:'rgba(0,0,0,0.04)',borderRadius:'100px',padding:'3px 10px'}}>⭐ {helper.rating} · {helper.reviews} reseñas</span>
+              {helper.dniVerified && <span style={{fontSize:'var(--text-xs)',color:'#059669',background:'#ECFDF5',border:'1px solid rgba(5,150,105,0.15)',borderRadius:'100px',padding:'3px 10px',fontWeight:600}}>Verificado</span>}
+              {helper.available && <span style={{fontSize:'var(--text-xs)',color:'#059669',background:'#ECFDF5',border:'1px solid rgba(5,150,105,0.15)',borderRadius:'100px',padding:'3px 10px',fontWeight:600}}>● Disponible</span>}
+              <span style={{fontSize:'var(--text-xs)',color:'rgba(0,0,0,0.4)',background:'rgba(0,0,0,0.04)',borderRadius:'100px',padding:'3px 10px'}}>⭐ {helper.rating} · {helper.reviews} reseñas</span>
             </div>
             {/* Conversation starters */}
             <div style={{display:'flex',flexDirection:'column',gap:'8px',marginTop:'20px',width:'100%',maxWidth:'280px'}}>
-              <p style={{fontSize:'12px',color:'rgba(0,0,0,0.4)',textAlign:'center',margin:0}}>Empieza la conversación</p>
+              <p style={{fontSize:'var(--text-xs)',color:'rgba(0,0,0,0.4)',textAlign:'center',margin:0}}>Empieza la conversación</p>
               {[
                 `¿Tienes disponibilidad esta semana?`,
                 `¿Cuánto cobras por sesión?`,
@@ -623,7 +623,7 @@ export default function Chat() {
                     background:'rgba(255,255,255,0.85)',
                     border:'1px solid rgba(0,0,0,0.08)',
                     borderRadius:'14px',
-                    fontSize:'13px',color:'rgba(0,0,0,0.7)',
+                    fontSize:'var(--text-sm)',color:'rgba(0,0,0,0.7)',
                     cursor:'pointer',textAlign:'left',
                     fontFamily:'-apple-system,"Inter",sans-serif',
                     transition:'opacity 0.15s',
@@ -664,7 +664,7 @@ export default function Chat() {
                           sendMessage(chip)
                         }}
                         style={{
-                          padding:'5px 12px',borderRadius:'100px',fontSize:'12px',fontWeight:600,
+                          padding:'5px 12px',borderRadius:'100px',fontSize:'var(--text-xs)',fontWeight:600,
                           cursor:'pointer',border:'none',
                           background: chip === 'Confirmar reserva'
                             ? 'var(--purple)' : 'rgba(0,0,0,0.07)',

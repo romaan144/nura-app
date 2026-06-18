@@ -83,7 +83,7 @@ export default function Profile() {
               alt={user.name} className={styles.avatar}
             />
             <div className={styles.avatarBadge}>
-              {user.isHelper ? <Award size={12} color="white" /> : <span style={{fontSize:'10px'}}>✓</span>}
+              {user.isHelper ? <Award size={12} color="white" /> : <span style={{fontSize:'var(--text-xs)'}}>✓</span>}
             </div>
           </div>
 
@@ -163,7 +163,7 @@ export default function Profile() {
         {(chats?.length > 0 || (services||[]).length > 0) && (
           <div style={{
             background:'rgba(123,47,255,0.04)',border:'1px solid rgba(123,47,255,0.08)',
-            borderRadius:'16px',padding:'14px 16px',fontSize:'13px',
+            borderRadius:'16px',padding:'14px 16px',fontSize:'var(--text-sm)',
             color:'rgba(0,0,0,0.5)',lineHeight:1.6,
           }}>
             {services?.length > 0
@@ -182,10 +182,10 @@ export default function Profile() {
           }}>
             <span style={{width:'22px',height:'22px',display:'flex',alignItems:'center',justifyContent:'center'}}><AlertCircle size={18} color='#7B2FFF' strokeWidth={1.6}/></span>
             <div>
-              <div style={{fontSize:'13px',fontWeight:700,color:'rgba(0,0,0,0.7)',marginBottom:'4px'}}>
+              <div style={{fontSize:'var(--text-sm)',fontWeight:700,color:'rgba(0,0,0,0.7)',marginBottom:'4px'}}>
                 Empieza buscando con Nüra
               </div>
-              <div style={{fontSize:'12px',color:'rgba(0,0,0,0.45)',lineHeight:1.6}}>
+              <div style={{fontSize:'var(--text-xs)',color:'rgba(0,0,0,0.45)',lineHeight:1.6}}>
                 Cuéntale qué necesitas en la pantalla principal. Encontrará al profesional ideal en segundos.
               </div>
             </div>

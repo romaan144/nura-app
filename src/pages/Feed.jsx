@@ -140,7 +140,7 @@ function PostCard({ post }) {
       {isLong && !expanded && (
         <button
           onClick={() => setExpanded(true)}
-          style={{fontSize:'12px',color:'var(--purple)',fontWeight:600,
+          style={{fontSize:'var(--text-xs)',color:'var(--purple)',fontWeight:600,
             background:'none',border:'none',padding:'0',cursor:'pointer',marginTop:'-4px'}}>
           Ver más
         </button>
@@ -249,11 +249,11 @@ export default function Feed() {
             }}>
               <div style={{display:'flex',alignItems:'center',gap:'6px',marginBottom:'12px'}}>
                 <img src="/logo-iso.png" alt="Nüra" style={{width:'14px',height:'14px',objectFit:'contain'}} />
-                <span style={{fontSize:'11px',fontWeight:700,color:'var(--purple)',letterSpacing:'0.4px',textTransform:'uppercase'}}>
+                <span style={{fontSize:'var(--text-xs)',fontWeight:700,color:'var(--purple)',letterSpacing:'0.4px',textTransform:'uppercase'}}>
                   Basado en tu búsqueda
                 </span>
               </div>
-              <p style={{fontSize:'13px',color:'rgba(0,0,0,0.55)',margin:'0 0 12px',lineHeight:1.5}}>
+              <p style={{fontSize:'var(--text-sm)',color:'rgba(0,0,0,0.55)',margin:'0 0 12px',lineHeight:1.5}}>
                 Buscaste <strong style={{color:'rgba(0,0,0,0.75)'}}>{lastQ}</strong>. Estos profesionales están disponibles ahora.
               </p>
               <div style={{display:'flex',gap:'8px',overflowX:'auto',paddingBottom:'2px'}}>
@@ -269,13 +269,13 @@ export default function Feed() {
                     }}>
                     <img src={h.avatarUrl} alt={h.name}
                       style={{width:'40px',height:'40px',borderRadius:'50%',objectFit:'cover'}} />
-                    <span style={{fontSize:'12px',fontWeight:700,color:'rgba(0,0,0,0.8)',textAlign:'center'}}>
+                    <span style={{fontSize:'var(--text-xs)',fontWeight:700,color:'rgba(0,0,0,0.8)',textAlign:'center'}}>
                       {h.name.split(' ')[0]}
                     </span>
-                    <span style={{fontSize:'10px',color:'rgba(0,0,0,0.45)',textAlign:'center',lineHeight:1.3}}>
+                    <span style={{fontSize:'var(--text-xs)',color:'rgba(0,0,0,0.45)',textAlign:'center',lineHeight:1.3}}>
                       {h.specialty}
                     </span>
-                    <span style={{fontSize:'10px',color:'#059669',fontWeight:600}}>
+                    <span style={{fontSize:'var(--text-xs)',color:'#059669',fontWeight:600}}>
                       Disponible
                     </span>
                   </div>

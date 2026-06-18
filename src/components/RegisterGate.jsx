@@ -66,10 +66,10 @@ export default function RegisterGate({ onClose, reason = 'contact' }) {
         {/* Icon + headline */}
         <div style={{textAlign:'center',marginBottom:'20px'}}>
           <div style={{fontSize:'44px',marginBottom:'12px',lineHeight:1}}>{(() => { const IC = r.Icon; return IC ? <IC size={36} strokeWidth={1.4} color='var(--purple)' /> : null })()}</div>
-          <h2 style={{fontSize:'20px',fontWeight:800,color:'rgba(0,0,0,0.85)',letterSpacing:'-0.4px',margin:'0 0 8px'}}>
+          <h2 style={{fontSize:'var(--text-md)',fontWeight:800,color:'rgba(0,0,0,0.85)',letterSpacing:'-0.4px',margin:'0 0 8px'}}>
             {r.title}
           </h2>
-          <p style={{fontSize:'14px',color:'rgba(0,0,0,0.45)',lineHeight:1.65,margin:0,maxWidth:'280px',marginInline:'auto'}}>
+          <p style={{fontSize:'var(--text-sm)',color:'rgba(0,0,0,0.45)',lineHeight:1.65,margin:0,maxWidth:'280px',marginInline:'auto'}}>
             {r.desc}
           </p>
         </div>
@@ -80,7 +80,7 @@ export default function RegisterGate({ onClose, reason = 'contact' }) {
           {BENEFITS.map((b, i) => (
             <div key={i} style={{display:'flex',alignItems:'center',gap:'10px'}}>
               {b.icon}
-              <span style={{fontSize:'13px',color:'rgba(0,0,0,0.65)',fontWeight:500}}>{b.text}</span>
+              <span style={{fontSize:'var(--text-sm)',color:'rgba(0,0,0,0.65)',fontWeight:500}}>{b.text}</span>
             </div>
           ))}
         </div>
@@ -94,7 +94,7 @@ export default function RegisterGate({ onClose, reason = 'contact' }) {
               width:'100%',padding:'15px',
               background:'var(--purple)',color:'white',
               border:'none',borderRadius:'100px',
-              fontSize:'15px',fontWeight:700,
+              fontSize:'var(--text-base)',fontWeight:700,
               cursor:'pointer',letterSpacing:'-0.2px',
             }}>
             Crear cuenta gratis <ArrowRight size={16} />
@@ -105,14 +105,14 @@ export default function RegisterGate({ onClose, reason = 'contact' }) {
               width:'100%',padding:'13px',
               background:'rgba(0,0,0,0.05)',color:'rgba(0,0,0,0.55)',
               border:'none',borderRadius:'100px',
-              fontSize:'14px',fontWeight:600,
+              fontSize:'var(--text-sm)',fontWeight:600,
               cursor:'pointer',
             }}>
             Ya tengo cuenta
           </button>
         </div>
 
-        <p style={{textAlign:'center',fontSize:'11px',color:'rgba(0,0,0,0.25)',marginTop:'14px',marginBottom:0}}>
+        <p style={{textAlign:'center',fontSize:'var(--text-xs)',color:'rgba(0,0,0,0.25)',marginTop:'14px',marginBottom:0}}>
           Gratis · Sin tarjeta · Sin compromiso
         </p>
       </div>

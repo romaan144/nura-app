@@ -140,7 +140,7 @@ export default function MyServices() {
                : tab === 'Próximos' ? 'No tienes servicios próximos'
                : 'Sin servicios completados'}
             </strong>
-            <p style={{fontSize:'13px',color:'rgba(0,0,0,0.4)',margin:'4px 0 16px',lineHeight:1.6,textAlign:'center',maxWidth:'220px'}}>
+            <p style={{fontSize:'var(--text-sm)',color:'rgba(0,0,0,0.4)',margin:'4px 0 16px',lineHeight:1.6,textAlign:'center',maxWidth:'220px'}}>
               {tab === 'Todos'
                 ? 'Cuando contactes con un helper y concretes una cita, aparecerá aquí.'
                 : tab === 'Próximos'
@@ -249,15 +249,15 @@ export default function MyServices() {
             {ratingSent ? (
               <div style={{textAlign:'center',padding:'20px 0',display:'flex',flexDirection:'column',alignItems:'center',gap:'12px'}}>
                 <Star size={44} color='#F59E0B' fill='#F59E0B' strokeWidth={1.5} />
-                <h3 style={{fontSize:'18px',fontWeight:800,color:'rgba(0,0,0,0.85)',margin:0,letterSpacing:'-0.3px'}}>¡Gracias por valorar!</h3>
-                <p style={{fontSize:'13px',color:'rgba(0,0,0,0.45)',margin:0}}>Tu valoración ayuda a toda la comunidad.</p>
+                <h3 style={{fontSize:'var(--text-md)',fontWeight:800,color:'rgba(0,0,0,0.85)',margin:0,letterSpacing:'-0.3px'}}>¡Gracias por valorar!</h3>
+                <p style={{fontSize:'var(--text-sm)',color:'rgba(0,0,0,0.45)',margin:0}}>Tu valoración ayuda a toda la comunidad.</p>
               </div>
             ) : (
               <>
-                <h3 style={{fontSize:'17px',fontWeight:800,margin:'0 0 4px',color:'rgba(0,0,0,0.85)',letterSpacing:'-0.3px'}}>
+                <h3 style={{fontSize:'var(--text-md)',fontWeight:800,margin:'0 0 4px',color:'rgba(0,0,0,0.85)',letterSpacing:'-0.3px'}}>
                   Valorar a {ratingModal.helperName?.split(' ')?.[0]}
                 </h3>
-                <p style={{fontSize:'13px',color:'rgba(0,0,0,0.4)',margin:'0 0 20px'}}>{ratingModal.specialty}</p>
+                <p style={{fontSize:'var(--text-sm)',color:'rgba(0,0,0,0.4)',margin:'0 0 20px'}}>{ratingModal.specialty}</p>
                 <div style={{display:'flex',gap:'6px',justifyContent:'center',marginBottom:'16px'}}>
                   {[1,2,3,4,5].map(n => (
                     <button key={n} onClick={() => setRatingVal(n)}
@@ -268,10 +268,10 @@ export default function MyServices() {
                 </div>
                 <textarea value={ratingText} onChange={e=>setRatingText(e.target.value)}
                   placeholder="¿Qué destacarías? (opcional)" rows={3}
-                  style={{width:'100%',padding:'12px 16px',border:'1px solid rgba(0,0,0,0.1)',borderRadius:'14px',fontSize:'15px',outline:'none',resize:'none',fontFamily:'inherit',background:'rgba(0,0,0,0.03)',boxSizing:'border-box',marginBottom:'12px'}} />
+                  style={{width:'100%',padding:'12px 16px',border:'1px solid rgba(0,0,0,0.1)',borderRadius:'14px',fontSize:'var(--text-base)',outline:'none',resize:'none',fontFamily:'inherit',background:'rgba(0,0,0,0.03)',boxSizing:'border-box',marginBottom:'12px'}} />
                 <div style={{display:'flex',gap:'8px'}}>
                   <button onClick={() => setRatingModal(null)}
-                    style={{flex:1,padding:'13px',background:'rgba(0,0,0,0.05)',color:'rgba(0,0,0,0.55)',border:'none',borderRadius:'100px',fontSize:'14px',fontWeight:600,cursor:'pointer'}}>
+                    style={{flex:1,padding:'13px',background:'rgba(0,0,0,0.05)',color:'rgba(0,0,0,0.55)',border:'none',borderRadius:'100px',fontSize:'var(--text-sm)',fontWeight:600,cursor:'pointer'}}>
                     Cancelar
                   </button>
                   <button onClick={submitRating}

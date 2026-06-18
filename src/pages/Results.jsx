@@ -148,10 +148,10 @@ export default function Results({ searchState }) {
           <div style={{padding:'32px 20px',textAlign:'center',display:'flex',flexDirection:'column',alignItems:'center',gap:'16px'}}>
             <Search size={44} color='rgba(0,0,0,0.12)' strokeWidth={1.3} />
             <div>
-              <h3 style={{fontSize:'18px',fontWeight:800,color:'rgba(0,0,0,0.75)',margin:'0 0 8px',letterSpacing:'-0.3px'}}>
+              <h3 style={{fontSize:'var(--text-md)',fontWeight:800,color:'rgba(0,0,0,0.75)',margin:'0 0 8px',letterSpacing:'-0.3px'}}>
                 Sin resultados ahora mismo
               </h3>
-              <p style={{fontSize:'14px',color:'rgba(0,0,0,0.45)',margin:0,lineHeight:1.6,maxWidth:'260px'}}>
+              <p style={{fontSize:'var(--text-sm)',color:'rgba(0,0,0,0.45)',margin:0,lineHeight:1.6,maxWidth:'260px'}}>
                 No encontramos profesionales exactamente para esta búsqueda. Prueba a ampliar los criterios.
               </p>
             </div>
@@ -159,13 +159,13 @@ export default function Results({ searchState }) {
               <button
                 onClick={() => navigate('/')}
                 style={{padding:'13px',background:'var(--purple)',color:'white',border:'none',
-                  borderRadius:'100px',fontSize:'14px',fontWeight:700,cursor:'pointer'}}>
+                  borderRadius:'100px',fontSize:'var(--text-sm)',fontWeight:700,cursor:'pointer'}}>
                 Buscar de nuevo con Nüra
               </button>
               <button
                 onClick={() => navigate('/explore')}
                 style={{padding:'12px',background:'rgba(0,0,0,0.05)',color:'rgba(0,0,0,0.6)',
-                  border:'none',borderRadius:'100px',fontSize:'14px',fontWeight:600,cursor:'pointer'}}>
+                  border:'none',borderRadius:'100px',fontSize:'var(--text-sm)',fontWeight:600,cursor:'pointer'}}>
                 Explorar todos los profesionales
               </button>
             </div>
