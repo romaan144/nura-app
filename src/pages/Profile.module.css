@@ -47,8 +47,8 @@
 
 /* ── Stats ── */
 .statsRow { background: rgba(255,255,255,0.85); border: 1px solid rgba(255,255,255,0.5); border-radius: 18px; display: flex; overflow: hidden; box-shadow: var(--shadow-xs); }
-.statItem { flex: 1; padding: 14px 8px; text-align: center; }
-.statNum { display: block; font-size: var(--text-lg); font-weight: 800; color: rgba(0,0,0,0.85); letter-spacing: -0.5px; }
+.statItem { flex: 1; padding: 12px 4px; text-align: center; }
+.statNum { display: block; font-size: var(--text-md); font-weight: 800; color: rgba(0,0,0,0.85); letter-spacing: -0.5px; }
 .statLbl { display: block; font-size: var(--text-xs); color: rgba(0,0,0,0.4); font-weight: 500; margin-top: 2px; }
 
 /* ── Nudge cards ── */
@@ -89,3 +89,48 @@
   to   { opacity: 1; transform: translateY(0); }
 }
 .page { animation: fadeSlideIn 0.28s ease both; }
+
+/* ── ACTIVITY CARD ── */
+.activityCard {
+  background: #FFFFFF;
+  border: 1px solid rgba(0,0,0,0.05);
+  border-radius: var(--radius-lg);
+  padding: 16px;
+  margin-bottom: 10px;
+  box-shadow: var(--shadow-xs);
+}
+
+.activityTitle {
+  font-size: var(--text-xs);
+  font-weight: 700;
+  color: rgba(0,0,0,0.4);
+  text-transform: uppercase;
+  letter-spacing: 0.6px;
+  margin: 0 0 12px;
+}
+
+.activityItem {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 8px 0;
+  border-bottom: 1px solid rgba(0,0,0,0.04);
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+}
+.activityItem:last-child { border-bottom: none; padding-bottom: 0; }
+.activityItem:first-of-type { padding-top: 0; }
+
+.activityDot {
+  width: 8px; height: 8px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+.activityText {
+  flex: 1;
+  font-size: var(--text-xs);
+  color: rgba(0,0,0,0.55);
+  line-height: 1.4;
+}
+.activityText strong { color: rgba(0,0,0,0.75); font-weight: 600; }

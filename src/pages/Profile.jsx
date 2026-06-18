@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom'
 import { LogOut, ChevronRight, Award, Edit2, Check, X, User, MessageCircle, Heart, ClipboardList, HelpCircle, Info, Sparkles, AlertCircle, UserCheck } from 'lucide-react'
 import PageHeader from '../components/PageHeader'
 import { useUser } from '../context/UserContext'
+import { HELPERS } from '../data/helpers'
 import styles from './Profile.module.css'
 
 export default function Profile() {
@@ -34,7 +35,7 @@ export default function Profile() {
           Crear cuenta
         </button>
         <button className={styles.helperBtn} onClick={() => navigate('/register-helper')}>
-          <Sparkles size={14} strokeWidth={1.8} style={{marginRight:'6px'}} /> Quiero ser Helper
+          <Sparkles size={14} strokeWidth={1.8} style={{marginRight:'6px'}} /> Quiero ser Profesional
         </button>
       </div>
     </div>
@@ -135,7 +136,7 @@ export default function Profile() {
 
           {user.isHelper && (
             <div className={styles.helperBadges}>
-              <span className={styles.founderBadge}><Award size={11} /> Helper en Nüra</span>
+              <span className={styles.founderBadge}><Award size={11} /> Profesional en Nüra</span>
             </div>
           )}
           {daysSince > 0 && (
@@ -146,12 +147,13 @@ export default function Profile() {
         {/* ── Activity stats ──────────────────────────────────────────── */}
         <div className={styles.statsRow}>
           {[
-            { n: searchHistory?.length || 0, l: 'Búsquedas', path: '/' },
-            { n: chats?.length || 0, l: 'Contactos', path: '/chats' },
-            { n: favorites?.length || 0, l: 'Favoritos', path: '/favorites' },
+            { n: searchHistory?.length || 0,           l: 'Búsquedas',   path: '/' },
+            { n: (services||[]).length || chats?.length || 0, l: (services||[]).length > 0 ? 'Servicios' : 'Chats', path: (services||[]).length > 0 ? '/my-services' : '/chats' },
+            { n: favorites?.length || 0,               l: 'Favoritos',   path: '/favorites' },
+            { n: ratings?.length || 0,                 l: 'Valoraciones',path: '/my-services' },
           ].map(({ n, l, path }, i) => (
             <div key={l} className={styles.statItem}
-              style={{borderRight: i<2 ? '1px solid rgba(0,0,0,0.06)' : 'none', cursor:'pointer'}}
+              style={{borderRight: i<3 ? '1px solid rgba(0,0,0,0.06)' : 'none', cursor:'pointer'}}
               onClick={() => navigate(path)}>
               <span className={styles.statNum}>{n}</span>
               <span className={styles.statLbl}>{l}</span>
@@ -160,95 +162,92 @@ export default function Profile() {
         </div>
 
         {/* ── Activity context message ──────────────────────────────────── */}
-        {(chats?.length > 0 || (services||[]).length > 0) && (
-          <div style={{
-            background:'rgba(123,47,255,0.04)',border:'1px solid rgba(123,47,255,0.08)',
-            borderRadius:'16px',padding:'14px 16px',fontSize:'var(--text-sm)',
-            color:'rgba(0,0,0,0.5)',lineHeight:1.6,
-          }}>
-            {services?.length > 0
-              ? `Tienes ${services.length} servicio${services.length>1?'s':''} registrado${services.length>1?'s':''}. Nüra construye tu historial automáticamente.`
-              : `Has contactado con ${chats.length} profesional${chats.length>1?'es':''}. Cada conversación mejora tu experiencia en Nüra.`
-            }
-          </div>
-        )}
+        
+        {/* ── Recent activity ─────────────────────────────────── */}
+        {(searchHistory?.length > 0 || (services||[]).length > 0) && (
+          <div className={styles.activityCard}>
+            <p className={styles.activityTitle}>Tu actividad en Nüra</p>
 
-        {/* ── First use guidance ───────────────────────────────────────── */}
-        {!searchHistory?.length && !chats?.length && !favorites?.length && (
-          <div style={{
-            background:'rgba(123,47,255,0.04)',border:'1px solid rgba(123,47,255,0.1)',
-            borderRadius:'16px',padding:'16px',
-            display:'flex',alignItems:'flex-start',gap:'12px'
-          }}>
-            <span style={{width:'22px',height:'22px',display:'flex',alignItems:'center',justifyContent:'center'}}><AlertCircle size={18} color='#7B2FFF' strokeWidth={1.6}/></span>
-            <div>
-              <div style={{fontSize:'var(--text-sm)',fontWeight:700,color:'rgba(0,0,0,0.7)',marginBottom:'4px'}}>
-                Empieza buscando con Nüra
+            {/* Last searches */}
+            {searchHistory?.slice(0, 3).map((s, i) => (
+              <div key={i} className={styles.activityItem}
+                onClick={() => navigate('/')}>
+                <div className={styles.activityDot} style={{background:'var(--purple)'}} />
+                <span className={styles.activityText}>
+                  Buscaste <strong>"{s.query?.length > 30 ? s.query.slice(0,30)+'...' : s.query}"</strong>
+                </span>
+                <ChevronRight size={12} color="rgba(0,0,0,0.2)" />
               </div>
-              <div style={{fontSize:'var(--text-xs)',color:'rgba(0,0,0,0.45)',lineHeight:1.6}}>
-                Cuéntale qué necesitas en la pantalla principal. Encontrará al profesional ideal en segundos.
+            ))}
+
+            {/* Last service */}
+            {(services||[]).slice(0, 1).map(s => (
+              <div key={s.id} className={styles.activityItem}
+                onClick={() => navigate('/my-services')}>
+                <div className={styles.activityDot} style={{background: s.status==='completed' ? 'var(--green)' : 'var(--amber)'}} />
+                <span className={styles.activityText}>
+                  {s.status === 'completed' ? 'Completaste con' : 'Cita con'}{' '}
+                  <strong>{s.helperName?.split(' ')?.[0]}</strong>
+                  {s.date && ` · ${s.date}`}
+                </span>
+                <ChevronRight size={12} color="rgba(0,0,0,0.2)" />
               </div>
-            </div>
-          </div>
-        )}
+            ))}
 
-        {/* ── Complete name nudge ─────────────────────────────────────── */}
-        {(!user.name || user.name === 'Usuario') && (
-          <div className={styles.nudgeCard} onClick={() => { setNameInput(''); setEditingName(true) }}>
-            <span style={{width:'20px',height:'20px',display:'flex',alignItems:'center',justifyContent:'center'}}><UserCheck size={18} color='var(--purple)' strokeWidth={1.6}/></span>
-            <div>
-              <div className={styles.nudgeTitle}>Añade tu nombre</div>
-              <div className={styles.nudgeDesc}>Para que los profesionales sepan quién les contacta</div>
-            </div>
-            <ChevronRight size={16} color="rgba(0,0,0,0.3)" />
-          </div>
-        )}
-
-        {/* ── Become helper CTA ───────────────────────────────────────── */}
-        {!user.isHelper && (
-          <div className={styles.helperCta} onClick={() => navigate('/register-helper')}>
-            <span style={{width:'22px',height:'22px',display:'flex',alignItems:'center',justifyContent:'center'}}><Sparkles size={18} color='var(--purple)' strokeWidth={1.6}/></span>
-            <div style={{flex:1}}>
-              <div className={styles.nudgeTitle}>Ofrece tus servicios en Nüra</div>
-              <div className={styles.nudgeDesc}>Crea tu perfil de helper gratis</div>
-            </div>
-            <ChevronRight size={16} color="var(--purple)" />
-          </div>
-        )}
-
-        {/* ── Actions ─────────────────────────────────────────────────── */}
-        <div className={styles.section}>
-          {ACTIONS.map((a, i) => (
-            <button key={i} className={styles.actionRow} onClick={a.action}>
-              <span className={styles.actionIcon}>{typeof a.icon === 'string' ? a.icon : <a.icon size={17} strokeWidth={1.8} />}</span>
-              <div className={styles.actionMeta}>
-                <span className={styles.actionLabel}>{a.label}</span>
-                <span className={styles.actionSub}>{a.sub}</span>
+            {/* Recent ratings given */}
+            {(ratings||[]).slice(0, 1).map((r, i) => (
+              <div key={i} className={styles.activityItem}
+                onClick={() => navigate('/my-services')}>
+                <div className={styles.activityDot} style={{background:'var(--amber)'}} />
+                <span className={styles.activityText}>
+                  Valoraste a <strong>{
+                      (services||[]).find(s => String(s.helperId) === String(r.helperId))?.helperName?.split(' ')?.[0] ||
+                      HELPERS.find(h => String(h.id) === String(r.helperId))?.name?.split(' ')?.[0] ||
+                      'un profesional'
+                    }</strong>
+                  {r.rating && <> · {'⭐'.repeat(r.rating)}</>}
+                </span>
+                <ChevronRight size={12} color="rgba(0,0,0,0.2)" />
               </div>
-              <ChevronRight size={15} color="rgba(0,0,0,0.25)" />
+            ))}
+          </div>
+        )}
+
+        {/* ── ACTIONS menu ──────────────────────────────────────── */}
+        <div className={styles.actions}>
+          {ACTIONS.map(({ icon: Icon, label, sub, action }) => (
+            <button key={label} className={styles.actionItem} onClick={action}>
+              <div className={styles.actionIcon}><Icon size={18} strokeWidth={1.7} /></div>
+              <div className={styles.actionText}>
+                <span className={styles.actionLabel}>{label}</span>
+                {sub && <span className={styles.actionSub}>{sub}</span>}
+              </div>
+              <ChevronRight size={16} color="rgba(0,0,0,0.2)" />
             </button>
           ))}
         </div>
 
-        {/* ── Logout ──────────────────────────────────────────────────── */}
-        <button className={styles.logoutBtn} onClick={() => { logout(); navigate('/') }}>
-          <LogOut size={15} /> Cerrar sesión
-        </button>
+        {/* ── Become pro CTA (non-helper) ──────────────────────── */}
+        {!user.isHelper && (
+          <button className={styles.becomeProCta}
+            onClick={() => navigate('/register-helper')}>
+            <span style={{width:'36px',height:'36px',borderRadius:'50%',
+              background:'rgba(123,47,255,0.08)',display:'flex',alignItems:'center',
+              justifyContent:'center',flexShrink:0}}>
+              <Sparkles size={16} color="var(--purple)" strokeWidth={1.8} />
+            </span>
+            <div style={{flex:1,textAlign:'left'}}>
+              <div style={{fontSize:'var(--text-sm)',fontWeight:700,color:'var(--ink)'}}>
+                Crea tu perfil profesional gratis
+              </div>
+              <div style={{fontSize:'var(--text-xs)',color:'rgba(0,0,0,0.4)',marginTop:'2px'}}>
+                Ofrece tus servicios en Nüra
+              </div>
+            </div>
+            <ChevronRight size={16} color="var(--purple)" />
+          </button>
+        )}
 
-        <p className={styles.version}>Nüra · v1.0 · Barcelona</p>
-
-        {/* Demo reset — hidden, long-press accessible */}
-        <button
-          onDoubleClick={() => {
-            if (window.confirm('¿Resetear demo? Se borrarán todos los datos locales.')) {
-              localStorage.clear()
-              sessionStorage.clear()
-              window.location.href = '/'
-            }
-          }}
-          style={{background:'none',border:'none',color:'transparent',padding:'12px',cursor:'default',userSelect:'none',fontSize:'1px'}}>
-          reset
-        </button>
       </div>
     </div>
   )
