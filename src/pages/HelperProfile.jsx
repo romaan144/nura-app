@@ -658,6 +658,7 @@ function HelperProfileInner() {
   } = useUser()
   const [showRating, setShowRating] = useState(false)
   const [showConfirm, setShowConfirm] = useState(false)
+  const [showFullProfile, setShowFullProfile] = useState(false)
 
   useEffect(() => {
     window.scrollTo(0, 0)
