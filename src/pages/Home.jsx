@@ -211,8 +211,10 @@ export default function Home({ setSearchState }) {
   const [inputFocused, setInputFocused] = useState(false)
   const lastMatches = nuraLastMatches
   const setLastMatches = setNuraLastMatches
-  const bottomRef = useRef(null)
-  const inputRef = useRef(null)
+  const bottomRef  = useRef(null)
+  const inputRef   = useRef(null)
+  const floatRef   = useRef(null)
+  const [floatH, setFloatH] = useState(160)
 
   useEffect(() => {
     let lines = getWelcome(user)
