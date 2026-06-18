@@ -1,4 +1,4 @@
-.page { padding-top: 72px; min-height: 100vh; background: #F5F5F8; padding-bottom: 24px; 
+.page { padding-top: 72px; min-height: 100vh; background: var(--paper); padding-bottom: 24px; 
   animation: fadeSlideIn 0.22s ease both;}
 
 .header {
@@ -14,7 +14,7 @@
   background: rgba(123,47,255,0.1); border-radius: 12px; padding: 3px 10px;
 }
 
-.searchWrap { padding: 10px 14px 8px; background: #F5F5F8; }
+.searchWrap { padding: 10px 14px 8px; background: var(--paper); }
 .searchBox {
   display: flex; align-items: center; gap: 8px;
   background: #FFFFFF;
@@ -51,7 +51,7 @@
 .avatar {
   width: 48px; height: 48px; border-radius: 50%;
   display: flex; align-items: center; justify-content: center;
-  color: white; font-weight: 700; font-size: 16px;
+  color: white; font-weight: 700; font-size: var(--text-base);
   box-shadow: var(--shadow-sm);
 }
 .avatarImg {

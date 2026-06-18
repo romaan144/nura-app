@@ -29,7 +29,7 @@
   position: fixed;
   top: 0; left: 0; bottom: 0;
   width: 270px;
-  background: #F5F5F8;
+  background: var(--paper);
   z-index: 500;
   display: flex; flex-direction: column;
   transform: translateX(-100%);
@@ -43,7 +43,7 @@
   display: flex; align-items: center; justify-content: space-between;
   padding: 52px var(--page-x) var(--space-lg);
   border-bottom: 1px solid var(--rule);
-  background: #F5F5F8;
+  background: var(--paper);
 }
 .drawerLogo { height: 24px; width: auto; }
 .drawerClose {

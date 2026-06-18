@@ -3,7 +3,7 @@
   background:
     radial-gradient(ellipse 120% 60% at 50% -5%, rgba(123,47,255,0.08) 0%, transparent 60%),
     radial-gradient(ellipse 80% 40% at 90% 110%, rgba(0,212,200,0.06) 0%, transparent 60%),
-    #F7F7F9;
+    var(--paper);
   display: flex; flex-direction: column;
   align-items: center; justify-content: center;
   padding: 0 32px 60px;

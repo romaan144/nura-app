@@ -13,7 +13,7 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-rendering: optimizeLegibility;
-  background: #F5F5F8;
+  background: var(--paper);
 }
 
 :root {
@@ -23,7 +23,10 @@ body {
   --text-base: 15px;   /* body, messages, descriptions */
   --text-md:   17px;   /* subheadings, emphasized body */
   --text-lg:   22px;   /* section titles, card headers */
-  --text-xl:   28px;   /* page titles, hero text */
+  --text-xl:   28px;
+  --text-hero: 22px;   /* hero names */
+  --text-heading: 20px;  /* screen titles, step titles */
+  --text-num:  32px;   /* large numbers: ratings, scores */   /* page titles, hero text */
 
   /* ── SHADOW SCALE (4 tokens) ───────────────────────── */
   --shadow-xs:  0 1px 3px rgba(13,13,26,0.06);

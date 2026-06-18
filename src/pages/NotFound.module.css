@@ -3,11 +3,11 @@
   from { opacity: 0; transform: translateY(8px); }
   to   { opacity: 1; transform: translateY(0); }
 }
-.page { min-height: 100dvh; background: #F5F5F8; display: flex; align-items: center; justify-content: center; padding: 32px; 
+.page { min-height: 100dvh; background: var(--paper); display: flex; align-items: center; justify-content: center; padding: 32px; 
   animation: fadeSlideIn 0.22s ease both;}
 .content { text-align: center; display: flex; flex-direction: column; align-items: center; gap: 16px; }
 .logo { width: 64px; height: 64px; object-fit: contain; opacity: 0.4; }
-.title { font-size: 20px; font-weight: 800; color: var(--ink); letter-spacing: -0.5px; }
+.title { font-size: var(--text-heading); font-weight: 800; color: var(--ink); letter-spacing: -0.5px; }
 .desc { font-size: var(--text-sm); color: var(--soft); line-height: 1.6; max-width: 260px; }
 .btn { padding: 12px 28px; background: var(--purple); color: white; border: none; border-radius: 100px; font-size: var(--text-sm); font-weight: 700; cursor: pointer; }
 

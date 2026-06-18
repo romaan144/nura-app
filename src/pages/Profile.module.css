@@ -1,8 +1,8 @@
 /* ══════════════════════════════════════════════════════
    PROFILE
    ══════════════════════════════════════════════════════ */
-.page { min-height: 100dvh; background: #F5F5F8; padding-top: 72px;
-  background: radial-gradient(ellipse 120% 50% at 50% -10%, rgba(123,47,255,0.04) 0%, transparent 60%), #F7F7F9;
+.page { min-height: 100dvh; background: var(--paper); padding-top: 72px;
+  background: radial-gradient(ellipse 120% 50% at 50% -10%, rgba(123,47,255,0.04) 0%, transparent 60%), var(--paper);
 
   animation: fadeSlideIn 0.22s ease both;}
 .content { padding: 8px 14px max(env(safe-area-inset-bottom,0px),24px); display: flex; flex-direction: column; gap: 10px; }
@@ -31,7 +31,7 @@
 
 /* Editable name */
 .nameRow { display: flex; align-items: center; gap: 6px; }
-.name { font-size: 20px; font-weight: 800; color: rgba(0,0,0,0.85); letter-spacing: -0.4px; margin: 0; }
+.name { font-size: var(--text-heading); font-weight: 800; color: rgba(0,0,0,0.85); letter-spacing: -0.4px; margin: 0; }
 .phoneRow { display: flex; align-items: center; gap: 4px; }
 .phone { font-size: var(--text-sm); color: rgba(0,0,0,0.4); margin: 0; }
 .editBtn { background: none; border: none; color: rgba(0,0,0,0.3); cursor: pointer; padding: 4px; display: flex; align-items: center; transition: color 0.15s; }

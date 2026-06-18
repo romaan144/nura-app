@@ -61,7 +61,7 @@
   width: 88px; height: 88px;
   border-radius: 50%;
   display: flex; align-items: center; justify-content: center;
-  color: white; font-weight: 800; font-size: 32px;
+  color: white; font-weight: 800; font-size: var(--text-num);
   box-shadow: var(--shadow-md);
 }
 .availDot {
@@ -72,7 +72,7 @@
 
 /* Name + specialty */
 .heroName {
-  font-size: 22px; font-weight: 800;
+  font-size: var(--text-lg); font-weight: 800;
   color: var(--ink); letter-spacing: -0.5px;
   margin: 0 0 4px; text-align: center;
   line-height: 1.2;
@@ -268,7 +268,7 @@
   display: flex; align-items: center; gap: 10px; margin-bottom: 14px;
 }
 .ratingBig {
-  font-size: 32px; font-weight: 800;
+  font-size: var(--text-num); font-weight: 800;
   color: var(--ink); letter-spacing: -1px;
 }
 .ratingStars { display: flex; gap: 2px; }
@@ -374,3 +374,11 @@
   font-family: inherit;
 }
 .postLikeActive { color: var(--red); }
+
+/* ── INLINE STYLE REPLACEMENTS ── */
+.flexCenter  { display: flex; align-items: center; justify-content: center; }
+.flexStart   { display: flex; align-items: flex-start; gap: 8px; }
+.textCenter  { text-align: center; }
+.mt4  { margin-top: 4px; }
+.mb4  { margin-bottom: 4px; }
+.mb2  { margin-bottom: 2px; }

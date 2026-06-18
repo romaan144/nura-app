@@ -9,7 +9,7 @@
 
 .page {
   display: flex; flex-direction: column;
-  height: 100dvh; background: #F5F5F8;
+  height: 100dvh; background: var(--paper);
   position: relative; overflow: hidden;
   animation: fadeSlideIn 0.22s ease both;
 }
@@ -96,7 +96,7 @@
 .emptyChat { display: flex; flex-direction: column; align-items: center; padding: 20px 0 24px; gap: 6px; }
 .emptyChatImg { width: 60px; height: 60px; border-radius: 50%; object-fit: cover; box-shadow: var(--shadow-md); margin-bottom: 4px; }
 .emptyChatAvatar { width: 60px; height: 60px; border-radius: 50%; display: flex; align-items: center; justify-content: center; color: white; font-weight: 700; font-size: var(--text-lg); box-shadow: var(--shadow-md); margin-bottom: 4px; }
-.emptyChatName { font-size: 16px; font-weight: 800; color: rgba(0,0,0,0.85); letter-spacing: -0.3px; }
+.emptyChatName { font-size: var(--text-base); font-weight: 800; color: rgba(0,0,0,0.85); letter-spacing: -0.3px; }
 .emptyChatDesc { font-size: var(--text-sm); color: rgba(0,0,0,0.4); }
 .emptyChatPrice { font-size: var(--text-sm); font-weight: 700; color: var(--purple); }
 
@@ -180,7 +180,7 @@
 }
 .input {
   flex: 1; border: none; outline: none; background: transparent;
-  font-size: 16px; color: rgba(0,0,0,0.85); font-family: -apple-system,'Inter',sans-serif;
+  font-size: var(--text-base); color: rgba(0,0,0,0.85); font-family: -apple-system,'Inter',sans-serif;
   letter-spacing: -0.2px; padding: 0; resize: none; line-height: 1.4;
 }
 .input::placeholder { color: rgba(0,0,0,0.28); font-weight: 300; }

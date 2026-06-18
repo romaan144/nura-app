@@ -1,5 +1,5 @@
 .page {
-  min-height: 100dvh; background: #F5F5F8;
+  min-height: 100dvh; background: var(--paper);
   display: flex; flex-direction: column;
   padding: max(env(safe-area-inset-top,0px),20px) 24px max(env(safe-area-inset-bottom,0px),32px);
   position: relative; overflow: hidden;
@@ -47,7 +47,7 @@
   display: flex; align-items: center; justify-content: center; gap: 8px;
   padding: 16px; width: 100%;
   background: var(--purple); color: white; border: none; border-radius: 100px;
-  font-size: 16px; font-weight: 700; letter-spacing: -0.2px;
+  font-size: var(--text-base); font-weight: 700; letter-spacing: -0.2px;
   box-shadow: var(--shadow-md); transition: opacity 0.2s;
 }
 .primary:active { opacity: 0.8; }

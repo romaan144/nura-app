@@ -3,7 +3,7 @@
    ══════════════════════════════════════════════════════ */
 .page {
   min-height: 100dvh;
-  background: #F5F5F8;
+  background: var(--paper);
   padding-top: 72px;
 
   animation: fadeSlideIn 0.22s ease both;}
