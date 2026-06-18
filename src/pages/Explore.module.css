@@ -14,7 +14,7 @@
   backdrop-filter: blur(24px) saturate(180%);
   border: 1px solid rgba(255,255,255,0.35);
   border-radius: 100px;
-  padding: 11px 18px;
+  padding: 9px 16px;
   box-shadow: var(--shadow-sm), 0 0 0 0.5px rgba(0,0,0,0.06);
   animation: fadeSlideIn 0.22s ease both;
 }
@@ -35,7 +35,7 @@
 .clearFilters { display: flex; align-items: center; gap: 6px; background: none; border: none; color: var(--soft); font-size: var(--text-xs); padding: 0; align-self: flex-start; }
 
 /* Categories */
-.categories { display: flex; gap: 8px; overflow-x: auto; padding: 0 14px 12px; }
+.categories { display: flex; gap: 8px; overflow-x: auto; padding: 0 14px 8px; }
 .categories::-webkit-scrollbar { display: none; }
 .cat {
   display: flex; align-items: center; gap: 5px;
@@ -66,7 +66,7 @@
 }
 
 /* Grid — single column, rich cards */
-.grid { display: flex; flex-direction: column; gap: 8px; }
+.grid { display: flex; flex-direction: column; gap: 6px; }
 
 .card:active { opacity: 0.75; }
 

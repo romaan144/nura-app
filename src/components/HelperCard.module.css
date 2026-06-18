@@ -6,7 +6,7 @@
   background: #FFFFFF;
   border: 1px solid rgba(0,0,0,0.055);
   border-radius: var(--radius-lg);
-  padding: 14px 16px;
+  padding: 12px 14px;
   cursor: pointer;
   box-shadow: var(--shadow-sm);
   transition: opacity 0.15s;
@@ -45,7 +45,7 @@
   min-width: 0;
   display: flex;
   flex-direction: column;
-  gap: 2px;
+  gap: 3px;
   justify-content: center;
 }
 
@@ -112,8 +112,8 @@
   flex-shrink: 0;
   display: flex;
   flex-direction: column;
-  align-items: center;
-  gap: 6px;
+  align-items: flex-end;
+  gap: 5px;
   align-self: center;
 }
 
