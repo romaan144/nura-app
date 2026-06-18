@@ -20,12 +20,13 @@
   flex: 1;
   overflow-y: auto;
   overflow-x: hidden;
-  padding: 80px 16px 0; /* top overridden by JS; bottom = 0 (floatBottom in flow) */
+  padding: 80px 16px 12px;
   display: flex;
   flex-direction: column;
+  justify-content: flex-end; /* content always anchored to bottom — no JS scroll needed */
   gap: 0;
   -webkit-overflow-scrolling: touch;
-  min-height: 0; /* critical for flex child overflow */
+  min-height: 0;
 }
 
 /* ── FLOATING TOP LAYER ─────────────────────────────── */

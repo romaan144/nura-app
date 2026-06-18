@@ -1,4 +1,4 @@
-import { useState, useEffect, useLayoutEffect, useRef } from 'react'
+import { useState, useEffect, useRef } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { Send, Mic, MicOff, Plus, Clock } from 'lucide-react'
 import { analyzeNeed, matchHelpers, getPriceContext } from '../utils/matching'
@@ -213,7 +213,6 @@ export default function Home({ setSearchState }) {
   const bottomRef  = useRef(null)
   const inputRef   = useRef(null)
   const topRef     = useRef(null)
-  const msgsRef    = useRef(null)
   const [topH, setTopH] = useState(80) /* header height fallback */
 
   useEffect(() => {
@@ -303,30 +302,8 @@ export default function Home({ setSearchState }) {
     return () => timers.forEach(clearTimeout)
   }, [user?.id])
 
-  function scrollToBottom(smooth = false) {
-    const el = msgsRef.current
-    if (!el) return
-    if (smooth) {
-      el.scrollTo({ top: el.scrollHeight, behavior: 'smooth' })
-    } else {
-      el.scrollTop = el.scrollHeight
-    }
-  }
-
-  // Scroll to bottom on mount and whenever messages update
-  useLayoutEffect(() => {
-    scrollToBottom(false)
-  }, [])
-
-  // Smooth scroll when new messages arrive during an active session
-  const prevMsgCount = useRef(0)
-  useEffect(() => {
-    const count = messages.length
-    if (count > prevMsgCount.current && prevMsgCount.current > 0) {
-      scrollToBottom(true)
-    }
-    prevMsgCount.current = count
-  }, [messages])
+  // No scroll JS needed — justify-content:flex-end handles positioning
+  // New messages naturally appear at bottom via flex layout
 
   function formatLine(line) {
     const parts = line.split(/\*\*(.*?)\*\*/g)
@@ -702,7 +679,7 @@ export default function Home({ setSearchState }) {
         </button>
       </div>
 
-      <div ref={msgsRef} className={styles.messages} style={{paddingTop: topH + 'px'}}>
+      <div className={styles.messages} style={{paddingTop: topH + 'px'}}>
         {messages.map((msg, msgIdx) => {
           const prevMsg = messages[msgIdx - 1]
           const prevHadResults = prevMsg?.results?.length > 0
