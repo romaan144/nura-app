@@ -1,7 +1,7 @@
 import { useState, useEffect, useRef } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { Send, Mic, MicOff, Plus, Clock } from 'lucide-react'
-import { analyzeNeed, matchHelpers } from '../utils/matching'
+import { analyzeNeed, matchHelpers, getPriceContext } from '../utils/matching'
 import { HELPERS } from '../data/helpers'
 import { useUser } from '../context/UserContext'
 import { MenuButton } from '../components/NavBar'
@@ -540,6 +540,11 @@ export default function Home({ setSearchState }) {
         ? `Encontré **1 ${especialidad.slice(0,-1)}** verificado cerca de ti.`
         : `Encontré **${matches.length} ${especialidad}** cerca de ti en ${zona}.`
 
+      // Price context — reduces doubt at decision moment
+      const priceCtx = matches.length > 0
+        ? getPriceContext(matches[0], analysis?.categoria)
+        : null
+
       // Build rich match explanation — the core AI differentiator
       function buildMatchReason(helper, analysis) {
         if (!helper) return null
@@ -582,8 +587,12 @@ export default function Home({ setSearchState }) {
       const resultMsg = {
         id: Date.now(), from: 'nura',
         lines: followLine
-          ? (user ? [resultLine, followLine] : [resultLine, followLine, 'Para contactarles, crea tu cuenta gratis. Solo tarda 30 segundos.'])
-          : (user ? [resultLine] : [resultLine, 'Crea tu cuenta gratis para escribirles.']),
+          ? (user
+              ? [resultLine, ...(priceCtx ? [priceCtx] : []), followLine]
+              : [resultLine, ...(priceCtx ? [priceCtx] : []), followLine, 'Para contactarles, crea tu cuenta gratis. Solo tarda 30 segundos.'])
+          : (user
+              ? [resultLine, ...(priceCtx ? [priceCtx] : [])]
+              : [resultLine, ...(priceCtx ? [priceCtx] : []), 'Crea tu cuenta gratis para escribirles.']),
         results: matches,
         chips: matches.length > 0
           ? (user

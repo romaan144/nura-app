@@ -1,3 +1,45 @@
+
+// ── Contexto de precio por categoría (mercado Barcelona) ──────────────────
+// Usado por Nüra para contextualizar el precio de cada helper al usuario
+export const PRICE_CONTEXT = {
+  logopeda:     { lo: 40,  hi: 70,  unit: 'sesión', label: 'logopedas' },
+  tecnico:      { lo: 50,  hi: 100, unit: 'visita',  label: 'técnicos' },
+  limpieza:     { lo: 10,  hi: 18,  unit: 'hora',    label: 'limpieza del hogar' },
+  cuidado:      { lo: 10,  hi: 20,  unit: 'hora',    label: 'cuidadores' },
+  mascotas:     { lo: 12,  hi: 25,  unit: 'hora',    label: 'cuidadores de mascotas' },
+  matematicas:  { lo: 20,  hi: 40,  unit: 'hora',    label: 'profesores particulares' },
+  entrenador:   { lo: 30,  hi: 60,  unit: 'sesión',  label: 'entrenadores personales' },
+  salud:        { lo: 60,  hi: 120, unit: 'consulta', label: 'profesionales de salud' },
+  legal:        { lo: 80,  hi: 200, unit: 'hora',    label: 'abogados' },
+  hogar:        { lo: 40,  hi: 90,  unit: 'visita',  label: 'profesionales del hogar' },
+  psicologia:   { lo: 60,  hi: 100, unit: 'sesión',  label: 'psicólogos' },
+  fisioterapia: { lo: 40,  hi: 70,  unit: 'sesión',  label: 'fisioterapeutas' },
+  otro:         { lo: 20,  hi: 80,  unit: 'hora',    label: 'profesionales' },
+}
+
+// Genera una frase de contexto de precio para el helper top
+export function getPriceContext(helper, categoria) {
+  const ctx = PRICE_CONTEXT[categoria] || PRICE_CONTEXT.otro
+  if (!helper?.price || helper.price === 'Consultar') return null
+
+  const helperNum = parseInt((helper.price || '').replace(/[^0-9]/g, ''))
+  if (!helperNum) return null
+
+  const isBelow = helperNum < ctx.lo
+  const isAbove = helperNum > ctx.hi
+  const isAvg   = helperNum >= ctx.lo && helperNum <= ctx.hi
+
+  const helperName = helper.name?.split(' ')?.[0] || 'Este profesional'
+
+  if (isBelow) {
+    return `El precio de ${ctx.label} en Barcelona es ${ctx.lo}–${ctx.hi}€/${ctx.unit}. ${helperName} cobra ${helperNum}€ — por debajo de la media.`
+  }
+  if (isAbove) {
+    return `El precio medio de ${ctx.label} en Barcelona es ${ctx.lo}–${ctx.hi}€/${ctx.unit}. ${helperName} cobra ${helperNum}€.`
+  }
+  return `El precio de ${ctx.label} en Barcelona suele ser ${ctx.lo}–${ctx.hi}€/${ctx.unit}. ${helperName} cobra ${helperNum}€ — dentro de la media.`
+}
+
 import { HELPERS as LOCAL_HELPERS } from '../data/helpers'
 import { searchHelpers } from './supabase'
 
