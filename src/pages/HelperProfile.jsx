@@ -230,10 +230,10 @@ function HelperProfileInner() {
 
           {/* Avatar + availability */}
           <div className={styles.avatarWrap}>
-            {h.avatarUrl
+            {h.avatarUrl && !h.avatarUrl.includes('dicebear')
               ? <img src={h.avatarUrl} alt={h.name} className={styles.avatar} />
               : <div className={styles.avatarFallback} style={{background: h.avatarColor || 'var(--purple)'}}>
-                  {h.avatar || h.name?.[0]}
+                  {h.name?.split(' ').slice(0,2).map(w => w[0]).join('').toUpperCase() || h.avatar}
                 </div>
             }
             {h.available && <span className={styles.availDot} />}
