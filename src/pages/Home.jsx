@@ -351,7 +351,7 @@ export default function Home({ setSearchState }) {
         return
       }
       // Smart refinement based on chip
-      const isRefinement = t.includes('no') || t.includes('otro') || t.includes('diferente') ||
+      const isRefinement = /\bno\b/.test(t) || t.includes('otro') || t.includes('diferente') ||
         t.includes('más barato') || t.includes('más cerca') || t.includes('mejor valorado') ||
         t.includes('ajusta') || t.includes('filtra') || t.includes('urgencias')
 
@@ -394,7 +394,7 @@ export default function Home({ setSearchState }) {
     }
 
     // Refinement — if user is refining previous results
-    if (lastMatches && intent === 'search') {
+    if (lastMatches?.length > 0 && intent === 'search') {
       const refined = await matchHelpers({ categoria: 'otro', palabrasClave: msg.toLowerCase().split(' ') }, 4, msg, lastMatches)
       if (refined?.length) {
         const resultMsg = { id: Date.now(), from: 'nura', lines: [`He ajustado los resultados.`], results: refined }
