@@ -315,12 +315,16 @@ export default function Home({ setSearchState }) {
     }
   }
 
-  // After floatH/topH are set, DOM is updated synchronously by React.
-  // useLayoutEffect fires after DOM mutation but before paint —
-  // guaranteed to run with correct paddingBottom already in the DOM.
+  // After floatH is set by measure(), DOM has correct paddingBottom.
+  // useLayoutEffect fires synchronously before paint — scroll is instant.
   useLayoutEffect(() => {
     if (floatH > 0) scrollToBottom(false)
   }, [floatH])
+
+  // Safety: also scroll on every mount, after initial layout
+  useLayoutEffect(() => {
+    scrollToBottom(false)
+  }, [])
 
   // Smooth scroll when new messages arrive during an active session
   const prevMsgCount = useRef(0)
