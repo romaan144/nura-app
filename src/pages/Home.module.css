@@ -192,7 +192,7 @@
 .sendBtn {
   width: 32px; height: 32px;
   border-radius: 50%;
-  background: #1C1C1E;
+  background: var(--purple);
   color: white; border: none;
   display: flex; align-items: center; justify-content: center;
   flex-shrink: 0; cursor: pointer;

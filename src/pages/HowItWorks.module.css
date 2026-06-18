@@ -45,7 +45,7 @@
 @keyframes pulse { 0%,100%{transform:scale(1)} 50%{transform:scale(1.07)} }
 .ctaTitle { font-size: 20px; font-weight: 800; color: rgba(0,0,0,0.85); letter-spacing: -0.4px; margin: 0; }
 .ctaDesc { font-size: var(--text-sm); color: rgba(0,0,0,0.45); margin: 0; line-height: 1.6; }
-.ctaBtn { display: flex; align-items: center; gap: 8px; padding: 14px 28px; background: #1C1C1E; color: white; border: none; border-radius: 100px; font-size: var(--text-base); font-weight: 700; cursor: pointer; transition: opacity 0.2s; letter-spacing: -0.2px; }
+.ctaBtn { display: flex; align-items: center; gap: 8px; padding: 14px 28px; background: var(--purple); color: white; border: none; border-radius: 100px; font-size: var(--text-base); font-weight: 700; cursor: pointer; transition: opacity 0.2s; letter-spacing: -0.2px; }
 .ctaBtn:active { opacity: 0.75; }
 
 @media (min-width: 768px) {

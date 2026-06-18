@@ -543,7 +543,7 @@ function BookingModal({ helper, onClose, onBook, onNavigate }) {
     sheet: {background:'rgba(255,255,255,0.96)',WebkitBackdropFilter: 'blur(32px)', backdropFilter:'blur(32px)',borderRadius:'24px 24px 0 0',padding:'24px 20px 36px',width:'100%',maxWidth:'500px'},
     handle: {width:'36px',height:'4px',background:'rgba(0,0,0,0.1)',borderRadius:'2px',margin:'0 auto 20px'},
     input: {width:'100%',padding:'12px 16px',border:'1px solid rgba(0,0,0,0.1)',borderRadius:'14px',fontSize:'var(--text-base)',outline:'none',fontFamily:'-apple-system,Inter,sans-serif',background:'rgba(0,0,0,0.03)',boxSizing:'border-box'},
-    btnPrimary: {width:'100%',padding:'14px',background:'#1C1C1E',color:'white',border:'none',borderRadius:'100px',fontSize:'14px',fontWeight:700,cursor:'pointer',transition:'opacity 0.2s'},
+    btnPrimary: {width:'100%',padding:'14px',background:'var(--purple)',color:'white',border:'none',borderRadius:'100px',fontSize:'14px',fontWeight:700,cursor:'pointer',transition:'opacity 0.2s'},
     btnSecondary: {width:'100%',padding:'12px',background:'rgba(0,0,0,0.05)',color:'rgba(0,0,0,0.55)',border:'none',borderRadius:'100px',fontSize:'14px',fontWeight:600,cursor:'pointer'},
   }
 
@@ -607,7 +607,7 @@ function BookingModal({ helper, onClose, onBook, onNavigate }) {
                     return (
                       <button key={i} onClick={()=>setDate(iso)} style={{
                         flexShrink:0,padding:'8px 14px',
-                        background:date===iso?'#1C1C1E':'rgba(0,0,0,0.05)',
+                        background:date===iso?'var(--purple)':'rgba(0,0,0,0.05)',
                         color:date===iso?'white':'rgba(0,0,0,0.6)',
                         border:'none',borderRadius:'100px',fontSize:'var(--text-xs)',fontWeight:600,
                         cursor:'pointer',fontFamily:'inherit',transition:'all 0.15s',
@@ -624,7 +624,7 @@ function BookingModal({ helper, onClose, onBook, onNavigate }) {
                   {['9:00','10:00','11:00','12:00','16:00','17:00','18:00','19:00'].map(t=>(
                     <button key={t} onClick={()=>setTime(t)} style={{
                       padding:'7px 12px',
-                      background:time===t?'#1C1C1E':'rgba(0,0,0,0.05)',
+                      background:time===t?'var(--purple)':'rgba(0,0,0,0.05)',
                       color:time===t?'white':'rgba(0,0,0,0.6)',
                       border:'none',borderRadius:'100px',fontSize:'var(--text-xs)',fontWeight:600,
                       cursor:'pointer',fontFamily:'inherit',transition:'all 0.15s',

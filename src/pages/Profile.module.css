@@ -12,7 +12,7 @@
 .noUserLogo { width: 56px; height: 56px; object-fit: contain; opacity: 0.5; }
 .noUserTitle { font-size: var(--text-lg); font-weight: 800; color: rgba(0,0,0,0.85); letter-spacing: -0.5px; margin: 0; }
 .noUserDesc { font-size: var(--text-sm); color: rgba(0,0,0,0.45); margin: 0; line-height: 1.6; max-width: 260px; }
-.loginBtn { width: 100%; max-width: 280px; padding: 14px; background: #1C1C1E; color: white; border: none; border-radius: 100px; font-size: var(--text-base); font-weight: 700; cursor: pointer; }
+.loginBtn { width: 100%; max-width: 280px; padding: 14px; background: var(--purple); color: white; border: none; border-radius: 100px; font-size: var(--text-base); font-weight: 700; cursor: pointer; }
 .registerBtn { width: 100%; max-width: 280px; padding: 14px; background: rgba(0,0,0,0.05); color: rgba(0,0,0,0.65); border: none; border-radius: 100px; font-size: var(--text-base); font-weight: 600; cursor: pointer; }
 .helperBtn { background: none; border: none; font-size: var(--text-sm); color: var(--purple); font-weight: 600; cursor: pointer; padding: 4px; }
 
@@ -27,7 +27,7 @@
 .avatar { width: 76px; height: 76px; border-radius: 50%; object-fit: cover; display: block;
   box-shadow: var(--shadow-md); }
 .avatarBadge { position: absolute; bottom: 0; right: 0; width: 22px; height: 22px; border-radius: 50%;
-  background: #1C1C1E; border: 2px solid white; display: flex; align-items: center; justify-content: center; color: white; }
+  background: var(--ink); border: 2px solid white; display: flex; align-items: center; justify-content: center; color: white; }
 
 /* Editable name */
 .nameRow { display: flex; align-items: center; gap: 6px; }

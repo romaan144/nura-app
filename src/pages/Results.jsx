@@ -158,7 +158,7 @@ export default function Results({ searchState }) {
             <div style={{display:'flex',flexDirection:'column',gap:'8px',width:'100%',maxWidth:'280px'}}>
               <button
                 onClick={() => navigate('/')}
-                style={{padding:'13px',background:'#1C1C1E',color:'white',border:'none',
+                style={{padding:'13px',background:'var(--purple)',color:'white',border:'none',
                   borderRadius:'100px',fontSize:'14px',fontWeight:700,cursor:'pointer'}}>
                 Buscar de nuevo con Nüra
               </button>

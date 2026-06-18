@@ -74,7 +74,7 @@
 }
 .dotActive {
   width: 22px; border-radius: 3px;
-  background: #1C1C1E;
+  background: var(--purple);
 }
 .dotDone { background: rgba(0,0,0,0.3); }
 
@@ -82,7 +82,7 @@
 .primary {
   display: flex; align-items: center; justify-content: center;
   gap: 8px; padding: 16px;
-  background: #1C1C1E; color: white;
+  background: var(--purple); color: white;
   border: none; border-radius: 100px;
   font-size: 16px; font-weight: 700;
   letter-spacing: -0.2px;

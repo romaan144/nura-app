@@ -25,7 +25,7 @@
 .nuraAvatarImg { width: 26px; height: 26px; object-fit: contain; }
 .bubble { max-width: 78%; padding: 11px 14px; font-size: var(--text-base); line-height: 1.55; letter-spacing: -0.15px; border-radius: 18px; }
 .bubbleNura { background: rgba(255,255,255,0.85); border: 1px solid rgba(255,255,255,0.5); border-radius: 4px 18px 18px 18px; color: rgba(0,0,0,0.85); box-shadow: var(--shadow-xs); }
-.bubbleUser { background: #1C1C1E; color: white; border-radius: 18px 18px 4px 18px; }
+.bubbleUser { background: var(--purple); color: white; border-radius: 18px 18px 4px 18px; }
 .typingDots { display: flex; gap: 4px; padding: 2px 0; }
 .typingDots span { width: 6px; height: 6px; border-radius: 50%; background: rgba(0,0,0,0.2); animation: tdot 1.4s infinite; }
 .typingDots span:nth-child(2) { animation-delay: 0.2s; }
@@ -39,6 +39,6 @@
 .input { flex: 1; border: none; outline: none; background: transparent; font-size: 16px; color: rgba(0,0,0,0.85); font-family: -apple-system,'Inter',sans-serif; letter-spacing: -0.2px; padding: 0; }
 .input::placeholder { color: rgba(0,0,0,0.28); font-weight: 300; }
 .input:disabled { opacity: 0.5; }
-.sendBtn { width: 32px; height: 32px; border-radius: 50%; background: #1C1C1E; color: white; border: none; display: flex; align-items: center; justify-content: center; flex-shrink: 0; cursor: pointer; transition: opacity 0.2s; }
+.sendBtn { width: 32px; height: 32px; border-radius: 50%; background: var(--purple); color: white; border: none; display: flex; align-items: center; justify-content: center; flex-shrink: 0; cursor: pointer; transition: opacity 0.2s; }
 .sendBtn:active { opacity: 0.7; }
 .sendBtn:disabled { background: rgba(0,0,0,0.12); color: rgba(0,0,0,0.28); }

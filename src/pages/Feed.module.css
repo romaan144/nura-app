@@ -35,7 +35,7 @@
   font-family: -apple-system, 'Inter', sans-serif;
 }
 .tabActive {
-  background: #1C1C1E; color: white; font-weight: 700;
+  background: var(--purple); color: white; font-weight: 700;
 }
 
 /* ── Feed ────────────────────────────────────────────── */
@@ -102,7 +102,7 @@
 .followBtn {
   display: flex; align-items: center; gap: 4px;
   padding: 6px 12px; border-radius: 100px;
-  background: #1C1C1E; color: white;
+  background: var(--purple); color: white;
   border: none; font-size: var(--text-xs); font-weight: 700;
   cursor: pointer; flex-shrink: 0;
   transition: opacity 0.15s;
@@ -174,7 +174,7 @@
   margin: 0; line-height: 1.6; max-width: 240px;
 }
 .emptyBtn {
-  padding: 11px 24px; background: #1C1C1E; color: white;
+  padding: 11px 24px; background: var(--purple); color: white;
   border: none; border-radius: 100px; font-size: var(--text-sm);
   font-weight: 700; cursor: pointer;
 }

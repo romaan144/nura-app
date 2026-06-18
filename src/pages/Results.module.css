@@ -90,7 +90,7 @@
 .sortRow::-webkit-scrollbar { display: none; }
 .sortBtn { padding: 6px 13px; background: white; border: none; border-radius: var(--card-radius); font-size: 12px; font-weight: 500; color: var(--mid); white-space: nowrap; flex-shrink: 0; box-shadow: var(--shadow-xs); transition: all 0.15s; }
 .sortBtn { transition: all 0.15s; }
-.sortBtnActive { background: #1C1C1E; color: white; box-shadow: var(--shadow-sm); }
+.sortBtnActive { background: var(--purple); color: white; box-shadow: var(--shadow-sm); }
 
 @media (min-width: 768px) {
   .page { max-width: 800px; margin: 0 auto; }
@@ -106,7 +106,7 @@
 
 .topBar { display: flex; gap: 6px; padding: 0 14px 8px; }
 .viewBtn { padding: 6px 14px; border-radius: 20px; border: none; background: white; color: var(--soft); font-size: 12px; font-weight: 500; box-shadow: var(--shadow-sm); cursor: pointer; transition: all 0.15s; }
-.viewBtnActive { background: #1C1C1E; color: white; }
+.viewBtnActive { background: var(--purple); color: white; }
 .cardsGrid { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
 .cardsGrid 
 .cardsGrid 

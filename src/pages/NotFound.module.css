@@ -9,7 +9,7 @@
 .logo { width: 64px; height: 64px; object-fit: contain; opacity: 0.4; }
 .title { font-size: 20px; font-weight: 800; color: var(--ink); letter-spacing: -0.5px; }
 .desc { font-size: var(--text-sm); color: var(--soft); line-height: 1.6; max-width: 260px; }
-.btn { padding: 12px 28px; background: #1C1C1E; color: white; border: none; border-radius: 100px; font-size: var(--text-sm); font-weight: 700; cursor: pointer; }
+.btn { padding: 12px 28px; background: var(--purple); color: white; border: none; border-radius: 100px; font-size: var(--text-sm); font-weight: 700; cursor: pointer; }
 
 .btnSecondary {
   padding: 12px 28px;

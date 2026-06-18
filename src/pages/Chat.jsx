@@ -280,7 +280,7 @@ function ConfirmModal({ helper, onClose, onConfirm, prefillDate, prefillTime }) 
         )}
         <div style={{display:'flex',flexDirection:'column',gap:'8px',width:'100%'}}>
           <button onClick={() => { onClose(); navigate('/my-services') }}
-            style={{padding:'13px',background:'#1C1C1E',color:'white',border:'none',borderRadius:'100px',fontSize:'14px',fontWeight:700,cursor:'pointer',width:'100%'}}>
+            style={{padding:'13px',background:'var(--purple)',color:'white',border:'none',borderRadius:'100px',fontSize:'14px',fontWeight:700,cursor:'pointer',width:'100%'}}>
             Ver mis servicios
           </button>
           <button onClick={onClose}
@@ -321,7 +321,7 @@ function ConfirmModal({ helper, onClose, onConfirm, prefillDate, prefillTime }) 
                 return (
                   <button key={i} onClick={()=>setDate(iso)} style={{
                     flexShrink:0,padding:'8px 14px',
-                    background:date===iso?'#1C1C1E':'rgba(0,0,0,0.05)',
+                    background:date===iso?'var(--purple)':'rgba(0,0,0,0.05)',
                     color:date===iso?'white':'rgba(0,0,0,0.6)',
                     border:'none',borderRadius:'100px',fontSize:'12px',fontWeight:600,
                     cursor:'pointer',fontFamily:'inherit',transition:'all 0.15s',whiteSpace:'nowrap',
@@ -337,7 +337,7 @@ function ConfirmModal({ helper, onClose, onConfirm, prefillDate, prefillTime }) 
               {['9:00','10:00','11:00','12:00','16:00','17:00','18:00','19:00'].map(t=>(
                 <button key={t} onClick={()=>setTime(t)} style={{
                   padding:'7px 12px',
-                  background:time===t?'#1C1C1E':'rgba(0,0,0,0.05)',
+                  background:time===t?'var(--purple)':'rgba(0,0,0,0.05)',
                   color:time===t?'white':'rgba(0,0,0,0.6)',
                   border:'none',borderRadius:'100px',fontSize:'12px',fontWeight:600,
                   cursor:'pointer',fontFamily:'inherit',transition:'all 0.15s',
@@ -352,7 +352,7 @@ function ConfirmModal({ helper, onClose, onConfirm, prefillDate, prefillTime }) 
         <div style={{display:'flex',gap:'10px'}}>
           <button onClick={onClose} style={{flex:1,padding:'14px',background:'rgba(0,0,0,0.05)',color:'rgba(0,0,0,0.55)',border:'none',borderRadius:'100px',fontSize:'14px',fontWeight:600,cursor:'pointer'}}>Cancelar</button>
           <button onClick={()=>{ onConfirm?.(date, time, note); setDone(true); notifyServiceConfirmed(helper.name?.split(' ')?.[0] || helper.name); haptic('success') }} disabled={!date}
-            style={{flex:2,padding:'14px',background:date?'#1C1C1E':'rgba(0,0,0,0.1)',color:date?'white':'rgba(0,0,0,0.3)',border:'none',borderRadius:'100px',fontSize:'14px',fontWeight:700,cursor:date?'pointer':'default',transition:'all 0.2s'}}>
+            style={{flex:2,padding:'14px',background:date?'var(--purple)':'rgba(0,0,0,0.1)',color:date?'white':'rgba(0,0,0,0.3)',border:'none',borderRadius:'100px',fontSize:'14px',fontWeight:700,cursor:date?'pointer':'default',transition:'all 0.2s'}}>
             Enviar solicitud
           </button>
         </div>

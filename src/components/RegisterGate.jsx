@@ -92,7 +92,7 @@ export default function RegisterGate({ onClose, reason = 'contact' }) {
             style={{
               display:'flex',alignItems:'center',justifyContent:'center',gap:'8px',
               width:'100%',padding:'15px',
-              background:'#1C1C1E',color:'white',
+              background:'var(--purple)',color:'white',
               border:'none',borderRadius:'100px',
               fontSize:'15px',fontWeight:700,
               cursor:'pointer',letterSpacing:'-0.2px',
