@@ -602,8 +602,8 @@ export default function Home({ setSearchState }) {
         results: matches,
         chips: matches.length > 0
           ? (user
-            ? [`Escribir a ${topName}`, 'Más barato', 'Más cerca', 'Buscar otra cosa']
-            : [`Crear cuenta`, 'Más barato', 'Más cerca', 'Buscar otra cosa'])
+            ? [`Escribir a ${topName}`, 'Más barato', 'Más cerca']
+            : [`Crear cuenta`, 'Más barato', 'Más cerca'])
           : ['Ampliar búsqueda', 'Cambiar zona', 'Online también']
       }
       setMessages(prev => [...prev, resultMsg])
