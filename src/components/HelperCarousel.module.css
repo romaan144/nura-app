@@ -4,7 +4,7 @@
 
 /* Outer wrap: overflow hidden + fade at right edge */
 .wrap {
-  margin-top: 8px;
+  margin-top: 0;
   position: relative;
   /* Fade out right edge to hint scroll */
   -webkit-mask-image: linear-gradient(to right, black 85%, transparent 100%);
@@ -15,7 +15,7 @@
 .track {
   display: flex;
   flex-direction: row;
-  gap: 10px;
+  gap: 8px;
   overflow-x: auto;
   overflow-y: hidden;
   padding: 2px 4px 8px;

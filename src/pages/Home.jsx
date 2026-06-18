@@ -633,6 +633,21 @@ export default function Home({ setSearchState }) {
 
   const suggestions = user?.isHelper ? HELPER_SUGGESTIONS : getDynamicSuggestions(user, searchHistory)
 
+  // Dynamic padding: measure floatBottom height so messages never hide behind it
+  useEffect(() => {
+    const el = floatRef.current
+    if (!el) return
+    const ro = new ResizeObserver(([entry]) => {
+      const h = entry.contentRect.height
+      const navH = 72
+      const safeArea = 12
+      setFloatH(Math.ceil(h) + navH + safeArea + 16)
+    })
+    ro.observe(el)
+    return () => ro.disconnect()
+  }, [])
+
+
   return (
     <div className={styles.page}>
       {/* New search button — appears when chat has content */}
@@ -695,7 +710,7 @@ export default function Home({ setSearchState }) {
         </button>
       </div>
 
-      <div className={styles.messages}>
+      <div className={styles.messages} style={{paddingBottom: floatH + 'px'}}>
         {messages.map(msg => (
           <div key={msg.id}>
             <div className={`${styles.msgRow} ${msg.from === 'user' ? styles.msgRowUser : ''}`}>
@@ -840,7 +855,7 @@ export default function Home({ setSearchState }) {
       </div>
 
       {/* Floating bottom — suggestions + input capsule */}
-      <div className={styles.floatBottom}>
+      <div className={styles.floatBottom} ref={floatRef}>
         {inputFocused && !input && searchHistory?.length > 0 && (
           <div className={styles.recentSearches}>
             <span className={styles.recentLabel}>Recientes</span>
