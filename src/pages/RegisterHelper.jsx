@@ -9,6 +9,12 @@ const SUPABASE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZ
 
 async function saveHelperToSupabase(answers) {
   try {
+    // Infer category from specialty
+    const { analyzeNeed } = await import('../utils/matching')
+    const specialtyAnalysis = analyzeNeed(answers.specialty || '')
+    const inferredCategory = specialtyAnalysis.categoria !== 'otro' 
+      ? specialtyAnalysis.categoria : 'otro'
+
     const payload = {
       name: answers.name || 'Profesional',
       specialty: answers.specialty || '',
@@ -16,7 +22,7 @@ async function saveHelperToSupabase(answers) {
       zone: answers.zone || 'Barcelona',
       city: 'Barcelona',
       price: answers.price || null,
-      category: 'otro',
+      category: inferredCategory,
       presential: (answers.modality || '').toLowerCase().includes('presencial') || true,
       online: (answers.modality || '').toLowerCase().includes('online'),
       available: true,
@@ -55,15 +61,12 @@ async function saveHelperToSupabase(answers) {
 }
 
 const QUESTIONS = [
-  { id: 'name',          text: '¡Hola! Soy Nüra. Voy a construir tu perfil para que las personas adecuadas puedan encontrarte. ¿Cómo te llamas?', placeholder: 'Tu nombre completo' },
-  { id: 'specialty',     text: 'Encantada, {name}. ¿Cuál es tu especialidad principal?', placeholder: 'Ej: logopeda, cuidadora, técnico de calderas...' },
-  { id: 'formation',     text: '¿Qué formación tienes? Buscaré tus estudios para verificarlos.', placeholder: 'Ej: Grado en Logopedia, FP Atención Sociosanitaria...' },
-  { id: 'experience',    text: '¿Cuántos años llevas trabajando en esto? ¿En qué contextos?', placeholder: 'Ej: 5 años, clínica privada y domicilio' },
-  { id: 'zone',          text: '¿En qué zona trabajas? ¿Te desplazas?', placeholder: 'Ej: Gràcia y alrededores, toda Barcelona' },
-  { id: 'price',         text: '¿Cuál es tu tarifa? Sé específico: por hora, sesión, día...', placeholder: 'Ej: 50€/sesión de 45 min, 15€/hora' },
-  { id: 'availability',  text: '¿Cuándo estás disponible? ¿Haces urgencias?', placeholder: 'Ej: Lunes a viernes tardes, urgencias si puedo' },
-  { id: 'modality',      text: '¿Trabajas de forma presencial, online o ambas?', placeholder: 'Ej: Presencial en domicilio, también videollamada' },
-  { id: 'differentiator',text: 'Última: ¿qué te hace diferente a otros profesionales?', placeholder: 'Lo que te hace único' },
+  { id: 'name',           text: '¡Hola! Soy Nüra. Construiré tu perfil profesional para que las personas correctas puedan encontrarte. ¿Cómo te llamas?', placeholder: 'Tu nombre completo' },
+  { id: 'specialty',      text: 'Encantada, {name}. ¿Cuál es tu especialidad principal?', placeholder: 'Ej: logopeda, cuidadora, técnico de calderas...' },
+  { id: 'formation',      text: '¿Qué formación o certificaciones tienes?', placeholder: 'Ej: Grado en Logopedia, FP Atención Sociosanitaria...' },
+  { id: 'zone',           text: '¿En qué zona de Barcelona trabajas? ¿Te desplazas?', placeholder: 'Ej: Gràcia y alrededores, toda Barcelona' },
+  { id: 'price',          text: '¿Cuál es tu tarifa? Cuanto más claro, más confianza genera.', placeholder: 'Ej: 50€/sesión de 45 min, 15€/hora' },
+  { id: 'differentiator', text: 'Última pregunta: ¿qué te diferencia de otros profesionales?', placeholder: 'Lo que te hace único — en una o dos frases' },
 ]
 
 export default function RegisterHelper() {
@@ -125,6 +128,10 @@ export default function RegisterHelper() {
         }]), 1800)
         // Save to Supabase (async, non-blocking)
         saveHelperToSupabase(newAnswers).then(saved => {
+          if (!saved) {
+            // Silently continue — profile saved locally, Supabase sync will retry
+            console.warn('Supabase sync failed — profile saved locally')
+          }
         })
         login({ name: newAnswers.name || val, isHelper: true, helperProfile: newAnswers })
         sessionStorage.setItem('nura_helper_registered', '1')
