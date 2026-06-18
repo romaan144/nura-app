@@ -269,6 +269,14 @@ function HelperProfileInner() {
             </div>
           )}
 
+          {/* Availability status — simple, no day grid */}
+          {h.available && (
+            <div className={styles.availStatus}>
+              <span className={styles.availDotInline} />
+              Disponible para nuevos clientes
+            </div>
+          )}
+
           {/* Stats row */}
           <div className={styles.statsRow}>
             {h.rating && (
@@ -301,7 +309,7 @@ function HelperProfileInner() {
           </button>
           <button className={styles.ctaSecondary}
             onClick={() => user ? setShowConfirm(true) : setShowGate(true)}>
-            <Calendar size={14} /> Ver disponibilidad
+            <Calendar size={14} /> Contratar
           </button>
 
         </div>
@@ -311,11 +319,70 @@ function HelperProfileInner() {
             La persona es la protagonista
             ══════════════════════════════════════════════════ */}
 
+        {/* ── Cómo puedo ayudarte ── */}
+        {(h.tags?.length > 0 || h.specialty) && (
+          <section className={styles.section}>
+            <h2 className={styles.sectionHeading}>Puedo ayudarte con</h2>
+            <div className={styles.ayudaList}>
+              {[h.specialty, ...(h.tags || []).filter(t => t !== h.specialty)].filter(Boolean).slice(0,8).map((item, i) => (
+                <div key={i} className={styles.ayudaItem}>
+                  <span className={styles.ayudaCheck}>✓</span>
+                  <span>{item}</span>
+                </div>
+              ))}
+              {h.presential && (
+                <div className={styles.ayudaItem}>
+                  <span className={styles.ayudaCheck}>✓</span>
+                  <span>Sesiones presenciales</span>
+                </div>
+              )}
+              {h.online && (
+                <div className={styles.ayudaItem}>
+                  <span className={styles.ayudaCheck}>✓</span>
+                  <span>Sesiones online</span>
+                </div>
+              )}
+            </div>
+          </section>
+        )}
+
+{/* ── Valoraciones ── */}
+        {h.reviews > 0 && (
+          <section className={styles.section}>
+            <h2 className={styles.sectionHeading}>
+              <Star size={14} fill="var(--amber)" color="var(--amber)" /> Lo que dicen de {firstName}
+            </h2>
+            <div className={styles.ratingRow}>
+              <span className={styles.ratingBig}>{h.rating}</span>
+              <div>
+                <div className={styles.ratingStars}>
+                  {[1,2,3,4,5].map(n => (
+                    <Star key={n} size={13}
+                      fill={n <= Math.round(h.rating) ? 'var(--amber)' : 'rgba(0,0,0,0.1)'}
+                      color={n <= Math.round(h.rating) ? 'var(--amber)' : 'rgba(0,0,0,0.1)'} />
+                  ))}
+                </div>
+                <span className={styles.ratingCount}>{h.reviews} valoraciones verificadas</span>
+              </div>
+            </div>
+            {h.qualitativeComments?.length > 0 && (
+              <div className={styles.reviewList}>
+                {h.qualitativeComments.slice(0,3).map((c, i) => (
+                  <div key={i} className={styles.reviewItem}>
+                    <p>"{typeof c === 'string' ? c : c.text}"</p>
+                    {c.user && <span>— {c.user}</span>}
+                  </div>
+                ))}
+              </div>
+            )}
+          </section>
+        )}
+
         {/* ── Experiencia ── */}
         {h.experience?.length > 0 && (
           <section className={styles.section}>
             <h2 className={styles.sectionHeading}>
-              <Briefcase size={14} /> Experiencia
+              <Briefcase size={14} /> Trayectoria profesional
             </h2>
             <div className={styles.expList}>
               {h.experience.map((exp, i) => (
@@ -363,7 +430,7 @@ function HelperProfileInner() {
         {h.education?.length > 0 && (
           <section className={styles.section}>
             <h2 className={styles.sectionHeading}>
-              <BookOpen size={14} /> Formación
+              <BookOpen size={14} /> Formación académica
             </h2>
             <div className={styles.expList}>
               {h.education.map((edu, i) => (
@@ -407,57 +474,6 @@ function HelperProfileInner() {
                 <span key={i} className={`${styles.tag} ${styles.tagIdioma}`}>{l}</span>
               ))}
             </div>
-          </section>
-        )}
-
-        {/* ── Disponibilidad ── */}
-        <section className={styles.section}>
-          <h2 className={styles.sectionHeading}>
-            <Calendar size={14} /> Disponibilidad
-          </h2>
-          <div className={styles.availRow}>
-            {['Lun','Mar','Mié','Jue','Vie','Sáb','Dom'].map((day, i) => {
-              const on = h.available && i < 5
-              return (
-                <div key={day} className={`${styles.dayPill} ${on ? styles.dayOn : styles.dayOff}`}>
-                  <span>{day}</span>
-                  <span>{on ? '✓' : '–'}</span>
-                </div>
-              )
-            })}
-          </div>
-          {h.online && <p className={styles.availNote}>También disponible online</p>}
-        </section>
-
-        {/* ── Valoraciones ── */}
-        {h.reviews > 0 && (
-          <section className={styles.section}>
-            <h2 className={styles.sectionHeading}>
-              <Star size={14} fill="var(--amber)" color="var(--amber)" /> Valoraciones
-            </h2>
-            <div className={styles.ratingRow}>
-              <span className={styles.ratingBig}>{h.rating}</span>
-              <div>
-                <div className={styles.ratingStars}>
-                  {[1,2,3,4,5].map(n => (
-                    <Star key={n} size={13}
-                      fill={n <= Math.round(h.rating) ? 'var(--amber)' : 'rgba(0,0,0,0.1)'}
-                      color={n <= Math.round(h.rating) ? 'var(--amber)' : 'rgba(0,0,0,0.1)'} />
-                  ))}
-                </div>
-                <span className={styles.ratingCount}>{h.reviews} valoraciones verificadas</span>
-              </div>
-            </div>
-            {h.qualitativeComments?.length > 0 && (
-              <div className={styles.reviewList}>
-                {h.qualitativeComments.slice(0,3).map((c, i) => (
-                  <div key={i} className={styles.reviewItem}>
-                    <p>"{typeof c === 'string' ? c : c.text}"</p>
-                    {c.user && <span>— {c.user}</span>}
-                  </div>
-                ))}
-              </div>
-            )}
           </section>
         )}
 
