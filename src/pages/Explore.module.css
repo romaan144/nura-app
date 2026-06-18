@@ -16,6 +16,7 @@
 
 
 .searchBar {
+  flex: 1;
   display: flex; align-items: center; gap: 8px;
   background: rgba(255,255,255,0.72);
   -webkit-backdrop-filter: blur(24px) saturate(180%);
