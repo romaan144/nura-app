@@ -42,24 +42,19 @@ function CarouselCard({ helper, isTopPick, matchReason }) {
       style={{position:'relative'}}
       onClick={() => {
       const reason = window.__nuraMatchReasons?.[String(helper.id)]
-      navigate(`/helper/${helper.id}`, { state: { helper, fromSearch: true, matchReason: reason } })
+      navigate(`/helper/${helper.id}`, { state: { helper, fromSearch: true, matchReason: reason, userQuery: window.__nuraLastQuery, analysis: window.__nuraLastAnalysis } })
     }}>
 
       {/* Top pick indicator */}
+
       {isTopPick && (
         <div style={{
-          position:'absolute',top:-1,left:-1,right:-1,bottom:-1,
-          borderRadius:'inherit',border:'1.5px solid var(--purple)',
-          pointerEvents:'none',zIndex:1,
-        }}/>
-      )}
-      {isTopPick && (
-        <div style={{
-          position:'absolute',top:-9,left:'50%',transform:'translateX(-50%)',
+          alignSelf:'center',
           background:'var(--purple)',color:'white',
           fontSize:'8px',fontWeight:800,letterSpacing:'0.8px',
-          padding:'2px 8px',borderRadius:'100px',
-          whiteSpace:'nowrap',zIndex:2,
+          padding:'2px 10px',borderRadius:'var(--radius-full)',
+          whiteSpace:'nowrap',marginBottom:'4px',
+          order:-1,
         }}>
           NÜRA RECOMIENDA
         </div>
