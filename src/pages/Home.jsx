@@ -212,11 +212,9 @@ export default function Home({ setSearchState }) {
   const setLastMatches = setNuraLastMatches
   const bottomRef  = useRef(null)
   const inputRef   = useRef(null)
-  const floatRef   = useRef(null)
   const topRef     = useRef(null)
   const msgsRef    = useRef(null)
-  const [topH, setTopH] = useState(0)
-  const [floatH, setFloatH] = useState(0)
+  const [topH, setTopH] = useState(80) /* header height fallback */
 
   useEffect(() => {
     let lines = getWelcome(user)
@@ -315,13 +313,7 @@ export default function Home({ setSearchState }) {
     }
   }
 
-  // After floatH is set by measure(), DOM has correct paddingBottom.
-  // useLayoutEffect fires synchronously before paint — scroll is instant.
-  useLayoutEffect(() => {
-    if (floatH > 0) scrollToBottom(false)
-  }, [floatH])
-
-  // Safety: also scroll on every mount, after initial layout
+  // Scroll to bottom on mount and whenever messages update
   useLayoutEffect(() => {
     scrollToBottom(false)
   }, [])
@@ -664,32 +656,18 @@ export default function Home({ setSearchState }) {
 
   const suggestions = user?.isHelper ? HELPER_SUGGESTIONS : getDynamicSuggestions(user, searchHistory)
 
-  // Dynamic padding: measure both floatTop and floatBottom for perfect layout
+  // Measure only the floatTop height for messages top padding
   useEffect(() => {
-    const bottom = floatRef.current
-    const top    = topRef.current
-    if (!bottom) return
-
+    const top = topRef.current
+    if (!top) return
     const measure = () => {
-      // Bottom padding: floatBottom real position from bottom of viewport
-      const bRect = bottom.getBoundingClientRect()
-      const windowH = window.innerHeight
-      const floatTotalH = bRect.height + (windowH - bRect.bottom)
-      setFloatH(Math.ceil(floatTotalH) + 24)  // +24px visual margin
-
-      // Top padding: floatTop real height + its top offset
-      if (top) {
-        const tRect = top.getBoundingClientRect()
-        setTopH(Math.ceil(tRect.bottom) + 8)  // floatTop bottom + 8px gap
-      }
-
+      const tRect = top.getBoundingClientRect()
+      setTopH(Math.ceil(tRect.bottom) + 8)
     }
-
     const ro = new ResizeObserver(measure)
-    ro.observe(bottom)
-    if (top) ro.observe(top)
-    measure()  // measure immediately on mount
-    return () => { ro.disconnect() }
+    ro.observe(top)
+    measure()
+    return () => ro.disconnect()
   }, [])
 
 
@@ -724,7 +702,7 @@ export default function Home({ setSearchState }) {
         </button>
       </div>
 
-      <div ref={msgsRef} className={styles.messages} style={{paddingBottom: floatH + 'px', paddingTop: topH + 'px'}}>
+      <div ref={msgsRef} className={styles.messages} style={{paddingTop: topH + 'px'}}>
         {messages.map((msg, msgIdx) => {
           const prevMsg = messages[msgIdx - 1]
           const prevHadResults = prevMsg?.results?.length > 0
@@ -815,7 +793,7 @@ export default function Home({ setSearchState }) {
       </div>
 
       {/* Floating bottom — suggestions + input capsule only */}
-      <div className={styles.floatBottom} ref={floatRef}>
+      <div className={styles.floatBottom}>
         {inputFocused && !input && searchHistory?.length > 0 && (
           <div className={styles.recentSearches}>
             <span className={styles.recentLabel}>Recientes</span>

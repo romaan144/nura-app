@@ -6,6 +6,8 @@
 .page {
   position: fixed;
   inset: 0;
+  display: flex;
+  flex-direction: column;
   background:
     radial-gradient(ellipse 120% 60% at 50% -10%, rgba(123,47,255,0.045) 0%, transparent 65%),
     radial-gradient(ellipse 80% 40% at 90% 100%, rgba(0,212,200,0.03) 0%, transparent 60%),
@@ -15,16 +17,15 @@
 
 /* ── MESSAGES — scrollable, full page, behind everything */
 .messages {
-  position: absolute;
-  inset: 0;
+  flex: 1;
   overflow-y: auto;
   overflow-x: hidden;
-  /* padding-top and padding-bottom controlled by JS — see Home.jsx ResizeObserver */
-  padding: 80px 16px 0;  /* fallback only, overridden immediately by JS */
+  padding: 80px 16px 0; /* top overridden by JS; bottom = 0 (floatBottom in flow) */
   display: flex;
   flex-direction: column;
   gap: 0;
   -webkit-overflow-scrolling: touch;
+  min-height: 0; /* critical for flex child overflow */
 }
 
 /* ── FLOATING TOP LAYER ─────────────────────────────── */
@@ -43,15 +44,17 @@
 
 /* ── FLOATING BOTTOM LAYER ──────────────────────────── */
 .floatBottom {
-  position: absolute;
-  bottom: var(--nav-h);  /* sits exactly at nav bar top */
-  left: 20px;
-  right: 20px;
+  /* Normal flow — sits at bottom of flex column, above BottomNav */
+  flex-shrink: 0;
+  padding: 8px 20px;
+  padding-bottom: max(env(safe-area-inset-bottom, 8px), 8px);
+  margin-bottom: 65px; /* BottomNav height */
   z-index: 30;
   display: flex;
   flex-direction: column;
   gap: 8px;
   pointer-events: none;
+  background: transparent;
 }
 .floatBottom > * { pointer-events: all; }
 
