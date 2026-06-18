@@ -21,7 +21,7 @@
   flex: 1;
   overflow-y: auto;
   overflow-x: hidden;
-  padding: 80px 16px 12px;
+  padding: 80px 16px 80px;
   display: flex;
   flex-direction: column;
   justify-content: flex-end; /* content always anchored to bottom — no JS scroll needed */
@@ -46,7 +46,9 @@
 
 /* ── FLOATING BOTTOM LAYER ──────────────────────────── */
 .floatBottom {
-  flex-shrink: 0;
+  position: absolute;
+  bottom: var(--nav-h);
+  left: 0; right: 0;
   padding: 8px 20px 12px;
   z-index: 30;
   display: flex;
