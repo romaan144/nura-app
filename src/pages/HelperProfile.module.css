@@ -892,3 +892,20 @@
   padding-top: 12px;
   animation: fadeSlideIn 0.18s ease both;
 }
+
+/* ── BIO PREVIEW (primer nivel — breve descripción) ── */
+.bioPill {
+  padding: 12px 16px;
+  background: #FFFFFF;
+  border: 1px solid rgba(0,0,0,0.05);
+  border-radius: var(--radius-md);
+  margin-bottom: 4px;
+  box-shadow: var(--shadow-xs);
+}
+.bioPillText {
+  font-size: var(--text-sm);
+  color: rgba(0,0,0,0.6);
+  line-height: 1.6;
+  margin: 0;
+  font-style: italic;
+}

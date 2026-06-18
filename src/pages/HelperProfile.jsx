@@ -909,23 +909,14 @@ function HelperProfileInner() {
           </div>
         </div>
 
-        {/* Trust line */}
-        <div className={styles.trustLine}>
-          <Star size={11} fill='var(--amber)' color='var(--amber)' />
-          <strong>{h.rating}</strong>
-          <span className={styles.trustLineDot}>·</span>
-          <span>{h.reviews} valoraciones</span>
-          {h.completionRate && (<>
-            <span className={styles.trustLineDot}>·</span>
-            <span className={styles.trustLineGreen}>{h.completionRate}% completados</span>
-          </>)}
-          {h.services && (<>
-            <span className={styles.trustLineDot}>·</span>
-            <span>{h.services} servicios</span>
-          </>)}
-        </div>
+        {/* ── Bio preview — breve descripción ── */}
+        {h.bio && (
+          <div className={styles.bioPill}>
+            <p className={styles.bioPillText}>{h.bio.length > 120 ? h.bio.slice(0,120).trim()+'...' : h.bio}</p>
+          </div>
+        )}
 
-        {/* ── TAB NAVIGATOR ── */}
+                {/* ── TAB NAVIGATOR ── */}
         <div className={styles.tabNav}>
           {[
             { id: 'perfil',      label: 'Perfil' },
@@ -1103,13 +1094,6 @@ function HelperProfileInner() {
               </div>
             </section>
 
-          {/* ── Ver perfil completo toggle ── */}
-          <button
-            onClick={() => setShowFullProfile(p => !p)}
-            className={styles.profileToggle}>
-            <ChevronDown size={14} style={{transition:'transform 0.2s',transform:showFullProfile?'rotate(180deg)':'none'}} />
-            {showFullProfile ? 'Ocultar detalle' : `Ver perfil completo de ${h.name?.split(' ')?.[0]}`}
-          </button>
             {/* Nüra-detected skills — THE differentiator */}
             {h.hiddenSkills?.length > 0 && !isSupabaseHelper && (
               <div className={styles.nuraDetectedCard}>
@@ -1131,7 +1115,7 @@ function HelperProfileInner() {
 
 
             {/* Declared skills */}
-            {showFullProfile && (
+            {true && (
               <>
             {h.skills?.length > 0 && (
               <section className={styles.section}>
@@ -1144,7 +1128,7 @@ function HelperProfileInner() {
               </>)}
 
             {/* Education */}
-            {showFullProfile && (
+            {true && (
               <>
             {h.education?.length > 0 && (
               <section className={styles.section}>
@@ -1176,7 +1160,7 @@ function HelperProfileInner() {
               </>)}
 
             {/* Languages */}
-            {showFullProfile && (
+            {true && (
               <>
             {h.languages?.length > 0 && (
               <section className={styles.section}>
@@ -1189,7 +1173,7 @@ function HelperProfileInner() {
               </>)}
 
             {/* Reviews — semantic analysis */}
-            {showFullProfile && (
+            {true && (
               <>
             {h.qualitativeComments?.length > 0 && (
               <section className={styles.section}>
@@ -1369,7 +1353,7 @@ function HelperProfileInner() {
             </div>
 
             {/* Personality */}
-            {showFullProfile && (
+            {true && (
               <>
             {h.personality && !isSupabaseHelper && !h.aiData?.personality && (
               <section className={styles.section}>
@@ -1392,7 +1376,7 @@ function HelperProfileInner() {
               </>)}
 
             {/* Evolution */}
-            {showFullProfile && (
+            {true && (
               <>
             {h.evolution?.length > 0 && !isSupabaseHelper && (
               <section className={styles.section}>
