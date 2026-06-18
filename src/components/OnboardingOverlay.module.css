@@ -18,7 +18,7 @@
 .skip {
   align-self: flex-end;
   background: none; border: none;
-  font-size: 14px; color: rgba(0,0,0,0.35);
+  font-size: var(--text-sm); color: rgba(0,0,0,0.35);
   font-weight: 500; padding: 6px 2px;
   cursor: pointer; font-family: -apple-system,'Inter',sans-serif;
 }
@@ -53,7 +53,7 @@
   white-space: pre-line;
 }
 .desc {
-  font-size: 15px; color: rgba(0,0,0,0.45);
+  font-size: var(--text-base); color: rgba(0,0,0,0.45);
   line-height: 1.65; margin: 0;
   max-width: 280px; font-weight: 400;
 }
@@ -86,7 +86,7 @@
   border: none; border-radius: 100px;
   font-size: 16px; font-weight: 700;
   letter-spacing: -0.2px;
-  box-shadow: 0 4px 20px rgba(0,0,0,0.15);
+  box-shadow: var(--shadow-md);
   cursor: pointer; transition: opacity 0.2s;
   font-family: -apple-system,'Inter',sans-serif;
 }
@@ -106,17 +106,17 @@
 @keyframes pulse { 0%,100%{transform:scale(1)} 50%{transform:scale(1.07)} }
 
 .nameTitle {
-  font-size: 26px; font-weight: 800;
+  font-size: var(--text-xl); font-weight: 800;
   color: rgba(0,0,0,0.85); letter-spacing: -0.5px;
   margin: 0;
 }
 .nameDesc {
-  font-size: 14px; color: rgba(0,0,0,0.4);
+  font-size: var(--text-sm); color: rgba(0,0,0,0.4);
   margin: 0;
 }
 .nameInput {
   width: 100%; padding: 16px 20px;
-  font-size: 18px; font-weight: 500;
+  font-size: var(--text-md); font-weight: 500;
   color: rgba(0,0,0,0.85);
   font-family: -apple-system,'Inter',sans-serif;
   background: rgba(255,255,255,0.72);
@@ -125,7 +125,7 @@
   border: 1px solid rgba(255,255,255,0.35);
   border-radius: 100px; outline: none;
   text-align: center;
-  box-shadow: 0 2px 16px rgba(0,0,0,0.05);
+  box-shadow: var(--shadow-sm);
   box-sizing: border-box;
   transition: all 0.2s;
 }
@@ -151,7 +151,7 @@
 }
 .loginLink {
   background: none; border: none;
-  font-size: 14px; color: var(--purple);
+  font-size: var(--text-sm); color: var(--purple);
   font-weight: 600; padding: 6px 2px;
   cursor: pointer; font-family: -apple-system,'Inter',sans-serif;
 }

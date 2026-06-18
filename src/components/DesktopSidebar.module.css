@@ -29,7 +29,7 @@
   .navItem {
     display: flex; align-items: center; gap: 12px;
     padding: 12px 14px; border-radius: 14px;
-    color: var(--mid); font-size: 14px; font-weight: 500;
+    color: var(--mid); font-size: var(--text-sm); font-weight: 500;
     transition: all 0.15s; width: 100%; text-align: left;
     border: none; background: transparent; cursor: pointer;
     position: relative;

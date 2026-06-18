@@ -65,9 +65,9 @@
   width: 42px; height: 42px; border-radius: 50%;
   object-fit: cover;
   flex-shrink: 0;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.12);
+  box-shadow: var(--shadow-sm);
 }
-.drawerUserName { font-size: 14px; font-weight: 700; color: var(--ink); margin-bottom: 2px; }
+.drawerUserName { font-size: var(--text-sm); font-weight: 700; color: var(--ink); margin-bottom: 2px; }
 .drawerUserSub { font-size: 11px; color: var(--purple); font-weight: 500; }
 
 /* Nav */
@@ -81,7 +81,7 @@
   display: flex; align-items: center; gap: 14px;
   padding: 13px 16px;
   border-radius: 16px;
-  color: var(--mid); font-size: 14px; font-weight: 500;
+  color: var(--mid); font-size: var(--text-sm); font-weight: 500;
   transition: all 0.15s;
   width: 100%; text-align: left;
 }
