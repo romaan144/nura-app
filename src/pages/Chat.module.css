@@ -274,3 +274,23 @@
 .msgRow {
   animation: msgIn 0.22s ease both;
 }
+
+/* ── UTILITIES ── */
+.rowGap4   { display: flex; align-items: center; gap: 4px; }
+.rowGap6   { display: flex; align-items: center; gap: 6px; }
+.rowGap8   { display: flex; align-items: center; gap: 8px; }
+.rowGap12  { display: flex; align-items: center; gap: 12px; }
+.colGap4   { display: flex; flex-direction: column; gap: 4px; }
+.colGap6   { display: flex; flex-direction: column; gap: 6px; }
+.colGap8   { display: flex; flex-direction: column; gap: 8px; }
+.rowWrap   { display: flex; flex-wrap: wrap; gap: 6px; }
+.flex1     { flex: 1; min-width: 0; }
+.metaSm    { font-size: var(--text-sm); color: rgba(0,0,0,0.6); }
+.metaXs    { font-size: var(--text-xs); color: rgba(0,0,0,0.45); }
+.metaDot   { color: rgba(0,0,0,0.2); margin: 0 2px; }
+
+.modalTitle  { font-size: 19px; font-weight: 800; margin-bottom: 4px; color: rgba(0,0,0,0.85); letter-spacing: -0.3px; }
+.modalSub    { font-size: var(--text-sm); color: rgba(0,0,0,0.45); margin-bottom: 12px; }
+.metaXs3     { margin: 0 0 3px; font-size: var(--text-xs); color: rgba(0,0,0,0.55); }
+.purpleLabel { font-size: var(--text-xs); color: var(--purple); font-weight: 600; }
+.colFull     { display: flex; flex-direction: column; gap: 8px; width: 100%; }

@@ -267,18 +267,18 @@ function ConfirmModal({ helper, onClose, onConfirm, prefillDate, prefillTime }) 
           }
           <span style={{position:'absolute',bottom:-2,right:-2,width:'20px',height:'20px',background:'var(--green-dot)',borderRadius:'50%',display:'flex',alignItems:'center',justifyContent:'center'}}><svg width='11' height='11' viewBox='0 0 12 12' fill='none'><path d='M2 6l3 3 5-5' stroke='white' strokeWidth='1.8' strokeLinecap='round' strokeLinejoin='round'/></svg></span>
         </div>
-        <h3 style={{fontSize:'19px',fontWeight:800,marginBottom:'4px',color:'rgba(0,0,0,0.85)',letterSpacing:'-0.3px'}}>¡Solicitud enviada!</h3>
+        <h3 className={styles.modalTitle}>¡Solicitud enviada!</h3>
         <p style={{fontSize:'var(--text-sm)',color:'rgba(0,0,0,0.45)',marginBottom:'12px',lineHeight:1.6}}>{name} confirmará disponibilidad en breve.</p>
         {(date || time) && (
           <div style={{background:'rgba(0,0,0,0.03)',border:'1px solid rgba(0,0,0,0.06)',borderRadius:'12px',
             padding:'10px 14px',marginBottom:'20px',textAlign:'left'}}>
-            {date && <p style={{margin:'0 0 3px',fontSize:'var(--text-xs)',color:'rgba(0,0,0,0.55)'}}>
+            {date && <p className={styles.metaXs3}>
               {new Date(date).toLocaleDateString('es-ES',{weekday:'long',day:'numeric',month:'long'})}
             </p>}
             {time && <p style={{margin:0,fontSize:'var(--text-xs)',color:'rgba(0,0,0,0.55)'}}>{time}h</p>}
           </div>
         )}
-        <div style={{display:'flex',flexDirection:'column',gap:'8px',width:'100%'}}>
+        <div className={styles.colFull}>
           <button onClick={() => { onClose(); navigate('/my-services') }}
             style={{padding:'13px',background:'var(--purple)',color:'white',border:'none',borderRadius:'100px',fontSize:'var(--text-sm)',fontWeight:700,cursor:'pointer',width:'100%'}}>
             Ver mis servicios
@@ -304,7 +304,7 @@ function ConfirmModal({ helper, onClose, onConfirm, prefillDate, prefillTime }) 
             borderRadius:'10px',padding:'8px 12px',marginBottom:'16px',
           }}>
             <img src="/logo-iso.png" alt="" style={{width:'12px',height:'12px',opacity:0.7}} />
-            <span style={{fontSize:'var(--text-xs)',color:'var(--purple)',fontWeight:600}}>
+            <span className={styles.purpleLabel}>
               Nüra detectó la fecha de vuestra conversación
             </span>
           </div>

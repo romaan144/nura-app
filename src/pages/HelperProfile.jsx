@@ -225,7 +225,7 @@ function AiDataSection({ aiData, aiAnalyzedAt, helperName }) {
       </div>
     ),
     skills: (v) => { const arr = Array.isArray(v) ? v : (v ? String(v).split(',').map(s=>s.trim()) : []); return arr.filter(Boolean).length > 0 && (
-      <div style={{display:'flex',flexWrap:'wrap',gap:'6px'}}>
+      <div className={styles.rowWrap}>
         {v.map((s,i) => (
           <span key={i} style={{padding:'4px 10px',borderRadius:'100px',
             background:'rgba(123,47,255,0.07)',color:'var(--purple)',
@@ -236,9 +236,9 @@ function AiDataSection({ aiData, aiAnalyzedAt, helperName }) {
       </div>
     ); },
     personality: (v) => typeof v === 'object' && (
-      <div style={{display:'flex',flexDirection:'column',gap:'8px'}}>
+      <div className={styles.colGap8}>
         {Object.entries(v).map(([k, val]) => (
-          <div key={k} style={{display:'flex',alignItems:'center',gap:'10px'}}>
+          <div key={k} className={styles.rowGap10}>
             <span style={{fontSize:'var(--text-xs)',color:'rgba(0,0,0,0.5)',minWidth:'100px',
               textTransform:'capitalize'}}>{k}</span>
             <div style={{flex:1,height:'4px',borderRadius:'2px',background:'rgba(0,0,0,0.08)'}}>
@@ -267,7 +267,7 @@ function AiDataSection({ aiData, aiAnalyzedAt, helperName }) {
     ),
 
     red_flags: (v) => Array.isArray(v) && v.length > 0 && (
-      <div style={{display:'flex',flexDirection:'column',gap:'4px'}}>
+      <div className={styles.colGap4}>
         {v.map((s,i) => (
           <div key={i} style={{display:'flex',alignItems:'center',gap:'8px',
             fontSize:'var(--text-sm)',color:'rgba(0,0,0,0.5)'}}>
@@ -277,7 +277,7 @@ function AiDataSection({ aiData, aiAnalyzedAt, helperName }) {
       </div>
     ),
     certifications: (v) => Array.isArray(v) && v.length > 0 && (
-      <div style={{display:'flex',flexDirection:'column',gap:'6px'}}>
+      <div className={styles.colGap6}>
         {v.map((c,i) => (
           <div key={i} style={{display:'flex',alignItems:'center',gap:'8px',
             fontSize:'var(--text-sm)',color:'rgba(0,0,0,0.7)'}}>
@@ -306,10 +306,10 @@ function AiDataSection({ aiData, aiAnalyzedAt, helperName }) {
   ]
 
   return (
-    <div style={{display:'flex',flexDirection:'column',gap:'12px'}}>
+    <div className={styles.colGap12}>
       {/* Header */}
       <div style={{display:'flex',alignItems:'center',justifyContent:'space-between'}}>
-        <div style={{display:'flex',alignItems:'center',gap:'8px'}}>
+        <div className={styles.rowGap8}>
           <img src="/logo-iso.png" alt="Nüra" style={{width:'16px',height:'16px',objectFit:'contain'}} />
           <span style={{fontSize:'var(--text-xs)',fontWeight:700,color:'var(--purple)',letterSpacing:'0.5px'}}>
             ANÁLISIS NÜRA IA
@@ -331,7 +331,7 @@ function AiDataSection({ aiData, aiAnalyzedAt, helperName }) {
           typeof value === 'string' ? (
             <p style={{fontSize:'var(--text-sm)',color:'rgba(0,0,0,0.6)',margin:0,lineHeight:1.6}}>{value}</p>
           ) : Array.isArray(value) ? (
-            <div style={{display:'flex',flexWrap:'wrap',gap:'6px'}}>
+            <div className={styles.rowWrap}>
               {value.map((v,i) => (
                 <span key={i} style={{padding:'3px 8px',borderRadius:'8px',
                   background:'rgba(0,0,0,0.05)',fontSize:'var(--text-xs)',color:'rgba(0,0,0,0.6)'}}>
@@ -340,15 +340,15 @@ function AiDataSection({ aiData, aiAnalyzedAt, helperName }) {
               ))}
             </div>
           ) : typeof value === 'object' ? (
-            <div style={{display:'flex',flexDirection:'column',gap:'4px'}}>
+            <div className={styles.colGap4}>
               {Object.entries(value).map(([k,v]) => (
-                <div key={k} style={{fontSize:'var(--text-sm)',color:'rgba(0,0,0,0.6)'}}>
+                <div key={k} className={styles.metaSm}>
                   <strong style={{color:'rgba(0,0,0,0.75)',textTransform:'capitalize'}}>{k.replace(/_/g,' ')}:</strong> {String(v)}
                 </div>
               ))}
             </div>
           ) : (
-            <span style={{fontSize:'var(--text-sm)',color:'rgba(0,0,0,0.6)'}}>{String(value)}</span>
+            <span className={styles.metaSm}>{String(value)}</span>
           )
         )
 
@@ -427,7 +427,7 @@ function OwnerPanel({ helper, user, updateUser, navigate }) {
       }}>
         {/* Header */}
         <div style={{display:'flex',alignItems:'center',justifyContent:'space-between',marginBottom:'12px'}}>
-          <div style={{display:'flex',alignItems:'center',gap:'8px'}}>
+          <div className={styles.rowGap8}>
             <img src="/logo-iso.png" alt="Nüra" style={{width:'18px',height:'18px',objectFit:'contain',filter:'brightness(10)'}} />
             <span style={{fontSize:'var(--text-xs)',fontWeight:700,color:'white',letterSpacing:'0.5px'}}>
               TU PERFIL EN NÜRA
@@ -451,7 +451,7 @@ function OwnerPanel({ helper, user, updateUser, navigate }) {
         </div>
 
         {/* Actions */}
-        <div style={{display:'flex',gap:'8px'}}>
+        <div className={styles.rowGap8}>
           {/* Availability toggle */}
           <button
             onClick={toggleAvailability}
@@ -599,7 +599,7 @@ function BookingModal({ helper, onClose, onBook, onNavigate }) {
               {/* Day pills */}
               <div>
                 <p style={{fontSize:'var(--text-xs)',fontWeight:700,color:'rgba(0,0,0,0.4)',margin:'0 0 8px',letterSpacing:'0.5px',textTransform:'uppercase'}}>Fecha</p>
-                <div style={{display:'flex',gap:'6px',overflowX:'auto',paddingBottom:'4px'}}>
+                <div className={styles.rowScroll}>
                   {Array.from({length:7},(_,i)=>{
                     const d=new Date(); d.setDate(d.getDate()+i)
                     const iso=d.toISOString().split('T')[0]
@@ -636,7 +636,7 @@ function BookingModal({ helper, onClose, onBook, onNavigate }) {
                 placeholder="Detalles adicionales (opcional)..." rows={3}
                 style={{...style.input, resize:'none'}} />
             </div>
-            <div style={{display:'flex',gap:'8px'}}>
+            <div className={styles.rowGap8}>
               <button onClick={onClose} style={{...style.btnSecondary,flex:1}}>Cancelar</button>
               <button onClick={confirm} disabled={!date}
                 style={{...style.btnPrimary,flex:2,opacity:date?1:0.4}}>
@@ -802,7 +802,7 @@ function HelperProfileInner() {
           <div className={styles.heroInner} style={{position:'relative', zIndex:1}}>
 
             {/* ── TOP ROW: Avatar + Name + Key facts ── */}
-            <div style={{display:'flex',alignItems:'flex-start',gap:'14px',width:'100%'}}>
+            <div className={styles.rowGap14}>
               {/* Avatar */}
               <div style={{flexShrink:0,position:'relative'}}>
                 {h.avatarUrl
@@ -832,13 +832,13 @@ function HelperProfileInner() {
                   </span>
                   {h.distance && (
                     <span style={{display:'flex',alignItems:'center',gap:'3px',fontSize:'var(--text-xs)',color:'rgba(0,0,0,0.45)'}}>
-                      <span style={{color:'rgba(0,0,0,0.2)'}}>·</span>
+                      <span className={styles.metaDot}>·</span>
                       <MapPin size={9} color='rgba(0,0,0,0.3)'/>{h.distance}km
                     </span>
                   )}
                   {h.price && h.price !== 'Consultar' && (
                     <span style={{display:'flex',alignItems:'center',gap:'3px',fontSize:'var(--text-xs)'}}>
-                      <span style={{color:'rgba(0,0,0,0.2)'}}>·</span>
+                      <span className={styles.metaDot}>·</span>
                       <span style={{fontWeight:700,color:'var(--purple)'}}>{h.price}</span>
                     </span>
                   )}
@@ -873,7 +873,7 @@ function HelperProfileInner() {
             )}
 
             {/* ── Primary CTA ── */}
-            <div style={{display:'flex',gap:'8px',width:'100%',marginTop:'14px'}}>
+            <div className={styles.ctaRow}>
               <button style={{
                 flex:1,height:'44px',display:'flex',alignItems:'center',
                 justifyContent:'center',gap:'7px',
@@ -932,7 +932,7 @@ function HelperProfileInner() {
         {true && (
           <section className={styles.section} style={{marginBottom:'10px'}}>
             <h3 className={styles.sectionTitle}><Calendar size={13} /> Disponibilidad esta semana</h3>
-            <div style={{display:'flex',gap:'6px',overflowX:'auto',paddingBottom:'4px'}}>
+            <div className={styles.rowScroll}>
               {['Lun','Mar','Mié','Jue','Vie','Sáb','Dom'].map((day,i) => {
                 const available = h.available && i < 5
                 return (
@@ -996,7 +996,7 @@ function HelperProfileInner() {
             borderRadius:'14px',
           }}>
             <img src="/logo-iso.png" alt="Nüra" style={{width:'20px',height:'20px',objectFit:'contain'}} />
-            <span style={{fontSize:'var(--text-xs)',color:'rgba(0,0,0,0.55)'}}>
+            <span className={styles.metaXsMid}>
               Perfil encontrado y verificado por <strong style={{color:'var(--purple)'}}>Nüra</strong>
             </span>
           </div>
@@ -1012,7 +1012,7 @@ function HelperProfileInner() {
             <Shield size={16} color='var(--purple)' strokeWidth={1.6} />
             <div>
               <div style={{fontSize:'var(--text-xs)',fontWeight:700,color:'var(--green)',letterSpacing:'-0.1px'}}>Perfil verificado por Nüra</div>
-              <div style={{fontSize:'var(--text-xs)',color:'rgba(0,0,0,0.45)'}}>Identidad confirmada · {h.services || 0} servicios reales · valoraciones auténticas</div>
+              <div className={styles.metaXs}>Identidad confirmada · {h.services || 0} servicios reales · valoraciones auténticas</div>
             </div>
           </div>
 
@@ -1222,7 +1222,7 @@ function HelperProfileInner() {
           {isSupabaseHelper && h.specialty && (
             <section className={styles.section}>
               <h3 className={styles.sectionTitle}><Wrench size={13} /> Servicios ofrecidos</h3>
-              <div style={{display:'flex',flexWrap:'wrap',gap:'8px'}}>
+              <div className={styles.rowWrap8}>
                 {[
                   h.specialty,
                   ...(h.tags || []).filter(t => t !== h.specialty).slice(0, 4)
@@ -1272,7 +1272,7 @@ function HelperProfileInner() {
                 ))}
               </div>
             ) : isSupabaseHelper ? (
-              <div style={{display:'flex',flexDirection:'column',gap:'8px'}}>
+              <div className={styles.colGap8}>
                 {/* Show what we DO know */}
                 <div style={{background:'rgba(255,255,255,0.85)',border:'1px solid rgba(255,255,255,0.5)',borderRadius:'16px',padding:'16px',boxShadow:'0 1px 8px rgba(0,0,0,0.04)'}}>
                   <div style={{display:'flex',gap:'12px',alignItems:'center'}}>
