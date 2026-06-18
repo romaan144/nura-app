@@ -63,9 +63,6 @@ export default function HelperCard({ helper, onContact, showContact = true }) {
           <div className={styles.nameRow}>
             <span className={styles.name}>{firstName}{lastName ? ` ${lastName}.` : ''}</span>
             {helper.dniVerified && <Shield size={9} color="var(--green)" />}
-            {helper.price && helper.price !== 'Consultar' && (
-              <span className={styles.price}>{helper.price}</span>
-            )}
           </div>
           <div className={styles.sub}>
             <span className={styles.specialty}>{helper.specialty}</span>
@@ -77,7 +74,10 @@ export default function HelperCard({ helper, onContact, showContact = true }) {
             <Star size={9} fill="var(--amber)" color="var(--amber)" />
             <span className={styles.metaStrong}>{helper.rating}</span>
             {helper.reviews > 0 && <span className={styles.metaMuted}>({helper.reviews})</span>}
-            {helper.urgent && <><span className={styles.dot}>·</span><Zap size={8} color="var(--red)" /><span style={{color:'var(--red)',fontWeight:600}}>Urgencias</span></>}
+            {helper.price && helper.price !== 'Consultar' && (
+              <><span className={styles.dot}>·</span><span className={styles.price}>{helper.price}</span></>
+            )}
+            {helper.urgent && <><span className={styles.dot}>·</span><Zap size={8} color="var(--red)" /></>}
           </div>
         </div>
 

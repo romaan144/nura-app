@@ -1,37 +1,37 @@
 /* ══════════════════════════════════════════════════════
-   HELPER CARD — uniform height, scannable, decisive
+   HELPER CARD — grid-aligned, scannable, premium 2026
    ══════════════════════════════════════════════════════ */
 
 .card {
   background: #FFFFFF;
-  border: 1px solid rgba(0,0,0,0.05);
+  border: 1px solid rgba(0,0,0,0.055);
   border-radius: var(--radius-lg);
   padding: 14px 16px;
   cursor: pointer;
-  box-shadow: var(--shadow-xs);
+  box-shadow: var(--shadow-sm);
   transition: opacity 0.15s;
   -webkit-tap-highlight-color: transparent;
 }
-.card:active { opacity: 0.75; }
+.card:active { opacity: 0.72; }
 
 /* Single row: avatar + info + cta */
 .row {
   display: flex;
   align-items: center;
-  gap: 12px;
+  gap: 13px;
 }
 
 /* Avatar */
 .avatarWrap { position: relative; flex-shrink: 0; }
 .avatar {
-  width: 48px; height: 48px;
+  width: 46px; height: 46px;
   border-radius: 50%; object-fit: cover; display: block;
 }
 .avatarFallback {
-  width: 48px; height: 48px;
+  width: 46px; height: 46px;
   border-radius: 50%;
   display: flex; align-items: center; justify-content: center;
-  color: white; font-weight: 700; font-size: var(--text-md);
+  color: white; font-weight: 700; font-size: var(--text-base);
 }
 .availDot {
   position: absolute; bottom: 1px; right: 1px;
@@ -39,65 +39,88 @@
   background: var(--green-dot); border: 2px solid white;
 }
 
-/* Info — 3 lines: name+price / specialty+dist / rating */
-.info { flex: 1; min-width: 0; display: flex; flex-direction: column; gap: 3px; justify-content: center; }
+/* Info — 3 lines with improved hierarchy */
+.info {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  justify-content: center;
+}
 
+/* Line 1: name + verified */
 .nameRow {
-  display: flex; align-items: center; gap: 5px;
-  overflow: hidden;
-  flex-wrap: nowrap;
+  display: flex;
+  align-items: center;
+  gap: 4px;
   min-width: 0;
 }
 .name {
   font-size: var(--text-sm);
   font-weight: 700;
-  color: rgba(0,0,0,0.85);
+  color: var(--ink);
   letter-spacing: -0.2px;
   white-space: nowrap;
-  overflow: hidden; text-overflow: ellipsis;
-  flex-shrink: 1;
-  line-height: 1.2;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  line-height: 1.25;
 }
+
+/* Line 2: specialty · distance */
+.sub {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  font-size: var(--text-xs);
+  color: rgba(0,0,0,0.45);
+  line-height: 1.25;
+  white-space: nowrap;
+  overflow: hidden;
+}
+.specialty {
+  color: rgba(0,0,0,0.55);
+  font-weight: 500;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* Line 3: rating · price — both here, clear visual hierarchy */
+.meta {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  font-size: var(--text-xs);
+  color: rgba(0,0,0,0.38);
+  line-height: 1.25;
+}
+.metaStrong { font-weight: 700; color: rgba(0,0,0,0.72); }
+.metaMuted  { color: rgba(0,0,0,0.3); }
+.dot { color: rgba(0,0,0,0.15); margin: 0 1px; }
+
+/* Price now lives in meta row */
 .price {
   font-size: var(--text-xs);
   font-weight: 700;
   color: var(--purple);
   white-space: nowrap;
-  flex-shrink: 0;
-  margin-left: auto;  /* pushes price to the right of name */
 }
 
-.sub {
-  display: flex; align-items: center; gap: 4px;
-  font-size: var(--text-xs); color: rgba(0,0,0,0.4);
-  line-height: 1.2;
-  white-space: nowrap; overflow: hidden;
-}
-.specialty { color: rgba(0,0,0,0.55); font-weight: 500; 
-  white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
-
-.meta {
-  display: flex; align-items: center; gap: 4px;
-  font-size: var(--text-xs); color: rgba(0,0,0,0.38);
-  line-height: 1.2;
-}
-.metaStrong { font-weight: 700; color: rgba(0,0,0,0.72); }
-.metaMuted  { color: rgba(0,0,0,0.3); }
-.dot { color: rgba(0,0,0,0.18); }
-
-/* CTA — always centered with avatar, never variable height */
+/* CTA */
 .cta {
   flex-shrink: 0;
   display: flex;
+  flex-direction: column;
   align-items: center;
-  gap: 5px;
-  align-self: center;  /* always centered regardless of row height */
+  gap: 6px;
+  align-self: center;
 }
 
 .favBtn {
-  width: 30px; height: 30px; border-radius: 50%;
-  background: rgba(0,0,0,0.03);
-  border: 1px solid rgba(0,0,0,0.06);
+  width: 28px; height: 28px; border-radius: 50%;
+  background: none;
+  border: none;
   display: flex; align-items: center; justify-content: center;
   cursor: pointer; transition: opacity 0.15s;
   flex-shrink: 0;
@@ -106,13 +129,16 @@
 
 .contactBtn {
   display: flex; align-items: center; gap: 4px;
-  padding: 7px 13px;
-  background: var(--purple); color: white;
-  border: none; border-radius: var(--radius-full);
-  font-size: var(--text-xs); font-weight: 700;
-  cursor: pointer; transition: opacity 0.15s;
+  padding: 6px 12px;
+  background: transparent;
+  color: var(--purple);
+  border: 1.5px solid rgba(123,47,255,0.3);
+  border-radius: var(--radius-full);
+  font-size: var(--text-xs);
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.15s;
   font-family: inherit;
   white-space: nowrap;
-  letter-spacing: 0.1px;
 }
-.contactBtn:active { opacity: 0.75; }
+.contactBtn:active { background: rgba(123,47,255,0.06); opacity: 0.8; }
