@@ -37,6 +37,7 @@
   color: rgba(0,0,0,0.65);
   cursor: pointer;
   transition: opacity 0.2s;
+  line-height: 0;  /* elimina espacio fantasma inline */
 }
 .shareBtn:active { opacity: 0.6; }
 
