@@ -215,8 +215,8 @@ export default function Home({ setSearchState }) {
   const floatRef   = useRef(null)
   const topRef     = useRef(null)
   const msgsRef    = useRef(null)
-  const [topH, setTopH] = useState(80)
-  const [floatH, setFloatH] = useState(160)
+  const [topH, setTopH] = useState(0)
+  const [floatH, setFloatH] = useState(0)
 
   useEffect(() => {
     let lines = getWelcome(user)
@@ -305,11 +305,7 @@ export default function Home({ setSearchState }) {
     return () => timers.forEach(clearTimeout)
   }, [user?.id])
 
-  // Scroll to bottom when messages change or when floatH is corrected.
-  // Uses scrollTop = scrollHeight (not scrollIntoView) to avoid the gap bug:
-  // scrollIntoView relies on correct padding BEFORE it fires; scrollTop
-  // always scrolls the container to its true bottom regardless of padding.
-  function scrollToBottom(smooth = true) {
+  function scrollToBottom(smooth = false) {
     const el = msgsRef.current
     if (!el) return
     if (smooth) {
@@ -319,18 +315,16 @@ export default function Home({ setSearchState }) {
     }
   }
 
+  // Smooth scroll when new messages arrive (not on mount/remount)
+  const prevMsgCount = useRef(0)
   useEffect(() => {
-    // Instant scroll on remount (no animation — prevents gap flash)
-    // Smooth scroll when new messages arrive mid-session
-    const isRemount = messages.length > 0 && !window.__nuraScrolledOnce
-    scrollToBottom(!isRemount)
-    window.__nuraScrolledOnce = true
+    const count = messages.length
+    if (count > prevMsgCount.current && prevMsgCount.current > 0) {
+      // New message added during session — smooth scroll
+      scrollToBottom(true)
+    }
+    prevMsgCount.current = count
   }, [messages])
-
-  // Re-scroll after floatH is corrected by ResizeObserver
-  useEffect(() => {
-    if (floatH !== 160) scrollToBottom(false)
-  }, [floatH])
 
   function formatLine(line) {
     const parts = line.split(/\*\*(.*?)\*\*/g)
@@ -678,16 +672,20 @@ export default function Home({ setSearchState }) {
         const tRect = top.getBoundingClientRect()
         setTopH(Math.ceil(tRect.bottom) + 8)  // floatTop bottom + 8px gap
       }
+
+      // Scroll to bottom AFTER padding is set correctly.
+      // requestAnimationFrame ensures React has re-rendered with new padding.
+      requestAnimationFrame(() => {
+        const el = msgsRef.current
+        if (el) el.scrollTop = el.scrollHeight
+      })
     }
 
     const ro = new ResizeObserver(measure)
     ro.observe(bottom)
     if (top) ro.observe(top)
     measure()  // measure immediately on mount
-    return () => {
-      ro.disconnect()
-      window.__nuraScrolledOnce = false  // reset on unmount for next visit
-    }
+    return () => { ro.disconnect() }
   }, [])
 
 
