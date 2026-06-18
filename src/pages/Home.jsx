@@ -2,7 +2,6 @@ import { useState, useEffect, useRef } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { Send, Mic, MicOff, Plus, Clock } from 'lucide-react'
 import { analyzeNeed, matchHelpers, getPriceContext } from '../utils/matching'
-import { HELPERS } from '../data/helpers'
 import { useUser } from '../context/UserContext'
 import { MenuButton } from '../components/NavBar'
 import { showToast } from '../components/Toast'
@@ -20,7 +19,7 @@ function getWelcome(user, searchHistory, favorites, helpersCache) {
 
   if (!user) return [
     `Hola. Soy **Nüra**.`,
-    `Cuéntame lo que necesitas — en lenguaje normal, sin formularios. Encuentro a la persona real que puede ayudarte.`,
+    `Cuéntame lo que necesitas — en lenguaje normal, sin formularios. Encuentro a la persona real que puede ayudarte. La mayoría contactan en menos de 1h.`,
   ]
 
   // Use what Nüra knows about this user
@@ -177,13 +176,13 @@ function getDynamicSuggestions(user, searchHistory) {
     return ha - hb
   })
 
-  const needed = 4
+  const needed = 3
   const combined = [
     ...personalSuggestions.slice(0, 2),
     ...shuffled.slice(0, needed - Math.min(personalSuggestions.length, 2))
   ]
 
-  return combined.slice(0, needed).map(text => ({ text }))
+  return combined.slice(0, 3).map(text => ({ text }))
 }
 
 const HELPER_SUGGESTIONS = [
@@ -770,84 +769,6 @@ export default function Home({ setSearchState }) {
               )}
               </div>
             </div>
-            {messages.length === 1 && msg.from === 'nura' && (
-              <>
-              {!user && (
-              <div style={{display:'flex',gap:'20px',padding:'4px 0',flexWrap:'wrap'}}>
-                {[['1.200+','profesionales verificados'],['4.8★','valoración media'],['< 1h','primer contacto']].map(([n,l]) => (
-                  <div key={l} style={{textAlign:'center'}}>
-                    <div style={{fontSize:'var(--text-base)',fontWeight:800,color:'rgba(0,0,0,0.85)',letterSpacing:'-0.3px'}}>{n}</div>
-                    <div style={{fontSize:'var(--text-xs)',color:'rgba(0,0,0,0.4)',fontWeight:400}}>{l}</div>
-                  </div>
-                ))}
-              </div>
-              )}
-
-              {/* Disponibles ahora strip */}
-              <div style={{width:'100%',marginTop:'12px'}}>
-                <p style={{fontSize:'var(--text-xs)',fontWeight:700,color:'rgba(0,0,0,0.3)',
-                  letterSpacing:'0.5px',textTransform:'uppercase',margin:'0 0 8px'}}>
-                  Disponibles ahora
-                </p>
-                <div style={{display:'flex',gap:'8px',overflowX:'auto',paddingBottom:'2px'}}>
-                  {HELPERS.filter(h=>h.available).slice(0,5).map(h=>(
-                    <button key={h.id}
-                      onClick={()=>navigate(`/helper/${h.id}`,{state:{helper:h}})}
-                      style={{
-                        flexShrink:0,display:'flex',flexDirection:'column',
-                        alignItems:'center',gap:'5px',
-                        background:'rgba(255,255,255,0.85)',
-                        border:'1px solid rgba(255,255,255,0.5)',
-                        borderRadius:'16px',padding:'10px 10px 8px',
-                        cursor:'pointer',minWidth:'68px',
-                        WebkitBackdropFilter:'blur(20px)',
-                        backdropFilter:'blur(20px)',
-                      }}>
-                      {h.avatarUrl
-                        ?<img src={h.avatarUrl} alt={h.name}
-                            style={{width:'38px',height:'38px',borderRadius:'50%',objectFit:'cover'}}/>
-                        :<div style={{width:'38px',height:'38px',borderRadius:'50%',
-                            background:h.avatarColor||'#7B2FFF',color:'white',fontSize:'var(--text-sm)',
-                            fontWeight:700,display:'flex',alignItems:'center',justifyContent:'center'}}>
-                            {h.avatar}
-                          </div>
-                      }
-                      <span style={{fontSize:'var(--text-xs)',fontWeight:700,color:'rgba(0,0,0,0.75)',
-                        textAlign:'center',lineHeight:1.2,maxWidth:'62px'}}>
-                        {h.name.split(' ')[0]}
-                      </span>
-                      <span style={{fontSize:'var(--text-xs)',color:'rgba(0,0,0,0.4)',
-                        textAlign:'center',lineHeight:1.2,maxWidth:'62px',
-                        overflow:'hidden',textOverflow:'ellipsis',whiteSpace:'nowrap'}}>
-                        {h.tags?.[0] || h.specialty?.split(' ')[0]}
-                      </span>
-                      <span style={{fontSize:'8px',color:'var(--green)',fontWeight:700,
-                        background:'var(--green-light)',borderRadius:'100px',padding:'1px 5px',
-                        display:'flex',alignItems:'center',gap:'2px'}}>
-                        <span style={{width:'5px',height:'5px',borderRadius:'50%',
-                          background:'var(--green)',display:'inline-block'}}/>
-                        Libre
-                      </span>
-                    </button>
-                  ))}
-                  <button onClick={()=>navigate('/explore')}
-                    style={{
-                      flexShrink:0,display:'flex',flexDirection:'column',
-                      alignItems:'center',justifyContent:'center',gap:'4px',
-                      background:'rgba(123,47,255,0.05)',
-                      border:'1px dashed rgba(123,47,255,0.25)',
-                      borderRadius:'16px',padding:'10px 10px 8px',
-                      cursor:'pointer',minWidth:'68px',
-                    }}>
-                    <span style={{fontSize:'var(--text-md)'}}>→</span>
-                    <span style={{fontSize:'var(--text-xs)',fontWeight:700,color:'#7B2FFF',textAlign:'center',lineHeight:1.3}}>
-                      Ver todos
-                    </span>
-                  </button>
-                </div>
-              </div>
-              </>
-            )}
             {msg.results && (
               <HelperCarousel helpers={msg.results} />
             )}
