@@ -668,8 +668,9 @@ export default function Home({ setSearchState }) {
         <div className={styles.logoBubble}>
           <img src="/logo-text.png" alt="Nüra" className={styles.headerLogo} />
         </div>
-        {messages.length > 1
-          ? <button
+        <div style={{display:'flex',alignItems:'center',gap:'8px',pointerEvents:'all'}}>
+          {messages.length > 1 && (
+            <button
               className={styles.resetBubble}
               onClick={() => {
                 setMessages([])
@@ -678,16 +679,17 @@ export default function Home({ setSearchState }) {
               }}>
               <RotateCcw size={15} color="rgba(0,0,0,0.6)" />
             </button>
-          : <button
-              className={styles.logoBubble}
-              style={{position:'static',transform:'none',padding:'0',width:'42px',height:'42px',borderRadius:'50%',overflow:'hidden',display:'flex',alignItems:'center',justifyContent:'center',pointerEvents:'all'}}
-              onClick={() => navigate('/profile')}>
-              {user?.name
-                ? <img src={`https://api.dicebear.com/9.x/personas/svg?seed=${encodeURIComponent(user.name)}`} alt="" style={{width:'100%',height:'100%',objectFit:'cover'}} />
-                : <span style={{fontSize:'16px',color:'rgba(0,0,0,0.5)'}}>?</span>
-              }
-            </button>
-        }
+          )}
+          <button
+            className={styles.logoBubble}
+            style={{position:'static',transform:'none',padding:'0',width:'42px',height:'42px',borderRadius:'50%',overflow:'hidden',display:'flex',alignItems:'center',justifyContent:'center',pointerEvents:'all'}}
+            onClick={() => navigate('/profile')}>
+            {user?.name
+              ? <img src={`https://api.dicebear.com/9.x/personas/svg?seed=${encodeURIComponent(user.name)}`} alt="" style={{width:'100%',height:'100%',objectFit:'cover'}} />
+              : <span style={{fontSize:'16px',color:'rgba(0,0,0,0.5)'}}>?</span>
+            }
+          </button>
+        </div>
       </div>
 
       <div className={styles.messages} style={{paddingTop: topH + 'px'}}>
@@ -765,23 +767,7 @@ export default function Home({ setSearchState }) {
           </div>
           )
         })}
-        {/* Nueva búsqueda — in scroll flow, never hidden by float */}
-        {messages.length > 1 && (
-          <div className={styles.newSearchRow} style={{marginTop:'16px', marginBottom:'8px'}}>
-            <button className={styles.newSearchBtn}
-              onClick={() => {
-                setMessages([])
-                setLastMatches([])
-                setInput('')
-                setTimeout(() => {
-                  setMessages([{ id: 1, from: 'nura', lines: getWelcome(user) }])
-                }, 100)
-              }}>
-              ✕ Nueva búsqueda
-            </button>
-          </div>
-        )}
-        <div ref={bottomRef} />
+                <div ref={bottomRef} />
       </div>
 
       {/* Floating bottom — suggestions + input capsule only */}
