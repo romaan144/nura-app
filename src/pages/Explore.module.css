@@ -1,4 +1,10 @@
-.page { padding-top: 72px; min-height: 100dvh; background: #F5F5F8; }
+
+@keyframes fadeSlideIn {
+  from { opacity: 0; transform: translateY(8px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+.page { padding-top: 72px; min-height: 100dvh; background: #F5F5F8; 
+  animation: fadeSlideIn 0.22s ease both;}
 
 .searchWrap { padding: 0 14px 10px; }
 .searchBar {
@@ -10,6 +16,7 @@
   border-radius: 100px;
   padding: 11px 18px;
   box-shadow: var(--shadow-sm), 0 0 0 0.5px rgba(0,0,0,0.06);
+  animation: fadeSlideIn 0.22s ease both;
 }
 .searchInput { flex: 1; border: none; outline: none; font-size: var(--text-sm); color: var(--ink); background: transparent; font-family: 'Inter',sans-serif; }
 .searchInput::placeholder { color: var(--soft); }

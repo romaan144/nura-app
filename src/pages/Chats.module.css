@@ -1,4 +1,5 @@
-.page { padding-top: 72px; min-height: 100vh; background: #F5F5F8; padding-bottom: 24px; }
+.page { padding-top: 72px; min-height: 100vh; background: #F5F5F8; padding-bottom: 24px; 
+  animation: fadeSlideIn 0.22s ease both;}
 
 .header {
   display: flex; align-items: center; justify-content: space-between;

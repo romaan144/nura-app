@@ -5,7 +5,8 @@
   min-height: 100dvh;
   background: #F5F5F8;
   padding-top: 72px;
-}
+
+  animation: fadeSlideIn 0.22s ease both;}
 
 /* ── Tabs ────────────────────────────────────────────── */
 .tabs {

@@ -2,7 +2,8 @@
    HELPER PROFILE — Visual redesign with hierarchy
    ══════════════════════════════════════════════════════ */
 
-.page { padding-top: 72px; min-height: 100vh; background: #F5F5F8; display: flex; flex-direction: column; }
+.page { padding-top: 72px; min-height: 100vh; background: #F5F5F8; display: flex; flex-direction: column; 
+  animation: fadeSlideIn 0.22s ease both;}
 
 /* ── HEADER ── */
 .header {

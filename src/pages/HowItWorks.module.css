@@ -1,4 +1,10 @@
-.page { min-height: 100dvh; background: #F5F5F8; padding-top: 72px; }
+
+@keyframes fadeSlideIn {
+  from { opacity: 0; transform: translateY(8px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+.page { min-height: 100dvh; background: #F5F5F8; padding-top: 72px; 
+  animation: fadeSlideIn 0.22s ease both;}
 .content { padding: 8px 16px max(env(safe-area-inset-bottom,0px),32px); display: flex; flex-direction: column; gap: 14px; }
 
 /* Hero */
