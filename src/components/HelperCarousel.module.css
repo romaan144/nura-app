@@ -28,7 +28,7 @@
 /* Individual card */
 .card {
   flex-shrink: 0;
-  width: 152px;
+  width: 168px;
   background: #FFFFFF;
   border: 1px solid rgba(0,0,0,0.05);
   border-radius: var(--radius-lg);
@@ -156,4 +156,27 @@
 /* Top pick card border */
 .cardTop {
   border-color: rgba(123,47,255,0.2);
+}
+
+/* ── MATCH REASON INLINE ── */
+.matchReasonLine {
+  display: flex;
+  align-items: flex-start;
+  gap: 4px;
+  font-size: 9px;
+  color: rgba(123,47,255,0.65);
+  font-weight: 500;
+  line-height: 1.4;
+  margin-top: 1px;
+}
+.matchReasonLine span {
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+}
+
+.metaStrong {
+  font-weight: 700;
+  color: rgba(0,0,0,0.72);
 }

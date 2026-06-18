@@ -1,5 +1,5 @@
 import { useNavigate } from 'react-router-dom'
-import { Star, Shield, MessageCircle, Heart, MapPin } from 'lucide-react'
+import { Star, Shield, MessageCircle, Heart, MapPin, Sparkles } from 'lucide-react'
 import { useUser } from '../context/UserContext'
 import { showToast } from './Toast'
 import styles from './HelperCarousel.module.css'
@@ -63,19 +63,42 @@ function CarouselCard({ helper, isTopPick, matchReason }) {
         </button>
       </div>
 
-      {/* Fixed info block — exactly 3 lines, no variables */}
+      {/* Name + verified */}
       <div className={styles.name}>
         {helper.name?.split(' ')?.[0]}
-        {helper.dniVerified && <Shield size={9} color="var(--green)" style={{ marginLeft: 3, verticalAlign: 'middle' }} />}
+        {helper.dniVerified && (
+          <Shield size={9} color="var(--green)" style={{ marginLeft: 3, verticalAlign: 'middle' }} />
+        )}
       </div>
+
+      {/* Specialty */}
       <div className={styles.specialty}>{helper.specialty}</div>
+
+      {/* Rating + reviews + distance */}
       <div className={styles.meta}>
         <Star size={9} fill="var(--amber)" color="var(--amber)" />
-        <span>{helper.rating}</span>
+        <span className={styles.metaStrong}>{helper.rating}</span>
+        {helper.reviews > 0 && (
+          <span className={styles.metaDot}>({helper.reviews})</span>
+        )}
         <span className={styles.metaDot}>·</span>
         <MapPin size={8} color="rgba(0,0,0,0.3)" />
         <span>{helper.distance || 1.2}km</span>
       </div>
+
+      {/* Match reason — why Nüra chose this person */}
+      {matchReason && (
+        <div className={styles.matchReasonLine}>
+          <Sparkles size={8} color="var(--purple)" style={{flexShrink:0}} />
+          <span>{matchReason
+            .replace(/^\*\*[^*]+\*\*[^:]*:\s*/, '')
+            .replace(/\*\*/g, '')
+            .split('·')[0]
+            .trim()
+            .slice(0, 45)
+          }</span>
+        </div>
+      )}
 
       {/* Spacer — pushes price+CTA to bottom */}
       <div className={styles.spacer} />
