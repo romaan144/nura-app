@@ -41,7 +41,11 @@
   transition: color 0.15s;
 }
 .tabActive svg {
-  color: #1C1C1E;
+  color: var(--purple);
+}
+.tabActive .label {
+  color: var(--purple);
+  font-weight: 700;
 }
 
 .label {

@@ -229,7 +229,7 @@ function AiDataSection({ aiData, aiAnalyzedAt, helperName }) {
         {v.map((s,i) => (
           <span key={i} style={{padding:'4px 10px',borderRadius:'100px',
             background:'rgba(123,47,255,0.07)',color:'var(--purple)',
-            fontSize:'12px',fontWeight:600,border:'1px solid rgba(123,47,255,0.12)'}}>
+            fontSize:'var(--text-xs)',fontWeight:600,border:'1px solid rgba(123,47,255,0.12)'}}>
             {s}
           </span>
         ))}
@@ -245,7 +245,7 @@ function AiDataSection({ aiData, aiAnalyzedAt, helperName }) {
               <div style={{width:`${typeof val==='number' ? (val > 10 ? val : val*10) : 70}%`,height:'100%',
                 borderRadius:'2px',background:'var(--purple)'}} />
             </div>
-            <span style={{fontSize:'11px',color:'rgba(0,0,0,0.4)',minWidth:'28px',textAlign:'right'}}>
+            <span style={{fontSize:'var(--text-xs)',color:'rgba(0,0,0,0.4)',minWidth:'28px',textAlign:'right'}}>
               {typeof val === 'number' ? val : ''}
             </span>
           </div>
@@ -257,10 +257,10 @@ function AiDataSection({ aiData, aiAnalyzedAt, helperName }) {
         background:'rgba(123,47,255,0.04)',border:'1px solid rgba(123,47,255,0.08)',
         borderRadius:'12px',padding:'10px 14px',
       }}>
-        <span style={{fontSize:'11px',fontWeight:700,color:'#7B2FFF',letterSpacing:'0.5px',textTransform:'uppercase'}}>
+        <span style={{fontSize:'var(--text-xs)',fontWeight:700,color:'#7B2FFF',letterSpacing:'0.5px',textTransform:'uppercase'}}>
           Ideal para
         </span>
-        <p style={{fontSize:'13px',color:'rgba(0,0,0,0.65)',margin:'4px 0 0',lineHeight:1.6}}>
+        <p style={{fontSize:'var(--text-sm)',color:'rgba(0,0,0,0.65)',margin:'4px 0 0',lineHeight:1.6}}>
           {Array.isArray(v) ? v.join(', ') : v}
         </p>
       </div>
@@ -270,8 +270,8 @@ function AiDataSection({ aiData, aiAnalyzedAt, helperName }) {
       <div style={{display:'flex',flexDirection:'column',gap:'4px'}}>
         {v.map((s,i) => (
           <div key={i} style={{display:'flex',alignItems:'center',gap:'8px',
-            fontSize:'13px',color:'rgba(0,0,0,0.5)'}}>
-            <span style={{color:'#F59E0B',fontSize:'11px',fontWeight:700}}>!</span> {s}
+            fontSize:'var(--text-sm)',color:'rgba(0,0,0,0.5)'}}>
+            <span style={{color:'#F59E0B',fontSize:'var(--text-xs)',fontWeight:700}}>!</span> {s}
           </div>
         ))}
       </div>
@@ -280,7 +280,7 @@ function AiDataSection({ aiData, aiAnalyzedAt, helperName }) {
       <div style={{display:'flex',flexDirection:'column',gap:'6px'}}>
         {v.map((c,i) => (
           <div key={i} style={{display:'flex',alignItems:'center',gap:'8px',
-            fontSize:'13px',color:'rgba(0,0,0,0.7)'}}>
+            fontSize:'var(--text-sm)',color:'rgba(0,0,0,0.7)'}}>
             <Shield size={12} color="#1A56DB" /> {typeof c === 'string' ? c : c.name || JSON.stringify(c)}
           </div>
         ))}
@@ -311,7 +311,7 @@ function AiDataSection({ aiData, aiAnalyzedAt, helperName }) {
       <div style={{display:'flex',alignItems:'center',justifyContent:'space-between'}}>
         <div style={{display:'flex',alignItems:'center',gap:'8px'}}>
           <img src="/logo-iso.png" alt="Nüra" style={{width:'16px',height:'16px',objectFit:'contain'}} />
-          <span style={{fontSize:'12px',fontWeight:700,color:'var(--purple)',letterSpacing:'0.5px'}}>
+          <span style={{fontSize:'var(--text-xs)',fontWeight:700,color:'var(--purple)',letterSpacing:'0.5px'}}>
             ANÁLISIS NÜRA IA
           </span>
         </div>
@@ -329,12 +329,12 @@ function AiDataSection({ aiData, aiAnalyzedAt, helperName }) {
         const rendered = renderer ? renderer(value) : (
           // Fallback: render unknown keys generically
           typeof value === 'string' ? (
-            <p style={{fontSize:'13px',color:'rgba(0,0,0,0.6)',margin:0,lineHeight:1.6}}>{value}</p>
+            <p style={{fontSize:'var(--text-sm)',color:'rgba(0,0,0,0.6)',margin:0,lineHeight:1.6}}>{value}</p>
           ) : Array.isArray(value) ? (
             <div style={{display:'flex',flexWrap:'wrap',gap:'6px'}}>
               {value.map((v,i) => (
                 <span key={i} style={{padding:'3px 8px',borderRadius:'8px',
-                  background:'rgba(0,0,0,0.05)',fontSize:'12px',color:'rgba(0,0,0,0.6)'}}>
+                  background:'rgba(0,0,0,0.05)',fontSize:'var(--text-xs)',color:'rgba(0,0,0,0.6)'}}>
                   {typeof v === 'string' ? v : JSON.stringify(v)}
                 </span>
               ))}
@@ -342,13 +342,13 @@ function AiDataSection({ aiData, aiAnalyzedAt, helperName }) {
           ) : typeof value === 'object' ? (
             <div style={{display:'flex',flexDirection:'column',gap:'4px'}}>
               {Object.entries(value).map(([k,v]) => (
-                <div key={k} style={{fontSize:'13px',color:'rgba(0,0,0,0.6)'}}>
+                <div key={k} style={{fontSize:'var(--text-sm)',color:'rgba(0,0,0,0.6)'}}>
                   <strong style={{color:'rgba(0,0,0,0.75)',textTransform:'capitalize'}}>{k.replace(/_/g,' ')}:</strong> {String(v)}
                 </div>
               ))}
             </div>
           ) : (
-            <span style={{fontSize:'13px',color:'rgba(0,0,0,0.6)'}}>{String(value)}</span>
+            <span style={{fontSize:'var(--text-sm)',color:'rgba(0,0,0,0.6)'}}>{String(value)}</span>
           )
         )
 
@@ -362,7 +362,7 @@ function AiDataSection({ aiData, aiAnalyzedAt, helperName }) {
             boxShadow:'0 1px 8px rgba(0,0,0,0.04)'
           }}>
             {!RENDERERS[key] || key !== 'summary' ? (
-              <div style={{fontSize:'11px',fontWeight:700,color:'rgba(0,0,0,0.4)',
+              <div style={{fontSize:'var(--text-xs)',fontWeight:700,color:'rgba(0,0,0,0.4)',
                 textTransform:'uppercase',letterSpacing:'0.8px',marginBottom:'10px'}}>
                 {label}
               </div>
@@ -429,12 +429,12 @@ function OwnerPanel({ helper, user, updateUser, navigate }) {
         <div style={{display:'flex',alignItems:'center',justifyContent:'space-between',marginBottom:'12px'}}>
           <div style={{display:'flex',alignItems:'center',gap:'8px'}}>
             <img src="/logo-iso.png" alt="Nüra" style={{width:'18px',height:'18px',objectFit:'contain',filter:'brightness(10)'}} />
-            <span style={{fontSize:'12px',fontWeight:700,color:'white',letterSpacing:'0.5px'}}>
+            <span style={{fontSize:'var(--text-xs)',fontWeight:700,color:'white',letterSpacing:'0.5px'}}>
               TU PERFIL EN NÜRA
             </span>
           </div>
           {saved && (
-            <span style={{fontSize:'11px',color:'#34D399',fontWeight:600,display:'flex',alignItems:'center',gap:'3px'}}><CheckCircle size={11} color='#34D399'/>Guardado</span>
+            <span style={{fontSize:'var(--text-xs)',color:'#34D399',fontWeight:600,display:'flex',alignItems:'center',gap:'3px'}}><CheckCircle size={11} color='#34D399'/>Guardado</span>
           )}
         </div>
 
@@ -542,7 +542,7 @@ function BookingModal({ helper, onClose, onBook, onNavigate }) {
     overlay: {position:'fixed',inset:0,background:'rgba(0,0,0,0.5)',WebkitBackdropFilter: 'blur(8px)', backdropFilter:'blur(8px)',zIndex:300,display:'flex',alignItems:'flex-end',justifyContent:'center'},
     sheet: {background:'rgba(255,255,255,0.96)',WebkitBackdropFilter: 'blur(32px)', backdropFilter:'blur(32px)',borderRadius:'24px 24px 0 0',padding:'24px 20px 36px',width:'100%',maxWidth:'500px'},
     handle: {width:'36px',height:'4px',background:'rgba(0,0,0,0.1)',borderRadius:'2px',margin:'0 auto 20px'},
-    input: {width:'100%',padding:'12px 16px',border:'1px solid rgba(0,0,0,0.1)',borderRadius:'14px',fontSize:'15px',outline:'none',fontFamily:'-apple-system,Inter,sans-serif',background:'rgba(0,0,0,0.03)',boxSizing:'border-box'},
+    input: {width:'100%',padding:'12px 16px',border:'1px solid rgba(0,0,0,0.1)',borderRadius:'14px',fontSize:'var(--text-base)',outline:'none',fontFamily:'-apple-system,Inter,sans-serif',background:'rgba(0,0,0,0.03)',boxSizing:'border-box'},
     btnPrimary: {width:'100%',padding:'14px',background:'#1C1C1E',color:'white',border:'none',borderRadius:'100px',fontSize:'14px',fontWeight:700,cursor:'pointer',transition:'opacity 0.2s'},
     btnSecondary: {width:'100%',padding:'12px',background:'rgba(0,0,0,0.05)',color:'rgba(0,0,0,0.55)',border:'none',borderRadius:'100px',fontSize:'14px',fontWeight:600,cursor:'pointer'},
   }
@@ -570,7 +570,7 @@ function BookingModal({ helper, onClose, onBook, onNavigate }) {
               <h3 style={{fontSize:'19px',fontWeight:800,margin:'0 0 4px',color:'rgba(0,0,0,0.85)',letterSpacing:'-0.3px'}}>
                 ¡Solicitud enviada!
               </h3>
-              <p style={{fontSize:'13px',color:'rgba(0,0,0,0.5)',margin:0,lineHeight:1.6}}>
+              <p style={{fontSize:'var(--text-sm)',color:'rgba(0,0,0,0.5)',margin:0,lineHeight:1.6}}>
                 {name} recibirá tu solicitud y confirmará en breve.
               </p>
             </div>
@@ -578,10 +578,10 @@ function BookingModal({ helper, onClose, onBook, onNavigate }) {
             {(date || time) && (
               <div style={{background:'rgba(0,0,0,0.03)',border:'1px solid rgba(0,0,0,0.06)',
                 borderRadius:'14px',padding:'12px 16px',width:'100%',textAlign:'left'}}>
-                {date && <p style={{margin:'0 0 4px',fontSize:'13px',color:'rgba(0,0,0,0.6)'}}>
+                {date && <p style={{margin:'0 0 4px',fontSize:'var(--text-sm)',color:'rgba(0,0,0,0.6)'}}>
                   {new Date(date).toLocaleDateString('es-ES',{weekday:'long',day:'numeric',month:'long'})}
                 </p>}
-                {time && <p style={{margin:0,fontSize:'13px',color:'rgba(0,0,0,0.6)'}}><Clock size={12} style={{marginRight:'4px',verticalAlign:'middle'}}/>{time}h</p>}
+                {time && <p style={{margin:0,fontSize:'var(--text-sm)',color:'rgba(0,0,0,0.6)'}}><Clock size={12} style={{marginRight:'4px',verticalAlign:'middle'}}/>{time}h</p>}
               </div>
             )}
             <div style={{display:'flex',flexDirection:'column',gap:'8px',width:'100%',marginTop:'4px'}}>
@@ -594,11 +594,11 @@ function BookingModal({ helper, onClose, onBook, onNavigate }) {
         ) : (
           <>
             <h3 style={{fontSize:'17px',fontWeight:800,margin:'0 0 4px',color:'rgba(0,0,0,0.85)',letterSpacing:'-0.3px'}}>Solicitar servicio</h3>
-            <p style={{fontSize:'13px',color:'rgba(0,0,0,0.4)',margin:'0 0 20px'}}>{name} · {helper?.price || 'Precio a consultar'}</p>
+            <p style={{fontSize:'var(--text-sm)',color:'rgba(0,0,0,0.4)',margin:'0 0 20px'}}>{name} · {helper?.price || 'Precio a consultar'}</p>
             <div style={{display:'flex',flexDirection:'column',gap:'10px',marginBottom:'20px'}}>
               {/* Day pills */}
               <div>
-                <p style={{fontSize:'11px',fontWeight:700,color:'rgba(0,0,0,0.4)',margin:'0 0 8px',letterSpacing:'0.5px',textTransform:'uppercase'}}>Fecha</p>
+                <p style={{fontSize:'var(--text-xs)',fontWeight:700,color:'rgba(0,0,0,0.4)',margin:'0 0 8px',letterSpacing:'0.5px',textTransform:'uppercase'}}>Fecha</p>
                 <div style={{display:'flex',gap:'6px',overflowX:'auto',paddingBottom:'4px'}}>
                   {Array.from({length:7},(_,i)=>{
                     const d=new Date(); d.setDate(d.getDate()+i)
@@ -609,7 +609,7 @@ function BookingModal({ helper, onClose, onBook, onNavigate }) {
                         flexShrink:0,padding:'8px 14px',
                         background:date===iso?'#1C1C1E':'rgba(0,0,0,0.05)',
                         color:date===iso?'white':'rgba(0,0,0,0.6)',
-                        border:'none',borderRadius:'100px',fontSize:'12px',fontWeight:600,
+                        border:'none',borderRadius:'100px',fontSize:'var(--text-xs)',fontWeight:600,
                         cursor:'pointer',fontFamily:'inherit',transition:'all 0.15s',
                         whiteSpace:'nowrap',
                       }}>{lbl}</button>
@@ -619,14 +619,14 @@ function BookingModal({ helper, onClose, onBook, onNavigate }) {
               </div>
               {/* Time pills */}
               <div>
-                <p style={{fontSize:'11px',fontWeight:700,color:'rgba(0,0,0,0.4)',margin:'0 0 8px',letterSpacing:'0.5px',textTransform:'uppercase'}}>Hora</p>
+                <p style={{fontSize:'var(--text-xs)',fontWeight:700,color:'rgba(0,0,0,0.4)',margin:'0 0 8px',letterSpacing:'0.5px',textTransform:'uppercase'}}>Hora</p>
                 <div style={{display:'flex',gap:'6px',flexWrap:'wrap'}}>
                   {['9:00','10:00','11:00','12:00','16:00','17:00','18:00','19:00'].map(t=>(
                     <button key={t} onClick={()=>setTime(t)} style={{
                       padding:'7px 12px',
                       background:time===t?'#1C1C1E':'rgba(0,0,0,0.05)',
                       color:time===t?'white':'rgba(0,0,0,0.6)',
-                      border:'none',borderRadius:'100px',fontSize:'12px',fontWeight:600,
+                      border:'none',borderRadius:'100px',fontSize:'var(--text-xs)',fontWeight:600,
                       cursor:'pointer',fontFamily:'inherit',transition:'all 0.15s',
                     }}>{t}</button>
                   ))}
@@ -711,7 +711,7 @@ function HelperProfileInner() {
     <div style={{display:'flex',alignItems:'center',justifyContent:'center',height:'100dvh',background:'#F8F8FA'}}>
       <div style={{textAlign:'center',display:'flex',flexDirection:'column',alignItems:'center',gap:'16px'}}>
         <img src="/logo-iso.png" alt="Nüra" style={{width:'48px',height:'48px',animation:'pulse 1.5s ease-in-out infinite'}} />
-        <p style={{fontSize:'13px',color:'var(--soft)'}}>Cargando perfil...</p>
+        <p style={{fontSize:'var(--text-sm)',color:'var(--soft)'}}>Cargando perfil...</p>
       </div>
     </div>
   )
@@ -976,10 +976,10 @@ function HelperProfileInner() {
           }}>
             <img src="/logo-iso.png" alt="Nüra" style={{width:'28px',height:'28px',objectFit:'contain',flexShrink:0,marginTop:'2px'}} />
             <div>
-              <div style={{fontSize:'13px',fontWeight:700,color:'rgba(0,0,0,0.75)',marginBottom:'3px',letterSpacing:'-0.1px'}}>
+              <div style={{fontSize:'var(--text-sm)',fontWeight:700,color:'rgba(0,0,0,0.75)',marginBottom:'3px',letterSpacing:'-0.1px'}}>
                 Nüra está construyendo este perfil
               </div>
-              <div style={{fontSize:'12px',color:'rgba(0,0,0,0.45)',lineHeight:1.6}}>
+              <div style={{fontSize:'var(--text-xs)',color:'rgba(0,0,0,0.45)',lineHeight:1.6}}>
                 La IA verifica identidad, analiza historial y detecta habilidades automáticamente. El perfil se completa solo con cada servicio realizado.
               </div>
             </div>
@@ -996,7 +996,7 @@ function HelperProfileInner() {
             borderRadius:'14px',
           }}>
             <img src="/logo-iso.png" alt="Nüra" style={{width:'20px',height:'20px',objectFit:'contain'}} />
-            <span style={{fontSize:'12px',color:'rgba(0,0,0,0.55)'}}>
+            <span style={{fontSize:'var(--text-xs)',color:'rgba(0,0,0,0.55)'}}>
               Perfil encontrado y verificado por <strong style={{color:'var(--purple)'}}>Nüra</strong>
             </span>
           </div>
@@ -1011,8 +1011,8 @@ function HelperProfileInner() {
           }}>
             <Shield size={16} color='var(--purple)' strokeWidth={1.6} />
             <div>
-              <div style={{fontSize:'12px',fontWeight:700,color:'#059669',letterSpacing:'-0.1px'}}>Perfil verificado por Nüra</div>
-              <div style={{fontSize:'11px',color:'rgba(0,0,0,0.45)'}}>Identidad confirmada · {h.services || 0} servicios reales · valoraciones auténticas</div>
+              <div style={{fontSize:'var(--text-xs)',fontWeight:700,color:'#059669',letterSpacing:'-0.1px'}}>Perfil verificado por Nüra</div>
+              <div style={{fontSize:'var(--text-xs)',color:'rgba(0,0,0,0.45)'}}>Identidad confirmada · {h.services || 0} servicios reales · valoraciones auténticas</div>
             </div>
           </div>
 
@@ -1035,7 +1035,7 @@ function HelperProfileInner() {
                 textAlign:'left',
               }}>
                 <Sparkles size={14} color='#7B2FFF' strokeWidth={1.7} style={{flexShrink:0,marginTop:'1px'}} />
-                <p style={{fontSize:'12px',color:'rgba(0,0,0,0.55)',margin:0,lineHeight:1.6}}>
+                <p style={{fontSize:'var(--text-xs)',color:'rgba(0,0,0,0.55)',margin:0,lineHeight:1.6}}>
                   <strong style={{color:'#7B2FFF',fontWeight:700}}>Nüra te la recomienda</strong>
                   {' '}— {matchReason}
                 </p>
@@ -1232,7 +1232,7 @@ function HelperProfileInner() {
                     background:'rgba(123,47,255,0.06)',
                     border:'1px solid rgba(123,47,255,0.12)',
                     borderRadius:'100px',
-                    fontSize:'13px',fontWeight:500,
+                    fontSize:'var(--text-sm)',fontWeight:500,
                     color:'rgba(0,0,0,0.7)',
                   }}>{s}</span>
                 ))}
@@ -1279,18 +1279,18 @@ function HelperProfileInner() {
                     <div style={{width:'40px',height:'40px',borderRadius:'50%',background:'rgba(123,47,255,0.08)',display:'flex',alignItems:'center',justifyContent:'center',flexShrink:0}}><Briefcase size={18} color='var(--purple)' strokeWidth={1.6} /></div>
                     <div>
                       <div style={{fontSize:'14px',fontWeight:700,color:'rgba(0,0,0,0.8)',letterSpacing:'-0.1px'}}>{h.specialty || 'Profesional'}</div>
-                      <div style={{fontSize:'12px',color:'rgba(0,0,0,0.45)',marginTop:'2px'}}>{h.zone || h.city || 'Barcelona'} · Autónomo/a</div>
+                      <div style={{fontSize:'var(--text-xs)',color:'rgba(0,0,0,0.45)',marginTop:'2px'}}>{h.zone || h.city || 'Barcelona'} · Autónomo/a</div>
                     </div>
                   </div>
                 </div>
-                <div style={{fontSize:'12px',color:'rgba(0,0,0,0.4)',padding:'8px 4px',textAlign:'center',fontStyle:'italic'}}>
+                <div style={{fontSize:'var(--text-xs)',color:'rgba(0,0,0,0.4)',padding:'8px 4px',textAlign:'center',fontStyle:'italic'}}>
                   Nüra verificará y completará el historial automáticamente con cada servicio realizado.
                 </div>
               </div>
             ) : (
               <div className={styles.emptyTab} style={{gap:'10px',padding:'28px 16px'}}>
                 <Shield size={32} color="rgba(0,0,0,0.12)" />
-                <p style={{fontWeight:700,color:'rgba(0,0,0,0.6)',fontSize:'15px',margin:0}}>Sin historial verificado</p>
+                <p style={{fontWeight:700,color:'rgba(0,0,0,0.6)',fontSize:'var(--text-base)',margin:0}}>Sin historial verificado</p>
               </div>
             )}
 
@@ -1312,8 +1312,8 @@ function HelperProfileInner() {
               : (
                 <div className={styles.emptyTab} style={{gap:'10px',padding:'28px 16px'}}>
                   <MessageSquare size={32} color="rgba(0,0,0,0.12)" />
-                  <p style={{fontWeight:700,color:'rgba(0,0,0,0.6)',fontSize:'15px',margin:0}}>Sin publicaciones todavía</p>
-                  <p style={{fontSize:'13px',color:'rgba(0,0,0,0.38)',lineHeight:1.6,margin:0,textAlign:'center'}}>Cuando {h.name?.split(' ')?.[0] || ''} publique actualizaciones aparecerán aquí.</p>
+                  <p style={{fontWeight:700,color:'rgba(0,0,0,0.6)',fontSize:'var(--text-base)',margin:0}}>Sin publicaciones todavía</p>
+                  <p style={{fontSize:'var(--text-sm)',color:'rgba(0,0,0,0.38)',lineHeight:1.6,margin:0,textAlign:'center'}}>Cuando {h.name?.split(' ')?.[0] || ''} publique actualizaciones aparecerán aquí.</p>
                 </div>
               )
             }

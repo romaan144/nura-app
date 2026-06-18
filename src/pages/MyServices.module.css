@@ -1,6 +1,6 @@
 .page { min-height: 100dvh; background: #F7F7F9; padding-top: 72px; }
 .content { padding: 8px 14px; display: flex; flex-direction: column; gap: 10px; }
-.title { font-size: 22px; font-weight: 800; color: rgba(0,0,0,0.85); letter-spacing: -0.5px; margin: 8px 0 0; }
+.title { font-size: var(--text-lg); font-weight: 800; color: rgba(0,0,0,0.85); letter-spacing: -0.5px; margin: 8px 0 0; }
 
 /* Tabs */
 .tabs { display: flex; gap: 6px; background: rgba(255,255,255,0.72); backdrop-filter: blur(24px) saturate(180%); -webkit-backdrop-filter: blur(24px) saturate(180%); border: 1px solid rgba(255,255,255,0.35); border-radius: 16px; padding: 4px; box-shadow: 0 2px 16px rgba(0,0,0,0.05); }

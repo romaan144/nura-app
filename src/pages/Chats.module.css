@@ -7,7 +7,7 @@
   border-bottom: 1px solid rgba(255,255,255,0.5); box-shadow: 0 1px 0 rgba(0,0,0,0.04);
   position: sticky; top: 0; z-index: 10;
 }
-.title { font-size: 22px; font-weight: 800; color: var(--ink); letter-spacing: -0.5px; }
+.title { font-size: var(--text-lg); font-weight: 800; color: var(--ink); letter-spacing: -0.5px; }
 .count {
   font-size: var(--text-xs); font-weight: 600; color: var(--purple);
   background: rgba(123,47,255,0.1); border-radius: 12px; padding: 3px 10px;
@@ -21,7 +21,7 @@
   transition: border-color 0.2s;
 }
 .searchBox:focus-within { border-color: var(--purple); }
-.searchInput { border: none; outline: none; background: transparent; font-size: 14px; color: var(--ink); flex: 1; }
+.searchInput { border: none; outline: none; background: transparent; font-size: var(--text-sm); color: var(--ink); flex: 1; }
 .searchInput::placeholder { color: var(--soft); }
 
 .list { }
@@ -56,8 +56,8 @@
 
 .chatInfo { flex: 1; min-width: 0; }
 .chatTop { display: flex; align-items: center; justify-content: space-between; margin-bottom: 4px; gap: 8px; }
-.chatName { font-size: 14px; font-weight: 700; color: rgba(0,0,0,0.85); letter-spacing: -0.2px; }
-.chatTime { font-size: 11px; color: var(--soft); flex-shrink: 0; }
+.chatName { font-size: var(--text-sm); font-weight: 700; color: rgba(0,0,0,0.85); letter-spacing: -0.2px; }
+.chatTime { font-size: var(--text-xs); color: var(--soft); flex-shrink: 0; }
 
 .chatBottom { display: flex; align-items: center; justify-content: space-between; gap: 8px; }
 .chatLastMsg {
@@ -75,7 +75,7 @@
   padding: 0 5px; flex-shrink: 0;
 }
 
-.empty { padding: 40px 20px; text-align: center; color: var(--soft); font-size: 14px; }
+.empty { padding: 40px 20px; text-align: center; color: var(--soft); font-size: var(--text-sm); }
 
 .chatAvatarWrap { position: relative; flex-shrink: 0; }
 .onlineIndicator { position: absolute; bottom: 1px; right: 1px; width: 11px; height: 11px; border-radius: 50%; background: #22C55E; border: 2px solid #F8F8FA; }
@@ -101,10 +101,10 @@
 /* ── Empty state ── */
 .emptyIso { margin-bottom: 4px; }
 .emptyTitle { font-size: 19px; font-weight: 800; color: rgba(0,0,0,0.75); margin: 0; letter-spacing: -0.3px; }
-.emptyDesc { font-size: 14px; color: rgba(0,0,0,0.4); margin: 0; line-height: 1.65; max-width: 240px; text-align: center; }
-.emptyBtn { display: flex; align-items: center; justify-content: center; gap: 8px; width: 100%; max-width: 280px; padding: 13px; background: #1C1C1E; color: white; border: none; border-radius: 100px; font-size: 14px; font-weight: 700; cursor: pointer; transition: opacity 0.2s; font-family: -apple-system,'Inter',sans-serif; }
+.emptyDesc { font-size: var(--text-sm); color: rgba(0,0,0,0.4); margin: 0; line-height: 1.65; max-width: 240px; text-align: center; }
+.emptyBtn { display: flex; align-items: center; justify-content: center; gap: 8px; width: 100%; max-width: 280px; padding: 13px; background: #1C1C1E; color: white; border: none; border-radius: 100px; font-size: var(--text-sm); font-weight: 700; cursor: pointer; transition: opacity 0.2s; font-family: -apple-system,'Inter',sans-serif; }
 .emptyBtn:active { opacity: 0.75; }
-.emptyBtnSecondary { width: 100%; max-width: 280px; padding: 12px; background: rgba(0,0,0,0.05); color: rgba(0,0,0,0.55); border: none; border-radius: 100px; font-size: 14px; font-weight: 600; cursor: pointer; font-family: -apple-system,'Inter',sans-serif; }
+.emptyBtnSecondary { width: 100%; max-width: 280px; padding: 12px; background: rgba(0,0,0,0.05); color: rgba(0,0,0,0.55); border: none; border-radius: 100px; font-size: var(--text-sm); font-weight: 600; cursor: pointer; font-family: -apple-system,'Inter',sans-serif; }
 
 @keyframes fadeSlideIn {
   from { opacity: 0; transform: translateY(10px); }

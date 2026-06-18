@@ -1,6 +1,6 @@
 .page { padding-top: 72px; min-height: 100dvh; background: #F8F8FA; }
 .content { padding: 0 14px 40px; }
-.title { font-size: 22px; font-weight: 800; color: var(--ink); margin-bottom: 4px; letter-spacing: -0.5px; }
+.title { font-size: var(--text-lg); font-weight: 800; color: var(--ink); margin-bottom: 4px; letter-spacing: -0.5px; }
 .sub { font-size: 13px; color: var(--soft); margin-bottom: 20px; }
 .list { display: flex; flex-direction: column; gap: 10px; }
 .card { background: white; border-radius: var(--card-radius); padding: var(--card-padding); display: flex; align-items: center; justify-content: space-between; box-shadow: 0 2px 8px rgba(0,0,0,0.08), 0 1px 3px rgba(0,0,0,0.05); cursor: pointer; transition: all 0.15s; }
