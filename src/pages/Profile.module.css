@@ -1,7 +1,7 @@
 /* ══════════════════════════════════════════════════════
    PROFILE
    ══════════════════════════════════════════════════════ */
-.page { min-height: 100dvh; background: #F7F7F9; padding-top: 72px;
+.page { min-height: 100dvh; background: #F5F5F8; padding-top: 72px;
   background: radial-gradient(ellipse 120% 50% at 50% -10%, rgba(123,47,255,0.04) 0%, transparent 60%), #F7F7F9;
 }
 .content { padding: 8px 14px max(env(safe-area-inset-bottom,0px),24px); display: flex; flex-direction: column; gap: 10px; }

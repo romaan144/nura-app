@@ -2,7 +2,7 @@
    HELPER PROFILE — Visual redesign with hierarchy
    ══════════════════════════════════════════════════════ */
 
-.page { padding-top: 72px; min-height: 100vh; background: #F8F8FA; display: flex; flex-direction: column; }
+.page { padding-top: 72px; min-height: 100vh; background: #F5F5F8; display: flex; flex-direction: column; }
 
 /* ── HEADER ── */
 .header {
@@ -102,7 +102,7 @@
   transition: all 0.18s;
   flex: 1;
 }
-.tab:hover { color: var(--ink); background: #F8F8FA; }
+.tab:hover { color: var(--ink); background: #F5F5F8; }
 .tabActive {
   color: #ffffff !important;
   background: #1a1a2e !important;
@@ -131,9 +131,9 @@
 /* ── SKILLS ── */
 .section { background: #FFFFFF; border: 1px solid rgba(0,0,0,0.04); border-radius: var(--radius-lg); padding: 18px 20px; margin-bottom: 10px; box-shadow: var(--shadow-xs); }
 .sectionTitle { display: flex; align-items: center; gap: 6px; font-size: var(--text-xs); font-weight: 700; color: var(--soft); text-transform: uppercase; letter-spacing: 0.6px; margin-bottom: 14px; }
-.sectionNote { font-size: var(--text-xs); color: var(--soft); margin-bottom: 14px; line-height: 1.5; padding: 8px 12px; background: #F8F8FA; border-radius: 8px; border-left: 3px solid var(--rule); }
+.sectionNote { font-size: var(--text-xs); color: var(--soft); margin-bottom: 14px; line-height: 1.5; padding: 8px 12px; background: #F5F5F8; border-radius: 8px; border-left: 3px solid var(--rule); }
 .skillsGrid { display: flex; flex-wrap: wrap; gap: 7px; }
-.skill { font-size: var(--text-xs); font-weight: 500; color: var(--ink); background: #F8F8FA; border: none; border-radius: 8px; padding: 6px 12px; }
+.skill { font-size: var(--text-xs); font-weight: 500; color: var(--ink); background: #F5F5F8; border: none; border-radius: 8px; padding: 6px 12px; }
 
 /* ── EDUCATION — visual timeline ── */
 .eduTimeline { display: flex; flex-direction: column; gap: 0; }
@@ -161,7 +161,7 @@
 
 /* ── LANGUAGES ── */
 .langRow { display: flex; flex-wrap: wrap; gap: 7px; }
-.langTag { font-size: var(--text-xs); color: var(--mid); background: #F8F8FA; border: none; border-radius: 8px; padding: 6px 12px; display: flex; align-items: center; gap: 5px; }
+.langTag { font-size: var(--text-xs); color: var(--mid); background: #F5F5F8; border: none; border-radius: 8px; padding: 6px 12px; display: flex; align-items: center; gap: 5px; }
 .langFlag { font-size: 16px; }
 
 /* ── REVIEWS ── */
@@ -202,7 +202,7 @@
 .expVerifiedTag { display: inline-flex; align-items: center; gap: 3px; font-size: 9px; font-weight: 700; color: #1E40AF; background: #EFF6FF; border: 1px solid #93C5FD; border-radius: 8px; padding: 3px 7px; white-space: nowrap; flex-shrink: 0; }
 
 .competencies { display: flex; flex-wrap: wrap; gap: 5px; }
-.competency { font-size: var(--text-xs); color: var(--mid); background: #F8F8FA; border: none; border-radius: 6px; padding: 3px 9px; }
+.competency { font-size: var(--text-xs); color: var(--mid); background: #F5F5F8; border: none; border-radius: 6px; padding: 3px 9px; }
 
 /* Manager opinion */
 .managerBlock {
@@ -222,7 +222,7 @@
 .managerVerified { display: inline-flex; align-items: center; gap: 4px; font-size: 10px; font-weight: 700; color: #059669; background: #ECFDF5; border: 1px solid #86EFAC; border-radius: 8px; padding: 3px 8px; }
 
 /* Colleagues */
-.colleaguesBlock { background: #F8F8FA; border-radius: 12px; padding: 14px; }
+.colleaguesBlock { background: #F5F5F8; border-radius: 12px; padding: 14px; }
 .colleaguesTitle { font-size: 10px; font-weight: 700; color: var(--soft); text-transform: uppercase; letter-spacing: 0.8px; margin-bottom: 12px; display: flex; align-items: center; gap: 5px; }
 .colleagueRow { display: flex; gap: 10px; }
 .colleagueRow:last-child { margin-bottom: 0; }
@@ -250,16 +250,16 @@
 .postBadge { display: inline-flex; align-items: center; gap: 6px; font-size: var(--text-xs); font-weight: 600; color: #92400E; background: #FEF3C7; border-radius: 10px; padding: 6px 12px; }
 .postActions { display: flex; gap: 6px; padding-top: 10px; border-top: 1px solid var(--rule); }
 .postAction { display: flex; align-items: center; gap: 5px; font-size: var(--text-sm); font-weight: 500; color: var(--soft); padding: 6px 12px; border-radius: 8px; transition: all 0.15s; }
-.postAction:hover { background: #F8F8FA; color: var(--purple); }
+.postAction:hover { background: #F5F5F8; color: var(--purple); }
 .postActionActive { color: var(--purple) !important; background: rgba(123,47,255,0.06) !important; }
 .commentInputRow { display: flex; gap: 8px; margin-top: 10px; padding-top: 10px; border-top: 1px solid var(--rule); }
-.commentField { flex: 1; padding: 9px 14px; border: none; border-radius: 20px; font-size: var(--text-sm); outline: none; background: #F8F8FA; color: var(--ink); font-family: 'Inter', sans-serif; }
+.commentField { flex: 1; padding: 9px 14px; border: none; border-radius: 20px; font-size: var(--text-sm); outline: none; background: #F5F5F8; color: var(--ink); font-family: 'Inter', sans-serif; }
 .commentField:focus { border-color: var(--purple); background: #FFFFFF; }
 .commentSubmit { width: 36px; height: 36px; border-radius: 50%; background: var(--grad-main); color: white; border: none; font-size: 16px; display: flex; align-items: center; justify-content: center; flex-shrink: 0; box-shadow: 0 3px 10px rgba(123,47,255,0.3); }
 .commentSubmit:disabled { background: var(--rule); box-shadow: none; }
 .userComment { display: flex; gap: 8px; margin-top: 10px; }
 .commentDot { width: 26px; height: 26px; border-radius: 50%; background: var(--grad-main); color: white; font-size: 10px; font-weight: 700; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
-.commentBubble { background: #F8F8FA; border-radius: 12px; padding: 9px 13px; flex: 1; }
+.commentBubble { background: #F5F5F8; border-radius: 12px; padding: 9px 13px; flex: 1; }
 .commentUser { font-size: var(--text-xs); font-weight: 700; color: var(--ink); display: block; margin-bottom: 2px; }
 .commentText { font-size: var(--text-sm); color: var(--mid); }
 
@@ -351,16 +351,16 @@
 }
 .evoServicesPill {
   font-size: var(--text-xs); color: var(--soft);
-  background: #F8F8FA; border: none;
+  background: #F5F5F8; border: none;
   border-radius: 8px; padding: 3px 9px;
 }
 .evoTrend {
   font-size: var(--text-xs); font-weight: 600; color: var(--mid);
-  background: #F8F8FA; border: none; border-radius: 8px; padding: 3px 9px;
+  background: #F5F5F8; border: none; border-radius: 8px; padding: 3px 9px;
 }
 .evoStable {
   font-size: var(--text-xs); color: var(--soft);
-  background: #F8F8FA; border-radius: 8px; padding: 3px 9px;
+  background: #F5F5F8; border-radius: 8px; padding: 3px 9px;
 }
 
 /* ── AVAILABILITY ── */
@@ -435,7 +435,7 @@
 .nuraQuestionText { font-size: var(--text-sm); color: var(--ink); line-height: 1.55; }
 .nuraQuestionActions { display: flex; gap: 8px; }
 .nuraQuestionBtn { padding: 8px 16px; background: var(--grad-main); color: white; border: none; border-radius: 20px; font-size: var(--text-xs); font-weight: 600; transition: all 0.15s; }
-.nuraQuestionSkip { padding: 8px 14px; background: #F8F8FA; color: var(--soft); border: none; border-radius: 20px; font-size: var(--text-xs); }
+.nuraQuestionSkip { padding: 8px 14px; background: #F5F5F8; color: var(--soft); border: none; border-radius: 20px; font-size: var(--text-xs); }
 .nuraQuestionInput { display: flex; gap: 8px; }
 .nuraInput { flex: 1; padding: 9px 14px; border: 1.5px solid var(--purple); border-radius: 20px; font-size: var(--text-sm); outline: none; background: #FFFFFF; color: var(--ink); font-family: 'Inter',sans-serif; }
 .nuraInputSend { width: 36px; height: 36px; border-radius: 50%; background: var(--grad-main); color: white; border: none; font-size: 16px; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
@@ -455,7 +455,7 @@
 .scoreComponents { display: flex; gap: 6px; flex-wrap: wrap; margin-top: 10px; }
 .scoreComp {
   display: flex; flex-direction: column; align-items: center;
-  background: #F8F8FA; border-radius: 8px; padding: 5px 8px;
+  background: #F5F5F8; border-radius: 8px; padding: 5px 8px;
   flex: 1; min-width: 55px;
 }
 .scoreComp span:first-child { font-size: 9px; color: var(--soft); margin-bottom: 2px; text-align: center; }

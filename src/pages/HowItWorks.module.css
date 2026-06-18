@@ -1,4 +1,4 @@
-.page { min-height: 100dvh; background: #F7F7F9; padding-top: 72px; }
+.page { min-height: 100dvh; background: #F5F5F8; padding-top: 72px; }
 .content { padding: 8px 16px max(env(safe-area-inset-bottom,0px),32px); display: flex; flex-direction: column; gap: 14px; }
 
 /* Hero */

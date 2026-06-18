@@ -1,4 +1,4 @@
-.page { padding-top: 72px; min-height: 100vh; background: #FFFFFF; padding-bottom: 24px; }
+.page { padding-top: 72px; min-height: 100vh; background: #F5F5F8; padding-bottom: 24px; }
 
 .header {
   display: flex; align-items: center; justify-content: space-between;
@@ -13,7 +13,7 @@
   background: rgba(123,47,255,0.1); border-radius: 12px; padding: 3px 10px;
 }
 
-.searchWrap { padding: 12px 16px 10px; background: #FFFFFF; }
+.searchWrap { padding: 12px 16px 10px; background: #F5F5F8; }
 .searchBox {
   display: flex; align-items: center; gap: 8px;
   background: #F8F8FA; border: none;

@@ -12,6 +12,7 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-rendering: optimizeLegibility;
+  background: #F5F5F8;
 }
 
 :root {
@@ -58,7 +59,7 @@ body {
   --soft:     #8888AA;
   --rule:     #E4E4F0;
   --rule2:    #F0F0FA;
-  --paper:    #FAFAFF;
+  --paper:    #F5F5F8;
   --white:    #FFFFFF;
   --green:    #00C48C;
   --amber:    #FFB800;
