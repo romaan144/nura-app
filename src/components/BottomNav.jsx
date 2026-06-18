@@ -5,9 +5,9 @@ import styles from './BottomNav.module.css'
 
 const TABS = [
   { path: '/',        icon: Search,        label: 'Nüra'     },
-  { path: '/explore', icon: Compass,       label: 'Explorar' },
+  { path: '/explore', icon: Compass,       label: 'Buscar' },
   { path: '/chats',   icon: MessageCircle, label: 'Chats'    },
-  { path: '/feed',    icon: Rss,           label: 'Feed'     },
+  { path: '/feed',    icon: Rss,           label: 'Inicio'     },
   { path: '/profile', icon: User,          label: 'Perfil'   },
 ]
 
