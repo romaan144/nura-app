@@ -634,15 +634,19 @@ export default function Home({ setSearchState }) {
 
   const suggestions = user?.isHelper ? HELPER_SUGGESTIONS : getDynamicSuggestions(user, searchHistory)
 
-  // Dynamic padding: measure floatBottom height so messages never hide behind it
+  // Dynamic padding: measure floatBottom position + height so last message is never hidden
   useEffect(() => {
     const el = floatRef.current
     if (!el) return
-    const ro = new ResizeObserver(([entry]) => {
-      const h = entry.contentRect.height
-      const navH = 72
-      const safeArea = 12
-      setFloatH(Math.ceil(h) + navH + safeArea + 16)
+    const ro = new ResizeObserver(() => {
+      const rect = el.getBoundingClientRect()
+      const windowH = window.innerHeight
+      // Distance from bottom of viewport to bottom of floatBottom
+      const distanceFromBottom = windowH - rect.bottom
+      // Total space the float occupies from the bottom: its height + its offset from bottom
+      const floatTotalH = rect.height + distanceFromBottom
+      // Add 24px premium visual margin so last message breathes above float
+      setFloatH(Math.ceil(floatTotalH) + 24)
     })
     ro.observe(el)
     return () => ro.disconnect()
@@ -681,9 +685,14 @@ export default function Home({ setSearchState }) {
       </div>
 
       <div className={styles.messages} style={{paddingBottom: floatH + 'px'}}>
-        {messages.map(msg => (
-          <div key={msg.id}>
-            <div className={`${styles.msgRow} ${msg.from === 'user' ? styles.msgRowUser : ''}`}>
+        {messages.map((msg, msgIdx) => {
+          const prevMsg = messages[msgIdx - 1]
+          const prevHadResults = prevMsg?.results?.length > 0
+          // Spacing: 16px between messages, 24px after carousel, 20px for user replies
+          const spacingClass = prevHadResults ? styles.afterCarousel : ''
+          return (
+          <div key={msg.id} style={{marginTop: msgIdx === 0 ? 0 : msg.from === 'user' ? '20px' : prevHadResults ? '24px' : '16px'}}>
+            <div className={`${styles.msgRow} ${msg.from === 'user' ? styles.msgRowUser : ''} ${spacingClass}`}>
               {msg.from === 'nura' && (
                 <div className={styles.nuraAvatar}>
                   <img src="/logo-iso.png" alt="Nüra" className={styles.nuraAvatarImg} />
@@ -739,10 +748,13 @@ export default function Home({ setSearchState }) {
               </div>
             </div>
             {msg.results && (
-              <HelperCarousel helpers={msg.results} />
+              <div className={styles.carouselBlock}>
+                <HelperCarousel helpers={msg.results} />
+              </div>
             )}
           </div>
-        ))}
+          )
+        })}
         <div ref={bottomRef} />
       </div>
 

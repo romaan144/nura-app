@@ -22,7 +22,7 @@
   padding: 96px 16px 80px; /* fallback — overridden by JS */
   display: flex;
   flex-direction: column;
-  gap: 16px;  /* var(--space-std) — more breathing room between messages */
+  gap: 0;     /* semantic spacing via margin on each element */
   -webkit-overflow-scrolling: touch;
 }
 
@@ -376,3 +376,32 @@
   box-shadow: var(--shadow-xs);
 }
 .newSearchBtn:active { opacity: 0.65; }
+
+/* ── CHAT SPACING SYSTEM ────────────────────────────────────────────
+   Replaces uniform gap with semantic spacing per message type.
+   Based on 8pt scale: 8 / 16 / 24px
+────────────────────────────────────────────────────────────────────── */
+
+/* ── CHAT SEMANTIC SPACING ─────────────────────────────────── */
+/* Applied via className in JSX — wrapper div approach           */
+
+/* All messages: base top margin (gap replacement) */
+.msgRowUser {
+  margin-top: 20px;   /* user reply = new exchange, more visual break */
+}
+
+/* Nüra reply after user: moderate spacing */
+.msgRow {
+  /* base defined above */
+}
+
+/* Carousel: connected to the Nüra message (same response block) */
+.carouselBlock {
+  margin-top: 6px;
+  margin-bottom: 4px;
+}
+
+/* Message after carousel: clear section break */
+.afterCarousel {
+  margin-top: 24px;
+}
