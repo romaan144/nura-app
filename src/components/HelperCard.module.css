@@ -1,5 +1,5 @@
 /* ══════════════════════════════════════════════════════
-   HELPER CARD — compact, scannable, decisive
+   HELPER CARD — uniform height, scannable, decisive
    ══════════════════════════════════════════════════════ */
 
 .card {
@@ -8,15 +8,14 @@
   border-radius: var(--radius-lg);
   padding: 14px 16px;
   cursor: pointer;
-  position: relative;
   box-shadow: var(--shadow-xs);
   transition: opacity 0.15s;
   -webkit-tap-highlight-color: transparent;
 }
 .card:active { opacity: 0.75; }
 
-/* Top row: avatar + info + price/actions */
-.topRow {
+/* Single row: avatar + info + cta */
+.row {
   display: flex;
   align-items: center;
   gap: 12px;
@@ -40,23 +39,37 @@
   background: var(--green-dot); border: 2px solid white;
 }
 
-/* Info column */
+/* Info — 3 lines: name+price / specialty+dist / rating */
 .info { flex: 1; min-width: 0; display: flex; flex-direction: column; gap: 3px; }
 
+.nameRow {
+  display: flex; align-items: center; gap: 5px;
+  overflow: hidden;
+}
 .name {
   font-size: var(--text-sm);
   font-weight: 700;
   color: rgba(0,0,0,0.85);
   letter-spacing: -0.2px;
-  display: flex; align-items: center; gap: 4px;
-  white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden; text-overflow: ellipsis;
+  flex-shrink: 1;
+}
+.price {
+  font-size: var(--text-xs);
+  font-weight: 700;
+  color: var(--purple);
+  white-space: nowrap;
+  flex-shrink: 0;
+  margin-left: auto;  /* pushes price to the right of name */
 }
 
 .sub {
   display: flex; align-items: center; gap: 4px;
   font-size: var(--text-xs); color: rgba(0,0,0,0.4);
 }
-.specialty { color: rgba(0,0,0,0.55); font-weight: 500; }
+.specialty { color: rgba(0,0,0,0.55); font-weight: 500; 
+  white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
 
 .meta {
   display: flex; align-items: center; gap: 4px;
@@ -66,24 +79,14 @@
 .metaMuted  { color: rgba(0,0,0,0.3); }
 .dot { color: rgba(0,0,0,0.18); }
 
-/* Right column: price + actions */
-.right {
+/* CTA — always centered with avatar, never variable height */
+.cta {
   flex-shrink: 0;
   display: flex;
-  flex-direction: column;
-  align-items: flex-end;
-  gap: 6px;
+  align-items: center;
+  gap: 5px;
 }
 
-.price {
-  font-size: var(--text-xs);
-  font-weight: 700;
-  color: var(--purple);
-  white-space: nowrap;
-}
-
-/* Actions */
-.actions { display: flex; gap: 5px; align-items: center; }
 .favBtn {
   width: 30px; height: 30px; border-radius: 50%;
   background: rgba(0,0,0,0.03);

@@ -50,13 +50,16 @@ function CarouselCard({ helper, isTopPick, matchReason }) {
       {isTopPick && (
         <div style={{
           alignSelf:'center',
-          background:'var(--purple)',color:'white',
-          fontSize:'8px',fontWeight:800,letterSpacing:'0.8px',
-          padding:'2px 10px',borderRadius:'var(--radius-full)',
-          whiteSpace:'nowrap',marginBottom:'4px',
+          background:'transparent',
+          color:'var(--purple)',
+          fontSize:'9px',fontWeight:600,letterSpacing:'0.3px',
+          padding:'2px 8px',
+          border:'1px solid rgba(123,47,255,0.25)',
+          borderRadius:'var(--radius-full)',
+          whiteSpace:'nowrap',marginBottom:'6px',
           order:-1,
         }}>
-          NÜRA RECOMIENDA
+          Nüra recomienda
         </div>
       )}
 

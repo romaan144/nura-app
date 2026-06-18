@@ -31,13 +31,11 @@ body {
   --shadow-md:  0 4px 20px rgba(13,13,26,0.10);
   --shadow-lg:  0 12px 40px rgba(13,13,26,0.14);
 
-  /* ── SPACING SCALE (8-point grid) ──────────────────── */
-  --space-1:  4px;
-  --space-2:  8px;
-  --space-3: 12px;
-  --space-4: 16px;
-  --space-5: 20px;
-  --space-6: 24px;
+  /* ── SPACING SCALE ─────────────────────────────────────── */
+  --space-micro:   8px;   /* micro: between inline elements */
+  --space-std:    16px;   /* standard: padding, small gaps */
+  --space-block:  24px;   /* block: between content blocks */
+  --space-section:32px;   /* section: between major sections */
 
   /* ── RADIUS SCALE ───────────────────────────────────── */
   --radius-sm:  10px;
