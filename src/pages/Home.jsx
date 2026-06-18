@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef } from 'react'
+import { useState, useEffect, useLayoutEffect, useRef } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { Send, Mic, MicOff, Plus, Clock } from 'lucide-react'
 import { analyzeNeed, matchHelpers, getPriceContext } from '../utils/matching'
@@ -315,12 +315,18 @@ export default function Home({ setSearchState }) {
     }
   }
 
-  // Smooth scroll when new messages arrive (not on mount/remount)
+  // After floatH/topH are set, DOM is updated synchronously by React.
+  // useLayoutEffect fires after DOM mutation but before paint —
+  // guaranteed to run with correct paddingBottom already in the DOM.
+  useLayoutEffect(() => {
+    if (floatH > 0) scrollToBottom(false)
+  }, [floatH])
+
+  // Smooth scroll when new messages arrive during an active session
   const prevMsgCount = useRef(0)
   useEffect(() => {
     const count = messages.length
     if (count > prevMsgCount.current && prevMsgCount.current > 0) {
-      // New message added during session — smooth scroll
       scrollToBottom(true)
     }
     prevMsgCount.current = count
@@ -673,12 +679,6 @@ export default function Home({ setSearchState }) {
         setTopH(Math.ceil(tRect.bottom) + 8)  // floatTop bottom + 8px gap
       }
 
-      // Scroll to bottom AFTER padding is set correctly.
-      // requestAnimationFrame ensures React has re-rendered with new padding.
-      requestAnimationFrame(() => {
-        const el = msgsRef.current
-        if (el) el.scrollTop = el.scrollHeight
-      })
     }
 
     const ro = new ResizeObserver(measure)
