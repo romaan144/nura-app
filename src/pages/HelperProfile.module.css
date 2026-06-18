@@ -845,3 +845,50 @@
 .rowGap14    { display: flex; align-items: center; gap: 14px; }
 .alignStart  { align-items: flex-start !important; }
 .ctaRow      { display: flex; gap: 8px; width: 100%; margin-top: 14px; }
+
+/* ══════════════════════════════════════════════════════
+   TAB NAVIGATOR — Apple/Linear style
+   ══════════════════════════════════════════════════════ */
+.tabNav {
+  display: flex;
+  gap: 0;
+  margin: 8px 0 4px;
+  border-bottom: 1px solid rgba(0,0,0,0.06);
+  position: sticky;
+  top: 60px;
+  background: #F5F5F8;
+  z-index: 10;
+  padding: 0 4px;
+}
+
+.tabNavBtn {
+  flex: 1;
+  padding: 10px 8px;
+  background: none;
+  border: none;
+  border-bottom: 2px solid transparent;
+  font-size: var(--text-sm);
+  font-weight: 500;
+  color: rgba(0,0,0,0.38);
+  cursor: pointer;
+  font-family: inherit;
+  transition: color 0.15s, border-color 0.15s;
+  -webkit-tap-highlight-color: transparent;
+  white-space: nowrap;
+  letter-spacing: -0.1px;
+  margin-bottom: -1px;  /* overlap the border-bottom of tabNav */
+}
+
+.tabNavBtn:active { opacity: 0.7; }
+
+.tabNavBtnActive {
+  color: var(--purple);
+  font-weight: 700;
+  border-bottom-color: var(--purple);
+}
+
+/* Tab content area */
+.tabContent {
+  padding-top: 12px;
+  animation: fadeSlideIn 0.18s ease both;
+}

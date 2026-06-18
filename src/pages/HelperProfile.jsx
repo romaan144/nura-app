@@ -658,6 +658,7 @@ function HelperProfileInner() {
   } = useUser()
   const [showRating, setShowRating] = useState(false)
   const [showConfirm, setShowConfirm] = useState(false)
+  const [activeTab, setActiveTab] = useState('perfil')
   const [showFullProfile, setShowFullProfile] = useState(false)
 
   useEffect(() => {
@@ -924,8 +925,25 @@ function HelperProfileInner() {
           </>)}
         </div>
 
-        {/* Tabs */}
-  
+        {/* ── TAB NAVIGATOR ── */}
+        <div className={styles.tabNav}>
+          {[
+            { id: 'perfil',      label: 'Perfil' },
+            { id: 'trayectoria', label: 'Trayectoria' },
+            { id: 'publicaciones', label: 'Publicaciones' },
+          ].map(t => (
+            <button
+              key={t.id}
+              className={`${styles.tabNavBtn} ${activeTab === t.id ? styles.tabNavBtnActive : ''}`}
+              onClick={() => setActiveTab(t.id)}>
+              {t.label}
+            </button>
+          ))}
+        </div>
+
+        {/* ── TAB: PERFIL ── */}
+        {activeTab === 'perfil' && (
+          <div className={styles.tabContent}>
 
         {/* ── TAB: PERFIL VIVO ── */}
         {/* Availability quick view */}
@@ -1242,8 +1260,12 @@ function HelperProfileInner() {
           </>
         )}
 
-        {/* ── TAB: LABORAL ── */}
-        {true && (
+          </div>
+        )}
+
+        {/* ── TAB: TRAYECTORIA ── */}
+        {activeTab === 'trayectoria' && (
+          <div className={styles.tabContent}>
           <div>
             <div className={styles.empresasIntroCard}>
               <Shield size={16} color="var(--purple)" />
@@ -1302,10 +1324,12 @@ function HelperProfileInner() {
               </div>
             </div>
           </div>
+          </div>
         )}
 
         {/* ── TAB: PUBLICACIONES ── */}
-        {true && (
+        {activeTab === 'publicaciones' && (
+          <div className={styles.tabContent}>
           <div>
             {h.posts?.length > 0
               ? h.posts?.map(post => <PostCard key={post.id} post={post} helper={h} />)
@@ -1318,10 +1342,9 @@ function HelperProfileInner() {
               )
             }
           </div>
+          </div>
         )}
-
-        {/* ── TAB: REPUTACIÓN ── */}
-        {true && (
+        {false && (
           <div>
             {/* Score */}
             <div className={styles.scoreCard}>
