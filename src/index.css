@@ -35,6 +35,14 @@ body {
   --shadow-lg:  0 12px 40px rgba(13,13,26,0.14);
 
   /* ── SPACING SCALE ─────────────────────────────────────── */
+  /* ── SAFE AREA LAYOUT ───────────────────────────────────────────
+     Universal spacing that accounts for device safe areas.
+     Every page uses these instead of hardcoded px values.
+  ── */
+  --header-h: calc(max(env(safe-area-inset-top, 0px), 12px) + 64px);
+  --nav-h:    calc(max(env(safe-area-inset-bottom, 0px), 8px) + 65px);
+
+
   --space-micro:   8px;   /* micro: between inline elements */
   --space-std:    16px;   /* standard: padding, small gaps */
   --space-block:  24px;   /* block: between content blocks */

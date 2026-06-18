@@ -1,4 +1,4 @@
-.page { min-height: 100dvh; background: var(--paper); padding-top: 72px; 
+.page { min-height: 100dvh; background: var(--paper); padding-top: var(--header-h); 
   animation: fadeSlideIn 0.22s ease both;}
 .content { padding: 8px 14px; display: flex; flex-direction: column; gap: 10px; }
 .title { font-size: var(--text-lg); font-weight: 800; color: rgba(0,0,0,0.85); letter-spacing: -0.5px; margin: 8px 0 0; }
@@ -16,7 +16,7 @@
 .emptyBtn { padding: 12px 28px; background: var(--purple); color: white; border: none; border-radius: var(--radius-full); font-size: var(--text-sm); font-weight: 700; cursor: pointer; }
 
 /* List */
-.list { display: flex; flex-direction: column; gap: 8px; padding-bottom: calc(72px + max(env(safe-area-inset-bottom,0px),8px)); }
+.list { display: flex; flex-direction: column; gap: 8px; padding-bottom: var(--nav-h); }
 
 /* Card */
 .card { background: rgba(255,255,255,0.85); border: 1px solid rgba(255,255,255,0.5); border-radius: 18px; overflow: hidden; box-shadow: var(--shadow-xs); cursor: pointer; transition: opacity 0.15s; }

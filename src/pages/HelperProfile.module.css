@@ -6,6 +6,7 @@
 .page {
   min-height: 100vh;
   background: var(--paper);
+  padding-top: var(--header-h);
   animation: fadeSlideIn 0.2s ease both;
 }
 
@@ -35,7 +36,7 @@
    ══════════════════════════════════════════════════════════ */
 .hero {
   background: #FFFFFF;
-  padding: 28px 20px 24px;
+  padding: 20px 20px 24px;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -44,14 +45,14 @@
 
 .avatarWrap { position:relative; margin-bottom:16px; }
 .avatar {
-  width: 120px; height: 120px;
+  width: 108px; height: 108px;
   border-radius: 50%; object-fit:cover;
   border: 3.5px solid #fff;
   box-shadow: 0 4px 24px rgba(0,0,0,0.13);
   display: block;
 }
 .avatarFallback {
-  width:120px; height:120px; border-radius:50%;
+  width:108px; height:108px; border-radius:50%;
   display:flex; align-items:center; justify-content:center;
   color:white; font-weight:700; font-size:38px;
   letter-spacing: -1px;
@@ -174,8 +175,8 @@
 .ctaSecondary {
   display: flex; align-items: center; justify-content: center; gap: 7px;
   width: 100%; padding: 12px;
-  background: transparent; color: rgba(0,0,0,0.65);
-  border: 1.5px solid rgba(0,0,0,0.12);
+  background: rgba(123,47,255,0.06); color: var(--purple);
+  border: 1.5px solid rgba(123,47,255,0.2);
   border-radius: var(--radius-full);
   font-size: var(--text-sm); font-weight: 600;
   cursor: pointer; font-family: inherit;

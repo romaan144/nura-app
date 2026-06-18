@@ -1,7 +1,7 @@
 /* ══════════════════════════════════════════════════════
    PROFILE
    ══════════════════════════════════════════════════════ */
-.page { min-height: 100dvh; background: var(--paper); padding-top: 72px;
+.page { min-height: 100dvh; background: var(--paper); padding-top: var(--header-h);
   background: radial-gradient(ellipse 120% 50% at 50% -10%, rgba(123,47,255,0.04) 0%, transparent 60%), var(--paper);
 
   animation: fadeSlideIn 0.22s ease both;}
@@ -81,7 +81,7 @@
 
 /* Bottom nav clearance */
 @media (max-width: 767px) {
-  .page { padding-bottom: calc(72px + max(env(safe-area-inset-bottom, 0px), 8px)) !important; }
+  .page { padding-bottom: var(--nav-h) !important; }
 }
 
 @keyframes fadeSlideIn {

@@ -1,4 +1,4 @@
-.page { padding-top: 72px; min-height: 100vh; background: var(--paper); padding-bottom: 24px; 
+.page { padding-top: var(--header-h); min-height: 100vh; background: var(--paper); padding-bottom: 24px; 
   animation: fadeSlideIn 0.22s ease both;}
 
 .header {
@@ -105,7 +105,7 @@
 
 /* Bottom nav clearance */
 @media (max-width: 767px) {
-  .page { padding-bottom: calc(72px + max(env(safe-area-inset-bottom, 0px), 8px)) !important; }
+  .page { padding-bottom: var(--nav-h) !important; }
 }
 
 /* ── Empty state ── */
