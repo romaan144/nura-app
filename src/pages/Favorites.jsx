@@ -25,7 +25,7 @@ export default function Favorites() {
 
         {saved.length === 0 ? (
           <div className={styles.empty}>
-            <div className={styles.emptyIcon}><Heart size={44} color='rgba(0,0,0,0.15)' strokeWidth={1.5} /></div>
+            <div className={styles.emptyIcon}><Heart size={48} color='rgba(123,47,255,0.2)' strokeWidth={1.3} fill='rgba(123,47,255,0.06)' /></div>
             <h3 className={styles.emptyTitle}>Sin favoritos todavía</h3>
             <p className={styles.emptyDesc}>Cuando encuentres un helper que te interese, pulsa el corazón para guardarlo aquí.</p>
             <button className={styles.emptyBtn} onClick={() => navigate('/explore')}>
