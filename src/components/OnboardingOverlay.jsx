@@ -1,50 +1,82 @@
 import { useState } from 'react'
-import { ArrowRight, X, MessageCircle, Shield, Users } from 'lucide-react'
+import { ArrowRight, Search, Briefcase } from 'lucide-react'
 import { useUser } from '../context/UserContext'
 import styles from './OnboardingOverlay.module.css'
 
-const STEPS = [
-  {
-    Icon: Users,
-    eyebrow: 'BIENVENIDO A NÜRA',
-    title: 'La IA que conecta\npersonas reales',
-    desc: 'Cuéntame lo que necesitas — en tus palabras, sin formularios. Encuentro a la persona exacta verificada y disponible.',
-  },
-]
-
 export default function OnboardingOverlay({ onComplete }) {
-  const [step, setStep] = useState(0)
+  const [phase, setPhase]       = useState('welcome')  // welcome | name | choose
   const [finishing, setFinishing] = useState(false)
-  const [showName, setShowName] = useState(false)
-  const [name, setName] = useState('')
-  const { login } = useUser()
-
-  const isLast = step === STEPS.length - 1
-
-  function finish() {
-    localStorage.setItem('nura_onboarded', '1')
-    if (name.trim()) {
-      login({ name: name.trim(), joined: new Date().toISOString() })
-      sessionStorage.setItem('nura_just_onboarded', name.trim())
-    }
-    setFinishing(true)
-    setTimeout(onComplete, 380)
-  }
+  const [name, setName]         = useState('')
+  const { login }               = useUser()
 
   function skip() {
     localStorage.setItem('nura_onboarded', '1')
     onComplete()
   }
 
-  if (showName) return (
-    <div className={`${styles.overlay} ${finishing ? styles.overlayOut : ''}`}>
+  function afterName() {
+    const trimmed = name.trim()
+    if (trimmed) {
+      login({ name: trimmed, joined: new Date().toISOString() })
+      sessionStorage.setItem('nura_just_onboarded', trimmed)
+    }
+    setPhase('choose')
+  }
+
+  function chooseSeeker() {
+    localStorage.setItem('nura_onboarded', '1')
+    setFinishing(true)
+    setTimeout(onComplete, 360)
+  }
+
+  function choosePro() {
+    localStorage.setItem('nura_onboarded', '1')
+    setFinishing(true)
+    setTimeout(() => { onComplete(); window.location.href = '/register-helper' }, 360)
+  }
+
+  const overlay = `${styles.overlay} ${finishing ? styles.overlayOut : ''}`
+
+  // ── PHASE: WELCOME ────────────────────────────────────────
+  if (phase === 'welcome') return (
+    <div className={overlay}>
       <div className={styles.topRow}>
         <button className={styles.skip} onClick={skip}>Saltar</button>
-        <button className={styles.loginLink} onClick={() => { skip(); window.location.href = '/login' }}>
+        <button className={styles.loginLink}
+          onClick={() => { skip(); window.location.href = '/login' }}>
           Ya tengo cuenta
         </button>
       </div>
-      <div className={styles.namePage}>
+
+      <div className={styles.content} key="welcome">
+        <img src="/logo-iso.png" alt="Nüra" className={styles.welcomeIso} />
+        <p className={styles.eyebrow}>BIENVENIDO A NÜRA</p>
+        <h1 className={styles.title}>La IA que conecta{'\n'}personas reales</h1>
+        <p className={styles.desc}>
+          Cuéntame lo que necesitas — en tus palabras, sin formularios.
+          Encuentro a la persona exacta, verificada y disponible.
+        </p>
+      </div>
+
+      <div className={styles.bottom}>
+        <button className={styles.primary} onClick={() => setPhase('name')}>
+          Empezar <ArrowRight size={16} />
+        </button>
+      </div>
+    </div>
+  )
+
+  // ── PHASE: NAME ───────────────────────────────────────────
+  if (phase === 'name') return (
+    <div className={overlay}>
+      <div className={styles.topRow}>
+        <button className={styles.skip} onClick={skip}>Saltar</button>
+        <button className={styles.loginLink}
+          onClick={() => { skip(); window.location.href = '/login' }}>
+          Ya tengo cuenta
+        </button>
+      </div>
+      <div className={styles.namePage} key="name">
         <img src="/logo-iso.png" alt="Nüra" className={styles.nameIso} />
         <h2 className={styles.nameTitle}>¿Cómo te llamas?</h2>
         <p className={styles.nameDesc}>Para que Nüra pueda saludarte. Es opcional.</p>
@@ -53,47 +85,49 @@ export default function OnboardingOverlay({ onComplete }) {
           placeholder="Escribe tu nombre..."
           value={name}
           onChange={e => setName(e.target.value)}
-          onKeyDown={e => e.key === 'Enter' && finish()}
+          onKeyDown={e => e.key === 'Enter' && afterName()}
           autoFocus
           maxLength={40}
         />
-        <button className={styles.primary} onClick={finish}>
-          {name.trim() ? `¡Empezar, ${name.split(' ')[0]}!` : 'Empezar sin nombre'} <ArrowRight size={16} />
-        </button>
-        <button className={styles.helperLink} onClick={() => { skip(); window.location.href = '/register-helper' }}>
-          Soy profesional y quiero ofrecer servicios →
+        <button className={styles.primary} onClick={afterName}>
+          {name.trim() ? `Continuar, ${name.split(' ')[0]}` : 'Continuar'} <ArrowRight size={16} />
         </button>
       </div>
     </div>
   )
 
-  const s = STEPS[step]
-
+  // ── PHASE: CHOOSE ─────────────────────────────────────────
+  const firstName = name.trim().split(' ')[0] || ''
   return (
-    <div className={`${styles.overlay} ${finishing ? styles.overlayOut : ''}`}>
-      <div className={styles.topRow}>
-        <button className={styles.skip} onClick={skip}>Saltar</button>
-        <button className={styles.loginLink} onClick={() => { skip(); window.location.href = '/login' }}>
-          Ya tengo cuenta
+    <div className={overlay}>
+      <div className={styles.chooseContent} key="choose">
+        <p className={styles.chooseTitle}>
+          {firstName ? `${firstName}, ¿cómo usarás Nüra?` : '¿Cómo usarás Nüra?'}
+        </p>
+        <p className={styles.chooseDesc}>Puedes cambiar esto cuando quieras.</p>
+
+        {/* Card 1 — Buscador (primary) */}
+        <button className={styles.chooseCard} onClick={chooseSeeker}>
+          <div className={styles.chooseCardIcon} style={{background:'rgba(123,47,255,0.08)'}}>
+            <Search size={22} color="var(--purple)" strokeWidth={2} />
+          </div>
+          <div className={styles.chooseCardText}>
+            <span className={styles.chooseCardTitle}>Necesito ayuda</span>
+            <span className={styles.chooseCardSub}>Encuentra al profesional perfecto</span>
+          </div>
+          <ArrowRight size={16} color="var(--purple)" />
         </button>
-      </div>
 
-      <div className={styles.content} key={step}>
-        <div className={styles.emoji}>{s.Icon && <s.Icon size={40} strokeWidth={1.5} color='var(--purple)' />}</div>
-        <p className={styles.eyebrow}>{s.eyebrow}</p>
-        <h1 className={styles.title}>{s.title}</h1>
-        <p className={styles.desc}>{s.desc}</p>
-      </div>
-
-      <div className={styles.bottom}>
-        <div className={styles.dots}>
-          {STEPS.map((_, i) => (
-            <div key={i} className={`${styles.dot} ${i === step ? styles.dotActive : i < step ? styles.dotDone : ''}`} />
-          ))}
-        </div>
-        <button className={styles.primary}
-          onClick={() => isLast ? setShowName(true) : setStep(i => i + 1)}>
-          {isLast ? '¡Empezar con Nüra!' : 'Continuar'} <ArrowRight size={16} />
+        {/* Card 2 — Profesional */}
+        <button className={`${styles.chooseCard} ${styles.chooseCardPro}`} onClick={choosePro}>
+          <div className={styles.chooseCardIcon} style={{background:'rgba(0,0,0,0.04)'}}>
+            <Briefcase size={22} color="rgba(0,0,0,0.5)" strokeWidth={1.8} />
+          </div>
+          <div className={styles.chooseCardText}>
+            <span className={styles.chooseCardTitle} style={{color:'rgba(0,0,0,0.75)'}}>Quiero ofrecer mis servicios</span>
+            <span className={styles.chooseCardSub}>Crea tu perfil profesional gratis</span>
+          </div>
+          <ArrowRight size={16} color="rgba(0,0,0,0.3)" />
         </button>
       </div>
     </div>
