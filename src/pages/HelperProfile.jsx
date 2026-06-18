@@ -2,9 +2,9 @@ import PageHeader from '../components/PageHeader'
 import ErrorBoundary from '../components/ErrorBoundary'
 import { useState, useEffect } from 'react'
 import { useParams, useNavigate, useLocation } from 'react-router-dom'
-import { Star, Shield, MapPin, MessageCircle, Clock, CheckCircle, Award,
-         Share2, Heart, Sparkles, Calendar, Briefcase, BookOpen,
-         ChevronRight, Zap } from 'lucide-react'
+import { Star, Shield, MapPin, MessageCircle, Calendar,
+         Share2, Heart, Briefcase, BookOpen, Award,
+         CheckCircle, Globe, Zap, ChevronRight } from 'lucide-react'
 import { HELPERS } from '../data/helpers'
 import { useUser } from '../context/UserContext'
 import RatingModal from '../components/RatingModal'
@@ -13,67 +13,19 @@ import { showToast } from '../components/Toast'
 import RegisterGate from '../components/RegisterGate'
 import { getHelperById } from '../utils/supabase'
 
-// ── EXPERIENCE CARD ─────────────────────────────────────────
-function ExperienceCard({ exp }) {
-  return (
-    <div className={styles.expCard}>
-      <div className={styles.expHeader}>
-        <div className={styles.expRole}>{exp.role}</div>
-        <div className={styles.expCompany}>{exp.company}</div>
-        <div className={styles.expPeriod}>{exp.period}</div>
-        {exp.verifiedByCompany && (
-          <div className={styles.expVerified}>
-            <Shield size={9} color="var(--green)" /> Verificado por empresa
-          </div>
-        )}
-      </div>
-      {exp.description && (
-        <p className={styles.expDesc}>{exp.description}</p>
-      )}
-      {exp.achievements?.length > 0 && (
-        <ul className={styles.expAchievements}>
-          {exp.achievements.slice(0,3).map((a,i) => (
-            <li key={i}>{a}</li>
-          ))}
-        </ul>
-      )}
-      {exp.competencies?.length > 0 && (
-        <div className={styles.expCompetencies}>
-          {exp.competencies.slice(0,4).map((c,i) => (
-            <span key={i} className={styles.expCompPill}>{c}</span>
-          ))}
-        </div>
-      )}
-      {exp.managerOpinion && (
-        <div className={styles.managerQuote}>
-          <div className={styles.managerQuoteText}>
-            "{exp.managerOpinion.text.length > 100
-              ? exp.managerOpinion.text.slice(0,100)+'…'
-              : exp.managerOpinion.text}"
-          </div>
-          <div className={styles.managerQuoteAuthor}>
-            — {exp.managerOpinion.name}, {exp.managerOpinion.role}
-          </div>
-        </div>
-      )}
-    </div>
-  )
-}
+// ── HELPERS ─────────────────────────────────────────────────────────────────
 
-// ── POST CARD ────────────────────────────────────────────────
-function PostCard({ post, helper }) {
+function PostCard({ post }) {
   const [liked, setLiked] = useState(false)
   const [likes, setLikes] = useState(post.likes || 0)
   return (
     <div className={styles.postCard}>
       <p className={styles.postText}>{post.text}</p>
-      {post.badge && <div className={styles.postBadge}>{post.badge}</div>}
       <div className={styles.postMeta}>
-        <span>{post.date}</span>
-        <button
-          className={`${styles.postLike} ${liked ? styles.postLikeActive : ''}`}
+        <span className={styles.postDate}>{post.date}</span>
+        <button className={`${styles.postLike} ${liked ? styles.postLikeActive : ''}`}
           onClick={() => { setLiked(l => !l); setLikes(n => liked ? n-1 : n+1) }}>
-          <Heart size={13} fill={liked ? 'var(--red)' : 'none'}
+          <Heart size={12} fill={liked ? 'var(--red)' : 'none'}
             color={liked ? 'var(--red)' : 'rgba(0,0,0,0.3)'} />
           <span>{likes}</span>
         </button>
@@ -207,23 +159,20 @@ function BookingModal({ helper, onClose, onBook, onNavigate }) {
 }
 
 // ── MAIN PROFILE COMPONENT ──────────────────────────────────
-function HelperProfileInner() {
-  const { id }       = useParams()
-  const navigate     = useNavigate()
-  const location     = useLocation()
-  const { user, addService, addRating } = useUser()
 
-  const [h, setH]               = useState(location.state?.helper || null)
-  const [loading, setLoading]   = useState(!h)
-  const [activeTab, setActiveTab] = useState('perfil')
+function HelperProfileInner() {
+  const { id }     = useParams()
+  const navigate   = useNavigate()
+  const location   = useLocation()
+  const { user, addService } = useUser()
+
+  const [h, setH]             = useState(location.state?.helper || null)
+  const [loading, setLoading] = useState(!h)
   const [showConfirm, setShowConfirm] = useState(false)
   const [showRating, setShowRating]   = useState(false)
   const [showGate, setShowGate]       = useState(false)
   const [shared, setShared]           = useState(false)
   const [fav, setFav]                 = useState(false)
-
-  const matchReason = location.state?.matchReason
-    || window.__nuraMatchReasons?.[String(id)] || null
 
   useEffect(() => {
     if (!h) {
@@ -234,452 +183,296 @@ function HelperProfileInner() {
     }
   }, [id])
 
-  function handleShare() {
-    navigator.clipboard?.writeText(window.location.href)
-      .then(() => { setShared(true); showToast('Enlace copiado') })
-      .catch(() => {})
-  }
+  if (loading) return (
+    <div className={styles.page}>
+      <PageHeader showBack />
+      <div className={styles.loadingWrap}><div className={styles.loadingPulse} /></div>
+    </div>
+  )
+  if (!h) return (
+    <div className={styles.page}>
+      <PageHeader showBack />
+      <div className={styles.notFound}>Perfil no encontrado.</div>
+    </div>
+  )
 
-  function handleContact(e) {
-    e?.stopPropagation()
+  const firstName = h.name?.split(' ')?.[0] || ''
+
+  // Primary education for hero display
+  const mainEdu = h.education?.[0]
+
+  function handleContact() {
     if (!user) { setShowGate(true); return }
     navigate(`/chat/${h.id}`, { state: { helper: h, userQuery: location.state?.userQuery } })
   }
 
-  if (loading) return (
-    <div className={styles.page}>
-      <PageHeader showBack />
-      <div className={styles.loadingWrap}>
-        <div className={styles.loadingPulse} />
-      </div>
-    </div>
-  )
-
-  if (!h) return (
-    <div className={styles.page}>
-      <PageHeader showBack />
-      <div className={styles.empty}>Perfil no encontrado.</div>
-    </div>
-  )
-
-  const firstName = h.name?.split(' ')?.[0] || h.name || ''
-  const isVerified = h.dniVerified || h.verified
-
-  // Clean matchReason text
-  const cleanReason = matchReason
-    ? matchReason
-        .replace(/^\*\*[^*]+\*\*[^:]*:\s*/, '')
-        .replace(/\*\*/g, '')
-        .replace(/^(Nüra la recomienda|Por qué Nüra)[^:]*:\s*/i, '')
-        .trim()
-    : null
+  function handleShare() {
+    navigator.clipboard?.writeText(window.location.href)
+      .then(() => { setShared(true); showToast('Enlace copiado') })
+  }
 
   return (
     <div className={styles.page}>
-      {/* Header */}
       <PageHeader showBack rightEl={
         <button className={styles.shareBtn} onClick={handleShare}>
           {shared
             ? <span style={{fontSize:'var(--text-xs)',fontWeight:700,color:'var(--green)'}}>✓</span>
-            : <Share2 size={17} color="rgba(0,0,0,0.6)" />}
+            : <Share2 size={17} color="rgba(0,0,0,0.55)" />}
         </button>
       } />
 
-      {/* ══════════════════════════════════════════════════
-          PRIMER NIVEL — Hero: decide en menos de 5s
-          ══════════════════════════════════════════════════ */}
-      <div className={styles.hero}>
+      <div className={styles.scroll}>
 
-        {/* Avatar */}
-        <div className={styles.avatarWrap}>
-          {h.avatarUrl
-            ? <img src={h.avatarUrl} alt={h.name} className={styles.avatar} />
-            : <div className={styles.avatarFallback} style={{background: h.avatarColor || 'var(--purple)'}}>
-                {h.avatar || h.name?.[0]}
-              </div>
-          }
-          {h.available && <span className={styles.availDot} />}
-        </div>
+        {/* ══════════════════════════════════════════════════
+            HERO — quien es esta persona en 5 segundos
+            ══════════════════════════════════════════════════ */}
+        <div className={styles.hero}>
 
-        {/* Name + specialty */}
-        <h1 className={styles.heroName}>{h.name}</h1>
-        <p className={styles.heroSpecialty}>{h.specialty || h.tags?.[0]}</p>
-
-        {/* Key facts row */}
-        <div className={styles.heroFacts}>
-          {h.rating && (
-            <span className={styles.fact}>
-              <Star size={11} fill="var(--amber)" color="var(--amber)" />
-              {h.rating}
-              {h.reviews > 0 && <span className={styles.factMuted}> ({h.reviews})</span>}
-            </span>
-          )}
-          {h.distance && (
-            <span className={styles.factDot}>·</span>
-          )}
-          {h.distance && (
-            <span className={styles.fact}>
-              <MapPin size={11} color="rgba(0,0,0,0.35)" />
-              {h.distance} km
-            </span>
-          )}
-          {h.price && h.price !== 'Consultar' && (
-            <span className={styles.factDot}>·</span>
-          )}
-          {h.price && h.price !== 'Consultar' && (
-            <span className={styles.factPrice}>{h.price}</span>
-          )}
-        </div>
-
-        {/* Verification + availability */}
-        <div className={styles.heroBadges}>
-          {isVerified && (
-            <span className={styles.badge}>
-              <Shield size={10} color="var(--green)" /> Verificado
-            </span>
-          )}
-          {h.available
-            ? <span className={`${styles.badge} ${styles.badgeAvail}`}>Disponible</span>
-            : <span className={`${styles.badge} ${styles.badgeBusy}`}>Ocupado</span>
-          }
-          {h.urgent && (
-            <span className={`${styles.badge} ${styles.badgeUrgent}`}>
-              <Zap size={9} /> Urgencias
-            </span>
-          )}
-        </div>
-
-        {/* Short bio */}
-        {h.bio && (
-          <p className={styles.heroBio}>
-            {h.bio.length > 140 ? h.bio.slice(0, 140).trim() + '…' : h.bio}
-          </p>
-        )}
-
-        {/* Nüra recommendation — clean, one line */}
-        {cleanReason && (
-          <div className={styles.recommendBadge}>
-            <Sparkles size={10} color="var(--purple)" />
-            <span>
-              <strong>Recomendado por Nüra · </strong>
-              {cleanReason.charAt(0).toUpperCase() + cleanReason.slice(1)}
-            </span>
+          {/* Avatar + availability */}
+          <div className={styles.avatarWrap}>
+            {h.avatarUrl
+              ? <img src={h.avatarUrl} alt={h.name} className={styles.avatar} />
+              : <div className={styles.avatarFallback} style={{background: h.avatarColor || 'var(--purple)'}}>
+                  {h.avatar || h.name?.[0]}
+                </div>
+            }
+            {h.available && <span className={styles.availDot} />}
           </div>
-        )}
 
-        {/* Primary CTA */}
-        <button className={styles.ctaPrimary} onClick={handleContact}>
-          <MessageCircle size={15} /> Escribir a {firstName}
-        </button>
-        <button className={styles.ctaSecondary}
-          onClick={() => user ? setShowConfirm(true) : setShowGate(true)}>
-          <Calendar size={14} /> Contratar
-        </button>
+          {/* Name */}
+          <h1 className={styles.name}>{h.name}</h1>
 
-      </div>
-
-      {/* ══════════════════════════════════════════════════
-          SEGUNDO NIVEL — Tabs: profundiza
-          ══════════════════════════════════════════════════ */}
-      <div className={styles.tabNav}>
-        {[
-          { id: 'perfil',         label: 'Perfil',         icon: null },
-          { id: 'trayectoria',    label: 'Trayectoria',    icon: null },
-          { id: 'publicaciones',  label: 'Publicaciones',  icon: null },
-        ].map(t => (
-          <button key={t.id}
-            className={`${styles.tabBtn} ${activeTab === t.id ? styles.tabBtnActive : ''}`}
-            onClick={() => setActiveTab(t.id)}>
-            {t.label}
-          </button>
-        ))}
-      </div>
-
-      <div className={styles.tabContent}>
-
-        {/* ── TAB: PERFIL ──────────────────────────────── */}
-        {activeTab === 'perfil' && (
-          <div className={styles.tab}>
-
-            {/* Bio completa */}
-            {h.bio && (
-              <section className={styles.section}>
-                <h3 className={styles.sectionTitle}>Sobre {firstName}</h3>
-                <p className={styles.bioText}>{h.bio}</p>
-              </section>
+          {/* Specialty + verified */}
+          <div className={styles.specialty}>
+            {h.specialty}
+            {h.dniVerified && (
+              <span className={styles.verifiedBadge}>
+                <Shield size={10} color="var(--green)" /> Verificado
+              </span>
             )}
-
-            {/* Servicios */}
-            {(h.specialty || (h.tags?.length > 0)) && (
-              <section className={styles.section}>
-                <h3 className={styles.sectionTitle}>Servicios</h3>
-                <div className={styles.chipRow}>
-                  {[h.specialty, ...(h.tags || [])
-                    .filter(t => t && t !== h.specialty && t !== h.zone)
-                    .slice(0, 5)
-                  ].filter(Boolean).map((s, i) => (
-                    <span key={i} className={styles.chip}>{s}</span>
-                  ))}
-                </div>
-              </section>
-            )}
-
-            {/* Disponibilidad */}
-            <section className={styles.section}>
-              <h3 className={styles.sectionTitle}>Disponibilidad</h3>
-              <div className={styles.availRow}>
-                {['Lun','Mar','Mié','Jue','Vie','Sáb','Dom'].map((day, i) => {
-                  const avail = h.available && i < 5
-                  return (
-                    <div key={day} className={`${styles.dayPill} ${avail ? styles.dayPillOn : styles.dayPillOff}`}>
-                      <span className={styles.dayLabel}>{day}</span>
-                      <span className={styles.dayStatus}>{avail ? '✓' : '–'}</span>
-                    </div>
-                  )
-                })}
-              </div>
-            </section>
-
-            {/* Zona de trabajo */}
-            {h.zone && (
-              <section className={styles.section}>
-                <h3 className={styles.sectionTitle}>Zona de trabajo</h3>
-                <div className={styles.chipRow}>
-                  <span className={styles.chip}>
-                    <MapPin size={11} color="rgba(0,0,0,0.4)" /> {h.zone}
-                  </span>
-                  {h.distance && (
-                    <span className={styles.chipMuted}>
-                      Radio hasta {h.distance < 5 ? '5' : h.distance < 10 ? '10' : '15'} km
-                    </span>
-                  )}
-                </div>
-              </section>
-            )}
-
-            {/* Reconocimientos */}
-            {(h.founder || h.urgent || h.completionRate >= 90) && (
-              <section className={styles.section}>
-                <h3 className={styles.sectionTitle}>Reconocimientos</h3>
-                <div className={styles.badgeRow}>
-                  {h.founder && (
-                    <div className={styles.recognitionBadge}>
-                      <Award size={14} color="#92400E" />
-                      <span>Profesional fundador de Nüra</span>
-                    </div>
-                  )}
-                  {h.completionRate >= 90 && (
-                    <div className={styles.recognitionBadge}>
-                      <CheckCircle size={14} color="var(--green)" />
-                      <span>{h.completionRate}% de servicios completados</span>
-                    </div>
-                  )}
-                  {h.urgent && (
-                    <div className={styles.recognitionBadge}>
-                      <Zap size={14} color="var(--purple)" />
-                      <span>Acepta urgencias</span>
-                    </div>
-                  )}
-                </div>
-              </section>
-            )}
-
-            {/* Valoraciones */}
-            {h.reviews > 0 && (
-              <section className={styles.section}>
-                <h3 className={styles.sectionTitle}>Valoraciones</h3>
-                <div className={styles.ratingHero}>
-                  <span className={styles.ratingBig}>{h.rating}</span>
-                  <div className={styles.ratingStars}>
-                    {[1,2,3,4,5].map(n => (
-                      <Star key={n} size={14}
-                        fill={n <= Math.round(h.rating) ? 'var(--amber)' : 'rgba(0,0,0,0.1)'}
-                        color={n <= Math.round(h.rating) ? 'var(--amber)' : 'rgba(0,0,0,0.1)'} />
-                    ))}
-                  </div>
-                  <span className={styles.ratingCount}>{h.reviews} valoraciones</span>
-                </div>
-                {h.qualitativeComments?.length > 0 && (
-                  <div className={styles.reviewList}>
-                    {h.qualitativeComments.slice(0, 3).map((c, i) => (
-                      <div key={i} className={styles.reviewItem}>
-                        <span className={styles.reviewQuote}>"</span>
-                        <p>{c}</p>
-                      </div>
-                    ))}
-                  </div>
-                )}
-              </section>
-            )}
-
           </div>
-        )}
 
-        {/* ── TAB: TRAYECTORIA ─────────────────────────── */}
-        {activeTab === 'trayectoria' && (
-          <div className={styles.tab}>
-
-            {/* Nota verificación */}
-            <div className={styles.verifyNote}>
-              <Shield size={13} color="var(--green)" />
-              <p>Historial verificado por terceros. No lo ha escrito {firstName}.</p>
+          {/* Education headline — the most trust-building line */}
+          {mainEdu && (
+            <div className={styles.eduHeadline}>
+              <BookOpen size={11} color="rgba(0,0,0,0.35)" />
+              <span>{mainEdu.title} · {mainEdu.institution?.split('—')[0].trim()}</span>
             </div>
+          )}
 
-            {/* Verified stats */}
-            {(h.services > 0 || h.completionRate > 0) && (
-              <div className={styles.verifiedStats}>
-                {h.services > 0 && (
-                  <div className={styles.statPill}>
-                    <span className={styles.statPillNum}>{h.services}</span>
-                    <span className={styles.statPillLabel}>servicios</span>
-                  </div>
-                )}
-                {h.completionRate > 0 && (
-                  <div className={styles.statPill}>
-                    <span className={styles.statPillNum}>{h.completionRate}%</span>
-                    <span className={styles.statPillLabel}>satisfacción</span>
-                  </div>
-                )}
-                {h.reviews > 0 && (
-                  <div className={styles.statPill}>
-                    <span className={styles.statPillNum}>{h.reviews}</span>
-                    <span className={styles.statPillLabel}>valoraciones</span>
-                  </div>
-                )}
+          {/* Location */}
+          {(h.zone || h.city) && (
+            <div className={styles.location}>
+              <MapPin size={11} color="rgba(0,0,0,0.35)" />
+              <span>{h.zone}{h.city && h.zone !== h.city ? `, ${h.city}` : ''}</span>
+              {h.distance && <span className={styles.locationDist}> · {h.distance} km de ti</span>}
+            </div>
+          )}
+
+          {/* Stats row */}
+          <div className={styles.statsRow}>
+            {h.rating && (
+              <div className={styles.stat}>
+                <Star size={12} fill="var(--amber)" color="var(--amber)" />
+                <strong>{h.rating}</strong>
+                {h.reviews > 0 && <span>({h.reviews})</span>}
               </div>
             )}
-
-            {/* Experiencia laboral */}
-            {h.experience?.length > 0 && (
-              <section className={styles.section}>
-                <h3 className={styles.sectionTitle}>
-                  <Briefcase size={13} /> Experiencia
-                </h3>
-                <div className={styles.timeline}>
-                  {h.experience.map((exp, i) => (
-                    <div key={i} className={styles.timelineItem}>
-                      <div className={styles.timelineDot} />
-                      {i < h.experience.length - 1 && <div className={styles.timelineLine} />}
-                      <div className={styles.timelineBody}>
-                        <ExperienceCard exp={exp} />
-                      </div>
-                    </div>
-                  ))}
-                </div>
-              </section>
-            )}
-
-            {/* Formación */}
-            {h.education?.length > 0 && (
-              <section className={styles.section}>
-                <h3 className={styles.sectionTitle}>
-                  <BookOpen size={13} /> Formación
-                </h3>
-                <div className={styles.timeline}>
-                  {h.education.map((edu, i) => (
-                    <div key={i} className={styles.timelineItem}>
-                      <div className={styles.timelineDot} />
-                      {i < h.education.length - 1 && <div className={styles.timelineLine} />}
-                      <div className={styles.timelineBody}>
-                        <div className={styles.eduCard}>
-                          <div className={styles.eduTitle}>{edu.title || edu.degree}</div>
-                          <div className={styles.eduInst}>{edu.institution || edu.school}</div>
-                          {edu.year && <div className={styles.eduYear}>{edu.year}</div>}
-                          {edu.details && (
-                            <p className={styles.eduDetails}>
-                              {edu.details.length > 130 ? edu.details.slice(0,130)+'…' : edu.details}
-                            </p>
-                          )}
-                          {edu.verified && (
-                            <div className={styles.eduVerified}>
-                              <Shield size={9} color="var(--green)" /> Verificado
-                            </div>
-                          )}
-                        </div>
-                      </div>
-                    </div>
-                  ))}
-                </div>
-              </section>
-            )}
-
-            {/* Certificaciones — extracted from education */}
-            {h.education?.some(e => /certif|acredit|colegia|título/i.test(e.title)) && (
-              <section className={styles.section}>
-                <h3 className={styles.sectionTitle}>
-                  <Award size={13} /> Certificaciones y acreditaciones
-                </h3>
-                <div className={styles.certList}>
-                  {h.education
-                    .filter(e => /certif|acredit|colegia/i.test(e.title))
-                    .map((cert, i) => (
-                      <div key={i} className={styles.certItem}>
-                        <div className={styles.certIcon}>
-                          <CheckCircle size={13} color="var(--green)" />
-                        </div>
-                        <div className={styles.certBody}>
-                          <div className={styles.certTitle}>{cert.title}</div>
-                          <div className={styles.certInst}>
-                            {cert.institution}
-                            {cert.year && <span> · {cert.year}</span>}
-                          </div>
-                        </div>
-                      </div>
-                    ))
-                  }
-                </div>
-              </section>
-            )}
-
-            {/* Idiomas */}
-            {h.languages?.length > 0 && (
-              <section className={styles.section}>
-                <h3 className={styles.sectionTitle}>Idiomas</h3>
-                <div className={styles.chipRow}>
-                  {h.languages.map((l, i) => (
-                    <span key={i} className={styles.chip}>{l}</span>
-                  ))}
-                </div>
-              </section>
-            )}
-
-            {/* Skills / especialidades */}
-            {h.skills?.length > 0 && (
-              <section className={styles.section}>
-                <h3 className={styles.sectionTitle}>Especialidades</h3>
-                <div className={styles.chipRow}>
-                  {h.skills.map((s, i) => (
-                    <span key={i} className={`${styles.chip} ${styles.chipSubtle}`}>{s}</span>
-                  ))}
-                </div>
-              </section>
-            )}
-
-            {/* Empty state */}
-            {!h.experience?.length && !h.education?.length && (
-              <div className={styles.emptyTab}>
-                <p>La trayectoria de {firstName} se irá completando.</p>
+            {h.price && h.price !== 'Consultar' && (
+              <div className={styles.stat}>
+                <strong>{h.price}</strong>
               </div>
             )}
-
+            {h.urgent && (
+              <div className={`${styles.stat} ${styles.statUrgent}`}>
+                <Zap size={10} /> Urgencias
+              </div>
+            )}
           </div>
+
+          {/* Bio */}
+          {h.bio && (
+            <p className={styles.bio}>{h.bio}</p>
+          )}
+
+          {/* CTA */}
+          <button className={styles.ctaPrimary} onClick={handleContact}>
+            <MessageCircle size={15} /> Escribir a {firstName}
+          </button>
+          <button className={styles.ctaSecondary}
+            onClick={() => user ? setShowConfirm(true) : setShowGate(true)}>
+            <Calendar size={14} /> Ver disponibilidad
+          </button>
+
+        </div>
+
+        {/* ══════════════════════════════════════════════════
+            CONTENIDO — flujo continuo, sin tabs
+            La persona es la protagonista
+            ══════════════════════════════════════════════════ */}
+
+        {/* ── Experiencia ── */}
+        {h.experience?.length > 0 && (
+          <section className={styles.section}>
+            <h2 className={styles.sectionHeading}>
+              <Briefcase size={14} /> Experiencia
+            </h2>
+            <div className={styles.expList}>
+              {h.experience.map((exp, i) => (
+                <div key={i} className={styles.expItem}>
+                  <div className={styles.expDot} />
+                  {i < h.experience.length - 1 && <div className={styles.expLine} />}
+                  <div className={styles.expContent}>
+                    <div className={styles.expRole}>{exp.role}</div>
+                    <div className={styles.expCompany}>
+                      {exp.company}
+                      {exp.verifiedByCompany && (
+                        <span className={styles.expVerified}>
+                          <CheckCircle size={9} color="var(--green)" /> Verificado
+                        </span>
+                      )}
+                    </div>
+                    <div className={styles.expPeriod}>{exp.period}{exp.location ? ` · ${exp.location}` : ''}</div>
+                    {exp.description && <p className={styles.expDesc}>{exp.description}</p>}
+                    {exp.achievements?.length > 0 && (
+                      <ul className={styles.expAchievements}>
+                        {exp.achievements.slice(0,3).map((a,j) => <li key={j}>{a}</li>)}
+                      </ul>
+                    )}
+                    {exp.competencies?.length > 0 && (
+                      <div className={styles.expTags}>
+                        {exp.competencies.slice(0,4).map((c,j) => (
+                          <span key={j} className={styles.expTag}>{c}</span>
+                        ))}
+                      </div>
+                    )}
+                    {exp.managerOpinion && (
+                      <div className={styles.quote}>
+                        <p>"{exp.managerOpinion.text?.slice(0,120)}{exp.managerOpinion.text?.length > 120 ? '…' : ''}"</p>
+                        <span>— {exp.managerOpinion.name}, {exp.managerOpinion.role}</span>
+                      </div>
+                    )}
+                  </div>
+                </div>
+              ))}
+            </div>
+          </section>
         )}
 
-        {/* ── TAB: PUBLICACIONES ───────────────────────── */}
-        {activeTab === 'publicaciones' && (
-          <div className={styles.tab}>
-            {h.posts?.length > 0
-              ? h.posts.map((post, i) => (
-                  <PostCard key={i} post={post} helper={h} />
-                ))
-              : (
-                <div className={styles.emptyTab}>
-                  <p>Cuando {firstName} publique contenido aparecerá aquí.</p>
+        {/* ── Formación ── */}
+        {h.education?.length > 0 && (
+          <section className={styles.section}>
+            <h2 className={styles.sectionHeading}>
+              <BookOpen size={14} /> Formación
+            </h2>
+            <div className={styles.expList}>
+              {h.education.map((edu, i) => (
+                <div key={i} className={styles.expItem}>
+                  <div className={styles.expDot} />
+                  {i < h.education.length - 1 && <div className={styles.expLine} />}
+                  <div className={styles.expContent}>
+                    <div className={styles.expRole}>{edu.title || edu.degree}</div>
+                    <div className={styles.expCompany}>{edu.institution || edu.school}</div>
+                    {edu.year && <div className={styles.expPeriod}>{edu.year}</div>}
+                    {edu.details && (
+                      <p className={styles.expDesc}>{edu.details}</p>
+                    )}
+                  </div>
+                </div>
+              ))}
+            </div>
+          </section>
+        )}
+
+        {/* ── Habilidades ── */}
+        {h.skills?.length > 0 && (
+          <section className={styles.section}>
+            <h2 className={styles.sectionHeading}>Habilidades</h2>
+            <div className={styles.tags}>
+              {h.skills.map((s, i) => (
+                <span key={i} className={styles.tag}>{s}</span>
+              ))}
+            </div>
+          </section>
+        )}
+
+        {/* ── Idiomas ── */}
+        {h.languages?.length > 0 && (
+          <section className={styles.section}>
+            <h2 className={styles.sectionHeading}>
+              <Globe size={14} /> Idiomas
+            </h2>
+            <div className={styles.tags}>
+              {h.languages.map((l, i) => (
+                <span key={i} className={`${styles.tag} ${styles.tagIdioma}`}>{l}</span>
+              ))}
+            </div>
+          </section>
+        )}
+
+        {/* ── Disponibilidad ── */}
+        <section className={styles.section}>
+          <h2 className={styles.sectionHeading}>
+            <Calendar size={14} /> Disponibilidad
+          </h2>
+          <div className={styles.availRow}>
+            {['Lun','Mar','Mié','Jue','Vie','Sáb','Dom'].map((day, i) => {
+              const on = h.available && i < 5
+              return (
+                <div key={day} className={`${styles.dayPill} ${on ? styles.dayOn : styles.dayOff}`}>
+                  <span>{day}</span>
+                  <span>{on ? '✓' : '–'}</span>
                 </div>
               )
-            }
+            })}
           </div>
+          {h.online && <p className={styles.availNote}>También disponible online</p>}
+        </section>
+
+        {/* ── Valoraciones ── */}
+        {h.reviews > 0 && (
+          <section className={styles.section}>
+            <h2 className={styles.sectionHeading}>
+              <Star size={14} fill="var(--amber)" color="var(--amber)" /> Valoraciones
+            </h2>
+            <div className={styles.ratingRow}>
+              <span className={styles.ratingBig}>{h.rating}</span>
+              <div>
+                <div className={styles.ratingStars}>
+                  {[1,2,3,4,5].map(n => (
+                    <Star key={n} size={13}
+                      fill={n <= Math.round(h.rating) ? 'var(--amber)' : 'rgba(0,0,0,0.1)'}
+                      color={n <= Math.round(h.rating) ? 'var(--amber)' : 'rgba(0,0,0,0.1)'} />
+                  ))}
+                </div>
+                <span className={styles.ratingCount}>{h.reviews} valoraciones verificadas</span>
+              </div>
+            </div>
+            {h.qualitativeComments?.length > 0 && (
+              <div className={styles.reviewList}>
+                {h.qualitativeComments.slice(0,3).map((c, i) => (
+                  <div key={i} className={styles.reviewItem}>
+                    <p>"{typeof c === 'string' ? c : c.text}"</p>
+                    {c.user && <span>— {c.user}</span>}
+                  </div>
+                ))}
+              </div>
+            )}
+          </section>
         )}
+
+        {/* ── Publicaciones ── */}
+        {h.posts?.length > 0 && (
+          <section className={styles.section}>
+            <h2 className={styles.sectionHeading}>Publicaciones</h2>
+            {h.posts.slice(0,2).map((post, i) => (
+              <PostCard key={i} post={post} />
+            ))}
+          </section>
+        )}
+
+        {/* Bottom padding */}
+        <div style={{height: '80px'}} />
 
       </div>
 
