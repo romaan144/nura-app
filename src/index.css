@@ -61,7 +61,19 @@ body {
   --rule2:    #F0F0FA;
   --paper:    #F5F5F8;
   --white:    #FFFFFF;
-  --green:    #00C48C;
+
+  /* ── SEMANTIC COLORS ────────────────────────────────── */
+  --green:        #059669;   /* verified, available, success */
+  --green-light:  #ECFDF5;   /* green background tint */
+  --green-dot:    #22C55E;   /* availability dot */
+  --red:          #EF4444;   /* error, remove, danger */
+  --red-light:    #FEF2F2;   /* red background tint */
+  --amber:        #F59E0B;   /* rating stars, warnings */
+  --amber-light:  #FEF3C7;   /* amber background tint */
+  --blue:         #3B82F6;   /* info, links */
+  --blue-light:   #EFF6FF;   /* blue background tint */
+
+  --green-old: #00C48C;  /* legacy — use --green instead */
   --amber:    #FFB800;
 
   /* Gradients */

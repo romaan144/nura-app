@@ -821,11 +821,11 @@ export default function Home({ setSearchState }) {
                         overflow:'hidden',textOverflow:'ellipsis',whiteSpace:'nowrap'}}>
                         {h.tags?.[0] || h.specialty?.split(' ')[0]}
                       </span>
-                      <span style={{fontSize:'8px',color:'#059669',fontWeight:700,
-                        background:'#ECFDF5',borderRadius:'100px',padding:'1px 5px',
+                      <span style={{fontSize:'8px',color:'var(--green)',fontWeight:700,
+                        background:'var(--green-light)',borderRadius:'100px',padding:'1px 5px',
                         display:'flex',alignItems:'center',gap:'2px'}}>
                         <span style={{width:'5px',height:'5px',borderRadius:'50%',
-                          background:'#059669',display:'inline-block'}}/>
+                          background:'var(--green)',display:'inline-block'}}/>
                         Libre
                       </span>
                     </button>

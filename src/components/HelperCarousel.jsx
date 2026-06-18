@@ -70,20 +70,20 @@ function CarouselCard({ helper, isTopPick, matchReason }) {
         }
         {helper.available && <span className={styles.availDot} />}
         <button className={styles.favBtn} onClick={handleFav}>
-          <Heart size={11} fill={fav ? '#EF4444' : 'none'} color={fav ? '#EF4444' : 'rgba(0,0,0,0.3)'} />
+          <Heart size={11} fill={fav ? 'var(--red)' : 'none'} color={fav ? 'var(--red)' : 'rgba(0,0,0,0.3)'} />
         </button>
       </div>
 
       {/* Info */}
       <div className={styles.name}>
         {helper.name?.split(' ')?.[0]} {helper.name?.split(' ')?.[1]?.[0]}.
-        {helper.dniVerified && <Shield size={9} color="#059669" style={{ marginLeft: 3, verticalAlign: 'middle' }} />}
+        {helper.dniVerified && <Shield size={9} color="var(--green)" style={{ marginLeft: 3, verticalAlign: 'middle' }} />}
       </div>
       <div className={styles.specialty}>{helper.specialty}</div>
 
       {/* Rating + distance */}
       <div className={styles.meta}>
-        <Star size={9} fill="#F59E0B" color="#F59E0B" />
+        <Star size={9} fill="var(--amber)" color="var(--amber)" />
         <span>{helper.rating}</span>
         <span className={styles.metaDot}>·</span>
         <MapPin size={8} color="rgba(0,0,0,0.3)" />

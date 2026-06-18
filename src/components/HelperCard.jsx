@@ -61,7 +61,7 @@ export default function HelperCard({ helper, onContact, compact = false, showCon
           {/* Name row */}
           <div className={styles.name}>
             <span>{firstName}{lastName ? ` ${lastName}.` : ''}</span>
-            {helper.dniVerified && <Shield size={9} color="#059669" style={{ marginLeft: 3 }} />}
+            {helper.dniVerified && <Shield size={9} color="var(--green)" style={{ marginLeft: 3 }} />}
           </div>
 
           {/* Specialty + distance */}
@@ -78,7 +78,7 @@ export default function HelperCard({ helper, onContact, compact = false, showCon
 
           {/* Meta: rating + mode */}
           <div className={styles.meta}>
-            <Star size={9} fill="#F59E0B" color="#F59E0B" />
+            <Star size={9} fill="var(--amber)" color="var(--amber)" />
             <span className={styles.metaStrong}>{helper.rating}</span>
             {helper.reviews > 0 && <span className={styles.metaMuted}>({helper.reviews})</span>}
             {(helper.presential || helper.online) && (
@@ -109,7 +109,7 @@ export default function HelperCard({ helper, onContact, compact = false, showCon
           )}
           <div className={styles.actions}>
             <button className={styles.favBtn} onClick={handleFav}>
-              <Heart size={12} fill={fav ? '#EF4444' : 'none'} color={fav ? '#EF4444' : 'rgba(0,0,0,0.3)'} />
+              <Heart size={12} fill={fav ? 'var(--red)' : 'none'} color={fav ? 'var(--red)' : 'rgba(0,0,0,0.3)'} />
             </button>
             {showContact && (
               <button className={styles.contactBtn} onClick={handleContact}>

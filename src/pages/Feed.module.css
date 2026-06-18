@@ -82,7 +82,7 @@
 .verifiedDot {
   position: absolute; bottom: -1px; right: -1px;
   width: 14px; height: 14px; border-radius: 50%;
-  background: #059669; border: 2px solid white;
+  background: var(--green); border: 2px solid white;
   display: flex; align-items: center; justify-content: center;
 }
 
@@ -134,7 +134,7 @@
 }
 .hiringBadge {
   font-size: var(--text-xs); font-weight: 600;
-  color: #059669; background: #ECFDF5;
+  color: var(--green); background: var(--green-light);
   border-radius: 100px; padding: 4px 12px;
   display: inline-block; margin: 0 14px 10px;
   border: 1px solid rgba(5,150,105,0.15);
@@ -155,7 +155,7 @@
   font-family: -apple-system, 'Inter', sans-serif;
 }
 .action:active { opacity: 0.6; }
-.actionLiked { color: #EF4444; }
+.actionLiked { color: var(--red); }
 .actionSaved { color: var(--purple); }
 .actionEnd { margin-left: auto; }
 
@@ -190,7 +190,7 @@
 .availabilityBadge {
   display: inline-block;
   font-size: var(--text-xs); font-weight: 700;
-  color: #059669; background: #ECFDF5;
+  color: var(--green); background: var(--green-light);
   border: 1px solid rgba(5,150,105,0.2);
   border-radius: 100px; padding: 3px 10px;
   margin-bottom: 4px;

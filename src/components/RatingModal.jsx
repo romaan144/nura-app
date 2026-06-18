@@ -34,8 +34,8 @@ export default function RatingModal({ helper, onClose }) {
                   onMouseLeave={() => setHover(0)}
                   onClick={() => setRating(n)}>
                   <Star size={36}
-                    fill={(hover || rating) >= n ? '#F59E0B' : 'none'}
-                    color={(hover || rating) >= n ? '#F59E0B' : 'var(--rule)'}
+                    fill={(hover || rating) >= n ? 'var(--amber)' : 'none'}
+                    color={(hover || rating) >= n ? 'var(--amber)' : 'var(--rule)'}
                     strokeWidth={1.5} />
                 </button>
               ))}
@@ -58,7 +58,7 @@ export default function RatingModal({ helper, onClose }) {
           </>
         ) : (
           <div className={styles.doneState}>
-            <div className={styles.doneIcon}><CheckCircle size={48} color='#059669' strokeWidth={1.4} /></div>
+            <div className={styles.doneIcon}><CheckCircle size={48} color='var(--green)' strokeWidth={1.4} /></div>
             <h3 className={styles.title}>¡Gracias!</h3>
             <p className={styles.desc}>Tu valoración ya forma parte del perfil de {helper.name.split(' ')[0]} en Nüra.</p>
           </div>

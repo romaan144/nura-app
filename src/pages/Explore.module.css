@@ -48,7 +48,7 @@
 
 .card:active { opacity: 0.75; }
 
-.urgentBadge { position: absolute; bottom: 0; right: 0; width: 18px; height: 18px; border-radius: 50%; background: #EF4444; color: white; display: flex; align-items: center; justify-content: center; border: 2px solid white; }
+.urgentBadge { position: absolute; bottom: 0; right: 0; width: 18px; height: 18px; border-radius: 50%; background: var(--red); color: white; display: flex; align-items: center; justify-content: center; border: 2px solid white; }
 
 .cardBody { padding: 0 12px 8px; text-align: center; flex: 1; }
 

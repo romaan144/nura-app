@@ -16,7 +16,7 @@ const STEPS = [
     title: 'Nüra analiza y selecciona',
     desc: 'La IA evalúa más de 1.200 perfiles verificados. Filtra por especialidad, zona, disponibilidad, valoraciones y compatibilidad con tu caso.',
     example: 'En segundos te presenta las personas más adecuadas — no una lista genérica.',
-    color: '#059669',
+    color: 'var(--green)',
   },
   {
     n: '03',

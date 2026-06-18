@@ -13,7 +13,7 @@ const DEMO_SERVICES = [
     helperName: 'Elena Fernández Ros',
     specialty: 'Auxiliar de geriatría',
     avatarUrl: 'https://api.dicebear.com/9.x/personas/svg?seed=ElenaFernandez',
-    avatarColor: '#059669',
+    avatarColor: 'var(--green)',
     avatar: 'EF',
     date: (() => { const d = new Date(); d.setDate(d.getDate()+1); return d.toISOString().split('T')[0] })(),
     time: '09:30',
@@ -57,9 +57,9 @@ const DEMO_SERVICES = [
 
 const STATUS = {
   pending:   { label: 'Pendiente',   color: '#D97706', bg: '#FFFBEB' },
-  confirmed: { label: 'Confirmado',  color: '#059669', bg: '#ECFDF5' },
+  confirmed: { label: 'Confirmado',  color: 'var(--green)', bg: 'var(--green-light)' },
   completed: { label: 'Completado',  color: '#6B7280', bg: '#F9FAFB' },
-  cancelled: { label: 'Cancelado',   color: '#EF4444', bg: '#FEF2F2' },
+  cancelled: { label: 'Cancelado',   color: 'var(--red)', bg: 'var(--red-light)' },
 }
 
 const TABS = ['Todos', 'Próximos', 'Completados']
@@ -222,7 +222,7 @@ export default function MyServices() {
                 {rated && (
                   <div className={styles.postActions}>
                     <div className={styles.ratedRow} style={{flex:1}}>
-                      <CheckCircle size={12} color="#059669" />
+                      <CheckCircle size={12} color="var(--green)" />
                       <span>Valorado</span>
                     </div>
                     <button className={styles.actionBtnSecondary}
@@ -248,7 +248,7 @@ export default function MyServices() {
             <div style={{width:'36px',height:'4px',background:'rgba(0,0,0,0.1)',borderRadius:'2px',margin:'0 auto 20px'}} />
             {ratingSent ? (
               <div style={{textAlign:'center',padding:'20px 0',display:'flex',flexDirection:'column',alignItems:'center',gap:'12px'}}>
-                <Star size={44} color='#F59E0B' fill='#F59E0B' strokeWidth={1.5} />
+                <Star size={44} color='var(--amber)' fill='var(--amber)' strokeWidth={1.5} />
                 <h3 style={{fontSize:'var(--text-md)',fontWeight:800,color:'rgba(0,0,0,0.85)',margin:0,letterSpacing:'-0.3px'}}>¡Gracias por valorar!</h3>
                 <p style={{fontSize:'var(--text-sm)',color:'rgba(0,0,0,0.45)',margin:0}}>Tu valoración ayuda a toda la comunidad.</p>
               </div>
@@ -262,7 +262,7 @@ export default function MyServices() {
                   {[1,2,3,4,5].map(n => (
                     <button key={n} onClick={() => setRatingVal(n)}
                       style={{fontSize:'34px',background:'none',border:'none',cursor:'pointer',opacity:n<=ratingVal?1:0.25,transition:'opacity 0.15s'}}>
-                      <Star size={18} fill={ratingVal >= n ? '#F59E0B' : 'none'} color='#F59E0B' />
+                      <Star size={18} fill={ratingVal >= n ? 'var(--amber)' : 'none'} color='var(--amber)' />
                     </button>
                   ))}
                 </div>

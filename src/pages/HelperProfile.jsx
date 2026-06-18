@@ -108,7 +108,7 @@ function ExperienceCard({ exp }) {
               <span className={styles.managerRole}>{exp.managerOpinion.role}</span>
             </div>
             <div className={styles.managerStars}>
-              {[1,2,3,4,5].map(n => <Star key={n} size={10} fill="#F59E0B" color="#F59E0B" />)}
+              {[1,2,3,4,5].map(n => <Star key={n} size={10} fill="var(--amber)" color="var(--amber)" />)}
             </div>
           </div>
           <p className={styles.managerQuote}>"{exp.managerOpinion.text}"</p>
@@ -271,7 +271,7 @@ function AiDataSection({ aiData, aiAnalyzedAt, helperName }) {
         {v.map((s,i) => (
           <div key={i} style={{display:'flex',alignItems:'center',gap:'8px',
             fontSize:'var(--text-sm)',color:'rgba(0,0,0,0.5)'}}>
-            <span style={{color:'#F59E0B',fontSize:'var(--text-xs)',fontWeight:700}}>!</span> {s}
+            <span style={{color:'var(--amber)',fontSize:'var(--text-xs)',fontWeight:700}}>!</span> {s}
           </div>
         ))}
       </div>
@@ -462,7 +462,7 @@ function OwnerPanel({ helper, user, updateUser, navigate }) {
               borderRadius:'12px', cursor:'pointer',
               display:'flex', flexDirection:'column', alignItems:'center', gap:'3px',
             }}>
-            <span style={{width:'10px',height:'10px',borderRadius:'50%',background:available?'#22C55E':'rgba(0,0,0,0.2)',display:'inline-block'}} />
+            <span style={{width:'10px',height:'10px',borderRadius:'50%',background:available?'var(--green-dot)':'rgba(0,0,0,0.2)',display:'inline-block'}} />
             <span style={{fontSize:'var(--text-xs)',fontWeight:700,
               color: available ? '#34D399' : 'rgba(255,255,255,0.45)'}}>
               {available ? 'Disponible' : 'No disponible'}
@@ -557,14 +557,14 @@ function BookingModal({ helper, onClose, onBook, onNavigate }) {
             <div style={{position:'relative'}}>
               {helper?.avatarUrl
                 ? <img src={helper.avatarUrl} alt={name}
-                    style={{width:'68px',height:'68px',borderRadius:'50%',border:'3px solid #22C55E'}} />
+                    style={{width:'68px',height:'68px',borderRadius:'50%',border:'3px solid var(--green-dot)'}} />
                 : <div style={{width:'68px',height:'68px',borderRadius:'50%',background:helper?.avatarColor||'#7B2FFF',
                     display:'flex',alignItems:'center',justifyContent:'center',color:'white',fontSize:'24px',fontWeight:700,
-                    border:'3px solid #22C55E'}}>
+                    border:'3px solid var(--green-dot)'}}>
                     {helper?.avatar||name?.[0]}
                   </div>
               }
-              <span style={{position:'absolute',bottom:-2,right:-2,width:'22px',height:'22px',background:'#22C55E',borderRadius:'50%',display:'flex',alignItems:'center',justifyContent:'center'}}><svg width='12' height='12' viewBox='0 0 12 12' fill='none'><path d='M2 6l3 3 5-5' stroke='white' strokeWidth='1.8' strokeLinecap='round' strokeLinejoin='round'/></svg></span>
+              <span style={{position:'absolute',bottom:-2,right:-2,width:'22px',height:'22px',background:'var(--green-dot)',borderRadius:'50%',display:'flex',alignItems:'center',justifyContent:'center'}}><svg width='12' height='12' viewBox='0 0 12 12' fill='none'><path d='M2 6l3 3 5-5' stroke='white' strokeWidth='1.8' strokeLinecap='round' strokeLinejoin='round'/></svg></span>
             </div>
             <div>
               <h3 style={{fontSize:'19px',fontWeight:800,margin:'0 0 4px',color:'rgba(0,0,0,0.85)',letterSpacing:'-0.3px'}}>
@@ -747,7 +747,7 @@ function HelperProfileInner() {
   const COVER_GRADIENTS = {
     logopedia: 'linear-gradient(135deg,#1A56DB,#0891B2)',
     tecnico: 'linear-gradient(135deg,#1E40AF,#3730A3)',
-    limpieza: 'linear-gradient(135deg,#059669,#0891B2)',
+    limpieza: 'linear-gradient(135deg,var(--green),#0891B2)',
     cuidado: 'linear-gradient(135deg,#DB2777,#9333EA)',
     mascotas: 'linear-gradient(135deg,#D97706,#DC2626)',
     matematicas: 'linear-gradient(135deg,#7C3AED,#1D4ED8)',
@@ -779,15 +779,15 @@ function HelperProfileInner() {
     ((h.completionRate || 0) / 100) * 20 +
     (h.dniVerified ? 10 : 0)
   )
-  const level = score >= 85 ? { label: 'Experto verificado', color: '#059669', bg: '#ECFDF5' }
-    : score >= 65 ? { label: 'Referente de confianza', color: '#1A56DB', bg: '#EFF6FF' }
+  const level = score >= 85 ? { label: 'Experto verificado', color: 'var(--green)', bg: 'var(--green-light)' }
+    : score >= 65 ? { label: 'Referente de confianza', color: '#1A56DB', bg: 'var(--blue-light)' }
     : score >= 40 ? { label: 'Con historial', color: '#D97706', bg: '#FFFBEB' }
     : { label: 'Perfil nuevo', color: '#6B7280', bg: '#F9FAFB' }
 
   return (
     <div className={styles.page}>
       {/* Header */}
-      <PageHeader showBack rightEl={<button className={styles.shareBtn} onClick={handleShare}>{shared ? <span style={{fontSize:'var(--text-sm)',fontWeight:700,color:'#059669'}}>✓</span> : <Share2 size={17} color="#1a1a1a" />}</button>} />
+      <PageHeader showBack rightEl={<button className={styles.shareBtn} onClick={handleShare}>{shared ? <span style={{fontSize:'var(--text-sm)',fontWeight:700,color:'var(--green)'}}>✓</span> : <Share2 size={17} color="#1a1a1a" />}</button>} />
 
       <div className={styles.content}>
         {/* Hero */}
@@ -811,7 +811,7 @@ function HelperProfileInner() {
                 }
                 {h.available && (
                   <span style={{position:'absolute',bottom:2,right:2,width:'12px',height:'12px',
-                    background:'#22C55E',border:'2px solid white',borderRadius:'50%'}} />
+                    background:'var(--green-dot)',border:'2px solid white',borderRadius:'50%'}} />
                 )}
               </div>
 
@@ -827,7 +827,7 @@ function HelperProfileInner() {
                 {/* Key facts row */}
                 <div style={{display:'flex',alignItems:'center',gap:'6px',flexWrap:'wrap'}}>
                   <span style={{display:'flex',alignItems:'center',gap:'3px',fontSize:'var(--text-xs)',fontWeight:600,color:'rgba(0,0,0,0.7)'}}>
-                    <Star size={10} fill='#F59E0B' color='#F59E0B'/>{h.rating}
+                    <Star size={10} fill='var(--amber)' color='var(--amber)'/>{h.rating}
                     <span style={{color:'rgba(0,0,0,0.25)',fontWeight:400}}>({h.reviews})</span>
                   </span>
                   {h.distance && (
@@ -846,8 +846,8 @@ function HelperProfileInner() {
                 {/* DNI badge inline */}
                 {h.dniVerified && (
                   <div style={{display:'inline-flex',alignItems:'center',gap:'3px',marginTop:'6px',
-                    fontSize:'var(--text-xs)',fontWeight:600,color:'#059669',
-                    background:'#ECFDF5',borderRadius:'100px',padding:'2px 8px',
+                    fontSize:'var(--text-xs)',fontWeight:600,color:'var(--green)',
+                    background:'var(--green-light)',borderRadius:'100px',padding:'2px 8px',
                   }}>
                     <Shield size={9}/> Verificado
                   </div>
@@ -910,7 +910,7 @@ function HelperProfileInner() {
 
         {/* Trust line */}
         <div className={styles.trustLine}>
-          <Star size={11} fill='#F59E0B' color='#F59E0B' />
+          <Star size={11} fill='var(--amber)' color='var(--amber)' />
           <strong>{h.rating}</strong>
           <span className={styles.trustLineDot}>·</span>
           <span>{h.reviews} valoraciones</span>
@@ -945,7 +945,7 @@ function HelperProfileInner() {
                   }}>
                     <span style={{fontSize:'var(--text-xs)',color:'var(--soft)',fontWeight:600}}>{day}</span>
                     <span style={{fontSize:'var(--text-sm)'}}>{available ? '✓' : '–'}</span>
-                    {available && <span style={{fontSize:'var(--text-xs)',color:'#059669',fontWeight:600}}>Libre</span>}
+                    {available && <span style={{fontSize:'var(--text-xs)',color:'var(--green)',fontWeight:600}}>Libre</span>}
                   </div>
                 )
               })}
@@ -1011,7 +1011,7 @@ function HelperProfileInner() {
           }}>
             <Shield size={16} color='var(--purple)' strokeWidth={1.6} />
             <div>
-              <div style={{fontSize:'var(--text-xs)',fontWeight:700,color:'#059669',letterSpacing:'-0.1px'}}>Perfil verificado por Nüra</div>
+              <div style={{fontSize:'var(--text-xs)',fontWeight:700,color:'var(--green)',letterSpacing:'-0.1px'}}>Perfil verificado por Nüra</div>
               <div style={{fontSize:'var(--text-xs)',color:'rgba(0,0,0,0.45)'}}>Identidad confirmada · {h.services || 0} servicios reales · valoraciones auténticas</div>
             </div>
           </div>
@@ -1048,25 +1048,25 @@ function HelperProfileInner() {
               <div className={styles.badgesGrid}>
                 {(h.services || 0) >= 50 && (
                   <div className={styles.achieveBadge}>
-                    <Award size={16} color='#F59E0B' strokeWidth={1.6} />
+                    <Award size={16} color='var(--amber)' strokeWidth={1.6} />
                     <span className={styles.achieveLabel}>+50 servicios</span>
                   </div>
                 )}
                 {h.rating >= 4.8 && (
                   <div className={styles.achieveBadge}>
-                    <Star size={16} color='#F59E0B' fill='#F59E0B' strokeWidth={1.6} />
+                    <Star size={16} color='var(--amber)' fill='var(--amber)' strokeWidth={1.6} />
                     <span className={styles.achieveLabel}>Valoración top</span>
                   </div>
                 )}
                 {h.dniVerified && (
                   <div className={styles.achieveBadge}>
-                    <Shield size={16} color='#059669' strokeWidth={1.6} />
+                    <Shield size={16} color='var(--green)' strokeWidth={1.6} />
                     <span className={styles.achieveLabel}>Identidad verificada</span>
                   </div>
                 )}
                 {(h.completionRate || 0) >= 95 && (
                   <div className={styles.achieveBadge}>
-                    <CheckCircle size={16} color='#059669' strokeWidth={1.6} />
+                    <CheckCircle size={16} color='var(--green)' strokeWidth={1.6} />
                     <span className={styles.achieveLabel}>+95% completados</span>
                   </div>
                 )}
@@ -1180,7 +1180,7 @@ function HelperProfileInner() {
                 <div className={styles.ratingBreakdown}>
                   <div className={styles.ratingBig}>
                     <span className={styles.ratingBigNum}>{h.rating}</span>
-                    <div className={styles.ratingStars}>{[1,2,3,4,5].map(n=><Star key={n} size={14} fill="#F59E0B" color="#F59E0B" />)}</div>
+                    <div className={styles.ratingStars}>{[1,2,3,4,5].map(n=><Star key={n} size={14} fill="var(--amber)" color="var(--amber)" />)}</div>
                     <span className={styles.ratingCount}>{h.reviews} valoraciones</span>
                   </div>
                   <div className={styles.ratingBars}>
@@ -1206,7 +1206,7 @@ function HelperProfileInner() {
                         <div className={styles.reviewTop}>
                           <span className={styles.reviewUser}>{c.user}</span>
                           <div className={styles.reviewStars}>
-                            {[1,2,3,4,5].map(n => <Star key={n} size={9} fill="#F59E0B" color="#F59E0B" />)}
+                            {[1,2,3,4,5].map(n => <Star key={n} size={9} fill="var(--amber)" color="var(--amber)" />)}
                           </div>
                           <span className={styles.reviewDate}>{c.date}</span>
                         </div>

@@ -37,9 +37,9 @@ export default function RegisterGate({ onClose, reason = 'contact' }) {
 
   const BENEFITS = [
     { icon: <MessageCircle size={15} color="#7B2FFF" />, text: 'Contacto directo con profesionales' },
-    { icon: <Shield size={15} color="#059669" />, text: 'Todos los perfiles verificados por Nüra' },
-    { icon: <Star size={15} color="#F59E0B" />, text: 'Historial y valoraciones de tus servicios' },
-    { icon: <Heart size={15} color="#EF4444" />, text: 'Guarda tus favoritos y accede cuando quieras' },
+    { icon: <Shield size={15} color="var(--green)" />, text: 'Todos los perfiles verificados por Nüra' },
+    { icon: <Star size={15} color="var(--amber)" />, text: 'Historial y valoraciones de tus servicios' },
+    { icon: <Heart size={15} color="var(--red)" />, text: 'Guarda tus favoritos y accede cuando quieras' },
   ]
 
   return (

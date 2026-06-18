@@ -174,7 +174,7 @@ managerOpinion: { name:"Rosa Puigdomènech", role:"Directora de operaciones", te
     aiAnalyzedAt: "2025-06-15T10:00:00Z",
   },
   {
-    id: 5, name: "Elena Fernández Ros", avatar: "EF", avatarColor: "#059669",
+    id: 5, name: "Elena Fernández Ros", avatar: "EF", avatarColor: "var(--green)",
     avatarUrl: "https://api.dicebear.com/9.x/personas/svg?seed=elena",
     specialty: "Auxiliar de geriatría", category: "cuidado",
     tags: ["Alzheimer", "geriatría", "movilidad reducida", "acompañamiento"],
@@ -433,7 +433,7 @@ managerOpinion: { name:"Marta Alonso", role:"Socia directora — Garrigues BCN",
     evolution: [{ period: "2021", rating: 4.7, services: 8 }, { period: "2022", rating: 4.8, services: 22 }, { period: "2023", rating: 4.8, services: 34 }, { period: "2024", rating: 4.8, services: 43 }],
   },
   {
-    id: 11, name: "Dra. Laia Mercadé Font", avatar: "LM", avatarColor: "#059669",
+    id: 11, name: "Dra. Laia Mercadé Font", avatar: "LM", avatarColor: "var(--green)",
     avatarUrl: "https://api.dicebear.com/9.x/personas/svg?seed=laia",
     specialty: "Médica internista y medicina preventiva", category: "salud",
     tags: ["medicina interna","preventiva","segunda opinión","salud ejecutivos","nutrición clínica"],

@@ -65,7 +65,7 @@
   position: absolute; bottom: 1px; right: 1px;
   width: 10px; height: 10px;
   border-radius: 50%;
-  background: #22C55E;
+  background: var(--green-dot);
   border: 2px solid white;
 }
 .favBtn {

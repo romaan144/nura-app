@@ -18,7 +18,7 @@
 .analysisPill { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 12px; }
 .pill { font-size: var(--text-xs); font-weight: 500; border-radius: 20px; padding: 4px 11px; }
 .pillNormal { color: var(--mid); background: #F5F5F8; border: none; }
-.pillUrgent { color: #92400E; background: #FEF3C7; border: 1.5px solid #FCD34D; }
+.pillUrgent { color: #92400E; background: var(--amber-light); border: 1.5px solid #FCD34D; }
 
 /* Refine */
 .refineBox { background: #F5F5F8; border: 1.5px solid var(--purple); border-radius: 18px; padding: 14px 16px; margin-top: 4px; margin-bottom: 16px; box-shadow: 0 0 0 3px rgba(123,47,255,0.05); }

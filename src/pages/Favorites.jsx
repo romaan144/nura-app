@@ -46,7 +46,7 @@ export default function Favorites() {
                     <div className={styles.name}>{h.name}</div>
                     <div className={styles.spec}>{h.specialty}</div>
                     <div className={styles.meta}>
-                      <Star size={11} fill="#F59E0B" color="#F59E0B" /> {h.rating}
+                      <Star size={11} fill="var(--amber)" color="var(--amber)" /> {h.rating}
                       <span>·</span>
                       <MapPin size={11} /> {h.distance}km
                       <span>·</span>
@@ -56,7 +56,7 @@ export default function Favorites() {
                 </div>
                 <button className={styles.heartBtn}
                   onClick={e => { e.stopPropagation(); toggleFavorite(h.id) }}>
-                  <Heart size={18} fill="#EF4444" color="#EF4444" />
+                  <Heart size={18} fill="var(--red)" color="var(--red)" />
                 </button>
               </div>
             ))}

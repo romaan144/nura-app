@@ -11,7 +11,7 @@ export default class ErrorBoundary extends Component {
   render() {
     if (this.state.error) {
       return (
-        <div style={{padding:'24px',background:'#FEF2F2',minHeight:'100dvh',display:'flex',flexDirection:'column',gap:'12px'}}>
+        <div style={{padding:'24px',background:'var(--red-light)',minHeight:'100dvh',display:'flex',flexDirection:'column',gap:'12px'}}>
           <h2 style={{color:'#DC2626',fontSize:'16px',fontWeight:700}}>Error al cargar el perfil</h2>
           <p style={{color:'#991B1B',fontSize:'var(--text-sm)',fontFamily:'monospace',background:'white',padding:'12px',borderRadius:'8px',whiteSpace:'pre-wrap'}}>
             {this.state.error.message}

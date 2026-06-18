@@ -149,7 +149,7 @@ function PostCard({ post }) {
       {/* Badge */}
       {post.badge && <div className={styles.badge}>{post.badge}</div>}
       {post.type === 'availability' && !post.badge && (
-        <div className={styles.availabilityBadge}><span style={{display:'inline-block',width:'7px',height:'7px',borderRadius:'50%',background:'#059669',marginRight:'5px',verticalAlign:'middle'}}/>Disponible esta semana</div>
+        <div className={styles.availabilityBadge}><span style={{display:'inline-block',width:'7px',height:'7px',borderRadius:'50%',background:'var(--green)',marginRight:'5px',verticalAlign:'middle'}}/>Disponible esta semana</div>
       )}
       {post.type === 'tip' && !post.badge && (
         <div className={styles.tipBadge}>Consejo profesional</div>
@@ -163,7 +163,7 @@ function PostCard({ post }) {
         <button
           className={`${styles.action} ${liked ? styles.actionLiked : ''}`}
           onClick={() => { setLiked(l => !l); setLikes(n => liked ? n-1 : n+1) }}>
-          <Heart size={17} fill={liked?'#EF4444':'none'} color={liked?'#EF4444':'rgba(0,0,0,0.35)'} />
+          <Heart size={17} fill={liked?'var(--red)':'none'} color={liked?'var(--red)':'rgba(0,0,0,0.35)'} />
           <span>{likes}</span>
         </button>
         <button className={styles.action}>
@@ -275,7 +275,7 @@ export default function Feed() {
                     <span style={{fontSize:'var(--text-xs)',color:'rgba(0,0,0,0.45)',textAlign:'center',lineHeight:1.3}}>
                       {h.specialty}
                     </span>
-                    <span style={{fontSize:'var(--text-xs)',color:'#059669',fontWeight:600}}>
+                    <span style={{fontSize:'var(--text-xs)',color:'var(--green)',fontWeight:600}}>
                       Disponible
                     </span>
                   </div>

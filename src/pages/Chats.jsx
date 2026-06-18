@@ -14,7 +14,7 @@ const DEMO_CHATS = [
     helperId: 5,
     helperName: "Elena Fernández Ros",
     avatarUrl: "https://api.dicebear.com/9.x/personas/svg?seed=ElenaFernandez",
-    helperColor: "#059669",
+    helperColor: "var(--green)",
     helperAvatar: "EF",
     lastMsg: "Mañana a las 9:30 en su domicilio entonces. Le mando ubicación por aquí 🙂",
     lastTime: new Date(Date.now() - 1000 * 60 * 12).toISOString(),
@@ -202,9 +202,9 @@ export default function Chats() {
                 }
                 {/* Online status — green if active recently */}
                 <span className={styles.onlineDot} style={{
-                  background: chat.unread > 0 ? '#22C55E' 
-                    : (new Date() - new Date(chat.lastTime)) < 1000*60*60*2 ? '#22C55E'
-                    : (new Date() - new Date(chat.lastTime)) < 1000*60*60*24 ? '#F59E0B'
+                  background: chat.unread > 0 ? 'var(--green-dot)' 
+                    : (new Date() - new Date(chat.lastTime)) < 1000*60*60*2 ? 'var(--green-dot)'
+                    : (new Date() - new Date(chat.lastTime)) < 1000*60*60*24 ? 'var(--amber)'
                     : 'rgba(0,0,0,0.2)',
                 }} />
               </div>

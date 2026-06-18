@@ -258,14 +258,14 @@ function ConfirmModal({ helper, onClose, onConfirm, prefillDate, prefillTime }) 
         <div style={{position:'relative',display:'inline-block',marginBottom:'12px'}}>
           {helper.avatarUrl
             ? <img src={helper.avatarUrl} alt={name}
-                style={{width:'64px',height:'64px',borderRadius:'50%',border:'3px solid #22C55E',display:'block'}} />
+                style={{width:'64px',height:'64px',borderRadius:'50%',border:'3px solid var(--green-dot)',display:'block'}} />
             : <div style={{width:'64px',height:'64px',borderRadius:'50%',background:helper.avatarColor||'#7B2FFF',
                 display:'flex',alignItems:'center',justifyContent:'center',color:'white',fontSize:'var(--text-lg)',fontWeight:700,
-                border:'3px solid #22C55E'}}>
+                border:'3px solid var(--green-dot)'}}>
                 {helper.avatar||name[0]}
               </div>
           }
-          <span style={{position:'absolute',bottom:-2,right:-2,width:'20px',height:'20px',background:'#22C55E',borderRadius:'50%',display:'flex',alignItems:'center',justifyContent:'center'}}><svg width='11' height='11' viewBox='0 0 12 12' fill='none'><path d='M2 6l3 3 5-5' stroke='white' strokeWidth='1.8' strokeLinecap='round' strokeLinejoin='round'/></svg></span>
+          <span style={{position:'absolute',bottom:-2,right:-2,width:'20px',height:'20px',background:'var(--green-dot)',borderRadius:'50%',display:'flex',alignItems:'center',justifyContent:'center'}}><svg width='11' height='11' viewBox='0 0 12 12' fill='none'><path d='M2 6l3 3 5-5' stroke='white' strokeWidth='1.8' strokeLinecap='round' strokeLinejoin='round'/></svg></span>
         </div>
         <h3 style={{fontSize:'19px',fontWeight:800,marginBottom:'4px',color:'rgba(0,0,0,0.85)',letterSpacing:'-0.3px'}}>¡Solicitud enviada!</h3>
         <p style={{fontSize:'var(--text-sm)',color:'rgba(0,0,0,0.45)',marginBottom:'12px',lineHeight:1.6}}>{name} confirmará disponibilidad en breve.</p>
@@ -555,7 +555,7 @@ export default function Chat() {
             <div className={styles.helperName}>
               {helper.name}
               {helper.founder && <Award size={11} color='#92400E' style={{marginLeft:'3px',verticalAlign:'middle'}} />}
-              {helper.dniVerified && <Shield size={10} color='#059669' style={{marginLeft:'3px',verticalAlign:'middle'}} />}
+              {helper.dniVerified && <Shield size={10} color='var(--green)' style={{marginLeft:'3px',verticalAlign:'middle'}} />}
             </div>
             <div className={styles.helperStatus}>
               {typing
@@ -604,8 +604,8 @@ export default function Chat() {
             <p className={styles.emptyChatDesc}>{helper.specialty} · {helper.zone}</p>
             {helper.price && <p className={styles.emptyChatPrice}>{helper.price}</p>}
             <div style={{display:'flex',gap:'8px',flexWrap:'wrap',justifyContent:'center',marginTop:'4px'}}>
-              {helper.dniVerified && <span style={{fontSize:'var(--text-xs)',color:'#059669',background:'#ECFDF5',border:'1px solid rgba(5,150,105,0.15)',borderRadius:'100px',padding:'3px 10px',fontWeight:600}}>Verificado</span>}
-              {helper.available && <span style={{fontSize:'var(--text-xs)',color:'#059669',background:'#ECFDF5',border:'1px solid rgba(5,150,105,0.15)',borderRadius:'100px',padding:'3px 10px',fontWeight:600}}>● Disponible</span>}
+              {helper.dniVerified && <span style={{fontSize:'var(--text-xs)',color:'var(--green)',background:'var(--green-light)',border:'1px solid rgba(5,150,105,0.15)',borderRadius:'100px',padding:'3px 10px',fontWeight:600}}>Verificado</span>}
+              {helper.available && <span style={{fontSize:'var(--text-xs)',color:'var(--green)',background:'var(--green-light)',border:'1px solid rgba(5,150,105,0.15)',borderRadius:'100px',padding:'3px 10px',fontWeight:600}}>● Disponible</span>}
               <span style={{fontSize:'var(--text-xs)',color:'rgba(0,0,0,0.4)',background:'rgba(0,0,0,0.04)',borderRadius:'100px',padding:'3px 10px'}}>⭐ {helper.rating} · {helper.reviews} reseñas</span>
             </div>
             {/* Conversation starters */}
