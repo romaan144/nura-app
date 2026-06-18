@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react'
-import { Briefcase, Users2, Award, Bookmark, Check, MessageCircle, Share2, Shield, UserPlus, Heart } from 'lucide-react'
+import { Briefcase, Users2, Award, Bookmark, Check, MessageCircle, Share2, Shield, UserPlus, Heart, Sparkles, Star, Rss } from 'lucide-react'
 import RegisterGate from '../components/RegisterGate'
 import { useNavigate } from 'react-router-dom'
 import { HELPERS } from '../data/helpers'
@@ -12,6 +12,9 @@ import { showToast } from '../components/Toast'
 import styles from './Feed.module.css'
 
 // ── Build feed — deterministic order, not random ───────────────────────────
+// Daily seed: changes once per day, making feed feel fresh on return visits
+const DAILY_SEED = Math.floor(Date.now() / (1000 * 60 * 60 * 24))
+
 function buildFeed(following, helpers, companies) {
   const posts = []
 
@@ -57,6 +60,9 @@ function buildFeed(following, helpers, companies) {
     if (p.type === 'cert')         s += 2   // credentials = trust
     if (p.badge)                   s += 2   // social proof
     if (p.verifiedWork)            s += 1   // work post
+    // Daily jitter: same post scores differently each day → feed feels fresh
+    const jitter = ((p.id || 0) * 17 + DAILY_SEED * 7) % 3
+    s += jitter * 0.1
     return s
   }
   return posts.sort((a, b) => postScore(b) - postScore(a))
@@ -225,7 +231,58 @@ export default function Feed() {
       <div className={styles.feed}>
 
         {/* Nüra personalized section — based on last search */}
-        {tab === 'para-ti' && searchHistory?.length > 0 && (() => {
+        
+        {/* ── Nüra Pick del día ── */}
+        {tab === 'para-ti' && (() => {
+          // Pick: best available professional today (seed changes daily)
+          const available = HELPERS.filter(h => h.available)
+          if (!available.length) return null
+          const pickIdx = DAILY_SEED % available.length
+          const pick = available[pickIdx]
+          const pickReason = searchHistory?.[0]?.query
+            ? `Coincide con tu búsqueda de "${searchHistory[0].query.toLowerCase()}"`
+            : pick.specialty
+              ? `Especialista en ${pick.specialty.toLowerCase()}`
+              : 'Muy valorado en Nüra'
+          return (
+            <div className={styles.nuraPick} key="nura-pick"
+              onClick={() => navigate(`/helper/${pick.id}`, { state: { helper: pick } })}>
+              <div className={styles.nuraPickHeader}>
+                <span className={styles.nuraPickLabel}>
+                  <Sparkles size={11} color="var(--purple)" /> Nüra Pick del día
+                </span>
+                <span className={styles.nuraPickDate}>Actualiza mañana</span>
+              </div>
+              <div className={styles.nuraPickCard}>
+                {pick.avatarUrl
+                  ? <img src={pick.avatarUrl} alt={pick.name} className={styles.nuraPickAvatar} />
+                  : <div className={styles.nuraPickAvatarFallback} style={{background: pick.avatarColor}}>
+                      {pick.avatar || pick.name?.[0]}
+                    </div>
+                }
+                <div className={styles.nuraPickInfo}>
+                  <div className={styles.nuraPickName}>{pick.name?.split(' ').slice(0,2).join(' ')}</div>
+                  <div className={styles.nuraPickSpec}>{pick.specialty}</div>
+                  <div className={styles.nuraPickReason}>
+                    <Sparkles size={9} color="var(--purple)" />
+                    {pickReason}
+                  </div>
+                </div>
+                <div className={styles.nuraPickRight}>
+                  {pick.price && pick.price !== 'Consultar' && (
+                    <span className={styles.nuraPickPrice}>{pick.price}</span>
+                  )}
+                  <div className={styles.nuraPickStar}>
+                    <Star size={10} fill="var(--amber)" color="var(--amber)" />
+                    <span>{pick.rating}</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          )
+        })()}
+
+{tab === 'para-ti' && searchHistory?.length > 0 && (() => {
           const lastQ = searchHistory[0]?.query
           const lastCat = searchHistory[0]?.category
           const words = lastQ.toLowerCase().split(/\s+/).filter(w => w.length > 3)
@@ -311,7 +368,7 @@ export default function Feed() {
             <h3>Aún no sigues a nadie</h3>
             <p>Sigue a profesionales para ver sus publicaciones aquí. Están en la tab "Para ti".</p>
             <button className={styles.emptyBtn} onClick={() => setTab('para-ti')}>
-              Ver sugerencias
+              Descubrir profesionales
             </button>
           </div>
         ) : (
