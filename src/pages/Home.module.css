@@ -46,7 +46,7 @@
 /* ── FLOATING BOTTOM LAYER ──────────────────────────── */
 .floatBottom {
   position: absolute;
-  bottom: calc(72px + max(env(safe-area-inset-bottom, 0px), 12px));
+  bottom: var(--nav-h);  /* sits exactly at nav bar top */
   left: 20px;
   right: 20px;
   z-index: 30;
@@ -346,7 +346,7 @@
 
 /* Bottom nav space (mobile only) */
 @media (max-width: 767px) {
-  .page { padding-bottom: 72px; }
+  .page { padding-bottom: var(--nav-h); }
 
 }
 

@@ -214,6 +214,7 @@ export default function Home({ setSearchState }) {
   const inputRef   = useRef(null)
   const floatRef   = useRef(null)
   const topRef     = useRef(null)
+  const msgsRef    = useRef(null)
   const [topH, setTopH] = useState(80)
   const [floatH, setFloatH] = useState(160)
 
@@ -304,9 +305,32 @@ export default function Home({ setSearchState }) {
     return () => timers.forEach(clearTimeout)
   }, [user?.id])
 
+  // Scroll to bottom when messages change or when floatH is corrected.
+  // Uses scrollTop = scrollHeight (not scrollIntoView) to avoid the gap bug:
+  // scrollIntoView relies on correct padding BEFORE it fires; scrollTop
+  // always scrolls the container to its true bottom regardless of padding.
+  function scrollToBottom(smooth = true) {
+    const el = msgsRef.current
+    if (!el) return
+    if (smooth) {
+      el.scrollTo({ top: el.scrollHeight, behavior: 'smooth' })
+    } else {
+      el.scrollTop = el.scrollHeight
+    }
+  }
+
   useEffect(() => {
-    bottomRef.current?.scrollIntoView({ behavior: 'smooth' })
+    // Instant scroll on remount (no animation — prevents gap flash)
+    // Smooth scroll when new messages arrive mid-session
+    const isRemount = messages.length > 0 && !window.__nuraScrolledOnce
+    scrollToBottom(!isRemount)
+    window.__nuraScrolledOnce = true
   }, [messages])
+
+  // Re-scroll after floatH is corrected by ResizeObserver
+  useEffect(() => {
+    if (floatH !== 160) scrollToBottom(false)
+  }, [floatH])
 
   function formatLine(line) {
     const parts = line.split(/\*\*(.*?)\*\*/g)
@@ -660,7 +684,10 @@ export default function Home({ setSearchState }) {
     ro.observe(bottom)
     if (top) ro.observe(top)
     measure()  // measure immediately on mount
-    return () => ro.disconnect()
+    return () => {
+      ro.disconnect()
+      window.__nuraScrolledOnce = false  // reset on unmount for next visit
+    }
   }, [])
 
 
@@ -695,7 +722,7 @@ export default function Home({ setSearchState }) {
         </button>
       </div>
 
-      <div className={styles.messages} style={{paddingBottom: floatH + 'px', paddingTop: topH + 'px'}}>
+      <div ref={msgsRef} className={styles.messages} style={{paddingBottom: floatH + 'px', paddingTop: topH + 'px'}}>
         {messages.map((msg, msgIdx) => {
           const prevMsg = messages[msgIdx - 1]
           const prevHadResults = prevMsg?.results?.length > 0
