@@ -15,4 +15,4 @@
 @keyframes slideDown { from{opacity:0;transform:translateY(-16px)} to{opacity:1;transform:translateY(0)} }
 @keyframes fadeOut { to{opacity:0;transform:translateY(-8px)} }
 .icon { width: 22px; height: 22px; object-fit: contain; flex-shrink: 0; }
-.msg { font-size: 13px; font-weight: 500; line-height: 1.4; }
+.msg { font-size: var(--text-sm); font-weight: 500; line-height: 1.4; }

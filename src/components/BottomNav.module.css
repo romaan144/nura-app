@@ -59,7 +59,7 @@
   line-height: 1;
 }
 .tabActive .label {
-  color: #1C1C1E;
+  color: var(--purple);
   font-weight: 700;
 }
 
@@ -71,7 +71,7 @@
   border-radius: 8px;
   background: #EF4444;
   color: white;
-  font-size: 9px;
+  font-size: var(--text-xs);
   font-weight: 700;
   display: flex;
   align-items: center;
@@ -86,7 +86,7 @@
   display: block;
   width: 4px; height: 4px;
   border-radius: 50%;
-  background: #1C1C1E;
+  background: var(--purple);
   margin-top: 1px;
 }
 

@@ -7,13 +7,13 @@
 .close { position: absolute; top: 14px; right: 14px; width: 30px; height: 30px; border-radius: 50%; background: var(--rule2); color: var(--soft); display: flex; align-items: center; justify-content: center; }
 
 .avatar { width: 60px; height: 60px; border-radius: 50%; display: flex; align-items: center; justify-content: center; color: white; font-size: var(--text-lg); font-weight: 700; margin: 0 auto 14px; box-shadow: var(--shadow-md); }
-.title { font-size: 20px; font-weight: 800; color: var(--ink); text-align: center; margin-bottom: 6px; letter-spacing: -0.3px; }
-.desc { font-size: 13px; color: var(--mid); text-align: center; margin-bottom: 22px; line-height: 1.5; }
+.title { font-size: var(--text-md); font-weight: 800; color: var(--ink); text-align: center; margin-bottom: 6px; letter-spacing: -0.3px; }
+.desc { font-size: var(--text-sm); color: var(--mid); text-align: center; margin-bottom: 22px; line-height: 1.5; }
 
 .stars { display: flex; justify-content: center; gap: 4px; margin-bottom: 8px; }
 .star { padding: 4px; transition: transform 0.1s; }
 .star:hover { transform: scale(1.15); }
-.ratingLabel { text-align: center; font-size: 13px; font-weight: 600; color: var(--amber); margin-bottom: 16px; }
+.ratingLabel { text-align: center; font-size: var(--text-sm); font-weight: 600; color: var(--amber); margin-bottom: 16px; }
 
 .textarea { width: 100%; padding: 12px 14px; border: 1.5px solid var(--rule); border-radius: 12px; font-size: var(--text-sm); outline: none; resize: none; color: var(--ink); background: var(--paper); margin-bottom: 16px; line-height: 1.55; transition: border-color 0.2s; }
 .textarea:focus { border-color: var(--purple); background: var(--white); }
