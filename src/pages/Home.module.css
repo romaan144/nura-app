@@ -360,25 +360,9 @@
 }
 
 /* ── NUEVA BÚSQUEDA — natural in flow ── */
-.newSearchRow {
-  display: flex;
-  justify-content: center;
-  pointer-events: all;
-}
-.newSearchBtn {
-  display: flex; align-items: center; gap: 5px;
-  padding: 6px 14px;
-  background: rgba(255,255,255,0.9);
-  border: 1px solid rgba(0,0,0,0.08);
-  border-radius: var(--radius-full);
-  font-size: var(--text-xs); font-weight: 600;
-  color: rgba(0,0,0,0.45);
-  cursor: pointer; font-family: inherit;
-  transition: opacity 0.15s;
-  -webkit-tap-highlight-color: transparent;
-  box-shadow: var(--shadow-xs);
-}
-.newSearchBtn:active { opacity: 0.65; }
+
+
+
 
 /* ── CHAT SPACING SYSTEM ────────────────────────────────────────────
    Replaces uniform gap with semantic spacing per message type.

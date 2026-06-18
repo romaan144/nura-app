@@ -602,8 +602,8 @@ export default function Home({ setSearchState }) {
         results: matches,
         chips: matches.length > 0
           ? (user
-            ? [`Escribir a ${topName}`, 'Más barato', 'Más cerca', 'Ver todos']
-            : [`Crear cuenta`, 'Más barato', 'Más cerca', 'Ver todos'])
+            ? [`Escribir a ${topName}`, 'Más barato', 'Más cerca', 'Buscar otra cosa']
+            : [`Crear cuenta`, 'Más barato', 'Más cerca', 'Buscar otra cosa'])
           : ['Ampliar búsqueda', 'Cambiar zona', 'Online también']
       }
       setMessages(prev => [...prev, resultMsg])
@@ -704,9 +704,13 @@ export default function Home({ setSearchState }) {
                       if (chip === 'Buscar de nuevo' && searchHistory?.[0]?.query) {
                         handleSend(searchHistory[0].query); return
                       }
-                      if (chip === 'Buscar algo diferente') {
-                        setMessages([{ id: Date.now(), from: 'nura', lines: ['Cuéntame qué necesitas.'] }])
-                        setTimeout(() => document.querySelector('textarea,input[type=text]')?.focus(), 100)
+                      if (chip === 'Buscar algo diferente' || chip === 'Buscar otra cosa') {
+                        setMessages([])
+                        setLastMatches([])
+                        setTimeout(() => {
+                          setMessages([{ id: 1, from: 'nura', lines: getWelcome(user) }])
+                          document.querySelector('textarea,input[type=text]')?.focus()
+                        }, 100)
                         return
                       }
                       if (chip === 'Ver Explorar') { navigate('/explore'); return }
