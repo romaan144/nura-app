@@ -1,3 +1,4 @@
+import PageHeader from '../components/PageHeader'
 import HelperCard from '../components/HelperCard'
 import { useState, useEffect, useRef } from 'react'
 import { useNavigate } from 'react-router-dom'
@@ -149,6 +150,8 @@ export default function Explore() {
 
   return (
     <div className={styles.page}>
+
+      <PageHeader />
 
       {/* ── STICKY TOP BAR: search + categories ── */}
       <div className={styles.topBar}>
