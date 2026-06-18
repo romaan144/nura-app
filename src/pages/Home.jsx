@@ -78,52 +78,50 @@ function detectIntent(text, user) {
 // Rotates based on time of day, day of week, and user history
 function getDynamicSuggestions(user, searchHistory) {
   const hour = new Date().getHours()
-  const day  = new Date().getDay() // 0=Sun, 6=Sat
+  const day  = new Date().getDay()
   const isWeekend = day === 0 || day === 6
   const isMorning = hour >= 7 && hour < 13
   const isAfternoon = hour >= 13 && hour < 20
-  const isEvening = hour >= 20 || hour < 7
 
-  // Pool of all possible suggestions
-  const ALL = [
-    // Cuidado
-    'Cuidadora de mayores en casa',
-    'Cuidado de mi abuela con Alzheimer',
-    'Niñera para mis hijos',
-    'Acompañante para persona mayor',
-    'Auxiliar a domicilio',
-    // Técnicos
-    'Técnico urgente hoy',
-    'Fontanero para una gotera',
-    'Electricista certificado',
-    'Reparar la caldera',
-    'Pintor para el salón',
-    // Salud
-    'Logopeda infantil',
-    'Fisioterapeuta a domicilio',
-    'Psicólogo online',
-    'Nutricionista personalizado',
-    // Educación
-    'Clases de matemáticas',
-    'Profesor de inglés',
-    'Refuerzo escolar para el cole',
-    // Limpieza
-    'Limpieza del hogar',
-    'Limpieza profunda',
-    'Persona de limpieza semanal',
-    // Mascotas
-    'Cuidado de mascotas',
-    'Paseos para mi perro',
-    'Cuidar mi gato en vacaciones',
-    // Fitness
-    'Entrenador personal',
-    'Clases de yoga a domicilio',
-    'Pilates personalizado',
-  ]
+  // ── 1. HISTORY-BASED SUGGESTIONS (highest priority) ───────────────────
+  // Map past searches to follow-up suggestions for the same category
+  const FOLLOWUP_MAP = {
+    logopeda:    ['Logopeda infantil en mi zona', 'Sesión de seguimiento de logopedia', 'Evaluación logopédica para mi hijo'],
+    tecnico:     ['Técnico urgente hoy', 'Revisión de instalación eléctrica', 'Fontanero en mi zona'],
+    limpieza:    ['Limpieza semanal del hogar', 'Limpieza profunda este fin de semana', 'Persona de limpieza de confianza'],
+    cuidado:     ['Cuidadora de mayores en casa', 'Auxiliar a domicilio', 'Acompañante para persona mayor'],
+    mascotas:    ['Cuidado de mascotas en vacaciones', 'Paseos para mi perro', 'Veterinario a domicilio'],
+    matematicas: ['Repaso de matemáticas para el examen', 'Clases de física y química', 'Profesor particular de primaria'],
+    entrenador:  ['Sesión de entrenamiento personal', 'Rutina de ejercicio personalizada', 'Clases de yoga a domicilio'],
+    salud:       ['Fisioterapeuta a domicilio', 'Nutricionista personalizado', 'Psicólogo online'],
+    legal:       ['Consulta legal urgente', 'Asesoría laboral', 'Abogado de familia'],
+    hogar:       ['Pintor para el salón', 'Reformas del hogar', 'Instalación de muebles'],
+    psicologia:  ['Sesión de psicología online', 'Terapia de pareja', 'Psicólogo para adolescentes'],
+    fisioterapia:['Fisioterapia a domicilio', 'Rehabilitación deportiva', 'Masaje terapéutico'],
+  }
 
-  // Time-based pools
+  const recentSearches = (searchHistory || []).slice(0, 3)
+  const personalSuggestions = []
+
+  for (const entry of recentSearches) {
+    const cat = entry.category
+    const followups = FOLLOWUP_MAP[cat] || []
+    // Add a direct "continue" chip first
+    if (entry.query && personalSuggestions.length < 2) {
+      // Don't repeat the exact same query — suggest a variation
+      const variation = followups[0]
+      if (variation && !personalSuggestions.includes(variation)) {
+        personalSuggestions.push(variation)
+      }
+    }
+    // Add a second related suggestion
+    if (followups[1] && !personalSuggestions.includes(followups[1]) && personalSuggestions.length < 3) {
+      personalSuggestions.push(followups[1])
+    }
+  }
+
+  // ── 2. TIME-BASED POOL (fills remaining slots) ────────────────────────
   let pool = []
-
   if (isWeekend) {
     pool = [
       'Limpieza profunda este fin de semana',
@@ -149,35 +147,43 @@ function getDynamicSuggestions(user, searchHistory) {
       'Niñera para mis hijos',
       'Técnico urgente hoy',
       'Paseos para mi perro',
-      'Nutricionista personalizado',
-    ]
-  } else { // evening
-    pool = [
-      'Cuidadora de mayores en casa',
-      'Psicólogo online',
       'Entrenador personal',
-      'Auxiliar a domicilio',
-      'Reparar la caldera',
-      'Clases de inglés online',
+    ]
+  } else {
+    pool = [
+      'Cuidado de mayores mañana',
+      'Fontanero urgente',
+      'Cuidado de mascotas',
+      'Logopeda para mi hijo',
+      'Clases de yoga a domicilio',
+      'Fisioterapeuta a domicilio',
     ]
   }
 
-  // Remove things user already searched
-  const searched = (searchHistory || []).map(s => s.query?.toLowerCase() || '')
-  const filtered = pool.filter(s =>
-    !searched.some(q => s.toLowerCase().includes(q.slice(0,8)))
-  )
-  const final = filtered.length >= 3 ? filtered : pool
+  // ── 3. MERGE: personal first, then time-based (no duplicates) ─────────
+  const searched = recentSearches.map(s => s.query?.toLowerCase() || '')
+  const usedTexts = new Set(personalSuggestions.map(s => s.toLowerCase()))
 
-  // Pick 4 varied suggestions (shuffle deterministically by minute)
-  const seed = Math.floor(Date.now() / (1000 * 60 * 60 * 24)) // changes daily
-  const shuffled = [...final].sort((a, b) => {
+  const timeFiltered = pool.filter(s =>
+    !usedTexts.has(s.toLowerCase()) &&
+    !searched.some(q => q.length > 4 && s.toLowerCase().includes(q.slice(0, 8).toLowerCase()))
+  )
+
+  // Daily shuffle for the time-based ones
+  const seed = Math.floor(Date.now() / (1000 * 60 * 60 * 24))
+  const shuffled = [...timeFiltered].sort((a, b) => {
     const ha = (a.charCodeAt(0) + seed) % 7
     const hb = (b.charCodeAt(0) + seed) % 7
     return ha - hb
   })
 
-  return shuffled.slice(0, 4).map(text => ({ text }))
+  const needed = 4
+  const combined = [
+    ...personalSuggestions.slice(0, 2),
+    ...shuffled.slice(0, needed - Math.min(personalSuggestions.length, 2))
+  ]
+
+  return combined.slice(0, needed).map(text => ({ text }))
 }
 
 const HELPER_SUGGESTIONS = [
