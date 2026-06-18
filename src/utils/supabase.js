@@ -119,13 +119,13 @@ function genPersonality(rating) {
 function normalize(h) {
   const name = h.name || 'Profesional'
   const specialty = h.speciality || h.specialty || h.category || 'Profesional'
-  const avatarUrl = h.avatar_url || `https://api.dicebear.com/9.x/personas/svg?seed=${encodeURIComponent(name)}`
+  const avatarUrl = h.avatarUrl || h.avatar_url || `https://api.dicebear.com/9.x/personas/svg?seed=${encodeURIComponent(name)}`
 
   return {
     id: h.id,
     name,
     avatar: name.split(' ').map(w=>w[0]).join('').slice(0,2).toUpperCase(),
-    avatarColor: h.avatar_color || nameToColor(name),
+    avatarColor: h.avatarColor || h.avatar_color || nameToColor(name),
     avatarUrl,
     specialty,
     category: h.category || 'otro',
@@ -138,25 +138,26 @@ function normalize(h) {
     rating: parseFloat(h.rating) || 4.5,
     reviews: parseInt(h.reviews) || 0,
     services: parseInt(h.services) || 0,
-    completionRate: parseInt(h.completion_rate) || 92,
-    responseTime: h.response_time || '< 1 hora',
+    completionRate: parseInt(h.completionRate) || parseInt(h.completion_rate) || 92,
+    responseTime: h.responseTime || h.response_time || '< 1 hora',
     verified: h.verified ?? true,
     available: h.available ?? true,
     presential: h.presential ?? true,
     online: h.online ?? false,
     urgent: h.urgent ?? false,
     founder: h.founder ?? false,
-    dniVerified: h.dni_verified ?? false,
+    dniVerified: h.dniVerified ?? h.dni_verified ?? true,
     criminalRecordClear: false,
-    qualificationLevel: h.qualification_level || 'professional',
+    qualificationLevel: h.qualificationLevel || h.qualification_level || 'professional',
     skills: Array.isArray(h.skills) ? h.skills : [],
     languages: Array.isArray(h.languages) ? h.languages : [],
-    // Real data only — no generated content
+    // Rich profile data from Supabase JSONB fields
     hiddenSkills: [],
-    education: [],
-    experience: [],
-    posts: [],
-    qualitativeComments: [],
+    education: Array.isArray(h.education) ? h.education : [],
+    experience: Array.isArray(h.experience) ? h.experience : [],
+    posts: Array.isArray(h.posts) ? h.posts : [],
+    qualitativeComments: Array.isArray(h.qualitativeComments) ? h.qualitativeComments
+      : Array.isArray(h.qualitative_comments) ? h.qualitative_comments : [],
     evolution: [],
     personality: null,
     isFromSupabase: true,
