@@ -40,11 +40,13 @@
 }
 
 /* Info — 3 lines: name+price / specialty+dist / rating */
-.info { flex: 1; min-width: 0; display: flex; flex-direction: column; gap: 3px; }
+.info { flex: 1; min-width: 0; display: flex; flex-direction: column; gap: 3px; justify-content: center; }
 
 .nameRow {
   display: flex; align-items: center; gap: 5px;
   overflow: hidden;
+  flex-wrap: nowrap;
+  min-width: 0;
 }
 .name {
   font-size: var(--text-sm);
@@ -54,6 +56,7 @@
   white-space: nowrap;
   overflow: hidden; text-overflow: ellipsis;
   flex-shrink: 1;
+  line-height: 1.2;
 }
 .price {
   font-size: var(--text-xs);
@@ -67,6 +70,8 @@
 .sub {
   display: flex; align-items: center; gap: 4px;
   font-size: var(--text-xs); color: rgba(0,0,0,0.4);
+  line-height: 1.2;
+  white-space: nowrap; overflow: hidden;
 }
 .specialty { color: rgba(0,0,0,0.55); font-weight: 500; 
   white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
@@ -74,6 +79,7 @@
 .meta {
   display: flex; align-items: center; gap: 4px;
   font-size: var(--text-xs); color: rgba(0,0,0,0.38);
+  line-height: 1.2;
 }
 .metaStrong { font-weight: 700; color: rgba(0,0,0,0.72); }
 .metaMuted  { color: rgba(0,0,0,0.3); }
@@ -85,6 +91,7 @@
   display: flex;
   align-items: center;
   gap: 5px;
+  align-self: center;  /* always centered regardless of row height */
 }
 
 .favBtn {

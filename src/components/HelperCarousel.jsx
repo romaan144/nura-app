@@ -38,36 +38,22 @@ function CarouselCard({ helper, isTopPick, matchReason }) {
 
   return (
     <div
-      className={styles.card}
-      style={{position:'relative'}}
+      className={`${styles.card} ${isTopPick ? styles.cardTop : ''}`}
       onClick={() => {
-      const reason = window.__nuraMatchReasons?.[String(helper.id)]
-      navigate(`/helper/${helper.id}`, { state: { helper, fromSearch: true, matchReason: reason, userQuery: window.__nuraLastQuery, analysis: window.__nuraLastAnalysis } })
-    }}>
+        const reason = window.__nuraMatchReasons?.[String(helper.id)]
+        navigate(`/helper/${helper.id}`, { state: { helper, fromSearch: true, matchReason: reason, userQuery: window.__nuraLastQuery, analysis: window.__nuraLastAnalysis } })
+      }}>
 
-      {/* Top pick indicator */}
-
+      {/* Top pick label */}
       {isTopPick && (
-        <div style={{
-          alignSelf:'center',
-          background:'transparent',
-          color:'var(--purple)',
-          fontSize:'9px',fontWeight:600,letterSpacing:'0.3px',
-          padding:'2px 8px',
-          border:'1px solid rgba(123,47,255,0.25)',
-          borderRadius:'var(--radius-full)',
-          whiteSpace:'nowrap',marginBottom:'6px',
-          order:-1,
-        }}>
-          Nüra recomienda
-        </div>
+        <div className={styles.topPickLabel}>Nüra recomienda</div>
       )}
 
-      {/* Avatar + availability */}
+      {/* Avatar */}
       <div className={styles.avatarWrap}>
         {helper.avatarUrl
           ? <img src={helper.avatarUrl} alt={helper.name} className={styles.avatar} />
-          : <div className={styles.avatarFallback} style={{ background: helper.avatarColor || '#7B2FFF' }}>
+          : <div className={styles.avatarFallback} style={{ background: helper.avatarColor || 'var(--purple)' }}>
               {helper.avatar || helper.name?.[0]}
             </div>
         }
@@ -77,14 +63,12 @@ function CarouselCard({ helper, isTopPick, matchReason }) {
         </button>
       </div>
 
-      {/* Info */}
+      {/* Fixed info block — exactly 3 lines, no variables */}
       <div className={styles.name}>
-        {helper.name?.split(' ')?.[0]} {helper.name?.split(' ')?.[1]?.[0]}.
+        {helper.name?.split(' ')?.[0]}
         {helper.dniVerified && <Shield size={9} color="var(--green)" style={{ marginLeft: 3, verticalAlign: 'middle' }} />}
       </div>
       <div className={styles.specialty}>{helper.specialty}</div>
-
-      {/* Rating + distance */}
       <div className={styles.meta}>
         <Star size={9} fill="var(--amber)" color="var(--amber)" />
         <span>{helper.rating}</span>
@@ -93,36 +77,13 @@ function CarouselCard({ helper, isTopPick, matchReason }) {
         <span>{helper.distance || 1.2}km</span>
       </div>
 
-      {/* Match reason micro-text — why Nüra chose this helper */}
-      {matchReason && (
-        <p style={{
-          fontSize:'var(--text-xs)',color:'rgba(0,0,0,0.45)',margin:'2px 0 0',
-          lineHeight:1.4,display:'-webkit-box',WebkitLineClamp:2,
-          WebkitBoxOrient:'vertical',overflow:'hidden',
-          fontStyle:'italic',
-        }}>
-          {matchReason.replace(/^\*\*[^*]+\*\*[^:]+: /,'')}
-        </p>
-      )}
+      {/* Spacer — pushes price+CTA to bottom */}
+      <div className={styles.spacer} />
 
-      {/* Top tag */}
-      {!matchReason && helper.tags?.[0] && (
-        <div style={{
-          fontSize:'var(--text-xs)',color:'rgba(0,0,0,0.4)',
-          background:'rgba(0,0,0,0.04)',
-          borderRadius:'100px',padding:'2px 7px',
-          alignSelf:'center',fontWeight:500,
-          whiteSpace:'nowrap',overflow:'hidden',textOverflow:'ellipsis',
-          maxWidth:'120px',
-        }}>{helper.tags[0]}</div>
-      )}
-
-      {/* Price */}
+      {/* Price + CTA — always anchored to bottom */}
       {helper.price && helper.price !== 'Consultar' && (
         <div className={styles.price}>{helper.price}</div>
       )}
-
-      {/* CTA */}
       <button className={styles.contactBtn} onClick={handleContact}>
         <MessageCircle size={12} /> Escribir
       </button>
