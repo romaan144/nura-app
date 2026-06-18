@@ -1,12 +1,21 @@
 
+/* ── TOP BAR — replaces PageHeader + searchWrap + categories ── */
+.topBar {
+  position: sticky;
+  top: 0;
+  z-index: 20;
+  background: var(--paper);
+  padding: max(env(safe-area-inset-top, 0px), 12px) 14px 0;
+  padding-bottom: 0;
+}
+
 @keyframes fadeSlideIn {
   from { opacity: 0; transform: translateY(8px); }
   to   { opacity: 1; transform: translateY(0); }
 }
-.page { padding-top: var(--header-h); min-height: 100dvh; background: var(--paper); 
-  animation: fadeSlideIn 0.22s ease both;}
+.page { min-height: 100dvh; background: var(--paper); animation: fadeSlideIn 0.22s ease both; }
 
-.searchWrap { padding: 0 14px 8px; }
+
 .searchBar {
   display: flex; align-items: center; gap: 10px;
   background: rgba(255,255,255,0.72);
@@ -14,7 +23,7 @@
   backdrop-filter: blur(24px) saturate(180%);
   border: 1px solid rgba(255,255,255,0.35);
   border-radius: 100px;
-  padding: 9px 16px;
+  padding: 8px 14px;
   box-shadow: var(--shadow-sm), 0 0 0 0.5px rgba(0,0,0,0.06);
   animation: fadeSlideIn 0.22s ease both;
 }
@@ -35,11 +44,11 @@
 .clearFilters { display: flex; align-items: center; gap: 6px; background: none; border: none; color: var(--soft); font-size: var(--text-xs); padding: 0; align-self: flex-start; }
 
 /* Categories */
-.categories { display: flex; gap: 8px; overflow-x: auto; padding: 0 14px 8px; }
+.categories { display: flex; gap: 6px; overflow-x: auto; padding: 0 0 8px; }
 .categories::-webkit-scrollbar { display: none; }
 .cat {
-  display: flex; align-items: center; gap: 5px;
-  padding: 7px 14px;
+  display: flex; align-items: center; gap: 4px;
+  padding: 5px 12px;
   background: #FFFFFF;
   border: 1px solid rgba(0,0,0,0.08);
   border-radius: var(--radius-full);
@@ -165,7 +174,7 @@
 }
 
 /* ── AI SEARCH ── */
-.searchForm { display: flex; width: 100%; }
+.searchForm { display: flex; width: 100%; margin-bottom: 8px; }
 
 .clearBtn {
   background: none; border: none; cursor: pointer;
@@ -229,6 +238,4 @@
 }
 
 /* Content wrapper */
-.content {
-  padding: 0 14px 100px;
-}
+.content { padding: 0 14px 100px; }

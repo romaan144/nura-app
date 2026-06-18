@@ -6,7 +6,6 @@ import { HELPERS as LOCAL_HELPERS } from '../data/helpers'
 import { getAllHelpers } from '../utils/supabase'
 import { analyzeNeed, matchHelpers, getPriceContext } from '../utils/matching'
 import { useUser } from '../context/UserContext'
-import PageHeader from '../components/PageHeader'
 import styles from './Explore.module.css'
 
 const QUICK_FILTERS = [
@@ -150,11 +149,9 @@ export default function Explore() {
 
   return (
     <div className={styles.page}>
-      <PageHeader />
 
-      <div className={styles.content}>
-
-        {/* ── SEARCH BAR ── */}
+      {/* ── STICKY TOP BAR: search + categories ── */}
+      <div className={styles.topBar}>
         <form onSubmit={handleSubmit} className={styles.searchForm}>
           <div className={styles.searchBar}>
             {aiSearching
@@ -196,6 +193,9 @@ export default function Explore() {
             </button>
           ))}
         </div>
+      </div>{/* end topBar */}
+
+      <div className={styles.content}>
 
         {/* ── FILTER PANEL ── */}
         {showFilters && (
