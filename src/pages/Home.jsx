@@ -330,7 +330,7 @@ export default function Home({ setSearchState }) {
 
     // Context-aware responses
     const t = msg.toLowerCase()
-    if (lastMatches) {
+    if (lastMatches?.length > 0) {
       // User confirms — guide to profile
       if (t.includes('sí') || t.includes('si') || t.includes('me convence') || t.includes('perfecto') || t.includes('ese') || t.includes('bien')) {
         const topMatch = lastMatches?.[0]
