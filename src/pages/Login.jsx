@@ -61,7 +61,7 @@ export default function Login() {
       <div className={styles.top}>
         <img src="/logo-iso.png" alt="Nüra" className={styles.iso} />
         <img src="/logo-text.png" alt="Nüra" className={styles.wordmark} />
-        <p className={styles.tagline}>La IA que conecta personas</p>
+        <p className={styles.tagline}>Encuentra a la persona adecuada</p>
       </div>
 
       <div className={styles.card}>

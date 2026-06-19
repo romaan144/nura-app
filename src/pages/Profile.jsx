@@ -26,10 +26,25 @@ export default function Profile() {
       <PageHeader />
       <div className={styles.noUser}>
         <img src="/logo-iso.png" alt="Nüra" className={styles.noUserLogo} />
-        <h2 className={styles.noUserTitle}>Tu perfil en Nüra</h2>
-        <p className={styles.noUserDesc}>Accede a tu historial de búsquedas, conversaciones y profesionales favoritos.</p>
+        <h2 className={styles.noUserTitle}>Crea tu cuenta gratis</h2>
+        <p className={styles.noUserDesc}>Solo tarda 30 segundos.</p>
+
+        <div style={{display:'flex',flexDirection:'column',gap:'10px',width:'100%',maxWidth:'280px',margin:'20px 0'}}>
+          {[
+            ['💬', 'Escribe a cualquier profesional'],
+            ['❤️', 'Guarda tus profesionales favoritos'],
+            ['📋', 'Consulta tu historial de búsquedas'],
+            ['⭐', 'Valora a los profesionales que contratas'],
+          ].map(([icon, text]) => (
+            <div key={text} style={{display:'flex',alignItems:'center',gap:'12px',textAlign:'left'}}>
+              <span style={{fontSize:'18px',flexShrink:0}}>{icon}</span>
+              <span style={{fontSize:'var(--text-sm)',color:'rgba(0,0,0,0.65)',fontWeight:500}}>{text}</span>
+            </div>
+          ))}
+        </div>
+
         <button className={styles.loginBtn} onClick={() => navigate('/login')}>
-          Iniciar sesión
+          Crear cuenta gratis
         </button>
         <button className={styles.registerBtn} onClick={() => navigate('/login')}>
           Crear cuenta

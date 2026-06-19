@@ -202,7 +202,13 @@ function HelperProfileInner() {
   const mainEdu = h.education?.[0]
 
   function handleContact() {
-    if (!user) { setShowGate(true); return }
+    if (!user) {
+      try {
+        sessionStorage.setItem('nura_pending_chat', JSON.stringify({ helperId: h.id, helperName: h.name }))
+        sessionStorage.setItem('nura_return_to', `/chat/${h.id}`)
+      } catch {}
+      setShowGate(true); return
+    }
     navigate(`/chat/${h.id}`, { state: { helper: h, userQuery: location.state?.userQuery } })
   }
 

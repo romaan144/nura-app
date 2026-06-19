@@ -164,6 +164,19 @@ export default function Chats() {
       </div>
 
       <div className={styles.list}>
+        {allChats.length === 0 && (
+          <div style={{textAlign:'center',padding:'64px 24px 32px',display:'flex',flexDirection:'column',alignItems:'center',gap:'8px'}}>
+            <div style={{fontSize:'32px',marginBottom:'4px'}}>💬</div>
+            <p style={{fontSize:'var(--text-sm)',fontWeight:600,color:'rgba(0,0,0,0.7)'}}>Aquí aparecerán tus conversaciones</p>
+            <p style={{fontSize:'var(--text-xs)',color:'rgba(0,0,0,0.4)',lineHeight:1.6,maxWidth:'220px'}}>Cuando contactes con un profesional, la conversación aparecerá aquí.</p>
+            <button
+              onClick={() => navigate('/')}
+              style={{marginTop:'8px',padding:'10px 20px',background:'var(--purple)',color:'white',border:'none',borderRadius:'100px',fontSize:'var(--text-xs)',fontWeight:600,cursor:'pointer',fontFamily:'inherit'}}>
+              Buscar ahora
+            </button>
+          </div>
+        )}
+
         {filtered.length === 0 && search.trim() && (
           <div style={{textAlign:'center',padding:'48px 24px',color:'rgba(0,0,0,0.4)'}}>
             <Search size={36} color='rgba(0,0,0,0.12)' strokeWidth={1.3} style={{marginBottom:'12px'}}/>

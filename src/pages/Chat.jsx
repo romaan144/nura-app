@@ -374,6 +374,8 @@ export default function Chat() {
     helpersCache?.[parseInt(id)] || helpersCache?.[id] || helpersCache?.[String(id)] ||
     HELPERS.filter(Boolean).find(h => String(h.id) === String(id)) || null
   )
+  // Clear pending chat from sessionStorage once we're here
+  try { sessionStorage.removeItem('nura_pending_chat') } catch {}
 
   useEffect(() => {
     if (!helper) {

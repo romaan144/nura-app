@@ -766,6 +766,26 @@ export default function Home({ setSearchState }) {
                 <button key={i} className={styles.suggestion}
                   onClick={() => {
                     if (chip === 'Crear cuenta') { navigate('/login'); return }
+                    if (chip === 'Mejor valorado' && lastMatches?.length > 0) {
+                      const sorted = [...lastMatches].sort((a,b) => (b.rating||0)-(a.rating||0))
+                      setMessages(prev => [...prev, { id: Date.now(), from: 'nura',
+                        lines: [`He ordenado por valoración. ${sorted[0]?.name?.split(' ')?.[0]} tiene ${sorted[0]?.rating}★.`],
+                        results: sorted, refineChips: ['Más barato','Más cerca','Online'] }])
+                      setLastMatches(sorted); return
+                    }
+                    if (chip === 'Online' && lastMatches?.length > 0) {
+                      const online = lastMatches.filter(h => h.online)
+                      if (online.length > 0) {
+                        setMessages(prev => [...prev, { id: Date.now(), from: 'nura',
+                          lines: [`${online.length} de ellos ofrecen sesiones online.`],
+                          results: online, refineChips: ['Más barato','Más cerca','Mejor valorado'] }])
+                        setLastMatches(online)
+                      } else {
+                        setMessages(prev => [...prev, { id: Date.now(), from: 'nura',
+                          lines: ['Ninguno de estos profesionales ofrece sesiones online.'] }])
+                      }
+                      return
+                    }
                     handleSend(chip)
                   }}>
                   <span className={styles.suggestionText}>{chip}</span>
