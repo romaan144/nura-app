@@ -3,6 +3,7 @@ import { Briefcase, Users2, Award, Bookmark, Check, MessageCircle, Share2, Shiel
 import RegisterGate from '../components/RegisterGate'
 import { useNavigate } from 'react-router-dom'
 import { HELPERS } from '../data/helpers'
+import HelperCarousel from '../components/HelperCarousel'
 import { generateDynamicPosts } from '../utils/feedGenerator'
 import { COMPANIES } from '../data/companies'
 import { useUser } from '../context/UserContext'
@@ -314,31 +315,7 @@ export default function Feed() {
               <p style={{fontSize:'var(--text-sm)',color:'rgba(0,0,0,0.55)',margin:'0 0 12px',lineHeight:1.5}}>
                 Buscaste <strong style={{color:'rgba(0,0,0,0.75)'}}>{lastQ}</strong>. Estos profesionales están disponibles ahora.
               </p>
-              <div style={{display:'flex',gap:'8px',overflowX:'auto',paddingBottom:'2px'}}>
-                {related.map(h => (
-                  <div key={h.id}
-                    onClick={() => navigate(`/helper/${h.id}`, { state: { helper: h } })}
-                    style={{
-                      flexShrink:0,cursor:'pointer',
-                      background:'white',borderRadius:'14px',
-                      padding:'10px 12px',minWidth:'120px',
-                      boxShadow:'0 1px 4px rgba(0,0,0,0.07)',
-                      display:'flex',flexDirection:'column',alignItems:'center',gap:'6px',
-                    }}>
-                    <img src={h.avatarUrl} alt={h.name}
-                      style={{width:'40px',height:'40px',borderRadius:'50%',objectFit:'cover'}} />
-                    <span style={{fontSize:'var(--text-xs)',fontWeight:700,color:'rgba(0,0,0,0.8)',textAlign:'center'}}>
-                      {h.name.split(' ')[0]}
-                    </span>
-                    <span style={{fontSize:'var(--text-xs)',color:'rgba(0,0,0,0.45)',textAlign:'center',lineHeight:1.3}}>
-                      {h.specialty}
-                    </span>
-                    <span style={{fontSize:'var(--text-xs)',color:'var(--green)',fontWeight:600}}>
-                      Disponible
-                    </span>
-                  </div>
-                ))}
-              </div>
+              <HelperCarousel helpers={related} />
             </div>
           )
         })()}

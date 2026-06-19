@@ -66,7 +66,7 @@ const TABS = ['Todos', 'Próximos', 'Completados']
 
 export default function MyServices() {
   const navigate = useNavigate()
-  const { services, addRating, hasRated, updateService } = useUser()
+  const { services, addRating, hasRated, updateService, user } = useUser()
   const [tab, setTab] = useState('Todos')
   const [ratingModal, setRatingModal] = useState(null)
   const [ratingVal, setRatingVal] = useState(5)
@@ -75,7 +75,8 @@ export default function MyServices() {
 
   // Merge real + demo (real take priority by helperId)
   const realIds = new Set((services||[]).map(s => String(s.helperId)))
-  const demosToShow = DEMO_SERVICES.filter(d => !realIds.has(String(d.helperId)))
+  // Show demo services only to guests — authenticated users see only real data
+  const demosToShow = !user ? DEMO_SERVICES.filter(d => !realIds.has(String(d.helperId))) : []
   const allServices = [...(services||[]), ...demosToShow]
 
   const filtered = allServices.filter(s => {

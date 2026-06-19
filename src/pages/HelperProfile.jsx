@@ -315,7 +315,7 @@ function HelperProfileInner() {
           </button>
           <button className={styles.ctaSecondary}
             onClick={() => user ? setShowConfirm(true) : setShowGate(true)}>
-            <Calendar size={14} /> Contratar
+            <Calendar size={14} /> Ver disponibilidad
           </button>
 
         </div>

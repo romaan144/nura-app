@@ -38,16 +38,12 @@ function CarouselCard({ helper, isTopPick, matchReason }) {
 
   return (
     <div
-      className={`${styles.card} ${isTopPick ? styles.cardTop : ''}`}
+      className={styles.card}
       onClick={() => {
         const reason = window.__nuraMatchReasons?.[String(helper.id)]
         navigate(`/helper/${helper.id}`, { state: { helper, fromSearch: true, matchReason: reason, userQuery: window.__nuraLastQuery, analysis: window.__nuraLastAnalysis } })
       }}>
 
-      {/* Top pick label */}
-      {isTopPick && (
-        <div className={styles.topPickLabel}>Nüra recomienda</div>
-      )}
 
       {/* Avatar */}
       <div className={styles.avatarWrap}>

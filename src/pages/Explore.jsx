@@ -168,6 +168,10 @@ export default function Explore() {
               value={searchText}
               onChange={e => setSearchText(e.target.value)}
               onKeyDown={e => e.key === 'Enter' && handleSubmit()}
+              autoComplete="off"
+              autoCorrect="off"
+              autoCapitalize="off"
+              spellCheck={false}
             />
             {(searchText || isAiMode) && (
               <button type="button" className={styles.clearBtn} onClick={clearAi}>
