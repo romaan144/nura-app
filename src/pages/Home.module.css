@@ -21,7 +21,7 @@
   flex: 1;
   overflow-y: auto;
   overflow-x: hidden;
-  padding: 80px 16px 88px; /* floatBottom height(76px) + gap(12px) */
+  padding: 80px 16px 88px; /* default: no suggestions (76px input + 12px gap) */
   display: flex;
   flex-direction: column;
   justify-content: flex-end; /* content always anchored to bottom — no JS scroll needed */
@@ -425,3 +425,8 @@
   pointer-events: all;
 }
 .suggestionsInScroll::-webkit-scrollbar { display: none; }
+
+/* When suggestions are visible, increase bottom padding to keep gap consistent */
+.messages[data-suggestions="true"] {
+  padding-bottom: 128px; /* floatBottom with suggestions (116px) + 12px gap */
+}
