@@ -427,8 +427,11 @@
 .suggestionsInScroll::-webkit-scrollbar { display: none; }
 
 /* When suggestions are visible, increase bottom padding to keep gap consistent */
-.messages[data-suggestions="true"] {
-  padding-bottom: 110px; /* reduced to match visual gap */
+.messages[data-suggestions="initial"] {
+  padding-bottom: 128px; /* initial suggestions — was working perfectly */
+}
+.messages[data-suggestions="refine"] {
+  padding-bottom: 110px; /* refineChips after search — calibrating */
 }
 
 /* Refine chips after carousel — same style as initial suggestions */
