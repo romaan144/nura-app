@@ -691,14 +691,14 @@ export default function Home({ setSearchState }) {
         </div>
       </div>
 
-      <div className={styles.messages} data-suggestions={showSuggestions ? 'initial' : messages[messages.length-1]?.refineChips ? 'refine' : 'false'} style={{paddingTop: topH + 'px'}}>
+      <div className={styles.messages} style={{paddingTop: topH + 'px'}}>
         {messages.map((msg, msgIdx) => {
           const prevMsg = messages[msgIdx - 1]
           const prevHadResults = prevMsg?.results?.length > 0
           // Spacing: 16px between messages, 24px after carousel, 20px for user replies
           const spacingClass = prevHadResults ? styles.afterCarousel : ''
           return (
-          <div key={msg.id} style={{marginTop: msgIdx === 0 ? 0 : msg.from === 'user' ? '20px' : prevHadResults ? '24px' : '16px'}}>
+          <div key={msg.id} style={{marginTop: msgIdx === 0 ? 0 : msg.from === 'user' ? 'var(--chat-gap-md)' : 'var(--chat-gap)'}}>
             <div className={`${styles.msgRow} ${msg.from === 'user' ? styles.msgRowUser : ''} ${spacingClass}`}>
               {msg.from === 'nura' && (
                 <div className={styles.nuraAvatar}>
@@ -736,7 +736,11 @@ export default function Home({ setSearchState }) {
           </div>
           )
         })}
-                <div ref={bottomRef} />
+                <div
+          className={styles.chatSpacer}
+          data-chips={(showSuggestions || !!messages[messages.length-1]?.refineChips) ? 'true' : 'false'}
+        />
+        <div ref={bottomRef} />
       </div>
 
       {/* Floating bottom — suggestions + input capsule only */}
