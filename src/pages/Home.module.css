@@ -21,7 +21,7 @@
   flex: 1;
   overflow-y: auto;
   overflow-x: hidden;
-  padding: 80px 16px 80px;
+  padding: 80px 16px 0;  /* bottom controlled by JS */
   display: flex;
   flex-direction: column;
   justify-content: flex-end; /* content always anchored to bottom — no JS scroll needed */

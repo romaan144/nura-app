@@ -212,8 +212,10 @@ export default function Home({ setSearchState }) {
   const setLastMatches = setNuraLastMatches
   const bottomRef  = useRef(null)
   const inputRef   = useRef(null)
+  const floatRef   = useRef(null)
   const topRef     = useRef(null)
-  const [topH, setTopH] = useState(80) /* header height fallback */
+  const [topH, setTopH] = useState(80)
+  const [floatH, setFloatH] = useState(80) /* header height fallback */
 
   useEffect(() => {
     let lines = getWelcome(user)
@@ -633,16 +635,24 @@ export default function Home({ setSearchState }) {
 
   const suggestions = user?.isHelper ? HELPER_SUGGESTIONS : getDynamicSuggestions(user, searchHistory)
 
-  // Measure only the floatTop height for messages top padding
+  // Measure floatTop (top padding) and floatBottom (bottom padding)
   useEffect(() => {
     const top = topRef.current
-    if (!top) return
+    const bottom = floatRef.current
     const measure = () => {
-      const tRect = top.getBoundingClientRect()
-      setTopH(Math.ceil(tRect.bottom) + 8)
+      if (top) {
+        const tRect = top.getBoundingClientRect()
+        setTopH(Math.ceil(tRect.bottom) + 8)
+      }
+      if (bottom) {
+        // Height of floatBottom element = padding-bottom needed in messages
+        const bRect = bottom.getBoundingClientRect()
+        setFloatH(Math.ceil(bRect.height) + 16)  // +16px breathing room
+      }
     }
     const ro = new ResizeObserver(measure)
-    ro.observe(top)
+    if (top) ro.observe(top)
+    if (bottom) ro.observe(bottom)
     measure()
     return () => ro.disconnect()
   }, [])
@@ -692,7 +702,7 @@ export default function Home({ setSearchState }) {
         </div>
       </div>
 
-      <div className={styles.messages} style={{paddingTop: topH + 'px'}}>
+      <div className={styles.messages} style={{paddingTop: topH + 'px', paddingBottom: floatH + 'px'}}>
         {messages.map((msg, msgIdx) => {
           const prevMsg = messages[msgIdx - 1]
           const prevHadResults = prevMsg?.results?.length > 0
@@ -771,7 +781,7 @@ export default function Home({ setSearchState }) {
       </div>
 
       {/* Floating bottom — suggestions + input capsule only */}
-      <div className={styles.floatBottom}>
+      <div className={styles.floatBottom} ref={floatRef}>
         {inputFocused && !input && searchHistory?.length > 0 && (
           <div className={styles.recentSearches}>
             <span className={styles.recentLabel}>Recientes</span>
