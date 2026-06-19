@@ -133,8 +133,8 @@ export default function MyServices() {
         {/* Empty state */}
         {filtered.length === 0 && (
           <div className={styles.empty}>
-            <span style={{fontSize:'48px',display:'block',marginBottom:'8px'}}>
-              {tab === 'Completados' ? <CheckCircle size={13} /> : tab === 'Próximos' ? <Calendar size={13} /> : <ClipboardList size={13} />}
+            <span style={{display:'block',marginBottom:'12px',opacity:0.25}}>
+              {tab === 'Completados' ? <CheckCircle size={44} /> : tab === 'Próximos' ? <Calendar size={44} /> : <ClipboardList size={44} />}
             </span>
             <strong style={{fontSize:'16px',color:'rgba(0,0,0,0.7)',letterSpacing:'-0.2px'}}>
               {tab === 'Todos' ? 'Aún no has contratado nada'

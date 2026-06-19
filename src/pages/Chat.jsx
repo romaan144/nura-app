@@ -721,7 +721,7 @@ export default function Chat() {
       <div className={styles.inputWrap}>
         <div className={styles.inputBar}>
           <input className={styles.input}
-            placeholder={`Escribe a ${helper.name?.split(' ')?.[0] || helper.name}...`}
+            placeholder="Escribe un mensaje..."
             value={input} onChange={e => setInput(e.target.value)} onKeyDown={handleKey} />
           <button className={styles.sendBtn} onClick={() => sendMessage()} disabled={!input.trim()}>
             <Send size={15} />

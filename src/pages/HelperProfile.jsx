@@ -368,7 +368,7 @@ function HelperProfileInner() {
                       color={n <= Math.round(h.rating) ? 'var(--amber)' : 'rgba(0,0,0,0.1)'} />
                   ))}
                 </div>
-                <span className={styles.ratingCount}>{h.reviews} valoraciones verificadas</span>
+                <span className={styles.ratingCount}>{h.reviews} valoraciones</span>
               </div>
             </div>
             {h.qualitativeComments?.length > 0 && (
@@ -460,7 +460,7 @@ function HelperProfileInner() {
         {/* ── Habilidades ── */}
         {h.skills?.length > 0 && (
           <section className={styles.section}>
-            <h2 className={styles.sectionHeading}>Habilidades</h2>
+            <h2 className={styles.sectionHeading}>En qué destaca</h2>
             <div className={styles.tags}>
               {h.skills.map((s, i) => (
                 <span key={i} className={styles.tag}>{s}</span>
