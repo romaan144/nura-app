@@ -428,7 +428,7 @@
 
 /* When suggestions are visible, increase bottom padding to keep gap consistent */
 .messages[data-suggestions="true"] {
-  padding-bottom: 125px; /* floatBottom with chips (113px) + 12px gap */
+  padding-bottom: 110px; /* reduced to match visual gap */
 }
 
 /* Refine chips after carousel — same style as initial suggestions */
