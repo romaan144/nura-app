@@ -215,7 +215,7 @@ export default function Home({ setSearchState }) {
   const floatRef   = useRef(null)
   const topRef     = useRef(null)
   const [topH, setTopH] = useState(80)
-  const [floatH, setFloatH] = useState(140) /* header height fallback */
+  const [floatH, setFloatH] = useState(80) /* header height fallback */
 
   useEffect(() => {
     let lines = getWelcome(user)
@@ -777,7 +777,16 @@ export default function Home({ setSearchState }) {
           </div>
           )
         })}
-                <div ref={bottomRef} />
+                {showSuggestions && (
+          <div className={styles.suggestionsInScroll}>
+            {(suggestions||[]).map((s, i) => (
+              <button key={i} className={styles.suggestion} onClick={() => handleSend(s.text)}>
+                <span className={styles.suggestionText}>{s.text}</span>
+              </button>
+            ))}
+          </div>
+        )}
+        <div ref={bottomRef} />
       </div>
 
       {/* Floating bottom — suggestions + input capsule only */}

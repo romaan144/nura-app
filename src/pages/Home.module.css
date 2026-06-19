@@ -411,3 +411,17 @@
   transition: opacity 0.2s;
 }
 .resetBubble:active { opacity: 0.6; }
+
+/* Suggestions inside scroll — above the last message, below content */
+.suggestionsInScroll {
+  display: flex;
+  flex-direction: row;
+  gap: 6px;
+  overflow-x: auto;
+  padding: 4px 0 8px;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;
+  flex-wrap: nowrap;
+  pointer-events: all;
+}
+.suggestionsInScroll::-webkit-scrollbar { display: none; }
