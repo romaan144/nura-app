@@ -711,38 +711,7 @@ export default function Home({ setSearchState }) {
                 {msg.text && <p>{msg.text}</p>}
                 {msg.lines?.map((line, i) => <p key={i}>{formatLine(line)}</p>)}
                 {msg.loading && <div className={styles.typingDots}><span /><span /><span /></div>}
-              {msg.chips && (
-                <div style={{display:'flex',flexWrap:'wrap',gap:'6px',marginTop:'8px'}}>
-                  {(msg.chips||[]).map((chip,i) => (
-                    <button key={i} onClick={() => {
-                      if (chip === 'Buscar de nuevo' && searchHistory?.[0]?.query) {
-                        handleSend(searchHistory[0].query); return
-                      }
-                      if (chip === 'Buscar algo diferente' || chip === 'Buscar otra cosa') {
-                        setMessages([])
-                        setLastMatches([])
-                        setTimeout(() => {
-                          setMessages([{ id: 1, from: 'nura', lines: getWelcome(user) }])
-                          document.querySelector('textarea,input[type=text]')?.focus()
-                        }, 100)
-                        return
-                      }
-                      if (chip === 'Ver Explorar') { navigate('/explore'); return }
-                      if (chip === 'Ver todos') { navigate('/explore'); return }
-                      if (chip === 'Crear cuenta') { navigate('/login'); return }
-                      if (chip.startsWith('Escribir a ') && lastMatches?.[0]) {
-                        const h = lastMatches[0]
-                        navigate(`/chat/${h.id}`, { state: { helper: h } })
-                        return
-                      }
-                      handleSend(chip)
-                    }}
-                      style={{padding:'5px 12px',borderRadius:'100px',background:'rgba(0,0,0,0.06)',border:'none',fontSize:'var(--text-xs)',fontWeight:500,color:'rgba(0,0,0,0.7)',cursor:'pointer',transition:'opacity 0.15s'}}>
-                      {chip}
-                    </button>
-                  ))}
-                </div>
-              )}
+
               {msg.quickOptions && (
                 <div style={{display:'flex',gap:'8px',flexWrap:'wrap',marginTop:'8px'}}>
                   {(msg.quickOptions||[]).map((opt,i) => (
@@ -763,6 +732,19 @@ export default function Home({ setSearchState }) {
             {msg.results && (
               <div className={styles.carouselBlock}>
                 <HelperCarousel helpers={msg.results} />
+              </div>
+            )}
+            {msg.refineChips && (
+              <div className={styles.refineChips}>
+                {(msg.refineChips||[]).map((chip,i) => (
+                  <button key={i} className={styles.suggestion}
+                    onClick={() => {
+                      if (chip === 'Crear cuenta') { navigate('/login'); return }
+                      handleSend(chip)
+                    }}>
+                    <span className={styles.suggestionText}>{chip}</span>
+                  </button>
+                ))}
               </div>
             )}
           </div>
