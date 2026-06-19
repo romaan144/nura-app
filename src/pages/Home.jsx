@@ -691,7 +691,7 @@ export default function Home({ setSearchState }) {
         </div>
       </div>
 
-      <div className={styles.messages} data-suggestions={showSuggestions ? 'true' : 'false'} style={{paddingTop: topH + 'px'}}>
+      <div className={styles.messages} data-suggestions={(showSuggestions || messages[messages.length-1]?.refineChips) ? 'true' : 'false'} style={{paddingTop: topH + 'px'}}>
         {messages.map((msg, msgIdx) => {
           const prevMsg = messages[msgIdx - 1]
           const prevHadResults = prevMsg?.results?.length > 0
@@ -732,19 +732,7 @@ export default function Home({ setSearchState }) {
                 <HelperCarousel helpers={msg.results} />
               </div>
             )}
-            {msg.refineChips && (
-              <div className={styles.refineChips}>
-                {(msg.refineChips||[]).map((chip,i) => (
-                  <button key={i} className={styles.suggestion}
-                    onClick={() => {
-                      if (chip === 'Crear cuenta') { navigate('/login'); return }
-                      handleSend(chip)
-                    }}>
-                    <span className={styles.suggestionText}>{chip}</span>
-                  </button>
-                ))}
-              </div>
-            )}
+
           </div>
           )
         })}
@@ -765,8 +753,23 @@ export default function Home({ setSearchState }) {
           </div>
         )}
 
-        {showSuggestions && (
-          <div className={styles.suggestionsWrap}>
+        {(() => {
+          const lastMsg = messages[messages.length - 1]
+          const activeChips = lastMsg?.refineChips
+          if (activeChips) return (
+            <div className={styles.suggestions}>
+              {activeChips.map((chip, i) => (
+                <button key={i} className={styles.suggestion}
+                  onClick={() => {
+                    if (chip === 'Crear cuenta') { navigate('/login'); return }
+                    handleSend(chip)
+                  }}>
+                  <span className={styles.suggestionText}>{chip}</span>
+                </button>
+              ))}
+            </div>
+          )
+          if (showSuggestions) return (
             <div className={styles.suggestions}>
               {(suggestions||[]).map((s, i) => (
                 <button key={i} className={styles.suggestion} onClick={() => handleSend(s.text)}>
@@ -774,8 +777,9 @@ export default function Home({ setSearchState }) {
                 </button>
               ))}
             </div>
-          </div>
-        )}
+          )
+          return null
+        })()}
 
         <div className={styles.inputCapsule}>
           <button className={styles.plusBtn}><Plus size={18} /></button>
