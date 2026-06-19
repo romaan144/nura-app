@@ -215,7 +215,7 @@ export default function Home({ setSearchState }) {
   const floatRef   = useRef(null)
   const topRef     = useRef(null)
   const [topH, setTopH] = useState(80)
-  const [floatH, setFloatH] = useState(80) /* header height fallback */
+  const [floatH, setFloatH] = useState(84) /* header height fallback */
 
   useEffect(() => {
     let lines = getWelcome(user)
@@ -647,7 +647,7 @@ export default function Home({ setSearchState }) {
       if (bottom) {
         // Height of floatBottom element = padding-bottom needed in messages
         const bRect = bottom.getBoundingClientRect()
-        setFloatH(Math.ceil(bRect.height) + 20)  // +20px breathing room
+        setFloatH(Math.ceil(bRect.height) + 12)  // +12px = same gap as input↔nav
       }
     }
     const ro = new ResizeObserver(measure)
