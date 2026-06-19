@@ -212,7 +212,6 @@ export default function Home({ setSearchState }) {
   const setLastMatches = setNuraLastMatches
   const bottomRef  = useRef(null)
   const inputRef   = useRef(null)
-  const floatRef   = useRef(null)
   const topRef     = useRef(null)
   const [topH, setTopH] = useState(80)
   const [floatH, setFloatH] = useState(84) /* header height fallback */
@@ -635,24 +634,16 @@ export default function Home({ setSearchState }) {
 
   const suggestions = user?.isHelper ? HELPER_SUGGESTIONS : getDynamicSuggestions(user, searchHistory)
 
-  // Measure floatTop (top padding) and floatBottom (bottom padding)
+  // Measure floatTop height for messages top padding
   useEffect(() => {
     const top = topRef.current
-    const bottom = floatRef.current
+    if (!top) return
     const measure = () => {
-      if (top) {
-        const tRect = top.getBoundingClientRect()
-        setTopH(Math.ceil(tRect.bottom) + 8)
-      }
-      if (bottom) {
-        // Height of floatBottom element = padding-bottom needed in messages
-        const bRect = bottom.getBoundingClientRect()
-        setFloatH(Math.ceil(bRect.height) + 12)  // +12px = same gap as input↔nav
-      }
+      const tRect = top.getBoundingClientRect()
+      setTopH(Math.ceil(tRect.bottom) + 8)
     }
     const ro = new ResizeObserver(measure)
-    if (top) ro.observe(top)
-    if (bottom) ro.observe(bottom)
+    ro.observe(top)
     measure()
     return () => ro.disconnect()
   }, [])
@@ -702,7 +693,7 @@ export default function Home({ setSearchState }) {
         </div>
       </div>
 
-      <div className={styles.messages} style={{paddingTop: topH + 'px', paddingBottom: floatH + 'px'}}>
+      <div className={styles.messages} style={{paddingTop: topH + 'px'}}>
         {messages.map((msg, msgIdx) => {
           const prevMsg = messages[msgIdx - 1]
           const prevHadResults = prevMsg?.results?.length > 0
@@ -781,7 +772,7 @@ export default function Home({ setSearchState }) {
       </div>
 
       {/* Floating bottom — suggestions + input capsule only */}
-      <div className={styles.floatBottom} ref={floatRef}>
+      <div className={styles.floatBottom}>
         {inputFocused && !input && searchHistory?.length > 0 && (
           <div className={styles.recentSearches}>
             <span className={styles.recentLabel}>Recientes</span>
