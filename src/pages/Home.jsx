@@ -386,7 +386,7 @@ export default function Home({ setSearchState }) {
         }
 
         const resultMsg = { id: Date.now(), from: 'nura', lines: [refineLine], results: refined,
-          chips: [`Escribir a ${refined[0]?.name?.split(' ')?.[0]}`, 'Más barato', 'Más cerca', 'Ver todos'] }
+          refineChips: ['Más barato', 'Más cerca', 'Mejor valorado', 'Online'] }
         setMessages(prev => [...prev, resultMsg])
         setLastMatches(refined)
         setLoading(false)
@@ -601,10 +601,8 @@ export default function Home({ setSearchState }) {
               ? [resultLine, ...(priceCtx ? [priceCtx] : [])]
               : [resultLine, ...(priceCtx ? [priceCtx] : []), 'Crea tu cuenta gratis para escribirles.']),
         results: matches,
-        chips: matches.length > 0
-          ? (user
-            ? [`Escribir a ${topName}`, 'Más barato', 'Más cerca']
-            : [`Crear cuenta`, 'Más barato', 'Más cerca'])
+        refineChips: matches.length > 0
+          ? ['Más barato', 'Más cerca', 'Mejor valorado', 'Online']
           : ['Ampliar búsqueda', 'Cambiar zona', 'Online también']
       }
       setMessages(prev => [...prev, resultMsg])
