@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
-import { LogOut, ChevronRight, Award, Edit2, Check, X, User, MessageCircle, Heart, ClipboardList, HelpCircle, Info, Sparkles, AlertCircle, UserCheck } from 'lucide-react'
+import { LogOut, ChevronRight, Award, Edit2, Check, X, User, MessageCircle, Heart, Clock, Star, ClipboardList, HelpCircle, Info, Sparkles, AlertCircle, UserCheck } from 'lucide-react'
 import PageHeader from '../components/PageHeader'
 import { useUser } from '../context/UserContext'
 import { HELPERS } from '../data/helpers'
@@ -29,15 +29,15 @@ export default function Profile() {
         <h2 className={styles.noUserTitle}>Crea tu cuenta gratis</h2>
         <p className={styles.noUserDesc}>Solo tarda 30 segundos.</p>
 
-        <div style={{display:'flex',flexDirection:'column',gap:'10px',width:'100%',maxWidth:'280px',margin:'20px 0'}}>
+        <div style={{display:'flex',flexDirection:'column',gap:'12px',width:'100%',maxWidth:'280px',margin:'20px 0'}}>
           {[
-            ['💬', 'Escribe a cualquier profesional'],
-            ['❤️', 'Guarda tus profesionales favoritos'],
-            ['📋', 'Consulta tu historial de búsquedas'],
-            ['⭐', 'Valora a los profesionales que contratas'],
-          ].map(([icon, text]) => (
+            [MessageCircle, 'Escribe a cualquier profesional'],
+            [Heart,         'Guarda tus profesionales favoritos'],
+            [Clock,         'Consulta tu historial de búsquedas'],
+            [Star,          'Valora a los profesionales que contratas'],
+          ].map(([Icon, text]) => (
             <div key={text} style={{display:'flex',alignItems:'center',gap:'12px',textAlign:'left'}}>
-              <span style={{fontSize:'18px',flexShrink:0}}>{icon}</span>
+              <Icon size={16} color="var(--purple)" strokeWidth={1.8} style={{flexShrink:0}} />
               <span style={{fontSize:'var(--text-sm)',color:'rgba(0,0,0,0.65)',fontWeight:500}}>{text}</span>
             </div>
           ))}
@@ -45,9 +45,6 @@ export default function Profile() {
 
         <button className={styles.loginBtn} onClick={() => navigate('/login')}>
           Crear cuenta gratis
-        </button>
-        <button className={styles.registerBtn} onClick={() => navigate('/login')}>
-          Crear cuenta
         </button>
         <button className={styles.helperBtn} onClick={() => navigate('/register-helper')}>
           <Sparkles size={14} strokeWidth={1.8} style={{marginRight:'6px'}} /> Quiero ser Profesional
