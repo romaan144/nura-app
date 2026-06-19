@@ -21,7 +21,7 @@
   flex: 1;
   overflow-y: auto;
   overflow-x: hidden;
-  padding: 80px 16px 88px; /* default: no suggestions (76px input + 12px gap) */
+  padding: 80px 16px 84px; /* no chips: floatBottom(72px) + 12px gap */
   display: flex;
   flex-direction: column;
   justify-content: flex-end; /* content always anchored to bottom — no JS scroll needed */
@@ -387,7 +387,7 @@
 /* Carousel: connected to the Nüra message (same response block) */
 .carouselBlock {
   margin-top: 6px;
-  margin-bottom: 4px;
+  margin-bottom: 0;
 }
 
 /* Message after carousel: clear section break */
@@ -428,7 +428,7 @@
 
 /* When suggestions are visible, increase bottom padding to keep gap consistent */
 .messages[data-suggestions="true"] {
-  padding-bottom: 128px; /* floatBottom with suggestions (116px) + 12px gap */
+  padding-bottom: 125px; /* floatBottom with chips (113px) + 12px gap */
 }
 
 /* Refine chips after carousel — same style as initial suggestions */
