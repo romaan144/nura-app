@@ -803,18 +803,6 @@ export default function Home({ setSearchState }) {
           </div>
         )}
 
-        {showSuggestions && (
-          <div className={styles.suggestionsWrap}>
-          <div className={styles.suggestions}>
-            {(suggestions||[]).map((s, i) => (
-              <button key={i} className={styles.suggestion} onClick={() => handleSend(s.text)}>
-                <span className={styles.suggestionText}>{s.text}</span>
-              </button>
-            ))}
-          </div>
-          </div>
-        )}
-
         <div className={styles.inputCapsule}>
           <button className={styles.plusBtn}><Plus size={18} /></button>
           <input ref={inputRef} className={styles.input}
