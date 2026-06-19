@@ -213,6 +213,8 @@ export default function Home({ setSearchState }) {
   const bottomRef  = useRef(null)
   const inputRef   = useRef(null)
   const topRef     = useRef(null)
+  const floatRef   = useRef(null)
+  const spacerRef  = useRef(null)
   const [topH, setTopH] = useState(80)
   const [floatH, setFloatH] = useState(84) /* header height fallback */
 
@@ -632,16 +634,17 @@ export default function Home({ setSearchState }) {
 
   const suggestions = user?.isHelper ? HELPER_SUGGESTIONS : getDynamicSuggestions(user, searchHistory)
 
-  // Measure floatTop height for messages top padding
+  // Measure floatTop (top padding) and floatBottom (spacer height) in real-time
   useEffect(() => {
-    const top = topRef.current
-    if (!top) return
+    const top    = topRef.current
+    const bottom = floatRef.current
     const measure = () => {
-      const tRect = top.getBoundingClientRect()
-      setTopH(Math.ceil(tRect.bottom) + 8)
+      if (top)    setTopH(Math.ceil(top.getBoundingClientRect().bottom) + 8)
+      if (bottom) setSpacerH(Math.ceil(bottom.getBoundingClientRect().height))
     }
     const ro = new ResizeObserver(measure)
-    ro.observe(top)
+    if (top)    ro.observe(top)
+    if (bottom) ro.observe(bottom)
     measure()
     return () => ro.disconnect()
   }, [])
@@ -736,15 +739,12 @@ export default function Home({ setSearchState }) {
           </div>
           )
         })}
-                <div
-          className={styles.chatSpacer}
-          data-chips={(showSuggestions || !!messages[messages.length-1]?.refineChips) ? 'true' : 'false'}
-        />
+                <div className={styles.chatSpacer} style={{height: spacerH + 'px'}} />
         <div ref={bottomRef} />
       </div>
 
       {/* Floating bottom — suggestions + input capsule only */}
-      <div className={styles.floatBottom}>
+      <div className={styles.floatBottom} ref={floatRef}>
         {inputFocused && !input && searchHistory?.length > 0 && (
           <div className={styles.recentSearches}>
             <span className={styles.recentLabel}>Recientes</span>

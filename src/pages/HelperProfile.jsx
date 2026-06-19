@@ -273,7 +273,7 @@ function HelperProfileInner() {
           {h.available && (
             <div className={styles.availStatus}>
               <span className={styles.availDotInline} />
-              Disponible para nuevos clientes
+              Disponible
             </div>
           )}
 

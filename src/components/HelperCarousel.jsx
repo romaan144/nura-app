@@ -45,9 +45,7 @@ function CarouselCard({ helper, isTopPick, matchReason }) {
       }}>
 
       {/* Top pick label */}
-      {isTopPick && (
-        <div className={styles.topPickLabel}>Nüra recomienda</div>
-      )}
+      
 
       {/* Avatar */}
       <div className={styles.avatarWrap}>
@@ -87,18 +85,7 @@ function CarouselCard({ helper, isTopPick, matchReason }) {
       </div>
 
       {/* Match reason — why Nüra chose this person */}
-      {matchReason && (
-        <div className={styles.matchReasonLine}>
-          <Sparkles size={8} color="var(--purple)" style={{flexShrink:0}} />
-          <span>{matchReason
-            .replace(/^\*\*[^*]+\*\*[^:]*:\s*/, '')
-            .replace(/\*\*/g, '')
-            .split('·')[0]
-            .trim()
-            .slice(0, 45)
-          }</span>
-        </div>
-      )}
+
 
       {/* Spacer — pushes price+CTA to bottom */}
       <div className={styles.spacer} />
