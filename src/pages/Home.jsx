@@ -777,16 +777,7 @@ export default function Home({ setSearchState }) {
           </div>
           )
         })}
-                {showSuggestions && (
-          <div className={styles.suggestionsInScroll}>
-            {(suggestions||[]).map((s, i) => (
-              <button key={i} className={styles.suggestion} onClick={() => handleSend(s.text)}>
-                <span className={styles.suggestionText}>{s.text}</span>
-              </button>
-            ))}
-          </div>
-        )}
-        <div ref={bottomRef} />
+                <div ref={bottomRef} />
       </div>
 
       {/* Floating bottom — suggestions + input capsule only */}
@@ -800,6 +791,18 @@ export default function Home({ setSearchState }) {
                 <span className={styles.recentText}>{s.query}</span>
               </button>
             ))}
+          </div>
+        )}
+
+        {showSuggestions && (
+          <div className={styles.suggestionsWrap}>
+            <div className={styles.suggestions}>
+              {(suggestions||[]).map((s, i) => (
+                <button key={i} className={styles.suggestion} onClick={() => handleSend(s.text)}>
+                  <span className={styles.suggestionText}>{s.text}</span>
+                </button>
+              ))}
+            </div>
           </div>
         )}
 
