@@ -243,9 +243,11 @@ export default function Feed() {
           const pick = available[pickIdx]
           const pickReason = searchHistory?.[0]?.query
             ? `Coincide con tu búsqueda de "${searchHistory[0].query.toLowerCase()}"`
-            : pick.specialty
-              ? `Especialista en ${pick.specialty.toLowerCase()}`
-              : 'Muy valorado en Nüra'
+            : pick.reviews > 0
+              ? `${pick.reviews} valoraciones · ${pick.rating}★`
+              : pick.specialty
+                ? `Especialista en ${pick.specialty.toLowerCase()}`
+                : null
           return (
             <div className={styles.nuraPick} key="nura-pick"
               onClick={() => navigate(`/helper/${pick.id}`, { state: { helper: pick } })}>

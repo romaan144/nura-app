@@ -28,8 +28,8 @@ export default function RegisterGate({ onClose, reason = 'contact' }) {
     },
     default: {
       Icon: Sparkles,
-      title: 'Únete a Nüra',
-      desc: 'Crea tu cuenta gratis para acceder a todos los profesionales verificados cerca de ti.',
+      title: 'Encuentra a quien necesitas',
+      desc: 'Crea tu cuenta gratis y empieza a encontrar a la persona adecuada para lo que necesitas.',
     },
   }
 
@@ -37,7 +37,7 @@ export default function RegisterGate({ onClose, reason = 'contact' }) {
 
   const BENEFITS = [
     { icon: <MessageCircle size={15} color="#7B2FFF" />, text: 'Contacto directo con profesionales' },
-    { icon: <Shield size={15} color="var(--green)" />, text: 'Todos los perfiles verificados por Nüra' },
+    { icon: <Shield size={15} color="var(--green)" />, text: 'Acceso a más de 900 profesionales en Barcelona' },
     { icon: <Star size={15} color="var(--amber)" />, text: 'Historial y valoraciones de tus servicios' },
     { icon: <Heart size={15} color="var(--red)" />, text: 'Guarda tus favoritos y accede cuando quieras' },
   ]
