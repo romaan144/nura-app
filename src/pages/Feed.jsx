@@ -235,7 +235,7 @@ export default function Feed() {
 
         {/* Nüra personalized section — based on last search */}
         
-        {/* ── Nüra Pick del día ── */}
+        {/* ── Profesional del día ── */}
         {tab === 'para-ti' && (() => {
           // Pick: best available professional today (seed changes daily)
           const available = HELPERS.filter(h => h.available)
@@ -254,9 +254,9 @@ export default function Feed() {
               onClick={() => navigate(`/helper/${pick.id}`, { state: { helper: pick } })}>
               <div className={styles.nuraPickHeader}>
                 <span className={styles.nuraPickLabel}>
-                  <Sparkles size={11} color="var(--purple)" /> Nüra Pick del día
+                  <Sparkles size={11} color="var(--purple)" /> Profesional del día
                 </span>
-                <span className={styles.nuraPickDate}>Actualiza mañana</span>
+                
               </div>
               <HelperCard helper={pick} />
             </div>
