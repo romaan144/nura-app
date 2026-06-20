@@ -1,7 +1,7 @@
 import PageHeader from '../components/PageHeader'
 import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
-import { Search } from 'lucide-react'
+import { Search, MessageCircle } from 'lucide-react'
 import { useUser } from '../context/UserContext'
 import { HELPERS } from '../data/helpers'
 import styles from './Chats.module.css'
@@ -166,9 +166,9 @@ export default function Chats() {
       <div className={styles.list}>
         {allChats.length === 0 && (
           <div style={{textAlign:'center',padding:'64px 24px 32px',display:'flex',flexDirection:'column',alignItems:'center',gap:'8px'}}>
-            <div style={{fontSize:'32px',marginBottom:'4px'}}>💬</div>
-            <p style={{fontSize:'var(--text-sm)',fontWeight:600,color:'rgba(0,0,0,0.7)'}}>Aquí aparecerán tus conversaciones</p>
-            <p style={{fontSize:'var(--text-xs)',color:'rgba(0,0,0,0.4)',lineHeight:1.6,maxWidth:'220px'}}>Cuando contactes con un profesional, la conversación aparecerá aquí.</p>
+            <MessageCircle size={44} strokeWidth={1.3} color='rgba(0,0,0,0.15)' style={{marginBottom:'4px'}} />
+            <p style={{fontSize:'var(--text-sm)',fontWeight:600,color:'var(--ink-primary)'}}>Aquí aparecerán tus conversaciones</p>
+            <p style={{fontSize:'var(--text-xs)',color:'var(--ink-tertiary)',lineHeight:1.6,maxWidth:'220px'}}>Cuando contactes con un profesional, la conversación aparecerá aquí.</p>
             <button
               onClick={() => navigate('/')}
               style={{marginTop:'8px',padding:'10px 20px',background:'var(--purple)',color:'white',border:'none',borderRadius:'100px',fontSize:'var(--text-xs)',fontWeight:600,cursor:'pointer',fontFamily:'inherit'}}>
@@ -178,7 +178,7 @@ export default function Chats() {
         )}
 
         {filtered.length === 0 && search.trim() && (
-          <div style={{textAlign:'center',padding:'48px 24px',color:'rgba(0,0,0,0.4)'}}>
+          <div style={{textAlign:'center',padding:'48px 24px',color:'var(--ink-tertiary)'}}>
             <Search size={36} color='rgba(0,0,0,0.12)' strokeWidth={1.3} style={{marginBottom:'12px'}}/>
             <p style={{fontSize:'var(--text-sm)',fontWeight:500}}>Sin resultados para "{search}"</p>
             <p style={{fontSize:'var(--text-xs)',marginTop:'4px'}}>Prueba con el nombre del profesional</p>

@@ -34,15 +34,23 @@ function getHelperReply(helper, count, userMsg = '') {
   if (count === 1) {
     const cat = helper.category || 'otro'
     const specific = {
-      logopeda: `Hola, gracias por escribirme. ¿Me cuentas la edad y qué dificultades concretas observas?`,
-      cuidado: `Hola, con mucho gusto. ¿Puedes contarme un poco sobre tu familiar — movilidad, horarios, lo que necesite?`,
-      tecnico: `Hola, dime en qué consiste el problema exactamente. Así vengo preparado con lo necesario.`,
-      limpieza: `Hola, disponibilidad tengo. ¿Cuántos metros es la vivienda y con qué frecuencia lo necesitarías?`,
-      entrenador: `Hola, la primera sesión es de valoración gratuita. ¿Esta semana te viene bien?`,
-      salud: `Hola, cuéntame qué te ocurre. Así valoro si puedo ayudarte y cómo.`,
-      legal: `Hola, para orientarte bien necesito saber más sobre el caso. ¿Qué tipo de situación es?`,
+      logopeda:    `Hola, gracias por escribirme. ¿Me cuentas la edad y qué dificultades concretas observas?`,
+      cuidado:     `Hola, con mucho gusto. ¿Puedes contarme un poco sobre tu familiar — movilidad, horarios, lo que necesite?`,
+      tecnico:     `Hola, dime en qué consiste el problema exactamente. Así vengo preparado con lo necesario.`,
+      limpieza:    `Hola, disponibilidad tengo. ¿Cuántos metros es la vivienda y con qué frecuencia lo necesitarías?`,
+      entrenador:  `Hola, la primera sesión es de valoración gratuita. ¿Esta semana te viene bien?`,
+      salud:       `Hola, cuéntame qué te ocurre. Así valoro si puedo ayudarte y cómo.`,
+      legal:       `Hola, para orientarte bien necesito saber más sobre el caso. ¿Qué tipo de situación es?`,
+      nutricion:   `Hola, para ayudarte bien necesito saber: ¿tienes algún objetivo concreto — perder peso, ganar músculo, mejorar energía?`,
+      psicologia:  `Hola, gracias por escribirme. ¿Llevas mucho tiempo con esto o es algo más reciente?`,
+      fisio:       `Hola, cuéntame qué zona te molesta y cuándo empezó. Así valoro si puedo ayudarte.`,
+      abogado:     `Hola, para orientarte necesito entender la situación. ¿Es un tema laboral, familiar o civil?`,
+      contable:    `Hola, ¿de qué tipo de gestión se trata — declaración de renta, autónomo, empresa?`,
+      mascotas:    `Hola, ¿qué raza y edad tiene? Y ¿qué servicio necesitas exactamente — cuidado, adiestramiento, paseos?`,
+      educacion:   `Hola, ¿para qué curso y asignatura necesitas el apoyo? ¿Hay alguna fecha de examen próxima?`,
+      idiomas:     `Hola, ¿cuál es tu nivel actual y para qué necesitas el idioma — trabajo, viaje, examen?`,
     }
-    return specific[cat] || `Hola, gracias por contactarme. Cuéntame qué necesitas exactamente.`
+    return specific[cat] || `Hola, gracias por contactarme. Cuéntame qué necesitas exactamente y te digo cómo puedo ayudarte.`
   }
 
   // Universal keyword responses (override category)

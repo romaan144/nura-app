@@ -146,6 +146,12 @@ export default function Explore() {
 
   const displayList   = aiResults ?? manualFiltered
   const isAiMode      = aiResults !== null
+
+  // Pagination — only in manual mode
+  const [visibleCount, setVisibleCount] = useState(20)
+  // Reset visible count when filters or search changes
+  const pagedList = isAiMode ? displayList : displayList.slice(0, visibleCount)
+  const hasMore   = !isAiMode && displayList.length > visibleCount
   const activeFilters = Object.values(filters).filter(Boolean).length
 
   return (
@@ -268,7 +274,7 @@ export default function Explore() {
             <span className={styles.listCount}>
               {isAiMode
                 ? `${displayList.length} resultado${displayList.length !== 1 ? 's' : ''} encontrado${displayList.length !== 1 ? 's' : ''}`
-                : `${displayList.length} profesional${displayList.length !== 1 ? 'es' : ''} cerca de ti`}
+                : `${pagedList.length} de ${displayList.length} profesional${displayList.length !== 1 ? 'es' : ''} cerca de ti`}
             </span>
           </div>
         )}
@@ -293,7 +299,7 @@ export default function Explore() {
                   Ver todos los profesionales
                 </button>
               </div>
-            ) : displayList.map(h => (
+            ) : pagedList.map(h => (
               <div key={h.id}>
                 <HelperCard
                   helper={h}
@@ -310,6 +316,19 @@ export default function Explore() {
                 )}
               </div>
             ))}
+          </div>
+        )}
+
+        {/* ── LOAD MORE ── */}
+        {hasMore && (
+          <div style={{padding:'8px 0 24px',textAlign:'center'}}>
+            <button
+              onClick={() => setVisibleCount(v => v + 20)}
+              style={{padding:'10px 28px',background:'rgba(0,0,0,0.05)',border:'none',
+                borderRadius:'var(--radius-full)',fontSize:'var(--text-sm)',fontWeight:600,
+                color:'var(--ink-secondary)',cursor:'pointer',fontFamily:'inherit'}}>
+              Ver más profesionales
+            </button>
           </div>
         )}
 
