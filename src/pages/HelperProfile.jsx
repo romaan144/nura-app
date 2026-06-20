@@ -335,12 +335,26 @@ function HelperProfileInner() {
           <section className={`${styles.section} ${styles.sectionFirst}`}>
             <h2 className={styles.sectionHeading}>Puedo ayudarte con</h2>
             <div className={styles.ayudaList}>
-              {[h.specialty, ...(h.tags || []).filter(t => t !== h.specialty)].filter(Boolean).slice(0,8).map((item, i) => (
-                <div key={i} className={styles.ayudaItem}>
-                  <span className={styles.ayudaCheck}>✓</span>
-                  <span>{item}</span>
-                </div>
-              ))}
+              {(() => {
+                // Build deduplicated list of real capabilities
+                const MODAL_KEYWORDS = ['presencial','online','a domicilio','domicilio','sesion','sesiones','visita','visitas','videollamada']
+                const isModal = s => MODAL_KEYWORDS.some(k => s.toLowerCase().includes(k))
+                const raw = [h.specialty, ...(h.tags || [])].filter(Boolean)
+                const seen = new Set()
+                const items = raw.filter(s => {
+                  const key = s.toLowerCase().trim()
+                  if (seen.has(key)) return false
+                  if (isModal(s)) return false
+                  seen.add(key)
+                  return true
+                }).slice(0, 8)
+                return items.map((item, i) => (
+                  <div key={i} className={styles.ayudaItem}>
+                    <span className={styles.ayudaCheck}>✓</span>
+                    <span>{item.charAt(0).toUpperCase() + item.slice(1)}</span>
+                  </div>
+                ))
+              })()}
               {h.presential && (
                 <div className={styles.ayudaItem}>
                   <span className={styles.ayudaCheck}>✓</span>
