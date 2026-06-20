@@ -47,8 +47,7 @@ export default function NavBar() {
   const tabs = [
     { path: '/favorites', icon: <Heart size={20} />, label: 'Favoritos' },
     { path: '/my-services', icon: <Calendar size={20} />, label: 'Mis servicios' },
-    { path: '/how-it-works', icon: <HelpCircle size={20} />, label: 'Cómo funciona Nüra' },
-    { path: '/register-helper', icon: <UserPlus size={20} />, label: 'Ofrecer mis servicios en Nüra' },
+    { path: '/register-helper', icon: <UserPlus size={20} />, label: 'Ofrecer mis servicios' },
   ]
 
   function go(path) { navigate(path); setOpen(false) }
@@ -78,7 +77,7 @@ export default function NavBar() {
             <div>
               <div className={styles.drawerUserName}>{user.name}</div>
               <div className={styles.drawerUserSub}>
-                {user.isHelper ? 'Profesional verificado' : 'Miembro de Nüra'}
+                {user.isHelper ? 'Profesional verificado' : 'Miembro desde el principio'}
               </div>
             </div>
           </div>

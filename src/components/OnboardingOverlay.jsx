@@ -50,8 +50,8 @@ export default function OnboardingOverlay({ onComplete }) {
 
       <div className={styles.content} key="welcome">
         <img src="/logo-iso.png" alt="Nüra" className={styles.welcomeIso} />
-        <p className={styles.eyebrow}>BIENVENIDO A NÜRA</p>
-        <h1 className={styles.title}>La IA que conecta{'\n'}personas reales</h1>
+        <p className={styles.eyebrow}>ENCUENTRA A QUIEN NECESITAS</p>
+        <h1 className={styles.title}>La persona adecuada,{'\n'}a un mensaje de distancia.</h1>
         <p className={styles.desc}>
           Cuéntame lo que necesitas — en tus palabras, sin formularios.
           Encuentro a la persona exacta, verificada y disponible.
@@ -102,7 +102,7 @@ export default function OnboardingOverlay({ onComplete }) {
     <div className={overlay}>
       <div className={styles.chooseContent} key="choose">
         <p className={styles.chooseTitle}>
-          {firstName ? `${firstName}, ¿cómo usarás Nüra?` : '¿Cómo usarás Nüra?'}
+          {firstName ? `${firstName}, ¿cómo usarás Nüra?` : '¿Qué estás buscando?'}
         </p>
         <p className={styles.chooseDesc}>Puedes cambiar esto cuando quieras.</p>
 

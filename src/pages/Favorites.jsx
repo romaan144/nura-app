@@ -32,7 +32,7 @@ export default function Favorites() {
               Explorar profesionales
             </button>
             <button className={styles.emptyBtnSecondary} onClick={() => navigate('/')}>
-              Buscar con Nüra
+              Buscar profesionales
             </button>
           </div>
         ) : (

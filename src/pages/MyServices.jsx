@@ -149,7 +149,7 @@ export default function MyServices() {
                 : 'Cuando finalices un servicio podrás valorar al profesional.'}
             </p>
             <button className={styles.emptyBtn} onClick={() => navigate('/')}>
-              Buscar con Nüra
+              Buscar profesionales
             </button>
           </div>
         )}

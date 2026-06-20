@@ -253,7 +253,7 @@ export default function Profile() {
                 Crea tu perfil profesional gratis
               </div>
               <div style={{fontSize:'var(--text-xs)',color:'rgba(0,0,0,0.4)',marginTop:'2px'}}>
-                Ofrece tus servicios en Nüra
+                Conecta con personas que te necesitan
               </div>
             </div>
             <ChevronRight size={16} color="var(--purple)" />
