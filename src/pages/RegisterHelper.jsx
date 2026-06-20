@@ -61,7 +61,7 @@ async function saveHelperToSupabase(answers) {
 }
 
 const QUESTIONS = [
-  { id: 'name',           text: '¡Hola! Soy Nüra. Construiré tu perfil profesional para que las personas correctas puedan encontrarte. ¿Cómo te llamas?', placeholder: 'Tu nombre completo' },
+  { id: 'name',           text: 'Hola, vamos a crear tu perfil profesional. ¿Cómo te llamas?', placeholder: 'Tu nombre completo' },
   { id: 'specialty',      text: 'Encantada, {name}. ¿Cuál es tu especialidad principal?', placeholder: 'Ej: logopeda, cuidadora, técnico de calderas...' },
   { id: 'formation',      text: '¿Qué formación o certificaciones tienes?', placeholder: 'Ej: Grado en Logopedia, FP Atención Sociosanitaria...' },
   { id: 'zone',           text: '¿En qué zona de Barcelona trabajas? ¿Te desplazas?', placeholder: 'Ej: Gràcia y alrededores, toda Barcelona' },
@@ -124,7 +124,7 @@ export default function RegisterHelper() {
         }])
         setTimeout(() => setMessages(prev => [...prev, {
           id: Date.now()+1, from: 'nura',
-          text: `Cada valoración que recibas fortalece tu posición en Nüra. ¡Mucha suerte!`
+          text: `Cada valoración que recibas fortalecerá tu reputación. ¡Mucha suerte!`
         }]), 1800)
         // Save to Supabase (async, non-blocking)
         saveHelperToSupabase(newAnswers).then(saved => {

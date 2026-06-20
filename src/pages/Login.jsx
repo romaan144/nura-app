@@ -120,7 +120,7 @@ export default function Login() {
               value={name} onChange={e => setName(e.target.value)} autoFocus
               onKeyDown={e => e.key === 'Enter' && handleName()} />
             <button className={styles.btn} onClick={handleName} disabled={!name.trim()}>
-              <ArrowRight size={17} /> Empezar en Nüra
+              <ArrowRight size={17} /> Crear cuenta gratis
             </button>
           </div>
         )}

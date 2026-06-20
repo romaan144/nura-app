@@ -65,7 +65,7 @@ const DEMO_CHATS = [
 // Per-chat realistic message histories
 export const DEMO_HISTORIES = {
   5: [
-    { id: 1, from: 'user', text: 'Hola Elena, me ha encontrado Nüra como auxiliar de geriatría. Mi madre tiene 78 años y vive sola en el Eixample, necesitaría ayuda las mañanas de lunes a viernes.', time: new Date(Date.now() - 1000*60*60*3).toISOString() },
+    { id: 1, from: 'user', text: 'Hola Elena, me pusieron en contacto contigo como auxiliar de geriatría. Mi madre tiene 78 años y vive sola en el Eixample, necesitaría ayuda las mañanas de lunes a viernes.', time: new Date(Date.now() - 1000*60*60*3).toISOString() },
     { id: 2, from: 'profesional', text: '¡Hola! Sí, claro. ¿Qué tipo de ayuda necesita principalmente? ¿Más asistencia con la higiene personal, compañía, o gestión de medicación?', time: new Date(Date.now() - 1000*60*60*2.8).toISOString() },
     { id: 3, from: 'user', text: 'Sobre todo compañía y que le ayude a preparar el desayuno y la medicación. Tiene Alzheimer en fase inicial.', time: new Date(Date.now() - 1000*60*60*2.5).toISOString() },
     { id: 4, from: 'profesional', text: 'Entiendo perfectamente. Tengo experiencia específica con Alzheimer en fase inicial y en esa zona además. ¿Podría ser de 9 a 13h? Mi tarifa para ese horario sería de 14€/h.', time: new Date(Date.now() - 1000*60*60*2).toISOString() },

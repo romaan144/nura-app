@@ -4,7 +4,7 @@ import { useUser } from '../context/UserContext'
 import styles from './BottomNav.module.css'
 
 const TABS = [
-  { path: '/',        icon: Search,        label: 'Nüra'     },
+  { path: '/',        icon: Search,        label: 'Buscar'     },
   { path: '/explore', icon: Compass,       label: 'Profesionales' },
   { path: '/chats',   icon: MessageCircle, label: 'Chats'    },
   { path: '/feed',    icon: Rss,           label: 'Comunidad'     },
