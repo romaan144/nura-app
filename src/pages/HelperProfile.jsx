@@ -337,15 +337,21 @@ function HelperProfileInner() {
             <div className={styles.ayudaList}>
               {(() => {
                 // Build deduplicated list of real capabilities
-                const MODAL_KEYWORDS = ['presencial','online','a domicilio','domicilio','sesion','sesiones','visita','visitas','videollamada']
+                const MODAL_KEYWORDS = ['presencial','online','a domicilio','domicilio','sesion','visita','videollamada','disponib']
                 const isModal = s => MODAL_KEYWORDS.some(k => s.toLowerCase().includes(k))
+                const isSimilar = (a, b) => {
+                  const x = a.toLowerCase().trim(), y = b.toLowerCase().trim()
+                  if (x === y) return true
+                  if (x.includes(y) || y.includes(x)) return true
+                  const stem = Math.min(x.length, y.length) - 2
+                  return stem >= 5 && x.slice(0, stem) === y.slice(0, stem)
+                }
                 const raw = [h.specialty, ...(h.tags || [])].filter(Boolean)
-                const seen = new Set()
+                const accepted = []
                 const items = raw.filter(s => {
-                  const key = s.toLowerCase().trim()
-                  if (seen.has(key)) return false
                   if (isModal(s)) return false
-                  seen.add(key)
+                  if (accepted.some(a => isSimilar(a, s))) return false
+                  accepted.push(s)
                   return true
                 }).slice(0, 8)
                 return items.map((item, i) => (
