@@ -275,13 +275,13 @@
   border: 1px solid rgba(255,255,255,0.6);
   border-left: 2px solid rgba(123,47,255,0.2);
   color: rgba(0,0,0,0.82);
-  border-radius: 4px var(--radius-md) var(--radius-md) var(--radius-md);
+  border-radius: var(--radius-xs) var(--radius-md) var(--radius-md) var(--radius-md);
   box-shadow: var(--shadow-xs);
 }
 .bubbleUser {
   background: var(--purple);
   color: white;
-  border-radius: var(--radius-md) var(--radius-md) 4px var(--radius-md);
+  border-radius: var(--radius-md) var(--radius-md) var(--radius-xs) var(--radius-md);
 }
 
 .typingDots {

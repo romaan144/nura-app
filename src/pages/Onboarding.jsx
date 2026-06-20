@@ -46,7 +46,7 @@ export default function OnboardingPage() {
       <div className={styles.namePage}>
         <img src="/logo-iso.png" alt="Nüra" className={styles.nameIso} />
         <h1 className={styles.nameTitle}>¿Cómo te llamas?</h1>
-        <p className={styles.nameDesc}>Para que Nüra pueda saludarte.</p>
+        
         <input className={styles.nameInput} placeholder="Tu nombre"
           value={name} onChange={e => setName(e.target.value)} autoFocus
           onKeyDown={e => e.key === 'Enter' && finish(false)} />

@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react'
-import { Briefcase, Users2, Award, Bookmark, Check, MessageCircle, Share2, Shield, UserPlus, Heart, Sparkles, Star, Rss } from 'lucide-react'
+import { Briefcase, Users2, Award, Bookmark, Check, MessageCircle, Share2, Shield, UserPlus, Heart, Star, Rss } from 'lucide-react'
 import RegisterGate from '../components/RegisterGate'
 import { useNavigate } from 'react-router-dom'
 import { HELPERS } from '../data/helpers'
@@ -254,7 +254,7 @@ export default function Feed() {
               onClick={() => navigate(`/helper/${pick.id}`, { state: { helper: pick } })}>
               <div className={styles.nuraPickHeader}>
                 <span className={styles.nuraPickLabel}>
-                  <Sparkles size={11} color="var(--purple)" /> Profesional del día
+                  Profesional del día
                 </span>
                 
               </div>

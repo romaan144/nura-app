@@ -46,13 +46,17 @@ body {
   --space-section:32px;   /* section: between major sections */
 
   /* ── RADIUS SCALE ───────────────────────────────────── */
+  --radius-xs:   4px
   --radius-full: 100px;
 
   /* ── Nüra palette — from the logo ─────────────────── */
   --red2:     #E8002D;
   --cyan:     #00D4C8;
   --cyan2:    #00B4AA;
-  --purple:   #7B2FFF;
+  --purple:    #7B2FFF;
+  --purple-10: rgba(123,47,255,0.10);
+  --purple-20: rgba(123,47,255,0.20);
+  --purple-40: rgba(123,47,255,0.40);
   --purple2:  #5A1FCC;
 
   /* Neutrals */
