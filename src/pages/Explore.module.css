@@ -27,6 +27,12 @@
   box-shadow: var(--shadow-sm);
   transition: all 0.2s ease;
 }
+.searchBar:focus-within {
+  border-color: rgba(123,47,255,0.4);
+  box-shadow: var(--shadow-sm), 0 0 0 3px rgba(123,47,255,0.08);
+  transition: all 0.2s ease;
+}
+
 .searchInput { flex: 1; border: none; outline: none; font-size: var(--text-sm); color: var(--ink); background: transparent; font-family: 'Inter',sans-serif; }
 .searchInput::placeholder { color: var(--soft); }
 .filterBtn { width: 32px; height: 32px; border-radius: 50%; background: var(--paper); border: none; color: var(--mid); display: flex; align-items: center; justify-content: center; position: relative; transition: all 0.15s; }
@@ -102,7 +108,7 @@
   .page { max-width: 960px; margin: 0 auto; }
   .searchWrap { padding: 0 32px 14px; }
   .categories { padding: 0 32px 16px; }
-  .content { padding: 0 32px 60px; }
+  .content { padding: 0 14px 100px; }
   .grid { grid-template-columns: 1fr 1fr 1fr; gap: 14px; }
   .filterPanel { margin: 0 32px 14px; }
 }

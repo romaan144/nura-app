@@ -57,6 +57,12 @@ body {
 
   /* Neutrals */
   --ink:      #0D0D1A;
+  /* ── INK OPACITY SCALE ─────────────────────────────── */
+  --ink-primary:   rgba(0,0,0,0.85);
+  --ink-secondary: rgba(0,0,0,0.55);
+  --ink-tertiary:  rgba(0,0,0,0.38);
+  --ink-disabled:  rgba(0,0,0,0.25);
+  --ink-border:    rgba(0,0,0,0.08);
   --mid:      #3D3D5C;
   --soft:     #8888AA;
   --rule:     #E4E4F0;
