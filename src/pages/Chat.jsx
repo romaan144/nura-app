@@ -71,7 +71,7 @@ function getHelperReply(helper, count, userMsg = '') {
     const options = [
       `¡Perfecto! Cuando quieras cerramos los detalles, ${firstName}.`,
       `Genial. Avísame cuando quieras concretar y lo organizamos.`,
-      `De nada. Estoy aquí para lo que necesites.`,
+      `Cuando quieras seguir, aquí estaremos.`,
     ]
     return options[Math.floor(Math.random() * options.length)]
   }

@@ -2,7 +2,7 @@
 // ── Contexto de precio por categoría (mercado Barcelona) ──────────────────
 // Usado por Nüra para contextualizar el precio de cada helper al usuario
 export const PRICE_CONTEXT = {
-  logopeda:     { lo: 40,  hi: 70,  unit: 'sesión', label: 'logopedas' },
+  logopedia:     { lo: 40,  hi: 70,  unit: 'sesión', label: 'logopedas' },
   tecnico:      { lo: 50,  hi: 100, unit: 'visita',  label: 'técnicos' },
   limpieza:     { lo: 10,  hi: 18,  unit: 'hora',    label: 'limpieza del hogar' },
   cuidado:      { lo: 10,  hi: 20,  unit: 'hora',    label: 'cuidadores' },
@@ -193,7 +193,7 @@ const SEMANTIC_MAP = {
 
 // ── CATEGORY KEYWORDS (extended) ─────────────────────────────────────────
 const CATEGORY_KEYWORDS = {
-  logopeda: ['logopeda','logopedia','habla','lenguaje','pronunciación','pronunciar',
+  logopedia: ['logopeda','logopedia','habla','lenguaje','pronunciación','pronunciar',
     'fonema','tartamudez','tartamudea','voz','dislalia','disfagia','comunicación',
     'hablar','retraso lenguaje','terapia habla'],
   tecnico: ['caldera','fontanero','fontanería','electricista','técnico','reparar',
@@ -338,7 +338,7 @@ export function analyzeNeed(userText) {
   const presencial = hasPresential || (!hasOnline && ['tecnico','cuidado','limpieza','mascotas'].includes(categoria))
   
   const QUALIFICATION_MAP = {
-    logopeda: 'professional', tecnico: 'professional', cuidado: 'experienced',
+    logopedia: 'professional', tecnico: 'professional', cuidado: 'experienced',
     mascotas: 'experienced', limpieza: 'experienced', matematicas: 'student',
     entrenador: 'professional', otro: 'professional',
   }
@@ -350,7 +350,7 @@ export function analyzeNeed(userText) {
     .slice(0, 5)
   
   const resumenMap = {
-    logopeda: 'Busca un logopeda', tecnico: 'Necesita un técnico o profesional del hogar',
+    logopedia: 'Busca un logopeda', tecnico: 'Necesita un técnico o profesional del hogar',
     limpieza: 'Busca servicio de limpieza', cuidado: 'Busca cuidado de personas',
     mascotas: 'Necesita cuidado de mascota', matematicas: 'Busca clases o formación',
     entrenador: 'Busca entrenador personal', otro: 'Busca un profesional',

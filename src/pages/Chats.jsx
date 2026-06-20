@@ -46,7 +46,7 @@ const DEMO_CHATS = [
     avatarUrl: "https://api.dicebear.com/9.x/personas/svg?seed=LuciaVidal",
     helperColor: "#DB2777",
     helperAvatar: "LV",
-    lastMsg: "Esta semana repasamos álgebra, que es donde más le cuesta. Avanzando bien 💪",
+    lastMsg: "Esta semana repasamos álgebra, que es donde más le cuesta. Avanzando bien.",
     lastTime: new Date(Date.now() - 1000 * 60 * 60 * 26).toISOString(),
     unread: 0,
   },
@@ -95,7 +95,7 @@ export const DEMO_HISTORIES = {
     { id: 3, from: 'user', text: 'Álgebra sobre todo. La física no la entiende en general.', time: new Date(Date.now() - 1000*60*60*48).toISOString() },
     { id: 4, from: 'profesional', text: 'Perfecto, son cosas muy trabajables. Hago clases los martes y jueves de 17 a 19h, 30€/hora. ¿Le viene bien?', time: new Date(Date.now() - 1000*60*60*47).toISOString() },
     { id: 5, from: 'user', text: 'Sí, los martes perfecto. ¿Puede ser en casa?', time: new Date(Date.now() - 1000*60*60*30).toISOString() },
-    { id: 6, from: 'profesional', text: 'Esta semana repasamos álgebra, que es donde más le cuesta. Avanzando bien 💪', time: new Date(Date.now() - 1000*60*60*26).toISOString() },
+    { id: 6, from: 'profesional', text: 'Esta semana repasamos álgebra, que es donde más le cuesta. Avanzando bien.', time: new Date(Date.now() - 1000*60*60*26).toISOString() },
   ],
   9: [
     { id: 1, from: 'user', text: 'Hola, busco psicóloga. Llevo meses con ansiedad generalizada y no duermo bien.', time: new Date(Date.now() - 1000*60*60*72).toISOString() },

@@ -19,7 +19,7 @@ function getWelcome(user, searchHistory, favorites, helpersCache) {
 
   if (!user) return [
     `Hola. Soy **Nüra**.`,
-    `Cuéntame qué necesitas. Yo me encargo de encontrar a la persona adecuada.`,
+    `Describe lo que necesitas. Encontraremos a la persona adecuada.`,
   ]
 
   // Use what Nüra knows about this user
@@ -718,7 +718,7 @@ export default function Home({ setSearchState }) {
                       onClick={() => {
                         setShowSuggestions(false)
                         if (opt.includes('busca')) handleSend(searchHistory[0]?.query)
-                        else setMessages(prev => [...prev, {id:Date.now(),from:'nura',lines:['Me alegra saberlo. Estoy aquí cuando lo necesites.']}])
+                        else setMessages(prev => [...prev, {id:Date.now(),from:'nura',lines:['Me alegra saberlo. Cuando lo necesites, vuelve a buscar.']}])
                       }}>
                       {opt}
                     </button>

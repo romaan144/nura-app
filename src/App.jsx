@@ -11,7 +11,6 @@ import Login from './pages/Login'
 import Profile from './pages/Profile'
 import Chats from './pages/Chats'
 const RegisterHelper = lazy(() => import('./pages/RegisterHelper'))
-const HowItWorks = lazy(() => import('./pages/HowItWorks'))
 import Explore from './pages/Explore'
 const Feed = lazy(() => import('./pages/Feed'))
 import NotFound from './pages/NotFound'
@@ -83,7 +82,6 @@ function AppRoutes() {
             <Route path="/profile" element={<Profile />} />
             <Route path="/chats" element={<Chats />} />
             <Route path="/register-helper" element={<RegisterHelper />} />
-            <Route path="/how-it-works" element={<HowItWorks />} />
             <Route path="/explore" element={<Explore />} />
             <Route path="/feed" element={<Feed />} />
             <Route path="*" element={<NotFound />} />
