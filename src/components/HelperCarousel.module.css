@@ -127,7 +127,7 @@
 
 /* Top pick card — subtle purple border */
 .card:has(> [style*="NÜRA RECOMIENDA"]) {
-  border-color: rgba(123,47,255,0.25);
+  border-color: var(--purple-20);
 }
 
 /* ── STRUCTURAL FIX: spacer anchors CTA to bottom ── */
@@ -144,7 +144,7 @@
   color: var(--purple);
   background: white;
   padding: 2px 8px;
-  border: 1px solid rgba(123,47,255,0.25);
+  border: 1px solid var(--purple-20);
   border-radius: var(--radius-full);
   white-space: nowrap;
   z-index: 1;
@@ -153,7 +153,7 @@
 
 /* Top pick card border */
 .cardTop {
-  border-color: rgba(123,47,255,0.2);
+  border-color: var(--purple-20);
 }
 
 /* ── MATCH REASON INLINE ── */
@@ -162,7 +162,7 @@
   align-items: flex-start;
   gap: 4px;
   font-size: 9px;
-  color: rgba(123,47,255,0.65);
+  color: var(--purple);
   font-weight: 500;
   line-height: 1.4;
   margin-top: 1px;

@@ -130,9 +130,9 @@
 .contactBtn {
   display: flex; align-items: center; gap: 4px;
   padding: 6px 12px;
-  background: rgba(123,47,255,0.08);
+  background: var(--purple-10);
   color: var(--purple);
-  border: 1.5px solid rgba(123,47,255,0.4);
+  border: 1.5px solid var(--purple-40);
   border-radius: var(--radius-full);
   font-size: var(--text-xs);
   font-weight: 600;
@@ -141,4 +141,4 @@
   font-family: inherit;
   white-space: nowrap;
 }
-.contactBtn:active { background: rgba(123,47,255,0.06); opacity: 0.8; }
+.contactBtn:active { background: var(--purple-10); opacity: 0.8; }

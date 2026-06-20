@@ -120,6 +120,13 @@ body {
   --page-x: clamp(12px, 4vw, 20px);
 }
 
+:root {
+  --chat-gap:             12px;
+  --chat-gap-md:          20px;
+  --float-bottom-h:       76px;
+  --float-bottom-h-chips: 113px;
+}
+
 
 
 h1, h2, h3 { font-family: 'Plus Jakarta Sans', 'Inter', sans-serif; }

@@ -203,7 +203,7 @@
 .infoVerified { display: flex; align-items: center; gap: 3px; color: var(--green); font-weight: 600; }
 .suggestionBar { padding: 0 14px 8px; }
 .suggestionLabel { font-size: 10px; font-weight: 700; color: var(--soft); text-transform: uppercase; letter-spacing: 0.5px; display: block; margin-bottom: 6px; }
-.suggestionText { display: block; width: 100%; text-align: left; padding: 10px 14px; background: rgba(255,255,255,0.72); border: 1px solid var(--ink-border); border-radius: 100px; font-size: var(--text-sm); color: rgba(0,0,0,0.7); cursor: pointer; box-shadow: var(--shadow-sm); }
+
 
 @media (min-width: 768px) {
   .messages { padding: 88px 32px 110px; }
@@ -235,16 +235,7 @@
   display: flex; flex-wrap: wrap; gap: 7px;
   padding: 4px 0 8px;
 }
-.quickReply {
-  padding: 8px 14px;
-  background: rgba(255,255,255,0.72);
-  -webkit-backdrop-filter: blur(24px) saturate(180%);
-  backdrop-filter: blur(24px) saturate(180%);
-  border: 1px solid var(--ink-border);
-  box-shadow: var(--shadow-sm);
-  border-radius: 100px; font-size: var(--text-sm); color: var(--ink-secondary);
-  cursor: pointer; transition: opacity 0.15s; font-weight: 500;
-}
+
 .quickReply:active { opacity: 0.6; }
 
 /* Suggestion bar */
