@@ -46,7 +46,7 @@ body {
   --space-section:32px;   /* section: between major sections */
 
   /* ── RADIUS SCALE ───────────────────────────────────── */
-  --radius-xs:   4px
+  --radius-xs:   4px;
   --radius-full: 100px;
 
   /* ── Nüra palette — from the logo ─────────────────── */
