@@ -2,7 +2,7 @@ import PageHeader from '../components/PageHeader'
 import HelperCard from '../components/HelperCard'
 import { useState, useEffect, useRef } from 'react'
 import { useNavigate } from 'react-router-dom'
-import { Search, SlidersHorizontal, X, Grid3X3, Heart, Wrench, BookOpen, Activity, Shield, Sparkles, MapPin } from 'lucide-react'
+import { Search, SlidersHorizontal, X, Grid3X3, Heart, Wrench, BookOpen, Activity, Shield, Loader2, MapPin } from 'lucide-react'
 import { HELPERS as LOCAL_HELPERS } from '../data/helpers'
 import { getAllHelpers } from '../utils/supabase'
 import { analyzeNeed, matchHelpers, getPriceContext } from '../utils/matching'
@@ -158,7 +158,7 @@ export default function Explore() {
         <form onSubmit={handleSubmit} className={styles.searchForm}>
           <div className={styles.searchBar}>
             {aiSearching
-              ? <Sparkles size={15} color="var(--purple)" style={{animation:'pulse 1s infinite'}} />
+              ? <Loader2 size={15} color="var(--purple)" style={{animation:'spin 1.2s linear infinite'}} />
               : <Search size={15} color="var(--soft)" />
             }
             <input
@@ -252,7 +252,6 @@ export default function Explore() {
         {/* ── AI RESULT HEADER ── */}
         {isAiMode && !aiSearching && (
           <div className={styles.aiHeader}>
-            <Sparkles size={13} color="var(--purple)" />
             <span>
               <strong>{displayList.length} resultado{displayList.length !== 1 ? 's' : ''}</strong>
               {' '}para "{aiQuery.length > 30 ? aiQuery.slice(0,30)+'...' : aiQuery}"
@@ -277,7 +276,7 @@ export default function Explore() {
         {/* ── SEARCHING STATE ── */}
         {aiSearching && (
           <div className={styles.searching}>
-            <Sparkles size={16} color="var(--purple)" />
+            <Loader2 size={16} color="var(--purple)" style={{animation:'spin 1.2s linear infinite'}} />
             <span>Nüra está buscando...</span>
           </div>
         )}
@@ -305,7 +304,7 @@ export default function Explore() {
                 {/* AI match reason — only in AI mode */}
                 {isAiMode && aiReasons[h.id] && (
                   <div className={styles.matchReason}>
-                    <Sparkles size={10} color="var(--purple)" />
+                    
                     <span>{aiReasons[h.id]}</span>
                   </div>
                 )}

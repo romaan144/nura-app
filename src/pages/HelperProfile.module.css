@@ -165,7 +165,7 @@
   line-height: 1.65;
   text-align: center;
   margin: 14px 0 20px;
-  max-width: 300px;
+  max-width: min(300px, 100%);
 }
 
 /* CTAs */
@@ -367,7 +367,7 @@
   min-width: 38px;
   display: flex; flex-direction: column; align-items: center;
   padding: 7px 5px;
-  border-radius: 10px;
+  border-radius: var(--radius-sm);
   border: 1px solid transparent;
 }
 .dayOn  { background: var(--green-light); border-color: rgba(5,150,105,0.18); }

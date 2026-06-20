@@ -22,13 +22,13 @@
   -webkit-backdrop-filter: blur(24px) saturate(180%);
   backdrop-filter: blur(24px) saturate(180%);
   border: 1px solid rgba(255,255,255,0.35);
-  border-radius: 20px;
+  border-radius: var(--radius-lg);
   padding: 4px;
   box-shadow: var(--shadow-sm);
 }
 .tab {
   flex: 1; padding: 8px 12px;
-  border: none; border-radius: 16px;
+  border: none; border-radius: var(--radius-md);
   font-size: var(--text-sm); font-weight: 500;
   color: var(--ink-secondary); background: transparent;
   cursor: pointer; transition: all 0.15s;
@@ -101,7 +101,7 @@
 /* Follow buttons */
 .followBtn {
   display: flex; align-items: center; gap: 4px;
-  padding: 6px 12px; border-radius: 100px;
+  padding: 6px 12px; border-radius: var(--radius-full);
   background: var(--purple); color: white;
   border: none; font-size: var(--text-xs); font-weight: 700;
   cursor: pointer; flex-shrink: 0;
@@ -111,7 +111,7 @@
 .followBtn:active { opacity: 0.7; }
 .followingBtn {
   display: flex; align-items: center; gap: 4px;
-  padding: 6px 12px; border-radius: 100px;
+  padding: 6px 12px; border-radius: var(--radius-full);
   background: rgba(0,0,0,0.06); color: var(--ink-secondary);
   border: none; font-size: var(--text-xs); font-weight: 600;
   cursor: pointer; flex-shrink: 0;
@@ -129,13 +129,13 @@
 .badge {
   font-size: var(--text-xs); font-weight: 600;
   color: var(--purple); background: rgba(123,47,255,0.07);
-  border-radius: 100px; padding: 4px 12px;
+  border-radius: var(--radius-full); padding: 4px 12px;
   display: inline-block; margin: 0 14px 10px;
 }
 .hiringBadge {
   font-size: var(--text-xs); font-weight: 600;
   color: var(--green); background: var(--green-light);
-  border-radius: 100px; padding: 4px 12px;
+  border-radius: var(--radius-full); padding: 4px 12px;
   display: inline-block; margin: 0 14px 10px;
   border: 1px solid rgba(5,150,105,0.15);
 }
@@ -151,7 +151,7 @@
   padding: 8px; border: none; background: none;
   font-size: var(--text-xs); font-weight: 500;
   color: var(--ink-secondary); cursor: pointer;
-  border-radius: 10px; transition: opacity 0.15s;
+  border-radius: var(--radius-sm); transition: opacity 0.15s;
   font-family: -apple-system, 'Inter', sans-serif;
 }
 .action:active { opacity: 0.6; }
@@ -175,7 +175,7 @@
 }
 .emptyBtn {
   padding: 11px 24px; background: var(--purple); color: white;
-  border: none; border-radius: 100px; font-size: var(--text-sm);
+  border: none; border-radius: var(--radius-full); font-size: var(--text-sm);
   font-weight: 700; cursor: pointer;
 }
 
@@ -192,7 +192,7 @@
   font-size: var(--text-xs); font-weight: 700;
   color: var(--green); background: var(--green-light);
   border: 1px solid rgba(5,150,105,0.2);
-  border-radius: 100px; padding: 3px 10px;
+  border-radius: var(--radius-full); padding: 3px 10px;
   margin-bottom: 4px;
 }
 .tipBadge {
@@ -200,7 +200,7 @@
   font-size: var(--text-xs); font-weight: 700;
   color: #D97706; background: #FFFBEB;
   border: 1px solid rgba(217,119,6,0.2);
-  border-radius: 100px; padding: 3px 10px;
+  border-radius: var(--radius-full); padding: 3px 10px;
   margin-bottom: 4px;
 }
 

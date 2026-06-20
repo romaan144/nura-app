@@ -46,7 +46,7 @@
 .filterPills { display: flex; flex-wrap: wrap; gap: 6px; }
 .filterPill { padding: 6px 12px; background: var(--paper); border: none; border-radius: var(--card-radius); font-size: var(--text-xs); color: var(--mid); transition: all 0.15s; }
 .filterPillActive { background: var(--purple); color: white; box-shadow: var(--shadow-sm); }
-.filterInput { padding: 8px 12px; border: 1.5px solid var(--rule); border-radius: 12px; font-size: var(--text-sm); outline: none; background: var(--paper); color: var(--ink); font-family: 'Inter',sans-serif; width: 100px; }
+.filterInput { padding: 8px 12px; border: 1.5px solid var(--rule); border-radius: var(--radius-sm); font-size: var(--text-sm); outline: none; background: var(--paper); color: var(--ink); font-family: 'Inter',sans-serif; width: 100px; }
 .clearFilters { display: flex; align-items: center; gap: 6px; background: none; border: none; color: var(--soft); font-size: var(--text-xs); padding: 0; align-self: flex-start; }
 
 /* Categories */
@@ -144,7 +144,7 @@
 }
 .featuredRow::-webkit-scrollbar { display: none; }
 .featuredCard {
-  background: white; border-radius: 18px; padding: 14px 12px;
+  background: white; border-radius: var(--card-radius); padding: 14px 12px;
   text-align: center; flex-shrink: 0; width: 88px;
   cursor: pointer;
   box-shadow: var(--shadow-sm), 0 1px 3px rgba(0,0,0,0.05);
@@ -171,7 +171,7 @@
   .page { padding-bottom: var(--nav-h) !important; }
 }
 
-.tag { font-size: 10px; color: var(--ink-secondary); background: rgba(0,0,0,0.04); border-radius: 100px; padding: 3px 8px; font-weight: 500; }
+.tag { font-size: 10px; color: var(--ink-secondary); background: rgba(0,0,0,0.04); border-radius: var(--radius-full); padding: 3px 8px; font-weight: 500; }
 
 
 /* Desktop: 2-column grid for richer cards */
