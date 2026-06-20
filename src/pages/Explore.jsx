@@ -263,11 +263,13 @@ export default function Explore() {
           </div>
         )}
 
-        {/* ── STANDARD HEADER (no AI) ── */}
-        {!isAiMode && !aiSearching && (
+        {/* ── RESULTS COUNT — always visible when not searching ── */}
+        {!aiSearching && (
           <div className={styles.listHeader}>
             <span className={styles.listCount}>
-              {displayList.length} profesional{displayList.length !== 1 ? 'es' : ''} cerca de ti
+              {isAiMode
+                ? `${displayList.length} resultado${displayList.length !== 1 ? 's' : ''} encontrado${displayList.length !== 1 ? 's' : ''}`
+                : `${displayList.length} profesional${displayList.length !== 1 ? 'es' : ''} cerca de ti`}
             </span>
           </div>
         )}

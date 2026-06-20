@@ -400,7 +400,7 @@ export default function Chat() {
     const name = helper.name?.split(' ')?.[0] || ''
     // Clean up the query — remove trailing punctuation, make it lowercase if it starts as such
     const q = query.trim().replace(/[.?!]+$/, '')
-    return `Hola ${name}, Nüra me ha recomendado tu perfil. ${q}. ¿Puedes ayudarme?`
+    return `Hola ${name}, ${q}. ¿Puedes ayudarme?`
   }
 
   const [input, setInput] = useState(() =>

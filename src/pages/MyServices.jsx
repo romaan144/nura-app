@@ -143,10 +143,10 @@ export default function MyServices() {
             </strong>
             <p style={{fontSize:'var(--text-sm)',color:'rgba(0,0,0,0.4)',margin:'4px 0 16px',lineHeight:1.6,textAlign:'center',maxWidth:'220px'}}>
               {tab === 'Todos'
-                ? 'Cuando contactes con un profesional y concretes una cita, aparecerá aquí.'
+                ? 'Cuando contrates a un profesional y concretéis una cita, aparecerá aquí.'
                 : tab === 'Próximos'
-                ? 'Cuando contrates un servicio lo verás aquí con los detalles.'
-                : 'Tus servicios completados y valoraciones aparecerán aquí.'}
+                ? 'Cuando reserves una cita, aparecerá aquí con todos los detalles.'
+                : 'Cuando finalices un servicio podrás valorar al profesional.'}
             </p>
             <button className={styles.emptyBtn} onClick={() => navigate('/')}>
               Buscar con Nüra
