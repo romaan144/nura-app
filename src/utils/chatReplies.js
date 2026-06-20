@@ -19,7 +19,22 @@ function getHelperReply(helper, count, userMsg = '') {
   const name = helper.name?.split(' ')?.[0] || ''
   const t = userMsg.toLowerCase()
   
-  // First message — respond directly to the need, no Nüra mention
+  // Initial greeting (count=0) — warm professional hello
+  if (count === 0) {
+    const cat = helper.category || 'otro'
+    const greetings = {
+      logopedia:  `¡Hola! Soy ${name}. ¿En qué puedo ayudarte?`,
+      cuidado:    `¡Hola! Soy ${name}. ¿En qué puedo ayudarte?`,
+      tecnico:    `¡Hola! Soy ${name}. ¿En qué puedo ayudarte?`,
+      limpieza:   `¡Hola! Soy ${name}. ¿En qué puedo ayudarte?`,
+      entrenador: `¡Hola! Soy ${name}. ¿En qué puedo ayudarte?`,
+      salud:      `¡Hola! Soy ${name}. ¿En qué puedo ayudarte?`,
+      legal:      `¡Hola! Soy ${name}. ¿En qué puedo ayudarte?`,
+    }
+    return greetings[cat] || `¡Hola! Soy ${name}. ¿En qué puedo ayudarte?`
+  }
+
+  // First user message — respond with category-specific question
   if (count === 1) {
     const cat = helper.category || 'otro'
     const specific = {
