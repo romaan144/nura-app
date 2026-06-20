@@ -332,7 +332,7 @@ function HelperProfileInner() {
 
         {/* ── Cómo puedo ayudarte ── */}
         {(h.tags?.length > 0 || h.specialty) && (
-          <section className={styles.section}>
+          <section className={`${styles.section} ${styles.sectionFirst}`}>
             <h2 className={styles.sectionHeading}>Puedo ayudarte con</h2>
             <div className={styles.ayudaList}>
               {[h.specialty, ...(h.tags || []).filter(t => t !== h.specialty)].filter(Boolean).slice(0,8).map((item, i) => (

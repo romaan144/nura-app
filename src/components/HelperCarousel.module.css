@@ -48,17 +48,17 @@
 /* Avatar */
 .avatarWrap {
   position: relative;
-  width: 48px; height: 48px;
+  width: 46px; height: 46px;
   margin-bottom: 4px;
   align-self: center;
 }
 .avatar {
-  width: 48px; height: 48px;
+  width: 46px; height: 46px;
   border-radius: 50%;
   object-fit: cover; display: block;
 }
 .avatarFallback {
-  width: 48px; height: 48px;
+  width: 46px; height: 46px;
   border-radius: 50%;
   display: flex; align-items: center; justify-content: center;
   color: white; font-weight: 700; font-size: var(--text-md);

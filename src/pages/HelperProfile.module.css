@@ -203,10 +203,9 @@
   margin-top: 4px;
 }
 
-/* First section (Puedo ayudarte con) has no top border */
-.section:first-of-type {
-  border-top: none;
-  margin-top: 0;
+.sectionFirst {
+  border-top: none !important;
+  margin-top: 0 !important;
 }
 
 .sectionHeading {

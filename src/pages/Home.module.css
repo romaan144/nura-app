@@ -28,7 +28,7 @@
   flex: 1;
   overflow-y: auto;
   overflow-x: hidden;
-  padding: 80px 16px 0;
+  padding: 80px 14px 0;
   display: flex;
   flex-direction: column;
   justify-content: flex-end; /* content always anchored to bottom — no JS scroll needed */
@@ -263,15 +263,10 @@
   line-height: 1.5;
 }
 /* Consistent line-height for chat text across all devices */
-.bubble p {
-  line-height: 1.55;
-  margin: 0 0 6px;
-}
-.bubble p:last-child {
-  margin-bottom: 0;
-}
 
-.bubble p { margin: 0; line-height: 1.55; letter-spacing: -0.1px; }
+
+.bubble p { margin: 0 0 5px; line-height: 1.55; letter-spacing: -0.1px; }
+.bubble p:last-child { margin-bottom: 0; }
 .bubble p:empty { display: none; }
 .bubbleNura {
   background: rgba(255,255,255,0.92);

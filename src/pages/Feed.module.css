@@ -12,7 +12,7 @@
 .tabs {
   padding: 8px 14px 4px;
   position: sticky;
-  top: 72px;
+  top: var(--header-h);
   z-index: 10;
   background: transparent;
 }
@@ -40,7 +40,7 @@
 
 /* ── Feed ────────────────────────────────────────────── */
 .feed {
-  padding: 8px 14px calc(72px + max(env(safe-area-inset-bottom,0px),8px) + 8px);
+  padding: 8px 14px var(--nav-h);
   display: flex; flex-direction: column; gap: 10px;
 }
 
