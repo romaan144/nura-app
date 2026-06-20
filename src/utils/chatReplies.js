@@ -1,3 +1,5 @@
+import { getFirstName } from './name'
+
 // ── Chat Reply Utilities ─────────────────────────────────────────────────
 // Business logic for generating helper responses, separated from UI layer
 
@@ -16,7 +18,7 @@ function generateFirstMessage(helper) {
 }
 
 function getHelperReply(helper, count, userMsg = '') {
-  const name = helper.name?.split(' ')?.[0] || ''
+  const name = getFirstName(helper.name) || ''
   const t = userMsg.toLowerCase()
   
   // Initial greeting (count=0) — warm professional hello

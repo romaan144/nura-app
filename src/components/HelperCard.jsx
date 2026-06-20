@@ -39,7 +39,7 @@ export default function HelperCard({ helper, onContact, showContact = true }) {
     navigate(`/helper/${helper.id}`, { state: { helper, fromSearch: true, matchReason: reason, userQuery: window.__nuraLastQuery, analysis: window.__nuraLastAnalysis } })
   }
 
-  const firstName = helper.name?.split(' ')[0]
+  const firstName = getFirstName(helper.name)
   const lastName  = helper.name?.split(' ')[1]?.[0]
 
   return (
