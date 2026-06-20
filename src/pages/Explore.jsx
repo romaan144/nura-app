@@ -97,6 +97,7 @@ export default function Explore() {
   }
 
   function clearAi() {
+    setVisibleCount(20)
     setAiResults(null)
     setAiReasons({})
     setAiQuery('')

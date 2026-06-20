@@ -45,7 +45,7 @@ export default function Onboarding({ onDone }) {
       <div className={styles.card}>
         <button className={styles.skip} onClick={finish}><X size={16} /></button>
 
-        <div className={styles.icon}>{s.icon}</div>
+        <div className={styles.icon}><s.Icon size={32} strokeWidth={1.5} /></div>
         <h2 className={styles.title}>{s.title}</h2>
         <p className={styles.desc}>{s.desc}</p>
 
