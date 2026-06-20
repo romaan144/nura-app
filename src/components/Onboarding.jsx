@@ -1,21 +1,21 @@
 import { useState, useEffect } from 'react'
-import { X, ArrowRight } from 'lucide-react'
+import { X, ArrowRight, MessageCircle, Search, Users } from 'lucide-react'
 import styles from './Onboarding.module.css'
 
 const STEPS = [
   {
-    icon: '💬',
+    Icon: MessageCircle,
     title: 'Describe lo que necesitas',
     desc: 'Con tus propias palabras, sin categorías ni formularios. Igual que se lo contarías a un amigo.',
   },
   {
-    icon: '🧠',
-    title: 'Nüra lo entiende todo',
-    desc: 'Detecta si es presencial, urgente, qué nivel de cualificación hace falta y quién está cerca.',
+    Icon: Search,
+    title: 'Encuentra a la persona adecuada',
+    desc: 'En segundos ves profesionales verificados cerca de ti, con valoraciones reales y disponibilidad.',
   },
   {
-    icon: '🤝',
-    title: 'Conectas con una persona real',
+    Icon: Users,
+    title: 'Habla directamente con ellos',
     desc: 'Perfiles verificados con historial real. No anuncios, no CVs inventados. Evidencia de verdad.',
   },
 ]

@@ -65,6 +65,7 @@ export default function Explore() {
   // ── AI SEARCH ────────────────────────────────────────────────
   async function runAiSearch(query) {
     if (!query.trim()) { clearAi(); return }
+    setVisibleCount(20)
     setAiSearching(true)
     setAiQuery(query)
 
@@ -108,6 +109,7 @@ export default function Explore() {
     if (cat === 'all') { clearAi(); return }
     if (cat === activeCategory) { clearAi(); return }
     setActiveCategory(cat)
+    setVisibleCount(20)
     const query = CAT_QUERIES[cat] || cat
     setSearchText('')
     runAiSearch(query)

@@ -16,7 +16,7 @@ const DEMO_CHATS = [
     avatarUrl: "https://api.dicebear.com/9.x/personas/svg?seed=ElenaFernandez",
     helperColor: "var(--green)",
     helperAvatar: "EF",
-    lastMsg: "Mañana a las 9:30 en su domicilio entonces. Le mando ubicación por aquí 🙂",
+    lastMsg: "Mañana a las 9:30 en su domicilio entonces. Le mando la ubicación por aquí.",
     lastTime: new Date(Date.now() - 1000 * 60 * 12).toISOString(),
     unread: 1,
   },
@@ -70,7 +70,7 @@ export const DEMO_HISTORIES = {
     { id: 3, from: 'user', text: 'Sobre todo compañía y que le ayude a preparar el desayuno y la medicación. Tiene Alzheimer en fase inicial.', time: new Date(Date.now() - 1000*60*60*2.5).toISOString() },
     { id: 4, from: 'profesional', text: 'Entiendo perfectamente. Tengo experiencia específica con Alzheimer en fase inicial y en esa zona además. ¿Podría ser de 9 a 13h? Mi tarifa para ese horario sería de 14€/h.', time: new Date(Date.now() - 1000*60*60*2).toISOString() },
     { id: 5, from: 'user', text: 'Perfecto, nos encajaría bien. ¿Podría empezar esta semana para que mi madre la conozca?', time: new Date(Date.now() - 1000*60*35).toISOString() },
-    { id: 6, from: 'profesional', text: 'Mañana a las 9:30 en su domicilio entonces. Le mando ubicación por aquí 🙂', time: new Date(Date.now() - 1000*60*12).toISOString() },
+    { id: 6, from: 'profesional', text: 'Mañana a las 9:30 en su domicilio entonces. Le mando la ubicación por aquí.', time: new Date(Date.now() - 1000*60*12).toISOString() },
   ],
   1: [
     { id: 1, from: 'user', text: 'Hola Carlos, busco logopeda para mi hija de 6 años. Tiene dificultad con la R y algunos fonemas.', time: new Date(Date.now() - 1000*60*60*5).toISOString() },

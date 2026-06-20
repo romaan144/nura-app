@@ -469,7 +469,7 @@ export default function Home({ setSearchState }) {
           id: Date.now(), from: 'nura',
           lines: [
             `No encontré a nadie para eso en tu zona.`,
-            `Puedo buscar **${rec.alt}** o ampliar el radio. ¿Qué prefieres?`
+            `¿Pruebo con **${rec.alt}** o amplío el radio?`
           ],
           chips: [rec.chip1, rec.chip2, 'Cuéntame más']
         }])
@@ -718,7 +718,7 @@ export default function Home({ setSearchState }) {
                       onClick={() => {
                         setShowSuggestions(false)
                         if (opt.includes('busca')) handleSend(searchHistory[0]?.query)
-                        else setMessages(prev => [...prev, {id:Date.now(),from:'nura',lines:['Me alegra saberlo 🎉 Estoy aquí cuando lo necesites.']}])
+                        else setMessages(prev => [...prev, {id:Date.now(),from:'nura',lines:['Me alegra saberlo. Estoy aquí cuando lo necesites.']}])
                       }}>
                       {opt}
                     </button>
