@@ -30,9 +30,6 @@ body {
 
   /* ── SHADOW SCALE (4 tokens) ───────────────────────── */
   --shadow-xs:  0 1px 3px rgba(13,13,26,0.06);
-  --shadow-sm:  0 2px 8px rgba(13,13,26,0.08);
-  --shadow-md:  0 4px 20px rgba(13,13,26,0.10);
-  --shadow-lg:  0 12px 40px rgba(13,13,26,0.14);
 
   /* ── SPACING SCALE ─────────────────────────────────────── */
   /* ── SAFE AREA LAYOUT ───────────────────────────────────────────
@@ -49,14 +46,9 @@ body {
   --space-section:32px;   /* section: between major sections */
 
   /* ── RADIUS SCALE ───────────────────────────────────── */
-  --radius-sm:  10px;
-  --radius-md:  16px;
-  --radius-lg:  20px;
-  --radius-xl:  28px;
   --radius-full: 100px;
 
   /* ── Nüra palette — from the logo ─────────────────── */
-  --red:      #FF3B3B;
   --red2:     #E8002D;
   --cyan:     #00D4C8;
   --cyan2:    #00B4AA;
@@ -78,7 +70,6 @@ body {
   --green-dot:    #22C55E;   /* availability dot */
   --red:          #EF4444;   /* error, remove, danger */
   --red-light:    #FEF2F2;   /* red background tint */
-  --amber:        #F59E0B;   /* rating stars, warnings */
   --amber-light:  #FEF3C7;   /* amber background tint */
   --blue:         #3B82F6;   /* info, links */
   --blue-light:   #EFF6FF;   /* blue background tint */

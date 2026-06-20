@@ -48,7 +48,7 @@
 .categories::-webkit-scrollbar { display: none; }
 .cat {
   display: flex; align-items: center; gap: 4px;
-  padding: 5px 12px;
+  padding: 7px 14px;
   background: #FFFFFF;
   border: 1px solid rgba(0,0,0,0.08);
   border-radius: var(--radius-full);

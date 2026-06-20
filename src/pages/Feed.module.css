@@ -212,14 +212,9 @@
 
 /* ── NÜRA PICK DEL DÍA ── */
 .nuraPick {
-  background: #FFFFFF;
-  border: 1px solid rgba(123,47,255,0.15);
-  border-radius: var(--radius-lg);
-  padding: 14px 16px;
+  padding: 0 0 4px;
   margin-bottom: 12px;
-  box-shadow: var(--shadow-xs);
   cursor: pointer;
-  transition: opacity 0.15s;
   -webkit-tap-highlight-color: transparent;
 }
 .nuraPick:active { opacity: 0.75; }
