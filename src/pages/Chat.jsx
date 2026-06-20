@@ -15,12 +15,12 @@ function generateFirstMessage(helper) {
   const name = helper.name?.split(' ')?.[0] || 'Hola'
   const map = {
     logopeda:    `Hola ${name}, te contacto Hola, necesito ayuda con logopedia. ¿Tienes disponibilidad esta semana?`,
-    tecnico:     `Hola ${name}, te contacto por Nüra. Tengo un problema que necesita un técnico. ¿Cuándo podrías venir?`,
-    limpieza:    `Hola ${name}, te encuentro en Nüra. Busco servicio de limpieza del hogar. ¿Estarías disponible?`,
-    cuidado:     `Hola ${name}, te contacto por Nüra. Busco a alguien de confianza para cuidar a un familiar. ¿Podríamos hablar?`,
-    mascotas:    `Hola ${name}, vi tu perfil en Nüra. Necesito a alguien que cuide mi mascota. ¿Estarías disponible?`,
-    matematicas: `Hola ${name}, te encuentro en Nüra. Mi hijo necesita refuerzo escolar. ¿Darías clases?`,
-    entrenador:  `Hola ${name}, te contacto por Nüra. Me gustaría empezar a entrenar. ¿Cuándo podría ser la primera sesión?`,
+    tecnico:     `Hola ${name}, Tengo un problema que necesita un técnico. ¿Cuándo podrías venir?`,
+    limpieza:    `Hola ${name}, Busco servicio de limpieza del hogar. ¿Estarías disponible?`,
+    cuidado:     `Hola ${name}, Busco a alguien de confianza para cuidar a un familiar. ¿Podríamos hablar?`,
+    mascotas:    `Hola ${name}, Necesito a alguien que cuide mi mascota. ¿Estarías disponible?`,
+    matematicas: `Hola ${name}, Mi hijo necesita refuerzo escolar. ¿Darías clases?`,
+    entrenador:  `Hola ${name}, Me gustaría empezar a entrenar. ¿Cuándo podría ser la primera sesión?`,
   }
   return map[helper.category] || `Hola ${name}, te contacto Hola, ¿tienes disponibilidad?`
 }
@@ -313,7 +313,7 @@ function ConfirmModal({ helper, onClose, onConfirm, prefillDate, prefillTime }) 
           }}>
             <img src="/logo-iso.png" alt="" style={{width:'12px',height:'12px',opacity:0.7}} />
             <span className={styles.purpleLabel}>
-              Nüra detectó la fecha de vuestra conversación
+              Fecha detectada en la conversación
             </span>
           </div>
         )}
@@ -604,7 +604,7 @@ export default function Chat() {
                 marginBottom:'4px',maxWidth:'260px',textAlign:'left',
               }}>
                 <p style={{fontSize:'var(--text-xs)',fontWeight:700,color:'var(--purple)',margin:'0 0 4px',
-                  letterSpacing:'0.3px',textTransform:'uppercase'}}>Nüra preparó tu mensaje</p>
+                  letterSpacing:'0.3px',textTransform:'uppercase'}}>Mensaje sugerido</p>
                 <p style={{fontSize:'var(--text-xs)',color:'rgba(0,0,0,0.5)',margin:0,lineHeight:1.6}}>
                   He redactado un primer mensaje basado en lo que necesitas. Revísalo y envíalo cuando quieras.
                 </p>

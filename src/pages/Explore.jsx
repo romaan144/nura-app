@@ -74,7 +74,7 @@ export default function Explore() {
     // Build match reasons
     const reasons = {}
     matches.forEach((h, i) => {
-      const rank = i === 0 ? 'Primera recomendación de Nüra' : null
+      const rank = null
       const spec = h.specialty ? `Especialista en ${h.specialty.toLowerCase()}` : null
       const dist = h.distance ? `A ${h.distance}km de ti` : null
       const parts = [rank, spec, dist].filter(Boolean)
@@ -283,7 +283,7 @@ export default function Explore() {
         {aiSearching && (
           <div className={styles.searching}>
             <Loader2 size={16} color="var(--purple)" style={{animation:'spin 1.2s linear infinite'}} />
-            <span>Nüra está buscando...</span>
+            <span>Buscando profesionales...</span>
           </div>
         )}
 

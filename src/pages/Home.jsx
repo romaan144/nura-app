@@ -253,8 +253,8 @@ export default function Home({ setSearchState }) {
       sessionStorage.removeItem('nura_helper_registered')
       const firstName = user?.name?.split(' ')?.[0] || user?.name || ''
       lines = [
-        `¡Ya eres parte de Nüra, **${firstName}**!`,
-        `Tu perfil ya está visible. Los primeros usuarios pueden encontrarte desde ahora. Nüra lo irá enriqueciendo automáticamente con cada interacción.`
+        `${firstName}, ya puedes encontrar a quien necesitas.`,
+        `Tu perfil ya está visible. Los primeros usuarios pueden encontrarte desde ahora. Tu perfil se irá enriqueciendo automáticamente con cada interacción.`
       ]
       setTimeout(() => setMessages([{ id: 1, from: 'nura', lines }]), 300)
       return
@@ -264,7 +264,7 @@ export default function Home({ setSearchState }) {
     let justRegistered; try { justRegistered = sessionStorage.getItem('nura_just_registered') } catch {}
     if (justRegistered) {
       sessionStorage.removeItem('nura_just_registered')
-      lines = [`Bienvenido a Nüra, **${user?.name?.split(' ')?.[0] || 'tú'}**. Ya puedes contactar con cualquier profesional. ¿Qué necesitas?`]
+      lines = [`**${user?.name?.split(' ')?.[0] || 'Hola'}**, Ya puedes contactar con cualquier profesional. ¿Qué necesitas?`]
       setTimeout(() => setMessages([{ id: 1, from: 'nura', lines }]), 300)
       return
     }
@@ -409,7 +409,7 @@ export default function Home({ setSearchState }) {
 
     if (intent === 'update_profile') {
       setTimeout(() => {
-        setMessages(prev => [...prev, { id: Date.now(), from: 'nura', lines: ['He actualizado tu perfil con esta información. Nüra lo analizará y añadirá las habilidades relevantes automáticamente.'] }])
+        setMessages(prev => [...prev, { id: Date.now(), from: 'nura', lines: ['He actualizado tu perfil con esta información. Se analizará y añadirán las habilidades relevantes automáticamente.'] }])
         setLoading(false)
       }, 1200)
       return
@@ -478,7 +478,7 @@ export default function Home({ setSearchState }) {
         setTimeout(() => {
           setMessages(prev => [...prev, {
             id: Date.now() + 1, from: 'nura',
-            lines: ['También puedes explorar todos los profesionales disponibles en Nüra.'],
+            lines: ['También puedes explorar todos los profesionales disponibles cerca de ti.'],
             chips: ['Ver Explorar']
           }])
         }, 2500)
@@ -497,7 +497,7 @@ export default function Home({ setSearchState }) {
       // Schedule reminder if user doesn't contact
       scheduleLocalNotification(
         '¿Te convencieron los resultados?',
-        `Tienes ${matches.length} profesionales esperando tu mensaje en Nüra.`,
+        `Tienes ${matches.length} profesionales disponibles. ¿Ya les has escrito?`,
         2 * 60 * 60 * 1000
       )
       // Cache helpers for instant profile + chat loading
