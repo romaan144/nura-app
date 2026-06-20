@@ -773,21 +773,21 @@ export default function Home({ setSearchState }) {
                         return pa - pb
                       })
                       setMessages(prev => [...prev, { id: Date.now(), from: 'nura',
-                        lines: [`He ordenado por precio. ${sorted[0]?.name?.split(' ')?.[0]} cobra ${sorted[0]?.price}.`],
+                        lines: [`${sorted[0]?.name?.split(' ')?.[0]} es el más económico — cobra ${sorted[0]?.price}.`],
                         results: sorted, refineChips: ['Más cerca','Mejor valorado','Online'] }])
                       setLastMatches(sorted); return
                     }
                     if (chip === 'Más cerca' && lastMatches?.length > 0) {
                       const sorted = [...lastMatches].sort((a,b) => (parseFloat(a.distance)||99) - (parseFloat(b.distance)||99))
                       setMessages(prev => [...prev, { id: Date.now(), from: 'nura',
-                        lines: [`He ordenado por distancia. ${sorted[0]?.name?.split(' ')?.[0]} está a ${sorted[0]?.distance || '?'} km.`],
+                        lines: [`${sorted[0]?.name?.split(' ')?.[0]} es el más cercano — a ${sorted[0]?.distance || '?'} km.`],
                         results: sorted, refineChips: ['Más barato','Mejor valorado','Online'] }])
                       setLastMatches(sorted); return
                     }
                     if (chip === 'Mejor valorado' && lastMatches?.length > 0) {
                       const sorted = [...lastMatches].sort((a,b) => (b.rating||0)-(a.rating||0))
                       setMessages(prev => [...prev, { id: Date.now(), from: 'nura',
-                        lines: [`He ordenado por valoración. ${sorted[0]?.name?.split(' ')?.[0]} tiene ${sorted[0]?.rating}★.`],
+                        lines: [`${sorted[0]?.name?.split(' ')?.[0]} tiene la mejor valoración — ${sorted[0]?.rating}★.`],
                         results: sorted, refineChips: ['Más barato','Más cerca','Online'] }])
                       setLastMatches(sorted); return
                     }

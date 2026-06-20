@@ -96,7 +96,7 @@ export default function Profile() {
               alt={user.name} className={styles.avatar}
             />
             <div className={styles.avatarBadge}>
-              {user.isHelper ? <Award size={12} color="white" /> : <span style={{fontSize:'var(--text-xs)'}}>✓</span>}
+              {user.isHelper ? <Award size={12} color="white" /> : <Check size={10} color="white" strokeWidth={3} />}
             </div>
           </div>
 
@@ -148,11 +148,11 @@ export default function Profile() {
 
           {user.isHelper && (
             <div className={styles.helperBadges}>
-              <span className={styles.founderBadge}><Award size={11} /> Profesional en Nüra</span>
+              <span className={styles.founderBadge}><Award size={11} /> Profesional verificado</span>
             </div>
           )}
           {daysSince > 0 && (
-            <p className={styles.memberSince}>En Nüra desde hace {daysSince} días</p>
+            <p className={styles.memberSince}>Miembro desde hace {daysSince} días</p>
           )}
         </div>
 
@@ -178,7 +178,7 @@ export default function Profile() {
         {/* ── Recent activity ─────────────────────────────────── */}
         {(searchHistory?.length > 0 || (services||[]).length > 0) && (
           <div className={styles.activityCard}>
-            <p className={styles.activityTitle}>Tu actividad en Nüra</p>
+            <p className={styles.activityTitle}>Tu actividad reciente</p>
 
             {/* Last searches */}
             {searchHistory?.slice(0, 3).map((s, i) => (
@@ -217,7 +217,7 @@ export default function Profile() {
                       HELPERS.find(h => String(h.id) === String(r.helperId))?.name?.split(' ')?.[0] ||
                       'un profesional'
                     }</strong>
-                  {r.rating && <> · {'⭐'.repeat(r.rating)}</>}
+                  {r.rating && <> · <Star size={10} fill="var(--amber)" color="var(--amber)" style={{verticalAlign:'middle',marginLeft:'2px'}} /> {r.rating}</>}
                 </span>
                 <ChevronRight size={12} color="rgba(0,0,0,0.2)" />
               </div>
