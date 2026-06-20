@@ -4,7 +4,7 @@ import { useState, useEffect } from 'react'
 import { useParams, useNavigate, useLocation } from 'react-router-dom'
 import { Star, Shield, MapPin, MessageCircle, Calendar,
          Share2, Heart, Briefcase, BookOpen, Award,
-         CheckCircle, Globe, Zap, ChevronRight } from 'lucide-react'
+         CheckCircle, Check, Globe, Zap, ChevronRight } from 'lucide-react'
 import { HELPERS } from '../data/helpers'
 import { useUser } from '../context/UserContext'
 import RatingModal from '../components/RatingModal'
@@ -222,7 +222,7 @@ function HelperProfileInner() {
       <PageHeader showBack rightEl={
         <button className={styles.shareBtn} onClick={handleShare}>
           {shared
-            ? <span style={{fontSize:'var(--text-xs)',fontWeight:700,color:'var(--green)'}}>✓</span>
+            ? <span style={{display:'flex',alignItems:'center',gap:'4px',color:'var(--green)',fontSize:'var(--text-xs)',fontWeight:700}}><Check size={11} color='var(--green)' strokeWidth={3}/> Copiado</span>
             : <Share2 size={17} color="rgba(0,0,0,0.55)" />}
         </button>
       } />
@@ -356,20 +356,20 @@ function HelperProfileInner() {
                 }).slice(0, 8)
                 return items.map((item, i) => (
                   <div key={i} className={styles.ayudaItem}>
-                    <span className={styles.ayudaCheck}>✓</span>
+                    <Check size={13} color="var(--purple)" strokeWidth={2.5} style={{flexShrink:0}} />
                     <span>{item.charAt(0).toUpperCase() + item.slice(1)}</span>
                   </div>
                 ))
               })()}
               {h.presential && (
                 <div className={styles.ayudaItem}>
-                  <span className={styles.ayudaCheck}>✓</span>
+                  <Check size={13} color="var(--purple)" strokeWidth={2.5} style={{flexShrink:0}} />
                   <span>Sesiones presenciales</span>
                 </div>
               )}
               {h.online && (
                 <div className={styles.ayudaItem}>
-                  <span className={styles.ayudaCheck}>✓</span>
+                  <Check size={13} color="var(--purple)" strokeWidth={2.5} style={{flexShrink:0}} />
                   <span>Sesiones online</span>
                 </div>
               )}
@@ -400,7 +400,7 @@ function HelperProfileInner() {
               <div className={styles.reviewList}>
                 {h.qualitativeComments.slice(0,3).map((c, i) => (
                   <div key={i} className={styles.reviewItem}>
-                    <p>"{typeof c === 'string' ? c : c.text}"</p>
+                    <p>{typeof c === 'string' ? c : c.text}</p>
                     {c.user && <span>— {c.user}</span>}
                   </div>
                 ))}
