@@ -468,8 +468,8 @@ export default function Home({ setSearchState }) {
         setMessages(prev => [...prev, {
           id: Date.now(), from: 'nura',
           lines: [
-            `Ahora mismo no hay nadie disponible exactamente para eso en tu zona.`,
-            `Puedo buscar **${rec.alt}** o ampliar un poco el radio. ¿Qué prefieres?`
+            `No encontré a nadie para eso en tu zona.`,
+            `Puedo buscar **${rec.alt}** o ampliar el radio. ¿Qué prefieres?`
           ],
           chips: [rec.chip1, rec.chip2, 'Cuéntame más']
         }])
@@ -766,6 +766,24 @@ export default function Home({ setSearchState }) {
                 <button key={i} className={styles.suggestion}
                   onClick={() => {
                     if (chip === 'Crear cuenta') { navigate('/login'); return }
+                    if (chip === 'Más barato' && lastMatches?.length > 0) {
+                      const sorted = [...lastMatches].sort((a,b) => {
+                        const pa = parseFloat((a.price||'').replace(/[^0-9.]/g,'')) || 9999
+                        const pb = parseFloat((b.price||'').replace(/[^0-9.]/g,'')) || 9999
+                        return pa - pb
+                      })
+                      setMessages(prev => [...prev, { id: Date.now(), from: 'nura',
+                        lines: [`He ordenado por precio. ${sorted[0]?.name?.split(' ')?.[0]} cobra ${sorted[0]?.price}.`],
+                        results: sorted, refineChips: ['Más cerca','Mejor valorado','Online'] }])
+                      setLastMatches(sorted); return
+                    }
+                    if (chip === 'Más cerca' && lastMatches?.length > 0) {
+                      const sorted = [...lastMatches].sort((a,b) => (parseFloat(a.distance)||99) - (parseFloat(b.distance)||99))
+                      setMessages(prev => [...prev, { id: Date.now(), from: 'nura',
+                        lines: [`He ordenado por distancia. ${sorted[0]?.name?.split(' ')?.[0]} está a ${sorted[0]?.distance || '?'} km.`],
+                        results: sorted, refineChips: ['Más barato','Mejor valorado','Online'] }])
+                      setLastMatches(sorted); return
+                    }
                     if (chip === 'Mejor valorado' && lastMatches?.length > 0) {
                       const sorted = [...lastMatches].sort((a,b) => (b.rating||0)-(a.rating||0))
                       setMessages(prev => [...prev, { id: Date.now(), from: 'nura',

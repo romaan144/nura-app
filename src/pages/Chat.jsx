@@ -14,7 +14,7 @@ import styles from './Chat.module.css'
 function generateFirstMessage(helper) {
   const name = helper.name?.split(' ')?.[0] || 'Hola'
   const map = {
-    logopeda:    `Hola ${name}, te contacto a través de Nüra. Necesito ayuda con logopedia. ¿Tienes disponibilidad esta semana?`,
+    logopeda:    `Hola ${name}, te contacto Hola, necesito ayuda con logopedia. ¿Tienes disponibilidad esta semana?`,
     tecnico:     `Hola ${name}, te contacto por Nüra. Tengo un problema que necesita un técnico. ¿Cuándo podrías venir?`,
     limpieza:    `Hola ${name}, te encuentro en Nüra. Busco servicio de limpieza del hogar. ¿Estarías disponible?`,
     cuidado:     `Hola ${name}, te contacto por Nüra. Busco a alguien de confianza para cuidar a un familiar. ¿Podríamos hablar?`,
@@ -22,7 +22,7 @@ function generateFirstMessage(helper) {
     matematicas: `Hola ${name}, te encuentro en Nüra. Mi hijo necesita refuerzo escolar. ¿Darías clases?`,
     entrenador:  `Hola ${name}, te contacto por Nüra. Me gustaría empezar a entrenar. ¿Cuándo podría ser la primera sesión?`,
   }
-  return map[helper.category] || `Hola ${name}, te contacto a través de Nüra. ¿Tienes disponibilidad?`
+  return map[helper.category] || `Hola ${name}, te contacto Hola, ¿tienes disponibilidad?`
 }
 
 // ── Smart replies based on conversation stage ─────────────────────────────
@@ -30,19 +30,19 @@ function getHelperReply(helper, count, userMsg = '') {
   const name = helper.name?.split(' ')?.[0] || ''
   const t = userMsg.toLowerCase()
   
-  // When coming from Nüra recommendation — acknowledge it
-  if (t.includes('nüra me ha recomendado') || t.includes('nura me ha recomendado')) {
+  // First message — respond directly to the need, no Nüra mention
+  if (count === 1) {
     const cat = helper.category || 'otro'
     const specific = {
-      logopeda: `Hola, me alegra que Nüra te haya dirigido aquí. ¿Me cuentas la edad y qué dificultades concretas observas?`,
+      logopeda: `Hola, gracias por escribirme. ¿Me cuentas la edad y qué dificultades concretas observas?`,
       cuidado: `Hola, con mucho gusto. ¿Puedes contarme un poco sobre tu familiar — movilidad, horarios, lo que necesite?`,
       tecnico: `Hola, dime en qué consiste el problema exactamente. Así vengo preparado con lo necesario.`,
       limpieza: `Hola, disponibilidad tengo. ¿Cuántos metros es la vivienda y con qué frecuencia lo necesitarías?`,
-      entrenador: `Hola, la primera sesión es gratis para evaluar punto de partida y objetivos. ¿Esta semana te viene bien?`,
+      entrenador: `Hola, la primera sesión es de valoración gratuita. ¿Esta semana te viene bien?`,
       salud: `Hola, cuéntame qué te ocurre. Así valoro si puedo ayudarte y cómo.`,
       legal: `Hola, para orientarte bien necesito saber más sobre el caso. ¿Qué tipo de situación es?`,
     }
-    return specific[cat] || `Hola, encantado/a. Cuéntame más sobre lo que necesitas para ver cómo puedo ayudarte.`
+    return specific[cat] || `Hola, gracias por contactarme. Cuéntame qué necesitas exactamente.`
   }
 
   // Universal keyword responses (override category)
@@ -68,7 +68,7 @@ function getHelperReply(helper, count, userMsg = '') {
     return options[Math.floor(Math.random() * options.length)]
   }
   if (t.includes('referencia') || t.includes('opinión') || t.includes('reseña') || t.includes('valoración'))
-    return `Tengo ${helper.reviews || 0} valoraciones en Nüra con una media de ${helper.rating || 4.5} estrellas. Puedes verlas en mi perfil.`
+    return `Tengo ${helper.reviews || 0} valoraciones con una media de ${helper.rating || 4.5} estrellas. Puedes verlas en mi perfil.`
   if (t.includes('contrat') || t.includes('reservar') || t.includes('apuntar'))
     return `Con mucho gusto. Dime cuándo y te confirmo disponibilidad.`
   // Only generic greeting if ONLY a greeting (no other content)

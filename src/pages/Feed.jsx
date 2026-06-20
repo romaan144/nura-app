@@ -4,6 +4,7 @@ import RegisterGate from '../components/RegisterGate'
 import { useNavigate } from 'react-router-dom'
 import { HELPERS } from '../data/helpers'
 import HelperCarousel from '../components/HelperCarousel'
+import HelperCard from '../components/HelperCard'
 import { generateDynamicPosts } from '../utils/feedGenerator'
 import { COMPANIES } from '../data/companies'
 import { useUser } from '../context/UserContext'
@@ -257,31 +258,7 @@ export default function Feed() {
                 </span>
                 <span className={styles.nuraPickDate}>Actualiza mañana</span>
               </div>
-              <div className={styles.nuraPickCard}>
-                {pick.avatarUrl
-                  ? <img src={pick.avatarUrl} alt={pick.name} className={styles.nuraPickAvatar} />
-                  : <div className={styles.nuraPickAvatarFallback} style={{background: pick.avatarColor}}>
-                      {pick.avatar || pick.name?.[0]}
-                    </div>
-                }
-                <div className={styles.nuraPickInfo}>
-                  <div className={styles.nuraPickName}>{pick.name?.split(' ').slice(0,2).join(' ')}</div>
-                  <div className={styles.nuraPickSpec}>{pick.specialty}</div>
-                  <div className={styles.nuraPickReason}>
-                    <Sparkles size={9} color="var(--purple)" />
-                    {pickReason}
-                  </div>
-                </div>
-                <div className={styles.nuraPickRight}>
-                  {pick.price && pick.price !== 'Consultar' && (
-                    <span className={styles.nuraPickPrice}>{pick.price}</span>
-                  )}
-                  <div className={styles.nuraPickStar}>
-                    <Star size={10} fill="var(--amber)" color="var(--amber)" />
-                    <span>{pick.rating}</span>
-                  </div>
-                </div>
-              </div>
+              <HelperCard helper={pick} />
             </div>
           )
         })()}

@@ -297,6 +297,11 @@ function HelperProfileInner() {
                 <strong>{h.price}</strong>
               </div>
             )}
+            {h.responseTime && (
+              <div className={styles.stat}>
+                <span style={{color:'rgba(0,0,0,0.38)'}}>Responde en {h.responseTime}</span>
+              </div>
+            )}
             {h.urgent && (
               <div className={`${styles.stat} ${styles.statUrgent}`}>
                 <Zap size={10} /> Urgencias
