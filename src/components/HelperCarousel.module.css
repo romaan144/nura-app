@@ -82,7 +82,7 @@
 /* Text */
 .name {
   font-size: var(--text-sm); font-weight: 700;
-  color: rgba(0,0,0,0.85);
+  color: var(--ink-primary);
   letter-spacing: -0.2px;
   text-align: center;
   display: flex; align-items: center; justify-content: center; gap: 3px;
@@ -176,5 +176,5 @@
 
 .metaStrong {
   font-weight: 700;
-  color: rgba(0,0,0,0.72);
+  color: var(--ink-primary);
 }

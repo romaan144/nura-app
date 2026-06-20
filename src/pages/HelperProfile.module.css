@@ -152,7 +152,7 @@
   align-items: center;
   gap: 4px;
   font-size: var(--text-xs);
-  color: rgba(0,0,0,0.6);
+  color: var(--ink-secondary);
 }
 .stat strong { font-weight: 700; color: rgba(0,0,0,0.82); }
 .stat span   { color: rgba(0,0,0,0.4); }
@@ -161,7 +161,7 @@
 /* Bio */
 .bio {
   font-size: var(--text-sm);
-  color: rgba(0,0,0,0.6);
+  color: var(--ink-secondary);
   line-height: 1.65;
   text-align: center;
   margin: 14px 0 20px;
@@ -327,7 +327,7 @@
 }
 .quote p {
   font-size: var(--text-xs);
-  color: rgba(0,0,0,0.6);
+  color: var(--ink-secondary);
   font-style: italic;
   line-height: 1.55;
   margin: 0 0 4px;

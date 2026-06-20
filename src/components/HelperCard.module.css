@@ -73,13 +73,13 @@
   align-items: center;
   gap: 4px;
   font-size: var(--text-xs);
-  color: rgba(0,0,0,0.45);
+  color: var(--ink-secondary);
   line-height: 1.25;
   white-space: nowrap;
   overflow: hidden;
 }
 .specialty {
-  color: rgba(0,0,0,0.55);
+  color: var(--ink-secondary);
   font-weight: 500;
   white-space: nowrap;
   overflow: hidden;
@@ -92,10 +92,10 @@
   align-items: center;
   gap: 4px;
   font-size: var(--text-xs);
-  color: rgba(0,0,0,0.38);
+  color: var(--ink-tertiary);
   line-height: 1.25;
 }
-.metaStrong { font-weight: 700; color: rgba(0,0,0,0.72); }
+.metaStrong { font-weight: 700; color: var(--ink-primary); }
 .metaMuted  { color: rgba(0,0,0,0.3); }
 .dot { color: rgba(0,0,0,0.15); margin: 0 1px; }
 
