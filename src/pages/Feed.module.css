@@ -30,7 +30,7 @@
   flex: 1; padding: 8px 12px;
   border: none; border-radius: 16px;
   font-size: var(--text-sm); font-weight: 500;
-  color: rgba(0,0,0,0.45); background: transparent;
+  color: var(--ink-secondary); background: transparent;
   cursor: pointer; transition: all 0.15s;
   font-family: -apple-system, 'Inter', sans-serif;
 }
@@ -55,7 +55,7 @@
 
 .suggestedLabel {
   font-size: 10px; font-weight: 700;
-  color: rgba(0,0,0,0.35); letter-spacing: 0.5px;
+  color: var(--ink-tertiary); letter-spacing: 0.5px;
   padding: 8px 14px 0;
   text-transform: uppercase;
 }
@@ -89,7 +89,7 @@
 .authorMeta { flex: 1; min-width: 0; }
 .authorName {
   font-size: var(--text-sm); font-weight: 700;
-  color: rgba(0,0,0,0.85); letter-spacing: -0.2px;
+  color: var(--ink-primary); letter-spacing: -0.2px;
   white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
   display: flex; align-items: center;
 }
@@ -112,7 +112,7 @@
 .followingBtn {
   display: flex; align-items: center; gap: 4px;
   padding: 6px 12px; border-radius: 100px;
-  background: rgba(0,0,0,0.06); color: rgba(0,0,0,0.55);
+  background: rgba(0,0,0,0.06); color: var(--ink-secondary);
   border: none; font-size: var(--text-xs); font-weight: 600;
   cursor: pointer; flex-shrink: 0;
   transition: opacity 0.15s;
@@ -121,7 +121,7 @@
 
 /* Post text */
 .postText {
-  font-size: var(--text-sm); color: rgba(0,0,0,0.75);
+  font-size: var(--text-sm); color: var(--ink-primary);
   line-height: 1.65; letter-spacing: -0.1px;
   padding: 0 14px 10px; margin: 0;
 }
@@ -150,7 +150,7 @@
   display: flex; align-items: center; gap: 5px;
   padding: 8px; border: none; background: none;
   font-size: var(--text-xs); font-weight: 500;
-  color: rgba(0,0,0,0.45); cursor: pointer;
+  color: var(--ink-secondary); cursor: pointer;
   border-radius: 10px; transition: opacity 0.15s;
   font-family: -apple-system, 'Inter', sans-serif;
 }
@@ -167,7 +167,7 @@
 }
 .empty h3 {
   font-size: var(--text-md); font-weight: 800;
-  color: rgba(0,0,0,0.7); margin: 0; letter-spacing: -0.3px;
+  color: var(--ink-primary); margin: 0; letter-spacing: -0.3px;
 }
 .empty p {
   font-size: var(--text-sm); color: rgba(0,0,0,0.4);
@@ -288,5 +288,5 @@
   display: flex; align-items: center; gap: 3px;
   font-size: var(--text-xs);
   font-weight: 700;
-  color: rgba(0,0,0,0.7);
+  color: var(--ink-primary);
 }
