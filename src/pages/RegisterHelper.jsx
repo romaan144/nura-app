@@ -120,7 +120,7 @@ export default function RegisterHelper() {
         setDone(true)
         setMessages(prev => [...prev, {
           id: Date.now(), from: 'nura',
-          text: `Perfecto, ${newAnswers.name || val}. He construido tu perfil. Nüra irá completando y enriqueciendo tu perfil con cada interacción. ¡Ya formas parte de la red!`
+          text: `Perfecto, ${newAnswers.name || val}. Tu perfil está listo. Se irá completando automáticamente con cada interacción. ¡Ya formas parte de la red!`
         }])
         setTimeout(() => setMessages(prev => [...prev, {
           id: Date.now()+1, from: 'nura',

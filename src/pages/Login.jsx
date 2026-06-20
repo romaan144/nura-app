@@ -75,7 +75,7 @@ export default function Login() {
             <h2 className={styles.stepTitle}>Accede a Nüra</h2>
             <p className={styles.stepDesc}>Para contactar profesionales y guardar tu historial necesitas una cuenta. Es gratis y tarda 30 segundos.</p>
             <div className={styles.phoneRow}>
-              <div className={styles.flag}>🇪🇸 +34</div>
+              <div className={styles.flag}>+34</div>
               <input className={styles.input} type="tel" placeholder="612 345 678"
                 value={phone} onChange={e => setPhone(e.target.value.replace(/\D/g,''))}
                 maxLength={9} autoFocus

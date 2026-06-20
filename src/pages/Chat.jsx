@@ -606,7 +606,7 @@ export default function Chat() {
                 <p style={{fontSize:'var(--text-xs)',fontWeight:700,color:'var(--purple)',margin:'0 0 4px',
                   letterSpacing:'0.3px',textTransform:'uppercase'}}>Mensaje sugerido</p>
                 <p style={{fontSize:'var(--text-xs)',color:'rgba(0,0,0,0.5)',margin:0,lineHeight:1.6}}>
-                  He redactado un primer mensaje basado en lo que necesitas. Revísalo y envíalo cuando quieras.
+                  Revisa el mensaje antes de enviarlo.
                 </p>
               </div>
             ) : null}

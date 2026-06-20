@@ -358,7 +358,7 @@ export default function Home({ setSearchState }) {
 
       if (isRefinement && lastMatches?.length > 0) {
         let refined = [...lastMatches]
-        let refineLine = 'He ajustado los resultados.'
+        let refineLine = 'Aquí tienes los resultados ajustados.'
 
         if (t.includes('más barato') || t.includes('precio') || t.includes('económico')) {
           refined = refined.sort((a,b) => {
