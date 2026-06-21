@@ -4,6 +4,7 @@ import { useUser } from '../context/UserContext'
 import { showToast } from './Toast'
 import styles from './HelperCard.module.css'
 import { haptic } from '../utils/haptic'
+import { getFirstName } from '../utils/name'
 
 export default function HelperCard({ helper, onContact, showContact = true }) {
   const navigate = useNavigate()
