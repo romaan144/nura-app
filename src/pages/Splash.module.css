@@ -1,28 +1,80 @@
+/* ── SPLASH — Concepto 3: Premium dark ──────────────────────── */
 .page {
   position: fixed; inset: 0; z-index: 9999;
-  background:
-    radial-gradient(ellipse 120% 60% at 50% -5%, rgba(123,47,255,0.08) 0%, transparent 60%),
-    radial-gradient(ellipse 80% 40% at 90% 110%, rgba(0,212,200,0.06) 0%, transparent 60%),
-    var(--paper);
+  background: #0a0a0a;
   display: flex; flex-direction: column;
   align-items: center; justify-content: center;
-  padding: 0 32px 60px;
+  transition: opacity 0.4s cubic-bezier(0.4, 0, 0.2, 1),
+              background 0.4s cubic-bezier(0.4, 0, 0.2, 1);
 }
-.center { flex: 1; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 16px; }
-.isoWrap { width: 88px; height: 88px; transition: all 0.5s cubic-bezier(0.25,0.46,0.45,0.94); animation: appear 0.5s cubic-bezier(0.34,1.56,0.64,1) both; }
-.isoSmall { width: 68px; height: 68px; }
 
-@keyframes appear { from{opacity:0;transform:scale(0.6)} to{opacity:1;transform:scale(1)} }
-@keyframes pulse { 0%,100%{transform:scale(1)} 50%{transform:scale(1.04)} }
-.iso { width: 100%; height: 100%; object-fit: contain; animation: pulse 2s ease-in-out 0.5s infinite; }
+.exit {
+  opacity: 0;
+  background: #ffffff;
+}
 
-.wordmarkWrap { opacity: 0; transform: translateY(8px); transition: all 0.4s cubic-bezier(0.25,0.46,0.45,0.94); }
-.wordmarkWrap.show { opacity: 1; transform: translateY(0); }
-.wordmark { height: 24px; width: auto; }
+/* ── CENTER ─────────────────────────────────────────────────── */
+.center {
+  position: relative;
+  display: flex; flex-direction: column;
+  align-items: center; justify-content: center;
+  gap: 20px;
+}
 
-.footer { opacity: 0; transform: translateY(8px); transition: all 0.4s cubic-bezier(0.25,0.46,0.45,0.94) 0.1s; display: flex; flex-direction: column; align-items: center; gap: 10px; width: 100%; }
-.footer.show { opacity: 1; transform: translateY(0); }
-.loadBar { width: 160px; height: 2px; background: rgba(0,0,0,0.08); border-radius: 1px; overflow: hidden; }
-.loadFill { height: 100%; background: var(--grad-main); animation: load 2s ease forwards; }
-@keyframes load { from{width:0} to{width:100%} }
-.tagline { font-size: var(--text-xs); color: rgba(0,0,0,0.35); letter-spacing: 0.2px; font-weight: 400; }
+/* ── ARC ────────────────────────────────────────────────────── */
+.arcWrap {
+  position: absolute;
+  width: 96px; height: 96px;
+  opacity: 0;
+  transition: opacity 0.6s ease;
+}
+.arcWrap.arcVisible { opacity: 1; }
+
+.arc {
+  width: 96px; height: 96px;
+  position: absolute;
+  top: 50%; left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+@keyframes spin {
+  from { transform: rotate(-90deg); }
+  to   { transform: rotate(270deg); }
+}
+.arcSpin {
+  transform-origin: center;
+  transform-box: fill-box;
+  animation: spin 1.4s linear infinite;
+}
+
+/* ── LOGO ───────────────────────────────────────────────────── */
+.isoWrap {
+  width: 64px; height: 64px;
+  opacity: 0;
+  transform: scale(0.82);
+  transition: opacity 0.5s cubic-bezier(0.34, 1.56, 0.64, 1),
+              transform 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+.isoIn {
+  opacity: 1;
+  transform: scale(1);
+}
+
+.iso { width: 100%; height: 100%; object-fit: contain; }
+
+/* ── WORDMARK ───────────────────────────────────────────────── */
+.wordmarkWrap {
+  opacity: 0;
+  transform: translateY(6px);
+  transition: opacity 0.4s ease 0.15s,
+              transform 0.4s ease 0.15s;
+}
+.wordmarkIn {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.wordmark {
+  height: 22px; width: auto;
+  filter: brightness(0) invert(1);
+}
