@@ -3,9 +3,8 @@
   from { opacity: 0; transform: translateY(8px); }
   to   { opacity: 1; transform: translateY(0); }
 }
-.page { height: 100dvh; background: var(--paper); display: flex; flex-direction: column; overflow: hidden; position: relative; padding-bottom: var(--nav-h);
-  animation: fadeSlideIn 0.22s ease both;}
-.page::before { content: ''; position: fixed; inset: 0; pointer-events: none; background: var(--paper); }
+.page { position: fixed; inset: 0; background: var(--paper); display: flex; flex-direction: column; overflow: hidden; padding-bottom: var(--nav-h);
+  animation: fadeSlideIn 0.22s ease both; }
 
 /* Floating header */
 .header { position: absolute; top: 0; left: 0; right: 0; z-index: 20; display: flex; align-items: center; gap: 10px; padding: max(env(safe-area-inset-top,0px),12px) 14px 10px; pointer-events: none; }
@@ -34,7 +33,7 @@
 @keyframes tdot { 0%,60%,100%{transform:translateY(0);opacity:0.4} 30%{transform:translateY(-4px);opacity:1} }
 
 /* Input */
-.inputWrap { position: fixed; bottom: var(--nav-h); left: 0; right: 0; padding: 10px 20px; z-index: 20; pointer-events: none; }
+.inputWrap { position: fixed; bottom: var(--nav-h); left: 0; right: 0; padding: 10px 20px; z-index: 30; pointer-events: none; }
 .inputWrap > * { pointer-events: all; }
 .inputCapsule { display: flex; align-items: center; gap: 6px; background: rgba(255,255,255,0.72); -webkit-backdrop-filter: blur(24px) saturate(180%); backdrop-filter: blur(24px) saturate(180%); border: 1px solid var(--ink-border); border-radius: var(--radius-full); padding: 10px 10px 10px 18px; box-shadow: var(--shadow-sm); transition: all 0.25s cubic-bezier(0.25,0.46,0.45,0.94); }
 .inputCapsule:focus-within { background: rgba(255,255,255,0.86); box-shadow: var(--shadow-sm), 0 0 0 0.5px rgba(0,0,0,0.07); }
