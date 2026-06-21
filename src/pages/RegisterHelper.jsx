@@ -56,7 +56,7 @@ const QUESTIONS = [
 export default function RegisterHelper() {
   const navigate = useNavigate()
   const { login } = useUser()
-  const [messages, setMessages]   = useState([])
+  const [messages, setMessages]   = useState([{ id: 1, from: 'nura', text: QUESTIONS[0].text }])
   const [input, setInput]         = useState('')
   const [qIdx, setQIdx]           = useState(0)
   const [answers, setAnswers]     = useState({})
@@ -65,10 +65,6 @@ export default function RegisterHelper() {
   const [done, setDone]           = useState(false)
   const bottomRef = useRef(null)
   const inputRef  = useRef(null)
-
-  useEffect(() => {
-    setTimeout(() => setMessages([{ id: 1, from: 'nura', text: QUESTIONS[0].text }]), 400)
-  }, [])
 
   useEffect(() => {
     bottomRef.current?.scrollIntoView({ behavior: 'smooth' })

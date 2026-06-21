@@ -10,7 +10,6 @@
   flex-direction: column;
   padding-bottom: var(--nav-h);
   background: var(--paper);
-  overflow: hidden;
 }
 
 /* ── MESSAGES ───────────────────────────────────────── */
@@ -18,7 +17,7 @@
   flex: 1;
   overflow-y: auto;
   overflow-x: hidden;
-  padding: 80px 14px 0;
+  padding: 80px 14px calc(var(--nav-h) + 76px);
   display: flex;
   flex-direction: column;
   justify-content: flex-end;
@@ -43,7 +42,7 @@
 
 /* ── FLOAT BOTTOM ───────────────────────────────────── */
 .floatBottom {
-  position: absolute;
+  position: fixed;
   bottom: var(--nav-h);
   left: 0; right: 0;
   padding: var(--chat-gap) 20px var(--chat-gap);
