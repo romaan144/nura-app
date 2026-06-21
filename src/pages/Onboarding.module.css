@@ -9,9 +9,7 @@
 .page::before {
   content: '';
   position: fixed; inset: 0; pointer-events: none;
-  background:
-    radial-gradient(ellipse 120% 60% at 50% -10%, rgba(123,47,255,0.06) 0%, transparent 60%),
-    radial-gradient(ellipse 80% 40% at 90% 100%, rgba(0,212,200,0.04) 0%, transparent 60%);
+  background: var(--paper);
 }
 
 .skip { display: flex; justify-content: flex-end; padding: 8px 0 0; }

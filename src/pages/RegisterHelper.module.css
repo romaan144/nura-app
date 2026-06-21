@@ -5,7 +5,7 @@
 }
 .page { height: 100dvh; background: var(--paper); display: flex; flex-direction: column; overflow: hidden; position: relative; 
   animation: fadeSlideIn 0.22s ease both;}
-.page::before { content: ''; position: fixed; inset: 0; pointer-events: none; background: radial-gradient(ellipse 120% 60% at 50% -10%, rgba(123,47,255,0.05) 0%, transparent 60%); }
+.page::before { content: ''; position: fixed; inset: 0; pointer-events: none; background: var(--paper); }
 
 /* Floating header */
 .header { position: absolute; top: 0; left: 0; right: 0; z-index: 20; display: flex; align-items: center; gap: 10px; padding: max(env(safe-area-inset-top,0px),12px) 14px 10px; pointer-events: none; }

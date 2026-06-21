@@ -2,7 +2,7 @@
    PROFILE
    ══════════════════════════════════════════════════════ */
 .page { min-height: 100dvh; background: var(--paper); padding-top: var(--header-h);
-  background: radial-gradient(ellipse 120% 50% at 50% -10%, rgba(123,47,255,0.04) 0%, transparent 60%), var(--paper);
+  background: var(--paper);
 
   animation: fadeSlideIn 0.22s ease both;}
 .content { padding: 8px 14px max(env(safe-area-inset-bottom,0px),24px); display: flex; flex-direction: column; gap: 10px; }

@@ -11,10 +11,7 @@
   display: flex;
   flex-direction: column;
   padding-bottom: var(--nav-h); /* reserve space for fixed BottomNav */
-  background:
-    radial-gradient(ellipse 120% 60% at 50% -10%, rgba(123,47,255,0.045) 0%, transparent 65%),
-    radial-gradient(ellipse 80% 40% at 90% 100%, rgba(0,212,200,0.03) 0%, transparent 60%),
-    var(--paper);
+  background: var(--paper);
   overflow: hidden;
 }
 
