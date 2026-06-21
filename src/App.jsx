@@ -37,7 +37,7 @@ function AppRoutes() {
     return !localStorage.getItem('nura_onboarded')
   })
 
-  const hideNav = ['/login', '/onboarding']
+  const hideNav = ['/login', '/onboarding', '/register-helper']
     .some(p => location.pathname.startsWith(p))
 
   if (showSplash) {
