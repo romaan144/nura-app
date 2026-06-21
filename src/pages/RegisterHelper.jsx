@@ -195,7 +195,7 @@ export default function RegisterHelper() {
           </div>
         )}
 
-        <div style={{ height: 'var(--float-bottom-h)' }} />
+        <div style={{ height: '96px' }} />
         <div ref={bottomRef} />
       </div>
 
