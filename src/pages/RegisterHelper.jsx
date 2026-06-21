@@ -1,6 +1,6 @@
 import { useState, useEffect, useRef } from 'react'
 import { useNavigate } from 'react-router-dom'
-import { ArrowLeft, Send, Plus } from 'lucide-react'
+import { ArrowLeft, Send, Plus, Mic, MicOff } from 'lucide-react'
 import { useUser } from '../context/UserContext'
 import styles from './RegisterHelper.module.css'
 
@@ -77,6 +77,7 @@ export default function RegisterHelper() {
   const [qIdx, setQIdx] = useState(0)
   const [answers, setAnswers] = useState({})
   const [typing, setTyping] = useState(false)
+  const [listening, setListening] = useState(false)
   const [done, setDone] = useState(false)
   const bottomRef = useRef(null)
   const inputRef = useRef(null)
@@ -142,6 +143,18 @@ export default function RegisterHelper() {
 
   const currentQ = QUESTIONS[qIdx]
 
+  function toggleMic() {
+    if (!('webkitSpeechRecognition' in window) && !('SpeechRecognition' in window)) return
+    const SR = window.SpeechRecognition || window.webkitSpeechRecognition
+    const rec = new SR()
+    rec.lang = 'es-ES'
+    rec.onresult = e => { setInput(e.results[0][0].transcript); setListening(false) }
+    rec.onerror = () => setListening(false)
+    rec.onend = () => setListening(false)
+    rec.start()
+    setListening(true)
+  }
+
   return (
     <div className={styles.page}>
       {/* Floating header */}
@@ -193,9 +206,12 @@ export default function RegisterHelper() {
               value={input} onChange={e => setInput(e.target.value)}
               onKeyDown={e => e.key === 'Enter' && sendMessage()}
               disabled={typing} />
-            <button className={styles.sendBtn} onClick={sendMessage} disabled={!input.trim() || typing}>
-              <Send size={16} />
-            </button>
+            {input.trim()
+              ? <button className={styles.sendBtn} onClick={sendMessage} disabled={!input.trim() || typing}><Send size={16} /></button>
+              : <button className={`${styles.sendBtn} ${listening ? styles.micActive : styles.micBtn}`} onClick={toggleMic}>
+                  {listening ? <MicOff size={16} /> : <Mic size={16} />}
+                </button>
+            }
           </div>
         </div>
       )}
