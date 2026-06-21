@@ -148,13 +148,13 @@ export default function RegisterHelper() {
         <div style={{ width: 42, flexShrink: 0 }} />
       </div>
 
-      {/* Barra de progreso — sin línea separadora, solo el fill */}
+      {/* Barra de progreso */}
       <div style={{
         position: 'absolute',
         top: topH - 4 + 'px',
         left: 14, right: 14,
         height: 2, borderRadius: 2,
-        background: 'rgba(0,0,0,0.06)',
+        background: 'transparent',
         zIndex: 29, overflow: 'hidden'
       }}>
         <div style={{
