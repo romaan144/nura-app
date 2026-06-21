@@ -149,6 +149,7 @@ export default function RegisterHelper() {
         <button className={styles.back} onClick={() => navigate(-1)}><ArrowLeft size={17} /></button>
         <div className={styles.logoPill}>
           <img src="/logo-text.png" alt="Nüra" className={styles.logo} />
+          <span className={styles.contextLabel}>Perfil profesional</span>
         </div>
         <div className={styles.progress}>
           <div className={styles.progressFill} style={{width:`${((qIdx) / QUESTIONS.length) * 100}%`}} />
