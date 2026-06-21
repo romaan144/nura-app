@@ -11,7 +11,7 @@ const TABS = [
   { path: '/profile', icon: User,          label: 'Perfil'   },
 ]
 
-const HIDE_ON = ['/login', '/register-helper', '/onboarding', '/chat/']
+const HIDE_ON = ['/login', '/onboarding', '/chat/']
 
 export default function BottomNav() {
   const location = useLocation()
