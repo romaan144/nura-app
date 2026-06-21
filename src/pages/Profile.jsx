@@ -47,7 +47,7 @@ export default function Profile() {
           Crear cuenta gratis
         </button>
         <button className={styles.helperBtn} onClick={() => navigate('/register-helper')}>
-          <Sparkles size={14} strokeWidth={1.8} style={{marginRight:'6px'}} /> Quiero ser Profesional
+          Quiero ser Profesional
         </button>
       </div>
     </div>
