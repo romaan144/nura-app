@@ -1,6 +1,6 @@
 import { useState, useEffect, useRef } from 'react'
 import { useNavigate } from 'react-router-dom'
-import { Send, Mic, MicOff, Plus, Clock, RotateCcw } from 'lucide-react'
+import { Send, Mic, MicOff, Plus, Clock, RotateCcw, UserRound } from 'lucide-react'
 import { analyzeNeed, matchHelpers, getPriceContext } from '../utils/matching'
 import { getFirstName } from '../utils/name'
 import { useUser } from '../context/UserContext'
@@ -686,7 +686,7 @@ export default function Home({ setSearchState }) {
             onClick={() => navigate('/profile')}>
             {user?.name
               ? <img src={`https://api.dicebear.com/9.x/personas/svg?seed=${encodeURIComponent(user.name)}`} alt="" style={{width:'100%',height:'100%',objectFit:'cover'}} />
-              : <span style={{fontSize:'16px',color:'rgba(0,0,0,0.5)'}}>?</span>
+              : <UserRound size={20} color="rgba(0,0,0,0.4)" strokeWidth={1.5} />
             }
           </button>
         </div>
