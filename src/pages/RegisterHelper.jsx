@@ -195,7 +195,7 @@ export default function RegisterHelper() {
           </div>
         )}
 
-        <div className={styles.chatSpacer} />
+        <div className={styles.chatSpacer} data-chips="true" />
         <div ref={bottomRef} />
       </div>
 
