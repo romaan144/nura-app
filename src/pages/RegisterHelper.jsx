@@ -2,7 +2,6 @@ import { useState, useEffect, useRef } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { ArrowLeft, Send, Plus, Mic, MicOff } from 'lucide-react'
 import { useUser } from '../context/UserContext'
-import BottomNav from '../components/BottomNav'
 import styles from './RegisterHelper.module.css'
 
 const SUPABASE_URL = 'https://oxmohciswebonoumghhu.supabase.co'
@@ -216,7 +215,6 @@ export default function RegisterHelper() {
           </div>
         </div>
       )}
-      <BottomNav />
     </div>
   )
 }
