@@ -1,6 +1,6 @@
 import { useState, useEffect, useRef } from 'react'
 import { useNavigate } from 'react-router-dom'
-import { ArrowLeft, Send } from 'lucide-react'
+import { ArrowLeft, Send, Plus } from 'lucide-react'
 import { useUser } from '../context/UserContext'
 import styles from './RegisterHelper.module.css'
 
@@ -186,14 +186,15 @@ export default function RegisterHelper() {
       {/* Floating input */}
       {!done && (
         <div className={styles.inputWrap}>
-          <div className={styles.inputBar}>
+          <div className={styles.inputCapsule}>
+            <button className={styles.plusBtn}><Plus size={18} /></button>
             <input ref={inputRef} className={styles.input}
               placeholder={currentQ?.placeholder || 'Escribe tu respuesta...'}
               value={input} onChange={e => setInput(e.target.value)}
               onKeyDown={e => e.key === 'Enter' && sendMessage()}
               disabled={typing} />
             <button className={styles.sendBtn} onClick={sendMessage} disabled={!input.trim() || typing}>
-              <Send size={15} />
+              <Send size={16} />
             </button>
           </div>
         </div>
