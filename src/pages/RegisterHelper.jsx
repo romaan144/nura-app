@@ -195,7 +195,7 @@ export default function RegisterHelper() {
           </div>
         )}
 
-        <div className={styles.chatSpacer} data-chips="true" />
+        <div style={{ height: 'var(--chat-gap)' }} />
         <div ref={bottomRef} />
       </div>
 
