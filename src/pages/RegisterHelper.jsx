@@ -195,7 +195,7 @@ export default function RegisterHelper() {
           </div>
         )}
 
-        <div style={{ height: 'var(--chat-gap)' }} />
+        <div style={{ height: 'var(--float-bottom-h)' }} />
         <div ref={bottomRef} />
       </div>
 
