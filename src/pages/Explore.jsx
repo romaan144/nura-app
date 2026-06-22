@@ -2,7 +2,7 @@ import { useState, useEffect, useRef } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { Search, ArrowLeft, Loader2, SlidersHorizontal,
          Heart, Wrench, BookOpen, Scale, Home, PawPrint,
-         Dumbbell, Baby, MapPin, Star } from 'lucide-react'
+         Dumbbell, Baby, MapPin, Star, Laptop, Palette, Car, PartyPopper, Globe } from 'lucide-react'
 import { searchHelpers, getAllHelpers } from '../utils/supabase'
 import { analyzeNeed, matchHelpers } from '../utils/matching'
 import { useUser } from '../context/UserContext'
