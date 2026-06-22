@@ -37,7 +37,7 @@ const CATEGORIES = [
     icon: BookOpen,
     color: '#3B82F6',
     bg: 'rgba(59,130,246,0.10)',
-    supabaseCategories: ['matematicas'],
+    supabaseCategories: ['matematicas', 'clases', 'idiomas', 'musica', 'educacion', 'formacion', 'academia'],
   },
   {
     id: 'asesoria',
@@ -73,7 +73,7 @@ const CATEGORIES = [
     icon: Dumbbell,
     color: '#06B6D4',
     bg: 'rgba(6,182,212,0.10)',
-    supabaseCategories: ['entrenador'],
+    supabaseCategories: ['entrenador', 'entrenamiento', 'fitness', 'deporte', 'sport', 'gym', 'trainer'],
   },
   {
     id: 'cuidado',
