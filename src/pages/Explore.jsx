@@ -219,10 +219,9 @@ export default function Explore() {
                 <button
                   key={cat.id}
                   className={styles.catCard}
-                  style={{ '--cat-color': cat.color, '--cat-bg': cat.bg }}
                   onClick={() => openCategory(cat)}
                 >
-                  <div className={styles.catIconWrap}>
+                  <div className={styles.catIconWrap} style={{background: cat.bg}}>
                     <Icon size={24} color={cat.color} strokeWidth={1.8} />
                   </div>
                   <div className={styles.catInfo}>

@@ -16,11 +16,7 @@
 
 /* ── SEARCH ──────────────────────────────────────────────────────────── */
 .searchWrap {
-  padding: 12px 16px 8px;
-  position: sticky;
-  top: var(--header-h);
-  background: var(--paper);
-  z-index: 10;
+  padding: 10px 16px 8px;
 }
 
 .searchBar {
