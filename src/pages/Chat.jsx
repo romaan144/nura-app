@@ -211,8 +211,9 @@ export default function Chat() {
   const navigate = useNavigate()
   const location = useLocation()
   const { addChat, markRead, hasRated, helpersCache, addService,
-    services, getChatHistory, saveChatHistory
+    services, getChatHistory, saveChatHistory, user
   } = useUser()
+  const [showRegGate, setShowRegGate] = useState(false)
 
   const [helper, setHelper] = useState(
     helpersCache?.[parseInt(id)] || helpersCache?.[id] || helpersCache?.[String(id)] ||
