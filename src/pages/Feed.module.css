@@ -121,9 +121,21 @@
 
 /* Post text */
 .postText {
-  font-size: var(--text-sm); color: var(--ink-primary);
-  line-height: 1.65; letter-spacing: -0.1px;
-  padding: 0 14px 10px; margin: 0;
+  font-size: var(--text-sm);
+  color: var(--ink-primary);
+  line-height: 1.65;
+  letter-spacing: -0.1px;
+  padding: 0 14px 4px;
+  margin: 0;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  -webkit-line-clamp: 4;
+}
+
+.postText[data-expanded='true'] {
+  display: block;
+  overflow: visible;
 }
 
 .badge {
@@ -289,4 +301,27 @@
   font-size: var(--text-xs);
   font-weight: 700;
   color: var(--ink-primary);
+}
+
+/* ── VER MÁS ──────────────────────────────────────────────── */
+
+
+.fadeWrap {
+  position: relative;
+  margin-top: -28px;
+  padding-top: 28px;
+  background: linear-gradient(to bottom, transparent, white 60%);
+  padding: 28px 14px 0;
+}
+
+.verMasBtn {
+  background: none;
+  border: none;
+  padding: 4px 0 8px;
+  color: var(--purple);
+  font-size: var(--text-xs);
+  font-weight: 600;
+  cursor: pointer;
+  font-family: inherit;
+  display: block;
 }
