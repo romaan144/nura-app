@@ -79,7 +79,7 @@ export default function OnboardingOverlay({ onComplete }) {
       <div className={styles.namePage} key="name">
         <img src="/logo-iso.png" alt="Nüra" className={styles.nameIso} />
         <h2 className={styles.nameTitle}>¿Cómo te llamas?</h2>
-        <p className={styles.nameDesc}>Para que Nüra pueda saludarte. Es opcional.</p>
+        
         <input
           className={styles.nameInput}
           placeholder="Escribe tu nombre..."

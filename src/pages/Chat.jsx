@@ -305,6 +305,8 @@ export default function Chat() {
     haptic('light')
     const msg = text || input
     if (!msg.trim() || typing) return
+    // Gate: after 2nd user message, require registration
+    if (!user && msgCount >= 2) { setShowRegGate(true); return }
     const newMsg = { id: Date.now(), text: msg, from: 'user', time: new Date().toISOString() }
     setMessages(prev => [...prev, newMsg])
     setInput(''); setSuggested('')
@@ -573,6 +575,7 @@ export default function Chat() {
         </div>
       </div>
 
+      {showRegGate && <RegisterGate reason="chat" onClose={() => setShowRegGate(false)} />}
       {showRating && <RatingModal helper={helper} onClose={() => setShowRating(false)} />}
       {showConfirm && (() => {
         const { extractedDate, extractedTime } = extractDateFromMessages(messages)
