@@ -3,6 +3,7 @@ import { Briefcase, Users2, Award, Bookmark, Check, MessageCircle, Share2, Shiel
 import RegisterGate from '../components/RegisterGate'
 import { useNavigate } from 'react-router-dom'
 import { getAllHelpers } from '../utils/supabase'
+import { HELPERS as LOCAL_HELPERS } from '../data/helpers'
 import HelperCarousel from '../components/HelperCarousel'
 import HelperCard from '../components/HelperCard'
 import { generateDynamicPosts } from '../utils/feedGenerator'
@@ -191,14 +192,15 @@ export default function Feed() {
   const { following, searchHistory } = useUser()
   const [tab, setTab] = useState('para-ti')
   const [feedLoading, setFeedLoading] = useState(true)
-  const [supabaseHelpers, setSupabaseHelpers] = useState([])
+  const [supabaseHelpers, setSupabaseHelpers] = useState(LOCAL_HELPERS)
   useEffect(() => {
+    // Show local helpers immediately, replace with Supabase when ready
+    setFeedLoading(false)
     async function loadHelpers() {
       try {
         const remote = await getAllHelpers()
         if (remote?.length > 0) setSupabaseHelpers(remote)
-      } catch {}
-      setFeedLoading(false)
+      } catch (e) { console.error('Feed Supabase:', e) }
     }
     loadHelpers()
   }, [])
