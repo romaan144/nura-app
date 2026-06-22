@@ -20,6 +20,7 @@ function CarouselCard({ helper, isTopPick, matchReason, onContactGate }) {
     e.stopPropagation()
     haptic('medium')
     if (!user) {
+      if (onContactGate) { onContactGate(); return }
       sessionStorage.setItem('nura_return_to', `/chat/${helper.id}`)
       sessionStorage.setItem('nura_pending_helper', JSON.stringify(helper))
       showToast('Crea tu cuenta para contactar')
