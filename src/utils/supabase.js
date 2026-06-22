@@ -174,8 +174,8 @@ export async function searchHelpers(category, keywords = []) {
   try {
     let url = `${SUPABASE_URL}/rest/v1/helpers?select=*&limit=100&order=rating.desc`
     if (category && !['otro','general','todos'].includes(category)) {
-      // Use ilike for case-insensitive partial match
-      url += `&category=ilike.${encodeURIComponent('*' + category + '*')}`
+      // Exact match first, case-insensitive via ilike without wildcards
+      url += `&category=ilike.${encodeURIComponent(category)}`
     }
     const res = await fetch(url, { headers })
     if (!res.ok) return null

@@ -38,6 +38,7 @@ const CATEGORIES = [
     color: '#3B82F6',
     bg: 'rgba(59,130,246,0.10)',
     supabaseCategories: ['matematicas', 'clases', 'idiomas', 'musica', 'educacion', 'formacion', 'academia'],
+    specialtyKeywords: ['profesor', 'clases', 'idiomas', 'inglés', 'matemáticas', 'música', 'guitarra', 'piano', 'refuerzo', 'academia', 'tutor'],
   },
   {
     id: 'asesoria',
@@ -74,6 +75,7 @@ const CATEGORIES = [
     color: '#06B6D4',
     bg: 'rgba(6,182,212,0.10)',
     supabaseCategories: ['entrenador', 'entrenamiento', 'fitness', 'deporte', 'sport', 'gym', 'trainer'],
+    specialtyKeywords: ['entrenador', 'entrenamiento', 'personal trainer', 'fitness', 'deporte', 'gym', 'pilates', 'yoga', 'crossfit', 'nutricion deportiva'],
   },
   {
     id: 'cuidado',
@@ -164,11 +166,17 @@ export default function Explore() {
         .filter((h, i, arr) => arr.findIndex(x => x.id === h.id) === i)
         .sort((a, b) => (b.rating||0) - (a.rating||0))
 
-      // Fallback: if no results, try searching without category filter
-      // and filter by specialty keywords from the category label
-      if (merged.length === 0) {
-        const fallback = await searchHelpers(null, cat.supabaseCategories)
-        if (fallback?.length > 0) merged = fallback
+      // Fallback: if no results, search all and filter by specialty text
+      if (merged.length === 0 && cat.specialtyKeywords) {
+        const allHelpers = await searchHelpers(null, [])
+        if (allHelpers?.length > 0) {
+          const kws = cat.specialtyKeywords
+          merged = allHelpers.filter(h => {
+            const text = [h.specialty, h.name, h.bio, h.category]
+              .filter(Boolean).join(' ').toLowerCase()
+            return kws.some(kw => text.includes(kw.toLowerCase()))
+          })
+        }
       }
 
       setCategoryResults(merged)
