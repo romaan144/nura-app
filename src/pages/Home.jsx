@@ -730,7 +730,7 @@ export default function Home({ setSearchState }) {
             </div>
             {msg.results && (
               <div className={styles.carouselBlock}>
-                <HelperCarousel helpers={msg.results} onContactGate={!user ? () => { setGateReason('contact'); setShowGate(true) } : null} />
+                <HelperCarousel helpers={msg.results} />
               </div>
             )}
 

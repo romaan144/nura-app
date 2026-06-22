@@ -11,7 +11,7 @@ import { haptic } from '../utils/haptic'
  * Tapping a card goes to chat directly (not profile).
  * Compact format: avatar, name, specialty, rating, price, one CTA.
  */
-function CarouselCard({ helper, isTopPick, matchReason, onContactGate }) {
+function CarouselCard({ helper, isTopPick, matchReason }) {
   const navigate = useNavigate()
   const { user, toggleFavorite, isFavorite } = useUser()
   const fav = isFavorite(helper.id)
@@ -20,7 +20,6 @@ function CarouselCard({ helper, isTopPick, matchReason, onContactGate }) {
     e.stopPropagation()
     haptic('medium')
     if (!user) {
-      if (onContactGate) { onContactGate(); return }
       sessionStorage.setItem('nura_return_to', `/chat/${helper.id}`)
       sessionStorage.setItem('nura_pending_helper', JSON.stringify(helper))
       showToast('Crea tu cuenta para contactar')
@@ -116,7 +115,7 @@ export default function HelperCarousel({ helpers }) {
   return (
     <div className={styles.wrap}>
       <div className={styles.track}>
-        {helpers.map((h, i) => { const reason = window.__nuraMatchReasons?.[String(h.id)]; return h && <CarouselCard key={h.id} helper={h} isTopPick={i === 0} matchReason={reason} onContactGate={onContactGate} /> })}
+        {helpers.map((h, i) => { const reason = window.__nuraMatchReasons?.[String(h.id)]; return h && <CarouselCard key={h.id} helper={h} isTopPick={i === 0} matchReason={reason} /> })}
       </div>
     </div>
   )
