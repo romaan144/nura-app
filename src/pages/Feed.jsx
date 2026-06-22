@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react'
 import { Briefcase, Users2, Award, Bookmark, Check, MessageCircle, Share2, Shield, UserPlus, Heart, Star, Rss } from 'lucide-react'
 import RegisterGate from '../components/RegisterGate'
 import { useNavigate } from 'react-router-dom'
-import { HELPERS } from '../data/helpers'
+import { getAllHelpers } from '../utils/supabase'
 import HelperCarousel from '../components/HelperCarousel'
 import HelperCard from '../components/HelperCard'
 import { generateDynamicPosts } from '../utils/feedGenerator'
@@ -47,7 +47,7 @@ function buildFeed(following, helpers, companies) {
   })
 
   // Add dynamic AI-generated posts (availability, tips, new helpers)
-  const dynamicPosts = generateDynamicPosts(helpers, 6)
+  const dynamicPosts = generateDynamicPosts(helpers, 20)
   posts.push(...dynamicPosts)
 
   // Sort by most recent (by date string priority) — following first, then suggested
@@ -191,13 +191,21 @@ export default function Feed() {
   const { following, searchHistory } = useUser()
   const [tab, setTab] = useState('para-ti')
   const [feedLoading, setFeedLoading] = useState(true)
+  const [supabaseHelpers, setSupabaseHelpers] = useState([])
   useEffect(() => {
-    const t = setTimeout(() => setFeedLoading(false), 400)
-    return () => clearTimeout(t)
+    async function loadHelpers() {
+      try {
+        const remote = await getAllHelpers()
+        if (remote?.length > 0) setSupabaseHelpers(remote)
+      } catch {}
+      setFeedLoading(false)
+    }
+    loadHelpers()
   }, [])
   const [showGate, setShowGate] = useState(false)
 
-  const allPosts = buildFeed(following, HELPERS, COMPANIES)
+  const feedHelpers = supabaseHelpers.length > 0 ? supabaseHelpers : []
+  const allPosts = buildFeed(following, feedHelpers, COMPANIES)
   const displayPosts = tab === 'siguiendo'
     ? allPosts.filter(p => p.following)
     : allPosts
@@ -232,7 +240,7 @@ export default function Feed() {
         {/* ── Profesional del día ── */}
         {tab === 'para-ti' && (() => {
           // Pick: best available professional today (seed changes daily)
-          const available = HELPERS.filter(h => h.available)
+          const available = feedHelpers.filter(h => h.available)
           if (!available.length) return null
           const pickIdx = DAILY_SEED % available.length
           const pick = available[pickIdx]
@@ -261,7 +269,7 @@ export default function Feed() {
           const lastQ = searchHistory[0]?.query
           const lastCat = searchHistory[0]?.category
           const words = lastQ.toLowerCase().split(/\s+/).filter(w => w.length > 3)
-          const related = HELPERS.filter(h =>
+          const related = feedHelpers.filter(h =>
             h.available && (
               (lastCat && h.category === lastCat) ||
               words.some(w =>
