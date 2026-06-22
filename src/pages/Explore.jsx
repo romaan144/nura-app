@@ -99,6 +99,9 @@ export default function Explore() {
   const [aiResults,       setAiResults]      = useState(null)
   const [aiSearching,     setAiSearching]    = useState(false)
   const [visibleCount,    setVisibleCount]   = useState(20)
+  const [filterAvailable, setFilterAvailable] = useState(false)
+  const [filterRating,    setFilterRating]    = useState(false)
+  const [filterOnline,    setFilterOnline]    = useState(false)
 
   // ── AI Search ─────────────────────────────────────────────────
   async function runAiSearch(query) {
@@ -145,6 +148,9 @@ export default function Explore() {
     setAiResults(null)
     setSearchText('')
     setVisibleCount(20)
+    setFilterAvailable(false)
+    setFilterRating(false)
+    setFilterOnline(false)
     setLoadingCat(true)
     setCategoryResults([])
     try {
@@ -169,7 +175,13 @@ export default function Explore() {
   }
 
   // ── Display list ──────────────────────────────────────────────
-  const displayList = aiResults ?? categoryResults
+  const baseList = aiResults ?? categoryResults
+  const displayList = baseList.filter(h => {
+    if (filterAvailable && !h.available) return false
+    if (filterRating && (h.rating || 0) < 4) return false
+    if (filterOnline && !h.online && !h.modality?.includes('online')) return false
+    return true
+  })
   const pagedList   = displayList.slice(0, visibleCount)
   const hasMore     = displayList.length > visibleCount
   const isLoading   = aiSearching || loadingCat
@@ -256,6 +268,25 @@ export default function Explore() {
               <span className={styles.resultCount}>
                 {displayList.length} profesional{displayList.length !== 1 ? 'es' : ''}
               </span>
+            </div>
+
+            {/* Filtros */}
+            <div className={styles.filtersRow}>
+              <button
+                className={`${styles.filterPill} ${filterAvailable ? styles.filterActive : ''}`}
+                onClick={() => { setFilterAvailable(v => !v); setVisibleCount(20) }}>
+                Disponible ahora
+              </button>
+              <button
+                className={`${styles.filterPill} ${filterRating ? styles.filterActive : ''}`}
+                onClick={() => { setFilterRating(v => !v); setVisibleCount(20) }}>
+                4★ o más
+              </button>
+              <button
+                className={`${styles.filterPill} ${filterOnline ? styles.filterActive : ''}`}
+                onClick={() => { setFilterOnline(v => !v); setVisibleCount(20) }}>
+                Online
+              </button>
             </div>
 
             {/* Lista */}
