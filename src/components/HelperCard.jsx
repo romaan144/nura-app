@@ -6,7 +6,7 @@ import styles from './HelperCard.module.css'
 import { haptic } from '../utils/haptic'
 import { getFirstName } from '../utils/name'
 
-export default function HelperCard({ helper, onContact, showContact = true }) {
+export default function HelperCard({ helper, onContact, showContact = true, showPrice = false }) {
   const navigate = useNavigate()
   const { user, toggleFavorite, isFavorite } = useUser()
   if (!helper) return null
@@ -75,7 +75,7 @@ export default function HelperCard({ helper, onContact, showContact = true }) {
             <Star size={9} fill="var(--amber)" color="var(--amber)" />
             <span className={styles.metaStrong}>{helper.rating}</span>
             {helper.reviews > 0 && <span className={styles.metaMuted}>({helper.reviews})</span>}
-            {helper.price && helper.price !== 'Consultar' && (
+            {showPrice && helper.price && helper.price !== 'Consultar' && (
               <><span className={styles.dot}>·</span><span className={styles.price}>{helper.price}</span></>
             )}
             {helper.urgent && <><span className={styles.dot}>·</span><Zap size={8} color="var(--red)" /></>}

@@ -141,7 +141,7 @@ export default function Results({ searchState }) {
               ))}
             </div>
             <div className={`${styles.cards} ${viewMode==='grid'?styles.cardsGrid:''}`}>
-              {(currentMatches||[]).map((h, i) => h && <HelperCard key={h.id || i} helper={h} />)}
+              {(currentMatches||[]).map((h, i) => h && <HelperCard key={h.id || i} helper={h} showPrice />)}
             </div>
           </>
         ) : (
