@@ -1,338 +1,290 @@
-import PageHeader from '../components/PageHeader'
-import HelperCard from '../components/HelperCard'
 import { useState, useEffect, useRef } from 'react'
 import { useNavigate } from 'react-router-dom'
-import { Search, SlidersHorizontal, X, Grid3X3, Heart, Wrench, BookOpen, Activity, Shield, Loader2, MapPin } from 'lucide-react'
-import { HELPERS as LOCAL_HELPERS } from '../data/helpers'
-import { getAllHelpers } from '../utils/supabase'
-import { analyzeNeed, matchHelpers, getPriceContext } from '../utils/matching'
+import { Search, ArrowLeft, Loader2, SlidersHorizontal,
+         Heart, Wrench, BookOpen, Scale, Home, PawPrint,
+         Dumbbell, Baby, MapPin, Star } from 'lucide-react'
+import { searchHelpers, getAllHelpers } from '../utils/supabase'
+import { analyzeNeed, matchHelpers } from '../utils/matching'
 import { useUser } from '../context/UserContext'
+import HelperCard from '../components/HelperCard'
+import PageHeader from '../components/PageHeader'
 import styles from './Explore.module.css'
 
-const QUICK_FILTERS = [
-  { id: 'all',       label: 'Todos',      icon: Grid3X3 },
-  { id: 'cuidado',   label: 'Cuidado',    icon: Heart },
-  { id: 'tecnico',   label: 'Técnicos',   icon: Wrench },
-  { id: 'clases',    label: 'Clases',     icon: BookOpen },
-  { id: 'salud',     label: 'Salud',      icon: Activity },
-  { id: 'legal',     label: 'Legal',      icon: Shield },
+// ── CATEGORÍAS ────────────────────────────────────────────────────────────
+const CATEGORIES = [
+  {
+    id: 'salud',
+    label: 'Salud y bienestar',
+    desc: 'Psicólogos, logopedas, médicos y bienestar',
+    icon: Heart,
+    color: '#FF6B6B',
+    bg: 'rgba(255,107,107,0.10)',
+    supabaseCategories: ['logopedia', 'salud'],
+  },
+  {
+    id: 'tecnico',
+    label: 'Técnicos',
+    desc: 'Fontaneros, electricistas y reparaciones',
+    icon: Wrench,
+    color: '#F59E0B',
+    bg: 'rgba(245,158,11,0.10)',
+    supabaseCategories: ['tecnico'],
+  },
+  {
+    id: 'clases',
+    label: 'Clases y formación',
+    desc: 'Idiomas, música y refuerzo escolar',
+    icon: BookOpen,
+    color: '#3B82F6',
+    bg: 'rgba(59,130,246,0.10)',
+    supabaseCategories: ['matematicas'],
+  },
+  {
+    id: 'asesoria',
+    label: 'Asesoría',
+    desc: 'Abogados, gestores y consultoría',
+    icon: Scale,
+    color: '#8B5CF6',
+    bg: 'rgba(139,92,246,0.10)',
+    supabaseCategories: ['legal'],
+  },
+  {
+    id: 'hogar',
+    label: 'Hogar',
+    desc: 'Limpieza, cocina y ayuda doméstica',
+    icon: Home,
+    color: '#10B981',
+    bg: 'rgba(16,185,129,0.10)',
+    supabaseCategories: ['limpieza', 'hogar'],
+  },
+  {
+    id: 'mascotas',
+    label: 'Mascotas',
+    desc: 'Cuidadores, paseos y adiestramiento',
+    icon: PawPrint,
+    color: '#F97316',
+    bg: 'rgba(249,115,22,0.10)',
+    supabaseCategories: ['mascotas'],
+  },
+  {
+    id: 'entrenamiento',
+    label: 'Entrenamiento',
+    desc: 'Personal trainers y deportes',
+    icon: Dumbbell,
+    color: '#06B6D4',
+    bg: 'rgba(6,182,212,0.10)',
+    supabaseCategories: ['entrenador'],
+  },
+  {
+    id: 'cuidado',
+    label: 'Cuidado de personas',
+    desc: 'Cuidadores, auxiliares y compañía',
+    icon: Baby,
+    color: '#EC4899',
+    bg: 'rgba(236,72,153,0.10)',
+    supabaseCategories: ['cuidado'],
+  },
 ]
-
-// Category → natural language query for AI matching
-const CAT_QUERIES = {
-  cuidado: 'Necesito una cuidadora o auxiliar para una persona mayor',
-  tecnico: 'Necesito un técnico para reparaciones en casa',
-  clases:  'Busco profesor de clases particulares o refuerzo escolar',
-  salud:   'Busco un profesional de salud o fisioterapeuta',
-  legal:   'Necesito asesoramiento legal o un abogado',
-}
 
 export default function Explore() {
   const navigate  = useNavigate()
   const { addSearch, cacheHelpers } = useUser()
   const inputRef  = useRef(null)
 
-  const [allHelpers, setAllHelpers]     = useState(LOCAL_HELPERS)
-  const [loadingData, setLoadingData]   = useState(true)
-  const [searchText, setSearchText]     = useState('')
-  const [activeCategory, setActiveCategory] = useState('all')
-  const [showFilters, setShowFilters]   = useState(false)
-  const [filters, setFilters]           = useState({ presential: false, online: false, urgent: false, maxPrice: '', maxDist: '' })
+  // ── State ────────────────────────────────────────────────────
+  const [searchText,      setSearchText]     = useState('')
+  const [activeCategory,  setActiveCategory] = useState(null)  // null = grid view
+  const [categoryResults, setCategoryResults] = useState([])
+  const [loadingCat,      setLoadingCat]     = useState(false)
+  const [aiResults,       setAiResults]      = useState(null)
+  const [aiSearching,     setAiSearching]    = useState(false)
+  const [visibleCount,    setVisibleCount]   = useState(20)
 
-  // AI state
-  const [aiResults, setAiResults]       = useState(null)   // null = show all
-  const [aiReasons, setAiReasons]       = useState({})
-  const [aiQuery, setAiQuery]           = useState('')
-  const [aiSearching, setAiSearching]   = useState(false)
-  const [priceCtx, setPriceCtx]         = useState(null)
-
-  // Load remote helpers
-  useEffect(() => {
-    getAllHelpers().then(remote => {
-      if (remote?.length > 0) {
-        const sorted = [...remote].sort((a, b) => {
-          const sa = (a.rating||0) * Math.log((a.reviews||0)+1)
-          const sb = (b.rating||0) * Math.log((b.reviews||0)+1)
-          return sb - sa
-        })
-        setAllHelpers(sorted)
-        cacheHelpers(sorted)
-      }
-      setLoadingData(false)
-    }).catch(() => setLoadingData(false))
-  }, [])
-
-  // ── AI SEARCH ────────────────────────────────────────────────
+  // ── AI Search ─────────────────────────────────────────────────
   async function runAiSearch(query) {
-    if (!query.trim()) { clearAi(); return }
-    setVisibleCount(20)
+    if (!query.trim()) return
     setAiSearching(true)
-    setAiQuery(query)
-
-    const analysis = analyzeNeed(query)
-    const matches  = await matchHelpers(analysis, 12)
-
-    // Build match reasons
-    const reasons = {}
-    matches.forEach((h, i) => {
-      const rank = null
-      const spec = h.specialty ? `Especialista en ${h.specialty.toLowerCase()}` : null
-      const dist = h.distance ? `A ${h.distance}km de ti` : null
-      const parts = [rank, spec, dist].filter(Boolean)
-      reasons[h.id] = parts.slice(0,2).join(' · ')
-    })
-
-    setAiResults(matches)
-    setAiReasons(reasons)
-    setPriceCtx(matches.length > 0 ? getPriceContext(matches[0], analysis.categoria) : null)
-
-    // Store window globals for profile navigation
-    window.__nuraMatchReasons = reasons
-    window.__nuraLastQuery    = query
-    try { sessionStorage.setItem('nura_match_reasons', JSON.stringify(reasons)) } catch {}
-    try { sessionStorage.setItem('nura_last_query', query) } catch {}
-
-    addSearch(query, analysis.categoria)
+    setAiResults(null)
+    setActiveCategory(null)
+    addSearch?.(query)
+    try {
+      const need    = analyzeNeed(query)
+      const remote  = await searchHelpers(need.category, need.keywords)
+      if (remote?.length > 0) { setAiResults(remote); setAiSearching(false); return }
+      const res = await fetch('https://api.anthropic.com/v1/messages', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          model: 'claude-sonnet-4-6',
+          max_tokens: 200,
+          messages: [{ role: 'user', content: `Clasifica esta búsqueda en una categoría: "${query}". Categorías: logopedia, tecnico, limpieza, cuidado, mascotas, matematicas, entrenador, salud, legal, hogar. Responde solo la categoría.` }]
+        })
+      })
+      const aiCat = (await res.json())?.content?.[0]?.text?.trim().toLowerCase() || need.category
+      const fallback = await searchHelpers(aiCat, need.keywords)
+      setAiResults(fallback || [])
+    } catch { setAiResults([]) }
     setAiSearching(false)
   }
 
-  function clearAi() {
-    setVisibleCount(20)
+  function handleSearch(e) {
+    e.preventDefault()
+    if (searchText.trim()) runAiSearch(searchText)
+  }
+
+  function clearSearch() {
+    setSearchText('')
     setAiResults(null)
-    setAiReasons({})
-    setAiQuery('')
-    setPriceCtx(null)
-    setSearchText('')
-    setActiveCategory('all')
-  }
-
-  function handleCategoryClick(cat) {
-    if (cat === 'all') { clearAi(); return }
-    if (cat === activeCategory) { clearAi(); return }
-    setActiveCategory(cat)
+    setActiveCategory(null)
     setVisibleCount(20)
-    const query = CAT_QUERIES[cat] || cat
+  }
+
+  // ── Category navigation ───────────────────────────────────────
+  async function openCategory(cat) {
+    setActiveCategory(cat)
+    setAiResults(null)
     setSearchText('')
-    runAiSearch(query)
+    setVisibleCount(20)
+    setLoadingCat(true)
+    setCategoryResults([])
+    try {
+      // Fetch all subcategories in parallel
+      const results = await Promise.all(
+        cat.supabaseCategories.map(c => searchHelpers(c))
+      )
+      const merged = results
+        .flat()
+        .filter(Boolean)
+        .filter((h, i, arr) => arr.findIndex(x => x.id === h.id) === i)
+        .sort((a, b) => b.rating - a.rating)
+      setCategoryResults(merged)
+    } catch { setCategoryResults([]) }
+    setLoadingCat(false)
   }
 
-  function handleSubmit(e) {
-    e?.preventDefault()
-    if (!searchText.trim()) return
-    setActiveCategory('all')
-    runAiSearch(searchText.trim())
+  function goBack() {
+    setActiveCategory(null)
+    setCategoryResults([])
+    setVisibleCount(20)
   }
 
-  // ── MANUAL FILTER (when no AI search active) ─────────────────
-  const manualFiltered = allHelpers.filter(h => {
-    const CATEGORY_MAP = {
-      clases: ['matematicas', 'clases'], salud: ['salud', 'otro'],
-      hogar: ['hogar', 'tecnico', 'limpieza'], legal: ['legal'],
-    }
-    const mapped = CATEGORY_MAP[activeCategory] || [activeCategory]
-    const catOk = activeCategory === 'all' ||
-      mapped.some(mc => h.category === mc) ||
-      h.specialty?.toLowerCase().includes(activeCategory) ||
-      (h.tags||[]).some(t => t.toLowerCase().includes(activeCategory))
-    const q = searchText.toLowerCase()
-    const textOk = !searchText ||
-      h.name?.toLowerCase().includes(q) ||
-      h.specialty?.toLowerCase().includes(q) ||
-      h.bio?.toLowerCase().includes(q)
-    const presOk  = !filters.presential || h.presential
-    const onlineOk= !filters.online     || h.online
-    const urgOk   = !filters.urgent     || h.urgent
-    const priceOk = !filters.maxPrice   || (h.price && parseInt(h.price.replace(/[^0-9]/g,'')) <= parseInt(filters.maxPrice))
-    const distOk  = !filters.maxDist    || h.distance <= parseFloat(filters.maxDist)
-    return catOk && textOk && presOk && onlineOk && urgOk && priceOk && distOk
-  }).sort((a,b) => (b.rating||0)*Math.log((b.reviews||0)+1) - (a.rating||0)*Math.log((a.reviews||0)+1))
+  // ── Display list ──────────────────────────────────────────────
+  const displayList = aiResults ?? categoryResults
+  const pagedList   = displayList.slice(0, visibleCount)
+  const hasMore     = displayList.length > visibleCount
+  const isLoading   = aiSearching || loadingCat
+  const isListView  = activeCategory !== null || aiResults !== null
 
-  const displayList   = aiResults ?? manualFiltered
-  const isAiMode      = aiResults !== null
-
-  // Pagination — only in manual mode
-  const [visibleCount, setVisibleCount] = useState(20)
-  // Reset visible count when filters or search changes
-  const pagedList = isAiMode ? displayList : displayList.slice(0, visibleCount)
-  const hasMore   = !isAiMode && displayList.length > visibleCount
-  const activeFilters = Object.values(filters).filter(Boolean).length
-
+  /* ── RENDER ─────────────────────────────────────────────────── */
   return (
     <div className={styles.page}>
+      {/* ── HEADER ──────────────────────────────────────────── */}
+      <PageHeader
+        title={activeCategory ? activeCategory.label : null}
+        showBack={!!activeCategory}
+        onBack={goBack}
+      />
 
-      <PageHeader />
+      <div className={styles.body}>
 
-      {/* ── STICKY TOP BAR: search + categories ── */}
-      <div className={styles.topBar}>
-        <form onSubmit={handleSubmit} className={styles.searchForm}>
-          <div className={styles.searchBar}>
+        {/* ── SEARCH BAR ──────────────────────────────────── */}
+        <div className={styles.searchWrap}>
+          <form className={styles.searchBar} onSubmit={handleSearch}>
             {aiSearching
-              ? <Loader2 size={15} color="var(--purple)" style={{animation:'spin 1.2s linear infinite'}} />
-              : <Search size={15} color="var(--soft)" />
+              ? <Loader2 size={16} color="var(--purple)" style={{animation:'spin 1.2s linear infinite', flexShrink:0}} />
+              : <Search size={16} color="var(--ink-tertiary)" style={{flexShrink:0}} />
             }
             <input
               ref={inputRef}
               className={styles.searchInput}
-              placeholder="Describe qué necesitas..."
+              placeholder="Buscar profesionales..."
               value={searchText}
               onChange={e => setSearchText(e.target.value)}
-              onKeyDown={e => e.key === 'Enter' && handleSubmit()}
-              autoComplete="off"
-              autoCorrect="off"
-              autoCapitalize="off"
-              spellCheck={false}
+              onKeyDown={e => e.key === 'Enter' && handleSearch(e)}
             />
-            {(searchText || isAiMode) && (
-              <button type="button" className={styles.clearBtn} onClick={clearAi}>
-                <X size={14} />
+            {(searchText || isListView) && (
+              <button type="button" className={styles.clearBtn} onClick={clearSearch}>
+                ✕
               </button>
             )}
-            <button
-              type="button"
-              className={`${styles.filterBtn} ${activeFilters > 0 ? styles.filterBtnActive : ''}`}
-              onClick={() => setShowFilters(s => !s)}>
-              <SlidersHorizontal size={15} />
-              {activeFilters > 0 && <span className={styles.filterCount}>{activeFilters}</span>}
-            </button>
-          </div>
-        </form>
-
-        {/* ── CATEGORY CHIPS ── */}
-        <div className={styles.categories}>
-          {QUICK_FILTERS.map(({ id, label, icon: Icon }) => (
-            <button
-              key={id}
-              className={`${styles.cat} ${(activeCategory === id && !isAiMode) || (isAiMode && id !== 'all' && CAT_QUERIES[id] && aiQuery === CAT_QUERIES[id]) ? styles.catActive : ''}`}
-              onClick={() => handleCategoryClick(id)}>
-              <Icon size={13} />
-              {label}
-            </button>
-          ))}
+          </form>
         </div>
-      </div>{/* end topBar */}
 
-      <div className={styles.content}>
-
-        {/* ── FILTER PANEL ── */}
-        {showFilters && (
-          <div className={styles.filterPanel}>
-            <div className={styles.filterRow}>
-              <span className={styles.filterLabel}>Modalidad</span>
-              <div className={styles.filterPills}>
-                {['presential','online'].map(k => (
-                  <button key={k} className={`${styles.filterPill} ${filters[k] ? styles.filterPillActive : ''}`}
-                    onClick={() => setFilters(f => ({...f, [k]: !f[k]}))}>
-                    {k === 'presential' ? 'Presencial' : 'Online'}
-                  </button>
-                ))}
-                <button className={`${styles.filterPill} ${filters.urgent ? styles.filterPillActive : ''}`}
-                  onClick={() => setFilters(f => ({...f, urgent: !f.urgent}))}>
-                  Urgencias
+        {/* ── GRID DE CATEGORÍAS ──────────────────────────── */}
+        {!isListView && !isLoading && (
+          <div className={styles.catGrid}>
+            {CATEGORIES.map(cat => {
+              const Icon = cat.icon
+              return (
+                <button
+                  key={cat.id}
+                  className={styles.catCard}
+                  style={{ '--cat-color': cat.color, '--cat-bg': cat.bg }}
+                  onClick={() => openCategory(cat)}
+                >
+                  <div className={styles.catIconWrap}>
+                    <Icon size={24} color={cat.color} strokeWidth={1.8} />
+                  </div>
+                  <div className={styles.catInfo}>
+                    <span className={styles.catLabel}>{cat.label}</span>
+                    <span className={styles.catDesc}>{cat.desc}</span>
+                  </div>
                 </button>
-              </div>
+              )
+            })}
+          </div>
+        )}
+
+        {/* ── LOADING ─────────────────────────────────────── */}
+        {isLoading && (
+          <div className={styles.loading}>
+            <Loader2 size={28} color="var(--purple)" style={{animation:'spin 1s linear infinite'}} />
+            <p>Buscando profesionales...</p>
+          </div>
+        )}
+
+        {/* ── RESULTADOS ──────────────────────────────────── */}
+        {isListView && !isLoading && (
+          <>
+            {/* Header de resultados */}
+            <div className={styles.resultsHeader}>
+              {activeCategory && (
+                <div className={styles.catPill} style={{ '--cat-color': activeCategory.color, '--cat-bg': activeCategory.bg }}>
+                  {(() => { const Icon = activeCategory.icon; return <Icon size={13} color={activeCategory.color} /> })()}
+                  <span>{activeCategory.label}</span>
+                </div>
+              )}
+              <span className={styles.resultCount}>
+                {displayList.length} profesional{displayList.length !== 1 ? 'es' : ''}
+              </span>
             </div>
-            <div className={styles.filterRow}>
-              <div style={{display:'flex',justifyContent:'space-between',alignItems:'center'}}>
-                <span className={styles.filterLabel}>Precio máximo</span>
-                <span className={styles.filterPriceLabel}>{filters.maxPrice ? `${filters.maxPrice}€` : 'Sin límite'}</span>
-              </div>
-              <input className={styles.filterInput} type="range" min="0" max="200" step="5"
-                value={filters.maxPrice || 200}
-                onChange={e => setFilters(f => ({...f, maxPrice: e.target.value === '200' ? '' : e.target.value}))} />
-            </div>
-            <div className={styles.filterRow}>
-              <span className={styles.filterLabel}>Distancia máxima (km)</span>
-              <div className={styles.filterPills}>
-                {['1','3','5','10'].map(d => (
-                  <button key={d} className={`${styles.filterPill} ${filters.maxDist === d ? styles.filterPillActive : ''}`}
-                    onClick={() => setFilters(f => ({...f, maxDist: f.maxDist === d ? '' : d}))}>
-                    {d}km
-                  </button>
-                ))}
-              </div>
-            </div>
-            <button className={styles.clearFilters}
-              onClick={() => setFilters({ presential:false,online:false,urgent:false,maxPrice:'',maxDist:'' })}>
-              <X size={12} /> Limpiar filtros
-            </button>
-          </div>
-        )}
 
-        {/* ── AI RESULT HEADER ── */}
-        {isAiMode && !aiSearching && (
-          <div className={styles.aiHeader}>
-            <span>
-              <strong>{displayList.length} resultado{displayList.length !== 1 ? 's' : ''}</strong>
-              {' '}para "{aiQuery.length > 30 ? aiQuery.slice(0,30)+'...' : aiQuery}"
-            </span>
-            {priceCtx && (
-              <p className={styles.priceCtx}>{priceCtx}</p>
-            )}
-          </div>
-        )}
-
-        {/* ── RESULTS COUNT — always visible when not searching ── */}
-        {!aiSearching && (
-          <div className={styles.listHeader}>
-            <span className={styles.listCount}>
-              {isAiMode
-                ? `${displayList.length} resultado${displayList.length !== 1 ? 's' : ''} encontrado${displayList.length !== 1 ? 's' : ''}`
-                : `${pagedList.length} de ${displayList.length} profesional${displayList.length !== 1 ? 'es' : ''} cerca de ti`}
-            </span>
-          </div>
-        )}
-
-        {/* ── SEARCHING STATE ── */}
-        {aiSearching && (
-          <div className={styles.searching}>
-            <Loader2 size={16} color="var(--purple)" style={{animation:'spin 1.2s linear infinite'}} />
-            <span>Buscando profesionales...</span>
-          </div>
-        )}
-
-        {/* ── RESULTS ── */}
-        {!aiSearching && (
-          <div className={styles.grid}>
-            {displayList.length === 0 ? (
-              <div className={styles.empty}>
-                <Search size={36} color="rgba(0,0,0,0.12)" strokeWidth={1.3} />
-                <strong>Sin resultados</strong>
-                <p>Prueba con otras palabras o amplía los filtros.</p>
-                <button className={styles.emptyBtn} onClick={clearAi}>
-                  Ver todos los profesionales
-                </button>
-              </div>
-            ) : pagedList.map(h => (
-              <div key={h.id}>
-                <HelperCard
-                  helper={h}
-                  onContact={() => navigate(`/chat/${h.id}`, {
-                    state: { helper: h, userQuery: aiQuery || window.__nuraLastQuery, matchReason: aiReasons[h.id] }
-                  })}
-                />
-                {/* AI match reason — only in AI mode */}
-                {isAiMode && aiReasons[h.id] && (
-                  <div className={styles.matchReason}>
-                    
-                    <span>{aiReasons[h.id]}</span>
+            {/* Lista */}
+            {pagedList.length > 0 ? (
+              <>
+                <div className={styles.list}>
+                  {pagedList.map(h => (
+                    <HelperCard key={h.id} helper={h} onClick={() => navigate(`/helper/${h.id}`)} />
+                  ))}
+                </div>
+                {hasMore && (
+                  <div className={styles.loadMoreWrap}>
+                    <button className={styles.loadMoreBtn} onClick={() => setVisibleCount(v => v + 20)}>
+                      Ver más profesionales
+                    </button>
                   </div>
                 )}
+              </>
+            ) : (
+              <div className={styles.empty}>
+                <Search size={40} color="var(--ink-border)" strokeWidth={1.3} />
+                <p>No encontramos profesionales en esta categoría.</p>
+                <button className={styles.emptyBtn} onClick={goBack}>
+                  Ver todas las categorías
+                </button>
               </div>
-            ))}
-          </div>
-        )}
-
-        {/* ── LOAD MORE ── */}
-        {hasMore && (
-          <div style={{padding:'8px 0 24px',textAlign:'center'}}>
-            <button
-              onClick={() => setVisibleCount(v => v + 20)}
-              style={{padding:'10px 28px',background:'rgba(0,0,0,0.05)',border:'none',
-                borderRadius:'var(--radius-full)',fontSize:'var(--text-sm)',fontWeight:600,
-                color:'var(--ink-secondary)',cursor:'pointer',fontFamily:'inherit'}}>
-              Ver más profesionales
-            </button>
-          </div>
+            )}
+          </>
         )}
 
       </div>
