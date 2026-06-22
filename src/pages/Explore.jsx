@@ -158,11 +158,19 @@ export default function Explore() {
       const results = await Promise.all(
         cat.supabaseCategories.map(c => searchHelpers(c))
       )
-      const merged = results
+      let merged = results
         .flat()
         .filter(Boolean)
         .filter((h, i, arr) => arr.findIndex(x => x.id === h.id) === i)
-        .sort((a, b) => b.rating - a.rating)
+        .sort((a, b) => (b.rating||0) - (a.rating||0))
+
+      // Fallback: if no results, try searching without category filter
+      // and filter by specialty keywords from the category label
+      if (merged.length === 0) {
+        const fallback = await searchHelpers(null, cat.supabaseCategories)
+        if (fallback?.length > 0) merged = fallback
+      }
+
       setCategoryResults(merged)
     } catch { setCategoryResults([]) }
     setLoadingCat(false)
