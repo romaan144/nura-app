@@ -443,6 +443,11 @@ export default function Chat() {
         <button className={styles.contractBtn} onClick={() => serviceState === 'Valorar' ? setShowRating(true) : setShowConfirm(true)}>
           <Calendar size={13} /> {serviceState}
         </button>
+
+        <button className={styles.back} onClick={() => navigate(-1)}>
+          <ArrowLeft size={17} />
+        </button>
+
       </header>
 
       {/* Messages — full screen */}
