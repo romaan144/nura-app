@@ -408,3 +408,25 @@ select:active,
 .skeleton-line-lg { height: 14px; width: 60%; }
 .skeleton-line-md { height: 11px; width: 40%; }
 .skeleton-line-sm { height: 10px; width: 80%; }
+
+/* ── EMPTY STATE ANIMATIONS ─────────────────────────────────────────────
+   Los estados vacíos entran con una animación suave y el icono flota.
+   ─────────────────────────────────────────────────────────────────────── */
+@keyframes emptyIn {
+  from { opacity: 0; transform: translateY(16px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes floatIcon {
+  0%, 100% { transform: translateY(0px); }
+  50%       { transform: translateY(-6px); }
+}
+
+.empty-enter {
+  animation: emptyIn 0.32s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
+}
+
+.empty-icon-float {
+  animation: floatIcon 3s ease-in-out infinite;
+  display: inline-flex;
+}

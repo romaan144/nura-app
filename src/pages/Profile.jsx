@@ -160,7 +160,7 @@ export default function Profile() {
               </span>
             </button>
           ) : (
-            <div className={styles.favEmpty}>
+            <div className={`${styles.favEmpty} empty-enter`}>
               <UserPlus size={14} strokeWidth={1.5} color="var(--ink-disabled)" />
               <span className={styles.favEmptyText}>
                 Guarda profesionales que te interesen para encontrarlos rápido
