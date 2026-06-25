@@ -1,6 +1,6 @@
 import { useState, useEffect, useRef } from 'react'
 import { useParams, useNavigate, useLocation } from 'react-router-dom'
-import { ArrowLeft, Send, Shield, Award, Calendar } from 'lucide-react'
+import { ArrowLeft, Send, Shield, Award, Calendar, Plus, Mic, MicOff } from 'lucide-react'
 import { HELPERS } from '../data/helpers'
 import { useUser } from '../context/UserContext'
 import { getHelperById } from '../utils/supabase'
@@ -386,6 +386,19 @@ export default function Chat() {
     'Voy a reservar ahora',
   ]
 
+  // ── Mic ────────────────────────────────────────────────────────────────
+  function toggleMic() {
+    if (!('webkitSpeechRecognition' in window) && !('SpeechRecognition' in window)) return
+    const SR = window.SpeechRecognition || window.webkitSpeechRecognition
+    const rec = new SR()
+    rec.lang = 'es-ES'
+    rec.onresult = e => { setInput(e.results[0][0].transcript); setListening(false) }
+    rec.onerror = () => setListening(false)
+    rec.onend = () => setListening(false)
+    rec.start()
+    setListening(true)
+  }
+
   // ── Display helpers ─────────────────────────────────────────
   // FIX 1: First name + first surname only
   const chatDisplayName = (() => {
@@ -597,12 +610,16 @@ export default function Chat() {
       {/* Floating input */}
       <div className={styles.inputWrap}>
         <div className={styles.inputBar}>
+          <button className={styles.plusBtn}><Plus size={18} /></button>
           <input className={styles.input}
             placeholder="Escribe un mensaje..."
             value={input} onChange={e => setInput(e.target.value)} onKeyDown={handleKey} />
-          <button className={styles.sendBtn} onClick={() => sendMessage()} disabled={!input.trim()}>
-            <Send size={15} />
-          </button>
+          {input.trim()
+            ? <button className={styles.sendBtn} onClick={() => sendMessage()}><Send size={16} /></button>
+            : <button className={`${styles.sendBtn} ${listening ? styles.micActive : styles.micBtn}`} onClick={toggleMic}>
+                {listening ? <MicOff size={16} /> : <Mic size={16} />}
+              </button>
+          }
         </div>
       </div>
 

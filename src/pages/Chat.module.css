@@ -319,3 +319,16 @@
   margin-top: 3px;
   line-height: 1;
 }
+
+/* ── INPUT BUTTONS — igual que Home ────────────────────────────────── */
+.plusBtn {
+  width: 34px; height: 34px;
+  border-radius: 50%;
+  background: transparent; border: none;
+  color: rgba(0,0,0,0.3);
+  display: flex; align-items: center; justify-content: center;
+  flex-shrink: 0; cursor: pointer;
+  transition: opacity 0.15s;
+}
+.micBtn { background: transparent; color: #999; box-shadow: none; }
+.micActive { background: var(--red); color: white; }
