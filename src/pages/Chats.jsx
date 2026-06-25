@@ -1,5 +1,5 @@
-import PageHeader from '../components/PageHeader'
 import { useState } from 'react'
+import PageHeader from '../components/PageHeader'
 import { useNavigate } from 'react-router-dom'
 import { Search, MessageCircle } from 'lucide-react'
 import { useUser } from '../context/UserContext'
@@ -149,7 +149,6 @@ export default function Chats() {
 
   return (
     <div className={styles.page}>
-      <PageHeader />
 
       <div className={styles.searchWrap}>
         <div className={styles.searchBox}>

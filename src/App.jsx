@@ -15,6 +15,7 @@ import Explore from './pages/Explore'
 const Feed = lazy(() => import('./pages/Feed'))
 import NotFound from './pages/NotFound'
 import BottomNav from './components/BottomNav'
+import AppShell from './components/AppShell'
 import DesktopSidebar from './components/DesktopSidebar'
 import ScrollToTop from './components/ScrollToTop'
 import OnboardingPage from './pages/Onboarding'
@@ -36,9 +37,6 @@ function AppRoutes() {
     return !localStorage.getItem('nura_onboarded')
   })
 
-  const hideNav = ['/login', '/onboarding', '/register-helper']
-    .some(p => location.pathname.startsWith(p))
-
   if (showSplash) {
     return <Splash onFinish={() => setShowSplash(false)} />
   }
@@ -53,8 +51,9 @@ function AppRoutes() {
       )}
 
       <ScrollToTop />
-      {!hideNav && <DesktopSidebar />}
+      <DesktopSidebar />
 
+      <AppShell>
       <div className="desktopMain">
         <PageTransition>
           <Suspense fallback={
@@ -88,8 +87,9 @@ function AppRoutes() {
           </Suspense>
         </PageTransition>
       </div>
+      </AppShell>
 
-      {!hideNav && <BottomNav />}
+      <BottomNav />
       <Toast />
     </>
   )

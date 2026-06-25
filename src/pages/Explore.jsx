@@ -1,4 +1,5 @@
 import { useState, useEffect, useRef } from 'react'
+import PageHeader from '../components/PageHeader'
 import { useNavigate } from 'react-router-dom'
 import { Search, ArrowLeft, Loader2, SlidersHorizontal,
          Heart, Wrench, BookOpen, Scale, Home, PawPrint,
@@ -7,7 +8,6 @@ import { searchHelpers, getAllHelpers } from '../utils/supabase'
 import { analyzeNeed, matchHelpers } from '../utils/matching'
 import { useUser } from '../context/UserContext'
 import HelperCard from '../components/HelperCard'
-import PageHeader from '../components/PageHeader'
 import styles from './Explore.module.css'
 
 // ── CATEGORÍAS ────────────────────────────────────────────────────────────
@@ -302,11 +302,6 @@ export default function Explore() {
   return (
     <div className={styles.page}>
       {/* ── HEADER ──────────────────────────────────────────── */}
-      <PageHeader
-        title={activeCategory ? activeCategory.label : null}
-        showBack={!!activeCategory}
-        onBack={goBack}
-      />
 
       <div className={styles.body}>
 

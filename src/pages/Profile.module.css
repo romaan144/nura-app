@@ -1,13 +1,13 @@
 /* ── PROFILE ─────────────────────────────────────────────────── */
 .page {
-  position: fixed; inset: 0;
   background: var(--bg, #f7f7f8);
-  overflow-y: auto;
-  -webkit-overflow-scrolling: touch;
+  min-height: 100%;
+  
+  padding-bottom: var(--nav-h);
 }
 
 .scroll {
-  padding: var(--header-h) 0 calc(var(--nav-h) + 20px);
+  padding: 0 0 20px;
 }
 
 /* ── ZONA 1: IDENTIDAD ───────────────────────────────────────── */

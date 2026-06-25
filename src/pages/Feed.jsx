@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react'
+import PageHeader from '../components/PageHeader'
 import { Briefcase, Users2, Award, Bookmark, Check, MessageCircle, Share2, Shield, UserPlus, Heart, Star, Rss } from 'lucide-react'
 import RegisterGate from '../components/RegisterGate'
 import { useNavigate } from 'react-router-dom'
@@ -9,7 +10,6 @@ import HelperCard from '../components/HelperCard'
 import { generateDynamicPosts } from '../utils/feedGenerator'
 import { COMPANIES } from '../data/companies'
 import { useUser } from '../context/UserContext'
-import PageHeader from '../components/PageHeader'
 import { showToast } from '../components/Toast'
 
 import styles from './Feed.module.css'
@@ -216,7 +216,6 @@ export default function Feed() {
 
   return (
     <div className={styles.page}>
-      <PageHeader />
 
       {/* Tabs */}
       <div className={styles.tabs}>

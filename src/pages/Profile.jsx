@@ -1,9 +1,9 @@
 import { useState } from 'react'
+import PageHeader from '../components/PageHeader'
 import { useNavigate } from 'react-router-dom'
 import { LogOut, Edit2, Check, X, Award, MessageCircle,
          Heart, ClipboardList, User, Phone, Search, Star } from 'lucide-react'
 import { useUser } from '../context/UserContext'
-import PageHeader from '../components/PageHeader'
 import styles from './Profile.module.css'
 
 export default function Profile() {
@@ -22,7 +22,6 @@ export default function Profile() {
   /* ── Guest ─────────────────────────────────────────────── */
   if (!user) return (
     <div className={styles.page}>
-      <PageHeader />
       <div className={styles.noUser}>
         <img src="/logo-iso.png" alt="Nüra" className={styles.noUserLogo} />
         <h2 className={styles.noUserTitle}>Crea tu cuenta gratis</h2>

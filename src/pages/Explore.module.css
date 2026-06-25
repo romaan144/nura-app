@@ -1,9 +1,10 @@
 /* ── EXPLORE ─────────────────────────────────────────────────────────── */
 .page {
-  position: fixed; inset: 0;
-  background: var(--paper);
   display: flex;
   flex-direction: column;
+  height: 100%;
+  background: var(--paper);
+  overflow: hidden;
 }
 
 .body {

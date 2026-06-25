@@ -2,11 +2,12 @@
    FEED
    ══════════════════════════════════════════════════════ */
 .page {
-  min-height: 100dvh;
   background: var(--paper);
+  min-height: 100%;
   padding-top: var(--header-h);
-
-  animation: fadeSlideIn 0.22s ease both;}
+  padding-bottom: var(--nav-h);
+  animation: fadeSlideIn 0.22s ease both;
+}
 
 /* ── Tabs ────────────────────────────────────────────── */
 .tabs {
@@ -40,7 +41,7 @@
 
 /* ── Feed ────────────────────────────────────────────── */
 .feed {
-  padding: 8px 14px var(--nav-h);
+  padding: 8px 14px 0;
   display: flex; flex-direction: column; gap: 10px;
 }
 
@@ -193,7 +194,13 @@
 
 /* Bottom nav clearance */
 @media (max-width: 767px) {
-  .page { padding-bottom: var(--nav-h) !important; }
+  .page {
+  background: var(--paper);
+  min-height: 100%;
+  padding-top: var(--header-h);
+  padding-bottom: var(--nav-h);
+  animation: fadeSlideIn 0.22s ease both;
+}
 }
 @media (min-width: 768px) {
   .feed { padding: 8px 24px 40px; max-width: 640px; margin: 0 auto; }
