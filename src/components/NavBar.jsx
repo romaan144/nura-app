@@ -1,108 +1,45 @@
-import { useState } from 'react'
 import { useNavigate, useLocation } from 'react-router-dom'
-import { Search, Compass, MessageCircle, User, Rss, X, Menu, Heart, Calendar, HelpCircle, UserPlus } from 'lucide-react'
+import { Search, Compass, MessageCircle, User, Rss } from 'lucide-react'
 import { useUser } from '../context/UserContext'
 import styles from './NavBar.module.css'
-import pageStyles from './PageHeader.module.css'
 
-// Export the trigger button separately so each page header can embed it
-export function MenuButton() {
-  return (
-    <button
-      onClick={() => window.__openDrawer?.()}
-      aria-label="Menú"
-      style={{
-        width: '40px',
-        height: '40px',
-        borderRadius: '50%',
-        background: 'white',
-        border: '1.5px solid rgba(0,0,0,0.08)',
-        boxShadow: '0 2px 8px rgba(0,0,0,0.1), 0 1px 3px rgba(0,0,0,0.06)',
-        display: 'flex',
-        alignItems: 'center',
-        justifyContent: 'center',
-        color: '#333',
-        cursor: 'pointer',
-        flexShrink: 0,
-      }}>
-      <Menu size={18} />
-    </button>
-  )
-}
+// MenuButton kept as empty stub to avoid breaking imports
+export function MenuButton() { return null }
 
 export default function NavBar() {
   const navigate = useNavigate()
   const location = useLocation()
-  const { totalUnreadChats, user } = useUser()
-  const [open, setOpen] = useState(false)
-
-  // Register global opener so MenuButton can call it
-  if (typeof window !== 'undefined') {
-    window.__openDrawer = () => setOpen(true)
-  }
+  const { totalUnreadChats } = useUser()
 
   const hideOn = ['/login', '/register-helper']
   if (hideOn.some(p => location.pathname.startsWith(p))) return null
 
   const tabs = [
-    { path: '/favorites', icon: <Heart size={20} />, label: 'Favoritos' },
-    { path: '/my-services', icon: <Calendar size={20} />, label: 'Mis servicios' },
-    { path: '/register-helper', icon: <UserPlus size={20} />, label: 'Ofrecer mis servicios' },
+    { path: '/',              icon: Search,        label: 'Buscar' },
+    { path: '/explore',       icon: Compass,       label: 'Profesionales' },
+    { path: '/chats',         icon: MessageCircle, label: 'Chats',     badge: totalUnreadChats },
+    { path: '/feed',          icon: Rss,           label: 'Comunidad' },
+    { path: '/profile',       icon: User,          label: 'Perfil' },
   ]
 
-  function go(path) { navigate(path); setOpen(false) }
-
   return (
-    <>
-      {/* Backdrop */}
-      {open && <div className={styles.backdrop} onClick={() => setOpen(false)} />}
-
-      {/* Drawer */}
-      <aside className={`${styles.drawer} ${open ? styles.drawerOpen : ''}`}>
-
-        <div className={styles.drawerHeader}>
-          <img src="/logo-text.png" alt="Nüra" className={styles.drawerLogo} />
-          <button className={styles.drawerClose} onClick={() => setOpen(false)}>
-            <X size={18} />
+    <nav className={styles.bottomNav}>
+      {tabs.map(({ path, icon: Icon, label, badge }) => {
+        const active = path === '/'
+          ? location.pathname === '/'
+          : location.pathname.startsWith(path)
+        return (
+          <button key={path}
+            className={`${styles.tab} ${active ? styles.tabActive : ''}`}
+            onClick={() => navigate(path)}>
+            <span className={styles.iconWrap}>
+              <Icon size={22} strokeWidth={active ? 2 : 1.6} />
+              {badge > 0 && <span className={styles.badge}>{badge > 9 ? '9+' : badge}</span>}
+            </span>
+            <span className={styles.label}>{label}</span>
           </button>
-        </div>
-
-        {user && (
-          <div className={styles.drawerUser} onClick={() => go('/profile')} style={{cursor:'pointer'}}>
-            <img
-              src={`https://api.dicebear.com/9.x/personas/svg?seed=${encodeURIComponent(user.name || 'user')}`}
-              alt={user.name}
-              className={styles.drawerAvatar}
-            />
-            <div>
-              <div className={styles.drawerUserName}>{user.name}</div>
-              <div className={styles.drawerUserSub}>
-                {user.isHelper ? 'Profesional verificado' : 'Miembro desde el principio'}
-              </div>
-            </div>
-          </div>
-        )}
-
-        <nav className={styles.drawerNav}>
-          {tabs.map(({ path, icon, label, badge }) => {
-            const active = location.pathname === path
-            return (
-              <button key={path}
-                className={`${styles.drawerItem} ${active ? styles.drawerItemActive : ''}`}
-                onClick={() => go(path)}>
-                <span className={styles.drawerIcon}>{icon}</span>
-                <span className={styles.drawerLabel}>{label}</span>
-                {badge > 0 && <span className={styles.drawerBadge}>{badge}</span>}
-              </button>
-            )
-          })}
-        </nav>
-
-        <div className={styles.drawerFooter}>
-          <span className={styles.drawerFooterBrand}>Nüra · Barcelona · 2026</span>
-          <span className={styles.drawerFooterTag}>La IA que conecta personas</span>
-        </div>
-      </aside>
-    </>
+        )
+      })}
+    </nav>
   )
 }

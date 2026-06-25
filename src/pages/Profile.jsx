@@ -148,6 +148,11 @@ export default function Profile() {
             </button>
           </div>
 
+          <button className={styles.favRow} onClick={() => navigate('/my-services')}>
+            <ClipboardList size={15} color="var(--purple)" strokeWidth={1.8} />
+            <span className={styles.favText}>Mis servicios e historial</span>
+          </button>
+
           {favCount > 0 ? (
             <button className={styles.favRow} onClick={() => navigate('/favorites')}>
               <Heart size={15} color="var(--purple)" strokeWidth={1.8} />
