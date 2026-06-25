@@ -12,6 +12,7 @@ export default function HelperCard({ helper, onContact, showContact = true, show
   if (!helper) return null
 
   const following = isFollowing(helper.id)
+  const [popAnim, setPopAnim] = React.useState(false)
 
   function handleContact(e) {
     e.stopPropagation()
@@ -28,6 +29,9 @@ export default function HelperCard({ helper, onContact, showContact = true, show
   }
 
   function handleFollow(e) {
+    setPopAnim(false)
+    requestAnimationFrame(() => setPopAnim(true))
+    setTimeout(() => setPopAnim(false), 350)
     e.stopPropagation()
     haptic('light')
     if (!user) { showToast('Inicia sesión para seguir profesionales'); return }
@@ -85,7 +89,7 @@ export default function HelperCard({ helper, onContact, showContact = true, show
         {/* CTA — always vertically centered */}
         <div className={styles.cta}>
           <button className={`${styles.favBtn} ${following ? styles.favBtnActive : ''}`} onClick={handleFollow}>
-            {following ? <UserCheck size={13} color='var(--purple)' strokeWidth={2} /> : <UserPlus size={13} color='rgba(0,0,0,0.3)' strokeWidth={1.8} />}
+            <span className={popAnim ? 'follow-pop' : ''} style={{display:'flex',alignItems:'center'}}>{following ? <UserCheck size={13} color='var(--purple)' strokeWidth={2} /> : <UserPlus size={13} color='rgba(0,0,0,0.3)' strokeWidth={1.8} />}</span>
           </button>
           {showContact && (
             <button className={styles.contactBtn} onClick={handleContact}>

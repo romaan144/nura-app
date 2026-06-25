@@ -430,3 +430,17 @@ select:active,
   animation: floatIcon 3s ease-in-out infinite;
   display: inline-flex;
 }
+
+/* ── FOLLOW BUTTON MICROINTERACTION ─────────────────────────────────────
+   Al seguir, el icono hace un pop para confirmar la acción.
+   ─────────────────────────────────────────────────────────────────────── */
+@keyframes followPop {
+  0%   { transform: scale(1); }
+  40%  { transform: scale(1.35); }
+  70%  { transform: scale(0.9); }
+  100% { transform: scale(1); }
+}
+
+.follow-pop {
+  animation: followPop 0.3s cubic-bezier(0.34, 1.4, 0.64, 1) both;
+}
