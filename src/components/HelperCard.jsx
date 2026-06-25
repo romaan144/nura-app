@@ -10,10 +10,11 @@ import { getFirstName } from '../utils/name'
 export default function HelperCard({ helper, onContact, showContact = true, showPrice = false }) {
   const navigate = useNavigate()
   const { user, follow, unfollow, isFollowing } = useUser()
+  const [popAnim, setPopAnim] = useState(false)
+
   if (!helper) return null
 
   const following = isFollowing(helper.id)
-  const [popAnim, setPopAnim] = useState(false)
 
   function handleContact(e) {
     e.stopPropagation()
@@ -31,7 +32,7 @@ export default function HelperCard({ helper, onContact, showContact = true, show
 
   function handleFollow(e) {
     setPopAnim(false)
-    requestAnimationFrame(() => setPopAnim(true))
+    if (typeof requestAnimationFrame !== 'undefined') requestAnimationFrame(() => setPopAnim(true)); else setPopAnim(true)
     setTimeout(() => setPopAnim(false), 350)
     e.stopPropagation()
     haptic('light')

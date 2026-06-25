@@ -18,23 +18,25 @@ export default function Results({ searchState }) {
     if (!searchState) navigate('/')
   }, [searchState])
 
+  const [refineText, setRefineText] = useState('')
+  const [refinements, setRefinements] = useState([])
+  const [currentMatches, setCurrentMatches] = useState(
+    Array.isArray(searchState?.matches) ? searchState.matches : []
+  )
+  const [refining, setRefining] = useState(false)
+
+  // Persist so page reload works
+  useEffect(() => {
+    if (searchState?.matches?.length > 0) {
+      try { sessionStorage.setItem('nura_last_search', JSON.stringify(searchState)) } catch {}
+    }
+  }, [])
+
   if (!searchState) return null
 
   const { query, analysis, matches } = searchState
   const resultCount = currentMatches?.length || 0
   const safeMatches = Array.isArray(matches) ? matches : []
-
-  // Persist so page reload works
-  useEffect(() => {
-    if (effectiveState && matches?.length > 0) {
-      try { sessionStorage.setItem('nura_last_search', JSON.stringify(effectiveState)) } catch {}
-    }
-  }, [])
-
-  const [refineText, setRefineText] = useState('')
-  const [refinements, setRefinements] = useState([])
-  const [currentMatches, setCurrentMatches] = useState(safeMatches)
-  const [refining, setRefining] = useState(false)
 
   useEffect(() => {
     if (safeMatches.length > 0) {

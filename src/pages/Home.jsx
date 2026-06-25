@@ -197,8 +197,8 @@ export default function Home({ setSearchState }) {
   const navigate = useNavigate()
   const { user, addSearch, searchHistory, favorites, helpersCache, nuraChatMessages, setNuraChatMessages, nuraLastMatches, setNuraLastMatches, cacheHelpers } = useUser()
   // messages persisted in context so they survive navigation
-  const messages = nuraChatMessages
-  const setMessages = setNuraChatMessages
+  const messages = nuraChatMessages || []
+  const setMessages = setNuraChatMessages || (() => {})
   const [input, setInput] = useState('')
   const [loading, setLoading] = useState(false)
   const [listening, setListening] = useState(false)
