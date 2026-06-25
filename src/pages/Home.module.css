@@ -455,3 +455,52 @@
   box-shadow: var(--shadow-sm), 0 0 0 3px rgba(123,47,255,0.10);
   background: rgba(255,255,255,0.92);
 }
+
+/* ── INITIAL SUGGESTION CHIPS ───────────────────────────────────────────
+   Chips de sugerencia que aparecen en el estado vacío inicial.
+   Guían al usuario hacia su primera búsqueda sin fricción.
+   ─────────────────────────────────────────────────────────────────────── */
+@keyframes chipIn {
+  from { opacity: 0; transform: translateY(6px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+.initChips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  padding: 0 4px 8px;
+  justify-content: center;
+  pointer-events: all;
+}
+
+.initChip {
+  background: rgba(255,255,255,0.82);
+  -webkit-backdrop-filter: blur(24px) saturate(180%);
+  backdrop-filter: blur(24px) saturate(180%);
+  border: 1px solid rgba(0,0,0,0.09);
+  border-radius: var(--radius-full);
+  padding: 8px 14px;
+  font-size: var(--text-sm);
+  font-weight: 500;
+  color: var(--ink-secondary);
+  font-family: inherit;
+  cursor: pointer;
+  white-space: nowrap;
+  box-shadow: var(--shadow-xs);
+  transition: all 0.15s ease;
+  animation: chipIn 0.22s ease-out both;
+}
+
+.initChip:nth-child(1) { animation-delay: 0.05s; }
+.initChip:nth-child(2) { animation-delay: 0.10s; }
+.initChip:nth-child(3) { animation-delay: 0.15s; }
+.initChip:nth-child(4) { animation-delay: 0.20s; }
+.initChip:nth-child(5) { animation-delay: 0.25s; }
+
+.initChip:active {
+  background: var(--purple);
+  color: white;
+  border-color: var(--purple);
+  transform: scale(0.97);
+}
