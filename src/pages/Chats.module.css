@@ -97,26 +97,12 @@
 .onlineIndicator { position: absolute; bottom: 1px; right: 1px; width: 11px; height: 11px; border-radius: 50%; background: var(--green-dot); border: 2px solid white; }
 
 @media (min-width: 768px) {
-  .page {
-  height: 100%;
-  background: var(--paper);
-  overflow-y: auto;
-  -webkit-overflow-scrolling: touch;
-  padding-top: var(--header-h);
-  padding-bottom: var(--nav-h);
-}
+  
   .content { padding: 0 24px 40px; }
 }
 
 @media (min-width: 768px) {
-  .page {
-  height: 100%;
-  background: var(--paper);
-  overflow-y: auto;
-  -webkit-overflow-scrolling: touch;
-  padding-top: var(--header-h);
-  padding-bottom: var(--nav-h);
-}
+  
   .header { padding: 16px 32px; }
   .searchRow { padding: 0 32px 14px; }
   .content { padding: 0 16px; }
@@ -125,14 +111,7 @@
 
 /* Bottom nav clearance */
 @media (max-width: 767px) {
-  .page {
-  height: 100%;
-  background: var(--paper);
-  overflow-y: auto;
-  -webkit-overflow-scrolling: touch;
-  padding-top: var(--header-h);
-  padding-bottom: var(--nav-h);
-}
+  
 }
 
 /* ── Empty state ── */

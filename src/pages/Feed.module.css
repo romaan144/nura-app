@@ -1,6 +1,3 @@
-/* ══════════════════════════════════════════════════════
-   FEED
-   ══════════════════════════════════════════════════════ */
 .page {
   height: 100%;
   background: var(--paper);
@@ -9,6 +6,11 @@
   padding-top: var(--header-h);
   padding-bottom: var(--nav-h);
 }
+
+/* ══════════════════════════════════════════════════════
+   FEED
+   ══════════════════════════════════════════════════════ */
+
 
 /* ── Tabs ────────────────────────────────────────────── */
 .tabs {
@@ -195,14 +197,7 @@
 
 /* Bottom nav clearance */
 @media (max-width: 767px) {
-  .page {
-  height: 100%;
-  background: var(--paper);
-  overflow-y: auto;
-  -webkit-overflow-scrolling: touch;
-  padding-top: var(--header-h);
-  padding-bottom: var(--nav-h);
-}
+  
 }
 @media (min-width: 768px) {
   .feed { padding: 8px 24px 40px; max-width: 640px; margin: 0 auto; }
