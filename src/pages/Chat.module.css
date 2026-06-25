@@ -18,7 +18,7 @@
 .header {
   position: absolute; top: 0; left: 0; right: 0; z-index: 20;
   display: flex; align-items: center; gap: 10px;
-  padding: max(env(safe-area-inset-top,0px),12px) 14px 10px;
+  padding: max(env(safe-area-inset-top,0px),10px) 14px 7px;
   background: transparent;
   pointer-events: none;
 }
@@ -100,7 +100,7 @@
 .emptyChatDesc { font-size: var(--text-sm); color: rgba(0,0,0,0.4); }
 .emptyChatPrice { font-size: var(--text-sm); font-weight: 700; color: var(--purple); }
 
-.msg { display: flex; align-items: flex-end; gap: 8px; margin: 2px 0; }
+.msg { display: flex; align-items: flex-end; gap: 8px; margin: 1px 0; }
 .msgUser { flex-direction: row-reverse; }
 
 .msgAvatarImg { width: 28px; height: 28px; border-radius: 50%; object-fit: cover; flex-shrink: 0; }
@@ -287,3 +287,22 @@
 .metaXs3     { margin: 0 0 3px; font-size: var(--text-xs); color: var(--ink-secondary); }
 .purpleLabel { font-size: var(--text-xs); color: var(--purple); font-weight: 600; }
 .colFull     { display: flex; flex-direction: column; gap: 8px; width: 100%; }
+
+/* ── TIME INSIDE BUBBLE ──────────────────────────────────────── */
+.msgTime {
+  display: block;
+  font-size: 10px;
+  color: rgba(255,255,255,0.65);
+  text-align: right;
+  margin-top: 3px;
+  line-height: 1;
+}
+
+.msgTimeHelper {
+  display: block;
+  font-size: 10px;
+  color: rgba(0,0,0,0.35);
+  text-align: right;
+  margin-top: 3px;
+  line-height: 1;
+}

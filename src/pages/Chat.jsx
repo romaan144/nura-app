@@ -386,6 +386,35 @@ export default function Chat() {
     'Voy a reservar ahora',
   ]
 
+  // ── Display helpers ─────────────────────────────────────────
+  // FIX 1: First name + first surname only
+  const chatDisplayName = (() => {
+    const parts = (helper.name || '').trim().split(' ')
+    const TITLES = new Set(['Dra.','Dr.','Prof.','Lic.','Sr.','Sra.','D.','Dña.'])
+    const filtered = parts.filter(p => !TITLES.has(p))
+    return filtered.slice(0, 2).join(' ')
+  })()
+
+  // FIX 2: Shorten specialty (max 3 words, strip long suffixes)
+  const chatSpecialty = (() => {
+    const s = helper.specialty || ''
+    const words = s.split(' ')
+    if (words.length <= 3) return s
+    return words.slice(0, 3).join(' ')
+  })()
+
+  // FIX 7: Contract button label based on service state
+  const serviceState = (() => {
+    const svc = services?.find(s => s.helperId === helper.id || s.helperId === String(helper.id))
+    if (!svc) return 'Contratar'
+    if (svc.status === 'pending')    return 'Pendiente'
+    if (svc.status === 'confirmed')  return 'Próxima visita'
+    if (svc.status === 'in_progress') return 'En curso'
+    if (svc.status === 'completed' && !hasRated(helper.id)) return 'Valorar'
+    if (svc.status === 'completed')  return 'Finalizado'
+    return 'Contratar'
+  })()
+
   return (
     <div className={styles.page}>
 
@@ -402,21 +431,21 @@ export default function Chat() {
           }
           <div className={styles.helperMeta}>
             <div className={styles.helperName}>
-              {helper.name}
+              {chatDisplayName}
               {helper.founder && <Award size={11} color='#92400E' style={{marginLeft:'3px',verticalAlign:'middle'}} />}
               {helper.dniVerified && <Shield size={10} color='var(--green)' style={{marginLeft:'3px',verticalAlign:'middle'}} />}
             </div>
             <div className={styles.helperStatus}>
               {typing
                 ? <span className={styles.typingStatus}>escribiendo...</span>
-                : <><span className={styles.onlineDot} />{helper.specialty}</>
+                : <><span className={styles.onlineDot} />{chatSpecialty}</>
               }
             </div>
           </div>
         </div>
 
-        <button className={styles.contractBtn} onClick={() => setShowConfirm(true)}>
-          <Calendar size={13} /> Contratar
+        <button className={styles.contractBtn} onClick={() => serviceState === 'Valorar' ? setShowRating(true) : setShowConfirm(true)}>
+          <Calendar size={13} /> {serviceState}
         </button>
       </header>
 
