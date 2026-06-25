@@ -36,9 +36,9 @@
   left: 14px;
   right: 14px;
   z-index: 30;
-  display: flex;
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
   align-items: center;
-  justify-content: space-between;
   pointer-events: none;
 }
 .floatTop > * { pointer-events: all; }
@@ -80,10 +80,8 @@
 
 /* ── LOGO PILL — floating center ────────────────────── */
 .logoBubble {
-  position: absolute;
-  left: 50%;
-  transform: translateX(-50%);
   background: rgba(255,255,255,0.72);
+  justify-self: center;
   -webkit-backdrop-filter: blur(24px) saturate(180%);
   backdrop-filter: blur(24px) saturate(180%);
   border: 1px solid rgba(255,255,255,0.35);

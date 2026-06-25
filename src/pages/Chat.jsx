@@ -420,6 +420,10 @@ export default function Chat() {
 
       {/* Floating header */}
       <header className={styles.header}>
+        <button className={styles.back} onClick={() => navigate(-1)}>
+          <ArrowLeft size={17} />
+        </button>
+
         <div className={styles.helperInfo} onClick={() => navigate(`/helper/${helper.id}`, { state: { helper } })}>
           {helper.avatarUrl
             ? <img src={helper.avatarUrl} alt={helper.name} className={styles.avatarImg} />
@@ -442,10 +446,6 @@ export default function Chat() {
 
         <button className={styles.contractBtn} onClick={() => serviceState === 'Valorar' ? setShowRating(true) : setShowConfirm(true)}>
           <Calendar size={13} /> {serviceState}
-        </button>
-
-        <button className={styles.back} onClick={() => navigate(-1)}>
-          <ArrowLeft size={17} />
         </button>
 
       </header>

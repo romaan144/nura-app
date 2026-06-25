@@ -655,10 +655,12 @@ export default function Home({ setSearchState }) {
       {/* Floating top — three independent bubbles */}
       <div className={styles.floatTop} ref={topRef}>
         
+        <div />
+
         <div className={styles.logoBubble}>
           <img src="/logo-text.png" alt="Nüra" className={styles.headerLogo} />
         </div>
-        <div style={{display:'flex',alignItems:'center',gap:'8px',pointerEvents:'all'}}>
+        <div style={{display:'flex',alignItems:'center',justifyContent:'flex-end',gap:'8px',pointerEvents:'all'}}>
           {messages.length > 1 && (
             <button
               className={styles.resetBubble}
