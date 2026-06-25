@@ -11,7 +11,7 @@ export default function NavBar() {
   const location = useLocation()
   const { totalUnreadChats } = useUser()
 
-  const hideOn = ['/login', '/register-helper']
+  const hideOn = ['/login', '/register-helper', '/chat/']
   if (hideOn.some(p => location.pathname.startsWith(p))) return null
 
   const tabs = [
