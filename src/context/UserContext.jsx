@@ -19,7 +19,7 @@ export function UserProvider({ children }) {
     return [1, 5]  // Carlos logopeda + Elena cuidadora
   })
   const [notifications, setNotifications] = useState(() => load('nura_notifications', []))
-  const [favorites, setFavorites] = useState(() => load('nura_favorites', []))
+  const [favorites, setFavorites] = useState(() => load('nura_following', []))
   const [nuraChatMessages, setNuraChatMessages] = useState([])  // always starts fresh
   const [chatHistories, setChatHistories] = useState(() => load('nura_chat_histories', {}))
   const [services, setServices] = useState(() => load('nura_services', []))
@@ -41,7 +41,7 @@ export function UserProvider({ children }) {
     if (savedFollowing) setFollowing(JSON.parse(savedFollowing))
     const savedNotifs = localStorage.getItem('nura_notifications')
     if (savedNotifs) setNotifications(JSON.parse(savedNotifs))
-    const savedFavs = localStorage.getItem('nura_favorites')
+    const savedFavs = localStorage.getItem('nura_following')
     if (savedFavs) setFavorites(JSON.parse(savedFavs))
     } catch (e) { console.warn('localStorage unavailable:', e) }
   }, [])
@@ -52,7 +52,7 @@ export function UserProvider({ children }) {
   useEffect(() => { save('nura_ratings', ratings) }, [ratings])
   useEffect(() => { save('nura_search_history', searchHistory) }, [searchHistory])
   useEffect(() => { save('nura_following', following) }, [following])
-  useEffect(() => { save('nura_favorites', favorites) }, [favorites])
+  useEffect(() => { save('nura_following', favorites) }, [favorites])
   // nuraChatMessages: intentionally NOT persisted — Nüra always starts fresh
   useEffect(() => { save('nura_chat_histories', chatHistories) }, [chatHistories])
   useEffect(() => { save('nura_services', services) }, [services])
@@ -178,13 +178,13 @@ export function UserProvider({ children }) {
     return (following||[]).includes(id)
   }
 
-  function toggleFavorite(helperId) {
+  function toggleFollow(helperId) {
     const isFav = favorites.includes(helperId)
     const updated = isFav ? (favorites||[]).filter(f => f !== helperId) : [...favorites, helperId]
     setFavorites(updated)
     return !isFav
   }
-  function isFavorite(helperId) { return favorites.includes(helperId) }
+  function isFollowing(helperId) { return favorites.includes(helperId) }
 
   function markNotifsRead() {
     const updated = (notifications||[]).map(n => ({ ...n, read: true }))
@@ -205,7 +205,7 @@ export function UserProvider({ children }) {
       helpersCache, cacheHelpers,
       following, follow, unfollow, isFollowing,
       notifications, markNotifsRead, unreadNotifs,
-      favorites, toggleFavorite, isFavorite,
+      favorites, toggleFavorite, isFavorite, toggleFollow, isFollowing,
       nuraChatMessages, setNuraChatMessages,
       nuraLastMatches, setNuraLastMatches,
       services, addService, updateService,

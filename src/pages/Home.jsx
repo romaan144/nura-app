@@ -12,7 +12,7 @@ import { haptic } from '../utils/haptic'
 import { scheduleLocalNotification, notifySearchAbandoned } from '../utils/notifications'
 import styles from './Home.module.css'
 
-function getWelcome(user, searchHistory, favorites, helpersCache) {
+function getWelcome(user, searchHistory, following, helpersCache) {
   const hour = new Date().getHours()
   const greeting = hour < 14 ? 'Buenos días' : hour < 21 ? 'Buenas tardes' : 'Buenas noches'
   const firstName = user?.name?.split(' ')?.[0] || user?.name
@@ -24,7 +24,7 @@ function getWelcome(user, searchHistory, favorites, helpersCache) {
 
   // Use what Nüra knows about this user
   const lastSearch = searchHistory?.[searchHistory.length - 1]?.query
-  const favHelpers = (favorites || [])
+  const favHelpers = (following || [])
     .map(id => helpersCache?.[id] || helpersCache?.[String(id)])
     .filter(Boolean)
   const topFav = favHelpers[0]
@@ -38,10 +38,10 @@ function getWelcome(user, searchHistory, favorites, helpersCache) {
   }
 
   // User with favorites
-  if (topFav && favorites?.length > 0) {
+  if (topFav && following?.length > 0) {
     return [
       `${greeting}, **${firstName}**.`,
-      `**${topFav.name?.split(' ')?.[0]}** está en tus favoritos. ¿Le escribo?`
+      `**${topFav.name?.split(' ')?.[0]}** está entre tus seguidos. ¿Le escribo?`
     ]
   }
 
@@ -195,7 +195,7 @@ const HELPER_SUGGESTIONS = [
 
 export default function Home({ setSearchState }) {
   const navigate = useNavigate()
-  const { user, addSearch, toggleFavorite, isFavorite, searchHistory, favorites, helpersCache, nuraChatMessages, setNuraChatMessages, nuraLastMatches, setNuraLastMatches, cacheHelpers } = useUser()
+  const { user, addSearch, toggleFollow, isFollowing, searchHistory, favorites, helpersCache, nuraChatMessages, setNuraChatMessages, nuraLastMatches, setNuraLastMatches, cacheHelpers } = useUser()
   // messages persisted in context so they survive navigation
   const messages = nuraChatMessages
   const setMessages = setNuraChatMessages

@@ -142,3 +142,5 @@
   white-space: nowrap;
 }
 .contactBtn:active { background: var(--purple-10); opacity: 0.8; }
+
+.favBtnActive { background: rgba(123,47,255,0.08); }

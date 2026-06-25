@@ -1,5 +1,5 @@
 import { useNavigate, useLocation } from 'react-router-dom'
-import { Shield, Star, MessageCircle, Heart, ArrowRight, User, Sparkles } from 'lucide-react'
+import { Shield, Star, MessageCircle, UserPlus, ArrowRight, User, Sparkles } from 'lucide-react'
 
 /**
  * RegisterGate — bottom sheet that appears when unregistered user
@@ -16,10 +16,10 @@ export default function RegisterGate({ onClose, reason = 'contact' }) {
       title: 'Escríbele directamente',
       desc: 'Crea tu cuenta gratis para contactar con este profesional y gestionar todos tus servicios desde un solo lugar.',
     },
-    favorite: {
-      Icon: Heart,
-      title: 'Guarda tus favoritos',
-      desc: 'Crea tu cuenta para guardar profesionales y acceder a ellos rápidamente cuando los necesites.',
+    follow: {
+      Icon: UserPlus,
+      title: 'Sigue a profesionales',
+      desc: 'Sigue a los profesionales que te interesan y encuéntralos fácilmente cuando los necesites.',
     },
     follow: {
       Icon: User,
@@ -39,7 +39,7 @@ export default function RegisterGate({ onClose, reason = 'contact' }) {
     { icon: <MessageCircle size={15} color="#7B2FFF" />, text: 'Contacto directo con profesionales' },
     { icon: <Shield size={15} color="var(--green)" />, text: 'Acceso a más de 900 profesionales en Barcelona' },
     { icon: <Star size={15} color="var(--amber)" />, text: 'Historial y valoraciones de tus servicios' },
-    { icon: <Heart size={15} color="var(--red)" />, text: 'Guarda tus favoritos y accede cuando quieras' },
+    { icon: <UserPlus size={15} color="var(--purple)" />, text: 'Sigue profesionales y accede a ellos cuando quieras' },
   ]
 
   return (

@@ -1,5 +1,5 @@
 import { useNavigate } from 'react-router-dom'
-import { Star, Shield, MessageCircle, Heart, MapPin, Sparkles } from 'lucide-react'
+import { Star, Shield, MessageCircle, UserPlus, UserCheck, MapPin, Sparkles } from 'lucide-react'
 import { useUser } from '../context/UserContext'
 import { showToast } from './Toast'
 import styles from './HelperCarousel.module.css'
@@ -13,8 +13,8 @@ import { haptic } from '../utils/haptic'
  */
 function CarouselCard({ helper, isTopPick, matchReason }) {
   const navigate = useNavigate()
-  const { user, toggleFavorite, isFavorite } = useUser()
-  const fav = isFavorite(helper.id)
+  const { user, toggleFollow, isFollowing } = useUser()
+  const following = isFollowing(helper.id)
 
   function handleContact(e) {
     e.stopPropagation()
@@ -29,11 +29,11 @@ function CarouselCard({ helper, isTopPick, matchReason }) {
     navigate(`/chat/${helper.id}`, { state: { helper, userQuery: window.__nuraLastQuery, analysis: window.__nuraLastAnalysis } })
   }
 
-  function handleFav(e) {
+  function handleFollow(e) {
     e.stopPropagation()
-    if (!user) { showToast('Inicia sesión para guardar favoritos'); return }
-    toggleFavorite(helper.id)
-    showToast(fav ? 'Eliminado de favoritos' : 'Guardado en favoritos')
+    if (!user) { showToast('Inicia sesión para seguir profesionales'); return }
+    toggleFollow(helper.id)
+    showToast(following ? 'Has dejado de seguir' : 'Siguiendo')
   }
 
   return (
@@ -54,8 +54,8 @@ function CarouselCard({ helper, isTopPick, matchReason }) {
             </div>
         }
         {helper.available && <span className={styles.availDot} />}
-        <button className={styles.favBtn} onClick={handleFav}>
-          <Heart size={11} fill={fav ? 'var(--red)' : 'none'} color={fav ? 'var(--red)' : 'rgba(0,0,0,0.3)'} />
+        <button className={`${styles.favBtn} ${following ? styles.favBtnActive : ''}`} onClick={handleFollow}>
+          {following ? <UserCheck size={12} color='var(--purple)' strokeWidth={2} /> : <UserPlus size={12} color='rgba(0,0,0,0.3)' strokeWidth={1.8} />}
         </button>
       </div>
 

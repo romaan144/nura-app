@@ -9,7 +9,7 @@ import styles from './Profile.module.css'
 export default function Profile() {
   const {
     user, logout, updateUser,
-    chats, ratings, searchHistory, favorites,
+    chats, ratings, searchHistory, favorites, isFollowing,
     services
   } = useUser()
   const navigate = useNavigate()
@@ -29,7 +29,7 @@ export default function Profile() {
         <div style={{display:'flex',flexDirection:'column',gap:'12px',width:'100%',maxWidth:'280px',margin:'20px 0'}}>
           {[
             [MessageCircle, 'Escribe a cualquier profesional'],
-            [Heart,         'Guarda tus profesionales favoritos'],
+            [UserPlus,       'Sigue a los profesionales que te interesan'],
             [ClipboardList, 'Consulta tu historial de búsquedas'],
             [Star,          'Valora a los profesionales que contratas'],
           ].map(([Icon, text]) => (
@@ -153,15 +153,15 @@ export default function Profile() {
           </button>
 
           {favCount > 0 ? (
-            <button className={styles.favRow} onClick={() => navigate('/favorites')}>
-              <Heart size={15} color="var(--purple)" strokeWidth={1.8} />
+            <button className={styles.favRow} onClick={() => navigate('/siguiendo')}>
+              <UserCheck size={15} color="var(--purple)" strokeWidth={1.8} />
               <span className={styles.favText}>
-                {favCount === 1 ? '1 profesional guardado' : `${favCount} profesionales guardados`}
+                {favCount === 1 ? '1 profesional al que sigues' : `${favCount} profesionales que sigues`}
               </span>
             </button>
           ) : (
             <div className={styles.favEmpty}>
-              <Heart size={14} strokeWidth={1.5} color="var(--ink-disabled)" />
+              <UserPlus size={14} strokeWidth={1.5} color="var(--ink-disabled)" />
               <span className={styles.favEmptyText}>
                 Guarda profesionales que te interesen para encontrarlos rápido
               </span>

@@ -178,3 +178,5 @@
   font-weight: 700;
   color: var(--ink-primary);
 }
+
+.favBtnActive { background: rgba(123,47,255,0.08); }

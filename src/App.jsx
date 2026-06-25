@@ -21,7 +21,7 @@ import ScrollToTop from './components/ScrollToTop'
 import OnboardingPage from './pages/Onboarding'
 import OnboardingOverlay from './components/OnboardingOverlay'
 const MyServices = lazy(() => import('./pages/MyServices'))
-import Favorites from './pages/Favorites'
+import Siguiendo from './pages/Siguiendo'
 import Toast from './components/Toast'
 import PageTransition from './components/PageTransition'
 import './index.css'
@@ -74,7 +74,7 @@ function AppRoutes() {
             <Route path="/helper/:id" element={<HelperProfile />} />
             <Route path="/chat/:id" element={<Chat />} />
             <Route path="/my-services" element={<MyServices />} />
-            <Route path="/favorites" element={<Favorites />} />
+            <Route path="/siguiendo" element={<Siguiendo />} />
             <Route path="/onboarding" element={<OnboardingPage />} />
             <Route path="/login" element={user ? <Navigate to="/" /> : <Login />} />
             <Route path="/profile" element={<Profile />} />

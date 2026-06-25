@@ -3,7 +3,7 @@ import ErrorBoundary from '../components/ErrorBoundary'
 import { useState, useEffect } from 'react'
 import { useParams, useNavigate, useLocation } from 'react-router-dom'
 import { Star, Shield, MapPin, MessageCircle, Calendar,
-         Share2, Heart, Briefcase, BookOpen, Award,
+         Share2, UserPlus, UserCheck, Briefcase, BookOpen, Award,
          CheckCircle, Check, Globe, Zap, ChevronRight } from 'lucide-react'
 import { HELPERS } from '../data/helpers'
 import { useUser } from '../context/UserContext'
@@ -25,7 +25,7 @@ function PostCard({ post }) {
         <span className={styles.postDate}>{post.date}</span>
         <button className={`${styles.postLike} ${liked ? styles.postLikeActive : ''}`}
           onClick={() => { setLiked(l => !l); setLikes(n => liked ? n-1 : n+1) }}>
-          <Heart size={12} fill={liked ? 'var(--red)' : 'none'}
+          <UserPlus size={12}
             color={liked ? 'var(--red)' : 'rgba(0,0,0,0.3)'} />
           <span>{likes}</span>
         </button>
@@ -172,7 +172,7 @@ function HelperProfileInner() {
   const [showRating, setShowRating]   = useState(false)
   const [showGate, setShowGate]       = useState(false)
   const [shared, setShared]           = useState(false)
-  const [fav, setFav]                 = useState(false)
+  const [following, setFollowing] = useState(false)
 
   useEffect(() => {
     if (!h) {

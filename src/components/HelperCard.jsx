@@ -1,5 +1,5 @@
 import { useNavigate } from 'react-router-dom'
-import { Star, MapPin, Shield, Zap, MessageCircle, Heart, MapPinned, Monitor } from 'lucide-react'
+import { Star, MapPin, Shield, Zap, MessageCircle, UserPlus, UserCheck, MapPinned, Monitor } from 'lucide-react'
 import { useUser } from '../context/UserContext'
 import { showToast } from './Toast'
 import styles from './HelperCard.module.css'
@@ -8,10 +8,10 @@ import { getFirstName } from '../utils/name'
 
 export default function HelperCard({ helper, onContact, showContact = true, showPrice = false }) {
   const navigate = useNavigate()
-  const { user, toggleFavorite, isFavorite } = useUser()
+  const { user, toggleFollow, isFollowing } = useUser()
   if (!helper) return null
 
-  const fav = isFavorite(helper.id)
+  const following = isFollowing(helper.id)
 
   function handleContact(e) {
     e.stopPropagation()
@@ -27,12 +27,12 @@ export default function HelperCard({ helper, onContact, showContact = true, show
     navigate(`/chat/${helper.id}`, { state: { helper, userQuery: window.__nuraLastQuery, analysis: window.__nuraLastAnalysis } })
   }
 
-  function handleFav(e) {
+  function handleFollow(e) {
     e.stopPropagation()
     haptic('light')
-    if (!user) { showToast('Inicia sesión para guardar favoritos'); return }
-    toggleFavorite(helper.id)
-    showToast(isFavorite(helper.id) ? 'Eliminado de favoritos' : 'Guardado en favoritos')
+    if (!user) { showToast('Inicia sesión para seguir profesionales'); return }
+    toggleFollow(helper.id)
+    showToast(isFollowing(helper.id) ? 'Has dejado de seguir' : 'Siguiendo')
   }
 
   function handleTap() {
@@ -84,8 +84,8 @@ export default function HelperCard({ helper, onContact, showContact = true, show
 
         {/* CTA — always vertically centered */}
         <div className={styles.cta}>
-          <button className={styles.favBtn} onClick={handleFav}>
-            <Heart size={12} fill={fav ? 'var(--red)' : 'none'} color={fav ? 'var(--red)' : 'rgba(0,0,0,0.3)'} />
+          <button className={`${styles.favBtn} ${following ? styles.favBtnActive : ''}`} onClick={handleFollow}>
+            {following ? <UserCheck size={13} color='var(--purple)' strokeWidth={2} /> : <UserPlus size={13} color='rgba(0,0,0,0.3)' strokeWidth={1.8} />}
           </button>
           {showContact && (
             <button className={styles.contactBtn} onClick={handleContact}>
