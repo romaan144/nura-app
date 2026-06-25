@@ -1,3 +1,4 @@
+import React, { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { Star, MapPin, Shield, Zap, MessageCircle, UserPlus, UserCheck, MapPinned, Monitor } from 'lucide-react'
 import { useUser } from '../context/UserContext'
