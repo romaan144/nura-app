@@ -29,7 +29,7 @@ export default function Profile() {
         <div style={{display:'flex',flexDirection:'column',gap:'12px',width:'100%',maxWidth:'280px',margin:'20px 0'}}>
           {[
             [MessageCircle, 'Escribe a cualquier profesional'],
-            [UserPlus,       'Sigue a los profesionales que te interesan'],
+            [UserPlus,       'Sigue a tus profesionales favoritos'],
             [ClipboardList, 'Consulta tu historial de búsquedas'],
             [Star,          'Valora a los profesionales que contratas'],
           ].map(([Icon, text]) => (
