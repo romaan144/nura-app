@@ -2,7 +2,7 @@ import { useState } from 'react'
 import PageHeader from '../components/PageHeader'
 import { useNavigate } from 'react-router-dom'
 import { LogOut, Edit2, Check, X, Award, MessageCircle,
-         Heart, ClipboardList, User, Phone, Search, Star } from 'lucide-react'
+         Heart, ClipboardList, User, Phone, Search, Star , UserPlus, UserCheck } from 'lucide-react'
 import { useUser } from '../context/UserContext'
 import styles from './Profile.module.css'
 
