@@ -20,7 +20,7 @@ const CATEGORIES = [
     color: '#FF6B6B',
     bg: 'rgba(255,107,107,0.10)',
     supabaseCategories: ['salud'],
-    subcategories: ['Todos', 'Psicóloga', 'Logopeda', 'Fisioterapeuta', 'Nutricionista', 'Pilates', 'Yoga', 'Osteopatía', 'Masajista', 'Entrenador personal', 'Neuropsicóloga', 'Dietista', 'Mindfulness'],
+    subcategories: ['Todos', 'Psicóloga', 'Logopeda', 'Fisioterapeuta', 'Nutricionista', 'Pilates', 'Yoga', 'Osteopatía', 'Masajista', 'Entrenador personal', 'Neuropsicóloga', 'Dietista', 'Mindfulness y meditación'],
   },
   {
     id: 'tecnico',
@@ -261,8 +261,12 @@ export default function Explore() {
       const sub = activeSubcategory.toLowerCase()
       const STOPWORDS = ['de', 'del', 'la', 'el', 'los', 'las', 'en', 'y', 'a']
       const subWords = sub.split(' ').filter(w => w.length > 2 && !STOPWORDS.includes(w))
+      // Use stem matching: remove last 2 chars to match gender/number variations
+      // "veterinario" → "veterinari" matches "veterinaria"
+      const subStems = subWords.map(w => w.length > 5 ? w.slice(0, -2) : w)
       const matches = spec.includes(sub) || sub.includes(spec) ||
-        (subWords.length > 0 && subWords.every(w => spec.includes(w)))
+        (subWords.length > 0 && subWords.every(w => spec.includes(w))) ||
+        (subStems.length > 0 && subStems.every(s => spec.includes(s)))
       if (!matches) return false
     }
     return true
