@@ -247,27 +247,14 @@ export default function Feed() {
         {/* Nüra personalized section — based on last search */}
         
         {/* ── Profesional del día ── */}
-        {tab === 'para-ti' && dailyPick && (() => {
-          const pick = dailyPick
-          const pickReason = searchHistory?.[0]?.query
-            ? `Coincide con tu búsqueda de "${searchHistory[0].query.toLowerCase()}"`
-            : pick.reviews > 0
-              ? `${pick.reviews} valoraciones · ${pick.rating}★`
-              : pick.specialty
-                ? `Especialista en ${pick.specialty.toLowerCase()}`
-                : null
-          return (
-            <div className={styles.nuraPick} key="nura-pick"
-              onClick={() => navigate(`/helper/${pick.id}`, { state: { helper: pick } })}>
-              <div className={styles.nuraPickHeader}>
-                <span className={styles.nuraPickLabel}>
-                  Profesional del día
-                </span>
-              </div>
-              <HelperCard helper={pick} />
+        {tab === 'para-ti' && dailyPick && (
+          <div className={styles.nuraPick} key="nura-pick"
+            onClick={() => navigate(`/helper/${dailyPick.id}`, { state: { helper: dailyPick } })}>
+            <div className={styles.nuraPickHeader}>
+              <span className={styles.nuraPickLabel}>Profesional del día</span>
             </div>
-          )
-        })()}
+            <HelperCard helper={dailyPick} />
+          </div>}
 
 {tab === 'para-ti' && searchHistory?.length > 0 && (() => {
           const lastQ = searchHistory[0]?.query
