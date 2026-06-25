@@ -20,6 +20,7 @@ const CATEGORIES = [
     color: '#FF6B6B',
     bg: 'rgba(255,107,107,0.10)',
     supabaseCategories: ['logopedia', 'salud'],
+    subcategories: ['Todos', 'Psicólogo', 'Psicólogo infantil', 'Logopeda', 'Logopeda infantil', 'Nutricionista', 'Dietista', 'Fisioterapeuta', 'Osteópata', 'Enfermera a domicilio', 'Terapeuta ocupacional', 'Quiromasajista'],
   },
   {
     id: 'tecnico',
@@ -29,6 +30,7 @@ const CATEGORIES = [
     color: '#F59E0B',
     bg: 'rgba(245,158,11,0.10)',
     supabaseCategories: ['tecnico'],
+    subcategories: ['Todos', 'Fontanero', 'Electricista', 'Albañil', 'Pintor', 'Carpintero', 'Cerrajero', 'Técnico aire acondicionado', 'Técnico calefacción'],
   },
   {
     id: 'clases',
@@ -38,6 +40,7 @@ const CATEGORIES = [
     color: '#3B82F6',
     bg: 'rgba(59,130,246,0.10)',
     supabaseCategories: ['matematicas', 'clases', 'idiomas', 'musica', 'educacion', 'formacion', 'academia'],
+    subcategories: ['Todos', 'Inglés', 'Francés', 'Alemán', 'Matemáticas', 'Física', 'Química', 'Piano', 'Guitarra', 'Selectividad', 'Oposiciones'],
     specialtyKeywords: ['profesor', 'clases', 'idiomas', 'inglés', 'matemáticas', 'música', 'guitarra', 'piano', 'refuerzo', 'academia', 'tutor'],
   },
   {
@@ -57,6 +60,7 @@ const CATEGORIES = [
     color: '#10B981',
     bg: 'rgba(16,185,129,0.10)',
     supabaseCategories: ['limpieza', 'hogar'],
+    subcategories: ['Todos', 'Limpieza doméstica', 'Limpieza profunda', 'Planchado', 'Cocina a domicilio', 'Organización del hogar', 'Montaje de muebles', 'Manitas'],
   },
   {
     id: 'mascotas',
@@ -66,6 +70,7 @@ const CATEGORIES = [
     color: '#F97316',
     bg: 'rgba(249,115,22,0.10)',
     supabaseCategories: ['mascotas'],
+    subcategories: ['Todos', 'Paseador de perros', 'Cuidador de mascotas', 'Peluquero canino', 'Adiestrador canino', 'Veterinario a domicilio'],
   },
   {
     id: 'entrenamiento',
@@ -75,6 +80,7 @@ const CATEGORIES = [
     color: '#06B6D4',
     bg: 'rgba(6,182,212,0.10)',
     supabaseCategories: ['entrenador', 'entrenamiento', 'fitness', 'deporte', 'sport', 'gym', 'trainer'],
+    subcategories: ['Todos', 'Entrenador personal', 'Yoga', 'Pilates', 'Running', 'Pádel', 'Tenis', 'Natación'],
     specialtyKeywords: ['entrenador', 'entrenamiento', 'personal trainer', 'fitness', 'deporte', 'gym', 'pilates', 'yoga', 'crossfit', 'nutricion deportiva'],
   },
   {
@@ -85,6 +91,7 @@ const CATEGORIES = [
     color: '#EC4899',
     bg: 'rgba(236,72,153,0.10)',
     supabaseCategories: ['cuidado'],
+    subcategories: ['Todos', 'Canguro', 'Niñera', 'Cuidador de mayores', 'Cuidador nocturno', 'Auxiliar geriátrico', 'Asistente personal'],
   },
   {
     id: 'tecnologia',
@@ -94,6 +101,7 @@ const CATEGORIES = [
     color: '#6366F1',
     bg: 'rgba(99,102,241,0.10)',
     supabaseCategories: ['tecnologia'],
+    subcategories: ['Todos', 'Técnico informático', 'Reparación ordenadores', 'Reparación móviles', 'Redes WiFi', 'Diseño web', 'Desarrollo web', 'Desarrollo apps', 'Especialista IA'],
   },
   {
     id: 'diseno',
@@ -103,6 +111,7 @@ const CATEGORIES = [
     color: '#F43F5E',
     bg: 'rgba(244,63,94,0.10)',
     supabaseCategories: ['diseno'],
+    subcategories: ['Todos', 'Diseñador gráfico', 'Diseñador UX/UI', 'Fotógrafo', 'Videógrafo', 'Editor de vídeo', 'Community manager', 'Copywriter'],
   },
   {
     id: 'automocion',
@@ -112,6 +121,7 @@ const CATEGORIES = [
     color: '#64748B',
     bg: 'rgba(100,116,139,0.10)',
     supabaseCategories: ['automocion'],
+    subcategories: ['Todos', 'Mecánico', 'Mecánico a domicilio', 'Chapista', 'Electricidad automóvil', 'Limpieza vehículos', 'Detailing'],
   },
   {
     id: 'eventos',
@@ -121,6 +131,7 @@ const CATEGORIES = [
     color: '#F97316',
     bg: 'rgba(249,115,22,0.10)',
     supabaseCategories: ['eventos'],
+    subcategories: ['Todos', 'DJ', 'Animador infantil', 'Wedding planner', 'Decorador de eventos', 'Mago'],
   },
   {
     id: 'idiomas',
@@ -130,6 +141,7 @@ const CATEGORIES = [
     color: '#0EA5E9',
     bg: 'rgba(14,165,233,0.10)',
     supabaseCategories: ['idiomas'],
+    subcategories: ['Todos', 'Guía turístico', 'Traductor', 'Intérprete', 'Organizador de viajes'],
   },
 ]
 
@@ -146,9 +158,10 @@ export default function Explore() {
   const [aiResults,       setAiResults]      = useState(null)
   const [aiSearching,     setAiSearching]    = useState(false)
   const [visibleCount,    setVisibleCount]   = useState(20)
-  const [filterAvailable, setFilterAvailable] = useState(false)
-  const [filterRating,    setFilterRating]    = useState(false)
-  const [filterOnline,    setFilterOnline]    = useState(false)
+  const [filterAvailable,   setFilterAvailable]   = useState(false)
+  const [filterRating,      setFilterRating]      = useState(false)
+  const [filterOnline,      setFilterOnline]      = useState(false)
+  const [activeSubcategory, setActiveSubcategory] = useState('Todos')
 
   // ── AI Search ─────────────────────────────────────────────────
   async function runAiSearch(query) {
@@ -198,6 +211,7 @@ export default function Explore() {
     setFilterAvailable(false)
     setFilterRating(false)
     setFilterOnline(false)
+    setActiveSubcategory('Todos')
     setLoadingCat(true)
     setCategoryResults([])
     try {
@@ -241,6 +255,10 @@ export default function Explore() {
     if (filterAvailable && !h.available) return false
     if (filterRating && (h.rating || 0) < 4) return false
     if (filterOnline && !h.online && !h.modality?.includes('online')) return false
+    if (activeSubcategory && activeSubcategory !== 'Todos') {
+      const text = [h.specialty, h.name, h.bio, h.category].filter(Boolean).join(' ').toLowerCase()
+      if (!text.includes(activeSubcategory.toLowerCase())) return false
+    }
     return true
   })
   const pagedList   = displayList.slice(0, visibleCount)
@@ -330,6 +348,21 @@ export default function Explore() {
                 {displayList.length} profesional{displayList.length !== 1 ? 'es' : ''}
               </span>
             </div>
+
+            {/* Subcategorías */}
+            {activeCategory?.subcategories?.length > 0 && (
+              <div className={styles.subCatRow}>
+                {activeCategory.subcategories.map(sub => (
+                  <button
+                    key={sub}
+                    className={`${styles.subCatPill} ${activeSubcategory === sub ? styles.subCatActive : ''}`}
+                    style={activeSubcategory === sub ? {background: activeCategory.color, borderColor: activeCategory.color} : {}}
+                    onClick={() => { setActiveSubcategory(sub); setVisibleCount(20) }}>
+                    {sub}
+                  </button>
+                ))}
+              </div>
+            )}
 
             {/* Filtros */}
             <div className={styles.filtersRow}>
