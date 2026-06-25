@@ -62,16 +62,22 @@
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  gap: 12px;
-  padding: 18px 16px;
+  gap: 14px;
+  padding: 20px 16px;
   background: white;
-  border: 1px solid var(--ink-border);
-  border-radius: var(--radius-lg);
+  border: 1px solid rgba(0,0,0,0.07);
+  border-radius: var(--radius-xl);
   cursor: pointer;
   text-align: left;
   font-family: inherit;
   -webkit-tap-highlight-color: transparent;
-  transition: transform 0.12s, box-shadow 0.12s;
+  box-shadow: var(--shadow-md);
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+
+.catCard:active {
+  transform: scale(0.97);
+  box-shadow: var(--shadow-sm);
 }
 
 .catCard:active {
@@ -80,8 +86,8 @@
 }
 
 .catIconWrap {
-  width: 46px; height: 46px;
-  border-radius: var(--radius-md);
+  width: 52px; height: 52px;
+  border-radius: var(--radius-lg);
   background: var(--cat-bg);
   display: flex; align-items: center; justify-content: center;
   flex-shrink: 0;
@@ -94,7 +100,7 @@
 }
 
 .catLabel {
-  font-size: var(--text-sm);
+  font-size: var(--text-base);
   font-weight: 700;
   color: var(--ink-primary);
   line-height: 1.2;
