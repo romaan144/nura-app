@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react'
+import React, { useState, useEffect } from 'react'
 import PageHeader from '../components/PageHeader'
 import { Briefcase, Users2, Award, Bookmark, Check, MessageCircle, Share2, Shield, UserPlus, Heart, Star, Rss } from 'lucide-react'
 import RegisterGate from '../components/RegisterGate'
@@ -207,6 +207,13 @@ export default function Feed() {
   const [showGate, setShowGate] = useState(false)
 
   const feedHelpers = supabaseHelpers.length > 0 ? supabaseHelpers : []
+
+  // Memoize daily pick so it doesn't disappear on tab switch
+  const dailyPick = React.useMemo(() => {
+    const available = feedHelpers.filter(h => h.available)
+    if (!available.length) return null
+    return available[DAILY_SEED % available.length]
+  }, [feedHelpers])
   const allPosts = buildFeed(following, feedHelpers, COMPANIES)
   const displayPosts = tab === 'siguiendo'
     ? allPosts.filter(p => p.following)
@@ -240,12 +247,8 @@ export default function Feed() {
         {/* Nüra personalized section — based on last search */}
         
         {/* ── Profesional del día ── */}
-        {tab === 'para-ti' && (() => {
-          // Pick: best available professional today (seed changes daily)
-          const available = feedHelpers.filter(h => h.available)
-          if (!available.length) return null
-          const pickIdx = DAILY_SEED % available.length
-          const pick = available[pickIdx]
+        {tab === 'para-ti' && dailyPick && (() => {
+          const pick = dailyPick
           const pickReason = searchHistory?.[0]?.query
             ? `Coincide con tu búsqueda de "${searchHistory[0].query.toLowerCase()}"`
             : pick.reviews > 0
@@ -260,7 +263,6 @@ export default function Feed() {
                 <span className={styles.nuraPickLabel}>
                   Profesional del día
                 </span>
-                
               </div>
               <HelperCard helper={pick} />
             </div>
