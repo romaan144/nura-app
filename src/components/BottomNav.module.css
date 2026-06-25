@@ -23,29 +23,34 @@
   background: none;
   border: none;
   cursor: pointer;
-  transition: opacity 0.15s;
   -webkit-tap-highlight-color: transparent;
+  transition: transform 0.12s ease;
+  position: relative;
 }
-.tab:active { opacity: 0.6; }
 
 .iconWrap {
   position: relative;
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 28px; height: 28px;
+  width: 32px; height: 32px;
+  border-radius: 10px;
+  transition: background 0.18s ease;
+}
+
+/* Active tab — pill background behind icon */
+.tabActive .iconWrap {
+  background: rgba(123,47,255,0.10);
 }
 
 .tab svg {
-  color: rgba(0,0,0,0.35);
-  transition: color 0.15s;
+  color: rgba(0,0,0,0.32);
+  transition: color 0.18s ease, transform 0.18s ease;
 }
+
 .tabActive svg {
   color: var(--purple);
-}
-.tabActive .label {
-  color: var(--purple);
-  font-weight: 700;
+  transform: scale(1.08);
 }
 
 .label {
@@ -54,9 +59,15 @@
   color: rgba(0,0,0,0.3);
   font-family: -apple-system, 'Inter', sans-serif;
   letter-spacing: -0.1px;
-  transition: color 0.15s;
+  transition: color 0.18s ease, font-weight 0.18s ease;
   line-height: 1;
 }
+
+.tabActive .label {
+  color: var(--purple);
+  font-weight: 700;
+}
+
 /* Unread badge */
 .badge {
   position: absolute;
