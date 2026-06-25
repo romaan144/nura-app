@@ -30,7 +30,7 @@ const CATEGORIES = [
     color: '#F59E0B',
     bg: 'rgba(245,158,11,0.10)',
     supabaseCategories: ['tecnico'],
-    subcategories: ['Todos', 'Fontanero', 'Electricista', 'Albañil', 'Pintor', 'Carpintero', 'Cerrajero', 'Técnico aire acondicionado', 'Técnico calefacción'],
+    subcategories: ['Todos', 'Fontanero', 'Fontanero urgencias', 'Electricista', 'Electricista domicilio', 'Albañil', 'Albañil y reformas pequeñas', 'Pintor', 'Pintor domicilio', 'Carpintero', 'Cerrajero', 'Técnico aire acondicionado', 'Aire acondicionado y climatización', 'Técnico calderas y calefacción', 'Técnico calefacción', 'Técnico gas natural', 'Técnico electrodomésticos', 'Técnico informático domicilio', 'Reparación de móviles'],
   },
   {
     id: 'clases',
@@ -40,7 +40,7 @@ const CATEGORIES = [
     color: '#3B82F6',
     bg: 'rgba(59,130,246,0.10)',
     supabaseCategories: ['clases', 'educacion'],
-    subcategories: ['Todos', 'Inglés', 'Francés', 'Alemán', 'Chino', 'Matemáticas', 'Física', 'Biología', 'Historia', 'Lengua', 'Piano', 'Guitarra', 'Programación', 'EBAU'],
+    subcategories: ['Todos', 'Inglés todos los niveles', 'Francés', 'Alemán', 'Chino mandarín', 'Matemáticas ESO y Bachillerato', 'Física y Química', 'Biología y Geología', 'Historia y Ciencias Sociales', 'Lengua y Literatura Española', 'Dibujo artístico', 'Piano y solfeo', 'Guitarra clásica y moderna', 'Programación Python y web', 'EBAU — Preparación acceso'],
     specialtyKeywords: ['profesor', 'clases', 'idiomas', 'inglés', 'matemáticas', 'música', 'guitarra', 'piano', 'refuerzo', 'academia', 'tutor'],
   },
   {
@@ -51,7 +51,7 @@ const CATEGORIES = [
     color: '#8B5CF6',
     bg: 'rgba(139,92,246,0.10)',
     supabaseCategories: ['legal'],
-    subcategories: ['Todos', 'Abogado laboralista', 'Abogado de familia', 'Abogado penal', 'Abogado mercantil', 'Abogado extranjería', 'Abogado herencias', 'Asesor fiscal', 'Asesora contable', 'Asesor financiero', 'Gestor'],
+    subcategories: ['Todos', 'Abogado laboralista', 'Abogado penal', 'Abogado de familia y divorcios', 'Abogada de familia', 'Abogado mercantil y startups', 'Abogado extranjería e inmigración', 'Abogada extranjería', 'Abogado herencias y sucesiones', 'Abogado arrendamientos y propiedad', 'Abogado administrativo', 'Asesor fiscal', 'Asesora contable', 'Asesor financiero', 'Gestora administrativa'],
   },
   {
     id: 'hogar',
@@ -61,7 +61,7 @@ const CATEGORIES = [
     color: '#10B981',
     bg: 'rgba(16,185,129,0.10)',
     supabaseCategories: ['hogar', 'limpieza'],
-    subcategories: ['Todos', 'Limpieza', 'Pintor', 'Electricista', 'Albañil', 'Carpintero', 'Manitas', 'Montador de muebles', 'Jardinero', 'Instalador', 'Organización del hogar', 'Diseñador de interiores', 'Arquitecto'],
+    subcategories: ['Todos', 'Limpieza doméstica', 'Limpieza por horas', 'Limpieza profunda', 'Planchado a domicilio', 'Organización del hogar', 'Cocinero a domicilio', 'Montaje de muebles', 'Montador de muebles IKEA y similares', 'Manitas', 'Manitas del hogar', 'Pintor de interiores', 'Electricista domicilio urgencias', 'Albañil reformas parciales', 'Carpintero a medida', 'Instalador de persianas y estores', 'Jardinero y mantenimiento de terrazas', 'Paisajista y jardines', 'Diseñador de interiores', 'Diseñador espacios comerciales', 'Arquitecto reformas domicilio', 'Arquitecto obra nueva'],
   },
   {
     id: 'mascotas',
@@ -71,7 +71,7 @@ const CATEGORIES = [
     color: '#F97316',
     bg: 'rgba(249,115,22,0.10)',
     supabaseCategories: ['mascotas'],
-    subcategories: ['Todos', 'Paseadora', 'Cuidadora', 'Grooming', 'Adiestrador', 'Veterinario', 'Pet sitter'],
+    subcategories: ['Todos', 'Paseadora de perros', 'Cuidadora de perros domicilio', 'Cuidador de mascotas', 'Cuidadora felina en casa', 'Pet sitter vacaciones', 'Grooming y estética canina', 'Peluquera canina', 'Adiestrador canino', 'Adiestradora canina', 'Educación cachorros', 'Veterinario a domicilio', 'Veterinaria domicilio urgencias'],
   },
   {
     id: 'entrenamiento',
@@ -81,7 +81,7 @@ const CATEGORIES = [
     color: '#06B6D4',
     bg: 'rgba(6,182,212,0.10)',
     supabaseCategories: ['entrenador'],
-    subcategories: ['Todos', 'Entrenador personal', 'Yoga', 'Pilates', 'Running', 'Pádel', 'Natación'],
+    subcategories: ['Todos', 'Entrenador personal', 'Entrenadora personal', 'Instructor de yoga', 'Instructora de pilates', 'Coach de running', 'Monitor de pádel', 'Profesor de natación'],
     specialtyKeywords: ['entrenador', 'entrenamiento', 'personal trainer', 'fitness', 'deporte', 'gym', 'pilates', 'yoga', 'crossfit', 'nutricion deportiva'],
   },
   {
@@ -92,7 +92,7 @@ const CATEGORIES = [
     color: '#EC4899',
     bg: 'rgba(236,72,153,0.10)',
     supabaseCategories: ['cuidado'],
-    subcategories: ['Todos', 'Cuidadora de mayores', 'Cuidadora nocturna', 'Auxiliar geriátrica', 'Enfermera', 'Niñera', 'Canguro', 'Asistente personal'],
+    subcategories: ['Todos', 'Cuidadora de mayores', 'Cuidadora de personas mayores', 'Cuidadora nocturna', 'Cuidadora personas con Alzheimer', 'Cuidadora post-operatorio', 'Auxiliar geriátrica', 'Auxiliar geriátrica domicilio', 'Auxiliar personas con discapacidad', 'Ayuda a domicilio integral', 'Enfermera domicilio', 'Niñera', 'Canguro', 'Asistente personal'],
   },
   {
     id: 'tecnologia',
@@ -122,7 +122,7 @@ const CATEGORIES = [
     color: '#64748B',
     bg: 'rgba(100,116,139,0.10)',
     supabaseCategories: ['automocion'],
-    subcategories: ['Todos', 'Mecánico', 'Electricidad', 'Limpieza de vehículos', 'Detailing'],
+    subcategories: ['Todos', 'Mecánico', 'Mecánico a domicilio', 'Electricidad del automóvil', 'Limpieza de vehículos', 'Detailing'],
   },
   {
     id: 'eventos',
@@ -132,7 +132,7 @@ const CATEGORIES = [
     color: '#F97316',
     bg: 'rgba(249,115,22,0.10)',
     supabaseCategories: ['eventos'],
-    subcategories: ['Todos', 'DJ', 'Animador', 'Wedding planner', 'Decorador', 'Mago'],
+    subcategories: ['Todos', 'DJ profesional', 'Animadora infantil', 'Wedding planner', 'Decorador de eventos', 'Mago'],
   },
   {
     id: 'idiomas',
@@ -142,7 +142,7 @@ const CATEGORIES = [
     color: '#0EA5E9',
     bg: 'rgba(14,165,233,0.10)',
     supabaseCategories: ['idiomas'],
-    subcategories: ['Todos', 'Guía turístico', 'Traductor', 'Intérprete', 'Profesora de inglés'],
+    subcategories: ['Todos', 'Guía turística', 'Guía turístico', 'Traductora chino-español', 'Traductor árabe-español', 'Intérprete', 'Profesora de inglés'],
   },
 ]
 
