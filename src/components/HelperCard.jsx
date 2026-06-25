@@ -13,7 +13,7 @@ export default function HelperCard({ helper, onContact, showContact = true, show
   if (!helper) return null
 
   const following = isFollowing(helper.id)
-  const [popAnim, setPopAnim] = React.useState(false)
+  const [popAnim, setPopAnim] = useState(false)
 
   function handleContact(e) {
     e.stopPropagation()
