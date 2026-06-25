@@ -30,7 +30,7 @@ const CATEGORIES = [
     color: '#F59E0B',
     bg: 'rgba(245,158,11,0.10)',
     supabaseCategories: ['tecnico'],
-    subcategories: ['Todos', 'Fontanero', 'Fontanero urgencias', 'Electricista', 'Electricista domicilio', 'Albañil', 'Albañil y reformas pequeñas', 'Pintor', 'Pintor domicilio', 'Carpintero', 'Cerrajero', 'Técnico aire acondicionado', 'Aire acondicionado y climatización', 'Técnico calderas y calefacción', 'Técnico calefacción', 'Técnico gas natural', 'Técnico electrodomésticos', 'Técnico informático domicilio', 'Reparación de móviles'],
+    subcategories: ['Todos', 'Fontanero', 'Electricista', 'Albañil', 'Pintor', 'Carpintero', 'Cerrajero', 'Técnico aire acondicionado', 'Aire acondicionado y climatización', 'Técnico calefacción', 'Técnico gas natural', 'Técnico electrodomésticos', 'Técnico informático domicilio', 'Reparación de móviles'],
   },
   {
     id: 'clases',
@@ -51,7 +51,7 @@ const CATEGORIES = [
     color: '#8B5CF6',
     bg: 'rgba(139,92,246,0.10)',
     supabaseCategories: ['legal'],
-    subcategories: ['Todos', 'Abogado laboralista', 'Abogado penal', 'Abogado de familia y divorcios', 'Abogada de familia', 'Abogado mercantil y startups', 'Abogado extranjería e inmigración', 'Abogada extranjería', 'Abogado herencias y sucesiones', 'Abogado arrendamientos y propiedad', 'Abogado administrativo', 'Asesor fiscal', 'Asesora contable', 'Asesor financiero', 'Gestora administrativa'],
+    subcategories: ['Todos', 'Abogado laboralista', 'Abogado penal', 'Abogado de familia', 'Abogado mercantil y startups', 'Abogado extranjería', 'Abogado herencias y sucesiones', 'Abogado arrendamientos y propiedad', 'Abogado administrativo', 'Asesor fiscal', 'Asesora contable', 'Asesor financiero', 'Gestora administrativa'],
   },
   {
     id: 'hogar',
@@ -61,7 +61,7 @@ const CATEGORIES = [
     color: '#10B981',
     bg: 'rgba(16,185,129,0.10)',
     supabaseCategories: ['hogar', 'limpieza'],
-    subcategories: ['Todos', 'Limpieza doméstica', 'Limpieza por horas', 'Limpieza profunda', 'Planchado a domicilio', 'Organización del hogar', 'Cocinero a domicilio', 'Montaje de muebles', 'Montador de muebles IKEA y similares', 'Manitas', 'Manitas del hogar', 'Pintor de interiores', 'Electricista domicilio urgencias', 'Albañil reformas parciales', 'Carpintero a medida', 'Instalador de persianas y estores', 'Jardinero y mantenimiento de terrazas', 'Paisajista y jardines', 'Diseñador de interiores', 'Diseñador espacios comerciales', 'Arquitecto reformas domicilio', 'Arquitecto obra nueva'],
+    subcategories: ['Todos', 'Limpieza doméstica', 'Limpieza por horas', 'Limpieza profunda', 'Planchado a domicilio', 'Organización del hogar', 'Cocinero a domicilio', 'Montador de muebles IKEA y similares', 'Manitas del hogar', 'Pintor de interiores', 'Electricista domicilio urgencias', 'Albañil reformas parciales', 'Carpintero a medida', 'Instalador de persianas y estores', 'Jardinero y mantenimiento de terrazas', 'Paisajista y jardines', 'Diseñador de interiores', 'Diseñador espacios comerciales', 'Arquitecto reformas domicilio', 'Arquitecto obra nueva'],
   },
   {
     id: 'mascotas',
@@ -71,7 +71,7 @@ const CATEGORIES = [
     color: '#F97316',
     bg: 'rgba(249,115,22,0.10)',
     supabaseCategories: ['mascotas'],
-    subcategories: ['Todos', 'Paseadora de perros', 'Cuidadora de perros domicilio', 'Cuidador de mascotas', 'Cuidadora felina en casa', 'Pet sitter vacaciones', 'Grooming y estética canina', 'Peluquera canina', 'Adiestrador canino', 'Adiestradora canina', 'Educación cachorros', 'Veterinario a domicilio', 'Veterinaria domicilio urgencias'],
+    subcategories: ['Todos', 'Paseadora de perros', 'Cuidadora de perros domicilio', 'Cuidador de mascotas', 'Cuidadora felina en casa', 'Pet sitter vacaciones', 'Grooming y estética canina', 'Peluquera canina', 'Adiestrador canino', 'Educación cachorros', 'Veterinario a domicilio'],
   },
   {
     id: 'entrenamiento',
@@ -81,7 +81,7 @@ const CATEGORIES = [
     color: '#06B6D4',
     bg: 'rgba(6,182,212,0.10)',
     supabaseCategories: ['entrenador'],
-    subcategories: ['Todos', 'Entrenador personal', 'Entrenadora personal', 'Instructor de yoga', 'Instructora de pilates', 'Coach de running', 'Monitor de pádel', 'Profesor de natación'],
+    subcategories: ['Todos', 'Entrenador personal', 'Instructor de yoga', 'Instructora de pilates', 'Coach de running', 'Monitor de pádel', 'Profesor de natación'],
     specialtyKeywords: ['entrenador', 'entrenamiento', 'personal trainer', 'fitness', 'deporte', 'gym', 'pilates', 'yoga', 'crossfit', 'nutricion deportiva'],
   },
   {
@@ -92,7 +92,7 @@ const CATEGORIES = [
     color: '#EC4899',
     bg: 'rgba(236,72,153,0.10)',
     supabaseCategories: ['cuidado'],
-    subcategories: ['Todos', 'Cuidadora de mayores', 'Cuidadora de personas mayores', 'Cuidadora nocturna', 'Cuidadora personas con Alzheimer', 'Cuidadora post-operatorio', 'Auxiliar geriátrica', 'Auxiliar geriátrica domicilio', 'Auxiliar personas con discapacidad', 'Ayuda a domicilio integral', 'Enfermera domicilio', 'Niñera', 'Canguro', 'Asistente personal'],
+    subcategories: ['Todos', 'Cuidadora de mayores', 'Cuidadora nocturna', 'Cuidadora personas con Alzheimer', 'Cuidadora post-operatorio', 'Auxiliar geriátrica', 'Auxiliar personas con discapacidad', 'Ayuda a domicilio integral', 'Enfermera domicilio', 'Niñera', 'Canguro', 'Asistente personal'],
   },
   {
     id: 'tecnologia',
@@ -142,7 +142,7 @@ const CATEGORIES = [
     color: '#0EA5E9',
     bg: 'rgba(14,165,233,0.10)',
     supabaseCategories: ['idiomas'],
-    subcategories: ['Todos', 'Guía turística', 'Guía turístico', 'Traductora chino-español', 'Traductor árabe-español', 'Intérprete', 'Profesora de inglés'],
+    subcategories: ['Todos', 'Guía turístico', 'Traductora chino-español', 'Traductor árabe-español', 'Intérprete', 'Profesora de inglés'],
   },
 ]
 
@@ -259,7 +259,29 @@ export default function Explore() {
     if (activeSubcategory && activeSubcategory !== 'Todos') {
       const spec = (h.specialty || '').toLowerCase()
       const sub = activeSubcategory.toLowerCase()
-      if (spec !== sub) return false
+      // Exact match
+      if (spec === sub) return true
+      // Merged groups: subcategory covers multiple specialty variants
+      const MERGED = {
+        'veterinario a domicilio':           ['veterinario a domicilio', 'veterinaria domicilio urgencias'],
+        'adiestrador canino':                ['adiestrador canino', 'adiestradora canina'],
+        'entrenador personal':               ['entrenador personal', 'entrenadora personal'],
+        'guía turístico':                    ['guía turístico', 'guía turística'],
+        'abogado de familia':                ['abogado de familia y divorcios', 'abogada de familia'],
+        'abogado extranjería':               ['abogado extranjería e inmigración', 'abogada extranjería'],
+        'cuidadora de mayores':              ['cuidadora de mayores', 'cuidadora de personas mayores'],
+        'auxiliar geriátrica':               ['auxiliar geriátrica', 'auxiliar geriátrica domicilio'],
+        'fontanero':                         ['fontanero', 'fontanero urgencias'],
+        'electricista':                      ['electricista', 'electricista domicilio'],
+        'albañil':                           ['albañil', 'albañil y reformas pequeñas'],
+        'técnico calefacción':               ['técnico calefacción', 'técnico calderas y calefacción'],
+        'pintor':                            ['pintor', 'pintor domicilio'],
+        'manitas del hogar':                 ['manitas del hogar', 'manitas'],
+        'montador de muebles ikea y similares': ['montador de muebles ikea y similares', 'montaje de muebles'],
+      }
+      const variants = MERGED[sub]
+      if (variants && variants.includes(spec)) return true
+      return false
     }
     return true
   })
