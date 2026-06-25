@@ -102,7 +102,7 @@ const CATEGORIES = [
     color: '#6366F1',
     bg: 'rgba(99,102,241,0.10)',
     supabaseCategories: ['tecnologia'],
-    subcategories: ['Todos', 'Técnico informático', 'Reparación ordenadores', 'Reparación móviles', 'WiFi', 'Diseño web', 'Desarrollador', 'Especialista IA'],
+    subcategories: ['Todos', 'Técnico informático', 'Reparación de ordenadores', 'Reparación de móviles', 'WiFi', 'Diseño web', 'Desarrollador', 'Especialista IA'],
   },
   {
     id: 'diseno',
@@ -259,11 +259,10 @@ export default function Explore() {
     if (activeSubcategory && activeSubcategory !== 'Todos') {
       const spec = (h.specialty || '').toLowerCase()
       const sub = activeSubcategory.toLowerCase()
-      // Match if specialty contains subcategory OR subcategory contains specialty
-      // Also try matching key words (ignore short words)
-      const subWords = sub.split(' ').filter(w => w.length > 3)
+      const STOPWORDS = ['de', 'del', 'la', 'el', 'los', 'las', 'en', 'y', 'a']
+      const subWords = sub.split(' ').filter(w => w.length > 2 && !STOPWORDS.includes(w))
       const matches = spec.includes(sub) || sub.includes(spec) ||
-        subWords.every(w => spec.includes(w))
+        (subWords.length > 0 && subWords.every(w => spec.includes(w)))
       if (!matches) return false
     }
     return true
