@@ -112,7 +112,7 @@ const CATEGORIES = [
     color: '#F43F5E',
     bg: 'rgba(244,63,94,0.10)',
     supabaseCategories: ['diseno'],
-    subcategories: ['Todos', 'Diseñadora gráfica', 'UX/UI', 'Fotógrafa', 'Videógrafo', 'Editora de vídeo', 'Community manager', 'Copywriter'],
+    subcategories: ['Todos', 'Diseñadora gráfica', 'Diseñador UX/UI', 'Fotógrafa', 'Videógrafo', 'Editora de vídeo', 'Community manager', 'Copywriter'],
   },
   {
     id: 'automocion',
