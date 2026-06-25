@@ -1,8 +1,10 @@
 /* ── PROFILE ─────────────────────────────────────────────────── */
 .page {
-  background: var(--bg, #f7f7f8);
-  min-height: 100%;
-  
+  height: 100%;
+  background: var(--paper);
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+  padding-top: var(--header-h);
   padding-bottom: var(--nav-h);
 }
 

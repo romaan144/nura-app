@@ -3,8 +3,14 @@
   from { opacity: 0; transform: translateY(8px); }
   to   { opacity: 1; transform: translateY(0); }
 }
-.page { padding-top: var(--header-h); min-height: 100vh; background: var(--paper); 
-  animation: fadeSlideIn 0.22s ease both;}
+.page {
+  height: 100%;
+  background: var(--paper);
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+  padding-top: var(--header-h);
+  padding-bottom: var(--nav-h);
+}
 
 .back { width: 34px; height: 34px; border-radius: 50%; border: none; background: var(--paper); color: var(--mid); display: flex; align-items: center; justify-content: center; transition: all 0.18s; flex-shrink: 0; }
 .back:hover { border-color: var(--purple); color: var(--purple); }
@@ -93,7 +99,14 @@
 .sortBtnActive { background: var(--purple); color: white; box-shadow: var(--shadow-sm); }
 
 @media (min-width: 768px) {
-  .page { max-width: 800px; margin: 0 auto; }
+  .page {
+  height: 100%;
+  background: var(--paper);
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+  padding-top: var(--header-h);
+  padding-bottom: var(--nav-h);
+}
   .content { padding: 0 24px 40px; }
   .cards { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
   .sortRow { padding: 0 24px 14px; }
@@ -115,5 +128,12 @@
 
 /* Bottom nav clearance */
 @media (max-width: 767px) {
-  .page { padding-bottom: var(--nav-h) !important; }
+  .page {
+  height: 100%;
+  background: var(--paper);
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+  padding-top: var(--header-h);
+  padding-bottom: var(--nav-h);
+}
 }

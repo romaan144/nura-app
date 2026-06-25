@@ -2,11 +2,12 @@
    FEED
    ══════════════════════════════════════════════════════ */
 .page {
+  height: 100%;
   background: var(--paper);
-  min-height: 100%;
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
   padding-top: var(--header-h);
   padding-bottom: var(--nav-h);
-  animation: fadeSlideIn 0.22s ease both;
 }
 
 /* ── Tabs ────────────────────────────────────────────── */
@@ -195,11 +196,12 @@
 /* Bottom nav clearance */
 @media (max-width: 767px) {
   .page {
+  height: 100%;
   background: var(--paper);
-  min-height: 100%;
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
   padding-top: var(--header-h);
   padding-bottom: var(--nav-h);
-  animation: fadeSlideIn 0.22s ease both;
 }
 }
 @media (min-width: 768px) {
