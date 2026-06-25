@@ -254,7 +254,8 @@ export default function Feed() {
               <span className={styles.nuraPickLabel}>Profesional del día</span>
             </div>
             <HelperCard helper={dailyPick} />
-          </div>}
+          </div>
+        )}
 
 {tab === 'para-ti' && searchHistory?.length > 0 && (() => {
           const lastQ = searchHistory[0]?.query
