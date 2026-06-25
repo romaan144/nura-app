@@ -205,7 +205,7 @@ export function UserProvider({ children }) {
       helpersCache, cacheHelpers,
       following, follow, unfollow, isFollowing,
       notifications, markNotifsRead, unreadNotifs,
-      favorites, toggleFavorite, isFavorite, toggleFollow,
+      favorites, toggleFollow,
       nuraChatMessages, setNuraChatMessages,
       nuraLastMatches, setNuraLastMatches,
       services, addService, updateService,
