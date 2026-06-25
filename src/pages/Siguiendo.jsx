@@ -7,7 +7,7 @@ import styles from './Siguiendo.module.css'
 
 export default function Siguiendo() {
   const navigate = useNavigate()
-  const { favorites, toggleFollow, isFollowing, helpersCache } = useUser()
+  const { favorites, follow, unfollow, isFollowing, helpersCache } = useUser()
   const allHelpers = [...HELPERS.filter(Boolean), ...Object.values(helpersCache || {}).filter(h => h?.id && !HELPERS.filter(Boolean).find(l => l && String(l.id) === String(h.id)))]
 
   // Demo favorites when user has none — shows what a real account looks like
@@ -55,7 +55,7 @@ export default function Siguiendo() {
                   </div>
                 </div>
                 <button className={styles.heartBtn}
-                  onClick={e => { e.stopPropagation(); toggleFollow(h.id) }}>
+                  onClick={e => { e.stopPropagation(); isFollowing(h.id) ? unfollow(h.id) : follow(h.id) }}>
                   <UserCheck size={18} color="var(--purple)" />
                 </button>
               </div>

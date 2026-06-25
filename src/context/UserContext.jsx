@@ -184,7 +184,7 @@ export function UserProvider({ children }) {
     setFavorites(updated)
     return !isFav
   }
-  function isFollowing(helperId) { return favorites.includes(helperId) }
+  // isFollowing already defined above from the following system
 
   function markNotifsRead() {
     const updated = (notifications||[]).map(n => ({ ...n, read: true }))
@@ -205,7 +205,7 @@ export function UserProvider({ children }) {
       helpersCache, cacheHelpers,
       following, follow, unfollow, isFollowing,
       notifications, markNotifsRead, unreadNotifs,
-      favorites, toggleFavorite, isFavorite, toggleFollow, isFollowing,
+      favorites, toggleFavorite, isFavorite, toggleFollow,
       nuraChatMessages, setNuraChatMessages,
       nuraLastMatches, setNuraLastMatches,
       services, addService, updateService,

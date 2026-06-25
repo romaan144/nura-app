@@ -195,7 +195,7 @@ const HELPER_SUGGESTIONS = [
 
 export default function Home({ setSearchState }) {
   const navigate = useNavigate()
-  const { user, addSearch, toggleFollow, isFollowing, searchHistory, favorites, helpersCache, nuraChatMessages, setNuraChatMessages, nuraLastMatches, setNuraLastMatches, cacheHelpers } = useUser()
+  const { user, addSearch, searchHistory, favorites, helpersCache, nuraChatMessages, setNuraChatMessages, nuraLastMatches, setNuraLastMatches, cacheHelpers } = useUser()
   // messages persisted in context so they survive navigation
   const messages = nuraChatMessages
   const setMessages = setNuraChatMessages

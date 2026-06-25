@@ -8,7 +8,7 @@ import { getFirstName } from '../utils/name'
 
 export default function HelperCard({ helper, onContact, showContact = true, showPrice = false }) {
   const navigate = useNavigate()
-  const { user, toggleFollow, isFollowing } = useUser()
+  const { user, follow, unfollow, isFollowing } = useUser()
   if (!helper) return null
 
   const following = isFollowing(helper.id)
@@ -31,7 +31,7 @@ export default function HelperCard({ helper, onContact, showContact = true, show
     e.stopPropagation()
     haptic('light')
     if (!user) { showToast('Inicia sesión para seguir profesionales'); return }
-    toggleFollow(helper.id)
+    isFollowing(helper.id) ? unfollow(helper.id) : follow(helper.id)
     showToast(isFollowing(helper.id) ? 'Has dejado de seguir' : 'Siguiendo')
   }
 

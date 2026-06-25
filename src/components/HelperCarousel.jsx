@@ -13,7 +13,7 @@ import { haptic } from '../utils/haptic'
  */
 function CarouselCard({ helper, isTopPick, matchReason }) {
   const navigate = useNavigate()
-  const { user, toggleFollow, isFollowing } = useUser()
+  const { user, follow, unfollow, isFollowing } = useUser()
   const following = isFollowing(helper.id)
 
   function handleContact(e) {
@@ -32,7 +32,7 @@ function CarouselCard({ helper, isTopPick, matchReason }) {
   function handleFollow(e) {
     e.stopPropagation()
     if (!user) { showToast('Inicia sesión para seguir profesionales'); return }
-    toggleFollow(helper.id)
+    isFollowing(helper.id) ? unfollow(helper.id) : follow(helper.id)
     showToast(following ? 'Has dejado de seguir' : 'Siguiendo')
   }
 
