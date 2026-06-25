@@ -267,10 +267,19 @@
   white-space: nowrap;
   font-family: inherit;
   flex-shrink: 0;
-  transition: all 0.15s;
+  transition: background 0.18s ease, color 0.18s ease,
+              border-color 0.18s ease, transform 0.12s ease,
+              box-shadow 0.18s ease;
+}
+
+.subCatPill:hover {
+  border-color: rgba(123,47,255,0.3);
+  color: var(--purple);
 }
 
 .subCatActive {
   color: white;
   font-weight: 600;
+  transform: scale(1.02);
+  box-shadow: 0 2px 8px rgba(0,0,0,0.12);
 }
