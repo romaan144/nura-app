@@ -1,6 +1,6 @@
 import { useState, useEffect, useRef } from 'react'
 import PageHeader from '../components/PageHeader'
-import { useNavigate } from 'react-router-dom'
+import { useNavigate, useLocation } from 'react-router-dom'
 import { Search, ArrowLeft, Loader2, SlidersHorizontal,
          Heart, Wrench, BookOpen, Scale, Home, PawPrint,
          Dumbbell, Baby, MapPin, Star, Laptop, Palette, Car, PartyPopper, Globe } from 'lucide-react'
@@ -154,6 +154,13 @@ export default function Explore() {
   // ── State ────────────────────────────────────────────────────
   const [searchText,      setSearchText]     = useState('')
   const [activeCategory,  setActiveCategory] = useState(null)  // null = grid view
+  const location = useLocation()
+
+  // Reset to grid when user taps Profesionales in BottomNav while already in /explore
+  useEffect(() => {
+    setActiveCategory(null)
+    setSearchText('')
+  }, [location.key])
   const [categoryResults, setCategoryResults] = useState([])
   const [loadingCat,      setLoadingCat]     = useState(false)
   const [aiResults,       setAiResults]      = useState(null)
