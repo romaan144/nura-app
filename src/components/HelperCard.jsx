@@ -44,7 +44,7 @@ export default function HelperCard({ helper, onContact, showContact = true, show
   const lastName  = helper.name?.split(' ')[1]?.[0]
 
   return (
-    <div className={styles.card} onClick={handleTap}>
+    <div className={`${styles.card} card-enter`} onClick={handleTap}>
       {/* ROW: Avatar + Info + CTA (always same height) */}
       <div className={styles.row}>
 
