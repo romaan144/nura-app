@@ -14,7 +14,6 @@ const RegisterHelper = lazy(() => import('./pages/RegisterHelper'))
 import Explore from './pages/Explore'
 const Feed = lazy(() => import('./pages/Feed'))
 import NotFound from './pages/NotFound'
-import NavBar from './components/NavBar'
 import BottomNav from './components/BottomNav'
 import DesktopSidebar from './components/DesktopSidebar'
 import ScrollToTop from './components/ScrollToTop'
@@ -90,7 +89,6 @@ function AppRoutes() {
         </PageTransition>
       </div>
 
-      {!hideNav && <NavBar />}
       {!hideNav && <BottomNav />}
       <Toast />
     </>
