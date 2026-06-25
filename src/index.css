@@ -302,3 +302,38 @@ input:focus-visible, textarea:focus-visible { outline: none; }
   from { opacity: 0; transform: translateY(40px); }
   to   { opacity: 1; transform: translateY(0); }
 }
+
+/* ── FEEDBACK TÁCTIL GLOBAL ─────────────────────────────────────────────
+   Todos los elementos interactivos ceden al pulsar.
+   Discreto (scale 0.97), rápido (80ms), natural (ease-out).
+   ─────────────────────────────────────────────────────────────────────── */
+button,
+a,
+[role="button"],
+[role="tab"],
+[role="checkbox"],
+[role="radio"],
+.clickable {
+  -webkit-tap-highlight-color: transparent;
+  transition: transform 80ms ease-out, opacity 80ms ease-out;
+}
+
+button:active,
+a:active,
+[role="button"]:active,
+[role="tab"]:active,
+[role="checkbox"]:active,
+[role="radio"]:active,
+.clickable:active {
+  transform: scale(0.97);
+  opacity: 0.85;
+}
+
+/* Excepciones — elementos que no deben escalar */
+input:active,
+textarea:active,
+select:active,
+.no-press:active {
+  transform: none;
+  opacity: 1;
+}
