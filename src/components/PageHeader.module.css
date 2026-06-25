@@ -1,41 +1,53 @@
-/* PageHeader — exact same glass as Home floating bubbles */
+/* PageHeader — identical to Home floating header */
 
 .header {
   position: fixed;
   top: 0;
   left: 0; right: 0;
   z-index: 20;
-  display: flex;
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
   align-items: center;
-  justify-content: space-between;
   padding: max(env(safe-area-inset-top, 0px), 12px) 14px 10px;
   background: transparent;
   pointer-events: none;
 }
 .header > * { pointer-events: all; }
 
-/* Left and right — same width so logo stays centered */
-.left { width: 42px; display: flex; justify-content: flex-start; }
-.right { width: 42px; display: flex; justify-content: flex-end; }
-.placeholder { width: 42px; pointer-events: none; }
+/* Left — back button */
+.left {
+  display: flex;
+  justify-content: flex-start;
+}
 
-/* Center logo pill — exact copy of .logoBubble in Home */
-.center { position: absolute; left: 50%; transform: translateX(-50%); }
+/* Center — Nüra pill, always perfectly centered */
+.center {
+  display: flex;
+  justify-content: center;
+}
 .logoPill {
   background: rgba(255,255,255,0.72);
   -webkit-backdrop-filter: blur(24px) saturate(180%);
   backdrop-filter: blur(24px) saturate(180%);
   border: 1px solid rgba(255,255,255,0.35);
   padding: 11px 36px;
-  border-radius: 100px;
+  border-radius: var(--radius-full);
   box-shadow: var(--shadow-sm), 0 0 0 0.5px rgba(0,0,0,0.06);
   display: flex;
   align-items: center;
   white-space: nowrap;
+  pointer-events: none;
 }
 .logo { height: 22px; width: auto; }
 
-/* Circle buttons — exact copy of menu/profile bubbles in Home */
+/* Right — profile button or empty */
+.right {
+  display: flex;
+  justify-content: flex-end;
+}
+.placeholder { width: 42px; pointer-events: none; }
+
+/* Circle buttons — back arrow, profile, share */
 .circleBtn {
   width: 42px; height: 42px;
   border-radius: 50%;
@@ -52,6 +64,5 @@
 .circleBtn:active { opacity: 0.6; }
 
 @media (min-width: 768px) {
-  .left { visibility: hidden; }
   .header { padding: 14px 24px; }
 }
