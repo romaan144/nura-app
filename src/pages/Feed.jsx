@@ -216,6 +216,7 @@ export default function Feed() {
 
   return (
     <div className={styles.page}>
+      <PageHeader />
 
       {/* Tabs */}
       <div className={styles.tabs}>

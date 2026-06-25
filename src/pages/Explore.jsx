@@ -301,7 +301,10 @@ export default function Explore() {
   /* ── RENDER ─────────────────────────────────────────────────── */
   return (
     <div className={styles.page}>
-      {/* ── HEADER ──────────────────────────────────────────── */}
+      <PageHeader
+        showBack={!!activeCategory}
+        onBack={goBack}
+      />
 
       <div className={styles.body}>
 

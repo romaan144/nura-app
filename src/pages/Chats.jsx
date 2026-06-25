@@ -149,6 +149,7 @@ export default function Chats() {
 
   return (
     <div className={styles.page}>
+      <PageHeader />
 
       <div className={styles.searchWrap}>
         <div className={styles.searchBox}>
