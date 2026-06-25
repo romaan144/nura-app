@@ -102,7 +102,7 @@ const CATEGORIES = [
     color: '#6366F1',
     bg: 'rgba(99,102,241,0.10)',
     supabaseCategories: ['tecnologia'],
-    subcategories: ['Todos', 'Técnico informático', 'Reparación de ordenadores', 'Reparación de móviles', 'WiFi', 'Diseño web', 'Desarrollador', 'Especialista IA'],
+    subcategories: ['Todos', 'Técnico informático', 'Reparación de ordenadores', 'Reparación de móviles', 'WiFi', 'Diseñadora web', 'Desarrollador', 'Especialista IA'],
   },
   {
     id: 'diseno',
