@@ -259,7 +259,12 @@ export default function Explore() {
     if (activeSubcategory && activeSubcategory !== 'Todos') {
       const spec = (h.specialty || '').toLowerCase()
       const sub = activeSubcategory.toLowerCase()
-      if (!spec.includes(sub)) return false
+      // Match if specialty contains subcategory OR subcategory contains specialty
+      // Also try matching key words (ignore short words)
+      const subWords = sub.split(' ').filter(w => w.length > 3)
+      const matches = spec.includes(sub) || sub.includes(spec) ||
+        subWords.every(w => spec.includes(w))
+      if (!matches) return false
     }
     return true
   })
