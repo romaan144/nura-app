@@ -262,6 +262,7 @@ export default function Chat() {
   const [showRating, setShowRating] = useState(false)
   const [showConfirm, setShowConfirm] = useState(false)
   const [msgCount, setMsgCount] = useState(() => Math.floor((getChatHistory(id)?.filter(m => m.from === 'helper')?.length || 0)))
+  const [listening, setListening] = useState(false)
   const bottomRef = useRef(null)
 
   useEffect(() => {
