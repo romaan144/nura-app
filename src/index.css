@@ -329,3 +329,49 @@ textarea:active {
   from { transform: translateY(10px); }
   to   { transform: translateY(0); }
 }
+
+/* ── SKELETON LOADER ─────────────────────────────────────────────────── */
+@keyframes shimmer {
+  0%   { background-position: -400px 0; }
+  100% { background-position:  400px 0; }
+}
+
+.skeleton {
+  background: linear-gradient(
+    90deg,
+    rgba(0,0,0,0.05) 25%,
+    rgba(0,0,0,0.09) 37%,
+    rgba(0,0,0,0.05) 63%
+  );
+  background-size: 800px 100%;
+  animation: shimmer 1.4s ease-in-out infinite;
+  border-radius: var(--radius-sm);
+}
+
+.skeleton-card {
+  background: white;
+  border-radius: var(--radius-xl);
+  padding: 14px 16px;
+  display: flex;
+  gap: 12px;
+  align-items: center;
+  box-shadow: var(--shadow-md);
+  border: 1px solid rgba(0,0,0,0.07);
+}
+
+.skeleton-avatar {
+  width: 52px; height: 52px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+.skeleton-body {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.skeleton-line-lg { height: 13px; width: 55%; }
+.skeleton-line-md { height: 11px; width: 35%; }
+.skeleton-line-sm { height: 10px; width: 75%; }
