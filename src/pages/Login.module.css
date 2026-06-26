@@ -8,7 +8,6 @@
   align-items: center; justify-content: center;
   padding: 32px 20px; background: var(--paper);
   position: relative; overflow: hidden;
-  animation: fadeSlideIn 0.22s ease both;
 }
 /* Background blobs */
 .blob1 {
