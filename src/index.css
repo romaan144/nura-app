@@ -197,8 +197,14 @@ body {
 .desktopMain {
   flex: 1;
   min-width: 0;
-  overflow-y: auto;
-  overflow-x: hidden;
+  overflow: visible;
+}
+
+@media (min-width: 768px) {
+  .desktopMain {
+    overflow-y: auto;
+    overflow-x: hidden;
+  }
 }
 
 /* ══════════════════════════════════════════════════════════
