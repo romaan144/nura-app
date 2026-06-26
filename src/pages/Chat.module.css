@@ -116,22 +116,10 @@
   font-size: var(--text-base); line-height: 1.5;
   letter-spacing: -0.15px;
 }
-.msgHelper .msgBubble {
-  background: white;
-  border-radius: 4px var(--radius-lg) var(--radius-lg) var(--radius-lg);
-  color: var(--ink-primary);
-  box-shadow: var(--shadow-xs);
-}
-.msgUser .msgBubble {
-  background: var(--purple); color: white;
-  border-radius: var(--radius-lg) var(--radius-lg) 4px var(--radius-lg);
-}
+.msgHelper /* .msgBubble defined above */
+.msgUser /* .msgBubble defined above */
 .systemMsg { text-align: center; }
-.systemMsg .msgBubble {
-  background: rgba(0,0,0,0.05); color: var(--ink-secondary);
-  border-radius: var(--radius-sm); font-size: var(--text-xs); max-width: 90%;
-  margin: 0 auto; padding: 6px 14px; box-shadow: none;
-}
+.systemMsg /* .msgBubble defined above */
 .msgMeta { font-size: var(--text-xs); color: rgba(255,255,255,0.45); margin-top: 2px; text-align: right; }
 .msgMetaHelper { font-size: var(--text-xs); color: rgba(0,0,0,0.28); margin-top: 2px; }
 
@@ -167,13 +155,7 @@
 .quickReply:active { opacity: 0.6; }
 
 /* ── INPUT CAPSULE ──────────────────────────────────── */
-.inputWrap {
-  position: absolute;
-  bottom: max(env(safe-area-inset-bottom, 0px), 16px);
-  left: 20px; right: 20px;
-  z-index: 20;
-  pointer-events: none;
-}
+/* .inputWrap defined above */
 .inputWrap > * { pointer-events: all; }
 .inputBar {
   display: flex;
@@ -218,7 +200,7 @@
 
 
 @media (min-width: 768px) {
-  .messages { padding: 88px 32px 110px; }
+  /* .messages defined above */
   .inputWrap {
   position: absolute;
   bottom: max(env(safe-area-inset-bottom, 0px), 16px);
@@ -226,7 +208,7 @@
   z-index: 20;
   pointer-events: none;
 }
-  .quickReplies { left: 32px; right: 32px; }
+  /* .quickReplies defined above */
 }
 
 /* Nüra intervention in chat */
@@ -249,23 +231,14 @@
 .msgBubbleNura p { font-size: var(--text-sm) !important; font-style: italic; }
 
 /* Quick replies floating */
-.quickReplies {
-  display: flex; flex-wrap: wrap; gap: 7px;
-  padding: 4px 0 8px;
-}
+/* .quickReplies defined above */
 
 .quickReply:active { opacity: 0.6; }
 
 /* Suggestion bar */
-.suggestionBar {
-  position: absolute;
-  bottom: 84px; left: 20px; right: 20px;
-  z-index: 15;
-  display: flex; flex-direction: column; gap: 6px;
-  pointer-events: none;
-}
+/* .suggestionBar defined above */
 .suggestionBar > * { pointer-events: all; }
-.suggestionLabel { font-size: var(--text-xs); font-weight: 600; color: var(--ink-tertiary); letter-spacing: 0.3px; }
+/* .suggestionLabel defined above */
 .suggestionText {
   padding: 11px 16px; text-align: left;
   background: rgba(255,255,255,0.72);
@@ -353,5 +326,5 @@
   from { opacity: 0; transform: scale(0.97) translateY(4px); }
   to   { opacity: 1; transform: scale(1) translateY(0); }
 }
-.msgUser   { animation: bubbleIn 0.16s cubic-bezier(0.34,1.1,0.64,1) both; }
+/* .msgUser defined above */
 .msgHelper { animation: bubbleIn 0.16s cubic-bezier(0.34,1.1,0.64,1) both; }

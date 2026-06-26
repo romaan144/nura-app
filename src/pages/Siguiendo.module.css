@@ -33,8 +33,8 @@
 .emptyBtn { padding: 12px 28px; background: var(--purple); color: white; border: none; border-radius: 20px; font-size: var(--text-sm); font-weight: 700; }
 @media (min-width: 768px) {
   
-  .content { padding: 0 32px 60px; }
-  .list { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+  /* .content defined above */
+  /* .list defined above */
 }
 
 /* Bottom nav clearance */
@@ -45,10 +45,10 @@
 .emptyIcon { font-size: 52px; }
 .emptyTitle { font-size: var(--text-md); font-weight: 800; color: rgba(0,0,0,0.75); margin: 0; letter-spacing: -0.3px; }
 .emptyDesc { font-size: var(--text-sm); color: rgba(0,0,0,0.4); margin: 0; line-height: 1.65; max-width: 240px; text-align: center; }
-.emptyBtn { padding: 13px 28px; background: var(--purple); color: white; border: none; border-radius: var(--radius-full); font-size: var(--text-sm); font-weight: 700; cursor: pointer; width: 100%; max-width: 280px; transition: opacity 0.2s; font-family: inherit; }
+/* .emptyBtn defined above */
 .emptyBtn:active { opacity: 0.75; }
 .emptyBtnSecondary { padding: 12px 28px; background: rgba(0,0,0,0.05); color: rgba(0,0,0,0.55); border: none; border-radius: var(--radius-full); font-size: var(--text-sm); font-weight: 600; cursor: pointer; width: 100%; max-width: 280px; font-family: inherit; }
 
 /* ── EMPTY STATE ANIMATION ── */
-.empty { animation: emptyIn 0.32s cubic-bezier(0.25,0.46,0.45,0.94) both; }
-.emptyIcon { animation: floatIcon 3s ease-in-out infinite; display: inline-flex; }
+/* .empty defined above */
+/* .emptyIcon defined above */

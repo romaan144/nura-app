@@ -207,10 +207,7 @@ body {
 @media (min-width: 768px) {
 
   /* Pages that use height:100dvh need to fill desktopMain instead */
-  .desktopMain {
-    display: flex;
-    flex-direction: column;
-  }
+  /* .desktopMain defined above */
 
   /* Home and RegisterHelper — chat pages that need to fill height */
   .desktopMain > * {

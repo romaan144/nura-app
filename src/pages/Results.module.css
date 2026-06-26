@@ -96,14 +96,14 @@
 .sortRow { display: flex; gap: 6px; overflow-x: auto; padding: 0 14px 12px; }
 .sortRow::-webkit-scrollbar { display: none; }
 .sortBtn { padding: 6px 13px; background: white; border: none; border-radius: var(--card-radius); font-size: var(--text-xs); font-weight: 500; color: var(--mid); white-space: nowrap; flex-shrink: 0; box-shadow: var(--shadow-xs); transition: all 0.15s; }
-.sortBtn { transition: all 0.15s; }
+/* .sortBtn defined above */
 .sortBtnActive { background: var(--purple); color: white; box-shadow: var(--shadow-sm); }
 
 @media (min-width: 768px) {
   
-  .content { padding: 0 24px 40px; }
-  .cards { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
-  .sortRow { padding: 0 24px 14px; }
+  /* .content defined above */
+  /* .cards defined above */
+  /* .sortRow defined above */
 }
 
 .analysisBox { background: rgba(123,47,255,0.04); border: 1.5px solid rgba(123,47,255,0.12); border-radius: var(--card-radius); padding: 12px 14px; margin-top: 10px; }

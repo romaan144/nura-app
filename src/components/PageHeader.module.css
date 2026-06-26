@@ -65,7 +65,7 @@
 .circleBtn:active { opacity: 0.6; }
 
 @media (min-width: 768px) {
-  .header { padding: 14px 24px; }
+  /* .header defined above */
 }
 
 /* ── HEADER ENTRANCE ─────────────────────────────────────────────────── */
@@ -73,6 +73,4 @@
   from { opacity: 0; transform: translateY(-4px); }
   to   { opacity: 1; transform: translateY(0); }
 }
-.header {
-  animation: headerIn 0.18s ease-out both;
-}
+/* .header defined above */

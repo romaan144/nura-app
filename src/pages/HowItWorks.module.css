@@ -56,8 +56,8 @@
 .ctaBtn:active { opacity: 0.75; }
 
 @media (min-width: 768px) {
-  .content { max-width: 600px; margin: 0 auto; }
-  .trustGrid { grid-template-columns: repeat(4, 1fr); }
+  /* .content defined above */
+  /* .trustGrid defined above */
 }
 
 /* Bottom nav clearance */

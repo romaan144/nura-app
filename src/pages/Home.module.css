@@ -211,11 +211,7 @@
 .micActive { background: var(--red); color: white; }
 
 /* ── CHAT MESSAGES ──────────────────────────────────── */
-.msgRow {
-  display: flex;
-  align-items: flex-end;
-  gap: 10px;
-}
+
 .msgRowUser { flex-direction: row-reverse; }
 
 .nuraAvatar {
@@ -327,18 +323,14 @@
 
 /* ── DESKTOP ── */
 @media (min-width: 768px) {
-  .messages { padding-left: 32px; padding-right: 32px; }
-  .floatTop { left: 24px; right: 24px; }
-  .floatBottom { left: 24px; right: 24px; max-width: 660px; margin: 0 auto; left: 50%; transform: translateX(-50%); width: calc(100% - 48px); }
-  .resultsList { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+  /* .messages defined above */
+  /* .floatTop defined above */
+  /* .floatBottom defined above */
+  /* .resultsList defined above */
 }
 
 /* Mic recording animation */
-.micActive {
-  background: var(--red) !important;
-  color: white !important;
-  animation: micPulse 1s ease-in-out infinite;
-}
+/* .micActive defined above */
 @keyframes micPulse {
   0%, 100% { box-shadow: 0 0 0 0 rgba(239,68,68,0.4); }
   50% { box-shadow: 0 0 0 8px rgba(239,68,68,0); }
@@ -359,7 +351,7 @@
 
 /* Bottom nav space (mobile only) */
 @media (max-width: 767px) {
-  .page { padding-bottom: var(--nav-h); }
+  /* .page defined above */
 
 }
 
@@ -368,9 +360,7 @@
   from { opacity: 0; transform: translateY(8px); }
   to   { opacity: 1; transform: translateY(0); }
 }
-.msgRow {
-  animation: msgIn 0.25s ease both;
-}
+
 
 /* ── NUEVA BÚSQUEDA — natural in flow ── */
 
@@ -385,14 +375,10 @@
 /* Applied via className in JSX — wrapper div approach           */
 
 /* All messages: base top margin (gap replacement) */
-.msgRowUser {
-  margin-top: 20px;   /* user reply = new exchange, more visual break */
-}
+/* .msgRowUser defined above */
 
 /* Nüra reply after user: moderate spacing */
-.msgRow {
-  /* base defined above */
-}
+
 
 /* Carousel: connected to the Nüra message (same response block) */
 .carouselBlock {
@@ -474,4 +460,12 @@
   from { opacity: 0; transform: translateY(5px); }
   to   { opacity: 1; transform: translateY(0); }
 }
-.msgRow { animation: bubbleInHome 0.18s ease-out both; }
+
+
+/* ── MSG ROW — unified ───────────────────────────────────────────────── */
+.msgRow {
+  display: flex;
+  align-items: flex-end;
+  gap: 10px;
+  animation: bubbleInHome 0.18s ease-out both;
+}

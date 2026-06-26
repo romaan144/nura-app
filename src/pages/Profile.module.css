@@ -204,10 +204,7 @@
 }
 
 /* ── ZONA 3: BÚSQUEDAS RECIENTES ─────────────────────────────── */
-.recentZone {
-  margin-top: 12px;
-  padding: 0 14px;
-}
+
 
 .recentList {
   background: white;
@@ -340,13 +337,12 @@
 }
 
 /* ── EMPTY STATE ANIMATION ── */
-.favEmpty { animation: emptyIn 0.32s cubic-bezier(0.25,0.46,0.45,0.94) both; }
+/* .favEmpty defined above */
 
 /* ── SECTION CARDS ───────────────────────────────────────────────────── */
 .activityZone,
 .favRow,
-.recentZone,
-.evolutionZone {
+.recentZone {
   background: white;
   border-radius: var(--radius-xl);
   box-shadow: var(--shadow-sm);
@@ -361,9 +357,5 @@
   from { opacity: 0; transform: translateY(10px); }
   to   { opacity: 1; transform: translateY(0); }
 }
-.identity {
-  animation: profileIn 0.26s cubic-bezier(0.25,0.46,0.45,0.94) both;
-}
-.avatarWrap {
-  animation: profileIn 0.30s cubic-bezier(0.34,1.1,0.64,1) 0.05s both;
-}
+/* .identity defined above */
+/* .avatarWrap defined above */

@@ -110,7 +110,7 @@
 .drawerFooterTag { font-size: var(--text-xs); color: var(--soft); }
 
 @media (min-width: 768px) {
-  .menuBtn { display: none; }
-  .drawer { display: none; }
-  .backdrop { display: none; }
+  /* .menuBtn defined above */
+  /* .drawer defined above */
+  /* .backdrop defined above */
 }
