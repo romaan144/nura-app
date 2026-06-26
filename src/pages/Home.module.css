@@ -463,3 +463,13 @@
   to   { opacity: 1; transform: translateY(0); }
 }
 .msgRow { animation: msgIn 0.32s cubic-bezier(0.22, 1, 0.36, 1) forwards; }
+
+/* ── RECENT CHIPS ENTRADA ────────────────────────────────────────────── */
+@keyframes chipIn {
+  from { opacity: 0; transform: translateY(8px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+.recentItem { animation: chipIn 0.26s cubic-bezier(0.22,1,0.36,1) forwards; }
+.recentSearches .recentItem:nth-child(1) { animation-delay: 0ms; }
+.recentSearches .recentItem:nth-child(2) { animation-delay: 45ms; }
+.recentSearches .recentItem:nth-child(3) { animation-delay: 90ms; }

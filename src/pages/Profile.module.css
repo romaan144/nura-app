@@ -337,3 +337,17 @@
   background: none; border: none; font-size: var(--text-sm);
   color: var(--purple); cursor: pointer; font-family: inherit;
 }
+
+/* ── PROFILE ENTRANCE ────────────────────────────────────────────────── */
+@keyframes profileAvatarIn {
+  from { opacity: 0; transform: scale(0.88) translateY(8px); }
+  to   { opacity: 1; transform: scale(1) translateY(0); }
+}
+@keyframes profileContentIn {
+  from { opacity: 0; transform: translateY(16px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+.identity   { animation: profileAvatarIn 0.36s cubic-bezier(0.22,1,0.36,1) forwards; }
+.activityZone { animation: profileContentIn 0.32s cubic-bezier(0.22,1,0.36,1) 0.08s forwards; }
+.recentZone   { animation: profileContentIn 0.32s cubic-bezier(0.22,1,0.36,1) 0.14s forwards; }
+.evolutionZone { animation: profileContentIn 0.32s cubic-bezier(0.22,1,0.36,1) 0.20s forwards; }
