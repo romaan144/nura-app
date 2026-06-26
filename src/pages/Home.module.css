@@ -7,10 +7,12 @@
 /* ── PAGE — full screen canvas ─────────────────────── */
 .page {
   position: fixed;
-  inset: 0;
+  top: 0; left: 0; right: 0; bottom: 0;
+  width: 100%;
+  height: 100%;
   display: flex;
   flex-direction: column;
-  padding-bottom: var(--nav-h); /* reserve space for fixed BottomNav */
+  padding-bottom: var(--nav-h);
   background: var(--paper);
   overflow: hidden;
 }
@@ -467,5 +469,4 @@
   display: flex;
   align-items: flex-end;
   gap: 10px;
-  animation: bubbleInHome 0.18s ease-out both;
 }
