@@ -355,3 +355,15 @@
   padding: 16px;
   overflow: hidden;
 }
+
+/* ── IDENTITY ENTRANCE ───────────────────────────────────────────────── */
+@keyframes profileIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+.identity {
+  animation: profileIn 0.26s cubic-bezier(0.25,0.46,0.45,0.94) both;
+}
+.avatarWrap {
+  animation: profileIn 0.30s cubic-bezier(0.34,1.1,0.64,1) 0.05s both;
+}

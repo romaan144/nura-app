@@ -60,15 +60,19 @@
 .onlineDot { width: 6px; height: 6px; border-radius: 50%; background: var(--green-dot); display: inline-block; margin-right: 3px; }
 
 .contractBtn {
-  padding: 8px 14px; border-radius: var(--radius-full);
-  background: rgba(255,255,255,0.72);
+  padding: 8px 16px; border-radius: var(--radius-full);
+  background: rgba(255,255,255,0.92);
   -webkit-backdrop-filter: blur(24px) saturate(180%);
   backdrop-filter: blur(24px) saturate(180%);
-  border: 1px solid var(--ink-border);
-  box-shadow: var(--shadow-sm), 0 0 0 0.5px rgba(0,0,0,0.06);
+  border: 1px solid rgba(123,47,255,0.20);
+  box-shadow: var(--shadow-md), 0 0 0 0.5px rgba(123,47,255,0.10);
   font-size: var(--text-xs); font-weight: 700; color: var(--purple);
   display: flex; align-items: center; gap: 5px; flex-shrink: 0;
-  cursor: pointer; transition: opacity 0.2s;
+  cursor: pointer; transition: opacity 0.2s, box-shadow 0.15s;
+}
+.contractBtn:active {
+  box-shadow: var(--shadow-sm);
+  opacity: 0.85;
 }
 .contractBtn:active { opacity: 0.7; }
 
@@ -114,13 +118,13 @@
 }
 .msgHelper .msgBubble {
   background: white;
-  border-radius: 4px 18px 18px 18px;
+  border-radius: 4px var(--radius-lg) var(--radius-lg) var(--radius-lg);
   color: var(--ink-primary);
   box-shadow: var(--shadow-xs);
 }
 .msgUser .msgBubble {
   background: var(--purple); color: white;
-  border-radius: var(--card-radius) 18px 4px 18px;
+  border-radius: var(--radius-lg) var(--radius-lg) 4px var(--radius-lg);
 }
 .systemMsg { text-align: center; }
 .systemMsg .msgBubble {
@@ -134,7 +138,7 @@
 /* Typing indicator */
 .typingRow { display: flex; align-items: flex-end; gap: 8px; margin: 2px 0; }
 .typingBubble {
-  background: white; border-radius: 4px 18px 18px 18px;
+  background: white; border-radius: 4px var(--radius-lg) var(--radius-lg) var(--radius-lg);
   padding: 12px 16px; display: flex; gap: 4px; align-items: center;
   box-shadow: var(--shadow-xs);
 }
