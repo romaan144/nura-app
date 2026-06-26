@@ -13,7 +13,6 @@
   -webkit-overflow-scrolling: touch;
   padding-top: var(--header-h);
   padding-bottom: var(--nav-h);
-  overscroll-behavior: contain;
 }
 
 /* ── SEARCH ──────────────────────────────────────────────────────────── */
@@ -63,36 +62,16 @@
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  gap: 14px;
-  padding: 20px 16px;
+  gap: 12px;
+  padding: 18px 16px;
   background: white;
-  border: 1px solid rgba(0,0,0,0.07);
-  border-radius: var(--radius-xl);
+  border: 1px solid var(--ink-border);
+  border-radius: var(--radius-lg);
   cursor: pointer;
   text-align: left;
   font-family: inherit;
   -webkit-tap-highlight-color: transparent;
-  box-shadow: var(--shadow-md);
-  transition: transform 0.15s ease, box-shadow 0.15s ease;
-  animation: cardIn 0.22s ease-out both;
-}
-.catCard:nth-child(1)  { animation-delay: 0ms; }
-.catCard:nth-child(2)  { animation-delay: 35ms; }
-.catCard:nth-child(3)  { animation-delay: 70ms; }
-.catCard:nth-child(4)  { animation-delay: 105ms; }
-.catCard:nth-child(5)  { animation-delay: 140ms; }
-.catCard:nth-child(6)  { animation-delay: 170ms; }
-.catCard:nth-child(7)  { animation-delay: 200ms; }
-.catCard:nth-child(8)  { animation-delay: 225ms; }
-.catCard:nth-child(9)  { animation-delay: 250ms; }
-.catCard:nth-child(10) { animation-delay: 270ms; }
-.catCard:nth-child(11) { animation-delay: 285ms; }
-.catCard:nth-child(12) { animation-delay: 300ms; }
-.catCard:nth-child(n+13) { animation-delay: 310ms; }
-
-.catCard:active {
-  transform: scale(0.97);
-  box-shadow: var(--shadow-sm);
+  transition: transform 0.12s, box-shadow 0.12s;
 }
 
 .catCard:active {
@@ -101,8 +80,8 @@
 }
 
 .catIconWrap {
-  width: 52px; height: 52px;
-  border-radius: var(--radius-lg);
+  width: 46px; height: 46px;
+  border-radius: var(--radius-md);
   background: var(--cat-bg);
   display: flex; align-items: center; justify-content: center;
   flex-shrink: 0;
@@ -115,7 +94,7 @@
 }
 
 .catLabel {
-  font-size: var(--text-base);
+  font-size: var(--text-sm);
   font-weight: 700;
   color: var(--ink-primary);
   line-height: 1.2;
@@ -151,10 +130,9 @@
 }
 
 .resultCount {
-  font-size: var(--text-base);
-  color: var(--ink-primary);
-  font-weight: 700;
-  letter-spacing: -0.2px;
+  font-size: var(--text-xs);
+  color: var(--ink-tertiary);
+  font-weight: 500;
 }
 
 .list {
@@ -289,14 +267,10 @@
   white-space: nowrap;
   font-family: inherit;
   flex-shrink: 0;
-  transition: background 0.16s ease, color 0.16s ease,
-              border-color 0.16s ease, transform 0.14s ease,
-              box-shadow 0.16s ease;
+  transition: all 0.15s;
 }
 
 .subCatActive {
   color: white;
   font-weight: 600;
-  transform: scale(1.03);
-  box-shadow: 0 2px 8px rgba(0,0,0,0.10);
 }

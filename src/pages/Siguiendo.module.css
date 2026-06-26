@@ -5,7 +5,6 @@
   -webkit-overflow-scrolling: touch;
   padding-top: var(--header-h);
   padding-bottom: var(--nav-h);
-  scroll-behavior: smooth;
 }
 
 @keyframes fadeSlideIn {
@@ -16,8 +15,7 @@
 .content { padding: 0 14px 40px; }
 .title { font-size: var(--text-lg); font-weight: 800; color: var(--ink); margin-bottom: 4px; letter-spacing: -0.5px; }
 .sub { font-size: var(--text-sm); color: var(--soft); margin-bottom: 20px; }
-.list { display: flex; flex-direction: column; gap: 10px;   padding-bottom: 16px;
-}
+.list { display: flex; flex-direction: column; gap: 10px; }
 .card { background: white; border: 1px solid rgba(0,0,0,0.05); border-radius: var(--radius-lg); padding: var(--card-padding); display: flex; align-items: center; justify-content: space-between; box-shadow: var(--shadow-xs); cursor: pointer; transition: all 0.15s; }
 .card:active { opacity: 0.75; }
 .cardLeft { display: flex; align-items: center; gap: 12px; }
@@ -33,8 +31,8 @@
 .emptyBtn { padding: 12px 28px; background: var(--purple); color: white; border: none; border-radius: 20px; font-size: var(--text-sm); font-weight: 700; }
 @media (min-width: 768px) {
   
-  /* .content defined above */
-  /* .list defined above */
+  .content { padding: 0 32px 60px; }
+  .list { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
 }
 
 /* Bottom nav clearance */
@@ -45,10 +43,6 @@
 .emptyIcon { font-size: 52px; }
 .emptyTitle { font-size: var(--text-md); font-weight: 800; color: rgba(0,0,0,0.75); margin: 0; letter-spacing: -0.3px; }
 .emptyDesc { font-size: var(--text-sm); color: rgba(0,0,0,0.4); margin: 0; line-height: 1.65; max-width: 240px; text-align: center; }
-/* .emptyBtn defined above */
+.emptyBtn { padding: 13px 28px; background: var(--purple); color: white; border: none; border-radius: var(--radius-full); font-size: var(--text-sm); font-weight: 700; cursor: pointer; width: 100%; max-width: 280px; transition: opacity 0.2s; font-family: inherit; }
 .emptyBtn:active { opacity: 0.75; }
 .emptyBtnSecondary { padding: 12px 28px; background: rgba(0,0,0,0.05); color: rgba(0,0,0,0.55); border: none; border-radius: var(--radius-full); font-size: var(--text-sm); font-weight: 600; cursor: pointer; width: 100%; max-width: 280px; font-family: inherit; }
-
-/* ── EMPTY STATE ANIMATION ── */
-/* .empty defined above */
-/* .emptyIcon defined above */

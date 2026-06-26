@@ -356,7 +356,9 @@
   from { opacity: 0; transform: translateY(8px); }
   to   { opacity: 1; transform: translateY(0); }
 }
-
+.msgRow {
+  animation: msgIn 0.25s ease both;
+}
 
 /* ── NUEVA BÚSQUEDA — natural in flow ── */
 
@@ -376,7 +378,9 @@
 }
 
 /* Nüra reply after user: moderate spacing */
-
+.msgRow {
+  /* base defined above */
+}
 
 /* Carousel: connected to the Nüra message (same response block) */
 .carouselBlock {

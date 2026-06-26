@@ -6,7 +6,6 @@
   -webkit-overflow-scrolling: touch;
   padding-top: var(--header-h);
   padding-bottom: var(--nav-h);
-  overscroll-behavior: contain;
 }
 
 .scroll {
@@ -52,7 +51,7 @@
 }
 
 .name {
-  font-size: var(--text-lg);
+  font-size: 22px;
   font-weight: 700;
   color: var(--ink-primary);
   margin: 0;
@@ -146,7 +145,7 @@
 .activityCard:active { opacity: 0.85; }
 
 .activityNum {
-  font-size: var(--text-xl);
+  font-size: 28px;
   font-weight: 700;
   color: var(--ink-primary);
   letter-spacing: -1px;
@@ -204,7 +203,10 @@
 }
 
 /* ── ZONA 3: BÚSQUEDAS RECIENTES ─────────────────────────────── */
-
+.recentZone {
+  margin-top: 12px;
+  padding: 0 14px;
+}
 
 .recentList {
   background: white;
@@ -335,27 +337,3 @@
   background: none; border: none; font-size: var(--text-sm);
   color: var(--purple); cursor: pointer; font-family: inherit;
 }
-
-/* ── EMPTY STATE ANIMATION ── */
-/* .favEmpty defined above */
-
-/* ── SECTION CARDS ───────────────────────────────────────────────────── */
-.activityZone,
-.favRow,
-.recentZone {
-  background: white;
-  border-radius: var(--radius-xl);
-  box-shadow: var(--shadow-sm);
-  border: 1px solid rgba(0,0,0,0.06);
-  margin: 0 16px 12px;
-  padding: 16px;
-  overflow: hidden;
-}
-
-/* ── IDENTITY ENTRANCE ───────────────────────────────────────────────── */
-@keyframes profileIn {
-  from { opacity: 0; transform: translateY(10px); }
-  to   { opacity: 1; transform: translateY(0); }
-}
-/* .identity defined above */
-/* .avatarWrap defined above */
