@@ -116,10 +116,10 @@
   font-size: var(--text-base); line-height: 1.5;
   letter-spacing: -0.15px;
 }
-.msgHelper /* .msgBubble defined above */
-.msgUser /* .msgBubble defined above */
+.msgHelper { border-radius: 4px var(--radius-lg) var(--radius-lg) var(--radius-lg); background: white; border: 1px solid rgba(0,0,0,0.07); }
+.msgUser { border-radius: var(--radius-lg) var(--radius-lg) 4px var(--radius-lg); background: var(--purple); color: white; }
 .systemMsg { text-align: center; }
-.systemMsg /* .msgBubble defined above */
+.systemMsg { text-align: center; font-size: var(--text-xs); color: rgba(0,0,0,0.4); padding: 2px 12px; }
 .msgMeta { font-size: var(--text-xs); color: rgba(255,255,255,0.45); margin-top: 2px; text-align: right; }
 .msgMetaHelper { font-size: var(--text-xs); color: rgba(0,0,0,0.28); margin-top: 2px; }
 

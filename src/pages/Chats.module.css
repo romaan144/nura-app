@@ -82,8 +82,8 @@
   font-size: var(--text-sm); color: var(--soft);
   white-space: nowrap; overflow: hidden; text-overflow: ellipsis; flex: 1;
 }
-.chatUnread /* .chatLastMsg defined above */
-.chatUnread /* .chatName defined above */
+.chatUnread .chatLastMsg { color: var(--ink-primary); font-weight: 600; }
+.chatUnread .chatName { font-weight: 700; }
 
 .unreadBadge {
   min-width: 18px; height: 18px; border-radius: 9px;

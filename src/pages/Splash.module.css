@@ -17,7 +17,7 @@
 .iso { width: 100%; height: 100%; object-fit: contain; animation: pulse 2s ease-in-out 0.5s infinite; }
 
 .wordmarkWrap { opacity: 0; transform: translateY(8px); transition: all 0.4s cubic-bezier(0.25,0.46,0.45,0.94); }
-.wordmarkWrap/* .show defined above */
+.wordmarkWrap
 .wordmark { height: 30px; width: auto; }
 
 .footer { opacity: 0; transform: translateY(8px); transition: all 0.4s cubic-bezier(0.25,0.46,0.45,0.94) 0.1s; display: flex; flex-direction: column; align-items: center; gap: 12px; width: 100%; }
