@@ -302,3 +302,24 @@ input:focus-visible, textarea:focus-visible { outline: none; }
   from { opacity: 0; transform: translateY(40px); }
   to   { opacity: 1; transform: translateY(0); }
 }
+
+/* ── FEEDBACK TÁCTIL GLOBAL ────────────────────────────────────────── */
+button,
+a,
+[role="button"] {
+  -webkit-tap-highlight-color: transparent;
+}
+
+button:active,
+a:active,
+[role="button"]:active {
+  transform: scale(0.96);
+  opacity: 0.82;
+  transition: transform 0.08s ease-out, opacity 0.08s ease-out;
+}
+
+input:active,
+textarea:active {
+  transform: none;
+  opacity: 1;
+}
