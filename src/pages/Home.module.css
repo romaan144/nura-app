@@ -7,12 +7,10 @@
 /* ── PAGE — full screen canvas ─────────────────────── */
 .page {
   position: fixed;
-  top: 0; left: 0; right: 0; bottom: 0;
-  width: 100%;
-  height: 100%;
+  inset: 0;
   display: flex;
   flex-direction: column;
-  padding-bottom: var(--nav-h);
+  padding-bottom: var(--nav-h); /* reserve space for fixed BottomNav */
   background: var(--paper);
   overflow: hidden;
 }
@@ -213,7 +211,11 @@
 .micActive { background: var(--red); color: white; }
 
 /* ── CHAT MESSAGES ──────────────────────────────────── */
-
+.msgRow {
+  display: flex;
+  align-items: flex-end;
+  gap: 10px;
+}
 .msgRowUser { flex-direction: row-reverse; }
 
 .nuraAvatar {
@@ -298,21 +300,9 @@
 .resultDist { color: #888; }
 
 /* ── RECENT SEARCHES ────────────────────────────────── */
-.recentSearches { display: flex; flex-direction: column; gap: 6px; padding: 0 2px 8px; }
+.recentSearches { display: flex; flex-direction: column; gap: 4px; padding: 0 2px; }
 .recentLabel { font-size: var(--text-xs); font-weight: 600; color: #aaa; text-transform: uppercase; letter-spacing: 0.5px; padding: 4px 8px; }
-.recentItem {
-  display: flex; align-items: center; gap: 10px;
-  padding: 10px 14px;
-  background: rgba(255,255,255,0.82);
-  -webkit-backdrop-filter: blur(20px);
-  backdrop-filter: blur(20px);
-  border: 1px solid rgba(0,0,0,0.07);
-  border-radius: var(--radius-full);
-  text-align: left; cursor: pointer;
-  box-shadow: var(--shadow-sm);
-  transition: background 0.15s ease;
-}
-.recentItem:active { background: rgba(255,255,255,0.95); }
+.recentItem { display: flex; align-items: center; gap: 10px; padding: 10px 12px; background: white; border: none; border-radius: var(--radius-lg); text-align: left; cursor: pointer; box-shadow: var(--shadow-xs); }
 .recentIcon { font-size: var(--text-sm); flex-shrink: 0; }
 .recentText { font-size: var(--text-sm); color: #555; }
 
@@ -325,14 +315,18 @@
 
 /* ── DESKTOP ── */
 @media (min-width: 768px) {
-  /* .messages defined above */
-  /* .floatTop defined above */
-  /* .floatBottom defined above */
-  /* .resultsList defined above */
+  .messages { padding-left: 32px; padding-right: 32px; }
+  .floatTop { left: 24px; right: 24px; }
+  .floatBottom { left: 24px; right: 24px; max-width: 660px; margin: 0 auto; left: 50%; transform: translateX(-50%); width: calc(100% - 48px); }
+  .resultsList { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
 }
 
 /* Mic recording animation */
-/* .micActive defined above */
+.micActive {
+  background: var(--red) !important;
+  color: white !important;
+  animation: micPulse 1s ease-in-out infinite;
+}
 @keyframes micPulse {
   0%, 100% { box-shadow: 0 0 0 0 rgba(239,68,68,0.4); }
   50% { box-shadow: 0 0 0 8px rgba(239,68,68,0); }
@@ -353,7 +347,7 @@
 
 /* Bottom nav space (mobile only) */
 @media (max-width: 767px) {
-  /* .page defined above */
+  .page { padding-bottom: var(--nav-h); }
 
 }
 
@@ -362,7 +356,9 @@
   from { opacity: 0; transform: translateY(8px); }
   to   { opacity: 1; transform: translateY(0); }
 }
-
+.msgRow {
+  animation: msgIn 0.25s ease both;
+}
 
 /* ── NUEVA BÚSQUEDA — natural in flow ── */
 
@@ -377,10 +373,14 @@
 /* Applied via className in JSX — wrapper div approach           */
 
 /* All messages: base top margin (gap replacement) */
-/* .msgRowUser defined above */
+.msgRowUser {
+  margin-top: 20px;   /* user reply = new exchange, more visual break */
+}
 
 /* Nüra reply after user: moderate spacing */
-
+.msgRow {
+  /* base defined above */
+}
 
 /* Carousel: connected to the Nüra message (same response block) */
 .carouselBlock {
@@ -447,26 +447,4 @@
 }
 .chatSpacer[data-chips="true"] {
   height: var(--float-bottom-h-chips);
-}
-
-/* ── INPUT FOCUS STATE ───────────────────────────────────────────────── */
-.inputCapsule:focus-within {
-  border-color: var(--purple);
-  box-shadow: var(--shadow-sm), 0 0 0 3px rgba(123,47,255,0.10);
-  background: rgba(255,255,255,0.95);
-  transition: box-shadow 0.18s ease, border-color 0.18s ease;
-}
-
-/* ── BUBBLE ENTRANCE ─────────────────────────────────────────────────── */
-@keyframes bubbleInHome {
-  from { opacity: 0; transform: translateY(5px); }
-  to   { opacity: 1; transform: translateY(0); }
-}
-
-
-/* ── MSG ROW — unified ───────────────────────────────────────────────── */
-.msgRow {
-  display: flex;
-  align-items: flex-end;
-  gap: 10px;
 }
