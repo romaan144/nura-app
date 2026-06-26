@@ -12,7 +12,7 @@
   padding-bottom: var(--nav-h);
 }
 
-.scroll {
+.scroll { animation: fadeUp 0.26s cubic-bezier(0.22, 1, 0.36, 1) 0.10s forwards;
   padding-bottom: 40px;
   animation: heroIn 0.24s ease-out 0.10s;
 }
@@ -47,7 +47,7 @@
 /* ══════════════════════════════════════════════════════════
    HERO — first impression, no scroll needed
    ══════════════════════════════════════════════════════════ */
-.hero {
+.hero { animation: fadeUp 0.28s cubic-bezier(0.22, 1, 0.36, 1) forwards;
   background: #FFFFFF;
   padding: 20px 20px 24px;
   display: flex;
@@ -58,7 +58,7 @@
 }
 
 .avatarWrap { position:relative; margin-bottom:16px; }
-.avatar {
+.avatar { animation: scaleIn 0.32s cubic-bezier(0.22, 1, 0.36, 1) 0.06s forwards;
   width: 108px; height: 108px;
   border-radius: 50%; object-fit:cover;
   border: 3.5px solid #fff;
@@ -209,12 +209,6 @@
 /* ══════════════════════════════════════════════════════════
    SECTIONS — continuous scroll, no tabs
    ══════════════════════════════════════════════════════════ */
-.section {
-  padding: 20px 20px 0;
-  border-top: 1px solid var(--rule);
-  margin-top: 4px;
-  animation: heroIn 0.32s cubic-bezier(0.22, 1, 0.36, 1) forwards;
-}
 
 .sectionFirst {
   border-top: none !important;
@@ -501,3 +495,15 @@
 .section:nth-child(3) { animation-delay: 0.25s; }
 .section:nth-child(4) { animation-delay: 0.31s; }
 .section:nth-child(n+5) { animation-delay: 0.36s; }
+
+.section:nth-child(1) { animation-delay: 0.12s; }
+.section:nth-child(2) { animation-delay: 0.20s; }
+.section:nth-child(3) { animation-delay: 0.27s; }
+.section:nth-child(4) { animation-delay: 0.33s; }
+.section:nth-child(n+5) { animation-delay: 0.38s; }
+.section {
+  padding: 20px 20px 0;
+  border-top: 1px solid var(--rule);
+  margin-top: 4px;
+  animation: fadeUp 0.28s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+}

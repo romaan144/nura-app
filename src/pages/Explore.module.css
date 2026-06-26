@@ -58,7 +58,7 @@
   padding: 12px 16px 24px;
 }
 
-.catCard {
+.catCard { animation: fadeUp 0.38s cubic-bezier(0.22, 1, 0.36, 1) forwards;
   display: flex;
   flex-direction: column;
   align-items: flex-start;
@@ -260,7 +260,7 @@
 }
 .subCatRow::-webkit-scrollbar { display: none; }
 
-.subCatPill {
+.subCatPill { animation: pillSlide 0.24s cubic-bezier(0.22, 1, 0.36, 1) forwards;
   display: flex;
   align-items: center;
   padding: 6px 14px;
@@ -314,3 +314,24 @@
 .subCatPill:nth-child(5)  { animation-delay: 145ms; }
 .subCatPill:nth-child(6)  { animation-delay: 170ms; }
 .subCatPill:nth-child(n+7) { animation-delay: 190ms; }
+
+.catCard:nth-child(1)  { animation-delay: 0ms; }
+.catCard:nth-child(2)  { animation-delay: 45ms; }
+.catCard:nth-child(3)  { animation-delay: 90ms; }
+.catCard:nth-child(4)  { animation-delay: 130ms; }
+.catCard:nth-child(5)  { animation-delay: 165ms; }
+.catCard:nth-child(6)  { animation-delay: 196ms; }
+.catCard:nth-child(7)  { animation-delay: 224ms; }
+.catCard:nth-child(8)  { animation-delay: 248ms; }
+.catCard:nth-child(9)  { animation-delay: 268ms; }
+.catCard:nth-child(10) { animation-delay: 285ms; }
+.catCard:nth-child(11) { animation-delay: 299ms; }
+.catCard:nth-child(12) { animation-delay: 310ms; }
+.catCard:nth-child(n+13) { animation-delay: 318ms; }
+
+.subCatPill:nth-child(1)  { animation-delay: 0ms; }
+.subCatPill:nth-child(2)  { animation-delay: 35ms; }
+.subCatPill:nth-child(3)  { animation-delay: 70ms; }
+.subCatPill:nth-child(4)  { animation-delay: 100ms; }
+.subCatPill:nth-child(5)  { animation-delay: 126ms; }
+.subCatPill:nth-child(n+6) { animation-delay: 148ms; }

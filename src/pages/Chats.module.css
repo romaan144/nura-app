@@ -91,8 +91,6 @@
   padding: 0 5px; flex-shrink: 0;
 }
 
-.empty { padding: 40px 20px; text-align: center; color: var(--soft); font-size: var(--text-sm);   animation: emptyIn 0.38s cubic-bezier(0.22,1,0.36,1) forwards;
-}
 
 .chatAvatarWrap { position: relative; flex-shrink: 0; }
 .onlineIndicator { position: absolute; bottom: 1px; right: 1px; width: 11px; height: 11px; border-radius: 50%; background: var(--green-dot); border: 2px solid white; }
@@ -116,8 +114,6 @@
 }
 
 /* ── Empty state ── */
-.emptyIso { margin-bottom: 4px;   animation: floatIcon 3s ease-in-out infinite;
-}
 .emptyTitle { font-size: var(--text-md); font-weight: 800; color: var(--ink-primary); margin: 0; letter-spacing: -0.3px; }
 .emptyDesc { font-size: var(--text-sm); color: rgba(0,0,0,0.4); margin: 0; line-height: 1.65; max-width: 240px; text-align: center; }
 .emptyBtn { display: flex; align-items: center; justify-content: center; gap: 8px; width: 100%; max-width: 280px; padding: 13px; background: var(--purple); color: white; border: none; border-radius: var(--radius-full); font-size: var(--text-sm); font-weight: 700; cursor: pointer; transition: opacity 0.2s; font-family: inherit; }
@@ -145,10 +141,35 @@
   from { opacity: 0; transform: translateX(-12px); }
   to   { opacity: 1; transform: translateX(0); }
 }
-.chatItem { animation: chatItemIn 0.30s cubic-bezier(0.22, 1, 0.36, 1) forwards; }
 .chatItem:nth-child(1) { animation-delay: 0ms; }
 .chatItem:nth-child(2) { animation-delay: 55ms; }
 .chatItem:nth-child(3) { animation-delay: 110ms; }
 .chatItem:nth-child(4) { animation-delay: 160ms; }
 .chatItem:nth-child(5) { animation-delay: 205ms; }
 .chatItem:nth-child(n+6) { animation-delay: 245ms; }
+
+/* ── CHAT ITEMS ── */
+@keyframes chatItemIn {
+  from { opacity: 0; transform: translateX(-14px); }
+  to   { opacity: 1; transform: translateX(0); }
+}
+.chatItem:nth-child(1) { animation-delay: 0ms; }
+.chatItem:nth-child(2) { animation-delay: 55ms; }
+.chatItem:nth-child(3) { animation-delay: 105ms; }
+.chatItem:nth-child(4) { animation-delay: 148ms; }
+.chatItem:nth-child(5) { animation-delay: 185ms; }
+.chatItem:nth-child(n+6) { animation-delay: 216ms; }
+.chatItem {
+  animation: chatItemIn 0.30s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+}
+.emptyIso {
+  margin-bottom: 4px;
+  animation: floatIcon 3s ease-in-out infinite;
+}
+.empty {
+  padding: 40px 20px;
+  text-align: center;
+  color: var(--soft);
+  font-size: var(--text-sm);
+  animation: fadeUp 0.38s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+}

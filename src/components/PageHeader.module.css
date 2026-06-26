@@ -1,6 +1,6 @@
 /* PageHeader — identical to Home floating header */
 
-.header {
+.header { animation: headerDown 0.22s cubic-bezier(0.22, 1, 0.36, 1) forwards;
   position: fixed;
   top: 0;
   left: 0; right: 0;
