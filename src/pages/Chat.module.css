@@ -277,7 +277,7 @@
   to   { opacity: 1; transform: translateY(0); }
 }
 .msgRow {
-  animation: msgIn 0.22s ease both;
+  animation: msgIn 0.22s ease forwards;
 }
 
 /* ── UTILITIES ── */
