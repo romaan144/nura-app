@@ -208,13 +208,15 @@
 .sendBtn:active { opacity: 0.7; }
 .sendBtn:disabled { background: #ddd; color: #aaa; }
 .micBtn { background: transparent; color: #999; box-shadow: none; }
-.micActive { background: var(--red); color: white; }
+.micActive { background: var(--red); color: white;   animation: micPulse 1s ease-in-out infinite;
+}
 
 /* ── CHAT MESSAGES ──────────────────────────────────── */
 .msgRow {
   display: flex;
   align-items: flex-end;
   gap: 10px;
+  animation: msgIn 0.32s cubic-bezier(0.22, 1, 0.36, 1) forwards;
 }
 .msgRowUser { flex-direction: row-reverse; }
 
@@ -302,7 +304,8 @@
 /* ── RECENT SEARCHES ────────────────────────────────── */
 .recentSearches { display: flex; flex-direction: column; gap: 4px; padding: 0 2px; }
 .recentLabel { font-size: var(--text-xs); font-weight: 600; color: #aaa; text-transform: uppercase; letter-spacing: 0.5px; padding: 4px 8px; }
-.recentItem { display: flex; align-items: center; gap: 10px; padding: 10px 12px; background: white; border: none; border-radius: var(--radius-lg); text-align: left; cursor: pointer; box-shadow: var(--shadow-xs); }
+.recentItem { display: flex; align-items: center; gap: 10px; padding: 10px 12px; background: white; border: none; border-radius: var(--radius-lg); text-align: left; cursor: pointer; box-shadow: var(--shadow-xs);   animation: chipIn 0.26s cubic-bezier(0.22,1,0.36,1) forwards;
+}
 .recentIcon { font-size: var(--text-sm); flex-shrink: 0; }
 .recentText { font-size: var(--text-sm); color: #555; }
 
@@ -322,11 +325,6 @@
 }
 
 /* Mic recording animation */
-.micActive {
-  background: var(--red) !important;
-  color: white !important;
-  animation: micPulse 1s ease-in-out infinite;
-}
 @keyframes micPulse {
   0%, 100% { box-shadow: 0 0 0 0 rgba(239,68,68,0.4); }
   50% { box-shadow: 0 0 0 8px rgba(239,68,68,0); }
@@ -356,9 +354,6 @@
   from { opacity: 0; transform: translateY(8px); }
   to   { opacity: 1; transform: translateY(0); }
 }
-.msgRow {
-  /* animation removed — iOS safe */
-}
 
 /* ── NUEVA BÚSQUEDA — natural in flow ── */
 
@@ -373,14 +368,8 @@
 /* Applied via className in JSX — wrapper div approach           */
 
 /* All messages: base top margin (gap replacement) */
-.msgRowUser {
-  margin-top: 20px;   /* user reply = new exchange, more visual break */
-}
 
 /* Nüra reply after user: moderate spacing */
-.msgRow {
-  /* base defined above */
-}
 
 /* Carousel: connected to the Nüra message (same response block) */
 .carouselBlock {
@@ -462,14 +451,12 @@
   from { opacity: 0; transform: translateY(12px); }
   to   { opacity: 1; transform: translateY(0); }
 }
-.msgRow { animation: msgIn 0.32s cubic-bezier(0.22, 1, 0.36, 1) forwards; }
 
 /* ── RECENT CHIPS ENTRADA ────────────────────────────────────────────── */
 @keyframes chipIn {
   from { opacity: 0; transform: translateY(8px); }
   to   { opacity: 1; transform: translateY(0); }
 }
-.recentItem { animation: chipIn 0.26s cubic-bezier(0.22,1,0.36,1) forwards; }
 .recentSearches .recentItem:nth-child(1) { animation-delay: 0ms; }
 .recentSearches .recentItem:nth-child(2) { animation-delay: 45ms; }
 .recentSearches .recentItem:nth-child(3) { animation-delay: 90ms; }

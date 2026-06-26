@@ -55,6 +55,7 @@
   border-radius: var(--radius-xl);
   overflow: hidden;
   box-shadow: var(--shadow-md);
+  animation: fadeSlideIn 0.3s ease forwards;
 }
 
 .suggestedLabel {
@@ -224,7 +225,6 @@
   from { opacity: 0; transform: translateY(10px); }
   to   { opacity: 1; transform: translateY(0); }
 }
-.card { animation: fadeSlideIn 0.3s ease forwards; }
 
 /* ── NÜRA PICK DEL DÍA ── */
 .nuraPick {

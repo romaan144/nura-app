@@ -11,6 +11,7 @@
   box-shadow: var(--shadow-md);
   transition: box-shadow 0.15s ease, transform 0.15s ease, opacity 0.15s;
   -webkit-tap-highlight-color: transparent;
+  animation: cardIn 0.38s cubic-bezier(0.22, 1, 0.36, 1) forwards;
 }
 
 .card:active {
@@ -153,7 +154,6 @@
 .favBtnActive { background: rgba(123,47,255,0.08); }
 
 /* ── CARD ENTRANCE — cascada fluida ──────────────────────────────────── */
-.card { animation: cardIn 0.38s cubic-bezier(0.22, 1, 0.36, 1) forwards; }
 .card:nth-child(1)  { animation-delay: 0ms; }
 .card:nth-child(2)  { animation-delay: 60ms; }
 .card:nth-child(3)  { animation-delay: 120ms; }
