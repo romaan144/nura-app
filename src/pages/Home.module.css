@@ -448,3 +448,11 @@
 .chatSpacer[data-chips="true"] {
   height: var(--float-bottom-h-chips);
 }
+
+/* ── INPUT FOCUS STATE ───────────────────────────────────────────────── */
+.inputCapsule:focus-within {
+  border-color: var(--purple);
+  box-shadow: var(--shadow-sm), 0 0 0 3px rgba(123,47,255,0.10);
+  background: rgba(255,255,255,0.95);
+  transition: box-shadow 0.18s ease, border-color 0.18s ease;
+}
