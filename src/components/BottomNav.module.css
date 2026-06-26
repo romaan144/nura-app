@@ -33,15 +33,21 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 28px; height: 28px;
+  width: 40px; height: 28px;
+  border-radius: 14px;
+  transition: background 0.18s ease;
 }
 
 .tab svg {
   color: rgba(0,0,0,0.35);
-  transition: color 0.15s;
+  transition: color 0.18s ease, transform 0.18s ease;
 }
 .tabActive svg {
   color: var(--purple);
+  transform: scale(1.1);
+}
+.tabActive .iconWrap {
+  background: rgba(123,47,255,0.10);
 }
 .tabActive .label {
   color: var(--purple);
