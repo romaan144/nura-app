@@ -431,7 +431,7 @@ export default function Explore() {
             {/* Lista */}
             {pagedList.length > 0 ? (
               <>
-                <div className={styles.list}>
+                <div className={styles.list} key={`${activeCategory}-${activeSubcategory}`}>
                   {pagedList.map(h => (
                     <HelperCard key={h.id} helper={h} onClick={() => navigate(`/helper/${h.id}`)} />
                   ))}
