@@ -1,4 +1,3 @@
-import React, { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { Star, MapPin, Shield, Zap, MessageCircle, UserPlus, UserCheck, MapPinned, Monitor } from 'lucide-react'
 import { useUser } from '../context/UserContext'
@@ -10,8 +9,6 @@ import { getFirstName } from '../utils/name'
 export default function HelperCard({ helper, onContact, showContact = true, showPrice = false }) {
   const navigate = useNavigate()
   const { user, follow, unfollow, isFollowing } = useUser()
-  const [popAnim, setPopAnim] = useState(false)
-
   if (!helper) return null
 
   const following = isFollowing(helper.id)
@@ -31,9 +28,6 @@ export default function HelperCard({ helper, onContact, showContact = true, show
   }
 
   function handleFollow(e) {
-    setPopAnim(false)
-    if (typeof requestAnimationFrame !== 'undefined') requestAnimationFrame(() => setPopAnim(true)); else setPopAnim(true)
-    setTimeout(() => setPopAnim(false), 350)
     e.stopPropagation()
     haptic('light')
     if (!user) { showToast('Inicia sesión para seguir profesionales'); return }
@@ -50,7 +44,7 @@ export default function HelperCard({ helper, onContact, showContact = true, show
   const lastName  = helper.name?.split(' ')[1]?.[0]
 
   return (
-    <div className={`${styles.card} card-enter`} onClick={handleTap}>
+    <div className={styles.card} onClick={handleTap}>
       {/* ROW: Avatar + Info + CTA (always same height) */}
       <div className={styles.row}>
 
@@ -91,7 +85,7 @@ export default function HelperCard({ helper, onContact, showContact = true, show
         {/* CTA — always vertically centered */}
         <div className={styles.cta}>
           <button className={`${styles.favBtn} ${following ? styles.favBtnActive : ''}`} onClick={handleFollow}>
-            <span className={popAnim ? 'follow-pop' : ''} style={{display:'flex',alignItems:'center'}}>{following ? <UserCheck size={13} color='var(--purple)' strokeWidth={2} /> : <UserPlus size={13} color='rgba(0,0,0,0.3)' strokeWidth={1.8} />}</span>
+            {following ? <UserCheck size={13} color='var(--purple)' strokeWidth={2} /> : <UserPlus size={13} color='rgba(0,0,0,0.3)' strokeWidth={1.8} />}
           </button>
           {showContact && (
             <button className={styles.contactBtn} onClick={handleContact}>

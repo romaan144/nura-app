@@ -104,7 +104,7 @@
   display: inline-flex;
   align-items: center;
   gap: 3px;
-  font-size: var(--text-xs);
+  font-size: 10px;
   font-weight: 600;
   color: var(--green);
   background: var(--green-light);
@@ -279,7 +279,7 @@
   display: inline-flex;
   align-items: center;
   gap: 3px;
-  font-size: var(--text-xs);
+  font-size: 9px;
   color: var(--green);
   font-weight: 600;
 }
@@ -313,7 +313,7 @@
   margin-top: 6px;
 }
 .expTag {
-  font-size: var(--text-xs);
+  font-size: 10px;
   color: rgba(0,0,0,0.5);
   background: rgba(0,0,0,0.04);
   border: 1px solid var(--ink-border);
@@ -336,7 +336,7 @@
   margin: 0 0 4px;
 }
 .quote span {
-  font-size: var(--text-xs);
+  font-size: 10px;
   color: var(--ink-tertiary);
   font-weight: 600;
 }
@@ -375,7 +375,7 @@
 }
 .dayOn  { background: var(--green-light); border-color: rgba(5,150,105,0.18); }
 .dayOff { background: rgba(0,0,0,0.03); border-color: rgba(0,0,0,0.06); }
-.dayPill span:first-child { font-size: var(--text-xs); font-weight: 600; color: var(--ink-secondary); margin-bottom: 3px; }
+.dayPill span:first-child { font-size: 10px; font-weight: 600; color: var(--ink-secondary); margin-bottom: 3px; }
 .dayOn  span:last-child { font-size: var(--text-xs); color: var(--green); font-weight: 700; }
 .dayOff span:last-child { font-size: var(--text-xs); color: rgba(0,0,0,0.2); }
 .availNote { font-size: var(--text-xs); color: rgba(0,0,0,0.4); margin-top: 8px; }
@@ -408,7 +408,7 @@
 }
 .reviewItem p::before { content: '\201C'; }
 .reviewItem p::after  { content: '\201D'; }
-.reviewItem span { font-size: var(--text-xs); color: var(--ink-tertiary); font-weight: 600; }
+.reviewItem span { font-size: 10px; color: var(--ink-tertiary); font-weight: 600; }
 
 /* ── Posts ── */
 .postCard {
@@ -470,36 +470,3 @@
 }
 .ayudaItem:last-child { border-bottom: none; }
 
-
-/* ── HERO ENTRANCE ───────────────────────────────────────────────────────
-   Avatar y contenido del hero entran con una animación suave al cargar.
-   ─────────────────────────────────────────────────────────────────────── */
-@keyframes heroIn {
-  from { opacity: 0; transform: translateY(12px); }
-  to   { opacity: 1; transform: translateY(0); }
-}
-
-.hero {
-  animation: heroIn 0.24s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
-}
-
-/* Avatar aparece con un efecto de zoom sutil */
-@keyframes avatarIn {
-  from { opacity: 0; transform: scale(0.88); }
-  to   { opacity: 1; transform: scale(1); }
-}
-
-.avatar {
-  animation: avatarIn 0.28s cubic-bezier(0.34, 1.2, 0.64, 1) 0.05s both;
-}
-
-/* Contenido del perfil entra desde abajo con ligero delay */
-.scroll {
-  animation: heroIn 0.22s ease-out 0.1s both;
-  padding-bottom: 40px;
-}
-
-/* Secciones internas con stagger */
-.section {
-  animation: heroIn 0.2s ease-out both;
-}

@@ -197,8 +197,8 @@ export default function Home({ setSearchState }) {
   const navigate = useNavigate()
   const { user, addSearch, searchHistory, favorites, helpersCache, nuraChatMessages, setNuraChatMessages, nuraLastMatches, setNuraLastMatches, cacheHelpers } = useUser()
   // messages persisted in context so they survive navigation
-  const messages = nuraChatMessages || []
-  const setMessages = setNuraChatMessages || (() => {})
+  const messages = nuraChatMessages
+  const setMessages = setNuraChatMessages
   const [input, setInput] = useState('')
   const [loading, setLoading] = useState(false)
   const [listening, setListening] = useState(false)
@@ -815,25 +815,6 @@ export default function Home({ setSearchState }) {
           )
           return null
         })()}
-
-        {messages.length <= 1 && !inputFocused && !input && (
-          <div className={styles.initChips}>
-            {[
-              'Necesito un fontanero urgente',
-              'Busco psicólogo infantil',
-              'Quiero clases de guitarra',
-              'Necesito ayuda con la declaración',
-              'Busco entrenador personal',
-            ].map((chip, i) => (
-              <button
-                key={i}
-                className={styles.initChip}
-                onClick={() => handleSend(chip)}>
-                {chip}
-              </button>
-            ))}
-          </div>
-        )}
 
         <div className={styles.inputCapsule}>
           <button className={styles.plusBtn}><Plus size={18} /></button>

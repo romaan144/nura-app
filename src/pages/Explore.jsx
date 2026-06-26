@@ -349,8 +349,8 @@ export default function Explore() {
                   className={styles.catCard}
                   onClick={() => openCategory(cat)}
                 >
-                  <div className={styles.catIconWrap} style={{background: cat.bg.replace('0.10)', '0.15)')}}>
-                    <Icon size={26} color={cat.color} strokeWidth={1.7} />
+                  <div className={styles.catIconWrap} style={{background: cat.bg}}>
+                    <Icon size={24} color={cat.color} strokeWidth={1.8} />
                   </div>
                   <div className={styles.catInfo}>
                     <span className={styles.catLabel}>{cat.label}</span>
@@ -364,17 +364,9 @@ export default function Explore() {
 
         {/* ── LOADING ─────────────────────────────────────── */}
         {isLoading && (
-          <div style={{display:'flex',flexDirection:'column',gap:'10px',padding:'0 16px'}}>
-            {[0,1,2,3,4].map(i => (
-              <div key={i} className="skeleton-card">
-                <div className="skeleton skeleton-avatar" />
-                <div className="skeleton-body">
-                  <div className="skeleton skeleton-line-lg" />
-                  <div className="skeleton skeleton-line-md" />
-                  <div className="skeleton skeleton-line-sm" />
-                </div>
-              </div>
-            ))}
+          <div className={styles.loading}>
+            <Loader2 size={28} color="var(--purple)" style={{animation:'spin 1s linear infinite'}} />
+            <p>Buscando profesionales...</p>
           </div>
         )}
 
