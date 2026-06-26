@@ -62,7 +62,6 @@
   border: 3.5px solid #fff;
   box-shadow: 0 4px 24px rgba(0,0,0,0.13);
   display: block;
-  background: rgba(0,0,0,0.06);
 }
 .avatarFallback {
   width:108px; height:108px; border-radius:50%;
