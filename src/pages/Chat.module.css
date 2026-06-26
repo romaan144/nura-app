@@ -101,7 +101,8 @@
 .emptyChatPrice { font-size: var(--text-sm); font-weight: 700; color: var(--purple); }
 
 .msg { display: flex; align-items: flex-end; gap: 8px; margin: 1px 0; }
-.msgUser { flex-direction: row-reverse; }
+.msgUser { flex-direction: row-reverse;   will-change: transform;
+}
 
 .msgAvatarImg { width: 28px; height: 28px; border-radius: 50%; object-fit: cover; flex-shrink: 0; }
 .msgAvatar { width: 28px; height: 28px; border-radius: 50%; display: flex; align-items: center; justify-content: center; color: white; font-weight: 700; font-size: var(--text-xs); flex-shrink: 0; }

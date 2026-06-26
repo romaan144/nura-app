@@ -11,6 +11,7 @@
   box-shadow: var(--shadow-md);
   transition: box-shadow 0.15s ease, transform 0.15s ease, opacity 0.15s;
   -webkit-tap-highlight-color: transparent;
+  will-change: transform;
 }
 
 .card:active {

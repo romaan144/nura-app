@@ -55,6 +55,7 @@
   flex-direction: column;
   align-items: center;
   border-bottom: 1px solid rgba(0,0,0,0.06);
+  will-change: transform;
 }
 
 .avatarWrap { position:relative; margin-bottom:16px; }
@@ -176,14 +177,20 @@
 /* CTAs */
 .ctaPrimary {
   display: flex; align-items: center; justify-content: center; gap: 7px;
-  width: 100%; padding: 14px;
+  width: 100%; padding: 15px;
   background: var(--purple); color: white;
   border: none; border-radius: var(--radius-full);
-  font-size: var(--text-sm); font-weight: 700;
+  font-size: var(--text-base); font-weight: 700;
   cursor: pointer; font-family: inherit;
   margin-bottom: 9px;
-  transition: opacity 0.15s;
+  box-shadow: 0 4px 16px rgba(123,47,255,0.30);
+  transition: opacity 0.15s, box-shadow 0.15s, transform 0.12s;
   letter-spacing: -0.1px;
+}
+
+.ctaPrimary:active {
+  transform: scale(0.98);
+  box-shadow: 0 2px 8px rgba(123,47,255,0.20);
 }
 .ctaPrimary:active { opacity: 0.8; }
 

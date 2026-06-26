@@ -11,6 +11,7 @@
   padding: max(env(safe-area-inset-top, 0px), 12px) 14px 10px;
   background: transparent;
   pointer-events: none;
+  will-change: transform;
 }
 .header > * { pointer-events: all; }
 
