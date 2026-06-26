@@ -173,14 +173,20 @@
 /* CTAs */
 .ctaPrimary {
   display: flex; align-items: center; justify-content: center; gap: 7px;
-  width: 100%; padding: 14px;
+  width: 100%; padding: 16px;
   background: var(--purple); color: white;
   border: none; border-radius: var(--radius-full);
-  font-size: var(--text-sm); font-weight: 700;
+  font-size: var(--text-base); font-weight: 700;
   cursor: pointer; font-family: inherit;
   margin-bottom: 9px;
-  transition: opacity 0.15s;
+  box-shadow: 0 4px 16px rgba(123,47,255,0.28);
+  transition: transform 0.12s ease, box-shadow 0.12s ease, opacity 0.15s;
   letter-spacing: -0.1px;
+}
+
+.ctaPrimary:active {
+  transform: scale(0.98);
+  box-shadow: 0 2px 8px rgba(123,47,255,0.18);
 }
 .ctaPrimary:active { opacity: 0.8; }
 
