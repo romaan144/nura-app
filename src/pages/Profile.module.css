@@ -13,7 +13,14 @@
 }
 
 /* ── ZONA 1: IDENTIDAD ───────────────────────────────────────── */
-
+.identity {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 32px 24px 28px;
+  background: white;
+  gap: 6px;
+}
 
 .avatarWrap {
   position: relative;
@@ -100,7 +107,10 @@
 }
 
 /* ── ZONA 2: ACTIVIDAD ───────────────────────────────────────── */
-
+.activityZone {
+  margin-top: 12px;
+  padding: 0 14px;
+}
 
 .zoneLabel {
   font-size: var(--text-xxs);
@@ -193,7 +203,10 @@
 }
 
 /* ── ZONA 3: BÚSQUEDAS RECIENTES ─────────────────────────────── */
-
+.recentZone {
+  margin-top: 12px;
+  padding: 0 14px;
+}
 
 .recentList {
   background: white;
@@ -228,7 +241,13 @@
 }
 
 /* ── ZONA 4: EVOLUCIÓN ───────────────────────────────────────── */
-
+.evolutionZone {
+  margin: 12px 14px 0;
+  background: white;
+  border-radius: var(--radius-lg);
+  padding: 22px 20px;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+}
 
 .evolutionQ {
   font-size: var(--text-base);
@@ -328,38 +347,7 @@
   from { opacity: 0; transform: translateY(16px); }
   to   { opacity: 1; transform: translateY(0); }
 }
-
-
-
-
-
-.identity {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  padding: 32px 24px 28px;
-  background: white;
-  gap: 6px;
-  animation: profileAvatarIn 0.36s cubic-bezier(0.22,1,0.36,1) forwards;
-}
-
-.activityZone {
-  margin-top: 12px;
-  padding: 0 14px;
-  animation: profileContentIn 0.32s cubic-bezier(0.22,1,0.36,1) 0.08s forwards;
-}
-
-.recentZone {
-  margin-top: 12px;
-  padding: 0 14px;
-  animation: profileContentIn 0.32s cubic-bezier(0.22,1,0.36,1) 0.14s forwards;
-}
-
-.evolutionZone {
-  margin: 12px 14px 0;
-  background: white;
-  border-radius: var(--radius-lg);
-  padding: 22px 20px;
-  box-shadow: 0 1px 3px rgba(0,0,0,0.05);
-  animation: profileContentIn 0.32s cubic-bezier(0.22,1,0.36,1) 0.20s forwards;
-}
+.identity   { animation: profileAvatarIn 0.36s cubic-bezier(0.22,1,0.36,1) forwards; }
+.activityZone { animation: profileContentIn 0.32s cubic-bezier(0.22,1,0.36,1) 0.08s forwards; }
+.recentZone   { animation: profileContentIn 0.32s cubic-bezier(0.22,1,0.36,1) 0.14s forwards; }
+.evolutionZone { animation: profileContentIn 0.32s cubic-bezier(0.22,1,0.36,1) 0.20s forwards; }

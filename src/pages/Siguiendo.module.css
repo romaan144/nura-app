@@ -12,11 +12,11 @@
   to   { opacity: 1; transform: translateY(0); }
 }
 
-
+.content { padding: 0 14px 40px; }
 .title { font-size: var(--text-lg); font-weight: 800; color: var(--ink); margin-bottom: 4px; letter-spacing: -0.5px; }
 .sub { font-size: var(--text-sm); color: var(--soft); margin-bottom: 20px; }
-
-.card { background: white; border: 1px solid rgba(0,0,0,0.07); border-radius: var(--radius-xl); padding: var(--card-padding); display: flex; align-items: center; justify-content: space-between; box-shadow: var(--shadow-md); cursor: pointer; transition: all 0.15s; animation: cardIn 0.36s cubic-bezier(0.22,1,0.36,1) forwards; }
+.list { display: flex; flex-direction: column; gap: 10px; }
+.card { background: white; border: 1px solid rgba(0,0,0,0.05); border-radius: var(--radius-lg); padding: var(--card-padding); display: flex; align-items: center; justify-content: space-between; box-shadow: var(--shadow-xs); cursor: pointer; transition: all 0.15s; }
 .card:active { opacity: 0.75; }
 .cardLeft { display: flex; align-items: center; gap: 12px; }
 .avatar { width: 48px; height: 48px; border-radius: 50%; object-fit: cover; }
@@ -25,14 +25,14 @@
 .meta { display: flex; align-items: center; gap: 5px; font-size: var(--text-xs); color: var(--soft); }
 .followBtn { width: 36px; height: 36px; border-radius: 50%; background: rgba(239,68,68,0.08); border: none; display: flex; align-items: center; justify-content: center; flex-shrink: 0; transition: opacity 0.15s; cursor: pointer; }
 .followBtn:active { opacity: 0.6; }
-
+.empty { display: flex; flex-direction: column; align-items: center; text-align: center; gap: 14px; padding: 60px 20px; }
 .empty h3 { font-size: var(--text-md); font-weight: 700; color: var(--ink); margin: 0; }
 .empty p { font-size: var(--text-sm); color: var(--soft); margin: 0; line-height: 1.6; }
-
+.emptyBtn { padding: 12px 28px; background: var(--purple); color: white; border: none; border-radius: 20px; font-size: var(--text-sm); font-weight: 700; }
 @media (min-width: 768px) {
   
-  
-  
+  .content { padding: 0 32px 60px; }
+  .list { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
 }
 
 /* Bottom nav clearance */
@@ -40,16 +40,16 @@
   
 }
 
-
+.emptyIcon { font-size: 52px; }
 .emptyTitle { font-size: var(--text-md); font-weight: 800; color: rgba(0,0,0,0.75); margin: 0; letter-spacing: -0.3px; }
 .emptyDesc { font-size: var(--text-sm); color: rgba(0,0,0,0.4); margin: 0; line-height: 1.65; max-width: 240px; text-align: center; }
-
+.emptyBtn { padding: 13px 28px; background: var(--purple); color: white; border: none; border-radius: var(--radius-full); font-size: var(--text-sm); font-weight: 700; cursor: pointer; width: 100%; max-width: 280px; transition: opacity 0.2s; font-family: inherit; }
 .emptyBtn:active { opacity: 0.75; }
 .emptyBtnSecondary { padding: 12px 28px; background: rgba(0,0,0,0.05); color: rgba(0,0,0,0.55); border: none; border-radius: var(--radius-full); font-size: var(--text-sm); font-weight: 600; cursor: pointer; width: 100%; max-width: 280px; font-family: inherit; }
 
 /* ── EMPTY STATE ─────────────────────────────────────────────────────── */
-
-
+.empty { animation: emptyIn 0.38s cubic-bezier(0.22,1,0.36,1) forwards; }
+.emptyIcon { animation: floatIcon 3s ease-in-out infinite; display: inline-flex; }
 
 /* ── SAVED LIST CASCADA ──────────────────────────────────────────────── */
 .savedItem { animation: cardIn 0.34s cubic-bezier(0.22,1,0.36,1) forwards; }
@@ -58,52 +58,3 @@
 .savedItem:nth-child(3) { animation-delay: 110ms; }
 .savedItem:nth-child(4) { animation-delay: 160ms; }
 .savedItem:nth-child(n+5) { animation-delay: 200ms; }
-
-/* ── SIGUIENDO CARDS CASCADA ─────────────────────────────────────────── */
-.card:nth-child(1) { animation-delay: 0ms; }
-.card:nth-child(2) { animation-delay: 60ms; }
-.card:nth-child(3) { animation-delay: 120ms; }
-.card:nth-child(4) { animation-delay: 175ms; }
-.card:nth-child(n+5) { animation-delay: 220ms; }
-
-.emptyIcon {
-  font-size: 52px;
-  animation: floatIcon 3s ease-in-out infinite;
-  display: inline-flex;
-}
-
-.empty {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  text-align: center;
-  gap: 14px;
-  padding: 60px 20px;
-  animation: emptyIn 0.38s cubic-bezier(0.22,1,0.36,1) forwards;
-}
-
-.emptyBtn {
-  padding: 13px 28px;
-  background: var(--purple);
-  color: white;
-  border: none;
-  border-radius: var(--radius-full);
-  font-size: var(--text-sm);
-  font-weight: 700;
-  cursor: pointer;
-  width: 100%;
-  max-width: 280px;
-  transition: opacity 0.2s;
-  font-family: inherit;
-}
-
-.list {
-  display: grid;
-  flex-direction: column;
-  gap: 12px;
-  grid-template-columns: 1fr 1fr;
-}
-
-.content {
-  padding: 0 32px 60px;
-}

@@ -22,7 +22,10 @@
 
   .base,
   .framework,
-  
+  .vite {
+    inset-inline: 0;
+    margin: 0 auto;
+  }
 
   .base {
     width: 170px;
@@ -31,7 +34,9 @@
   }
 
   .framework,
-  
+  .vite {
+    position: absolute;
+  }
 
   .framework {
     z-index: 1;
@@ -41,7 +46,14 @@
       scale(1.4);
   }
 
-  
+  .vite {
+    z-index: 0;
+    top: 107px;
+    height: 26px;
+    width: auto;
+    transform: perspective(2000px) rotateZ(300deg) rotateX(40deg) rotateY(39deg)
+      scale(0.8);
+  }
 }
 
 #center {
@@ -169,16 +181,4 @@
     right: 0;
     border-right-color: var(--border);
   }
-}
-
-.vite {
-  inset-inline: 0;
-  margin: 0 auto;
-  position: absolute;
-  z-index: 0;
-  top: 107px;
-  height: 26px;
-  width: auto;
-  transform: perspective(2000px) rotateZ(300deg) rotateX(40deg) rotateY(39deg)
-      scale(0.8);
 }
