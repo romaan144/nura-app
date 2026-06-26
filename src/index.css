@@ -326,3 +326,12 @@ textarea:active {
   transform: none;
   opacity: 1;
 }
+
+/* ── ENTRADA ESCALONADA DE TARJETAS ─────────────────────────────────────
+   Las tarjetas entran con fadeIn + translateY suave.
+   Solo CSS — sin tocar ningún JSX.
+   ─────────────────────────────────────────────────────────────────────── */
+@keyframes cardIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
