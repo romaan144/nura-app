@@ -11,8 +11,7 @@
   display: flex; flex-direction: column;
   height: 100dvh; background: var(--paper);
   position: relative; overflow: hidden;
-  animation: fadeSlideIn 0.22s ease both;
-}
+  }
 
 /* ── HEADER ─────────────────────────────────────────── */
 .header {
@@ -255,9 +254,7 @@
   from { opacity: 0; transform: translateY(6px); }
   to   { opacity: 1; transform: translateY(0); }
 }
-.msgRow {
-  animation: msgIn 0.22s ease both;
-}
+
 
 /* ── UTILITIES ── */
 .rowGap4   { display: flex; align-items: center; gap: 4px; }

@@ -10,7 +10,6 @@
   -webkit-overflow-scrolling: touch;
   padding-top: var(--header-h);
   padding-bottom: var(--nav-h);
-  animation: fadeSlideIn 0.2s ease both;
   overscroll-behavior: contain;
 }
 
