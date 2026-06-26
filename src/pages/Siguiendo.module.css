@@ -46,3 +46,7 @@
 .emptyBtn { padding: 13px 28px; background: var(--purple); color: white; border: none; border-radius: var(--radius-full); font-size: var(--text-sm); font-weight: 700; cursor: pointer; width: 100%; max-width: 280px; transition: opacity 0.2s; font-family: inherit; }
 .emptyBtn:active { opacity: 0.75; }
 .emptyBtnSecondary { padding: 12px 28px; background: rgba(0,0,0,0.05); color: rgba(0,0,0,0.55); border: none; border-radius: var(--radius-full); font-size: var(--text-sm); font-weight: 600; cursor: pointer; width: 100%; max-width: 280px; font-family: inherit; }
+
+/* ── EMPTY STATE ─────────────────────────────────────────────────────── */
+.empty { animation: emptyIn 0.38s cubic-bezier(0.22,1,0.36,1) forwards; }
+.emptyIcon { animation: floatIcon 3s ease-in-out infinite; display: inline-flex; }

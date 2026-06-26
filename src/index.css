@@ -375,3 +375,13 @@ textarea:active {
 .skeleton-line-lg { height: 13px; width: 55%; }
 .skeleton-line-md { height: 11px; width: 35%; }
 .skeleton-line-sm { height: 10px; width: 75%; }
+
+/* ── EMPTY STATE ENTRADA ─────────────────────────────────────────────── */
+@keyframes emptyIn {
+  from { opacity: 0; transform: translateY(20px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+@keyframes floatIcon {
+  0%, 100% { transform: translateY(0); }
+  50%       { transform: translateY(-8px); }
+}
