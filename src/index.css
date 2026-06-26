@@ -323,3 +323,9 @@ textarea:active {
   transform: none;
   opacity: 1;
 }
+
+/* ── ENTRADA TARJETAS ────────────────────────────────────────────────── */
+@keyframes cardIn {
+  from { transform: translateY(10px); }
+  to   { transform: translateY(0); }
+}
