@@ -194,12 +194,7 @@ body {
   }
 }
 
-.desktopMain {
-  flex: 1;
-  min-width: 0;
-  overflow-y: auto;
-  overflow-x: hidden;
-}
+
 
 /* ══════════════════════════════════════════════════════════
    DESKTOP FIXES — contain all fixed/sticky elements
@@ -207,10 +202,7 @@ body {
 @media (min-width: 768px) {
 
   /* Pages that use height:100dvh need to fill desktopMain instead */
-  .desktopMain {
-    display: flex;
-    flex-direction: column;
-  }
+  
 
   /* Home and RegisterHelper — chat pages that need to fill height */
   .desktopMain > * {
@@ -384,4 +376,13 @@ textarea:active {
 @keyframes floatIcon {
   0%, 100% { transform: translateY(0); }
   50%       { transform: translateY(-8px); }
+}
+
+.desktopMain {
+  flex: 1;
+  min-width: 0;
+  overflow-y: auto;
+  overflow-x: hidden;
+  display: flex;
+  flex-direction: column;
 }
