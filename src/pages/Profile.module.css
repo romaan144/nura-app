@@ -6,6 +6,7 @@
   -webkit-overflow-scrolling: touch;
   padding-top: var(--header-h);
   padding-bottom: var(--nav-h);
+  overscroll-behavior: contain;
 }
 
 .scroll {
@@ -51,7 +52,7 @@
 }
 
 .name {
-  font-size: 22px;
+  font-size: var(--text-lg);
   font-weight: 700;
   color: var(--ink-primary);
   margin: 0;
@@ -145,7 +146,7 @@
 .activityCard:active { opacity: 0.85; }
 
 .activityNum {
-  font-size: 28px;
+  font-size: var(--text-xl);
   font-weight: 700;
   color: var(--ink-primary);
   letter-spacing: -1px;

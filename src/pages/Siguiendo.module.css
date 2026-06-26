@@ -5,6 +5,7 @@
   -webkit-overflow-scrolling: touch;
   padding-top: var(--header-h);
   padding-bottom: var(--nav-h);
+  scroll-behavior: smooth;
 }
 
 @keyframes fadeSlideIn {
