@@ -66,3 +66,12 @@
 @media (min-width: 768px) {
   .header { padding: 14px 24px; }
 }
+
+/* ── HEADER ENTRANCE ─────────────────────────────────────────────────── */
+@keyframes headerIn {
+  from { opacity: 0; transform: translateY(-4px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+.header {
+  animation: headerIn 0.18s ease-out both;
+}

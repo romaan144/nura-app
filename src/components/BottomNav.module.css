@@ -52,6 +52,9 @@
 .tabActive .label {
   color: var(--purple);
   font-weight: 700;
+  transform: scale(1.04);
+  display: inline-block;
+  transition: transform 0.18s ease, color 0.18s ease;
 }
 
 .label {
@@ -60,8 +63,9 @@
   color: rgba(0,0,0,0.3);
   font-family: -apple-system, 'Inter', sans-serif;
   letter-spacing: -0.1px;
-  transition: color 0.15s;
+  transition: color 0.18s ease, transform 0.18s ease;
   line-height: 1;
+  display: inline-block;
 }
 /* Unread badge */
 .badge {

@@ -398,3 +398,10 @@ textarea:active {
   0%, 100% { transform: translateY(0px); }
   50%       { transform: translateY(-7px); }
 }
+
+/* ── BUTTON LOADING STATE ───────────────────────────────────────────── */
+button:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+  transform: none !important;
+}
