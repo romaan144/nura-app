@@ -52,11 +52,19 @@
 /* ── Card ────────────────────────────────────────────── */
 .card {
   background: #FFFFFF;
-  border: 1px solid rgba(0,0,0,0.05);
-  border-radius: var(--radius-lg);
+  border: 1px solid rgba(0,0,0,0.07);
+  border-radius: var(--radius-xl);
   overflow: hidden;
-  box-shadow: var(--shadow-xs);
+  box-shadow: var(--shadow-md);
+  animation: cardIn 0.22s ease-out both;
 }
+
+.card:nth-child(1) { animation-delay: 0ms; }
+.card:nth-child(2) { animation-delay: 40ms; }
+.card:nth-child(3) { animation-delay: 80ms; }
+.card:nth-child(4) { animation-delay: 120ms; }
+.card:nth-child(5) { animation-delay: 160ms; }
+.card:nth-child(n+6) { animation-delay: 200ms; }
 
 .suggestedLabel {
   font-size: var(--text-xs); font-weight: 700;

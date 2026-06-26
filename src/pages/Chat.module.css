@@ -306,19 +306,21 @@
 .msgTime {
   display: block;
   font-size: var(--text-xs);
-  color: rgba(255,255,255,0.65);
+  color: rgba(255,255,255,0.55);
   text-align: right;
-  margin-top: 3px;
+  margin-top: 5px;
   line-height: 1;
+  letter-spacing: 0.1px;
 }
 
 .msgTimeHelper {
   display: block;
   font-size: var(--text-xs);
-  color: rgba(0,0,0,0.35);
+  color: rgba(0,0,0,0.30);
   text-align: right;
-  margin-top: 3px;
+  margin-top: 5px;
   line-height: 1;
+  letter-spacing: 0.1px;
 }
 
 /* ── INPUT BUTTONS — igual que Home ────────────────────────────────── */
