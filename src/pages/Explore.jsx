@@ -432,8 +432,13 @@ export default function Explore() {
             {pagedList.length > 0 ? (
               <>
                 <div className={styles.list} key={`${activeCategory}-${activeSubcategory}`}>
-                  {pagedList.map(h => (
-                    <HelperCard key={h.id} helper={h} onClick={() => navigate(`/helper/${h.id}`)} />
+                  {pagedList.map((h, i) => (
+                    <div key={h.id} style={{
+                      animation: `slideInTest 0.6s ease-out ${i * 120}ms both`,
+                      transform: 'translateY(0)'
+                    }}>
+                    <HelperCard helper={h} onClick={() => navigate(`/helper/${h.id}`)} />
+                    </div>
                   ))}
                 </div>
                 {hasMore && (
