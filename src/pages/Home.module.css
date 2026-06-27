@@ -20,7 +20,7 @@
   flex: 1;
   overflow-y: auto;
   overflow-x: hidden;
-  padding: 80px 14px 0;
+  padding: 64px 14px 0;
   display: flex;
   flex-direction: column;
   justify-content: flex-end; /* content always anchored to bottom — no JS scroll needed */
