@@ -54,7 +54,7 @@
   cursor: pointer; transition: all 0.2s;
   box-shadow: var(--shadow-sm), 0 1px 3px rgba(0,0,0,0.05);
   position: relative; overflow: hidden;
-  animation: cardIn 0.36s cubic-bezier(0.22,1,0.36,1) forwards;
+  animation: cardIn 0.22s ease-out forwards;
 }
 .card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px; background: var(--grad-main); opacity: 0; transition: opacity 0.2s; }
 .card:hover { border-color: transparent; box-shadow: var(--shadow-sm), 0 1px 3px rgba(0,0,0,0.05); transform: translateY(-2px); }
@@ -133,7 +133,7 @@
 .card:nth-child(5)  { animation-delay: 205ms; }
 .card:nth-child(n+6) { animation-delay: 245ms; }
 
-.cards > * { animation: fadeUp 0.36s cubic-bezier(0.22, 1, 0.36, 1) forwards; }
+.cards > * { animation: fadeUp 0.22s ease-out forwards; }
 .cards > *:nth-child(1) { animation-delay: 0ms; }
 .cards > *:nth-child(2) { animation-delay: 60ms; }
 .cards > *:nth-child(3) { animation-delay: 115ms; }

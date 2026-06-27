@@ -12,7 +12,7 @@
   padding-bottom: var(--nav-h);
 }
 
-.scroll { animation: fadeUp 0.26s cubic-bezier(0.22, 1, 0.36, 1) 0.10s forwards;
+.scroll { animation: fadeUp 0.22s ease-out 0.10s forwards;
   padding-bottom: 40px;
   animation: heroIn 0.24s ease-out 0.10s;
 }
@@ -47,7 +47,7 @@
 /* ══════════════════════════════════════════════════════════
    HERO — first impression, no scroll needed
    ══════════════════════════════════════════════════════════ */
-.hero { animation: fadeUp 0.28s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+.hero { animation: fadeUp 0.22s ease-out forwards;
   background: #FFFFFF;
   padding: 20px 20px 24px;
   display: flex;
@@ -58,7 +58,7 @@
 }
 
 .avatarWrap { position:relative; margin-bottom:16px; }
-.avatar { animation: scaleIn 0.32s cubic-bezier(0.22, 1, 0.36, 1) 0.06s forwards;
+.avatar { animation: scaleIn 0.22s ease-out 0.06s forwards;
   width: 108px; height: 108px;
   border-radius: 50%; object-fit:cover;
   border: 3.5px solid #fff;
@@ -505,5 +505,5 @@
   padding: 20px 20px 0;
   border-top: 1px solid var(--rule);
   margin-top: 4px;
-  animation: fadeUp 0.28s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+  animation: fadeUp 0.22s ease-out forwards;
 }

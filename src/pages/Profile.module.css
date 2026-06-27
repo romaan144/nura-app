@@ -13,14 +13,14 @@
 }
 
 /* ── ZONA 1: IDENTIDAD ───────────────────────────────────────── */
-.identity { animation: scaleIn 0.36s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+.identity { animation: scaleIn 0.22s ease-out forwards;
   display: flex;
   flex-direction: column;
   align-items: center;
   padding: 32px 24px 28px;
   background: white;
   gap: 6px;
-  animation: profileAvatarIn 0.36s cubic-bezier(0.22,1,0.36,1) forwards;
+  animation: profileAvatarIn 0.22s ease-out forwards;
 }
 
 .avatarWrap {
@@ -108,10 +108,10 @@
 }
 
 /* ── ZONA 2: ACTIVIDAD ───────────────────────────────────────── */
-.activityZone { animation: fadeUp 0.32s cubic-bezier(0.22, 1, 0.36, 1) 0.08s forwards;
+.activityZone { animation: fadeUp 0.22s ease-out 0.08s forwards;
   margin-top: 12px;
   padding: 0 14px;
-  animation: profileContentIn 0.32s cubic-bezier(0.22,1,0.36,1) 0.08s forwards;
+  animation: profileContentIn 0.22s ease-out 0.08s forwards;
 }
 
 .zoneLabel {
@@ -205,10 +205,10 @@
 }
 
 /* ── ZONA 3: BÚSQUEDAS RECIENTES ─────────────────────────────── */
-.recentZone { animation: fadeUp 0.32s cubic-bezier(0.22, 1, 0.36, 1) 0.14s forwards;
+.recentZone { animation: fadeUp 0.22s ease-out 0.14s forwards;
   margin-top: 12px;
   padding: 0 14px;
-  animation: profileContentIn 0.32s cubic-bezier(0.22,1,0.36,1) 0.14s forwards;
+  animation: profileContentIn 0.22s ease-out 0.14s forwards;
 }
 
 .recentList {
@@ -244,13 +244,13 @@
 }
 
 /* ── ZONA 4: EVOLUCIÓN ───────────────────────────────────────── */
-.evolutionZone { animation: fadeUp 0.32s cubic-bezier(0.22, 1, 0.36, 1) 0.20s forwards;
+.evolutionZone { animation: fadeUp 0.22s ease-out 0.20s forwards;
   margin: 12px 14px 0;
   background: white;
   border-radius: var(--radius-lg);
   padding: 22px 20px;
   box-shadow: 0 1px 3px rgba(0,0,0,0.05);
-  animation: profileContentIn 0.32s cubic-bezier(0.22,1,0.36,1) 0.20s forwards;
+  animation: profileContentIn 0.22s ease-out 0.20s forwards;
 }
 
 .evolutionQ {
