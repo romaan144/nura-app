@@ -87,7 +87,7 @@
   overflow: hidden;
 }
 .specialty {
-  font-size: var(--text-sm);
+  font-size: var(--text-base);
   color: var(--ink-secondary);
   font-weight: 400;
   white-space: nowrap;
