@@ -326,7 +326,7 @@ textarea:active {
 
 /* ── ENTRADA TARJETAS ────────────────────────────────────────────────── */
 @keyframes cardIn {
-  from { transform: translateY(18px); }
+  from { transform: translateY(40px); }
   to   { transform: translateY(0); }
 }
 
