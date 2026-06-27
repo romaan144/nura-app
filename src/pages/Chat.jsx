@@ -534,7 +534,7 @@ export default function Chat() {
           const { msg } = item
           const isNura = msg.from === 'nura'
           return (
-            <div key={msg.id} className={`${styles.msg} ${msg.from === 'user' ? styles.msgUser : styles.msgHelper}`}>
+            <div key={msg.id} className={`${styles.msg} ${msg.from === 'user' ? styles.msgUser : styles.msgHelper}`} style={{animation:`fadeInUp 0.25s ease-out forwards`}}>
               {msg.from === 'helper' && (
                 helper.avatarUrl
                   ? <img src={helper.avatarUrl} alt="" className={styles.msgAvatarImg} />

@@ -232,7 +232,7 @@ function HelperProfileInner() {
         {/* ══════════════════════════════════════════════════
             HERO — quien es esta persona en 5 segundos
             ══════════════════════════════════════════════════ */}
-        <div className={styles.hero}>
+        <div className={styles.hero} style={{animation:'fadeInUp 0.3s ease-out forwards'}}>
 
           {/* Avatar + availability */}
           <div className={styles.avatarWrap}>
@@ -332,7 +332,7 @@ function HelperProfileInner() {
 
         {/* ── Cómo puedo ayudarte ── */}
         {(h.tags?.length > 0 || h.specialty) && (
-          <section className={`${styles.section} ${styles.sectionFirst}`}>
+          <section style={{animation:`fadeInUp 0.3s ease-out 0ms forwards`}} className={`${styles.section} ${styles.sectionFirst}`}>
             <h2 className={styles.sectionHeading}>Puedo ayudarte con</h2>
             <div className={styles.ayudaList}>
               {(() => {
@@ -379,7 +379,7 @@ function HelperProfileInner() {
 
 {/* ── Valoraciones ── */}
         {h.reviews > 0 && (
-          <section className={styles.section}>
+          <section style={{animation:`fadeInUp 0.3s ease-out 80ms forwards`}} className={styles.section}>
             <h2 className={styles.sectionHeading}>
               <Star size={14} fill="var(--amber)" color="var(--amber)" /> Lo que dicen de {firstName}
             </h2>
@@ -411,7 +411,7 @@ function HelperProfileInner() {
 
         {/* ── Experiencia ── */}
         {h.experience?.length > 0 && (
-          <section className={styles.section}>
+          <section style={{animation:`fadeInUp 0.3s ease-out 160ms forwards`}} className={styles.section}>
             <h2 className={styles.sectionHeading}>
               <Briefcase size={14} /> Trayectoria profesional
             </h2>
@@ -459,7 +459,7 @@ function HelperProfileInner() {
 
         {/* ── Formación ── */}
         {h.education?.length > 0 && (
-          <section className={styles.section}>
+          <section style={{animation:`fadeInUp 0.3s ease-out 240ms forwards`}} className={styles.section}>
             <h2 className={styles.sectionHeading}>
               <BookOpen size={14} /> Formación académica
             </h2>
@@ -484,7 +484,7 @@ function HelperProfileInner() {
 
         {/* ── Habilidades ── */}
         {h.skills?.length > 0 && (
-          <section className={styles.section}>
+          <section style={{animation:`fadeInUp 0.3s ease-out 320ms forwards`}} className={styles.section}>
             <h2 className={styles.sectionHeading}>En qué destaca</h2>
             <div className={styles.tags}>
               {h.skills.map((s, i) => (
@@ -496,7 +496,7 @@ function HelperProfileInner() {
 
         {/* ── Idiomas ── */}
         {h.languages?.length > 0 && (
-          <section className={styles.section}>
+          <section style={{animation:`fadeInUp 0.3s ease-out 400ms forwards`}} className={styles.section}>
             <h2 className={styles.sectionHeading}>
               <Globe size={14} /> Idiomas
             </h2>
@@ -510,7 +510,7 @@ function HelperProfileInner() {
 
         {/* ── Publicaciones ── */}
         {h.posts?.length > 0 && (
-          <section className={styles.section}>
+          <section style={{animation:`fadeInUp 0.3s ease-out 480ms forwards`}} className={styles.section}>
             <h2 className={styles.sectionHeading}>Publicaciones</h2>
             {h.posts.slice(0,2).map((post, i) => (
               <PostCard key={i} post={post} />

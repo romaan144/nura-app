@@ -77,7 +77,7 @@ export default function Profile() {
       <div className={styles.scroll}>
 
         {/* ── ZONA 1: IDENTIDAD ─────────────────────────── */}
-        <div className={styles.identity}>
+        <div className={styles.identity} style={{animation:`fadeInUp 0.3s ease-out 0ms forwards`}}>
           <div className={styles.avatarWrap}>
             <img
               src={`https://api.dicebear.com/9.x/personas/svg?seed=${encodeURIComponent(user.name || 'user')}`}
@@ -128,7 +128,7 @@ export default function Profile() {
         </div>
 
         {/* ── ZONA 2: ACTIVIDAD HUMANA ──────────────────── */}
-        <div className={styles.activityZone}>
+        <div className={styles.activityZone} style={{animation:`fadeInUp 0.3s ease-out 80ms forwards`}}>
           <p className={styles.zoneLabel}>Tu actividad</p>
           <div className={styles.activityGrid}>
             <button className={styles.activityCard} onClick={() => navigate('/')}>
@@ -171,7 +171,7 @@ export default function Profile() {
 
         {/* ── ZONA 3: BÚSQUEDAS RECIENTES ───────────────── */}
         {recentSearches.length > 0 && (
-          <div className={styles.recentZone}>
+          <div className={styles.recentZone} style={{animation:`fadeInUp 0.3s ease-out 160ms forwards`}}>
             <p className={styles.zoneLabel}>Búsquedas recientes</p>
             <div className={styles.recentList}>
               {recentSearches.map((q, i) => (
@@ -186,7 +186,7 @@ export default function Profile() {
 
         {/* ── ZONA 4: EVOLUCIÓN ─────────────────────────── */}
         {!user.isHelper && (
-          <div className={styles.evolutionZone}>
+          <div className={styles.evolutionZone} style={{animation:`fadeInUp 0.3s ease-out 240ms forwards`}}>
             <p className={styles.evolutionQ}>¿Tienes algo que ofrecer?</p>
             <p className={styles.evolutionSub}>
               Muchas personas de Nüra también ayudan a otros. Crea tu perfil profesional y empieza a recibir solicitudes.
