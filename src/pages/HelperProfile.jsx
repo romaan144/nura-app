@@ -237,7 +237,7 @@ function HelperProfileInner() {
           {/* Avatar + availability */}
           <div className={styles.avatarWrap}>
             {h.avatarUrl
-              ? <img src={h.avatarUrl} alt={h.name} className={styles.avatar} />
+              ? <img src={h.avatarUrl} alt={h.name} className={styles.avatar} style={{opacity:0}} onLoad={e => e.target.style.animation="popIn 0.35s ease-out forwards"} />
               : <div className={styles.avatarFallback} style={{background: h.avatarColor || 'var(--purple)'}}>
                   {h.name?.split(' ').slice(0,2).map(w => w[0]).join('').toUpperCase() || h.avatar}
                 </div>
