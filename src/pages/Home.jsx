@@ -653,7 +653,7 @@ export default function Home({ setSearchState }) {
 
 
       {/* Floating top — three independent bubbles */}
-      <div className={styles.floatTop} ref={topRef}>
+      <div className={styles.floatTop} ref={topRef} style={{animation:"fadeInUp 0.3s ease-out forwards"}}>
         
         <div />
 
@@ -737,7 +737,7 @@ export default function Home({ setSearchState }) {
       </div>
 
       {/* Floating bottom — suggestions + input capsule only */}
-      <div className={styles.floatBottom}>
+      <div className={styles.floatBottom} style={{animation:"fadeInUp 0.35s ease-out 0.1s forwards"}}>
         {inputFocused && !input && searchHistory?.length > 0 && (
           <div className={styles.recentSearches}>
             <span className={styles.recentLabel}>Recientes</span>
