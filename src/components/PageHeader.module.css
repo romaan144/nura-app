@@ -1,7 +1,6 @@
 /* PageHeader — identical to Home floating header */
 
-.header { animation: headerDown 0.22s ease-out forwards;
-  position: fixed;
+.header {   position: fixed;
   top: 0;
   left: 0; right: 0;
   z-index: 20;

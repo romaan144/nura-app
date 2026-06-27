@@ -2,7 +2,7 @@
    HELPER CARD — grid-aligned, scannable, premium 2026
    ══════════════════════════════════════════════════════ */
 
-.card { animation: cardIn 0.18s ease-out forwards;
+.card {
   background: #FFFFFF;
   border: 1px solid rgba(0,0,0,0.07);
   border-radius: var(--radius-xl);
@@ -11,7 +11,7 @@
   box-shadow: var(--shadow-md);
   transition: box-shadow 0.15s ease, transform 0.15s ease, opacity 0.15s;
   -webkit-tap-highlight-color: transparent;
-  animation: cardIn 0.38s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+  animation: cardIn 0.18s ease-out forwards;
 }
 
 .card:active {
