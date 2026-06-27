@@ -434,7 +434,7 @@ export default function Explore() {
                 <div className={styles.list} key={`${activeCategory}-${activeSubcategory}`}>
                   {pagedList.map((h, i) => (
                     <div key={h.id} style={{
-                      animation: `cardCascade 0.45s ease-out ${i * 80}ms both`,
+                      animation: `cardCascade 0.35s ease-out ${i * 55}ms both`,
                     }}>
                       <HelperCard helper={h} onClick={() => navigate(`/helper/${h.id}`)} />
                     </div>

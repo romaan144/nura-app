@@ -188,8 +188,7 @@ export default function Chats() {
           const helper = getHelper(chat.helperId)
           const isDemo = demosToShow.some(d => d.helperId === chat.helperId)
           return (
-            <div key={i} style={{animation:`cardCascade 0.45s ease-out ${i*70}ms both`}}>
-            <button
+            <button key={i}
               className={`${styles.chatRow} ${chat.unread > 0 ? styles.chatUnread : ''}`}
               onClick={() => {
                 markRead?.(chat.helperId)
@@ -233,7 +232,6 @@ export default function Chats() {
                 </div>
               </div>
             </button>
-            </div>
           )
         })}
       </div>

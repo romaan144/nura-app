@@ -436,6 +436,6 @@ textarea:active {
 }
 
 @keyframes cardCascade {
-  from { transform: translateY(32px); }
+  from { transform: translateY(16px); }
   to   { transform: translateY(0); }
 }
