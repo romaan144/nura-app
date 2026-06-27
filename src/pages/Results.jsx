@@ -140,7 +140,7 @@ export default function Results({ searchState }) {
               ))}
             </div>
             <div className={`${styles.cards} ${viewMode==='grid'?styles.cardsGrid:''}`}>
-              {(currentMatches||[]).map((h, i) => h && <HelperCard key={h.id || i} helper={h} showPrice />)}
+              {(currentMatches||[]).map((h, i) => h && <div key={h.id || i} style={{animation:`cardCascade 0.45s ease-out ${i*80}ms both`}}><HelperCard helper={h} showPrice /></div>)}
             </div>
           </>
         ) : (

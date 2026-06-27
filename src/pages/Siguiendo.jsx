@@ -37,8 +37,9 @@ export default function Siguiendo() {
           </div>
         ) : (
           <div className={styles.list}>
-            {(saved||[]).map(h => (
-              <div key={h.id} className={styles.card} onClick={() => navigate(`/helper/${h.id}`, { state: { helper: h } })}>
+            {(saved||[]).map((h, i) => (
+              <div key={h.id} style={{animation:`cardCascade 0.45s ease-out ${i*80}ms both`}}>
+              <div className={styles.card} onClick={() => navigate(`/helper/${h.id}`, { state: { helper: h } })}>
                 <div className={styles.cardLeft}>
                   <img src={h.avatarUrl || `https://api.dicebear.com/9.x/personas/svg?seed=${h.name}`}
                     alt={h.name} className={styles.avatar} />
@@ -58,6 +59,7 @@ export default function Siguiendo() {
                   onClick={e => { e.stopPropagation(); isFollowing(h.id) ? unfollow(h.id) : follow(h.id) }}>
                   <UserCheck size={18} color="var(--purple)" />
                 </button>
+              </div>
               </div>
             ))}
           </div>

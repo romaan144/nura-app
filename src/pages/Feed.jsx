@@ -324,7 +324,9 @@ export default function Feed() {
           </div>
         ) : (
           !feedLoading && displayPosts.map((post, i) => (
-            <PostCard key={post.id || i} post={post} />
+            <div key={post.id || i} style={{animation:`cardCascade 0.45s ease-out ${i*80}ms both`}}>
+              <PostCard post={post} />
+            </div>
           ))
         )}
       </div>
