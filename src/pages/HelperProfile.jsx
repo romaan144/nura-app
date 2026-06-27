@@ -287,14 +287,15 @@ function HelperProfileInner() {
           <div className={styles.statsRow}>
             {h.rating && (
               <div className={styles.stat}>
-                <Star size={12} fill="var(--amber)" color="var(--amber)" />
-                <strong>{h.rating}</strong>
-                {h.reviews > 0 && <span>({h.reviews})</span>}
+                <span className={styles.statNum}>⭐ {h.rating}</span>
+                <span className={styles.statLabel}>{h.reviews > 0 ? `${h.reviews} reseñas` : 'Valoración'}</span>
               </div>
             )}
+            {h.rating && h.price && h.price !== 'Consultar' && <div className={styles.statDivider} />}
             {h.price && h.price !== 'Consultar' && (
               <div className={styles.stat}>
-                <strong>{h.price}</strong>
+                <span className={styles.statNum}>{h.price}</span>
+                <span className={styles.statLabel}>por sesión</span>
               </div>
             )}
             {h.responseTime && (
