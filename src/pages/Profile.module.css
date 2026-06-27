@@ -19,8 +19,7 @@
   padding: 32px 24px 28px;
   background: white;
   gap: 6px;
-  animation: profileAvatarIn 0.22s ease-out forwards;
-}
+  }
 
 .avatarWrap {
   position: relative;
@@ -109,8 +108,7 @@
 /* ── ZONA 2: ACTIVIDAD ───────────────────────────────────────── */
 .activityZone {   margin-top: 12px;
   padding: 0 14px;
-  animation: profileContentIn 0.22s ease-out 0.08s forwards;
-}
+  }
 
 .zoneLabel {
   font-size: var(--text-xxs);
@@ -205,8 +203,7 @@
 /* ── ZONA 3: BÚSQUEDAS RECIENTES ─────────────────────────────── */
 .recentZone {   margin-top: 12px;
   padding: 0 14px;
-  animation: profileContentIn 0.22s ease-out 0.14s forwards;
-}
+  }
 
 .recentList {
   background: white;
@@ -246,8 +243,7 @@
   border-radius: var(--radius-lg);
   padding: 22px 20px;
   box-shadow: 0 1px 3px rgba(0,0,0,0.05);
-  animation: profileContentIn 0.22s ease-out 0.20s forwards;
-}
+  }
 
 .evolutionQ {
   font-size: var(--text-base);
