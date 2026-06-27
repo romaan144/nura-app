@@ -150,8 +150,8 @@
 
 /* ── CHAT ITEMS ── */
 @keyframes chatItemIn {
-  from { opacity: 0; transform: translateX(-14px); }
-  to   { opacity: 1; transform: translateX(0); }
+  from { transform: translateX(-14px); }
+  to   { transform: translateX(0); }
 }
 .chatItem:nth-child(1) { animation-delay: 0ms; }
 .chatItem:nth-child(2) { animation-delay: 55ms; }
