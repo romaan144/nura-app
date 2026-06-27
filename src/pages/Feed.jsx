@@ -226,7 +226,7 @@ export default function Feed() {
       <PageHeader />
 
       {/* Tabs */}
-      <div className={styles.tabs}>
+      <div className={styles.tabs} style={{animation:"fadeInUp 0.25s ease-out forwards"}}>
         <div className={styles.tabsInner}>
           <button
             className={`${styles.tab} ${tab==='para-ti' ? styles.tabActive : ''}`}

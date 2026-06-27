@@ -315,10 +315,10 @@ function HelperProfileInner() {
           )}
 
           {/* CTA */}
-          <button className={styles.ctaPrimary} onClick={handleContact}>
+          <button className={styles.ctaPrimary} onClick={handleContact} style={{animation:"popIn 0.3s ease-out 0.2s forwards"}}>
             <MessageCircle size={15} /> Escribir a {firstName}
           </button>
-          <button className={styles.ctaSecondary}
+          <button className={styles.ctaSecondary} style={{animation:"popIn 0.3s ease-out 0.28s forwards"}}
             onClick={() => user ? setShowConfirm(true) : setShowGate(true)}>
             <Calendar size={14} /> Ver disponibilidad
           </button>

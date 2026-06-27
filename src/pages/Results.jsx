@@ -69,7 +69,7 @@ export default function Results({ searchState }) {
 
       <div className={styles.content}>
         {/* Query */}
-        <div className={styles.queryBox}>
+        <div className={styles.queryBox} style={{animation:"fadeInUp 0.28s ease-out forwards"}}>
           <div className={styles.queryLabel}>Tu búsqueda</div>
           <p className={styles.queryText}>"{query}"</p>
         </div>

@@ -20,7 +20,7 @@ export default function Siguiendo() {
     <div className={styles.page}>
       <PageHeader showBack />
       <div className={styles.content}>
-        <h2 className={styles.title}>Siguiendo</h2>
+        <h2 className={styles.title} style={{animation:"fadeInUp 0.25s ease-out forwards"}}>Siguiendo</h2>
         <p className={styles.sub}>{saved.length} profesional{saved.length !== 1 ? 's' : ''} guardado{saved.length !== 1 ? 's' : ''}</p>
 
         {saved.length === 0 ? (
