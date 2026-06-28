@@ -227,6 +227,23 @@ export default function Profile() {
           </div>
         )}
 
+        {/* ── PRÓXIMAMENTE ────────────────────────────────── */}
+        <div style={{
+          margin:'0 16px 16px', padding:'16px',
+          background:'linear-gradient(135deg, rgba(123,47,255,0.06) 0%, rgba(123,47,255,0.02) 100%)',
+          borderRadius:'16px', border:'1px solid rgba(123,47,255,0.12)'
+        }}>
+          <div style={{display:'flex',alignItems:'center',gap:'8px',marginBottom:'8px'}}>
+            <span style={{fontSize:'10px',fontWeight:700,color:'var(--purple)',letterSpacing:'0.8px',textTransform:'uppercase'}}>Próximamente</span>
+          </div>
+          <p style={{fontSize:'14px',fontWeight:700,color:'var(--ink)',letterSpacing:'-0.2px',marginBottom:'4px'}}>
+            Tu reputación profesional verificada
+          </p>
+          <p style={{fontSize:'12px',color:'rgba(0,0,0,0.45)',lineHeight:1.5}}>
+            Nüra construirá tu currículum vivo basado en las ayudas reales que ofrezcas — verificadas y reconocidas por las personas que ayudaste.
+          </p>
+        </div>
+
         {/* ── ZONA 5: CONFIGURACIÓN DISCRETA ────────────── */}
         <button className={styles.logoutBtn} onClick={() => { logout(); navigate('/') }}>
           <LogOut size={15} />

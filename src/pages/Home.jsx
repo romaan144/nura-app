@@ -29,11 +29,22 @@ function getWelcome(user, searchHistory, following, helpersCache) {
     .filter(Boolean)
   const topFav = favHelpers[0]
 
-  // Returning user with history
+  // Returning user with history — show active memory
   if (lastSearch && searchHistory?.length > 2) {
+    // Check if search was recent (last 48h)
+    const lastSearchObj = searchHistory[searchHistory.length - 1]
+    const hoursAgo = lastSearchObj?.ts
+      ? Math.floor((Date.now() - lastSearchObj.ts) / (1000 * 60 * 60))
+      : 99
+    if (hoursAgo < 48) {
+      return [
+        `${greeting}, **${firstName}**.`,
+        `Ayer buscaste **${lastSearch}**. ¿Encontraste a alguien, o quieres que siga buscando?`
+      ]
+    }
     return [
       `${greeting}, **${firstName}**.`,
-      `La última vez buscaste **${lastSearch}**. ¿Sigues necesitando algo parecido o tienes una nueva necesidad?`
+      `La última vez buscaste **${lastSearch}**. ¿Sigues necesitando ayuda con eso, o tienes una nueva necesidad?`
     ]
   }
 
@@ -244,7 +255,15 @@ export default function Home({ setSearchState }) {
       let intentQuery; try { intentQuery = sessionStorage.getItem('nura_intent_query') } catch {}
       if (intentQuery) {
         sessionStorage.removeItem('nura_intent_query')
-        setTimeout(() => handleSend(intentQuery), 1800)
+        // Show a teaser first — then auto-send
+        const teaserMsg = {
+          id: Date.now() + 0.1, from: 'nura',
+          lines: [`He visto lo que me contaste. Déjame buscarte la mejor opción ahora mismo.`]
+        }
+        setTimeout(() => {
+          setMessages(prev => [...prev, teaserMsg])
+          setTimeout(() => handleSend(intentQuery), 1200)
+        }, 1000)
       } else {
         // Auto-focus input after welcome so user can start immediately
         setTimeout(() => {

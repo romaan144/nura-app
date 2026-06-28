@@ -145,7 +145,7 @@ export function UserProvider({ children }) {
   }
 
   function addSearch(query, category) {
-    const updated = [{ query, category, date: new Date().toISOString() }, ...searchHistory].slice(0, 10)
+    const updated = [{ query, category, date: new Date().toISOString(), ts: Date.now() }, ...searchHistory].slice(0, 10)
     setSearchHistory(updated)
     save('nura_history', updated)
   }

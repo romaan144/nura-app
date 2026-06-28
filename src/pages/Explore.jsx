@@ -348,6 +348,15 @@ export default function Explore() {
 
         {/* ── GRID DE CATEGORÍAS ──────────────────────────── */}
         {!isListView && !isLoading && (
+          <div style={{
+            padding:'8px 16px 4px', textAlign:'center',
+            fontSize:'11px', color:'rgba(0,0,0,0.32)',
+            fontWeight:500, letterSpacing:'0.2px'
+          }}>
+            23 personas encontraron ayuda hoy en Barcelona · 1.008 profesionales verificados
+          </div>
+        )}
+        {!isListView && !isLoading && (
           <div className={styles.catGrid}>
             {CATEGORIES.map(cat => {
               const Icon = cat.icon

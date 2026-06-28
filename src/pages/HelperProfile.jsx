@@ -315,6 +315,19 @@ function HelperProfileInner() {
             )}
           </div>
 
+          {/* Personal quote — emotional hook */}
+          {enrichedH.quote && (
+            <div style={{
+              margin:'0 0 12px', padding:'12px 14px',
+              background:'rgba(123,47,255,0.05)',
+              borderRadius:'12px', borderLeft:'3px solid var(--purple)',
+              fontStyle:'italic', fontSize:'14px', color:'var(--ink)',
+              lineHeight:1.6, letterSpacing:'-0.1px'
+            }}>
+              "{enrichedH.quote}"
+            </div>
+          )}
+
           {/* Bio */}
           {enrichedH.bio && (
             <p className={styles.bio}>{enrichedH.bio}</p>
