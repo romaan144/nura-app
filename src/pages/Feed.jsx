@@ -5,6 +5,7 @@ import RegisterGate from '../components/RegisterGate'
 import { useNavigate } from 'react-router-dom'
 import { getAllHelpers } from '../utils/supabase'
 import { HELPERS as LOCAL_HELPERS } from '../data/helpers'
+import { DEMO_ENRICHMENTS } from '../data/demoEnrichments'
 import HelperCarousel from '../components/HelperCarousel'
 import HelperCard from '../components/HelperCard'
 import { generateDynamicPosts } from '../utils/feedGenerator'
@@ -206,7 +207,15 @@ export default function Feed() {
   }, [])
   const [showGate, setShowGate] = useState(false)
 
-  const feedHelpers = supabaseHelpers.length > 0 ? supabaseHelpers : []
+  // Merge demo enrichments so posts appear in feed
+  const enrichedLocalHelpers = LOCAL_HELPERS.map(h =>
+    h.id >= 2000 && DEMO_ENRICHMENTS[h.id]
+      ? { ...DEMO_ENRICHMENTS[h.id], ...h, posts: DEMO_ENRICHMENTS[h.id].posts }
+      : h
+  )
+  const feedHelpers = [...enrichedLocalHelpers, ...supabaseHelpers].filter(
+    (h, i, arr) => arr.findIndex(x => x.id === h.id) === i
+  )
 
   // Memoize daily pick so it doesn't disappear on tab switch
   const dailyPick = React.useMemo(() => {

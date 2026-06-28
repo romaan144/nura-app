@@ -239,11 +239,19 @@ export default function Home({ setSearchState }) {
         chips: ejemplos
       }
       setTimeout(() => setMessages([welcomeMsg]), 150)
-      // Auto-focus input after welcome so user can start immediately
-      setTimeout(() => {
-        const inp = document.querySelector('textarea, input[type="text"]')
-        if (inp) inp.focus()
-      }, 600)
+
+      // If user wrote their intent in onboarding, auto-send it
+      let intentQuery; try { intentQuery = sessionStorage.getItem('nura_intent_query') } catch {}
+      if (intentQuery) {
+        sessionStorage.removeItem('nura_intent_query')
+        setTimeout(() => handleSend(intentQuery), 1800)
+      } else {
+        // Auto-focus input after welcome so user can start immediately
+        setTimeout(() => {
+          const inp = document.querySelector('textarea, input[type="text"]')
+          if (inp) inp.focus()
+        }, 600)
+      }
       return
     }
 
@@ -512,6 +520,18 @@ export default function Home({ setSearchState }) {
         `Tienes ${matches.length} profesionales disponibles. ¿Ya les has escrito?`,
         2 * 60 * 60 * 1000
       )
+      // Surprise moment: Nüra shows it remembers the user
+      if (searchHistory?.length >= 1) {
+        const lastQuery = searchHistory?.[searchHistory.length - 2]?.query
+        if (lastQuery) {
+          setTimeout(() => {
+            setMessages(prev => [...prev, {
+              id: Date.now() + 99, from: 'nura',
+              lines: [`Por cierto — la última vez buscaste **${lastQuery}**. Si sigue sin resolverse, puedo buscar de nuevo cuando quieras.`]
+            }])
+          }, 4500)
+        }
+      }
       // Cache helpers for instant profile + chat loading
       if (matches?.length) {
         const cacheMap = {}
@@ -608,7 +628,7 @@ export default function Home({ setSearchState }) {
         id: Date.now(), from: 'nura',
         lines: followLine
           ? (user
-              ? [resultLine, ...(priceCtx ? [priceCtx] : []), followLine]
+              ? [resultLine, ...(priceCtx ? [priceCtx] : []), followLine, '👆 Pulsa en cualquier tarjeta para ver el perfil completo y escribirle.']
               : [resultLine, ...(priceCtx ? [priceCtx] : []), followLine, 'Para contactarles, crea tu cuenta gratis. Solo tarda 30 segundos.'])
           : (user
               ? [resultLine, ...(priceCtx ? [priceCtx] : [])]
@@ -829,6 +849,14 @@ export default function Home({ setSearchState }) {
           return null
         })()}
 
+        {messages.length <= 1 && !inputFocused && (
+          <div style={{
+            textAlign:'center', fontSize:'11px', color:'rgba(0,0,0,0.32)',
+            letterSpacing:'0.2px', paddingBottom:'6px', fontWeight:500
+          }}>
+            1.008 profesionales verificados en Barcelona
+          </div>
+        )}
         <div className={styles.inputCapsule}>
           <button className={styles.plusBtn}><Plus size={18} /></button>
           <input ref={inputRef} className={styles.input}

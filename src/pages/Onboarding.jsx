@@ -23,18 +23,29 @@ const STEPS = [
     title: 'Presencial o online,\ncomo tú necesites',
     desc: 'Desde cuidadoras de mayores a técnicos de calderas. En tu zona, cuando lo necesites.',
   },
+  {
+    Visual: null,
+    eyebrow: 'ÚLTIMA PREGUNTA',
+    title: '¿Qué necesitas?',
+    desc: 'Cuéntaselo a Nüra ahora y tendrá los resultados listos cuando entres.',
+    isIntentCapture: true,
+  },
 ]
 
 export default function OnboardingPage() {
   const [step, setStep] = useState(0)
   const [name, setName] = useState('')
   const [showName, setShowName] = useState(false)
+  const [intentQuery, setIntentQuery] = useState('')
   const navigate = useNavigate()
   const { login } = useUser()
 
   function finish(isHelper) {
     localStorage.setItem('nura_onboarded', '1')
     login({ name: name.trim() || 'Usuario', isHelper })
+    if (intentQuery.trim()) {
+      try { sessionStorage.setItem('nura_intent_query', intentQuery.trim()) } catch {}
+    }
     navigate('/')
   }
 
@@ -71,6 +82,21 @@ export default function OnboardingPage() {
         <span className={styles.eyebrow}>{s.eyebrow}</span>
         <h1 className={styles.title}>{s.title}</h1>
         <p className={styles.desc}>{s.desc}</p>
+        {s.isIntentCapture && (
+          <textarea
+            style={{
+              marginTop:'16px', width:'100%', padding:'14px 16px',
+              borderRadius:'16px', border:'1.5px solid var(--purple)',
+              fontSize:'16px', fontFamily:'inherit', resize:'none',
+              background:'rgba(123,47,255,0.05)', color:'var(--ink)',
+              outline:'none', minHeight:'80px', lineHeight:'1.5',
+            }}
+            placeholder='Ej: Busco una cuidadora para mi padre con Alzheimer...'
+            value={intentQuery}
+            onChange={e => setIntentQuery(e.target.value)}
+            autoFocus
+          />
+        )}
       </div>
 
       <div className={styles.bottom}>
