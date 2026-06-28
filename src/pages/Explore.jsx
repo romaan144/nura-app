@@ -5,6 +5,7 @@ import { Search, ArrowLeft, Loader2, SlidersHorizontal,
          Heart, Wrench, BookOpen, Scale, Home, PawPrint,
          Dumbbell, Baby, MapPin, Star, Laptop, Palette, Car, PartyPopper, Globe } from 'lucide-react'
 import { searchHelpers, getAllHelpers } from '../utils/supabase'
+import { HELPERS as LOCAL_DEMO_HELPERS } from '../data/helpers'
 import { analyzeNeed, matchHelpers } from '../utils/matching'
 import { useUser } from '../context/UserContext'
 import HelperCard from '../components/HelperCard'
@@ -227,11 +228,18 @@ export default function Explore() {
       const results = await Promise.all(
         cat.supabaseCategories.map(c => searchHelpers(c))
       )
-      let merged = results
-        .flat()
-        .filter(Boolean)
+      // Inject local demo helpers (id >= 2000) that match this category — they appear first
+      const demoHelpers = LOCAL_DEMO_HELPERS.filter(h =>
+        h.id >= 2000 && cat.supabaseCategories.includes(h.category)
+      )
+
+      let merged = [...demoHelpers, ...results.flat().filter(Boolean)]
         .filter((h, i, arr) => arr.findIndex(x => x.id === h.id) === i)
-        .sort((a, b) => (b.rating||0) - (a.rating||0))
+        .sort((a, b) => {
+          // Demo helpers always first
+          if ((a.id >= 2000) !== (b.id >= 2000)) return a.id >= 2000 ? -1 : 1
+          return (b.rating||0) - (a.rating||0)
+        })
 
       // Fallback: if no results, search all and filter by specialty text
       if (merged.length === 0 && cat.specialtyKeywords) {

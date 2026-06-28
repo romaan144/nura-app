@@ -397,24 +397,34 @@ export async function matchHelpers(analysis, limit = 4, refinement = null, previ
 
   let pool = []
 
+  // Always include demo helpers (id >= 2000) that match the category
+  const demoPool = LOCAL_HELPERS
+    .filter(h => h?.id >= 2000 && h?.category === analysis.categoria)
+    .map(normalizeHelper).filter(Boolean)
+
   // Try Supabase
   try {
     const remote = await searchHelpers(analysis.categoria, analysis.palabrasClave)
     if (remote && remote.length > 0) {
-      pool = remote.map(normalizeHelper).filter(Boolean)
+      pool = [...demoPool, ...remote.map(normalizeHelper).filter(Boolean)]
     }
   } catch (e) {
     console.warn('Supabase error:', e)
   }
 
-  // Fallback to local
+  // Fallback to all local
   if (pool.length === 0) {
     pool = LOCAL_HELPERS.filter(Boolean).map(normalizeHelper).filter(Boolean)
   }
 
+  // Deduplicate
+  pool = pool.filter((h, i, arr) => arr.findIndex(x => x?.id === h?.id) === i)
+
   // Score helpers
   const scored = pool.map(h => {
     let score = 0
+    // Demo helpers (id >= 2000) get priority boost — rich profiles, verified data
+    if (h.id >= 2000) score += 80
     if (h.category === analysis.categoria) score += 40
     const keywords = analysis.palabrasClave || []
     keywords.forEach(kw => {
