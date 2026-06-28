@@ -322,8 +322,8 @@ export default function Chat() {
     haptic('light')
     const msg = text || input
     if (!msg.trim() || typing) return
-    // Gate: after 2nd user message, require registration
-    if (!user && msgCount >= 2) { setShowRegGate(true); return }
+    // Gate: after 4th user message, require registration (demo-friendly)
+    if (!user && msgCount >= 4) { setShowRegGate(true); return }
     const newMsg = { id: Date.now(), text: msg, from: 'user', time: new Date().toISOString() }
     setMessages(prev => [...prev, newMsg])
     setInput(''); setSuggested('')

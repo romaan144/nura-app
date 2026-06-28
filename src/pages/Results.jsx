@@ -72,6 +72,20 @@ export default function Results({ searchState }) {
         <div className={styles.queryBox} style={{animation:"fadeInUp 0.28s ease-out forwards"}}>
           <div className={styles.queryLabel}>Tu búsqueda</div>
           <p className={styles.queryText}>"{query}"</p>
+          {currentMatches?.length > 0 && (
+            <div style={{
+              marginTop:'10px', padding:'10px 12px',
+              background:'rgba(123,47,255,0.07)', borderRadius:'10px',
+              fontSize:'13px', color:'var(--ink)', lineHeight:1.5
+            }}>
+              He encontrado <strong>{currentMatches.length} profesionales</strong> que encajan con lo que describes.
+              {currentMatches[0] && (() => {
+                const top = currentMatches[0]
+                const name = top.name?.split(' ')?.[0]
+                return <span> Mi recomendación principal es <strong>{name}</strong> — {top.rating}★ y {top.reviews} valoraciones.</span>
+              })()}
+            </div>
+          )}
         </div>
 
         {/* Analysis pills */}

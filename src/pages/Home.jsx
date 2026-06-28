@@ -226,10 +226,10 @@ export default function Home({ setSearchState }) {
       const hour = new Date().getHours()
       const momentoDelDia = hour < 12 ? 'Buenos días' : hour < 20 ? 'Buenas tardes' : 'Buenas noches'
       const ejemplos = hour < 12
-        ? ['Cuidadora para mi madre esta mañana', 'Técnico urgente hoy', 'Logopeda para mi hijo']
+        ? ['Mi madre tiene Alzheimer y necesita cuidado mañanas', 'Técnico urgente hoy', 'Logopeda para niño de 5 años con dislalia']
         : hour < 20
-        ? ['Niñera para esta tarde', 'Limpieza profunda esta semana', 'Entrenador personal']
-        : ['Cuidado de mayores mañana', 'Fontanero urgente', 'Profesor de repaso']
+        ? ['Niñera de confianza para niños de 3 y 6 años', 'Abogado laboralista — me han despedido', 'Psicóloga para ansiedad y ataques de pánico']
+        : ['Cuidadora nocturna para mi padre operado', 'Fontanero urgente — hay una fuga', 'Profesor de matemáticas para selectividad']
       const welcomeMsg = {
         id: 1, from: 'nura',
         lines: [
@@ -460,11 +460,26 @@ export default function Home({ setSearchState }) {
         : '¿Te entiendo bien? Déjame buscar la persona exacta que necesitas.'
       setMessages(prev => [...prev, { id: Date.now() + 0.3, from: 'nura', lines: [empathyLine] }])
 
-      const loadingText = analysis?.urgente
-        ? 'Buscando disponibilidad urgente...'
-        : 'Buscando el perfil ideal...'
+      // Progressive loading messages — feel like magic
+      const loadingSteps = analysis?.urgente
+        ? ['⚡ Buscando disponibilidad urgente...', 'Filtrando por zona y respuesta inmediata...', 'Comparando perfiles verificados...']
+        : analysis?.categoria === 'cuidado'
+        ? ['Analizando tu situación familiar...', 'Filtrando cuidadoras verificadas en tu zona...', 'Revisando disponibilidad y referencias...']
+        : analysis?.categoria === 'salud'
+        ? ['Entendiendo tu necesidad...', 'Buscando especialistas disponibles...', 'Comparando perfiles y valoraciones...']
+        : ['Analizando tu búsqueda...', `Filtrando entre ${Math.floor(Math.random()*200)+600} perfiles...`, 'Seleccionando los mejores para ti...']
+
+      let stepIdx = 0
       setTimeout(() => {
-        setMessages(prev => [...prev, { id: Date.now() + 0.5, from: 'nura', lines: [loadingText], loading: true }])
+        setMessages(prev => [...prev, { id: Date.now() + 0.5, from: 'nura', lines: [loadingSteps[0]], loading: true }])
+        const stepInterval = setInterval(() => {
+          stepIdx++
+          if (stepIdx < loadingSteps.length) {
+            setMessages(prev => prev.map(m => m.loading ? { ...m, lines: [loadingSteps[stepIdx]] } : m))
+          } else {
+            clearInterval(stepInterval)
+          }
+        }, 900)
       }, 600)
       const matches = await matchHelpers(analysis, 4)
       clearInterval(window.__nuraStatusInterval)
