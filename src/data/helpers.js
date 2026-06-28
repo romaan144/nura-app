@@ -584,18 +584,6 @@ managerOpinion: { name:"Enric Ruiz-Geli", role:"Director del estudio", text:"Mar
     tags: ["psicóloga", "ansiedad", "depresión", "TCC", "EMDR", "terapia pareja"],
   },
   {
-    qualitativeComments: [
-      { user: "María S.", text: "Increíble profesional. En pocas sesiones noté una mejora enorme. Lo recomiendo sin dudarlo." },
-      { user: "Carlos M.", text: "Por fin encontré a alguien que realmente me escucha y me ayuda. Muy agradecido." },
-      { user: "Ana R.", text: "Trato excelente, muy profesional y cercana. Resultados visibles desde el principio." },
-    ],
-    qualitativeComments: [
-      { user: "María S.", text: "Increíble profesional. En pocas sesiones noté una mejora enorme. Lo recomiendo sin dudarlo." },
-      { user: "Carlos M.", text: "Por fin encontré a alguien que realmente me escucha y me ayuda. Muy agradecido." },
-      { user: "Ana R.", text: "Trato excelente, muy profesional y cercana. Resultados visibles desde el principio." },
-    ],
-  },
-  {
     id: 2002,
     name: "Dra. Natalia Vega Ros",
     specialty: "neuropsicóloga",
@@ -613,13 +601,6 @@ managerOpinion: { name:"Enric Ruiz-Geli", role:"Director del estudio", text:"Mar
     tags: ["neuropsicóloga", "cognitivo", "TDAH", "daño cerebral", "evaluación"],
   },
   {
-    qualitativeComments: [
-      { user: "María S.", text: "Increíble profesional. En pocas sesiones noté una mejora enorme. Lo recomiendo sin dudarlo." },
-      { user: "Carlos M.", text: "Por fin encontré a alguien que realmente me escucha y me ayuda. Muy agradecido." },
-      { user: "Ana R.", text: "Trato excelente, muy profesional y cercana. Resultados visibles desde el principio." },
-    ],
-  },
-  {
     id: 2003,
     name: "Carlos Martínez Vidal",
     specialty: "logopeda",
@@ -635,11 +616,6 @@ managerOpinion: { name:"Enric Ruiz-Geli", role:"Director del estudio", text:"Mar
     distance: 0.8,
     avatarUrl: "https://api.dicebear.com/9.x/personas/svg?seed=carlos",
     tags: ["logopeda", "infantil", "habla", "lenguaje", "dislalia", "niños"],
-    qualitativeComments: [
-      { user: "María S.", text: "Increíble profesional. En pocas sesiones noté una mejora enorme. Lo recomiendo sin dudarlo." },
-      { user: "Carlos M.", text: "Por fin encontré a alguien que realmente me escucha y me ayuda. Muy agradecido." },
-      { user: "Ana R.", text: "Trato excelente, muy profesional y cercana. Resultados visibles desde el principio." },
-    ],
   },
   {
     id: 2004,
@@ -659,13 +635,6 @@ managerOpinion: { name:"Enric Ruiz-Geli", role:"Director del estudio", text:"Mar
     tags: ["fisioterapeuta", "lesiones deportivas", "columna", "punción seca", "rehabilitación"],
   },
   {
-    qualitativeComments: [
-      { user: "María S.", text: "Increíble profesional. En pocas sesiones noté una mejora enorme. Lo recomiendo sin dudarlo." },
-      { user: "Carlos M.", text: "Por fin encontré a alguien que realmente me escucha y me ayuda. Muy agradecido." },
-      { user: "Ana R.", text: "Trato excelente, muy profesional y cercana. Resultados visibles desde el principio." },
-    ],
-  },
-  {
     id: 2005,
     name: "Laura Ferrer Mas",
     specialty: "nutricionista",
@@ -681,13 +650,6 @@ managerOpinion: { name:"Enric Ruiz-Geli", role:"Director del estudio", text:"Mar
     distance: 2.3,
     avatarUrl: "https://api.dicebear.com/9.x/personas/svg?seed=laura-nutri",
     tags: ["nutricionista", "dieta", "pérdida de peso", "deporte", "digestivo"],
-  },
-  {
-    qualitativeComments: [
-      { user: "María S.", text: "Increíble profesional. En pocas sesiones noté una mejora enorme. Lo recomiendo sin dudarlo." },
-      { user: "Carlos M.", text: "Por fin encontré a alguien que realmente me escucha y me ayuda. Muy agradecido." },
-      { user: "Ana R.", text: "Trato excelente, muy profesional y cercana. Resultados visibles desde el principio." },
-    ],
   },
   {
     id: 2006,
@@ -810,18 +772,6 @@ managerOpinion: { name:"Enric Ruiz-Geli", role:"Director del estudio", text:"Mar
     tags: ["fontanero", "urgencias", "fugas", "tuberías", "grifería"],
   },
   {
-    qualitativeComments: [
-      { user: "Roberto G.", text: "Vino en menos de una hora y lo dejó perfecto. Precio justo y trabajo impecable." },
-      { user: "Laura P.", text: "Muy profesional, rápido y limpio. No dudé en repetir cuando tuve otro problema." },
-      { user: "Joan M.", text: "Resolvió el problema que otro técnico no supo solucionar. 10 de 10." },
-    ],
-    qualitativeComments: [
-      { user: "Roberto G.", text: "Vino en menos de una hora y lo dejó perfecto. Precio justo y trabajo impecable." },
-      { user: "Laura P.", text: "Muy profesional, rápido y limpio. No dudé en repetir cuando tuve otro problema." },
-      { user: "Joan M.", text: "Resolvió el problema que otro técnico no supo solucionar. 10 de 10." },
-    ],
-  },
-  {
     id: 2021,
     name: "David Sánchez Ros",
     specialty: "electricista",
@@ -838,13 +788,6 @@ managerOpinion: { name:"Enric Ruiz-Geli", role:"Director del estudio", text:"Mar
     distance: 1.8,
     avatarUrl: "https://api.dicebear.com/9.x/personas/svg?seed=david-elec",
     tags: ["electricista", "instalaciones", "cuadro eléctrico", "coche eléctrico"],
-  },
-  {
-    qualitativeComments: [
-      { user: "Roberto G.", text: "Vino en menos de una hora y lo dejó perfecto. Precio justo y trabajo impecable." },
-      { user: "Laura P.", text: "Muy profesional, rápido y limpio. No dudé en repetir cuando tuve otro problema." },
-      { user: "Joan M.", text: "Resolvió el problema que otro técnico no supo solucionar. 10 de 10." },
-    ],
   },
   {
     id: 2022,
@@ -864,18 +807,6 @@ managerOpinion: { name:"Enric Ruiz-Geli", role:"Director del estudio", text:"Mar
     tags: ["albañil", "reformas", "alicatado", "solería", "tabiques"],
   },
   {
-    qualitativeComments: [
-      { user: "Roberto G.", text: "Vino en menos de una hora y lo dejó perfecto. Precio justo y trabajo impecable." },
-      { user: "Laura P.", text: "Muy profesional, rápido y limpio. No dudé en repetir cuando tuve otro problema." },
-      { user: "Joan M.", text: "Resolvió el problema que otro técnico no supo solucionar. 10 de 10." },
-    ],
-    qualitativeComments: [
-      { user: "Roberto G.", text: "Vino en menos de una hora y lo dejó perfecto. Precio justo y trabajo impecable." },
-      { user: "Laura P.", text: "Muy profesional, rápido y limpio. No dudé en repetir cuando tuve otro problema." },
-      { user: "Joan M.", text: "Resolvió el problema que otro técnico no supo solucionar. 10 de 10." },
-    ],
-  },
-  {
     id: 2023,
     name: "Miquel Font Roca",
     specialty: "pintor",
@@ -893,13 +824,6 @@ managerOpinion: { name:"Enric Ruiz-Geli", role:"Director del estudio", text:"Mar
     tags: ["pintor", "interiores", "exteriores", "estuco", "decorativo"],
   },
   {
-    qualitativeComments: [
-      { user: "Roberto G.", text: "Vino en menos de una hora y lo dejó perfecto. Precio justo y trabajo impecable." },
-      { user: "Laura P.", text: "Muy profesional, rápido y limpio. No dudé en repetir cuando tuve otro problema." },
-      { user: "Joan M.", text: "Resolvió el problema que otro técnico no supo solucionar. 10 de 10." },
-    ],
-  },
-  {
     id: 2024,
     name: "Josep Camps Vilar",
     specialty: "carpintero",
@@ -915,11 +839,6 @@ managerOpinion: { name:"Enric Ruiz-Geli", role:"Director del estudio", text:"Mar
     distance: 3.2,
     avatarUrl: "https://api.dicebear.com/9.x/personas/svg?seed=josep-carp",
     tags: ["carpintero", "medida", "armarios", "cocinas", "muebles", "puertas"],
-    qualitativeComments: [
-      { user: "Roberto G.", text: "Vino en menos de una hora y lo dejó perfecto. Precio justo y trabajo impecable." },
-      { user: "Laura P.", text: "Muy profesional, rápido y limpio. No dudé en repetir cuando tuve otro problema." },
-      { user: "Joan M.", text: "Resolvió el problema que otro técnico no supo solucionar. 10 de 10." },
-    ],
   },
   {
     id: 2025,
@@ -1045,18 +964,6 @@ managerOpinion: { name:"Enric Ruiz-Geli", role:"Director del estudio", text:"Mar
     tags: ["inglés", "nativo", "CELTA", "IELTS", "Cambridge", "negocios"],
   },
   {
-    qualitativeComments: [
-      { user: "Patricia L.", text: "Mi hijo aprobó con un 9 después de solo 2 meses de clases. Increíble." },
-      { user: "Marcos V.", text: "Explica muy bien y adapta las clases a mi ritmo. Aprendo mucho más que antes." },
-      { user: "Sofía K.", text: "En 3 meses pasé de nivel A2 a B1. Una profesora excepcional." },
-    ],
-    qualitativeComments: [
-      { user: "Patricia L.", text: "Mi hijo aprobó con un 9 después de solo 2 meses de clases. Increíble." },
-      { user: "Marcos V.", text: "Explica muy bien y adapta las clases a mi ritmo. Aprendo mucho más que antes." },
-      { user: "Sofía K.", text: "En 3 meses pasé de nivel A2 a B1. Una profesora excepcional." },
-    ],
-  },
-  {
     id: 2041,
     name: "Sophie Dubois",
     specialty: "francés",
@@ -1072,13 +979,6 @@ managerOpinion: { name:"Enric Ruiz-Geli", role:"Director del estudio", text:"Mar
     distance: 1.8,
     avatarUrl: "https://api.dicebear.com/9.x/personas/svg?seed=sophie-french",
     tags: ["francés", "nativa", "DELF", "DALF", "negocios"],
-  },
-  {
-    qualitativeComments: [
-      { user: "Patricia L.", text: "Mi hijo aprobó con un 9 después de solo 2 meses de clases. Increíble." },
-      { user: "Marcos V.", text: "Explica muy bien y adapta las clases a mi ritmo. Aprendo mucho más que antes." },
-      { user: "Sofía K.", text: "En 3 meses pasé de nivel A2 a B1. Una profesora excepcional." },
-    ],
   },
   {
     id: 2042,
@@ -1098,13 +998,6 @@ managerOpinion: { name:"Enric Ruiz-Geli", role:"Director del estudio", text:"Mar
     tags: ["alemán", "nativo", "Goethe", "negocios", "técnico"],
   },
   {
-    qualitativeComments: [
-      { user: "Patricia L.", text: "Mi hijo aprobó con un 9 después de solo 2 meses de clases. Increíble." },
-      { user: "Marcos V.", text: "Explica muy bien y adapta las clases a mi ritmo. Aprendo mucho más que antes." },
-      { user: "Sofía K.", text: "En 3 meses pasé de nivel A2 a B1. Una profesora excepcional." },
-    ],
-  },
-  {
     id: 2043,
     name: "Li Wei Chen",
     specialty: "chino mandarín",
@@ -1120,18 +1013,6 @@ managerOpinion: { name:"Enric Ruiz-Geli", role:"Director del estudio", text:"Mar
     distance: 2.9,
     avatarUrl: "https://api.dicebear.com/9.x/personas/svg?seed=liwei-chinese",
     tags: ["chino", "mandarín", "HSK", "negocios", "nativa"],
-  },
-  {
-    qualitativeComments: [
-      { user: "Patricia L.", text: "Mi hijo aprobó con un 9 después de solo 2 meses de clases. Increíble." },
-      { user: "Marcos V.", text: "Explica muy bien y adapta las clases a mi ritmo. Aprendo mucho más que antes." },
-      { user: "Sofía K.", text: "En 3 meses pasé de nivel A2 a B1. Una profesora excepcional." },
-    ],
-    qualitativeComments: [
-      { user: "Patricia L.", text: "Mi hijo aprobó con un 9 después de solo 2 meses de clases. Increíble." },
-      { user: "Marcos V.", text: "Explica muy bien y adapta las clases a mi ritmo. Aprendo mucho más que antes." },
-      { user: "Sofía K.", text: "En 3 meses pasé de nivel A2 a B1. Una profesora excepcional." },
-    ],
   },
   {
     id: 2044,
@@ -1151,13 +1032,6 @@ managerOpinion: { name:"Enric Ruiz-Geli", role:"Director del estudio", text:"Mar
     tags: ["matemáticas", "ESO", "Bachillerato", "EBAU", "álgebra", "cálculo"],
   },
   {
-    qualitativeComments: [
-      { user: "Patricia L.", text: "Mi hijo aprobó con un 9 después de solo 2 meses de clases. Increíble." },
-      { user: "Marcos V.", text: "Explica muy bien y adapta las clases a mi ritmo. Aprendo mucho más que antes." },
-      { user: "Sofía K.", text: "En 3 meses pasé de nivel A2 a B1. Una profesora excepcional." },
-    ],
-  },
-  {
     id: 2045,
     name: "Arnau Costa Puig",
     specialty: "física y química",
@@ -1173,13 +1047,6 @@ managerOpinion: { name:"Enric Ruiz-Geli", role:"Director del estudio", text:"Mar
     distance: 2.3,
     avatarUrl: "https://api.dicebear.com/9.x/personas/svg?seed=arnau-fisica",
     tags: ["física", "química", "ESO", "bachillerato", "selectividad"],
-  },
-  {
-    qualitativeComments: [
-      { user: "Patricia L.", text: "Mi hijo aprobó con un 9 después de solo 2 meses de clases. Increíble." },
-      { user: "Marcos V.", text: "Explica muy bien y adapta las clases a mi ritmo. Aprendo mucho más que antes." },
-      { user: "Sofía K.", text: "En 3 meses pasé de nivel A2 a B1. Una profesora excepcional." },
-    ],
   },
   {
     id: 2046,
@@ -1335,18 +1202,6 @@ managerOpinion: { name:"Enric Ruiz-Geli", role:"Director del estudio", text:"Mar
     tags: ["abogado", "laboral", "despido", "ERE", "salarios", "trabajo"],
   },
   {
-    qualitativeComments: [
-      { user: "Federico B.", text: "Resolvió mi caso con rapidez y claridad. En todo momento me explicó cada paso." },
-      { user: "Miriam C.", text: "Profesional, honesta y con precios justos. Me ahorró mucho dinero y tiempo." },
-      { user: "Tomás V.", text: "Primera consulta gratuita y muy esclarecedora. Se nota que domina el tema." },
-    ],
-    qualitativeComments: [
-      { user: "Federico B.", text: "Resolvió mi caso con rapidez y claridad. En todo momento me explicó cada paso." },
-      { user: "Miriam C.", text: "Profesional, honesta y con precios justos. Me ahorró mucho dinero y tiempo." },
-      { user: "Tomás V.", text: "Primera consulta gratuita y muy esclarecedora. Se nota que domina el tema." },
-    ],
-  },
-  {
     id: 2061,
     name: "Pau Ferrer Roca",
     specialty: "abogado penal",
@@ -1362,13 +1217,6 @@ managerOpinion: { name:"Enric Ruiz-Geli", role:"Director del estudio", text:"Mar
     distance: 1.9,
     avatarUrl: "https://api.dicebear.com/9.x/personas/svg?seed=pau-penal",
     tags: ["abogado penal", "defensa", "juicio", "recurso", "urgente"],
-  },
-  {
-    qualitativeComments: [
-      { user: "Federico B.", text: "Resolvió mi caso con rapidez y claridad. En todo momento me explicó cada paso." },
-      { user: "Miriam C.", text: "Profesional, honesta y con precios justos. Me ahorró mucho dinero y tiempo." },
-      { user: "Tomás V.", text: "Primera consulta gratuita y muy esclarecedora. Se nota que domina el tema." },
-    ],
   },
   {
     id: 2062,
@@ -1388,18 +1236,6 @@ managerOpinion: { name:"Enric Ruiz-Geli", role:"Director del estudio", text:"Mar
     tags: ["abogada", "familia", "divorcio", "custodia", "herencias"],
   },
   {
-    qualitativeComments: [
-      { user: "Federico B.", text: "Resolvió mi caso con rapidez y claridad. En todo momento me explicó cada paso." },
-      { user: "Miriam C.", text: "Profesional, honesta y con precios justos. Me ahorró mucho dinero y tiempo." },
-      { user: "Tomás V.", text: "Primera consulta gratuita y muy esclarecedora. Se nota que domina el tema." },
-    ],
-    qualitativeComments: [
-      { user: "Federico B.", text: "Resolvió mi caso con rapidez y claridad. En todo momento me explicó cada paso." },
-      { user: "Miriam C.", text: "Profesional, honesta y con precios justos. Me ahorró mucho dinero y tiempo." },
-      { user: "Tomás V.", text: "Primera consulta gratuita y muy esclarecedora. Se nota que domina el tema." },
-    ],
-  },
-  {
     id: 2063,
     name: "Oriol Mas Vila",
     specialty: "abogado mercantil y startups",
@@ -1417,13 +1253,6 @@ managerOpinion: { name:"Enric Ruiz-Geli", role:"Director del estudio", text:"Mar
     tags: ["abogado", "mercantil", "startups", "inversión", "contratos", "RGPD"],
   },
   {
-    qualitativeComments: [
-      { user: "Federico B.", text: "Resolvió mi caso con rapidez y claridad. En todo momento me explicó cada paso." },
-      { user: "Miriam C.", text: "Profesional, honesta y con precios justos. Me ahorró mucho dinero y tiempo." },
-      { user: "Tomás V.", text: "Primera consulta gratuita y muy esclarecedora. Se nota que domina el tema." },
-    ],
-  },
-  {
     id: 2064,
     name: "Ibrahim El Amrani",
     specialty: "abogado extranjería",
@@ -1439,13 +1268,6 @@ managerOpinion: { name:"Enric Ruiz-Geli", role:"Director del estudio", text:"Mar
     distance: 2.8,
     avatarUrl: "https://api.dicebear.com/9.x/personas/svg?seed=ibrahim-extr",
     tags: ["extranjería", "inmigración", "residencia", "visado", "nacionalidad"],
-  },
-  {
-    qualitativeComments: [
-      { user: "Federico B.", text: "Resolvió mi caso con rapidez y claridad. En todo momento me explicó cada paso." },
-      { user: "Miriam C.", text: "Profesional, honesta y con precios justos. Me ahorró mucho dinero y tiempo." },
-      { user: "Tomás V.", text: "Primera consulta gratuita y muy esclarecedora. Se nota que domina el tema." },
-    ],
   },
   {
     id: 2065,
@@ -1584,18 +1406,6 @@ managerOpinion: { name:"Enric Ruiz-Geli", role:"Director del estudio", text:"Mar
     tags: ["limpieza", "doméstica", "hogar", "ecológica", "referencias"],
   },
   {
-    qualitativeComments: [
-      { user: "Carmen R.", text: "Deja la casa impecable, es de total confianza y muy puntual. No cambio." },
-      { user: "Paco M.", text: "Perfecto trabajo, precio razonable y sin dejar ni rastro de suciedad. Muy recomendable." },
-      { user: "Inés G.", text: "Transformó nuestra casa en un día. Organización perfecta y muy profesional." },
-    ],
-    qualitativeComments: [
-      { user: "Carmen R.", text: "Deja la casa impecable, es de total confianza y muy puntual. No cambio." },
-      { user: "Paco M.", text: "Perfecto trabajo, precio razonable y sin dejar ni rastro de suciedad. Muy recomendable." },
-      { user: "Inés G.", text: "Transformó nuestra casa en un día. Organización perfecta y muy profesional." },
-    ],
-  },
-  {
     id: 2081,
     name: "María García Pérez",
     specialty: "limpieza profunda",
@@ -1611,13 +1421,6 @@ managerOpinion: { name:"Enric Ruiz-Geli", role:"Director del estudio", text:"Mar
     distance: 2.1,
     avatarUrl: "https://api.dicebear.com/9.x/personas/svg?seed=maria-limpieza-prof",
     tags: ["limpieza profunda", "fin de alquiler", "electrodomésticos", "cocina"],
-  },
-  {
-    qualitativeComments: [
-      { user: "Carmen R.", text: "Deja la casa impecable, es de total confianza y muy puntual. No cambio." },
-      { user: "Paco M.", text: "Perfecto trabajo, precio razonable y sin dejar ni rastro de suciedad. Muy recomendable." },
-      { user: "Inés G.", text: "Transformó nuestra casa en un día. Organización perfecta y muy profesional." },
-    ],
   },
   {
     id: 2082,
@@ -1637,18 +1440,6 @@ managerOpinion: { name:"Enric Ruiz-Geli", role:"Director del estudio", text:"Mar
     tags: ["planchado", "domicilio", "ropa", "camisas", "hogar"],
   },
   {
-    qualitativeComments: [
-      { user: "Carmen R.", text: "Deja la casa impecable, es de total confianza y muy puntual. No cambio." },
-      { user: "Paco M.", text: "Perfecto trabajo, precio razonable y sin dejar ni rastro de suciedad. Muy recomendable." },
-      { user: "Inés G.", text: "Transformó nuestra casa en un día. Organización perfecta y muy profesional." },
-    ],
-    qualitativeComments: [
-      { user: "Carmen R.", text: "Deja la casa impecable, es de total confianza y muy puntual. No cambio." },
-      { user: "Paco M.", text: "Perfecto trabajo, precio razonable y sin dejar ni rastro de suciedad. Muy recomendable." },
-      { user: "Inés G.", text: "Transformó nuestra casa en un día. Organización perfecta y muy profesional." },
-    ],
-  },
-  {
     id: 2083,
     name: "Clara Berenguer Mas",
     specialty: "organización del hogar",
@@ -1664,13 +1455,6 @@ managerOpinion: { name:"Enric Ruiz-Geli", role:"Director del estudio", text:"Mar
     distance: 2.4,
     avatarUrl: "https://api.dicebear.com/9.x/personas/svg?seed=clara-org",
     tags: ["organización", "KonMari", "hogar", "trastero", "armarios"],
-  },
-  {
-    qualitativeComments: [
-      { user: "Carmen R.", text: "Deja la casa impecable, es de total confianza y muy puntual. No cambio." },
-      { user: "Paco M.", text: "Perfecto trabajo, precio razonable y sin dejar ni rastro de suciedad. Muy recomendable." },
-      { user: "Inés G.", text: "Transformó nuestra casa en un día. Organización perfecta y muy profesional." },
-    ],
   },
   {
     id: 2084,
@@ -1690,13 +1474,6 @@ managerOpinion: { name:"Enric Ruiz-Geli", role:"Director del estudio", text:"Mar
     tags: ["cocinero", "chef", "domicilio", "cenas", "batch cooking"],
   },
   {
-    qualitativeComments: [
-      { user: "Carmen R.", text: "Deja la casa impecable, es de total confianza y muy puntual. No cambio." },
-      { user: "Paco M.", text: "Perfecto trabajo, precio razonable y sin dejar ni rastro de suciedad. Muy recomendable." },
-      { user: "Inés G.", text: "Transformó nuestra casa en un día. Organización perfecta y muy profesional." },
-    ],
-  },
-  {
     id: 2085,
     name: "Pedro Mas Torres",
     specialty: "manitas del hogar",
@@ -1712,11 +1489,6 @@ managerOpinion: { name:"Enric Ruiz-Geli", role:"Director del estudio", text:"Mar
     distance: 0.9,
     avatarUrl: "https://api.dicebear.com/9.x/personas/svg?seed=pedro-manitas",
     tags: ["manitas", "reparaciones", "montaje", "hogar", "polivalente"],
-    qualitativeComments: [
-      { user: "Carmen R.", text: "Deja la casa impecable, es de total confianza y muy puntual. No cambio." },
-      { user: "Paco M.", text: "Perfecto trabajo, precio razonable y sin dejar ni rastro de suciedad. Muy recomendable." },
-      { user: "Inés G.", text: "Transformó nuestra casa en un día. Organización perfecta y muy profesional." },
-    ],
   },
   {
     id: 2086,
@@ -1873,18 +1645,6 @@ managerOpinion: { name:"Enric Ruiz-Geli", role:"Director del estudio", text:"Mar
     tags: ["paseadora", "perros", "paseos", "fotos", "GPS"],
   },
   {
-    qualitativeComments: [
-      { user: "Raquel T.", text: "Mi perro la adora. Llega contento y vuelve contento. Mejor cuidadora que he tenido." },
-      { user: "David F.", text: "Fotos constantes y mucho cariño. Mi gato nunca ha estado tan bien cuidado." },
-      { user: "Nuria P.", text: "Muy responsable y cariñosa con los animales. Totalmente recomendable." },
-    ],
-    qualitativeComments: [
-      { user: "Raquel T.", text: "Mi perro la adora. Llega contento y vuelve contento. Mejor cuidadora que he tenido." },
-      { user: "David F.", text: "Fotos constantes y mucho cariño. Mi gato nunca ha estado tan bien cuidado." },
-      { user: "Nuria P.", text: "Muy responsable y cariñosa con los animales. Totalmente recomendable." },
-    ],
-  },
-  {
     id: 2101,
     name: "Marta Roca Ferrer",
     specialty: "cuidadora de perros domicilio",
@@ -1900,13 +1660,6 @@ managerOpinion: { name:"Enric Ruiz-Geli", role:"Director del estudio", text:"Mar
     distance: 1.4,
     avatarUrl: "https://api.dicebear.com/9.x/personas/svg?seed=marta-dogs",
     tags: ["cuidadora", "perros", "domicilio", "fotos", "sin jaulas"],
-  },
-  {
-    qualitativeComments: [
-      { user: "Raquel T.", text: "Mi perro la adora. Llega contento y vuelve contento. Mejor cuidadora que he tenido." },
-      { user: "David F.", text: "Fotos constantes y mucho cariño. Mi gato nunca ha estado tan bien cuidado." },
-      { user: "Nuria P.", text: "Muy responsable y cariñosa con los animales. Totalmente recomendable." },
-    ],
   },
   {
     id: 2102,
@@ -1926,13 +1679,6 @@ managerOpinion: { name:"Enric Ruiz-Geli", role:"Director del estudio", text:"Mar
     tags: ["gatos", "felinos", "cuidadora", "visitas", "comportamiento"],
   },
   {
-    qualitativeComments: [
-      { user: "Raquel T.", text: "Mi perro la adora. Llega contento y vuelve contento. Mejor cuidadora que he tenido." },
-      { user: "David F.", text: "Fotos constantes y mucho cariño. Mi gato nunca ha estado tan bien cuidado." },
-      { user: "Nuria P.", text: "Muy responsable y cariñosa con los animales. Totalmente recomendable." },
-    ],
-  },
-  {
     id: 2103,
     name: "Paula Mas Vidal",
     specialty: "pet sitter vacaciones",
@@ -1948,11 +1694,6 @@ managerOpinion: { name:"Enric Ruiz-Geli", role:"Director del estudio", text:"Mar
     distance: 1.6,
     avatarUrl: "https://api.dicebear.com/9.x/personas/svg?seed=paula-petsitter",
     tags: ["pet sitter", "vacaciones", "perros", "gatos", "fotos", "vídeos"],
-    qualitativeComments: [
-      { user: "Raquel T.", text: "Mi perro la adora. Llega contento y vuelve contento. Mejor cuidadora que he tenido." },
-      { user: "David F.", text: "Fotos constantes y mucho cariño. Mi gato nunca ha estado tan bien cuidado." },
-      { user: "Nuria P.", text: "Muy responsable y cariñosa con los animales. Totalmente recomendable." },
-    ],
   },
   {
     id: 2104,
@@ -2041,18 +1782,6 @@ managerOpinion: { name:"Enric Ruiz-Geli", role:"Director del estudio", text:"Mar
     tags: ["entrenador personal", "NSCA", "pérdida de grasa", "músculo", "lesiones"],
   },
   {
-    qualitativeComments: [
-      { user: "Álvaro M.", text: "En 3 meses bajé 8kg y gané mucha fuerza. Entrena duro pero con cabeza." },
-      { user: "Cristina V.", text: "El mejor entrenador que he tenido. Sabe motivar y adapta cada sesión a cómo estás." },
-      { user: "Iván R.", text: "Profesional, cercano y con mucho conocimiento. Los resultados hablan solos." },
-    ],
-    qualitativeComments: [
-      { user: "Álvaro M.", text: "En 3 meses bajé 8kg y gané mucha fuerza. Entrena duro pero con cabeza." },
-      { user: "Cristina V.", text: "El mejor entrenador que he tenido. Sabe motivar y adapta cada sesión a cómo estás." },
-      { user: "Iván R.", text: "Profesional, cercano y con mucho conocimiento. Los resultados hablan solos." },
-    ],
-  },
-  {
     id: 2111,
     name: "Mia Mas Ferrer",
     specialty: "instructor de yoga",
@@ -2070,13 +1799,6 @@ managerOpinion: { name:"Enric Ruiz-Geli", role:"Director del estudio", text:"Mar
     tags: ["yoga", "instructor", "hatha", "vinyasa", "restaurativo"],
   },
   {
-    qualitativeComments: [
-      { user: "Álvaro M.", text: "En 3 meses bajé 8kg y gané mucha fuerza. Entrena duro pero con cabeza." },
-      { user: "Cristina V.", text: "El mejor entrenador que he tenido. Sabe motivar y adapta cada sesión a cómo estás." },
-      { user: "Iván R.", text: "Profesional, cercano y con mucho conocimiento. Los resultados hablan solos." },
-    ],
-  },
-  {
     id: 2112,
     name: "Alba Mas Roca",
     specialty: "instructora de pilates",
@@ -2092,11 +1814,6 @@ managerOpinion: { name:"Enric Ruiz-Geli", role:"Director del estudio", text:"Mar
     distance: 2.1,
     avatarUrl: "https://api.dicebear.com/9.x/personas/svg?seed=alba-pilates-inst",
     tags: ["pilates", "instructora", "reformer", "embarazo", "postparto"],
-    qualitativeComments: [
-      { user: "Álvaro M.", text: "En 3 meses bajé 8kg y gané mucha fuerza. Entrena duro pero con cabeza." },
-      { user: "Cristina V.", text: "El mejor entrenador que he tenido. Sabe motivar y adapta cada sesión a cómo estás." },
-      { user: "Iván R.", text: "Profesional, cercano y con mucho conocimiento. Los resultados hablan solos." },
-    ],
   },
   {
     id: 2113,
@@ -2167,18 +1884,6 @@ managerOpinion: { name:"Enric Ruiz-Geli", role:"Director del estudio", text:"Mar
     tags: ["cuidadora", "mayores", "Alzheimer", "Parkinson", "domicilio"],
   },
   {
-    qualitativeComments: [
-      { user: "Elena M.", text: "Cuida a mi madre como si fuera la suya. Totalmente recomendable." },
-      { user: "Fernando T.", text: "Discreta, responsable y con mucha experiencia. Mi padre se ha adaptado muy bien a ella." },
-      { user: "Susana B.", text: "Una persona extraordinaria. Nos ha dado mucha tranquilidad a toda la familia." },
-    ],
-    qualitativeComments: [
-      { user: "Elena M.", text: "Cuida a mi madre como si fuera la suya. Totalmente recomendable." },
-      { user: "Fernando T.", text: "Discreta, responsable y con mucha experiencia. Mi padre se ha adaptado muy bien a ella." },
-      { user: "Susana B.", text: "Una persona extraordinaria. Nos ha dado mucha tranquilidad a toda la familia." },
-    ],
-  },
-  {
     id: 2121,
     name: "Carmen Torres Mas",
     specialty: "cuidadora nocturna",
@@ -2194,13 +1899,6 @@ managerOpinion: { name:"Enric Ruiz-Geli", role:"Director del estudio", text:"Mar
     distance: 2.1,
     avatarUrl: "https://api.dicebear.com/9.x/personas/svg?seed=carmen-nocturna",
     tags: ["cuidadora nocturna", "mayores", "turnos noche", "emergencias"],
-  },
-  {
-    qualitativeComments: [
-      { user: "Elena M.", text: "Cuida a mi madre como si fuera la suya. Totalmente recomendable." },
-      { user: "Fernando T.", text: "Discreta, responsable y con mucha experiencia. Mi padre se ha adaptado muy bien a ella." },
-      { user: "Susana B.", text: "Una persona extraordinaria. Nos ha dado mucha tranquilidad a toda la familia." },
-    ],
   },
   {
     id: 2122,
@@ -2220,13 +1918,6 @@ managerOpinion: { name:"Enric Ruiz-Geli", role:"Director del estudio", text:"Mar
     tags: ["Alzheimer", "demencia", "cuidadora", "rutinas", "comunicación"],
   },
   {
-    qualitativeComments: [
-      { user: "Elena M.", text: "Cuida a mi madre como si fuera la suya. Totalmente recomendable." },
-      { user: "Fernando T.", text: "Discreta, responsable y con mucha experiencia. Mi padre se ha adaptado muy bien a ella." },
-      { user: "Susana B.", text: "Una persona extraordinaria. Nos ha dado mucha tranquilidad a toda la familia." },
-    ],
-  },
-  {
     id: 2123,
     name: "Rosa Mas Vilar",
     specialty: "cuidadora post-operatorio",
@@ -2243,11 +1934,6 @@ managerOpinion: { name:"Enric Ruiz-Geli", role:"Director del estudio", text:"Mar
     distance: 1.5,
     avatarUrl: "https://api.dicebear.com/9.x/personas/svg?seed=rosa-postop",
     tags: ["post-operatorio", "curas", "medicación", "alta hospitalaria"],
-    qualitativeComments: [
-      { user: "Elena M.", text: "Cuida a mi madre como si fuera la suya. Totalmente recomendable." },
-      { user: "Fernando T.", text: "Discreta, responsable y con mucha experiencia. Mi padre se ha adaptado muy bien a ella." },
-      { user: "Susana B.", text: "Una persona extraordinaria. Nos ha dado mucha tranquilidad a toda la familia." },
-    ],
   },
   {
     id: 2124,
@@ -2265,13 +1951,6 @@ managerOpinion: { name:"Enric Ruiz-Geli", role:"Director del estudio", text:"Mar
     distance: 1.3,
     avatarUrl: "https://api.dicebear.com/9.x/personas/svg?seed=marta-auxger",
     tags: ["auxiliar geriátrica", "higiene", "estimulación", "compañía"],
-  },
-  {
-    qualitativeComments: [
-      { user: "Elena M.", text: "Cuida a mi madre como si fuera la suya. Totalmente recomendable." },
-      { user: "Fernando T.", text: "Discreta, responsable y con mucha experiencia. Mi padre se ha adaptado muy bien a ella." },
-      { user: "Susana B.", text: "Una persona extraordinaria. Nos ha dado mucha tranquilidad a toda la familia." },
-    ],
   },
   {
     id: 2125,
@@ -2395,18 +2074,6 @@ managerOpinion: { name:"Enric Ruiz-Geli", role:"Director del estudio", text:"Mar
     tags: ["informático", "Windows", "Mac", "virus", "red", "datos"],
   },
   {
-    qualitativeComments: [
-      { user: "Javier L.", text: "Solucionó en 20 minutos lo que yo llevaba días intentando. Muy recomendable." },
-      { user: "Beatriz M.", text: "Rápido, claro y sin tecnicismos. Explica todo para que lo entiendas." },
-      { user: "Rodrigo K.", text: "Precio justo y trabajo excelente. La web quedó mucho mejor de lo esperado." },
-    ],
-    qualitativeComments: [
-      { user: "Javier L.", text: "Solucionó en 20 minutos lo que yo llevaba días intentando. Muy recomendable." },
-      { user: "Beatriz M.", text: "Rápido, claro y sin tecnicismos. Explica todo para que lo entiendas." },
-      { user: "Rodrigo K.", text: "Precio justo y trabajo excelente. La web quedó mucho mejor de lo esperado." },
-    ],
-  },
-  {
     id: 2141,
     name: "Roger Mas Puig",
     specialty: "reparación de ordenadores",
@@ -2422,13 +2089,6 @@ managerOpinion: { name:"Enric Ruiz-Geli", role:"Director del estudio", text:"Mar
     distance: 1.3,
     avatarUrl: "https://api.dicebear.com/9.x/personas/svg?seed=roger-ordenadores",
     tags: ["ordenadores", "portátiles", "pantalla", "batería", "disco duro"],
-  },
-  {
-    qualitativeComments: [
-      { user: "Javier L.", text: "Solucionó en 20 minutos lo que yo llevaba días intentando. Muy recomendable." },
-      { user: "Beatriz M.", text: "Rápido, claro y sin tecnicismos. Explica todo para que lo entiendas." },
-      { user: "Rodrigo K.", text: "Precio justo y trabajo excelente. La web quedó mucho mejor de lo esperado." },
-    ],
   },
   {
     id: 2142,
@@ -2449,13 +2109,6 @@ managerOpinion: { name:"Enric Ruiz-Geli", role:"Director del estudio", text:"Mar
     tags: ["móviles", "iPhone", "Samsung", "pantalla", "batería"],
   },
   {
-    qualitativeComments: [
-      { user: "Javier L.", text: "Solucionó en 20 minutos lo que yo llevaba días intentando. Muy recomendable." },
-      { user: "Beatriz M.", text: "Rápido, claro y sin tecnicismos. Explica todo para que lo entiendas." },
-      { user: "Rodrigo K.", text: "Precio justo y trabajo excelente. La web quedó mucho mejor de lo esperado." },
-    ],
-  },
-  {
     id: 2143,
     name: "Carles Mas Vilar",
     specialty: "especialista wifi",
@@ -2471,11 +2124,6 @@ managerOpinion: { name:"Enric Ruiz-Geli", role:"Director del estudio", text:"Mar
     distance: 1.6,
     avatarUrl: "https://api.dicebear.com/9.x/personas/svg?seed=carles-wifi",
     tags: ["WiFi", "redes", "Mesh", "router", "cobertura", "seguridad"],
-    qualitativeComments: [
-      { user: "Javier L.", text: "Solucionó en 20 minutos lo que yo llevaba días intentando. Muy recomendable." },
-      { user: "Beatriz M.", text: "Rápido, claro y sin tecnicismos. Explica todo para que lo entiendas." },
-      { user: "Rodrigo K.", text: "Precio justo y trabajo excelente. La web quedó mucho mejor de lo esperado." },
-    ],
   },
   {
     id: 2144,
@@ -2563,18 +2211,6 @@ managerOpinion: { name:"Enric Ruiz-Geli", role:"Director del estudio", text:"Mar
     tags: ["diseño gráfico", "branding", "logo", "identidad visual", "editorial"],
   },
   {
-    qualitativeComments: [
-      { user: "Mónica R.", text: "Captó perfectamente lo que quería y lo llevó al siguiente nivel. Trabajo brillante." },
-      { user: "Sergio V.", text: "Muy creativa, puntual y con muchísimo talento. El resultado superó mis expectativas." },
-      { user: "Claudia M.", text: "Profesional, rápida y con muy buen gusto. No dudaré en volver a contratarla." },
-    ],
-    qualitativeComments: [
-      { user: "Mónica R.", text: "Captó perfectamente lo que quería y lo llevó al siguiente nivel. Trabajo brillante." },
-      { user: "Sergio V.", text: "Muy creativa, puntual y con muchísimo talento. El resultado superó mis expectativas." },
-      { user: "Claudia M.", text: "Profesional, rápida y con muy buen gusto. No dudaré en volver a contratarla." },
-    ],
-  },
-  {
     id: 2151,
     name: "Manel Mas Puig",
     specialty: "diseñador ux/ui",
@@ -2592,18 +2228,6 @@ managerOpinion: { name:"Enric Ruiz-Geli", role:"Director del estudio", text:"Mar
     tags: ["UX", "UI", "Figma", "wireframes", "prototipos", "investigación"],
   },
   {
-    qualitativeComments: [
-      { user: "Mónica R.", text: "Captó perfectamente lo que quería y lo llevó al siguiente nivel. Trabajo brillante." },
-      { user: "Sergio V.", text: "Muy creativa, puntual y con muchísimo talento. El resultado superó mis expectativas." },
-      { user: "Claudia M.", text: "Profesional, rápida y con muy buen gusto. No dudaré en volver a contratarla." },
-    ],
-    qualitativeComments: [
-      { user: "Mónica R.", text: "Captó perfectamente lo que quería y lo llevó al siguiente nivel. Trabajo brillante." },
-      { user: "Sergio V.", text: "Muy creativa, puntual y con muchísimo talento. El resultado superó mis expectativas." },
-      { user: "Claudia M.", text: "Profesional, rápida y con muy buen gusto. No dudaré en volver a contratarla." },
-    ],
-  },
-  {
     id: 2152,
     name: "Laura Mas Vidal",
     specialty: "fotógrafa",
@@ -2619,11 +2243,6 @@ managerOpinion: { name:"Enric Ruiz-Geli", role:"Director del estudio", text:"Mar
     distance: 2.3,
     avatarUrl: "https://api.dicebear.com/9.x/personas/svg?seed=laura-foto",
     tags: ["fotógrafa", "retrato", "producto", "eventos", "edición"],
-    qualitativeComments: [
-      { user: "Mónica R.", text: "Captó perfectamente lo que quería y lo llevó al siguiente nivel. Trabajo brillante." },
-      { user: "Sergio V.", text: "Muy creativa, puntual y con muchísimo talento. El resultado superó mis expectativas." },
-      { user: "Claudia M.", text: "Profesional, rápida y con muy buen gusto. No dudaré en volver a contratarla." },
-    ],
   },
   {
     id: 2153,
@@ -2711,18 +2330,6 @@ managerOpinion: { name:"Enric Ruiz-Geli", role:"Director del estudio", text:"Mar
     tags: ["mecánico", "diagnóstico", "frenos", "distribución", "revisión"],
   },
   {
-    qualitativeComments: [
-      { user: "Luis P.", text: "Rápido, honesto y con buen precio. Por fin un mecánico de confianza." },
-      { user: "Amparo S.", text: "Vino a mi garaje y lo dejó impecable. Sin sorpresas en el precio." },
-      { user: "Carlos F.", text: "Excelente resultado. El coche como nuevo. Muy profesional y detallista." },
-    ],
-    qualitativeComments: [
-      { user: "Luis P.", text: "Rápido, honesto y con buen precio. Por fin un mecánico de confianza." },
-      { user: "Amparo S.", text: "Vino a mi garaje y lo dejó impecable. Sin sorpresas en el precio." },
-      { user: "Carlos F.", text: "Excelente resultado. El coche como nuevo. Muy profesional y detallista." },
-    ],
-  },
-  {
     id: 2161,
     name: "Santi Mas Puig",
     specialty: "electricidad del automóvil",
@@ -2738,11 +2345,6 @@ managerOpinion: { name:"Enric Ruiz-Geli", role:"Director del estudio", text:"Mar
     distance: 2.8,
     avatarUrl: "https://api.dicebear.com/9.x/personas/svg?seed=santi-elec-auto",
     tags: ["electricista", "automóvil", "híbrido", "eléctrico", "alarmas"],
-    qualitativeComments: [
-      { user: "Luis P.", text: "Rápido, honesto y con buen precio. Por fin un mecánico de confianza." },
-      { user: "Amparo S.", text: "Vino a mi garaje y lo dejó impecable. Sin sorpresas en el precio." },
-      { user: "Carlos F.", text: "Excelente resultado. El coche como nuevo. Muy profesional y detallista." },
-    ],
   },
   {
     id: 2162,
@@ -2796,18 +2398,6 @@ managerOpinion: { name:"Enric Ruiz-Geli", role:"Director del estudio", text:"Mar
     tags: ["DJ", "bodas", "eventos", "cumpleaños", "sonido", "iluminación"],
   },
   {
-    qualitativeComments: [
-      { user: "Marta G.", text: "Los niños lo pasaron genial. Una animadora excepcional con mucha energía." },
-      { user: "Pablo R.", text: "Hizo que nuestra boda fuera perfecta. Cada detalle cuidado al máximo." },
-      { user: "Ana L.", text: "Ambiente increíble toda la noche. Sabe leer a la gente y poner la música perfecta." },
-    ],
-    qualitativeComments: [
-      { user: "Marta G.", text: "Los niños lo pasaron genial. Una animadora excepcional con mucha energía." },
-      { user: "Pablo R.", text: "Hizo que nuestra boda fuera perfecta. Cada detalle cuidado al máximo." },
-      { user: "Ana L.", text: "Ambiente increíble toda la noche. Sabe leer a la gente y poner la música perfecta." },
-    ],
-  },
-  {
     id: 2171,
     name: "Tania Mas Ferrer",
     specialty: "animadora infantil",
@@ -2823,11 +2413,6 @@ managerOpinion: { name:"Enric Ruiz-Geli", role:"Director del estudio", text:"Mar
     distance: 1.7,
     avatarUrl: "https://api.dicebear.com/9.x/personas/svg?seed=tania-animadora",
     tags: ["animadora", "infantil", "payasa", "magia", "manualidades", "niños"],
-    qualitativeComments: [
-      { user: "Marta G.", text: "Los niños lo pasaron genial. Una animadora excepcional con mucha energía." },
-      { user: "Pablo R.", text: "Hizo que nuestra boda fuera perfecta. Cada detalle cuidado al máximo." },
-      { user: "Ana L.", text: "Ambiente increíble toda la noche. Sabe leer a la gente y poner la música perfecta." },
-    ],
   },
   {
     id: 2172,

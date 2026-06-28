@@ -9,6 +9,7 @@ import { HELPERS } from '../data/helpers'
 import { useUser } from '../context/UserContext'
 import RatingModal from '../components/RatingModal'
 import styles from './HelperProfile.module.css'
+import { DEMO_ENRICHMENTS } from '../data/demoEnrichments'
 import { showToast } from '../components/Toast'
 import RegisterGate from '../components/RegisterGate'
 import { getHelperById } from '../utils/supabase'
@@ -167,6 +168,11 @@ function HelperProfileInner() {
   const { user, addService } = useUser()
 
   const [h, setH]             = useState(location.state?.helper || null)
+
+  // Merge demo enrichment for rich profiles
+  const enrichedH = h && h.id >= 2000 && DEMO_ENRICHMENTS[h.id]
+    ? { ...DEMO_ENRICHMENTS[h.id], ...h, qualitativeComments: h.qualitativeComments || DEMO_ENRICHMENTS[h.id].qualitativeComments }
+    : h
   const [loading, setLoading] = useState(!h)
   const [showConfirm, setShowConfirm] = useState(false)
   const [showRating, setShowRating]   = useState(false)
@@ -196,20 +202,20 @@ function HelperProfileInner() {
     </div>
   )
 
-  const firstName = h.name?.split(' ')?.[0] || ''
+  const firstName = enrichedH.name?.split(' ')?.[0] || ''
 
   // Primary education for hero display
-  const mainEdu = h.education?.[0]
+  const mainEdu = enrichedH.education?.[0]
 
   function handleContact() {
     if (!user) {
       try {
-        sessionStorage.setItem('nura_pending_chat', JSON.stringify({ helperId: h.id, helperName: h.name }))
-        sessionStorage.setItem('nura_return_to', `/chat/${h.id}`)
+        sessionStorage.setItem('nura_pending_chat', JSON.stringify({ helperId: enrichedH.id, helperName: enrichedH.name }))
+        sessionStorage.setItem('nura_return_to', `/chat/${enrichedH.id}`)
       } catch {}
       setShowGate(true); return
     }
-    navigate(`/chat/${h.id}`, { state: { helper: h, userQuery: location.state?.userQuery } })
+    navigate(`/chat/${enrichedH.id}`, { state: { helper: h, userQuery: location.state?.userQuery } })
   }
 
   function handleShare() {
@@ -236,22 +242,22 @@ function HelperProfileInner() {
 
           {/* Avatar + availability */}
           <div className={styles.avatarWrap}>
-            {h.avatarUrl
-              ? <img src={h.avatarUrl} alt={h.name} className={styles.avatar} style={{opacity:0}} onLoad={e => e.target.style.animation="popIn 0.35s ease-out forwards"} />
-              : <div className={styles.avatarFallback} style={{background: h.avatarColor || 'var(--purple)'}}>
-                  {h.name?.split(' ').slice(0,2).map(w => w[0]).join('').toUpperCase() || h.avatar}
+            {enrichedH.avatarUrl
+              ? <img src={enrichedH.avatarUrl} alt={enrichedH.name} className={styles.avatar} style={{opacity:0}} onLoad={e => e.target.style.animation="popIn 0.35s ease-out forwards"} />
+              : <div className={styles.avatarFallback} style={{background: enrichedH.avatarColor || 'var(--purple)'}}>
+                  {enrichedH.name?.split(' ').slice(0,2).map(w => w[0]).join('').toUpperCase() || enrichedH.avatar}
                 </div>
             }
-            {h.available && <span className={styles.availDot} />}
+            {enrichedH.available && <span className={styles.availDot} />}
           </div>
 
           {/* Name */}
-          <h1 className={styles.name}>{h.name}</h1>
+          <h1 className={styles.name}>{enrichedH.name}</h1>
 
           {/* Specialty + verified */}
           <div className={styles.specialty}>
-            {h.specialty}
-            {h.dniVerified && (
+            {enrichedH.specialty}
+            {enrichedH.dniVerified && (
               <span className={styles.verifiedBadge}>
                 <Shield size={10} color="var(--green)" /> Verificado
               </span>
@@ -267,16 +273,16 @@ function HelperProfileInner() {
           )}
 
           {/* Location */}
-          {(h.zone || h.city) && (
+          {(enrichedH.zone || enrichedH.city) && (
             <div className={styles.location}>
               <MapPin size={11} color="rgba(0,0,0,0.35)" />
-              <span>{h.zone}{h.city && h.zone !== h.city ? `, ${h.city}` : ''}</span>
-              {h.distance && <span className={styles.locationDist}> · {h.distance} km de ti</span>}
+              <span>{enrichedH.zone}{enrichedH.city && enrichedH.zone !== enrichedH.city ? `, ${enrichedH.city}` : ''}</span>
+              {enrichedH.distance && <span className={styles.locationDist}> · {enrichedH.distance} km de ti</span>}
             </div>
           )}
 
           {/* Availability status — simple, no day grid */}
-          {h.available && (
+          {enrichedH.available && (
             <div className={styles.availStatus}>
               <span className={styles.availDotInline} />
               Disponible
@@ -285,24 +291,24 @@ function HelperProfileInner() {
 
           {/* Stats row */}
           <div className={styles.statsRow}>
-            {h.rating && (
+            {enrichedH.rating && (
               <div className={styles.stat}>
                 <Star size={12} fill="var(--amber)" color="var(--amber)" />
-                <strong>{h.rating}</strong>
-                {h.reviews > 0 && <span>({h.reviews})</span>}
+                <strong>{enrichedH.rating}</strong>
+                {enrichedH.reviews > 0 && <span>({enrichedH.reviews})</span>}
               </div>
             )}
-            {h.price && h.price !== 'Consultar' && (
+            {enrichedH.price && enrichedH.price !== 'Consultar' && (
               <div className={styles.stat}>
-                <strong>{h.price}</strong>
+                <strong>{enrichedH.price}</strong>
               </div>
             )}
-            {h.responseTime && (
+            {enrichedH.responseTime && (
               <div className={styles.stat}>
-                <span style={{color:'rgba(0,0,0,0.38)'}}>Responde en {h.responseTime}</span>
+                <span style={{color:'rgba(0,0,0,0.38)'}}>Responde en {enrichedH.responseTime}</span>
               </div>
             )}
-            {h.urgent && (
+            {enrichedH.urgent && (
               <div className={`${styles.stat} ${styles.statUrgent}`}>
                 <Zap size={10} /> Urgencias
               </div>
@@ -310,8 +316,8 @@ function HelperProfileInner() {
           </div>
 
           {/* Bio */}
-          {h.bio && (
-            <p className={styles.bio}>{h.bio}</p>
+          {enrichedH.bio && (
+            <p className={styles.bio}>{enrichedH.bio}</p>
           )}
 
           {/* CTA */}
@@ -331,7 +337,7 @@ function HelperProfileInner() {
             ══════════════════════════════════════════════════ */}
 
         {/* ── Cómo puedo ayudarte ── */}
-        {(h.tags?.length > 0 || h.specialty) && (
+        {(enrichedH.tags?.length > 0 || enrichedH.specialty) && (
           <section style={{animation:`fadeInUp 0.3s ease-out 0ms forwards`}} className={`${styles.section} ${styles.sectionFirst}`}>
             <h2 className={styles.sectionHeading}>Puedo ayudarte con</h2>
             <div className={styles.ayudaList}>
@@ -346,7 +352,7 @@ function HelperProfileInner() {
                   const stem = Math.min(x.length, y.length) - 2
                   return stem >= 5 && x.slice(0, stem) === y.slice(0, stem)
                 }
-                const raw = [h.specialty, ...(h.tags || [])].filter(Boolean)
+                const raw = [enrichedH.specialty, ...(enrichedH.tags || [])].filter(Boolean)
                 const accepted = []
                 const items = raw.filter(s => {
                   if (isModal(s)) return false
@@ -361,13 +367,13 @@ function HelperProfileInner() {
                   </div>
                 ))
               })()}
-              {h.presential && (
+              {enrichedH.presential && (
                 <div className={styles.ayudaItem}>
                   <Check size={13} color="var(--purple)" strokeWidth={2.5} style={{flexShrink:0}} />
                   <span>Sesiones presenciales</span>
                 </div>
               )}
-              {h.online && (
+              {enrichedH.online && (
                 <div className={styles.ayudaItem}>
                   <Check size={13} color="var(--purple)" strokeWidth={2.5} style={{flexShrink:0}} />
                   <span>Sesiones online</span>
@@ -378,27 +384,27 @@ function HelperProfileInner() {
         )}
 
 {/* ── Valoraciones ── */}
-        {h.reviews > 0 && (
+        {enrichedH.reviews > 0 && (
           <section style={{animation:`fadeInUp 0.3s ease-out 80ms forwards`}} className={styles.section}>
             <h2 className={styles.sectionHeading}>
               <Star size={14} fill="var(--amber)" color="var(--amber)" /> Lo que dicen de {firstName}
             </h2>
             <div className={styles.ratingRow}>
-              <span className={styles.ratingBig}>{h.rating}</span>
+              <span className={styles.ratingBig}>{enrichedH.rating}</span>
               <div>
                 <div className={styles.ratingStars}>
                   {[1,2,3,4,5].map(n => (
                     <Star key={n} size={13}
-                      fill={n <= Math.round(h.rating) ? 'var(--amber)' : 'rgba(0,0,0,0.1)'}
-                      color={n <= Math.round(h.rating) ? 'var(--amber)' : 'rgba(0,0,0,0.1)'} />
+                      fill={n <= Math.round(enrichedH.rating) ? 'var(--amber)' : 'rgba(0,0,0,0.1)'}
+                      color={n <= Math.round(enrichedH.rating) ? 'var(--amber)' : 'rgba(0,0,0,0.1)'} />
                   ))}
                 </div>
-                <span className={styles.ratingCount}>{h.reviews} valoraciones</span>
+                <span className={styles.ratingCount}>{enrichedH.reviews} valoraciones</span>
               </div>
             </div>
-            {h.qualitativeComments?.length > 0 && (
+            {enrichedH.qualitativeComments?.length > 0 && (
               <div className={styles.reviewList}>
-                {h.qualitativeComments.slice(0,3).map((c, i) => (
+                {enrichedH.qualitativeComments.slice(0,3).map((c, i) => (
                   <div key={i} className={styles.reviewItem}>
                     <p>{typeof c === 'string' ? c : c.text}</p>
                     {c.user && <span>— {c.user}</span>}
@@ -410,16 +416,16 @@ function HelperProfileInner() {
         )}
 
         {/* ── Experiencia ── */}
-        {h.experience?.length > 0 && (
+        {enrichedH.experience?.length > 0 && (
           <section style={{animation:`fadeInUp 0.3s ease-out 160ms forwards`}} className={styles.section}>
             <h2 className={styles.sectionHeading}>
               <Briefcase size={14} /> Trayectoria profesional
             </h2>
             <div className={styles.expList}>
-              {h.experience.map((exp, i) => (
+              {enrichedH.experience.map((exp, i) => (
                 <div key={i} className={styles.expItem}>
                   <div className={styles.expDot} />
-                  {i < h.experience.length - 1 && <div className={styles.expLine} />}
+                  {i < enrichedH.experience.length - 1 && <div className={styles.expLine} />}
                   <div className={styles.expContent}>
                     <div className={styles.expRole}>{exp.role}</div>
                     <div className={styles.expCompany}>
@@ -458,16 +464,16 @@ function HelperProfileInner() {
         )}
 
         {/* ── Formación ── */}
-        {h.education?.length > 0 && (
+        {enrichedH.education?.length > 0 && (
           <section style={{animation:`fadeInUp 0.3s ease-out 240ms forwards`}} className={styles.section}>
             <h2 className={styles.sectionHeading}>
               <BookOpen size={14} /> Formación académica
             </h2>
             <div className={styles.expList}>
-              {h.education.map((edu, i) => (
+              {enrichedH.education.map((edu, i) => (
                 <div key={i} className={styles.expItem}>
                   <div className={styles.expDot} />
-                  {i < h.education.length - 1 && <div className={styles.expLine} />}
+                  {i < enrichedH.education.length - 1 && <div className={styles.expLine} />}
                   <div className={styles.expContent}>
                     <div className={styles.expRole}>{edu.title || edu.degree}</div>
                     <div className={styles.expCompany}>{edu.institution || edu.school}</div>
@@ -483,11 +489,11 @@ function HelperProfileInner() {
         )}
 
         {/* ── Habilidades ── */}
-        {h.skills?.length > 0 && (
+        {enrichedH.skills?.length > 0 && (
           <section style={{animation:`fadeInUp 0.3s ease-out 320ms forwards`}} className={styles.section}>
             <h2 className={styles.sectionHeading}>En qué destaca</h2>
             <div className={styles.tags}>
-              {h.skills.map((s, i) => (
+              {enrichedH.skills.map((s, i) => (
                 <span key={i} className={styles.tag}>{s}</span>
               ))}
             </div>
@@ -495,13 +501,13 @@ function HelperProfileInner() {
         )}
 
         {/* ── Idiomas ── */}
-        {h.languages?.length > 0 && (
+        {enrichedH.languages?.length > 0 && (
           <section style={{animation:`fadeInUp 0.3s ease-out 400ms forwards`}} className={styles.section}>
             <h2 className={styles.sectionHeading}>
               <Globe size={14} /> Idiomas
             </h2>
             <div className={styles.tags}>
-              {h.languages.map((l, i) => (
+              {enrichedH.languages.map((l, i) => (
                 <span key={i} className={`${styles.tag} ${styles.tagIdioma}`}>{l}</span>
               ))}
             </div>
@@ -509,10 +515,10 @@ function HelperProfileInner() {
         )}
 
         {/* ── Publicaciones ── */}
-        {h.posts?.length > 0 && (
+        {enrichedH.posts?.length > 0 && (
           <section style={{animation:`fadeInUp 0.3s ease-out 480ms forwards`}} className={styles.section}>
             <h2 className={styles.sectionHeading}>Publicaciones</h2>
-            {h.posts.slice(0,2).map((post, i) => (
+            {enrichedH.posts.slice(0,2).map((post, i) => (
               <PostCard key={i} post={post} />
             ))}
           </section>
