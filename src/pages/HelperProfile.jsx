@@ -333,6 +333,25 @@ function HelperProfileInner() {
             <p className={styles.bio}>{enrichedH.bio}</p>
           )}
 
+          {/* Trust badges — before CTA */}
+          <div style={{
+            display:'flex', gap:'6px', flexWrap:'wrap',
+            justifyContent:'center', marginBottom:'10px'
+          }}>
+            {[
+              enrichedH.verified && '✓ Identidad verificada',
+              enrichedH.dniVerified && '✓ DNI comprobado',
+              enrichedH.criminalRecordClear && '✓ Sin antecedentes',
+            ].filter(Boolean).map(badge => (
+              <span key={badge} style={{
+                fontSize:'10px', fontWeight:600, color:'#065f46',
+                background:'rgba(16,185,129,0.10)', borderRadius:'99px',
+                padding:'3px 10px', border:'1px solid rgba(16,185,129,0.20)',
+                letterSpacing:'0.1px'
+              }}>{badge}</span>
+            ))}
+          </div>
+
           {/* CTA */}
           <button className={styles.ctaPrimary} onClick={handleContact} style={{animation:"popIn 0.3s ease-out 0.2s forwards"}}>
             <MessageCircle size={15} /> Escribir a {firstName}

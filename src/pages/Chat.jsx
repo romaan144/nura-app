@@ -467,7 +467,22 @@ export default function Chat() {
             <div className={styles.helperStatus}>
               {typing
                 ? <span className={styles.typingStatus}>escribiendo...</span>
-                : <><span className={styles.onlineDot} />{chatSpecialty}</>
+                : <>
+                    <span className={styles.onlineDot} />
+                    {chatSpecialty}
+                    {helper.rating && (
+                      <span style={{marginLeft:'6px',fontSize:'10px',color:'rgba(0,0,0,0.4)'}}>
+                        ★ {helper.rating}
+                      </span>
+                    )}
+                    {helper.verified && (
+                      <span style={{
+                        marginLeft:'5px',fontSize:'9px',fontWeight:600,
+                        color:'#065f46',background:'rgba(16,185,129,0.12)',
+                        borderRadius:'99px',padding:'1px 5px'
+                      }}>✓ Verificado</span>
+                    )}
+                  </>
               }
             </div>
           </div>

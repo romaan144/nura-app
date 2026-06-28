@@ -104,6 +104,7 @@ export default function RegisterHelper() {
         saveHelperToSupabase(newAnswers)
         login({ name: newAnswers.name || val, isHelper: true, helperProfile: newAnswers })
         sessionStorage.setItem('nura_helper_registered', '1')
+        sessionStorage.setItem('nura_show_profile_preview', '1')
         setTimeout(() => navigate('/'), 3000)
       }, 1000)
     }

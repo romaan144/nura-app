@@ -332,11 +332,46 @@ export default function Feed() {
             </button>
           </div>
         ) : (
-          !feedLoading && displayPosts.map((post, i) => (
-            <div key={post.id || i} style={{animation:`cardCascade 0.45s ease-out ${i*80}ms both`}}>
-              <PostCard post={post} />
-            </div>
-          ))
+          !feedLoading && (<>
+            {tab === 'para-ti' && displayPosts.length > 0 && (
+              <div style={{
+                margin:'0 0 6px', padding:'14px 16px',
+                background:'linear-gradient(135deg,rgba(123,47,255,0.08),rgba(123,47,255,0.03))',
+                borderRadius:'16px', border:'1px solid rgba(123,47,255,0.12)'
+              }}>
+                <div style={{fontSize:'10px',fontWeight:700,color:'var(--purple)',letterSpacing:'0.6px',textTransform:'uppercase',marginBottom:'8px'}}>
+                  ✦ Nuevas ayudas cerca de ti
+                </div>
+                <div style={{display:'flex',gap:'8px',overflowX:'auto',paddingBottom:'2px'}}>
+                  {displayPosts.slice(0,3).map((p,i) => p.author && (
+                    <div key={i} style={{
+                      minWidth:'140px',padding:'10px 12px',
+                      background:'white',borderRadius:'12px',
+                      boxShadow:'0 1px 6px rgba(0,0,0,0.08)',
+                      border:'1px solid rgba(0,0,0,0.06)',flexShrink:0
+                    }}>
+                      <div style={{fontSize:'11px',fontWeight:700,color:'var(--ink)',marginBottom:'3px',whiteSpace:'nowrap',overflow:'hidden',textOverflow:'ellipsis'}}>
+                        {p.author?.name?.split(' ')?.[0]}
+                      </div>
+                      <div style={{fontSize:'10px',color:'rgba(0,0,0,0.45)',lineHeight:1.3}}>
+                        {p.author?.specialty}
+                      </div>
+                      {p.author?.rating && (
+                        <div style={{fontSize:'10px',color:'var(--amber)',marginTop:'4px'}}>
+                          ★ {p.author.rating}
+                        </div>
+                      )}
+                    </div>
+                  ))}
+                </div>
+              </div>
+            )}
+            {displayPosts.map((post, i) => (
+              <div key={post.id || i} style={{animation:`cardCascade 0.45s ease-out ${i*80}ms both`}}>
+                <PostCard post={post} />
+              </div>
+            ))}
+          </>)
         )}
       </div>
       {showGate && <RegisterGate reason="follow" onClose={() => setShowGate(false)} />}

@@ -31,8 +31,13 @@ export default function HelperCard({ helper, onContact, showContact = true, show
     e.stopPropagation()
     haptic('light')
     if (!user) { showToast('Inicia sesión para seguir profesionales'); return }
-    isFollowing(helper.id) ? unfollow(helper.id) : follow(helper.id)
-    showToast(isFollowing(helper.id) ? 'Has dejado de seguir' : 'Siguiendo')
+    const wasFollowing = isFollowing(helper.id)
+    wasFollowing ? unfollow(helper.id) : follow(helper.id)
+    const firstName = helper.name?.split(' ')?.[0] || helper.name
+    showToast(wasFollowing
+      ? `Has dejado de seguir a ${firstName}`
+      : `✓ Siguiendo a ${firstName} — verás sus posts en Comunidad`
+    )
   }
 
   function handleTap() {
