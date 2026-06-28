@@ -233,8 +233,23 @@ export default function Chat() {
     if (real?.length > 0) return real
     const demo = location.state?.demoHistory
     if (demo?.length > 0) return demo
+    // Demo mode: helper sends a welcome message to feel real
     return []
   })
+
+  // Add welcome message from helper if chat is empty
+  useEffect(() => {
+    if (messages.length === 0 && helper) {
+      const firstName = helper.name?.split(' ')?.[0] || helper.name
+      const welcomeMsg = {
+        id: 'welcome',
+        from: 'helper',
+        text: `Hola, soy ${firstName}. Vi que me encontraste a través de Nüra. ¿En qué puedo ayudarte?`,
+        time: new Date().toLocaleTimeString('es-ES', { hour: '2-digit', minute: '2-digit' })
+      }
+      setTimeout(() => setMessages([welcomeMsg]), 800)
+    }
+  }, [helper])
   const hasHistory = (getChatHistory(id)?.length > 0) || (location.state?.demoHistory?.length > 0)
   const userQuery = location.state?.userQuery || window.__nuraLastQuery
   const fromSearch = !!userQuery && !hasHistory

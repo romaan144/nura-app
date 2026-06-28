@@ -341,9 +341,9 @@ export default function Home({ setSearchState }) {
             id: Date.now(), from: 'nura',
             lines: [
               topMatch
-                ? `Perfecto. **${firstName}** tiene ${topMatch.rating}★ y suele responder en ${topMatch.responseTime || '< 1 hora'}.`
+                ? `Perfecto. **${firstName}** tiene ${topMatch.rating}★ y suele responder en ${topMatch.responseTime || 'menos de 1 hora'}. Es una muy buena elección.`
                 : `Perfecto.`,
-              `Pulsa en la tarjeta para ver el perfil completo y escribirle directamente.`
+              `Pulsa en su tarjeta para ver el perfil completo y escribirle directamente.`
             ],
             chips: topMatch ? [`Escribir a ${firstName}`] : []
           }])
@@ -432,20 +432,32 @@ export default function Home({ setSearchState }) {
     try {
       // Analyse first so we can use it for contextual loading message
       const analysis = await analyzeNeed(msg)
+      // Empathy acknowledgment — instant, before searching
+      const empathyLine = analysis?.urgente
+        ? '⚡ Entendido. Situación urgente — busco disponibilidad ahora mismo.'
+        : analysis?.categoria === 'cuidado'
+        ? 'Entiendo. Cuidar a alguien querido es una decisión importante. Busco a las mejores cuidadoras verificadas cerca de ti.'
+        : analysis?.categoria === 'tecnico'
+        ? 'Entendido. Te localizo técnicos disponibles en tu zona.'
+        : analysis?.categoria === 'logopeda'
+        ? 'Entendido. Busco logopedas especializados cerca de ti.'
+        : analysis?.categoria === 'salud'
+        ? 'Entendido. Busco el profesional de salud más adecuado para ti.'
+        : analysis?.categoria === 'legal'
+        ? 'Entendido. Te busco asesores jurídicos de confianza.'
+        : analysis?.categoria === 'matematicas'
+        ? 'Entendido. Busco el profesor ideal para lo que necesitas.'
+        : analysis?.categoria === 'psicologia'
+        ? 'Gracias por contarme. Busco el psicólogo más adecuado para ti.'
+        : '¿Te entiendo bien? Déjame buscar la persona exacta que necesitas.'
+      setMessages(prev => [...prev, { id: Date.now() + 0.3, from: 'nura', lines: [empathyLine] }])
+
       const loadingText = analysis?.urgente
         ? 'Buscando disponibilidad urgente...'
-        : analysis?.categoria === 'cuidado'
-        ? 'Revisando cuidadoras verificadas en tu zona...'
-        : analysis?.categoria === 'tecnico'
-        ? 'Localizando técnicos disponibles...'
-        : analysis?.categoria === 'logopeda'
-        ? 'Buscando logopedas especializados...'
-        : analysis?.categoria === 'salud'
-        ? 'Buscando profesionales de salud...'
-        : analysis?.categoria === 'legal'
-        ? 'Buscando asesores jurídicos...'
-        : 'Analizando tu necesidad y buscando el perfil ideal...'
-      setMessages(prev => [...prev, { id: Date.now() + 0.5, from: 'nura', lines: [loadingText], loading: true }])
+        : 'Buscando el perfil ideal...'
+      setTimeout(() => {
+        setMessages(prev => [...prev, { id: Date.now() + 0.5, from: 'nura', lines: [loadingText], loading: true }])
+      }, 600)
       const matches = await matchHelpers(analysis, 4)
       clearInterval(window.__nuraStatusInterval)
       setMessages(prev => prev.filter(m => !m.loading))
@@ -543,9 +555,10 @@ export default function Home({ setSearchState }) {
       const top = matches?.[0]
       const zona = top?.zone || top?.city || 'Barcelona'
       const topName = top?.name?.split(' ')?.[0] || ''
+      const topFirstName = top?.name?.split(' ')?.[0] || ''
       const resultLine = matches.length === 1
-        ? `Encontré **1 ${especialidad.slice(0,-1)}** verificado cerca de ti.`
-        : `Encontré **${matches.length} ${especialidad}** cerca de ti en ${zona}.`
+        ? `He encontrado a **${topFirstName}**, ${especialidad.slice(0,-1)} verificado cerca de ti.`
+        : `He encontrado **${matches.length} ${especialidad}** cerca de ti. El mejor candidato es **${topFirstName}**.`
 
       // Price context — reduces doubt at decision moment
       const priceCtx = matches.length > 0
@@ -588,7 +601,7 @@ export default function Home({ setSearchState }) {
       const followLine = matches.length >= 3 && matchExplanation
         ? matchExplanation
         : matches.length > 0
-        ? `Solo hay ${matches.length} disponibles ahora. ¿Ampliamos la búsqueda?`
+        ? `Hay ${matches.length} disponibles ahora. ¿Te cuento más sobre ${topFirstName}?`
         : null
 
       const resultMsg = {

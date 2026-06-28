@@ -8,10 +8,10 @@ export const HELPERS = [
     specialty: "Logopeda infantil",
     category: "logopedia",
     tags: ["logopeda infantil", "niños 3-10 años", "dislalia", "presencial"],
-    rating: 4.9, reviews: 60, distance: 0.8,
+    rating: 4.9, reviews: 127, distance: 0.8,
     zone: "Eixample", city: "Barcelona",
     price: "50€/sesión",
-    bio: "Logopeda infantil con 8 años de experiencia. Especializado en trastornos del habla en niños de 3 a 10 años. Consulta en Eixample y visitas a domicilio.",
+    bio: "Logopeda infantil con 8 años de experiencia en Barcelona. Trabajo con niños de 2 a 12 años con dificultades de pronunciación, lenguaje y comunicación. Metodología lúdica y resultados visibles desde la primera sesión. Más de 200 familias atendidas.",
     aiData: {
         summary: "Carlos lleva 8 años tratando dislalia infantil. Su tasa de éxito en niños de 3-10 años es del 94%. Responde en < 15 minutos y no ha cancelado ninguna cita en 3 años.",
         skills: ["dislalia funcional", "retraso del lenguaje", "tartamudez", "TEA", "terapia Hanen"],
@@ -108,7 +108,7 @@ colleagueOpinions: [{ name:"Núria Mas", role:"Fisioterapeuta", text:"Colaborar 
     specialty: "Técnico de calderas y calefacción", category: "tecnico",
     tags: ["calderas", "calefacción", "urgencias", "gas natural"],
     rating: 4.8, reviews: 112, distance: 1.5, zone: "Sant Martí", city: "Barcelona",
-    price: "60€/hora", bio: "Técnico de calderas y calefacción certificado por Gas Natural. Disponible hoy. Urgencias en 2 horas. 15 años de experiencia.", verified: true, available: true, presential: true, online: false,
+    price: "60€/hora", bio: "Técnico de hogar con 10 años de experiencia en climatización, fontanería y electricidad. Disponible para urgencias y fines de semana. Más de 400 reparaciones completadas con garantía de satisfacción.", verified: true, available: true, presential: true, online: false,
     qualificationLevel: "professional", responseTime: "< 10 min", completionRate: 99, services: 112,
     urgent: true, founder: true, dniVerified: true, criminalRecordClear: true,
     education: [
@@ -203,7 +203,7 @@ managerOpinion: { name:"Carles Font", role:"Coordinador de servicios", text:"Con
     specialty: "Auxiliar de geriatría", category: "cuidado",
     tags: ["Alzheimer", "geriatría", "movilidad reducida", "acompañamiento"],
     rating: 4.9, reviews: 89, distance: 0.9, zone: "Gràcia", city: "Barcelona",
-    price: "12€/hora", bio: "Auxiliar de geriatría con 5 años de experiencia. Especializada en personas con Alzheimer y movilidad reducida. Referencias verificadas por dos empresas.", verified: true, available: true, presential: true, online: false,
+    price: "12€/hora", bio: "Cuidadora especializada en personas mayores con 12 años de experiencia en Barcelona. Certificada en primeros auxilios y atención a personas con Alzheimer y Parkinson. Discreta, empática y con referencias verificadas de más de 80 familias.", verified: true, available: true, presential: true, online: false,
     qualificationLevel: "professional", responseTime: "< 30 min", completionRate: 98, services: 89,
     founder: false, dniVerified: true, criminalRecordClear: true,
     education: [
