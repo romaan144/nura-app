@@ -331,6 +331,37 @@ function HelperProfileInner() {
 
         </div>
 
+        {/* ── Próxima disponibilidad ── */}
+        <div style={{
+          display:'flex', alignItems:'center', gap:'8px',
+          padding:'10px 16px', margin:'0 20px 4px',
+          background:'rgba(16,185,129,0.08)', borderRadius:'12px',
+          border:'1px solid rgba(16,185,129,0.15)'
+        }}>
+          <div style={{width:'8px',height:'8px',borderRadius:'50%',background:'#10B981',flexShrink:0}} />
+          <div>
+            <span style={{fontSize:'12px',fontWeight:600,color:'#065f46'}}>Disponible ahora</span>
+            <span style={{fontSize:'12px',color:'rgba(0,0,0,0.4)',marginLeft:'6px'}}>
+              · Responde en {enrichedH.responseTime || '< 1 hora'}
+            </span>
+          </div>
+        </div>
+
+        {/* ── Días de la semana ── */}
+        <div style={{display:'flex',gap:'6px',padding:'8px 20px 12px',overflowX:'auto'}}>
+          {['L','M','X','J','V','S','D'].map((day, i) => (
+            <div key={day} style={{
+              minWidth:'36px', height:'36px', borderRadius:'10px',
+              display:'flex', flexDirection:'column', alignItems:'center',
+              justifyContent:'center', gap:'1px',
+              background: i < 5 ? 'rgba(123,47,255,0.10)' : 'rgba(0,0,0,0.04)',
+              border: i < 5 ? '1.5px solid rgba(123,47,255,0.20)' : '1.5px solid rgba(0,0,0,0.07)',
+            }}>
+              <span style={{fontSize:'10px',fontWeight:600,color: i < 5 ? 'var(--purple)' : 'rgba(0,0,0,0.3)'}}>{day}</span>
+            </div>
+          ))}
+        </div>
+
         {/* ══════════════════════════════════════════════════
             CONTENIDO — flujo continuo, sin tabs
             La persona es la protagonista

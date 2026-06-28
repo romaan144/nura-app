@@ -127,6 +127,35 @@ export default function Profile() {
           )}
         </div>
 
+        {/* ── PROFILE COMPLETION ─────────────────────────── */}
+        {user && (() => {
+          const fields = [
+            !!user.name, !!user.phone, (searchHistory?.length > 0),
+            (following?.length > 0), !!user.avatar
+          ]
+          const pct = Math.round((fields.filter(Boolean).length / fields.length) * 100)
+          const missing = []
+          if (!user.phone) missing.push('teléfono')
+          if (!following?.length) missing.push('seguir profesionales')
+          if (!searchHistory?.length) missing.push('hacer tu primera búsqueda')
+          return pct < 100 ? (
+            <div style={{margin:'0 16px 12px',padding:'14px 16px',background:'white',borderRadius:'16px',boxShadow:'0 1px 8px rgba(0,0,0,0.06)',border:'1px solid rgba(0,0,0,0.07)'}}>
+              <div style={{display:'flex',justifyContent:'space-between',alignItems:'center',marginBottom:'8px'}}>
+                <span style={{fontSize:'13px',fontWeight:700,color:'var(--ink)',letterSpacing:'-0.2px'}}>Tu perfil está al {pct}%</span>
+                <span style={{fontSize:'11px',color:'rgba(0,0,0,0.38)'}}>Mejora tus matches</span>
+              </div>
+              <div style={{height:'6px',background:'rgba(0,0,0,0.07)',borderRadius:'99px',overflow:'hidden'}}>
+                <div style={{height:'100%',width:`${pct}%`,background:'var(--purple)',borderRadius:'99px',transition:'width 0.6s ease'}} />
+              </div>
+              {missing.length > 0 && (
+                <p style={{fontSize:'12px',color:'rgba(0,0,0,0.45)',marginTop:'8px',lineHeight:1.4}}>
+                  Añade: {missing.join(' · ')}
+                </p>
+              )}
+            </div>
+          ) : null
+        })()}
+
         {/* ── ZONA 2: ACTIVIDAD HUMANA ──────────────────── */}
         <div className={styles.activityZone} style={{animation:`fadeInUp 0.3s ease-out 80ms forwards`}}>
           <p className={styles.zoneLabel}>Tu actividad</p>
