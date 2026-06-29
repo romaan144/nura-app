@@ -213,9 +213,9 @@ export default function Feed() {
       ? { ...DEMO_ENRICHMENTS[h.id], ...h, posts: DEMO_ENRICHMENTS[h.id].posts }
       : h
   )
-  const feedHelpers = [...enrichedLocalHelpers, ...supabaseHelpers].filter(
-    (h, i, arr) => arr.findIndex(x => x.id === h.id) === i
-  )
+  const feedHelpers = [...enrichedLocalHelpers, ...supabaseHelpers]
+    .filter(h => h != null && h.id != null)
+    .filter((h, i, arr) => arr.findIndex(x => x != null && x.id === h.id) === i)
 
   // Memoize daily pick so it doesn't disappear on tab switch
   const dailyPick = React.useMemo(() => {
