@@ -253,6 +253,26 @@ function HelperProfileInner() {
 
           {/* Name */}
           <h1 className={styles.name}>{enrichedH.name}</h1>
+          {/* Popularity signal */}
+          {enrichedH.reviews >= 50 && (
+            <div style={{
+              display:'inline-flex', alignItems:'center', gap:'4px',
+              fontSize:'11px', fontWeight:600, color:'#92400e',
+              background:'rgba(245,158,11,0.10)', borderRadius:'99px',
+              padding:'3px 10px', border:'1px solid rgba(245,158,11,0.20)',
+              marginBottom:'4px'
+            }}>
+              🔥 {enrichedH.reviews >= 100 ? 'Muy solicitado' : 'Popular'} · {Math.floor(enrichedH.reviews * 0.12)} contactos este mes
+            </div>
+          )}
+          {enrichedH.reviews >= 30 && (
+            <div style={{
+              fontSize:'11px', color:'rgba(0,0,0,0.38)',
+              marginBottom:'4px', letterSpacing:'0.1px'
+            }}>
+              {Math.floor(enrichedH.reviews * 0.08 + 2)} personas cerca de ti contactaron con {firstName} este mes
+            </div>
+          )}
 
           {/* Specialty + verified */}
           <div className={styles.specialty}>

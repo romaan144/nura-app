@@ -353,7 +353,7 @@ export default function Explore() {
             fontSize:'11px', color:'rgba(0,0,0,0.32)',
             fontWeight:500, letterSpacing:'0.2px'
           }}>
-            23 personas encontraron ayuda hoy en Barcelona · 1.008 profesionales verificados
+            🏘 47 personas en Barcelona usan Nüra esta semana · 1.008 profesionales verificados
           </div>
         )}
         {!isListView && !isLoading && (

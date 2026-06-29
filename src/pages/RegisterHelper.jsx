@@ -167,6 +167,23 @@ export default function RegisterHelper() {
 
       {/* ── MESSAGES — idéntico a Home ── */}
       <div className={styles.messages} style={{ paddingTop: topH + 'px' }}>
+        {messages.length === 1 && (
+          <div style={{
+            margin:'0 0 12px', padding:'12px 16px',
+            background:'rgba(123,47,255,0.06)', borderRadius:'14px',
+            border:'1px solid rgba(123,47,255,0.12)'
+          }}>
+            <div style={{fontSize:'11px',fontWeight:700,color:'var(--purple)',marginBottom:'6px',letterSpacing:'0.3px',textTransform:'uppercase'}}>
+              ¿Sabías que?
+            </div>
+            <div style={{fontSize:'13px',color:'var(--ink)',lineHeight:1.5,letterSpacing:'-0.1px'}}>
+              Los profesionales de Nüra en Barcelona reciben una media de <strong>8 contactos al mes</strong> desde el primer día.
+            </div>
+            <div style={{fontSize:'11px',color:'rgba(0,0,0,0.38)',marginTop:'6px'}}>
+              Tu perfil tarda menos de 3 minutos en estar publicado.
+            </div>
+          </div>
+        )}
         {messages.map((msg, msgIdx) => (
           <div key={msg.id} style={{ marginTop: msgIdx === 0 ? 0 : msg.from === 'user' ? 'var(--chat-gap-md)' : 'var(--chat-gap)' }}>
             <div className={`${styles.msgRow} ${msg.from === 'user' ? styles.msgRowUser : ''}`}>

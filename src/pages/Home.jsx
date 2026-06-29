@@ -610,9 +610,10 @@ export default function Home({ setSearchState }) {
       const zona = top?.zone || top?.city || 'Barcelona'
       const topName = top?.name?.split(' ')?.[0] || ''
       const topFirstName = top?.name?.split(' ')?.[0] || ''
+      const elapsedSec = ((Date.now() - searchStartTime) / 1000).toFixed(1)
       const resultLine = matches.length === 1
-        ? `He encontrado a **${topFirstName}**, ${especialidad.slice(0,-1)} verificado cerca de ti.`
-        : `He encontrado **${matches.length} ${especialidad}** cerca de ti. El mejor candidato es **${topFirstName}**.`
+        ? `He encontrado a **${topFirstName}**, ${especialidad.slice(0,-1)} verificado cerca de ti. ⚡ ${elapsedSec}s`
+        : `He encontrado **${matches.length} ${especialidad}** cerca de ti en ${elapsedSec} segundos. El mejor candidato es **${topFirstName}**.`
 
       // Price context — reduces doubt at decision moment
       const priceCtx = matches.length > 0
@@ -669,7 +670,7 @@ export default function Home({ setSearchState }) {
         id: Date.now(), from: 'nura',
         lines: followLine
           ? (user
-              ? [resultLine, ...(priceCtx ? [priceCtx] : []), followLine, '👆 Pulsa en cualquier tarjeta para ver el perfil completo y escribirle.']
+              ? [resultLine, ...(priceCtx ? [priceCtx] : []), ...(personalizationLine ? [personalizationLine] : []), followLine, '👆 Pulsa en cualquier tarjeta para ver el perfil completo y escribirle.']
               : [resultLine, ...(priceCtx ? [priceCtx] : []), followLine, 'Para contactarles, crea tu cuenta gratis. Solo tarda 30 segundos.'])
           : (user
               ? [resultLine, ...(priceCtx ? [priceCtx] : [])]
