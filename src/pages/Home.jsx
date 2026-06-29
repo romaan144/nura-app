@@ -916,6 +916,28 @@ export default function Home({ setSearchState }) {
             </div>
           </div>
         )}
+        {messages.length <= 1 && !inputFocused && (
+          <div style={{
+            display:'grid', gridTemplateColumns:'1fr 1fr 1fr',
+            gap:'8px', margin:'0 0 10px'
+          }}>
+            {[
+              {num:'2.847', label:'ayudas conectadas'},
+              {num:'94%', label:'encontraron lo que buscaban'},
+              {num:'< 3 min', label:'tiempo medio de respuesta'},
+            ].map(({num, label}) => (
+              <div key={label} style={{
+                padding:'10px 8px', background:'white',
+                borderRadius:'12px', textAlign:'center',
+                boxShadow:'0 1px 6px rgba(0,0,0,0.07)',
+                border:'1px solid rgba(0,0,0,0.06)'
+              }}>
+                <div style={{fontSize:'15px',fontWeight:800,color:'var(--purple)',letterSpacing:'-0.5px',lineHeight:1}}>{num}</div>
+                <div style={{fontSize:'9px',color:'rgba(0,0,0,0.4)',marginTop:'3px',lineHeight:1.3,fontWeight:500}}>{label}</div>
+              </div>
+            ))}
+          </div>
+        )}
         <div className={styles.inputCapsule}>
           <button className={styles.plusBtn}><Plus size={18} /></button>
           <input ref={inputRef} className={styles.input}

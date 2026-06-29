@@ -54,7 +54,16 @@ export default function HelperCard({ helper, onContact, showContact = true, show
       <div className={styles.row}>
 
         {/* Avatar */}
-        <div className={styles.avatarWrap}>
+        <div className={styles.avatarWrap} style={{position:'relative'}}>
+          {helper.verified && (
+            <div style={{
+              position:'absolute', bottom:0, right:0,
+              width:'16px', height:'16px', borderRadius:'50%',
+              background:'#10B981', border:'2px solid white',
+              display:'flex', alignItems:'center', justifyContent:'center',
+              zIndex:2, fontSize:'8px', color:'white', fontWeight:800
+            }}>✓</div>
+          )}
           {helper.avatarUrl
             ? <img src={helper.avatarUrl} alt={helper.name} className={styles.avatar} style={{opacity:0}} onLoad={e => e.target.style.animation="fadeInUp 0.3s ease-out forwards"} />
             : <div className={styles.avatarFallback} style={{ background: helper.avatarColor || 'var(--purple)' }}>
@@ -100,6 +109,34 @@ export default function HelperCard({ helper, onContact, showContact = true, show
         </div>
 
       </div>
+
+      {/* Urgency + match reason */}
+      {(helper.urgent || helper.responseTime?.includes('30 min') || helper.responseTime?.includes('1 hora')) && (
+        <div style={{
+          marginTop:'6px',
+          fontSize:'11px', fontWeight:600, color:'#065f46',
+          display:'flex', alignItems:'center', gap:'4px'
+        }}>
+          <span style={{width:'6px',height:'6px',borderRadius:'50%',background:'#10B981',flexShrink:0}} />
+          Disponible ahora · Responde en {helper.responseTime || '< 1h'}
+        </div>
+      )}
+      {/* Match reason — why Nüra recommended this person */}
+      {(() => {
+        const reason = window.__nuraMatchReasons?.[String(helper.id)]
+        return reason ? (
+          <div style={{
+            marginTop:'6px', paddingTop:'6px',
+            borderTop:'1px solid rgba(0,0,0,0.06)',
+            fontSize:'11px', color:'rgba(0,0,0,0.45)',
+            display:'flex', alignItems:'center', gap:'4px',
+            letterSpacing:'0.1px'
+          }}>
+            <span style={{color:'var(--purple)', fontWeight:600}}>✦</span>
+            {reason}
+          </div>
+        ) : null
+      })()}
     </div>
   )
 }

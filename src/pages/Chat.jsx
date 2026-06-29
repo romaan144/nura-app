@@ -328,6 +328,9 @@ export default function Chat() {
     setMessages(prev => [...prev, newMsg])
     setInput(''); setSuggested('')
     addChat?.(helper.id, helper.name, helper.avatarColor, helper.avatar, msg)
+
+    // After first contact, Nüra will follow up asking for feedback (simulated, 3s after reply)
+    const isFirstContact = msgCount === 0
     setTyping(true)
     const delay = 1000 + Math.random() * 600
     setTimeout(() => {
