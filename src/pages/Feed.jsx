@@ -343,7 +343,7 @@ export default function Feed() {
                   ✦ Nuevas ayudas cerca de ti
                 </div>
                 <div style={{display:'flex',gap:'8px',overflowX:'auto',paddingBottom:'2px'}}>
-                  {displayPosts.slice(0,3).map((p,i) => p.author && (
+                  {displayPosts.filter(p => p?.author?.name).slice(0,3).map((p,i) => (
                     <div key={i} style={{
                       minWidth:'140px',padding:'10px 12px',
                       background:'white',borderRadius:'12px',

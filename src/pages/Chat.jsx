@@ -467,23 +467,23 @@ export default function Chat() {
               {helper.founder && <Award size={11} color='#92400E' style={{marginLeft:'3px',verticalAlign:'middle'}} />}
               {helper.dniVerified && <Shield size={10} color='var(--green)' style={{marginLeft:'3px',verticalAlign:'middle'}} />}
             </div>
-            <div className={styles.helperStatus}>
+            <div className={styles.helperStatus} style={{display:'flex',alignItems:'center',gap:'4px',minWidth:0}}>
               {typing
                 ? <span className={styles.typingStatus}>escribiendo...</span>
                 : <>
-                    <span className={styles.onlineDot} />
-                    {chatSpecialty}
+                    <span className={styles.onlineDot} style={{flexShrink:0}} />
+                    <span style={{overflow:'hidden',textOverflow:'ellipsis',whiteSpace:'nowrap',minWidth:0}}>{chatSpecialty}</span>
                     {helper.rating && (
-                      <span style={{marginLeft:'6px',fontSize:'10px',color:'rgba(0,0,0,0.4)'}}>
+                      <span style={{flexShrink:0,fontSize:'10px',color:'rgba(0,0,0,0.4)'}}>
                         ★ {helper.rating}
                       </span>
                     )}
                     {helper.verified && (
                       <span style={{
-                        marginLeft:'5px',fontSize:'9px',fontWeight:600,
+                        flexShrink:0,fontSize:'9px',fontWeight:600,
                         color:'#065f46',background:'rgba(16,185,129,0.12)',
-                        borderRadius:'99px',padding:'1px 5px'
-                      }}>✓ Verificado</span>
+                        borderRadius:'99px',padding:'1px 5px',whiteSpace:'nowrap'
+                      }}>✓ Verif.</span>
                     )}
                   </>
               }
