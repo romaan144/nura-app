@@ -342,27 +342,16 @@ export default function Feed() {
                 <div style={{fontSize:'10px',fontWeight:700,color:'var(--purple)',letterSpacing:'0.6px',textTransform:'uppercase',marginBottom:'8px'}}>
                   ✦ Nuevas ayudas cerca de ti
                 </div>
-                <div style={{display:'flex',gap:'8px',overflowX:'auto',paddingBottom:'2px'}}>
-                  {displayPosts.filter(p => p?.author?.name).slice(0,3).map((p,i) => (
-                    <div key={i} style={{
-                      minWidth:'140px',padding:'10px 12px',
-                      background:'white',borderRadius:'12px',
-                      boxShadow:'0 1px 6px rgba(0,0,0,0.08)',
-                      border:'1px solid rgba(0,0,0,0.06)',flexShrink:0
-                    }}>
-                      <div style={{fontSize:'11px',fontWeight:700,color:'var(--ink)',marginBottom:'3px',whiteSpace:'nowrap',overflow:'hidden',textOverflow:'ellipsis'}}>
-                        {p.author?.name?.split(' ')?.[0]}
+                <div style={{display:'flex',gap:'10px',overflowX:'auto',paddingBottom:'2px'}}>
+                  {displayPosts
+                    .filter(p => p?.author?.name && p?.authorType === 'helper')
+                    .filter((p,i,arr) => arr.findIndex(x => x.author.id === p.author.id) === i)
+                    .slice(0,5)
+                    .map((p,i) => (
+                      <div key={p.author.id || i} style={{minWidth:'250px',flexShrink:0}}>
+                        <HelperCard helper={p.author} showContact={false} showPrice />
                       </div>
-                      <div style={{fontSize:'10px',color:'rgba(0,0,0,0.45)',lineHeight:1.3}}>
-                        {p.author?.specialty}
-                      </div>
-                      {p.author?.rating && (
-                        <div style={{fontSize:'10px',color:'var(--amber)',marginTop:'4px'}}>
-                          ★ {p.author.rating}
-                        </div>
-                      )}
-                    </div>
-                  ))}
+                    ))}
                 </div>
               </div>
             )}
