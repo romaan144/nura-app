@@ -12,6 +12,19 @@ import { haptic } from '../utils/haptic'
 import { scheduleLocalNotification, notifySearchAbandoned } from '../utils/notifications'
 import styles from './Home.module.css'
 
+// Category-aware refine chips — show the dimensions that matter for each need
+const CONTEXT_CHIPS = {
+  cuidado: ['Solo mañanas', 'Con experiencia en Alzheimer', 'Disponible hoy', 'Más cerca'],
+  salud: ['Esta semana', 'Online también', 'Mejor valorado', 'Más cerca'],
+  tecnico: ['Urgente hoy', 'Más barato', 'Mejor valorado', 'Más cerca'],
+  legal: ['Primera consulta gratis', 'Más barato', 'Mejor valorado', 'Online'],
+  clases: ['Online también', 'Más barato', 'Mejor valorado', 'Esta semana'],
+  mascotas: ['Disponible hoy', 'Más cerca', 'Mejor valorado', 'Con fotos'],
+  hogar: ['Más barato', 'Disponible hoy', 'Mejor valorado', 'Más cerca'],
+  entrenador: ['Online también', 'Más barato', 'Mejor valorado', 'Esta semana'],
+}
+
+
 function getWelcome(user, searchHistory, following, helpersCache) {
   const hour = new Date().getHours()
   const greeting = hour < 14 ? 'Buenos días' : hour < 21 ? 'Buenas tardes' : 'Buenas noches'
@@ -677,7 +690,7 @@ export default function Home({ setSearchState }) {
               : [resultLine, ...(priceCtx ? [priceCtx] : []), 'Crea tu cuenta gratis para escribirles.']),
         results: matches,
         refineChips: matches.length > 0
-          ? ['Más barato', 'Más cerca', 'Mejor valorado', 'Online']
+          ? (CONTEXT_CHIPS[analysis?.categoria] || ['Más barato', 'Más cerca', 'Mejor valorado', 'Online'])
           : ['Ampliar búsqueda', 'Cambiar zona', 'Online también']
       }
       setMessages(prev => [...prev, resultMsg])
